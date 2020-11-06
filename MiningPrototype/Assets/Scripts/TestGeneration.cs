@@ -52,15 +52,14 @@ public class TestGeneration : MonoBehaviour
         { 214 , 36},{ 216 , 37},{ 218 , 38},{ 219 , 39},{ 222 , 40},{ 223 , 41},{ 248 , 42},
         { 250 , 43},{ 251 , 44},{ 254 , 45},{ 255 , 46},{ 0 , 47 } };
 
-
-
     private void Start()
     {
-        RunCompleteProcess();
+        RunCompleteGeneration();
     }
 
+
     [Button]
-    private void RunCompleteProcess()
+    private void RunCompleteGeneration()
     {
         var stopwatch = new System.Diagnostics.Stopwatch();
         stopwatch.Start();
@@ -124,6 +123,39 @@ public class TestGeneration : MonoBehaviour
         return map[x, y];
     }
 
+    public void TryCarve(int x, int y)
+    {
+        Debug.Log("Try Carve " + x + " / " + y);
+        SetMapAt(x, y, false);
+    }
+
+    public void TryPlace(int x, int y)
+    {
+        Debug.Log("Try Place " + x + " / " + y);
+        SetMapAt(x, y, true);
+    }
+
+    private void SetMapAt(int x, int y, bool value, bool updateVisuals = true)
+    {
+        if (x < 0 || y < 0 || x >= size || y >= size)
+            return;
+
+        map[x, y] = value;
+
+        if (updateVisuals)
+        {
+            SetTileToMap(x, y);
+            SetTileToMap(x + 1, y);
+            SetTileToMap(x - 1, y);
+            SetTileToMap(x, y + 1);
+            SetTileToMap(x, y - 1);
+            SetTileToMap(x + 1, y + 1);
+            SetTileToMap(x - 1, y - 1);
+            SetTileToMap(x - 1, y + 1);
+            SetTileToMap(x + 1, y - 1);
+        }
+    }
+
     private void RunAutomataStep()
     {
         IterateXY(size, SingleAutomataSet);
@@ -145,7 +177,7 @@ public class TestGeneration : MonoBehaviour
     {
         if (updateOnParameterChanged)
         {
-            RunCompleteProcess();
+            RunCompleteGeneration();
         }
     }
 
@@ -159,7 +191,7 @@ public class TestGeneration : MonoBehaviour
         if (!map[x, y])
             return null;
 
-        int topLeft = GetMapAt(x - 1, y + 1) ? 1:0;
+        int topLeft = GetMapAt(x - 1, y + 1) ? 1 : 0;
         int topMid = GetMapAt(x, y + 1) ? 1 : 0;
         int topRight = GetMapAt(x + 1, y + 1) ? 1 : 0;
         int midLeft = GetMapAt(x - 1, y) ? 1 : 0;
@@ -169,13 +201,19 @@ public class TestGeneration : MonoBehaviour
         int botRight = GetMapAt(x + 1, y - 1) ? 1 : 0;
 
 
-        int value = topMid * 2 + midLeft * 8 + midRight * 16 + botMid*64;
+        int value = topMid * 2 + midLeft * 8 + midRight * 16 + botMid * 64;
         value += topLeft * topMid * midLeft;
         value += topRight * topMid * midRight * 4;
         value += botLeft * midLeft * botMid * 32;
         value += botRight * midRight * botMid * 128;
 
         int tileIndex = BITMASK_TO_TILEINDEX[value];
+
+        //Casual random tile
+        if (tileIndex == 46)
+        {
+            tileIndex = PseudoRandomValue(x, y) > 0.5f ? 46 : 0;
+        }
 
         return groundTiles[tileIndex];
     }
@@ -199,4 +237,23 @@ public class TestGeneration : MonoBehaviour
         }
     }
 
+    private float PseudoRandomValue(float x, float y)
+    {
+        return (float)(Mathf.Sin(Vector2.Dot(new Vector2(x, y), new Vector2(12.9898f, 78.233f))) * 43758.5453) % 1;
+    }
+
+}
+
+
+[System.Serializable]
+public class CollisionShape
+{
+    public Vector2[] Points;
+}
+
+public enum CollisionShapeType
+{
+    Square,
+    TL_BR_BL,
+    TL_TR_BR
 }

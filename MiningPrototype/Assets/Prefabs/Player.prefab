@@ -78,9 +78,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821c3d5db7c601149833a368a8b9b4bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundedAngle: 60
-  jumpVelocity: 7
+  groundedAngle: 88
+  jumpVelocity: 15
   moveSpeed: 5
+  jumpCooldown: 1
+  timeAfterGroundedToJump: 0.1
   feet: {fileID: 1786483705}
   feetRadius: 0.4
 --- !u!212 &8633471933228471855
@@ -168,8 +170,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.010150909, y: 1.0641136}
-  m_Size: {x: 0.95212555, y: 2.1282272}
+  m_Offset: {x: -0.010150909, y: 1.1248245}
+  m_Size: {x: 0.95212555, y: 2.0068054}
   m_Direction: 0
 --- !u!1 &8633471933530632206
 GameObject:
