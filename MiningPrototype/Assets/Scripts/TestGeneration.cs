@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 
 public class TestGeneration : MonoBehaviour
 {
-    [SerializeField] Tile groundTile;
+    [SerializeField] Tile[] groundTiles;
     [SerializeField] Tilemap tilemap;
 
     [Header("Settings")]
@@ -78,7 +78,7 @@ public class TestGeneration : MonoBehaviour
     }
 
     //https://gamedevelopment.tutsplus.com/tutorials/generate-random-cave-levels-using-cellular-automata--gamedev-9664
-    public int GetAliveNeightboursCountFor( int x, int y)
+    private int GetAliveNeightboursCountFor( int x, int y)
     {
         int count = 0;
         for (int i = -1; i < 2; i++)
@@ -103,6 +103,14 @@ public class TestGeneration : MonoBehaviour
         }
 
         return count;
+    }
+
+    private bool GetMapAt(int x, int y)
+    {
+        if (x < 0 || y < 0 || x >= size || y >= size)
+            return false;
+
+        return map[x, y];
     }
 
     private void RunAutomataStep()
@@ -132,7 +140,20 @@ public class TestGeneration : MonoBehaviour
 
     private void SetTileToMap(int x, int y)
     {
-        tilemap.SetTile(new Vector3Int(x, y, 0), map[x,y] ? groundTile : null);
+        tilemap.SetTile(new Vector3Int(x, y, 0), GetCorrectTile(x,y));
+    }
+
+    private Tile GetCorrectTile(int x, int y)
+    {
+        if (!map[x, y])
+            return null;
+
+        int index = GetMapAt(x, y+1) ? 1 : 0;
+        index += GetMapAt(x - 1, y) ? 2 : 0;
+        index += GetMapAt(x + 1, y) ? 4 : 0;
+        index += GetMapAt(x, y - 1) ? 8 : 0;
+
+        return groundTiles[index];
     }
 
     private void IterateXY(int size, System.Action<int, int> action)
