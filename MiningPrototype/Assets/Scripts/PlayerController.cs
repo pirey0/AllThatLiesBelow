@@ -10,9 +10,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float jumpVelocity;
     [SerializeField] float moveSpeed;
 
-    float groundedTimeStamp;
+    [SerializeField] Transform feet;
+    [SerializeField] float feetRadius;
 
-    private bool isGrounded { get => Time.time - groundedTimeStamp < 0.1f; }
+    float lastGroundedTimeStamp;
+
+    private bool isGrounded;
 
     private void Start()
     {
@@ -25,6 +28,13 @@ public class PlayerController : MonoBehaviour
         var horizontal = Input.GetAxis("Horizontal");
         var vertical = Input.GetAxis("Vertical");
 
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(feet.position, feetRadius);
+        isGrounded = colliders != null && colliders.Length > 1;
+
+        if (isGrounded)
+        {
+            lastGroundedTimeStamp = Time.time;
+        }
 
         if(isGrounded && vertical > 0)
         {
@@ -32,19 +42,23 @@ public class PlayerController : MonoBehaviour
         }
 
         rigidbody.position += horizontal * Vector2.right * moveSpeed * Time.fixedDeltaTime;
+        rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        var p = collision.contacts[0];
 
-        float angle = Mathf.Acos(Vector3.Dot(((Vector3)p.point - transform.position).normalized, Vector3.down)) * Mathf.Rad2Deg;
-
-        if(angle < groundedAngle)
+        foreach (var contact in collision.contacts)
         {
-            groundedTimeStamp = Time.time;
-        }
+            float angle = Mathf.Acos(Vector3.Dot(contact.normal, Vector3.up)) * Mathf.Rad2Deg;
 
+            Debug.DrawLine(transform.position, transform.position + (Vector3)contact.normal);
+        }
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        if(feet != null)
+        Gizmos.DrawWireSphere(feet.position, feetRadius);
+    }
 }
