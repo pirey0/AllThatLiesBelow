@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int miningBreakParticlesCount;
     [SerializeField] float miningParticlesRateOverTime = 4;
 
+    [SerializeField] AudioSource breakBlock, startMining;
+
     SpriteAnimator spriteAnimator;
     float lastGroundedTimeStamp;
     float lastJumpTimeStamp;
@@ -40,7 +43,8 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Vector2Int? digTarget;
 
-    bool inMining;
+    [ReadOnly]
+    [SerializeField] bool inMining;
 
     private void Start()
     {
@@ -67,11 +71,17 @@ public class PlayerController : MonoBehaviour
             {
                 TryPlace();
             }
+            else
+            {
+                if (inMining)
+                    DisableMiningParticles();
+            }
         }
         else
         {
             digTarget = null;
-            DisableMiningParticles();
+            if (inMining)
+                DisableMiningParticles();
         }
 
         UpdateDigHighlight();
@@ -116,11 +126,13 @@ public class PlayerController : MonoBehaviour
             {
                 miningParticles.transform.position = (Vector3Int)digTarget + new Vector3(0.5f, 0.5f);
                 miningParticles.Emit(miningBreakParticlesCount);
+                breakBlock.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+                breakBlock.Play();
+                DisableMiningParticles();
             }
             else
             {
-            UpdateMiningParticlesPositions();
-
+                UpdateMiningParticlesPositions();
             }
 
             if (!inMining)
@@ -130,6 +142,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            if(inMining)
             DisableMiningParticles();
         }
     }
@@ -146,6 +159,7 @@ public class PlayerController : MonoBehaviour
         inMining = false;
         var emission = miningParticles.emission;
         emission.rateOverTimeMultiplier = 0;
+        startMining.Stop();
     }
 
 
@@ -155,6 +169,8 @@ public class PlayerController : MonoBehaviour
         var emission = miningParticles.emission;
         emission.rateOverTimeMultiplier = miningParticlesRateOverTime;
         inMining = true;
+        startMining.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+        startMining.Play();
     }
 
     private Vector2Int GetPositionInGrid()
@@ -187,7 +203,7 @@ public class PlayerController : MonoBehaviour
 
         if (isGrounded)
         {
-            if (horizontal != 0)
+            if (horizontal == 0)
                 spriteAnimator.Play(an_Idle, false);
             else
                 spriteAnimator.Play(an_Walk, false);

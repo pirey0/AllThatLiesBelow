@@ -92816,9 +92816,9 @@ PrefabInstance:
       propertyPath: generation
       value: 
       objectReference: {fileID: 1141556478}
-    - target: {fileID: 497824006148765930, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
-      propertyPath: miningBreakParticlesCount
-      value: 20
+    - target: {fileID: 3471564094401374700, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
+      propertyPath: m_Volume
+      value: 0.661
       objectReference: {fileID: 0}
     - target: {fileID: 8633471933228471848, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
       propertyPath: m_Name
