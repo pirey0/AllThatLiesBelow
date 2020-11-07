@@ -23,14 +23,14 @@ Shader "Sprites/CustomColorPicker"
 		_Color7("Color 7 (0,1,1)", Color) = (1,1,1,1)
 		_Color8("Color 8 (1,1,1)", Color) = (1,1,1,1)
 
-		_SourceColor1("Source Color 1", Color) = (0,0,0,0)
-		_SourceColor2("Source Color 2", Color) = (0,0,0,0)
-		_SourceColor3("Source Color 3", Color) = (0,0,0,0)
-		_SourceColor4("Source Color 4", Color) = (0,0,0,0)
-		_SourceColor5("Source Color 5", Color) = (0,0,0,0)
-		_SourceColor6("Source Color 6", Color) = (0,0,0,0)
-		_SourceColor7("Source Color 7", Color) = (0,0,0,0)
-		_SourceColor8("Source Color 8", Color) = (0,0,0,0)
+		_SourceColor1("Source Color 1", Color) = (0,0,0,1)
+		_SourceColor2("Source Color 2", Color) = (0,0,0,1)
+		_SourceColor3("Source Color 3", Color) = (0,0,0,1)
+		_SourceColor4("Source Color 4", Color) = (0,0,0,1)
+		_SourceColor5("Source Color 5", Color) = (0,0,0,1)
+		_SourceColor6("Source Color 6", Color) = (0,0,0,1)
+		_SourceColor7("Source Color 7", Color) = (0,0,0,1)
+		_SourceColor8("Source Color 8", Color) = (0,0,0,1)
 
 	}
 
@@ -87,21 +87,21 @@ Shader "Sprites/CustomColorPicker"
 				c.rgb *= c.a;
 
 
-				if (length(abs(c.rgb - _SourceColor1.rgb))< _Sensitivity)
+				if (length(abs(c - _SourceColor1))< _Sensitivity)
 					c.rgb = _Color1;
-				else if (length(abs(c.rgb - _SourceColor2.rgb)) < _Sensitivity)
+				else if (length(abs(c - _SourceColor2)) < _Sensitivity)
 					c.rgb = _Color2;
-				else if (length(abs(c.rgb - _SourceColor3.rgb)) < _Sensitivity)
+				else if (length(abs(c - _SourceColor3)) < _Sensitivity)
 					c.rgb = _Color3;
-				else if (length(abs(c.rgb - _SourceColor4.rgb)) < _Sensitivity)
+				else if (length(abs(c - _SourceColor4)) < _Sensitivity)
 					c.rgb = _Color4;
-				else if (length(abs(c.rgb - _SourceColor5.rgb)) < _Sensitivity)
+				else if (length(abs(c - _SourceColor5)) < _Sensitivity)
 					c.rgb = _Color5;
-				else if (length(abs(c.rgb - _SourceColor6.rgb)) < _Sensitivity)
+				else if (length(abs(c - _SourceColor6)) < _Sensitivity)
 					c.rgb = _Color6;
-				else if (length(abs(c.rgb - _SourceColor7.rgb)) < _Sensitivity)
+				else if (length(abs(c - _SourceColor7)) < _Sensitivity)
 					c.rgb = _Color7;
-				else if (length(abs(c.rgb - _SourceColor8.rgb)) < _Sensitivity)
+				else if (length(abs(c - _SourceColor8)) < _Sensitivity)
 					c.rgb = _Color8;
 
 				return c;

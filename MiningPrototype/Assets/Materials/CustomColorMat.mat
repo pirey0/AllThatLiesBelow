@@ -73,7 +73,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Sensitivity: 0.044
+    - _Sensitivity: 0.082
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -81,23 +81,23 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color1: {r: 0, g: 0.55845124, b: 0.5464889, a: 1}
+    - _Color1: {r: 0.70980394, g: 0.54509807, b: 0.48235297, a: 1}
     - _Color2: {r: 1, g: 0.30514422, b: 0.5542575, a: 0.85714287}
-    - _Color3: {r: 0.39655173, g: 0.3114735, b: 0.52142894, a: 1}
+    - _Color3: {r: 0.16872355, g: 0.16148986, b: 0.1792453, a: 0}
     - _Color4: {r: 0.15517241, g: 0, b: 0, a: 1}
     - _Color5: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 0}
     - _Color6: {r: 1, g: 1, b: 1, a: 1}
-    - _Color7: {r: 1, g: 1, b: 1, a: 1}
-    - _Color8: {r: 0.75, g: 0.64285713, b: 1, a: 1}
+    - _Color7: {r: 1, g: 1, b: 1, a: 0}
+    - _Color8: {r: 0.9333334, g: 0.8117648, b: 0.5921569, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SourceColor1: {r: 0.9294118, g: 0.10980393, b: 0.14117648, a: 0}
-    - _SourceColor2: {r: 0.6, g: 0.41176474, b: 0.427451, a: 0}
-    - _SourceColor3: {r: 0.11764707, g: 0.08235294, b: 0.19215688, a: 0}
-    - _SourceColor4: {r: 0.2509804, g: 0.16470589, b: 0.2509804, a: 0}
-    - _SourceColor5: {r: 1, g: 1, b: 1, a: 0}
-    - _SourceColor6: {r: 0, g: 0, b: 0, a: 0}
-    - _SourceColor7: {r: 0, g: 0, b: 0, a: 0}
-    - _SourceColor8: {r: 0, g: 0, b: 0, a: 0}
+    - _SourceColor1: {r: 0, g: 0, b: 0, a: 1}
+    - _SourceColor2: {r: 0, g: 0, b: 0, a: 1}
+    - _SourceColor3: {r: 0, g: 0, b: 0, a: 1}
+    - _SourceColor4: {r: 0, g: 0, b: 0, a: 1}
+    - _SourceColor5: {r: 0, g: 0, b: 0, a: 1}
+    - _SourceColor6: {r: 0, g: 0, b: 0, a: 1}
+    - _SourceColor7: {r: 0, g: 0, b: 0, a: 1}
+    - _SourceColor8: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
