@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float feetRadius;
 
     [SerializeField] TestGeneration generation;
+    [SerializeField] float maxDigDistance = 3;
 
     float lastGroundedTimeStamp;
     float lastJumpTimeStamp;
@@ -42,16 +43,30 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            Vector2Int clickPos = GetClickPosition();
-            if (generation.HasLineOfSight(GetPositionInGrid(), clickPos, debugVisualize: true))
-                generation.TryCarve(clickPos.x, clickPos.y);
+            TryDig();
         }
         else if (Input.GetMouseButton(1))
         {
-            Vector2Int clickPos = GetClickPosition();
-            if (generation.HasLineOfSight(GetPositionInGrid(), clickPos, debugVisualize: true))
-                generation.TryPlace(clickPos.x, clickPos.y);
+            TryPlace();
         }
+    }
+
+    private void TryPlace()
+    {
+        Vector2Int clickPos = GetClickPosition();
+        if (generation.HasLineOfSight(GetPositionInGrid(), clickPos, debugVisualize: true))
+            generation.PlaceAt(clickPos.x, clickPos.y);
+    }
+
+    private void TryDig()
+    {
+        Vector2Int clickPos = GetClickPosition();
+        
+        if (Vector2Int.Distance(GetPositionInGrid(), clickPos) > maxDigDistance)
+            return;
+
+        if (generation.HasLineOfSight(GetPositionInGrid(), clickPos, debugVisualize: true))
+            generation.CarveAt(clickPos.x, clickPos.y);
     }
 
     private Vector2Int GetPositionInGrid()
@@ -140,5 +155,7 @@ public class PlayerController : MonoBehaviour
             Gizmos.DrawWireSphere(feet.position, feetRadius);
 
         Gizmos.DrawLine(transform.position, transform.position + (Vector3)rightWalkVector);
+
+        Gizmos.DrawWireSphere((Vector3Int)GetPositionInGrid(), maxDigDistance);
     }
 }
