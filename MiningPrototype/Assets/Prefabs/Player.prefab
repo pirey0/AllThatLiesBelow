@@ -69,7 +69,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1237965333
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f5f4023f34b8bfc468da3c911e96684b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.2509804}
@@ -182,7 +182,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1237965333
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 253be4da77579e64e8277a8b2979c3dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
@@ -382,7 +382,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -527,7 +527,7 @@ MonoBehaviour:
   feetRadius: 0.4
   generation: {fileID: 0}
   maxDigDistance: 5
-  digSpeed: 10
+  digSpeed: 20
   mouseHighlight: {fileID: 1281847263}
   an_Walk: {fileID: 11400000, guid: a277db9a3fae53741b035a9c4fb2951b, type: 2}
   an_Idle: {fileID: 11400000, guid: 032cff1f8108c1743afb6adbae6af0c4, type: 2}

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,6 +31,13 @@ public struct Tile
         }
     }
 
+    public static Tile Make(TileType t)
+    {
+        Tile tile = Air;
+        tile.Type = t;
+        return tile;
+    }
+
     public void TakeDamage(float amount)
     {
         if (Type == TileType.Air)
@@ -41,5 +49,7 @@ public struct Tile
 public enum TileType
 {
     Air = 0,
-    Stone = 1
+    Stone = 1,
+    Copper = 2,
+    Gold = 3
 }

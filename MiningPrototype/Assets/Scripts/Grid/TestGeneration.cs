@@ -8,9 +8,10 @@ using UnityEngine.Tilemaps;
 
 public class TestGeneration : MonoBehaviour
 {
-    [SerializeField] Tilemap tilemap, damageOverlayTilemap;
+    [SerializeField] Tilemap tilemap, damageOverlayTilemap, oreTilemap;
     [SerializeField] TileBase[] groundTiles;
     [SerializeField] TileBase[] damageOverlayTiles;
+    [SerializeField] TileBase[] oreTiles;
 
     [Header("Settings")]
     [SerializeField] bool updateOnParameterChanged;
@@ -41,7 +42,10 @@ public class TestGeneration : MonoBehaviour
     [SerializeField] int automataSteps;
 
     [SerializeField] AnimationCurve heightMultiplyer;
-
+    [SerializeField] float goldMaxHeight;
+    [SerializeField] float goldVeinProbability;
+    [SerializeField] float copperMaxHeight;
+    [SerializeField] float copperVeinProbability;
 
     Tile[,] map;
 
@@ -70,6 +74,8 @@ public class TestGeneration : MonoBehaviour
 
         IterateX(automataSteps, (x) => RunAutomataStep());
 
+        PopulateOres();
+
         CalculateNeighboursBitmask();
 
         UpdateVisuals();
@@ -78,6 +84,7 @@ public class TestGeneration : MonoBehaviour
 
         Debug.Log("Update Duration: " + stopwatch.ElapsedMilliseconds + "ms");
     }
+
 
     private void CalculateNeighboursBitmask()
     {
@@ -119,6 +126,36 @@ public class TestGeneration : MonoBehaviour
 
         IterateXY(size, PopulateAt);
 
+    }
+
+    private void PopulateOres()
+    {
+        IterateX((int)(size * size * goldVeinProbability), TryPlaceGoldVein);
+        IterateX((int)(size * size * copperVeinProbability), TryPlaceCopperVein);
+
+    }
+
+    private void TryPlaceCopperVein(int obj)
+    {
+        int y = UnityEngine.Random.Range(0, (int)(copperMaxHeight * size));
+        int x = UnityEngine.Random.Range(0, size);
+
+        if (IsBlockAt(x, y))
+        {
+            SetMapAt(x, y, Tile.Make(TileType.Copper), updateNeighbourBitmask: false, updateVisuals: false);
+            Debug.Assert(GetTileAt(x, y).Type == TileType.Copper);
+        }
+    }
+
+    private void TryPlaceGoldVein(int obj)
+    {
+        int y = UnityEngine.Random.Range(0, (int)(goldMaxHeight*size));
+        int x = UnityEngine.Random.Range(0, size);
+
+        if (IsBlockAt(x, y))
+        {
+            SetMapAt(x, y, Tile.Make(TileType.Gold), updateNeighbourBitmask: false, updateVisuals: false);
+        }
     }
 
     private void PopulateAt(int x, int y)
@@ -355,6 +392,7 @@ public class TestGeneration : MonoBehaviour
     {
         tilemap.ClearAllTiles();
         damageOverlayTilemap.ClearAllTiles();
+        oreTilemap.ClearAllTiles();
         IterateXY(size, UpdateVisualsAt);
     }
 
@@ -370,6 +408,8 @@ public class TestGeneration : MonoBehaviour
     {
         tilemap.SetTile(new Vector3Int(x, y, 0), GetVisualTileFor(x, y));
         damageOverlayTilemap.SetTile(new Vector3Int(x, y, 0), GetVisualDestructableOverlayFor(x, y));
+        oreTilemap.SetTile(new Vector3Int(x, y, 0), GetVisualOreTileFor(x, y));
+        
     }
 
     private bool IsOutOfBounds(int x, int y)
@@ -400,6 +440,15 @@ public class TestGeneration : MonoBehaviour
         return damageOverlayTiles[Mathf.FloorToInt(t.Damage)];
     }
 
+    private TileBase GetVisualOreTileFor(int x, int y)
+    {
+        var t = GetTileAt(x, y);
+        if ((int)t.Type < 2)
+            return null;
+
+        return oreTiles[(int)t.Type - 2];
+    }
+
     private void IterateXY(int size, System.Action<int, int> action)
     {
         for (int x = 0; x < size; x++)
@@ -424,18 +473,4 @@ public class TestGeneration : MonoBehaviour
         return (float)(Mathf.Sin(Vector2.Dot(new Vector2(x, y), new Vector2(12.9898f, 78.233f))) * 43758.5453) % 1;
     }
 
-}
-
-
-[System.Serializable]
-public class CollisionShape
-{
-    public Vector2[] Points;
-}
-
-public enum CollisionShapeType
-{
-    Square,
-    TL_BR_BL,
-    TL_TR_BR
 }

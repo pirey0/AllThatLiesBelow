@@ -45,6 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilemap: {fileID: 0}
   damageOverlayTilemap: {fileID: 0}
+  oreTilemap: {fileID: 0}
   groundTiles:
   - {fileID: 11400000, guid: a36febf07089986479169c7da38520bc, type: 2}
   - {fileID: 11400000, guid: 8151e566e662bc249b0383ccdbb9ae05, type: 2}
@@ -106,6 +107,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 46330f0dc5b279c48837144879f14b29, type: 2}
   - {fileID: 11400000, guid: ee0c7ed288d70a14e8f20176e453128f, type: 2}
   - {fileID: 11400000, guid: d7c51f4b80084cf40b6edcc4a9b40106, type: 2}
+  oreTiles:
+  - {fileID: 11400000, guid: 7e1e97604cdbd3a4bbc6131bc89e93f2, type: 2}
+  - {fileID: 11400000, guid: e3d0884e79b7a174a8be2d46522038ec, type: 2}
   updateOnParameterChanged: 1
   seedIsRandom: 0
   seed: 0
@@ -174,3 +178,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  goldMaxHeight: 0.2
+  goldVeinProbability: 0.01
+  copperMaxHeight: 0.5
+  copperVeinProbability: 0.03

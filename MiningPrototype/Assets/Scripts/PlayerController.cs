@@ -247,6 +247,11 @@ public class PlayerController : MonoBehaviour
         UpdateWalkVector(collision);
     }
 
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        rightWalkVector = Vector2.right;
+    }
+
     private void UpdateWalkVector(Collision2D collision)
     {
         var contact = collision.contacts[0];
