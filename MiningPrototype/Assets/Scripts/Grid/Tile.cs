@@ -6,7 +6,7 @@ public struct Tile
 {
     public TileType Type;
     public byte NeighbourBitmask;
-    public byte Damage;
+    public float Damage;
 
     public static Tile Air
     {
@@ -30,11 +30,11 @@ public struct Tile
         }
     }
 
-    public void TakeDamage()
+    public void TakeDamage(float amount)
     {
         if (Type == TileType.Air)
             return;
-        Damage++;
+        Damage += amount;
     }
 }
 

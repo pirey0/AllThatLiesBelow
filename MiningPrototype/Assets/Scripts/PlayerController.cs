@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] TestGeneration generation;
     [SerializeField] float maxDigDistance = 3;
 
+    [SerializeField] float digSpeed = 10;
+
     float lastGroundedTimeStamp;
     float lastJumpTimeStamp;
 
@@ -41,11 +43,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             TryDig();
         }
-        else if (Input.GetMouseButtonDown(1))
+        else if (Input.GetMouseButton(1))
         {
             TryPlace();
         }
@@ -66,7 +68,7 @@ public class PlayerController : MonoBehaviour
             return;
 
         if (generation.HasLineOfSight(GetPositionInGrid(), clickPos, debugVisualize: true))
-            generation.DamageAt(clickPos.x, clickPos.y);
+            generation.DamageAt(clickPos.x, clickPos.y, Time.deltaTime * digSpeed);
     }
 
     private Vector2Int GetPositionInGrid()

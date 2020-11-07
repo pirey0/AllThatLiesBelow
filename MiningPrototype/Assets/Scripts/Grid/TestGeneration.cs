@@ -86,6 +86,9 @@ public class TestGeneration : MonoBehaviour
 
     private void CalculateNeighboursBitmaskAt(int x, int y)
     {
+        if (IsOutOfBounds(x, y))
+            return;
+
         int topLeft = IsBlockAt(x - 1, y + 1) ? 1 : 0;
         int topMid = IsBlockAt(x, y + 1) ? 1 : 0;
         int topRight = IsBlockAt(x + 1, y + 1) ? 1 : 0;
@@ -210,13 +213,13 @@ public class TestGeneration : MonoBehaviour
         return true;
     }
 
-    public void DamageAt(int x, int y)
+    public void DamageAt(int x, int y, float amount)
     {
         if (IsOutOfBounds(x, y))
             return;
 
         Tile t = GetTileAt(x, y);
-        t.TakeDamage();
+        t.TakeDamage(amount);
         
         if (t.Damage > 10)
         {
@@ -338,7 +341,7 @@ public class TestGeneration : MonoBehaviour
     private TileBase GetVisualDestructableOverlayFor(int x, int y)
     {
         var t = GetTileAt(x, y);
-        return damageOverlayTiles[t.Damage];
+        return damageOverlayTiles[Mathf.FloorToInt(t.Damage)];
     }
 
     private void IterateXY(int size, System.Action<int, int> action)

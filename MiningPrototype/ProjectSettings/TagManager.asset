@@ -53,6 +53,9 @@ TagManager:
   - name: Rock
     uniqueID: 2348705865
     locked: 0
+  - name: DamageOverlay
+    uniqueID: 3040625225
+    locked: 0
   - name: Vignette
     uniqueID: 1237965333
     locked: 0

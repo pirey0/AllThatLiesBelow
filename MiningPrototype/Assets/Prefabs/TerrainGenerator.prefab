@@ -96,16 +96,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 59c7e75c8d906314189eadb8d2d1586f, type: 2}
   damageOverlayTiles:
   - {fileID: 0}
-  - {fileID: 11400000, guid: e3032cc685b170c42b72a1bdc822435e, type: 2}
-  - {fileID: 11400000, guid: e3032cc685b170c42b72a1bdc822435e, type: 2}
-  - {fileID: 0}
-  - {fileID: 11400000, guid: e3032cc685b170c42b72a1bdc822435e, type: 2}
-  - {fileID: 0}
-  - {fileID: 11400000, guid: e3032cc685b170c42b72a1bdc822435e, type: 2}
-  - {fileID: 0}
-  - {fileID: 11400000, guid: e3032cc685b170c42b72a1bdc822435e, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: ab62f49b0d19e9d4389ac6d165d7bd0e, type: 2}
+  - {fileID: 11400000, guid: add5a0ce75a92ad45b96fd132c4f755e, type: 2}
+  - {fileID: 11400000, guid: 804aec9eff66c994ca8640107d7f5942, type: 2}
+  - {fileID: 11400000, guid: ad591d8660251014c9ca5b9d34bafa96, type: 2}
+  - {fileID: 11400000, guid: d54426b4721bb0b4ba4349fa88035657, type: 2}
+  - {fileID: 11400000, guid: 361cfedcae2e4784ab63a02a73844b46, type: 2}
+  - {fileID: 11400000, guid: 4beb922940fe919468096c992d5a8db4, type: 2}
+  - {fileID: 11400000, guid: 46330f0dc5b279c48837144879f14b29, type: 2}
+  - {fileID: 11400000, guid: ee0c7ed288d70a14e8f20176e453128f, type: 2}
+  - {fileID: 11400000, guid: d7c51f4b80084cf40b6edcc4a9b40106, type: 2}
   updateOnParameterChanged: 1
   seedIsRandom: 0
   seed: 0
