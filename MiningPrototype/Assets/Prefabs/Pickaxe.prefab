@@ -120,17 +120,17 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.1737142
     - serializedVersion: 3
-      time: 0.18393649
-      value: 0.51111305
-      inSlope: 35.48875
-      outSlope: 35.48875
+      time: 0.19409724
+      value: -0.22233117
+      inSlope: 20.688328
+      outSlope: 20.688328
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.06817653
       outWeight: 0.1839246
     - serializedVersion: 3
-      time: 0.24674916
-      value: 1.1000366
+      time: 0.25068593
+      value: 0.08398819
       inSlope: 0.31880352
       outSlope: 0.31880352
       tangentMode: 0
@@ -140,4 +140,5 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 1
     m_RotationOrder: 4
+  flipX: 0
   playerSpriteRenderer: {fileID: 0}

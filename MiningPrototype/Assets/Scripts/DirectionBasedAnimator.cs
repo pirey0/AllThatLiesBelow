@@ -9,14 +9,14 @@ public class DirectionBasedAnimator : MonoBehaviour
     [SerializeField] Sprite[] sprites;
     [SerializeField] AnimationCurve animationCurve;
     
-    bool flipX;
+    [SerializeField] bool flipX;
     [SerializeField] SpriteRenderer playerSpriteRenderer;
 
-    //private void Update()
-    //{
-    //    flipX = playerSpriteRenderer == null ? false : playerSpriteRenderer.flipX;
-    //    SetFrame(GetFrameFromMouseAngle());
-    //}
+    private void Update()
+    {
+        flipX = TryFlipX();
+        //SetFrame(GetFrameFromMouseAngle(Input.GetMouseButton(1) ? 45f : 0f));
+    }
     private void Start()
     {
         SetFrame(idleFrameRight);
@@ -36,14 +36,12 @@ public class DirectionBasedAnimator : MonoBehaviour
     {
         float currentTime = 0;
         int frameBefore = GetFrameFromMouseAngle();
-        flipX = playerSpriteRenderer == null?false:playerSpriteRenderer.flipX;
-        spriteRenderer.flipX = flipX;
 
         while (true)
         {
             Debug.Log("play curve");
             currentTime += Time.deltaTime;
-            int frameCurrent = GetFrameFromMouseAngle() + (int)animationCurve.Evaluate(currentTime);
+            int frameCurrent = GetFrameFromMouseAngle(Mathf.RoundToInt(animationCurve.Evaluate(currentTime)) * 45f);
 
             if (frameCurrent != frameBefore)
             {
@@ -70,11 +68,18 @@ public class DirectionBasedAnimator : MonoBehaviour
         }
     }
 
-    private int GetFrameFromMouseAngle()
+    private bool TryFlipX()
+    {
+        bool xIsFlipped = playerSpriteRenderer == null ? false : playerSpriteRenderer.flipX;
+        spriteRenderer.flipX = xIsFlipped;
+        return xIsFlipped;
+    }
+
+    private int GetFrameFromMouseAngle(float additionalAngle = 0)
     {
         Vector2 p2 = new Vector3(Screen.width / 2, Screen.height / 2, 0);
-        float angle = (Mathf.Atan2(Input.mousePosition.y - p2.y, Input.mousePosition.x - p2.x)) * Mathf.Rad2Deg;
-        float angleAsFloat = (angle - 45f) / -45f;
+        float angle = (Mathf.Atan2(Input.mousePosition.y - p2.y, Input.mousePosition.x - p2.x)) * Mathf.Rad2Deg + additionalAngle * (flipX ? 1 : -1);
+        float angleAsFloat = (angle + (flipX ? -135 : -45)) / (flipX ? 45f : -45f);
         return Mathf.RoundToInt(angleAsFloat);
     }
 }
