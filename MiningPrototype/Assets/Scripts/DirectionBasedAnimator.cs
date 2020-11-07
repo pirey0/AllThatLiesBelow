@@ -8,6 +8,14 @@ public class DirectionBasedAnimator : MonoBehaviour
     [SerializeField] int idleFrame = 0;
     [SerializeField] Sprite[] sprites;
     [SerializeField] AnimationCurve animationCurve;
+    
+    bool flipX;
+    [SerializeField] SpriteRenderer playerSpriteRenderer;
+
+    private void Update()
+    {
+        //SetFrame(GetFrameFromMouseAngle());
+    }
     private void Start()
     {
         SetFrame(idleFrame);
@@ -27,12 +35,13 @@ public class DirectionBasedAnimator : MonoBehaviour
     {
         float currentTime = 0;
         int frameBefore = GetFrameFromMouseAngle();
+        flipX = playerSpriteRenderer == null?false:playerSpriteRenderer.flipX;
 
-        while(true)
+        while (true)
         {
             Debug.Log("play curve");
             currentTime += Time.deltaTime;
-            int frameCurrent = GetFrameFromMouseAngle() + (int)animationCurve.Evaluate(currentTime);
+            int frameCurrent = GetFrameFromMouseAngle() + (int)animationCurve.Evaluate(currentTime) * (flipX?-1:1);
 
             if (frameCurrent != frameBefore)
             {
