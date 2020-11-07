@@ -42,14 +42,29 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            Vector3 clickPos = camera.ScreenToWorldPoint(Input.mousePosition);
-            generation.TryCarve((int)clickPos.x, (int)clickPos.y);
+            Vector2Int clickPos = GetClickPosition();
+            if (generation.HasLineOfSight(GetPositionInGrid(), clickPos, debugVisualize: true))
+                generation.TryCarve(clickPos.x, clickPos.y);
         }
         else if (Input.GetMouseButton(1))
         {
-            Vector3 clickPos = camera.ScreenToWorldPoint(Input.mousePosition);
-            generation.TryPlace((int)clickPos.x, (int)clickPos.y);
+            Vector2Int clickPos = GetClickPosition();
+            if (generation.HasLineOfSight(GetPositionInGrid(), clickPos, debugVisualize: true))
+                generation.TryPlace(clickPos.x, clickPos.y);
         }
+    }
+
+    private Vector2Int GetPositionInGrid()
+    {
+        return new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
+    }
+
+    private Vector2Int GetClickPosition()
+    {
+        Vector3 position = Input.mousePosition + Vector3.back * camera.transform.position.z;
+        //position.y = Screen.height - position.y;
+        Vector3 clickPos = camera.ScreenToWorldPoint(position);
+        return new Vector2Int((int)clickPos.x, (int)clickPos.y);
     }
 
     private void FixedUpdate()
@@ -65,7 +80,7 @@ public class PlayerController : MonoBehaviour
         rigidbody.position += horizontal * rightWalkVector * moveSpeed * Time.fixedDeltaTime;
         rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
 
-        if(Mathf.Abs(horizontal) > 0.2f)
+        if (Mathf.Abs(horizontal) > 0.2f)
             spriteRenderer.flipX = horizontal < 0;
     }
 
