@@ -40,6 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5224685137942921381}
   - component: {fileID: 2446050048981319622}
+  - component: {fileID: 1963236739}
   m_Layer: 0
   m_Name: Vignette
   m_TagString: Untagged
@@ -98,8 +99,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1237965333
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 253be4da77579e64e8277a8b2979c3dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -112,6 +113,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1963236739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217721071391487497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7670e826dcbd1a48bba2c387563c39f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vignetteRenderer: {fileID: 2446050048981319622}
+  fadeHeight: 75
+  fadeThickness: 5
 --- !u!1 &8633471933228471848
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,8 +222,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1213309343
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: cc1a2e0b6277e804e8e09c1a9e6ba98a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
