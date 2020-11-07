@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngineInternal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float maxDigDistance = 3;
 
     [SerializeField] float digSpeed = 10;
+    [SerializeField] Transform mouseHighlight;
 
     float lastGroundedTimeStamp;
     float lastJumpTimeStamp;
@@ -28,6 +30,7 @@ public class PlayerController : MonoBehaviour
     Vector2 rightWalkVector = Vector3.right;
     Camera camera;
     SpriteRenderer spriteRenderer;
+    Vector2Int? digTarget;
 
     private void Start()
     {
@@ -43,14 +46,44 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
+
+        if (Vector2Int.Distance(GetPositionInGrid(), GetClickPosition()) <= maxDigDistance)
         {
-            TryDig();
+            UpdateDigTarget();
+
+            if (Input.GetMouseButton(0))
+            {
+                TryDig();
+            }
+            else if (Input.GetMouseButton(1))
+            {
+                TryPlace();
+            }
         }
-        else if (Input.GetMouseButton(1))
+        else
         {
-            TryPlace();
+            digTarget = null;
         }
+
+        UpdateDigHighlight();
+    }
+
+    private void UpdateDigTarget()
+    {
+        digTarget = generation.GetClosestSolidBlock(GetPositionInGrid(), GetClickPosition());
+        if (generation.IsAirAt(digTarget.Value.x, digTarget.Value.y))
+        {
+            digTarget = null;
+        }
+    }
+
+    private void UpdateDigHighlight()
+    {
+
+        if (digTarget == null)
+            mouseHighlight.position = new Vector3(-1000, -1000);
+        else
+            mouseHighlight.position = new Vector3(digTarget.Value.x, digTarget.Value.y, 0) + new Vector3(0.5f, 0.5f, 0);
     }
 
     private void TryPlace()
@@ -62,13 +95,8 @@ public class PlayerController : MonoBehaviour
 
     private void TryDig()
     {
-        Vector2Int clickPos = GetClickPosition();
-        
-        if (Vector2Int.Distance(GetPositionInGrid(), clickPos) > maxDigDistance)
-            return;
-
-        if (generation.HasLineOfSight(GetPositionInGrid(), clickPos, debugVisualize: true))
-            generation.DamageAt(clickPos.x, clickPos.y, Time.deltaTime * digSpeed);
+        if (digTarget.HasValue)
+            generation.DamageAt(digTarget.Value.x, digTarget.Value.y, Time.deltaTime * digSpeed);
     }
 
     private Vector2Int GetPositionInGrid()
@@ -79,7 +107,6 @@ public class PlayerController : MonoBehaviour
     private Vector2Int GetClickPosition()
     {
         Vector3 position = Input.mousePosition + Vector3.back * camera.transform.position.z;
-        //position.y = Screen.height - position.y;
         Vector3 clickPos = camera.ScreenToWorldPoint(position);
         return new Vector2Int((int)clickPos.x, (int)clickPos.y);
     }

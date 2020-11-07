@@ -191,26 +191,42 @@ public class TestGeneration : MonoBehaviour
             {
                 if (debugVisualize)
                     Debug.DrawLine((Vector3Int)current, (Vector3Int)end, Color.red, 1);
-
                 return false;
             }
 
-            Vector2Int delta = end - current;
-            Vector2Int offset;
-            if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
-                offset = new Vector2Int((int)Mathf.Sign(delta.x), 0);
-            else if (Mathf.Abs(delta.x) < Mathf.Abs(delta.y))
-                offset = new Vector2Int(0, (int)Mathf.Sign(delta.y));
-            else
-                offset = new Vector2Int((int)Mathf.Sign(delta.x), (int)Mathf.Sign(delta.y));
-
+            Vector2Int offset = StepTowards(current, end);
             if (debugVisualize)
                 Debug.DrawLine((Vector3Int)current, (Vector3Int)(current + offset), Color.yellow, 1f);
-
             current += offset;
         }
 
         return true;
+    }
+
+    private static Vector2Int StepTowards(Vector2Int current, Vector2Int end)
+    {
+        Vector2Int delta = end - current;
+        Vector2Int offset;
+        if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
+            offset = new Vector2Int((int)Mathf.Sign(delta.x), 0);
+        else if (Mathf.Abs(delta.x) < Mathf.Abs(delta.y))
+            offset = new Vector2Int(0, (int)Mathf.Sign(delta.y));
+        else
+            offset = new Vector2Int((int)Mathf.Sign(delta.x), (int)Mathf.Sign(delta.y));
+
+        return offset;
+    }
+
+    public Vector2Int GetClosestSolidBlock(Vector2Int current, Vector2Int end)
+    {
+        while (current != end)
+        {
+            if (IsBlockAt(current.x, current.y))
+                return current;
+
+            current += StepTowards(current, end);
+        }
+        return end;
     }
 
     public void DamageAt(int x, int y, float amount)
