@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 254087233
+    locked: 0
+  - name: Altar
+    uniqueID: 1254969039
+    locked: 0
+  - name: Player
+    uniqueID: 3081657953
+    locked: 0
+  - name: Rock
+    uniqueID: 2348705865
+    locked: 0
+  - name: Vignette
+    uniqueID: 1237965333
+    locked: 0

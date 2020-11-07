@@ -42,8 +42,6 @@ public class TestGeneration : MonoBehaviour
 
     [SerializeField] AnimationCurve heightMultiplyer;
 
-    [SerializeField] new TilemapRenderer renderer;
-
 
     Tile[,] map;
 
