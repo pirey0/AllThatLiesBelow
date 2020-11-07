@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float miningParticlesRateOverTime = 4;
 
     [SerializeField] AudioSource breakBlock, startMining;
+    [SerializeField] DirectionBasedAnimator pickaxeAnimator;
 
     SpriteAnimator spriteAnimator;
     float lastGroundedTimeStamp;
@@ -160,6 +161,7 @@ public class PlayerController : MonoBehaviour
         var emission = miningParticles.emission;
         emission.rateOverTimeMultiplier = 0;
         startMining.Stop();
+        pickaxeAnimator.Stop();
     }
 
 
@@ -171,6 +173,7 @@ public class PlayerController : MonoBehaviour
         inMining = true;
         startMining.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
         startMining.Play();
+        pickaxeAnimator.Play();
     }
 
     private Vector2Int GetPositionInGrid()
