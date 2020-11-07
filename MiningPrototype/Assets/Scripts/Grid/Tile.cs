@@ -29,6 +29,13 @@ public struct Tile
             return t;
         }
     }
+
+    public void TakeDamage()
+    {
+        if (Type == TileType.Air)
+            return;
+        Damage++;
+    }
 }
 
 public enum TileType

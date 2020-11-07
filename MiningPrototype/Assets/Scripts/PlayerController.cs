@@ -41,11 +41,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             TryDig();
         }
-        else if (Input.GetMouseButton(1))
+        else if (Input.GetMouseButtonDown(1))
         {
             TryPlace();
         }
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
             return;
 
         if (generation.HasLineOfSight(GetPositionInGrid(), clickPos, debugVisualize: true))
-            generation.CarveAt(clickPos.x, clickPos.y);
+            generation.DamageAt(clickPos.x, clickPos.y);
     }
 
     private Vector2Int GetPositionInGrid()

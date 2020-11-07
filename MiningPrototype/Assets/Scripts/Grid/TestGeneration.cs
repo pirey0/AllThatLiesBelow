@@ -216,7 +216,7 @@ public class TestGeneration : MonoBehaviour
             return;
 
         Tile t = GetTileAt(x, y);
-        t.Damage++;
+        t.TakeDamage();
         
         if (t.Damage > 10)
         {
@@ -224,7 +224,7 @@ public class TestGeneration : MonoBehaviour
         }
         else
         {
-            SetMapAt(x, y, Tile.Air, updateNeighbourBitmask: false, updateVisuals: true);
+            SetMapAt(x, y, t, updateNeighbourBitmask: false, updateVisuals: true);
         }
     }
 
@@ -250,6 +250,7 @@ public class TestGeneration : MonoBehaviour
 
         if (updateNeighbourBitmask)
         {
+            CalculateNeighboursBitmaskAt(x, y);
             foreach (var nIndex in GetNeighboursIndiciesOf(x, y))
             {
                 CalculateNeighboursBitmaskAt(nIndex.x, nIndex.y);
