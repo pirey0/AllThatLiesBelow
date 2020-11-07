@@ -299,6 +299,7 @@ public class TestGeneration : MonoBehaviour
     void UpdateVisuals()
     {
         tilemap.ClearAllTiles();
+        damageOverlayTilemap.ClearAllTiles();
         IterateXY(size, UpdateVisualsAt);
     }
 
