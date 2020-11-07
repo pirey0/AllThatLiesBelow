@@ -10,14 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d05716d329922cf4abb0b6513364aece, type: 3}
-  m_Name: playerWalking
+  m_Name: playerFall
   m_EditorClassIdentifier: 
   loop: 1
   speedMultiplyer: 1
   frames:
-  - Sprite: {fileID: 130943369924106770, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
-    Duration: 0.1
-  - Sprite: {fileID: 4652700660929824753, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
-    Duration: 0.1
-  fileToLoadFrom: {fileID: 2800000, guid: f2fce80918792284dbc507948b41bf1e, type: 3}
-  defaultTime: 0.1
+  - Sprite: {fileID: -3182722403739261302, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
+    Duration: 1
+  fileToLoadFrom: {fileID: 0}
+  defaultTime: 0.25
