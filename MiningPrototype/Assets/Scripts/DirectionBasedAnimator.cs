@@ -5,7 +5,7 @@ using UnityEngine;
 public class DirectionBasedAnimator : MonoBehaviour
 {
     [SerializeField] SpriteRenderer spriteRenderer;
-    [SerializeField] int idleFrame = 0;
+    [SerializeField] int idleFrameRight,idleFrameLeft;
     [SerializeField] Sprite[] sprites;
     [SerializeField] AnimationCurve animationCurve;
     
@@ -18,7 +18,7 @@ public class DirectionBasedAnimator : MonoBehaviour
     }
     private void Start()
     {
-        SetFrame(idleFrame);
+        SetFrame(idleFrameRight);
     }
     public void Play()
     {
@@ -28,7 +28,7 @@ public class DirectionBasedAnimator : MonoBehaviour
     public void Stop()
     {
         StopAllCoroutines();
-        SetFrame(idleFrame);
+        SetFrame(flipX?idleFrameLeft:idleFrameRight);
     }
 
     IEnumerator PickingRoutine()
