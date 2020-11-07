@@ -8,8 +8,9 @@ using UnityEngine.Tilemaps;
 
 public class TestGeneration : MonoBehaviour
 {
-    [SerializeField] Tilemap tilemap;
+    [SerializeField] Tilemap tilemap, damageOverlayTilemap;
     [SerializeField] TileBase[] groundTiles;
+    [SerializeField] TileBase[] damageOverlayTiles;
 
     [Header("Settings")]
     [SerializeField] bool updateOnParameterChanged;
@@ -41,7 +42,8 @@ public class TestGeneration : MonoBehaviour
 
     [SerializeField] AnimationCurve heightMultiplyer;
 
-    bool[,] map;
+
+    Tile[,] map;
 
     static readonly Dictionary<int, int> BITMASK_TO_TILEINDEX = new Dictionary<int, int>()
     {{2, 1 },{ 8, 2 }, {10, 3 }, {11, 4 }, {16, 5 }, {18, 6 }, { 22, 7 },
@@ -68,6 +70,8 @@ public class TestGeneration : MonoBehaviour
 
         IterateX(automataSteps, (x) => RunAutomataStep());
 
+        CalculateNeighboursBitmask();
+
         UpdateVisuals();
 
         stopwatch.Stop();
@@ -75,16 +79,58 @@ public class TestGeneration : MonoBehaviour
         Debug.Log("Update Duration: " + stopwatch.ElapsedMilliseconds + "ms");
     }
 
+    private void CalculateNeighboursBitmask()
+    {
+        IterateXY(size, CalculateNeighboursBitmaskAt);
+    }
+
+    private void CalculateNeighboursBitmaskAt(int x, int y)
+    {
+        if (IsOutOfBounds(x, y))
+            return;
+
+        int topLeft = IsBlockAt(x - 1, y + 1) ? 1 : 0;
+        int topMid = IsBlockAt(x, y + 1) ? 1 : 0;
+        int topRight = IsBlockAt(x + 1, y + 1) ? 1 : 0;
+        int midLeft = IsBlockAt(x - 1, y) ? 1 : 0;
+        int midRight = IsBlockAt(x + 1, y) ? 1 : 0;
+        int botLeft = IsBlockAt(x - 1, y - 1) ? 1 : 0;
+        int botMid = IsBlockAt(x, y - 1) ? 1 : 0;
+        int botRight = IsBlockAt(x + 1, y - 1) ? 1 : 0;
+
+        int value = topMid * 2 + midLeft * 8 + midRight * 16 + botMid * 64;
+        value += topLeft * topMid * midLeft;
+        value += topRight * topMid * midRight * 4;
+        value += botLeft * midLeft * botMid * 32;
+        value += botRight * midRight * botMid * 128;
+
+        Tile t = map[x, y];
+        t.NeighbourBitmask = (byte)value;
+        map[x, y] = t;
+
+    }
 
     private void Populate()
     {
         if (!seedIsRandom)
             UnityEngine.Random.InitState(seed);
 
-        map = new bool[size, size];
+        map = new Tile[size, size];
 
-        IterateXY(size, (x, y) => map[x, y] = heightMultiplyer.Evaluate((float)y / size) * UnityEngine.Random.value < initialAliveChance);
+        IterateXY(size, PopulateAt);
 
+    }
+
+    private void PopulateAt(int x, int y)
+    {
+        Tile t = Tile.Air;
+
+        bool occupied = heightMultiplyer.Evaluate((float)y / size) * UnityEngine.Random.value < initialAliveChance;
+
+        if (occupied)
+            t.Type = TileType.Stone;
+
+        map[x, y] = t;
     }
 
     //https://gamedevelopment.tutsplus.com/tutorials/generate-random-cave-levels-using-cellular-automata--gamedev-9664
@@ -95,17 +141,17 @@ public class TestGeneration : MonoBehaviour
         {
             for (int j = -1; j < 2; j++)
             {
-                int neighbour_x = x + i;
-                int neighbour_y = y + j;
+                int nx = x + i;
+                int ny = y + j;
 
                 if (i == 0 && j == 0)
                 {
                 }
-                else if (neighbour_x < 0 || neighbour_y < 0 || neighbour_x >= size || neighbour_y >= size)
+                else if (nx < 0 || ny < 0 || nx >= size || ny >= size)
                 {
                     count = count + 1;
                 }
-                else if (map[neighbour_x, neighbour_y])
+                else if (IsBlockAt(nx, ny))
                 {
                     count = count + 1;
                 }
@@ -115,10 +161,20 @@ public class TestGeneration : MonoBehaviour
         return count;
     }
 
-    private bool GetMapAt(int x, int y)
+    public bool IsAirAt(int x, int y)
+    {
+        return GetTileAt(x, y).Type == TileType.Air;
+    }
+
+    public bool IsBlockAt(int x, int y)
+    {
+        return GetTileAt(x, y).Type != TileType.Air;
+    }
+
+    public Tile GetTileAt(int x, int y)
     {
         if (IsOutOfBounds(x, y))
-            return false;
+            return Tile.Air;
 
         return map[x, y];
     }
@@ -129,7 +185,7 @@ public class TestGeneration : MonoBehaviour
 
         while (current != end)
         {
-            bool blocked = GetMapAt(current.x, current.y);
+            bool blocked = IsBlockAt(current.x, current.y);
 
             if (blocked)
             {
@@ -143,11 +199,13 @@ public class TestGeneration : MonoBehaviour
             Vector2Int offset;
             if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
                 offset = new Vector2Int((int)Mathf.Sign(delta.x), 0);
-            else
+            else if (Mathf.Abs(delta.x) < Mathf.Abs(delta.y))
                 offset = new Vector2Int(0, (int)Mathf.Sign(delta.y));
+            else
+                offset = new Vector2Int((int)Mathf.Sign(delta.x), (int)Mathf.Sign(delta.y));
 
             if (debugVisualize)
-                Debug.DrawLine((Vector3Int) current, (Vector3Int) (current + offset), Color.yellow, 1f);
+                Debug.DrawLine((Vector3Int)current, (Vector3Int)(current + offset), Color.yellow, 1f);
 
             current += offset;
         }
@@ -155,39 +213,76 @@ public class TestGeneration : MonoBehaviour
         return true;
     }
 
+    public void DamageAt(int x, int y, float amount)
+    {
+        if (IsOutOfBounds(x, y))
+            return;
+
+        Tile t = GetTileAt(x, y);
+        t.TakeDamage(amount);
+        
+        if (t.Damage > 10)
+        {
+            CarveAt(x, y);
+        }
+        else
+        {
+            SetMapAt(x, y, t, updateNeighbourBitmask: false, updateVisuals: true);
+        }
+    }
 
 
-    public void TryCarve(int x, int y)
+    public void CarveAt(int x, int y)
     {
         Debug.Log("Try Carve " + x + " / " + y);
-        SetMapAt(x, y, false);
+        SetMapAt(x, y, Tile.Air);
     }
 
-    public void TryPlace(int x, int y)
+    public void PlaceAt(int x, int y)
     {
         Debug.Log("Try Place " + x + " / " + y);
-        SetMapAt(x, y, true);
+        SetMapAt(x, y, Tile.Stone);
     }
 
-    private void SetMapAt(int x, int y, bool value, bool updateVisuals = true)
+    private void SetMapAt(int x, int y, Tile value, bool updateNeighbourBitmask = true, bool updateVisuals = true)
     {
         if (IsOutOfBounds(x, y))
             return;
 
         map[x, y] = value;
 
+        if (updateNeighbourBitmask)
+        {
+            CalculateNeighboursBitmaskAt(x, y);
+            foreach (var nIndex in GetNeighboursIndiciesOf(x, y))
+            {
+                CalculateNeighboursBitmaskAt(nIndex.x, nIndex.y);
+            }
+        }
+
         if (updateVisuals)
         {
-            UpdateTileMapAt(x, y);
-            UpdateTileMapAt(x + 1, y);
-            UpdateTileMapAt(x - 1, y);
-            UpdateTileMapAt(x, y + 1);
-            UpdateTileMapAt(x, y - 1);
-            UpdateTileMapAt(x + 1, y + 1);
-            UpdateTileMapAt(x - 1, y - 1);
-            UpdateTileMapAt(x - 1, y + 1);
-            UpdateTileMapAt(x + 1, y - 1);
+            UpdateVisualsAt(x, y);
+            foreach (var nIndex in GetNeighboursIndiciesOf(x, y))
+            {
+                UpdateVisualsAt(nIndex.x, nIndex.y);
+            }
         }
+    }
+
+    private Vector2Int[] GetNeighboursIndiciesOf(int x, int y)
+    {
+        return new Vector2Int[]
+        {
+            new Vector2Int(x+1,y),
+            new Vector2Int(x,y+1),
+            new Vector2Int(x+1,y+1),
+            new Vector2Int(x-1,y),
+            new Vector2Int(x,y-1),
+            new Vector2Int(x-1,y-1),
+            new Vector2Int(x+1,y-1),
+            new Vector2Int(x-1,y+1)
+        };
     }
 
     private void RunAutomataStep()
@@ -198,13 +293,13 @@ public class TestGeneration : MonoBehaviour
     private void SingleAutomataSet(int x, int y)
     {
         int nbs = GetAliveNeightboursCountFor(x, y);
-        map[x, y] = map[x, y] ? nbs > deathLimit : nbs > birthLimit;
+        map[x, y] = IsBlockAt(x, y) ? (nbs > deathLimit ? Tile.Stone : Tile.Air) : (nbs > birthLimit ? Tile.Stone : Tile.Air);
     }
 
     void UpdateVisuals()
     {
         tilemap.ClearAllTiles();
-        IterateXY(size, UpdateTileMapAt);
+        IterateXY(size, UpdateVisualsAt);
     }
 
     void OnParameterChanged()
@@ -215,9 +310,10 @@ public class TestGeneration : MonoBehaviour
         }
     }
 
-    private void UpdateTileMapAt(int x, int y)
+    private void UpdateVisualsAt(int x, int y)
     {
-        tilemap.SetTile(new Vector3Int(x, y, 0), GetCorrectTile(x, y));
+        tilemap.SetTile(new Vector3Int(x, y, 0), GetVisualTileFor(x, y));
+        damageOverlayTilemap.SetTile(new Vector3Int(x, y, 0), GetVisualDestructableOverlayFor(x, y));
     }
 
     private bool IsOutOfBounds(int x, int y)
@@ -225,29 +321,13 @@ public class TestGeneration : MonoBehaviour
         return (x < 0 || y < 0 || x >= size || y >= size);
     }
 
-    private TileBase GetCorrectTile(int x, int y)
+    private TileBase GetVisualTileFor(int x, int y)
     {
 
-        if (IsOutOfBounds(x, y) || !map[x, y])
+        if (IsOutOfBounds(x, y) || IsAirAt(x, y))
             return null;
 
-        int topLeft = GetMapAt(x - 1, y + 1) ? 1 : 0;
-        int topMid = GetMapAt(x, y + 1) ? 1 : 0;
-        int topRight = GetMapAt(x + 1, y + 1) ? 1 : 0;
-        int midLeft = GetMapAt(x - 1, y) ? 1 : 0;
-        int midRight = GetMapAt(x + 1, y) ? 1 : 0;
-        int botLeft = GetMapAt(x - 1, y - 1) ? 1 : 0;
-        int botMid = GetMapAt(x, y - 1) ? 1 : 0;
-        int botRight = GetMapAt(x + 1, y - 1) ? 1 : 0;
-
-
-        int value = topMid * 2 + midLeft * 8 + midRight * 16 + botMid * 64;
-        value += topLeft * topMid * midLeft;
-        value += topRight * topMid * midRight * 4;
-        value += botLeft * midLeft * botMid * 32;
-        value += botRight * midRight * botMid * 128;
-
-        int tileIndex = BITMASK_TO_TILEINDEX[value];
+        int tileIndex = BITMASK_TO_TILEINDEX[GetTileAt(x, y).NeighbourBitmask];
 
         //Casual random tile
         if (tileIndex == 46)
@@ -256,6 +336,12 @@ public class TestGeneration : MonoBehaviour
         }
 
         return groundTiles[tileIndex];
+    }
+
+    private TileBase GetVisualDestructableOverlayFor(int x, int y)
+    {
+        var t = GetTileAt(x, y);
+        return damageOverlayTiles[Mathf.FloorToInt(t.Damage)];
     }
 
     private void IterateXY(int size, System.Action<int, int> action)

@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 0}
+  damageOverlayTilemap: {fileID: 0}
   groundTiles:
   - {fileID: 11400000, guid: a36febf07089986479169c7da38520bc, type: 2}
   - {fileID: 11400000, guid: 8151e566e662bc249b0383ccdbb9ae05, type: 2}
@@ -93,14 +94,26 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b5051975910347e478eef769b5e18bf9, type: 2}
   - {fileID: 11400000, guid: f2badcaa583391443a977f441768cb39, type: 2}
   - {fileID: 11400000, guid: 59c7e75c8d906314189eadb8d2d1586f, type: 2}
+  damageOverlayTiles:
+  - {fileID: 0}
+  - {fileID: 11400000, guid: ab62f49b0d19e9d4389ac6d165d7bd0e, type: 2}
+  - {fileID: 11400000, guid: add5a0ce75a92ad45b96fd132c4f755e, type: 2}
+  - {fileID: 11400000, guid: 804aec9eff66c994ca8640107d7f5942, type: 2}
+  - {fileID: 11400000, guid: ad591d8660251014c9ca5b9d34bafa96, type: 2}
+  - {fileID: 11400000, guid: d54426b4721bb0b4ba4349fa88035657, type: 2}
+  - {fileID: 11400000, guid: 361cfedcae2e4784ab63a02a73844b46, type: 2}
+  - {fileID: 11400000, guid: 4beb922940fe919468096c992d5a8db4, type: 2}
+  - {fileID: 11400000, guid: 46330f0dc5b279c48837144879f14b29, type: 2}
+  - {fileID: 11400000, guid: ee0c7ed288d70a14e8f20176e453128f, type: 2}
+  - {fileID: 11400000, guid: d7c51f4b80084cf40b6edcc4a9b40106, type: 2}
   updateOnParameterChanged: 1
-  seedIsRandom: 1
+  seedIsRandom: 0
   seed: 0
   size: 100
   initialAliveChance: 0.51
   deathLimit: 3
   birthLimit: 4
-  automataSteps: 4
+  automataSteps: 3
   heightMultiplyer:
     serializedVersion: 2
     m_Curve:
@@ -141,10 +154,19 @@ MonoBehaviour:
       inWeight: 0.15513173
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.9851074
-      value: 2
-      inSlope: 5.269003
-      outSlope: 5.269003
+      time: 0.8189695
+      value: 3.4706664
+      inSlope: 3.9060838
+      outSlope: 3.9060838
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0005168
+      value: 3.476242
+      inSlope: 0.030711873
+      outSlope: 0.030711873
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
