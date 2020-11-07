@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngineInternal;
@@ -23,6 +24,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float digSpeed = 10;
     [SerializeField] Transform mouseHighlight;
 
+    [SerializeField] SpriteAnimation an_Walk, an_Idle, an_Fall;
+
+    [SerializeField] ParticleSystem miningParticles;
+    [SerializeField] int miningBreakParticlesCount;
+    [SerializeField] float miningParticlesRateOverTime = 4;
+
+    SpriteAnimator spriteAnimator;
     float lastGroundedTimeStamp;
     float lastJumpTimeStamp;
 
@@ -32,17 +40,17 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Vector2Int? digTarget;
 
+    bool inMining;
+
     private void Start()
     {
         camera = Camera.main;
         rigidbody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteAnimator = GetComponent<SpriteAnimator>();
     }
 
-    private bool CanJump()
-    {
-        return Time.time - lastGroundedTimeStamp < timeAfterGroundedToJump && Time.time - lastJumpTimeStamp > jumpCooldown;
-    }
+
 
     private void Update()
     {
@@ -63,9 +71,14 @@ public class PlayerController : MonoBehaviour
         else
         {
             digTarget = null;
+            DisableMiningParticles();
         }
 
         UpdateDigHighlight();
+    }
+    private bool CanJump()
+    {
+        return Time.time - lastGroundedTimeStamp < timeAfterGroundedToJump && Time.time - lastJumpTimeStamp > jumpCooldown;
     }
 
     private void UpdateDigTarget()
@@ -96,12 +109,57 @@ public class PlayerController : MonoBehaviour
     private void TryDig()
     {
         if (digTarget.HasValue)
-            generation.DamageAt(digTarget.Value.x, digTarget.Value.y, Time.deltaTime * digSpeed);
+        {
+            bool broken = generation.DamageAt(digTarget.Value.x, digTarget.Value.y, Time.deltaTime * digSpeed);
+
+            if (broken)
+            {
+                miningParticles.transform.position = (Vector3Int)digTarget + new Vector3(0.5f, 0.5f);
+                miningParticles.Emit(miningBreakParticlesCount);
+            }
+            else
+            {
+            UpdateMiningParticlesPositions();
+
+            }
+
+            if (!inMining)
+            {
+                StartMiningParticles();
+            }
+        }
+        else
+        {
+            DisableMiningParticles();
+        }
+    }
+
+    private void UpdateMiningParticlesPositions()
+    {
+        miningParticles.transform.position = generation.GetWorldLocationOfFreeFaceFromSource(digTarget.Value, GetPositionInGrid());
+        Debug.DrawLine((Vector3Int)GetPositionInGrid(), miningParticles.transform.position, Color.yellow, 0.1f);
+    }
+
+
+    private void DisableMiningParticles()
+    {
+        inMining = false;
+        var emission = miningParticles.emission;
+        emission.rateOverTimeMultiplier = 0;
+    }
+
+
+
+    private void StartMiningParticles()
+    {
+        var emission = miningParticles.emission;
+        emission.rateOverTimeMultiplier = miningParticlesRateOverTime;
+        inMining = true;
     }
 
     private Vector2Int GetPositionInGrid()
     {
-        return new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
+        return new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y) + 1); //+1 to be at center of player
     }
 
     private Vector2Int GetClickPosition()
@@ -126,6 +184,18 @@ public class PlayerController : MonoBehaviour
 
         if (Mathf.Abs(horizontal) > 0.2f)
             spriteRenderer.flipX = horizontal < 0;
+
+        if (isGrounded)
+        {
+            if (horizontal != 0)
+                spriteAnimator.Play(an_Idle, false);
+            else
+                spriteAnimator.Play(an_Walk, false);
+        }
+        else
+        {
+            spriteAnimator.Play(an_Fall);
+        }
     }
 
     private void UpdateJump()
