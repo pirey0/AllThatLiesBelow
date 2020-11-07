@@ -12,10 +12,11 @@ public class DirectionBasedAnimator : MonoBehaviour
     bool flipX;
     [SerializeField] SpriteRenderer playerSpriteRenderer;
 
-    private void Update()
-    {
-        //SetFrame(GetFrameFromMouseAngle());
-    }
+    //private void Update()
+    //{
+    //    flipX = playerSpriteRenderer == null ? false : playerSpriteRenderer.flipX;
+    //    SetFrame(GetFrameFromMouseAngle());
+    //}
     private void Start()
     {
         SetFrame(idleFrameRight);
@@ -36,12 +37,13 @@ public class DirectionBasedAnimator : MonoBehaviour
         float currentTime = 0;
         int frameBefore = GetFrameFromMouseAngle();
         flipX = playerSpriteRenderer == null?false:playerSpriteRenderer.flipX;
+        spriteRenderer.flipX = flipX;
 
         while (true)
         {
             Debug.Log("play curve");
             currentTime += Time.deltaTime;
-            int frameCurrent = GetFrameFromMouseAngle() + (int)animationCurve.Evaluate(currentTime) * (flipX?-1:1);
+            int frameCurrent = GetFrameFromMouseAngle() + (int)animationCurve.Evaluate(currentTime);
 
             if (frameCurrent != frameBefore)
             {
@@ -72,6 +74,7 @@ public class DirectionBasedAnimator : MonoBehaviour
     {
         Vector2 p2 = new Vector3(Screen.width / 2, Screen.height / 2, 0);
         float angle = (Mathf.Atan2(Input.mousePosition.y - p2.y, Input.mousePosition.x - p2.x)) * Mathf.Rad2Deg;
-        return (int)((angle - 45f) / -45f);
+        float angleAsFloat = (angle - 45f) / -45f;
+        return Mathf.RoundToInt(angleAsFloat);
     }
 }

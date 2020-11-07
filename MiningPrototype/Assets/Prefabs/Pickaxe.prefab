@@ -97,7 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 7720122279049008536}
   idleFrameRight: 6
-  idleFrameLeft: 0
+  idleFrameLeft: 6
   sprites:
   - {fileID: 1522097905951984030, guid: c099f4890c297984490ff015018f9495, type: 3}
   - {fileID: -4857031402594571213, guid: c099f4890c297984490ff015018f9495, type: 3}
