@@ -117,11 +117,45 @@ public class TestGeneration : MonoBehaviour
 
     private bool GetMapAt(int x, int y)
     {
-        if (IsOutOfBounds(x,y))
+        if (IsOutOfBounds(x, y))
             return false;
 
         return map[x, y];
     }
+
+    public bool HasLineOfSight(Vector2Int start, Vector2Int end, bool debugVisualize = false)
+    {
+        Vector2Int current = start;
+
+        while (current != end)
+        {
+            bool blocked = GetMapAt(current.x, current.y);
+
+            if (blocked)
+            {
+                if (debugVisualize)
+                    Debug.DrawLine((Vector3Int)current, (Vector3Int)end, Color.red, 1);
+
+                return false;
+            }
+
+            Vector2Int delta = end - current;
+            Vector2Int offset;
+            if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
+                offset = new Vector2Int((int)Mathf.Sign(delta.x), 0);
+            else
+                offset = new Vector2Int(0, (int)Mathf.Sign(delta.y));
+
+            if (debugVisualize)
+                Debug.DrawLine((Vector3Int) current, (Vector3Int) (current + offset), Color.yellow, 1f);
+
+            current += offset;
+        }
+
+        return true;
+    }
+
+
 
     public void TryCarve(int x, int y)
     {
@@ -137,22 +171,22 @@ public class TestGeneration : MonoBehaviour
 
     private void SetMapAt(int x, int y, bool value, bool updateVisuals = true)
     {
-        if (IsOutOfBounds(x,y))
+        if (IsOutOfBounds(x, y))
             return;
 
         map[x, y] = value;
 
         if (updateVisuals)
         {
-            SetTileToMap(x, y);
-            SetTileToMap(x + 1, y);
-            SetTileToMap(x - 1, y);
-            SetTileToMap(x, y + 1);
-            SetTileToMap(x, y - 1);
-            SetTileToMap(x + 1, y + 1);
-            SetTileToMap(x - 1, y - 1);
-            SetTileToMap(x - 1, y + 1);
-            SetTileToMap(x + 1, y - 1);
+            UpdateTileMapAt(x, y);
+            UpdateTileMapAt(x + 1, y);
+            UpdateTileMapAt(x - 1, y);
+            UpdateTileMapAt(x, y + 1);
+            UpdateTileMapAt(x, y - 1);
+            UpdateTileMapAt(x + 1, y + 1);
+            UpdateTileMapAt(x - 1, y - 1);
+            UpdateTileMapAt(x - 1, y + 1);
+            UpdateTileMapAt(x + 1, y - 1);
         }
     }
 
@@ -170,7 +204,7 @@ public class TestGeneration : MonoBehaviour
     void UpdateVisuals()
     {
         tilemap.ClearAllTiles();
-        IterateXY(size, SetTileToMap);
+        IterateXY(size, UpdateTileMapAt);
     }
 
     void OnParameterChanged()
@@ -181,7 +215,7 @@ public class TestGeneration : MonoBehaviour
         }
     }
 
-    private void SetTileToMap(int x, int y)
+    private void UpdateTileMapAt(int x, int y)
     {
         tilemap.SetTile(new Vector3Int(x, y, 0), GetCorrectTile(x, y));
     }
