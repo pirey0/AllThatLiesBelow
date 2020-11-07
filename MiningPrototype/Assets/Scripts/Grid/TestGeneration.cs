@@ -203,7 +203,7 @@ public class TestGeneration : MonoBehaviour
         return true;
     }
 
-    private static Vector2Int StepTowards(Vector2Int current, Vector2Int end)
+    public static Vector2Int StepTowards(Vector2Int current, Vector2Int end)
     {
         Vector2Int delta = end - current;
         Vector2Int offset;
@@ -215,6 +215,43 @@ public class TestGeneration : MonoBehaviour
             offset = new Vector2Int((int)Mathf.Sign(delta.x), (int)Mathf.Sign(delta.y));
 
         return offset;
+    }
+
+    public static Vector3 StepTowards(Vector3 current, Vector3 end)
+    {
+        Vector3 delta = end - current;
+        Vector3 offset;
+        if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
+            offset = new Vector3((int)Mathf.Sign(delta.x), 0);
+        else if (Mathf.Abs(delta.x) < Mathf.Abs(delta.y))
+            offset = new Vector3(0, (int)Mathf.Sign(delta.y));
+        else
+            offset = new Vector3((int)Mathf.Sign(delta.x), (int)Mathf.Sign(delta.y));
+
+        return offset;
+    }
+
+    public Vector3 GetWorldLocationOfFreeFaceFromSource(Vector2Int target, Vector2Int source)
+    {
+        Vector2Int disp = source - target;
+
+        if (Mathf.Abs(disp.x) > Mathf.Abs(disp.y))
+        {
+            bool xAir = IsAirAt(target.x + (int)Mathf.Sign(disp.x), target.y);
+            if (xAir)
+                return (Vector3Int)target + new Vector3((int)Mathf.Sign(disp.x) * 0.5f + 0.5f, 0.5f, 0);
+            else
+                return (Vector3Int)target + new Vector3(0.5f, (int)Mathf.Sign(disp.y) * 0.5f + 0.5f, 0);
+        }
+        else
+        {
+            bool yAir = IsAirAt(target.x, target.y + (int)Mathf.Sign(disp.y));
+            if (yAir)
+                return (Vector3Int)target + new Vector3(0.5f, (int)Mathf.Sign(disp.y) * 0.5f + 0.5f, 0);
+            else
+                return (Vector3Int)target + new Vector3((int)Mathf.Sign(disp.x) * 0.50f + 0.5f, 0.5f, 0);
+        }
+
     }
 
     public Vector2Int GetClosestSolidBlock(Vector2Int current, Vector2Int end)
@@ -229,21 +266,23 @@ public class TestGeneration : MonoBehaviour
         return end;
     }
 
-    public void DamageAt(int x, int y, float amount)
+    public bool DamageAt(int x, int y, float amount)
     {
         if (IsOutOfBounds(x, y))
-            return;
+            return false;
 
         Tile t = GetTileAt(x, y);
         t.TakeDamage(amount);
-        
+
         if (t.Damage > 10)
         {
             CarveAt(x, y);
+            return true;
         }
         else
         {
             SetMapAt(x, y, t, updateNeighbourBitmask: false, updateVisuals: true);
+            return false;
         }
     }
 

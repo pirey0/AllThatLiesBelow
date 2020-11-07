@@ -92610,7 +92610,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1637824985498278830, guid: 0e897a4e464652a4fb1a53fa37c6a52e, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1637824985498278830, guid: 0e897a4e464652a4fb1a53fa37c6a52e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -92816,6 +92816,10 @@ PrefabInstance:
       propertyPath: generation
       value: 
       objectReference: {fileID: 1141556478}
+    - target: {fileID: 3471564094401374700, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
+      propertyPath: m_Volume
+      value: 0.661
+      objectReference: {fileID: 0}
     - target: {fileID: 8633471933228471848, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
       propertyPath: m_Name
       value: Player
