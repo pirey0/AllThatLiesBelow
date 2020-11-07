@@ -117,7 +117,7 @@ public class TestGeneration : MonoBehaviour
 
     private bool GetMapAt(int x, int y)
     {
-        if (x < 0 || y < 0 || x >= size || y >= size)
+        if (IsOutOfBounds(x,y))
             return false;
 
         return map[x, y];
@@ -137,7 +137,7 @@ public class TestGeneration : MonoBehaviour
 
     private void SetMapAt(int x, int y, bool value, bool updateVisuals = true)
     {
-        if (x < 0 || y < 0 || x >= size || y >= size)
+        if (IsOutOfBounds(x,y))
             return;
 
         map[x, y] = value;
@@ -186,9 +186,15 @@ public class TestGeneration : MonoBehaviour
         tilemap.SetTile(new Vector3Int(x, y, 0), GetCorrectTile(x, y));
     }
 
+    private bool IsOutOfBounds(int x, int y)
+    {
+        return (x < 0 || y < 0 || x >= size || y >= size);
+    }
+
     private TileBase GetCorrectTile(int x, int y)
     {
-        if (!map[x, y])
+
+        if (IsOutOfBounds(x, y) || !map[x, y])
             return null;
 
         int topLeft = GetMapAt(x - 1, y + 1) ? 1 : 0;
