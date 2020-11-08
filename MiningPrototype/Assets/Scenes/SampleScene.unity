@@ -296,6 +296,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RockBackground
       objectReference: {fileID: 0}
+    - target: {fileID: 115993272797162940, guid: 4aaa7bf81b4a5c34099006b07a549854, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4aaa7bf81b4a5c34099006b07a549854, type: 3}
 --- !u!1 &827138719
