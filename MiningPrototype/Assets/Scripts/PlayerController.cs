@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int miningBreakParticlesCount;
     [SerializeField] float miningParticlesRateOverTime = 4;
 
-    [SerializeField] AudioSource breakBlock, startMining;
+    [SerializeField] AudioSource breakBlock, startMining, walking;
     [SerializeField] DirectionBasedAnimator pickaxeAnimator;
 
     SpriteAnimator spriteAnimator;
@@ -215,6 +215,8 @@ public class PlayerController : MonoBehaviour
         {
             spriteAnimator.Play(an_Fall);
         }
+
+        UpdateWalkingSound(horizontal);
     }
 
     private void UpdateJump()
@@ -240,6 +242,26 @@ public class PlayerController : MonoBehaviour
         rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpVelocity);
         lastJumpTimeStamp = Time.time;
     }
+
+    private void UpdateWalkingSound(float horizontal)
+    {
+        if (isGrounded && Mathf.Abs(horizontal) > 0.01f)
+        {
+            if (!walking.isPlaying)
+            {
+                
+                walking.Play();
+            }
+        } else
+        {
+            if (walking.isPlaying)
+            {
+                
+                walking.Pause();
+            }
+        }
+    }
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         UpdateWalkVector(collision);
