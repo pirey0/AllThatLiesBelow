@@ -14,6 +14,8 @@ public class TestGeneration : MonoBehaviour
     [SerializeField] TileBase[] oreTiles;
     [SerializeField] TileBase snowTile1, snowTile2;
 
+    [SerializeField] Inventory playerInventory;
+
     [Header("Settings")]
     [SerializeField] bool updateOnParameterChanged;
 
@@ -339,6 +341,22 @@ public class TestGeneration : MonoBehaviour
         if (t.Damage > 10)
         {
             CarveAt(x, y);
+
+            itemType itemType = itemType.ROCKS;
+
+            switch (t.Type)
+            {
+                case TileType.Gold:
+                    itemType = itemType.GOLD;
+                    break;
+
+                case TileType.Copper:
+                    itemType = itemType.COPPER;
+                    break;
+            }
+
+            playerInventory.Add(itemType,1);
+
             return true;
         }
         else

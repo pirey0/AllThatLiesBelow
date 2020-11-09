@@ -22,17 +22,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] TestGeneration generation;
     [SerializeField] float maxDigDistance = 3;
 
+    [SerializeField] GameObject pickaxe;
     [SerializeField] float digSpeed = 10;
     [SerializeField] Transform mouseHighlight;
 
-    [SerializeField] SpriteAnimation an_Walk, an_Idle, an_Fall;
+    [SerializeField] SpriteAnimation an_Walk, an_Idle, an_Fall, an_Inventory;
 
     [SerializeField] ParticleSystem miningParticles;
     [SerializeField] int miningBreakParticlesCount;
     [SerializeField] float miningParticlesRateOverTime = 4;
 
-    [SerializeField] AudioSource breakBlock, startMining, walking;
+    [SerializeField] AudioSource breakBlock, startMining, walking, backpack;
     [SerializeField] DirectionBasedAnimator pickaxeAnimator;
+
+    [SerializeField] Canvas canvas;
+    [SerializeField] InventoryVisualizer inventoryVisualizerPrefab;
+    [SerializeField] InventoryVisualizer inventoryVisualizer;
+
+    [SerializeField] Inventory inventory;
 
     SpriteAnimator spriteAnimator;
     float lastGroundedTimeStamp;
@@ -62,11 +69,15 @@ public class PlayerController : MonoBehaviour
 
         if (Vector2Int.Distance(GetPositionInGrid(), GetClickPosition()) <= maxDigDistance)
         {
+
             UpdateDigTarget();
 
             if (Input.GetMouseButton(0))
             {
-                TryDig();
+                if (Vector2Int.Distance(GetPositionInGrid(), GetClickPosition()) <= 1)
+                    SetInventoryOpen(true);
+                else
+                    TryDig();
             }
             else if (Input.GetMouseButton(1))
             {
@@ -87,6 +98,32 @@ public class PlayerController : MonoBehaviour
 
         UpdateDigHighlight();
     }
+
+    private void SetInventoryOpen(bool isOpen = true)
+    {
+        if (isOpen)
+        {
+            if (inventoryVisualizer == null)
+            {
+                backpack.pitch = 1;
+                backpack.Play();
+
+                inventoryVisualizer = Instantiate(inventoryVisualizerPrefab, canvas.transform);
+                inventoryVisualizer.Init(transform, inventory);
+            }
+        } else
+        {
+            backpack.pitch = 0.66f;
+            backpack.Play();
+
+            if (inventoryVisualizer != null)
+            {
+                inventoryVisualizer.Close();
+                inventoryVisualizer = null;
+            }
+        }
+    }
+
     private bool CanJump()
     {
         return Time.time - lastGroundedTimeStamp < timeAfterGroundedToJump && Time.time - lastJumpTimeStamp > jumpCooldown;
@@ -119,6 +156,8 @@ public class PlayerController : MonoBehaviour
 
     private void TryDig()
     {
+        SetInventoryOpen(false);
+
         if (digTarget.HasValue)
         {
             bool broken = generation.DamageAt(digTarget.Value.x, digTarget.Value.y, Time.deltaTime * digSpeed);
@@ -198,6 +237,10 @@ public class PlayerController : MonoBehaviour
     {
         var horizontal = Input.GetAxis("Horizontal");
 
+        if (Mathf.Abs(horizontal) > 0.01 && inventoryVisualizer != null)
+            SetInventoryOpen(false);
+
+
         rigidbody.position += horizontal * rightWalkVector * moveSpeed * Time.fixedDeltaTime;
         rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
 
@@ -207,16 +250,37 @@ public class PlayerController : MonoBehaviour
         if (isGrounded)
         {
             if (horizontal == 0)
-                spriteAnimator.Play(an_Idle, false);
+            {
+                if (inventoryVisualizer != null)
+                {
+                    spriteAnimator.Play(an_Inventory, false);
+                    SetPickaxeVisible(false);
+                }
+                else
+                {
+                    spriteAnimator.Play(an_Idle, false);
+                    SetPickaxeVisible(true);
+                }
+            }
             else
+            {
                 spriteAnimator.Play(an_Walk, false);
+                SetPickaxeVisible(true);
+            }
         }
         else
         {
             spriteAnimator.Play(an_Fall);
+            SetPickaxeVisible(true);
         }
 
         UpdateWalkingSound(horizontal);
+    }
+
+    private void SetPickaxeVisible(bool isVisible = true)
+    {
+        if (isVisible != pickaxe.activeSelf)
+            pickaxe.SetActive(isVisible);
     }
 
     private void UpdateJump()
