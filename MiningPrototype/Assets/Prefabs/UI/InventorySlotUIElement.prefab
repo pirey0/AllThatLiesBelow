@@ -136,6 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 5807934643293565873}
   amountDisplay: {fileID: 402584658561430279}
+  button: {fileID: 44503794327221531}
   ItemInformationStorage: {fileID: 11400000, guid: 2599a2d98abf6734f995c2a4a1bdaebf, type: 2}
 --- !u!1 &1230811284847878073
 GameObject:

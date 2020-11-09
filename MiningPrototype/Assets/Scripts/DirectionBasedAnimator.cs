@@ -39,7 +39,7 @@ public class DirectionBasedAnimator : MonoBehaviour
 
         while (true)
         {
-            Debug.Log("play curve");
+            //Debug.Log("play curve");
             currentTime += Time.deltaTime;
             int frameCurrent = GetFrameFromMouseAngle(Mathf.RoundToInt(animationCurve.Evaluate(currentTime)) * 45f);
 
@@ -63,7 +63,7 @@ public class DirectionBasedAnimator : MonoBehaviour
 
             int frameRemapped = (frameToSet) % framesMax;
 
-            Debug.Log("frame:" + frameRemapped);
+            //Debug.Log("frame:" + frameRemapped);
             spriteRenderer.sprite = sprites[frameRemapped];
         }
     }

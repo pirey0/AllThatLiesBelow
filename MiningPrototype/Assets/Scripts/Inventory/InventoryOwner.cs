@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public interface IInventoryOwner
     Inventory Inventory { get; }
 }
 
-public class InventoryOwner : MonoBehaviour, IInventoryOwner , IInteractable
+public class InventoryOwner : MonoBehaviour, IInventoryOwner, IInteractable
 {
     [Header("Inventory Owner")]
     [SerializeField] Inventory inventory;
@@ -20,6 +21,17 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner , IInteractable
     public Inventory Inventory { get => inventory; }
     public InventoryState InventoryDisplayState { get => state; }
 
+    protected virtual void Start()
+    {
+        inventory.InventoryChanged += OnInventoryChanged;
+    }
+
+    private void OnInventoryChanged()
+    {
+        if (state == InventoryState.Open)
+            inventoryVisualizer.RefreshInventoryDisplay();
+    }
+
     public void OpenInventory()
     {
         if (state == InventoryState.Closed)
@@ -27,12 +39,17 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner , IInteractable
             state = InventoryState.Open;
             if (inventoryVisualizer == null)
             {
-                openSource.pitch = 1;
-                openSource.Play();
+                if (openSource != null)
+                {
+                    openSource.pitch = 1;
+                    openSource.Play();
+                }
 
                 inventoryVisualizer = Instantiate(inventoryVisualizerPrefab, canvas.transform);
                 inventoryVisualizer.Init(transform, inventory);
             }
+
+            InventoryManager.NotifyInventoryOpen(this);
         }
     }
 
@@ -41,8 +58,11 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner , IInteractable
         if (state == InventoryState.Open)
         {
             state = InventoryState.Closed;
-            openSource.pitch = 0.66f;
-            openSource.Play();
+            if (openSource != null)
+            {
+                openSource.pitch = 0.66f;
+                openSource.Play();
+            }
 
             if (inventoryVisualizer != null)
             {
@@ -50,6 +70,8 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner , IInteractable
                 inventoryVisualizer = null;
             }
         }
+
+        InventoryManager.NotifyInventoryClosed(this);
     }
 
     public void BeginInteracting(GameObject interactor)

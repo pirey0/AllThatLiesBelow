@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngineInternal;
 
 public class PlayerController : InventoryOwner
@@ -36,6 +37,7 @@ public class PlayerController : InventoryOwner
 
     [SerializeField] float inventoryOpenDistance;
     [SerializeField] float maxInteractableDistance;
+    [SerializeField] EventSystem eventSystem;
 
 
     Rigidbody2D rigidbody;
@@ -53,8 +55,9 @@ public class PlayerController : InventoryOwner
     [ReadOnly]
     [SerializeField] bool inMining;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         camera = Camera.main;
         rigidbody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -71,7 +74,8 @@ public class PlayerController : InventoryOwner
 
             if (Input.GetMouseButton(0))
             {
-                TryDig();
+                if (eventSystem.currentSelectedGameObject == null)
+                    TryDig();
             }
             else if (Input.GetMouseButtonDown(1))
             {
@@ -259,12 +263,12 @@ public class PlayerController : InventoryOwner
     {
         var horizontal = Input.GetAxis("Horizontal");
 
-        if (Mathf.Abs(horizontal) > 0.01)
+        if (Mathf.Abs(horizontal) > 0.15f)
         {
             CloseInventory();
         }
 
-        if(currentInteractable != null)
+        if (currentInteractable != null)
         {
             if (Vector3.Distance(GetPositionInGridV3(), currentInteractable.gameObject.transform.position) > maxInteractableDistance)
                 TryStopInteracting();

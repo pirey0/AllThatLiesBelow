@@ -656,6 +656,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d276a21d9582594ebe483f80f61ea60, type: 3}
+--- !u!1 &727258365 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6814695091287791494, guid: 3452a2521ce36be43b878861ba5a3b3b, type: 3}
+  m_PrefabInstance: {fileID: 6814695090421914493}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &727258366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727258365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c783d16e49e341341999246ac89ecb55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory:
+    content:
+    - type: 1
+      amount: 1
+  canvas: {fileID: 429891085}
+  inventoryVisualizerPrefab: {fileID: 8727063801762088802, guid: c396613fa9613cb4d8d82148ef5649a7, type: 3}
+  inventoryVisualizer: {fileID: 0}
+  openSource: {fileID: 0}
 --- !u!1 &827138719
 GameObject:
   m_ObjectHideFlags: 0
@@ -49691,6 +49716,10 @@ PrefabInstance:
       propertyPath: generation
       value: 
       objectReference: {fileID: 1141556478}
+    - target: {fileID: 497824006148765930, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 575531986}
     - target: {fileID: 8633471933228471848, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
       propertyPath: m_Name
       value: Player

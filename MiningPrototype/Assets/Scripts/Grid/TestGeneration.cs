@@ -374,7 +374,7 @@ public class TestGeneration : MonoBehaviour
 
     public void CarveAt(int x, int y)
     {
-        Debug.Log("Try Carve " + x + " / " + y);
+        //Debug.Log("Try Carve " + x + " / " + y);
         SetMapAt(x, y, Tile.Air);
     }
 

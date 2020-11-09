@@ -4,9 +4,11 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class Inventory 
+public class Inventory
 {
-    [SerializeField] List<ItemAmountPair>  content = new List<ItemAmountPair>();
+    [SerializeField] List<ItemAmountPair> content = new List<ItemAmountPair>();
+
+    public event System.Action InventoryChanged;
 
     public void Add(itemType type, int amount)
     {
@@ -23,7 +25,42 @@ public class Inventory
         }
 
         content.Add(new ItemAmountPair(type, amount));
-    } 
+        InventoryChanged?.Invoke();
+    }
+
+    public void Add(ItemAmountPair pair)
+    {
+        Add(pair.type, pair.amount);
+    }
+
+    public ItemAmountPair Remove(int index)
+    {
+        if (index < 0 || index >= content.Count)
+            return null;
+
+        var c = content[index];
+
+        if(c != null)
+        {
+            content.RemoveAt(index);
+            InventoryChanged?.Invoke();
+            return c;
+        }
+
+        return null;
+    }
+
+    public ItemAmountPair this[int index]
+    {
+        get
+        {
+            if (index < 0 || index >= content.Count)
+                return null;
+
+            return content[index];
+        }
+    }
+
 
     public KeyValuePair<itemType, int>[] GetContent()
     {
@@ -32,7 +69,7 @@ public class Inventory
 
         foreach (ItemAmountPair item in content)
         {
-            list.Add(new KeyValuePair<itemType, int>(item.type,item.amount));
+            list.Add(new KeyValuePair<itemType, int>(item.type, item.amount));
         }
 
         return list.ToArray();

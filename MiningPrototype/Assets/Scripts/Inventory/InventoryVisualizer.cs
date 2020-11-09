@@ -27,8 +27,7 @@ public class InventoryVisualizer : MonoBehaviour
     {
         transformToFollow = target;
         inventory = inventoryToVisualize;
-
-        DisplayInventory();
+        RefreshInventoryDisplay();
         StartCoroutine(ScaleCoroutine(scaleUp: true));
     }
 
@@ -41,7 +40,7 @@ public class InventoryVisualizer : MonoBehaviour
     }
 
     [Button]
-    public void DisplayInventory ()
+    public void RefreshInventoryDisplay ()
     {
         foreach (Transform child in gridLayoutParent)
         {
@@ -83,6 +82,10 @@ public class InventoryVisualizer : MonoBehaviour
         {
             InventorySlotVisualizer newSlot = Instantiate(inventorySlotPrefab, gridLayoutParent);
             newSlot.Display(itemsToVisualize[i]);
+
+            //Set button so click tries to move items
+            int index = i;
+            newSlot.SetButtonToSlot(() => InventoryManager.TryMove(inventory, index));
         }
     }
 
