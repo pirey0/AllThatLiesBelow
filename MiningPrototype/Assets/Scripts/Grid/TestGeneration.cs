@@ -12,6 +12,7 @@ public class TestGeneration : MonoBehaviour
     [SerializeField] TileBase[] groundTiles;
     [SerializeField] TileBase[] damageOverlayTiles;
     [SerializeField] TileBase[] oreTiles;
+    [SerializeField] TileBase snowTile1, snowTile2;
 
     [Header("Settings")]
     [SerializeField] bool updateOnParameterChanged;
@@ -84,7 +85,6 @@ public class TestGeneration : MonoBehaviour
 
         Debug.Log("Update Duration: " + stopwatch.ElapsedMilliseconds + "ms");
     }
-
 
     private void CalculateNeighboursBitmask()
     {
@@ -385,7 +385,7 @@ public class TestGeneration : MonoBehaviour
     private void SingleAutomataSet(int x, int y)
     {
         int nbs = GetAliveNeightboursCountFor(x, y);
-        map[x, y] = IsBlockAt(x, y) ? (nbs > deathLimit ? Tile.Stone : Tile.Air) : (nbs > birthLimit ? Tile.Stone : Tile.Air);
+        map[x, y] = IsBlockAt(x, y) ? (nbs > deathLimit ? ((y == 79) ? Tile.Snow : Tile.Stone) : Tile.Air) : (nbs > birthLimit ? Tile.Stone : Tile.Air);
     }
 
     void UpdateVisuals()
@@ -419,11 +419,17 @@ public class TestGeneration : MonoBehaviour
 
     private TileBase GetVisualTileFor(int x, int y)
     {
+        Tile tile = GetTileAt(x, y);
 
         if (IsOutOfBounds(x, y) || IsAirAt(x, y))
             return null;
 
-        int tileIndex = BITMASK_TO_TILEINDEX[GetTileAt(x, y).NeighbourBitmask];
+        if (tile.Type == TileType.Snow)
+        {
+            return PseudoRandomValue(x, y) > 0.5f ? snowTile1 : snowTile2;
+        }
+
+        int tileIndex = BITMASK_TO_TILEINDEX[tile.NeighbourBitmask];
 
         //Casual random tile
         if (tileIndex == 46)
@@ -443,7 +449,7 @@ public class TestGeneration : MonoBehaviour
     private TileBase GetVisualOreTileFor(int x, int y)
     {
         var t = GetTileAt(x, y);
-        if ((int)t.Type < 2)
+        if ((int)t.Type < 2 || (int)t.Type == 4)
             return null;
 
         return oreTiles[(int)t.Type - 2];
