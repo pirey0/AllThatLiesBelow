@@ -47,6 +47,7 @@ public class PlayerController : InventoryOwner
     Camera camera;
     SpriteRenderer spriteRenderer;
     Vector2Int? digTarget;
+    IInteractable currentInteractable;
 
     [ReadOnly]
     [SerializeField] bool inMining;
@@ -69,7 +70,7 @@ public class PlayerController : InventoryOwner
 
             if (Input.GetMouseButton(0))
             {
-                    TryDig();
+                TryDig();
             }
             else if (Input.GetMouseButton(1))
             {
@@ -96,10 +97,26 @@ public class PlayerController : InventoryOwner
 
     private void TryInteract()
     {
+        Vector3 mousePos = Input.mousePosition;
+        Ray r = camera.ScreenPointToRay(mousePos);
+        var hits = Physics2D.RaycastAll(r.origin, r.direction, 100000);
 
+        currentInteractable = null;
+        foreach (var hit in hits)
+        {
+            if (hit.transform == transform)
+                continue;
+
+            if (hit.transform.TryGetComponent(out IInteractable interactable))
+            {
+                Debug.Log(hit.transform.name);
+                currentInteractable = interactable;
+                currentInteractable.BeginInteracting(gameObject);
+                Debug.DrawLine(GetPositionInGridV3(), hit.point, Color.green, 1f);
+                break;
+            }
+        }
     }
-
-
 
     private bool CanJump()
     {
@@ -134,6 +151,7 @@ public class PlayerController : InventoryOwner
     private void TryDig()
     {
         CloseInventory();
+        TryStopInteracting();
 
         if (digTarget.HasValue)
         {
@@ -159,8 +177,8 @@ public class PlayerController : InventoryOwner
         }
         else
         {
-            if(inMining)
-            DisableMiningParticles();
+            if (inMining)
+                DisableMiningParticles();
         }
     }
 
@@ -180,7 +198,14 @@ public class PlayerController : InventoryOwner
         pickaxeAnimator.Stop();
     }
 
-
+    private void TryStopInteracting()
+    {
+        if (currentInteractable != null)
+        {
+            currentInteractable.EndInteracting(gameObject);
+            currentInteractable = null;
+        }
+    }
 
     private void StartMiningParticles()
     {
@@ -228,8 +253,10 @@ public class PlayerController : InventoryOwner
         var horizontal = Input.GetAxis("Horizontal");
 
         if (Mathf.Abs(horizontal) > 0.01)
+        {
             CloseInventory();
-
+            TryStopInteracting();
+        }
 
         rigidbody.position += horizontal * rightWalkVector * moveSpeed * Time.fixedDeltaTime;
         rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
@@ -303,14 +330,15 @@ public class PlayerController : InventoryOwner
         {
             if (!walking.isPlaying)
             {
-                
+
                 walking.Play();
             }
-        } else
+        }
+        else
         {
             if (walking.isPlaying)
             {
-                
+
                 walking.Pause();
             }
         }
