@@ -195,7 +195,7 @@ MonoBehaviour:
   transformToFollow: {fileID: 0}
   followOffset: {x: 0, y: 4}
   targetScale: {x: 0.5, y: 0.5, z: 0.5}
-  openTimeMultiplier: 1
+  openTimeMultiplier: 3
 --- !u!1 &8727063802093156236
 GameObject:
   m_ObjectHideFlags: 0
