@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] InventoryVisualizer inventoryVisualizer;
 
     [SerializeField] Inventory inventory;
+    [SerializeField] float inventoryOpenDistance;
 
     SpriteAnimator spriteAnimator;
     float lastGroundedTimeStamp;
@@ -62,8 +63,6 @@ public class PlayerController : MonoBehaviour
         spriteAnimator = GetComponent<SpriteAnimator>();
     }
 
-
-
     private void Update()
     {
 
@@ -74,7 +73,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetMouseButton(0))
             {
-                if (Vector2Int.Distance(GetPositionInGrid(), GetClickPosition()) <= 1)
+                if (Vector2Int.Distance(GetPositionInGrid(), GetClickPosition()) <= inventoryOpenDistance && isGrounded)
                     SetInventoryOpen(true);
                 else
                     TryDig();
