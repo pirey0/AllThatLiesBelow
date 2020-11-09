@@ -48,6 +48,8 @@ public class TestGeneration : MonoBehaviour
     [SerializeField] float copperMaxHeight;
     [SerializeField] float copperVeinProbability;
 
+    [SerializeField] int snowStartHeight;
+
     Tile[,] map;
 
     static readonly Dictionary<int, int> BITMASK_TO_TILEINDEX = new Dictionary<int, int>()
@@ -79,11 +81,34 @@ public class TestGeneration : MonoBehaviour
 
         CalculateNeighboursBitmask();
 
+        PopulateSnow();
+
         UpdateVisuals();
 
         stopwatch.Stop();
 
         Debug.Log("Update Duration: " + stopwatch.ElapsedMilliseconds + "ms");
+    }
+
+    private void PopulateSnow()
+    {
+        IterateXY(size, PopulateSnowAt);
+    }
+
+    private void PopulateSnowAt(int x, int y)
+    {
+        if (y < snowStartHeight)
+            return;
+
+        var t = GetTileAt(x, y);
+
+
+        if (IsBlockAt(x, y) && ((t.NeighbourBitmask & 2) == 0)) 
+        {
+            t.Type = TileType.Snow;
+        }
+
+        SetMapAt(x, y, t, updateNeighbourBitmask: false, updateVisuals: false);
     }
 
     private void CalculateNeighboursBitmask()
@@ -385,7 +410,7 @@ public class TestGeneration : MonoBehaviour
     private void SingleAutomataSet(int x, int y)
     {
         int nbs = GetAliveNeightboursCountFor(x, y);
-        map[x, y] = IsBlockAt(x, y) ? (nbs > deathLimit ? ((y == 79) ? Tile.Snow : Tile.Stone) : Tile.Air) : (nbs > birthLimit ? Tile.Stone : Tile.Air);
+        map[x, y] = IsBlockAt(x, y) ? (nbs > deathLimit ? Tile.Stone : Tile.Air) : (nbs > birthLimit ? Tile.Stone : Tile.Air);
     }
 
     void UpdateVisuals()
