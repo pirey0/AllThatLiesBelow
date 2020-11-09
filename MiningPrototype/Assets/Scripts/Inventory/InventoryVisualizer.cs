@@ -15,12 +15,13 @@ public class InventoryVisualizer : MonoBehaviour
     [SerializeField] InventorySlotVisualizer inventorySlotPrefab;
     [SerializeField] Transform gridLayoutParent;
 
-    [SerializeField] Inventory inventory;
     [SerializeField] Transform transformToFollow;
     [SerializeField] Vector2 followOffset;
 
     [SerializeField] Vector3 targetScale;
     [SerializeField] float openTimeMultiplier;
+
+    Inventory inventory;
 
     public void Init(Transform target, Inventory inventoryToVisualize)
     {
@@ -30,7 +31,6 @@ public class InventoryVisualizer : MonoBehaviour
         DisplayInventory();
         StartCoroutine(ScaleCoroutine(scaleUp: true));
     }
-
 
     private void Update()
     {

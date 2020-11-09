@@ -241,6 +241,17 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &240933258 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 497824006148765930, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
+  m_PrefabInstance: {fileID: 8633471934036723826}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821c3d5db7c601149833a368a8b9b4bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &408938664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49606,6 +49617,10 @@ PrefabInstance:
       propertyPath: seedIsRandom
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8232243671930714987, guid: 18bfcd81277c0d24c9ecd515d23b0b76, type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 240933258}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18bfcd81277c0d24c9ecd515d23b0b76, type: 3}
 --- !u!1001 &8633471934036723826
@@ -49616,13 +49631,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 497824006148765930, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
-      propertyPath: generation
-      value: 
-      objectReference: {fileID: 1141556478}
-    - target: {fileID: 497824006148765930, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
       propertyPath: canvas
       value: 
       objectReference: {fileID: 429891085}
+    - target: {fileID: 497824006148765930, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
+      propertyPath: generation
+      value: 
+      objectReference: {fileID: 1141556478}
     - target: {fileID: 8633471933228471848, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
       propertyPath: m_Name
       value: Player
