@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Inventory inventory;
     [SerializeField] float inventoryOpenDistance;
 
+    bool backpackOpen = false;
     SpriteAnimator spriteAnimator;
     float lastGroundedTimeStamp;
     float lastJumpTimeStamp;
@@ -66,14 +67,14 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
 
-        if (Vector2Int.Distance(GetPositionInGrid(), GetClickPosition()) <= maxDigDistance)
+        if (Vector2Int.Distance(GetPositionInGrid(), GetClickCoordinate()) <= maxDigDistance)
         {
-
+            Debug.DrawLine(GetPositionInGridV3(), GetClickPositionV3(), Color.yellow, Time.deltaTime);
             UpdateDigTarget();
 
             if (Input.GetMouseButton(0))
             {
-                if (Vector2Int.Distance(GetPositionInGrid(), GetClickPosition()) <= inventoryOpenDistance && isGrounded)
+                if (Vector3.Distance(GetPositionInGridV3(), GetClickPositionV3()) <= inventoryOpenDistance && isGrounded)
                     SetInventoryOpen(true);
                 else
                     TryDig();
@@ -98,10 +99,11 @@ public class PlayerController : MonoBehaviour
         UpdateDigHighlight();
     }
 
-    private void SetInventoryOpen(bool isOpen = true)
+    private void SetInventoryOpen( bool open)
     {
-        if (isOpen)
+        if (open && !backpackOpen)
         {
+            backpackOpen = true;
             if (inventoryVisualizer == null)
             {
                 backpack.pitch = 1;
@@ -110,8 +112,10 @@ public class PlayerController : MonoBehaviour
                 inventoryVisualizer = Instantiate(inventoryVisualizerPrefab, canvas.transform);
                 inventoryVisualizer.Init(transform, inventory);
             }
-        } else
+        } 
+        else if(!open && backpackOpen)
         {
+            backpackOpen = false;
             backpack.pitch = 0.66f;
             backpack.Play();
 
@@ -130,7 +134,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateDigTarget()
     {
-        digTarget = generation.GetClosestSolidBlock(GetPositionInGrid(), GetClickPosition());
+        digTarget = generation.GetClosestSolidBlock(GetPositionInGrid(), GetClickCoordinate());
         if (generation.IsAirAt(digTarget.Value.x, digTarget.Value.y))
         {
             digTarget = null;
@@ -148,7 +152,7 @@ public class PlayerController : MonoBehaviour
 
     private void TryPlace()
     {
-        Vector2Int clickPos = GetClickPosition();
+        Vector2Int clickPos = GetClickCoordinate();
         if (generation.HasLineOfSight(GetPositionInGrid(), clickPos, debugVisualize: true))
             generation.PlaceAt(clickPos.x, clickPos.y);
     }
@@ -219,11 +223,24 @@ public class PlayerController : MonoBehaviour
         return new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y) + 1); //+1 to be at center of player
     }
 
-    private Vector2Int GetClickPosition()
+    /// <summary>
+    /// Just +1 in Y compared to transform.position
+    /// </summary>
+    private Vector3 GetPositionInGridV3()
+    {
+        return new Vector3(transform.position.x, transform.position.y + 1); //+1 to be at center of player
+    }
+
+    private Vector2Int GetClickCoordinate()
+    {
+        Vector3 clickPos = GetClickPositionV3();
+        return new Vector2Int((int)clickPos.x, (int)clickPos.y);
+    }
+
+    private Vector3 GetClickPositionV3()
     {
         Vector3 position = Input.mousePosition + Vector3.back * camera.transform.position.z;
-        Vector3 clickPos = camera.ScreenToWorldPoint(position);
-        return new Vector2Int((int)clickPos.x, (int)clickPos.y);
+        return camera.ScreenToWorldPoint(position);
     }
 
     private void FixedUpdate()
@@ -362,8 +379,10 @@ public class PlayerController : MonoBehaviour
         if (feet != null)
             Gizmos.DrawWireSphere(feet.position, feetRadius);
 
+        Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, transform.position + (Vector3)rightWalkVector);
 
         Gizmos.DrawWireSphere((Vector3Int)GetPositionInGrid(), maxDigDistance);
+        Gizmos.DrawWireSphere(GetPositionInGridV3(), inventoryOpenDistance);
     }
 }
