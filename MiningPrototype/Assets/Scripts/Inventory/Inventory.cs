@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class Inventory : ScriptableObject
+
+[System.Serializable]
+public class Inventory 
 {
     [SerializeField] List<ItemAmountPair>  content = new List<ItemAmountPair>();
 

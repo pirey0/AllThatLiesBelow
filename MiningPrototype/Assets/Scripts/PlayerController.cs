@@ -5,10 +5,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngineInternal;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : InventoryOwner
 {
-    Rigidbody2D rigidbody;
-
+    [Header("Player")]
     [SerializeField] float groundedAngle;
     [SerializeField] float jumpVelocity;
     [SerializeField] float moveSpeed;
@@ -32,17 +31,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int miningBreakParticlesCount;
     [SerializeField] float miningParticlesRateOverTime = 4;
 
-    [SerializeField] AudioSource breakBlock, startMining, walking, backpack;
+    [SerializeField] AudioSource breakBlock, startMining, walking;
     [SerializeField] DirectionBasedAnimator pickaxeAnimator;
 
-    [SerializeField] Canvas canvas;
-    [SerializeField] InventoryVisualizer inventoryVisualizerPrefab;
-    [SerializeField] InventoryVisualizer inventoryVisualizer;
-
-    [SerializeField] Inventory inventory;
     [SerializeField] float inventoryOpenDistance;
 
-    bool backpackOpen = false;
+
+    Rigidbody2D rigidbody;
     SpriteAnimator spriteAnimator;
     float lastGroundedTimeStamp;
     float lastJumpTimeStamp;
@@ -74,14 +69,14 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetMouseButton(0))
             {
-                if (Vector3.Distance(GetPositionInGridV3(), GetClickPositionV3()) <= inventoryOpenDistance && isGrounded)
-                    SetInventoryOpen(true);
-                else
                     TryDig();
             }
             else if (Input.GetMouseButton(1))
             {
-                TryPlace();
+                if (Vector3.Distance(GetPositionInGridV3(), GetClickPositionV3()) <= inventoryOpenDistance && isGrounded)
+                    OpenInventory();
+                else
+                    TryInteract();
             }
             else
             {
@@ -99,33 +94,12 @@ public class PlayerController : MonoBehaviour
         UpdateDigHighlight();
     }
 
-    private void SetInventoryOpen( bool open)
+    private void TryInteract()
     {
-        if (open && !backpackOpen)
-        {
-            backpackOpen = true;
-            if (inventoryVisualizer == null)
-            {
-                backpack.pitch = 1;
-                backpack.Play();
 
-                inventoryVisualizer = Instantiate(inventoryVisualizerPrefab, canvas.transform);
-                inventoryVisualizer.Init(transform, inventory);
-            }
-        } 
-        else if(!open && backpackOpen)
-        {
-            backpackOpen = false;
-            backpack.pitch = 0.66f;
-            backpack.Play();
-
-            if (inventoryVisualizer != null)
-            {
-                inventoryVisualizer.Close();
-                inventoryVisualizer = null;
-            }
-        }
     }
+
+
 
     private bool CanJump()
     {
@@ -159,7 +133,7 @@ public class PlayerController : MonoBehaviour
 
     private void TryDig()
     {
-        SetInventoryOpen(false);
+        CloseInventory();
 
         if (digTarget.HasValue)
         {
@@ -253,8 +227,8 @@ public class PlayerController : MonoBehaviour
     {
         var horizontal = Input.GetAxis("Horizontal");
 
-        if (Mathf.Abs(horizontal) > 0.01 && inventoryVisualizer != null)
-            SetInventoryOpen(false);
+        if (Mathf.Abs(horizontal) > 0.01)
+            CloseInventory();
 
 
         rigidbody.position += horizontal * rightWalkVector * moveSpeed * Time.fixedDeltaTime;
@@ -267,7 +241,7 @@ public class PlayerController : MonoBehaviour
         {
             if (horizontal == 0)
             {
-                if (inventoryVisualizer != null)
+                if (InventoryDisplayState == InventoryState.Open)
                 {
                     spriteAnimator.Play(an_Inventory, false);
                     SetPickaxeVisible(false);

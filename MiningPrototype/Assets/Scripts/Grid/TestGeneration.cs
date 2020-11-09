@@ -14,7 +14,7 @@ public class TestGeneration : MonoBehaviour
     [SerializeField] TileBase[] oreTiles;
     [SerializeField] TileBase snowTile1, snowTile2;
 
-    [SerializeField] Inventory playerInventory;
+    [SerializeField] InventoryOwner playerInventory;
 
     [Header("Settings")]
     [SerializeField] bool updateOnParameterChanged;
@@ -369,7 +369,7 @@ public class TestGeneration : MonoBehaviour
                 break;
         }
 
-        playerInventory.Add(itemType, 1);
+        playerInventory.Inventory.Add(itemType, 1);
     }
 
     public void CarveAt(int x, int y)

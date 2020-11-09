@@ -5688,6 +5688,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821c3d5db7c601149833a368a8b9b4bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventory:
+    content: []
+  canvas: {fileID: 0}
+  inventoryVisualizerPrefab: {fileID: 8727063801762088802, guid: c396613fa9613cb4d8d82148ef5649a7, type: 3}
+  inventoryVisualizer: {fileID: 8727063801762088802, guid: c396613fa9613cb4d8d82148ef5649a7, type: 3}
+  openSource: {fileID: 1456414342}
   groundedAngle: 88
   jumpVelocity: 15
   moveSpeed: 5
@@ -5710,12 +5716,7 @@ MonoBehaviour:
   breakBlock: {fileID: 3471564094401374700}
   startMining: {fileID: 4569569128638959811}
   walking: {fileID: 8148473555476766029}
-  backpack: {fileID: 1456414342}
   pickaxeAnimator: {fileID: 5520157571960154573}
-  canvas: {fileID: 0}
-  inventoryVisualizerPrefab: {fileID: 8727063801762088802, guid: c396613fa9613cb4d8d82148ef5649a7, type: 3}
-  inventoryVisualizer: {fileID: 0}
-  inventory: {fileID: 11400000, guid: 9c5554bdefd6fbd46b961ef414cdf88e, type: 2}
   inventoryOpenDistance: 0.5
   inMining: 0
 --- !u!114 &6332330309916232596
