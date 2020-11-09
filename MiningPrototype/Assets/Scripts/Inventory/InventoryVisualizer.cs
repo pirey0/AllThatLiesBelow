@@ -47,7 +47,7 @@ public class InventoryVisualizer : MonoBehaviour
             GameObject.Destroy(child.gameObject);
         }
 
-        KeyValuePair<itemType, int>[] content = inventory.GetContent();
+        KeyValuePair<ItemType, int>[] content = inventory.GetContent();
         SpawnItemElements(content);
         RecalculateUISize(content.Length);
     }
@@ -76,7 +76,7 @@ public class InventoryVisualizer : MonoBehaviour
         boxTransform.sizeDelta = new Vector2(basePadding.x + additonalSpacePerSlotNeeded.x * width, basePadding.y + additonalSpacePerSlotNeeded.y * height);
     }
 
-    private void SpawnItemElements(KeyValuePair<itemType, int>[] itemsToVisualize)
+    private void SpawnItemElements(KeyValuePair<ItemType, int>[] itemsToVisualize)
     {
         for (int i = 0; i < itemsToVisualize.Length; i++)
         {

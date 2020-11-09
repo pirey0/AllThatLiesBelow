@@ -10,7 +10,7 @@ public class Inventory
 
     public event System.Action InventoryChanged;
 
-    public void Add(itemType type, int amount)
+    public void Add(ItemType type, int amount)
     {
         if (content.Count > 0)
         {
@@ -62,14 +62,14 @@ public class Inventory
     }
 
 
-    public KeyValuePair<itemType, int>[] GetContent()
+    public KeyValuePair<ItemType, int>[] GetContent()
     {
 
-        List<KeyValuePair<itemType, int>> list = new List<KeyValuePair<itemType, int>>();
+        List<KeyValuePair<ItemType, int>> list = new List<KeyValuePair<ItemType, int>>();
 
         foreach (ItemAmountPair item in content)
         {
-            list.Add(new KeyValuePair<itemType, int>(item.type, item.amount));
+            list.Add(new KeyValuePair<ItemType, int>(item.type, item.amount));
         }
 
         return list.ToArray();
@@ -79,12 +79,12 @@ public class Inventory
 [System.Serializable]
 public class ItemAmountPair
 {
-    public ItemAmountPair(itemType itemType, int itemAmount)
+    public ItemAmountPair(ItemType itemType, int itemAmount)
     {
         type = itemType;
         amount = itemAmount;
     }
 
-    public itemType type;
+    public ItemType type;
     public int amount;
 }

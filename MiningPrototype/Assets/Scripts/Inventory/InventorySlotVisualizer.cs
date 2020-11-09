@@ -13,9 +13,9 @@ public class InventorySlotVisualizer : MonoBehaviour
     [SerializeField] ItemInformationStorage ItemInformationStorage;
 
     int amount;
-    itemType type;
+    ItemType type;
 
-    public void Display(KeyValuePair<itemType, int> pair)
+    public void Display(KeyValuePair<ItemType, int> pair)
     {
         amount = pair.Value;
         type = pair.Key;

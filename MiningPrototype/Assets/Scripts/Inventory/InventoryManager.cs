@@ -12,6 +12,8 @@ public class InventoryManager
     private Inventory otherInventory;
     bool playerInventoryOpen;
 
+    public event System.Action<ItemAmountPair> PlayerCollected;
+
     private static InventoryManager GetInstance()
     {
         if (instance == null)
@@ -54,12 +56,20 @@ public class InventoryManager
         }
     }
 
+    public static void PlayerCollects(ItemType itemType, int amount)
+    {
+        if (Instance.playerInventory != null)
+            Instance.playerInventory.Add(itemType, amount);
+
+        Instance.PlayerCollected?.Invoke(new ItemAmountPair(itemType, amount));
+    }
+
     public static void TryMove(Inventory inventory, int stackIndex)
     {
         //player to other
         if (inventory == Instance.playerInventory)
         {
-            if ( Instance.otherInventory != null)
+            if (Instance.otherInventory != null)
             {
                 if (Instance.playerInventoryOpen)
                 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum itemType
+public enum ItemType
 {
     ROCKS,
     GOLD,
@@ -15,7 +15,7 @@ public class ItemInformationStorage : ScriptableObject
     [SerializeField] List<ItemSpritePair> itemSpritePair = new List<ItemSpritePair>();
     [SerializeField] Sprite noSpriteFoundSprite;
 
-    public Sprite GetSpriteByItemType(itemType itemType)
+    public Sprite GetSpriteByItemType(ItemType itemType)
     {
         foreach (ItemSpritePair pair in itemSpritePair)
         {
@@ -30,6 +30,6 @@ public class ItemInformationStorage : ScriptableObject
 [System.Serializable]
 public class ItemSpritePair
 {
-    public itemType type;
+    public ItemType type;
     public Sprite sprite;
 }
