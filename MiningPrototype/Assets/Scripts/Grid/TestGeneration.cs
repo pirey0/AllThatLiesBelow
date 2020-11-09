@@ -338,24 +338,10 @@ public class TestGeneration : MonoBehaviour
         Tile t = GetTileAt(x, y);
         t.TakeDamage(amount);
 
+        //
         if (t.Damage > 10)
         {
-            CarveAt(x, y);
-
-            itemType itemType = itemType.ROCKS;
-
-            switch (t.Type)
-            {
-                case TileType.Gold:
-                    itemType = itemType.GOLD;
-                    break;
-
-                case TileType.Copper:
-                    itemType = itemType.COPPER;
-                    break;
-            }
-
-            playerInventory.Add(itemType,1);
+            BreakBlock(x, y, t);
 
             return true;
         }
@@ -366,6 +352,25 @@ public class TestGeneration : MonoBehaviour
         }
     }
 
+    private void BreakBlock(int x, int y, Tile t)
+    {
+        CarveAt(x, y);
+
+        itemType itemType = itemType.ROCKS;
+
+        switch (t.Type)
+        {
+            case TileType.Gold:
+                itemType = itemType.GOLD;
+                break;
+
+            case TileType.Copper:
+                itemType = itemType.COPPER;
+                break;
+        }
+
+        playerInventory.Add(itemType, 1);
+    }
 
     public void CarveAt(int x, int y)
     {
