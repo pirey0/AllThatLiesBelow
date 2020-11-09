@@ -6,4 +6,6 @@ public interface IInteractable
 {
     void BeginInteracting(GameObject interactor);
     void EndInteracting(GameObject interactor);
+
+    GameObject gameObject { get; }
 }

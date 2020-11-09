@@ -35,6 +35,7 @@ public class PlayerController : InventoryOwner
     [SerializeField] DirectionBasedAnimator pickaxeAnimator;
 
     [SerializeField] float inventoryOpenDistance;
+    [SerializeField] float maxInteractableDistance;
 
 
     Rigidbody2D rigidbody;
@@ -72,12 +73,19 @@ public class PlayerController : InventoryOwner
             {
                 TryDig();
             }
-            else if (Input.GetMouseButton(1))
+            else if (Input.GetMouseButtonDown(1))
             {
                 if (Vector3.Distance(GetPositionInGridV3(), GetClickPositionV3()) <= inventoryOpenDistance && isGrounded)
+                {
                     OpenInventory();
+                }
                 else
-                    TryInteract();
+                {
+                    if (currentInteractable == null)
+                        TryInteract();
+                    else
+                        TryStopInteracting();
+                }
             }
             else
             {
@@ -151,7 +159,6 @@ public class PlayerController : InventoryOwner
     private void TryDig()
     {
         CloseInventory();
-        TryStopInteracting();
 
         if (digTarget.HasValue)
         {
@@ -255,7 +262,12 @@ public class PlayerController : InventoryOwner
         if (Mathf.Abs(horizontal) > 0.01)
         {
             CloseInventory();
-            TryStopInteracting();
+        }
+
+        if(currentInteractable != null)
+        {
+            if (Vector3.Distance(GetPositionInGridV3(), currentInteractable.gameObject.transform.position) > maxInteractableDistance)
+                TryStopInteracting();
         }
 
         rigidbody.position += horizontal * rightWalkVector * moveSpeed * Time.fixedDeltaTime;
