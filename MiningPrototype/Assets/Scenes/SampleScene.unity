@@ -677,6 +677,8 @@ MonoBehaviour:
     content:
     - type: 1
       amount: 1
+    - type: 2
+      amount: 1
   canvas: {fileID: 429891085}
   inventoryVisualizerPrefab: {fileID: 8727063801762088802, guid: c396613fa9613cb4d8d82148ef5649a7, type: 3}
   inventoryVisualizer: {fileID: 0}

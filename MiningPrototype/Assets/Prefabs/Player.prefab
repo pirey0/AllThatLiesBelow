@@ -5704,7 +5704,7 @@ MonoBehaviour:
   generation: {fileID: 0}
   maxDigDistance: 5
   pickaxe: {fileID: 4724523066374434780}
-  digSpeed: 20
+  digSpeed: 10
   mouseHighlight: {fileID: 1281847263}
   an_Walk: {fileID: 11400000, guid: a277db9a3fae53741b035a9c4fb2951b, type: 2}
   an_Idle: {fileID: 11400000, guid: 032cff1f8108c1743afb6adbae6af0c4, type: 2}
@@ -5717,7 +5717,7 @@ MonoBehaviour:
   startMining: {fileID: 4569569128638959811}
   walking: {fileID: 8148473555476766029}
   pickaxeAnimator: {fileID: 5520157571960154573}
-  inventoryOpenDistance: 0.5
+  inventoryOpenDistance: 0.75
   maxInteractableDistance: 5
   eventSystem: {fileID: 0}
   inMining: 0

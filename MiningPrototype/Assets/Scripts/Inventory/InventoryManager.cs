@@ -66,16 +66,16 @@ public class InventoryManager
                     var result = Instance.playerInventory.Remove(stackIndex);
                     if (result != null)
                         Instance.otherInventory.Add(result);
-                    Debug.Log("Moved to other");
+                    Debug.Log("InventoryResult: Moved to other");
                 }
                 else
                 {
-                    Debug.LogError("InventoryError: Player inventory closed");
+                    Debug.Log("InventoryError: Player inventory closed");
                 }
             }
             else
             {
-                Debug.LogError("InventoryError: Other inventory closed");
+                Debug.Log("InventoryError: Other inventory closed");
             }
         }
         //other to player
@@ -87,16 +87,16 @@ public class InventoryManager
                 if (result != null)
                     Instance.playerInventory.Add(result);
 
-                Debug.Log("Moved to player");
+                Debug.Log("InventoryResult: Moved to player");
             }
             else
             {
-                Debug.LogError("InventoryError: Player inventory closed");
+                Debug.Log("InventoryError: Player inventory closed");
             }
         }
         else
         {
-            Debug.LogError("InventoryError: Moving failed unknown error");
+            Debug.Log("InventoryError: Moving failed unknown error");
         }
     }
 }
