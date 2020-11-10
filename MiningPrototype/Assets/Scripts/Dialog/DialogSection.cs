@@ -16,11 +16,8 @@ public class DialogSection : ScriptableObject
     public DialogSection[] Choiches;
     public DialogSection JumpToTarget;
 
-    public void OnValidate()
-    {
-        name = OptionText;
-    }
 }
+
 
 public enum DialogChoiceType
 {
