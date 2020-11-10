@@ -29,13 +29,18 @@ public class AltarDialogVisualizer : MonoBehaviour
         ray1.SetActive(false);
         ray2.SetActive(false);
         particleSystem.SetActive(false);
+
+        foreach (Transform child in transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
     }
 
     [Button]
     public void DisplaySentence(string sentence)
     {
         string[] words = sentence.Split(' ');
-        words = words.Reverse().ToArray();
+        words = words.ToArray();
 
         StartCoroutine(DisplayWords(words,2,0.5f,1.5f, 5));
     }
