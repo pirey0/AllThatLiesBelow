@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Alter : MonoBehaviour, IInteractable
+public class Altar : MonoBehaviour, IInteractable
 {
     [SerializeField] Transform cameraTarget;
     [SerializeField] AltarDialogVisualizer visualizer;
+    [SerializeField] string testDialog;
 
     bool inInteraction = false;
     DialogIterator iterator;
@@ -17,7 +18,9 @@ public class Alter : MonoBehaviour, IInteractable
         inInteraction = true;
         visualizer.StartDialog();
         CameraController.Instance.TransitionToNewTarget(cameraTarget);
-        iterator = new DialogIterator(ProgressionHandler.Instance.GetCurrentAltarDialog());
+
+        IDialogSection dialog = testDialog == "" ? ProgressionHandler.Instance.GetCurrentAltarDialog() : DialogParser.GetDialogFromName(testDialog);
+        iterator = new DialogIterator(dialog);
         iterator.StateChanged += OnStateChanged;
         visualizer.Progressed += OnProgressed;
         OnStateChanged();
