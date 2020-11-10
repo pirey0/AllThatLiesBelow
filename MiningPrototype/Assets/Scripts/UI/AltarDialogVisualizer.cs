@@ -3,12 +3,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Security;
 using UnityEngine;
 
 public class AltarDialogVisualizer : MonoBehaviour
 {
     [SerializeField] Vector3 leftSpawnPosition, rightSpawnposition;
-    [SerializeField] Vector3 offsetWithEveryWord;
+    [SerializeField] Vector3 offsetWithRow;
+    [SerializeField] float wordLengthOffsetMultiplier = 1f;
     [SerializeField] DialogElementVisualization dialogOptionPrefab, dialogCommentPrefab;
     DialogElementVisualization[] dialogOptions = new DialogElementVisualization[3];
 
@@ -42,7 +44,7 @@ public class AltarDialogVisualizer : MonoBehaviour
         string[] words = sentence.Split(' ');
         words = words.ToArray();
 
-        StartCoroutine(DisplayWords(words,2,0.5f,1.5f, 5));
+        StartCoroutine(DisplayWords(words,2,0.25f,0.5f, 5));
     }
 
     [Button]
@@ -51,7 +53,7 @@ public class AltarDialogVisualizer : MonoBehaviour
         dialogOptions = new DialogElementVisualization[options.Length];
         for (int i = 0; i < options.Length; i++)
         {
-            dialogOptions[i] = PrintOption(options[i], Vector3.down * i, 2);
+            dialogOptions[i] = PrintOption(options[i],Vector3.up * 2 + Vector3.down * 0.75f * i, 2);
         }
     }
 
@@ -64,7 +66,15 @@ public class AltarDialogVisualizer : MonoBehaviour
         foreach (string word in words)
         {
             float lerp = (float)wordsInLine / (float)(wordsPerLine-1);
-            PrintWord(word, Vector3.Lerp(leftSpawnPosition,rightSpawnposition,lerp) + offsetWithEveryWord * wordsInGeneral, 2 + (1 - (wordsInGeneral / words.Length)) * lifetimeDifferencePerWord);
+            int row = Mathf.FloorToInt((float)wordsInGeneral / (float)wordsPerLine);
+            Debug.LogWarning(row);
+
+            float offset = ((lerp > 0.5f ? 1f : -1f) * ((float)word.Length / 5f)) * wordLengthOffsetMultiplier;
+            Debug.LogWarning(word + " => " +  offset);
+            Vector3 leftRight = Vector3.Lerp(leftSpawnPosition, rightSpawnposition, lerp) + Vector3.right * offset;
+            Vector3 upDown = offsetWithRow * (row + 0.1f * wordsInGeneral);
+
+            PrintWord(word, leftRight + upDown, words.Length + (1 - (wordsInGeneral / words.Length)) * lifetimeDifferencePerWord);
 
             wordsInLine++;
             wordsInGeneral++;
@@ -72,7 +82,6 @@ public class AltarDialogVisualizer : MonoBehaviour
             if (wordsInLine >= wordsPerLine)
             {
                 wordsInLine = 0;
-                wordsInGeneral = 0;
                 yield return new WaitForSeconds(waitTimeAfterLinebreak);
             }
             else

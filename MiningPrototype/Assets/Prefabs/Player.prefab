@@ -5693,7 +5693,7 @@ MonoBehaviour:
   inventoryVisualizerPrefab: {fileID: 8727063801762088802, guid: c396613fa9613cb4d8d82148ef5649a7, type: 3}
   openSource: {fileID: 1456414342}
   groundedAngle: 88
-  jumpVelocity: 15
+  jumpVelocity: 8
   moveSpeed: 5
   jumpCooldown: 1
   timeAfterGroundedToJump: 0.1
