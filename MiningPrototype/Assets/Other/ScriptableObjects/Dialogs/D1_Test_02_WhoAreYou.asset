@@ -17,6 +17,6 @@ MonoBehaviour:
   Sentence: do you desire the answer to that question?
   Consequence: 0
   Choiches:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: b6c4d70b217c6d249a453b319090b9fb, type: 2}
+  - {fileID: 11400000, guid: d951bae270f03cc47807b4604c537e73, type: 2}
   JumpToTarget: {fileID: 0}
