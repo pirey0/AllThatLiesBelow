@@ -6,7 +6,8 @@ public enum ItemType
 {
     ROCKS,
     GOLD,
-    COPPER
+    COPPER,
+    FAMILY_PHOTO
 }
 
 [CreateAssetMenu]

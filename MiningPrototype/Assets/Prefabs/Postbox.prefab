@@ -102,6 +102,9 @@ MonoBehaviour:
   open: {fileID: -3027598413621054980, guid: 6ef3ab651b57e014d8b3b4195bf119df, type: 3}
   active: {fileID: -5347605606511437156, guid: 6ef3ab651b57e014d8b3b4195bf119df, type: 3}
   audioSource: {fileID: 1265463392}
+  storedItem:
+    type: 3
+    amount: 1
 --- !u!82 &1265463392
 AudioSource:
   m_ObjectHideFlags: 0

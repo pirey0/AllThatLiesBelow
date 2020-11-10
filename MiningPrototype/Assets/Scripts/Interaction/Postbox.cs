@@ -17,6 +17,8 @@ public class Postbox : MonoBehaviour, IInteractable
 
     [SerializeField] AudioSource audioSource;
 
+    [SerializeField] ItemAmountPair storedItem;
+
     PostboxStatus status;
 
     [Button]
@@ -29,6 +31,13 @@ public class Postbox : MonoBehaviour, IInteractable
     public void Open()
     {
         SetBoxstatus(PostboxStatus.OPEN);
+
+        //add all stored items to player inventory
+        if (storedItem != null && storedItem.amount > 0)
+        {
+            InventoryManager.PlayerCollects(storedItem.type,storedItem.amount);
+            storedItem = null;
+        }
     }
 
     [Button]
@@ -39,13 +48,12 @@ public class Postbox : MonoBehaviour, IInteractable
 
     public void BeginInteracting(GameObject interactor)
     {
-        SetBoxstatus(PostboxStatus.OPEN);
+        Open();
     }
-
 
     public void EndInteracting(GameObject interactor)
     {
-        SetBoxstatus(PostboxStatus.CLOSED);
+        Close();
     }
 
     private void SetBoxstatus(PostboxStatus newStatus)
