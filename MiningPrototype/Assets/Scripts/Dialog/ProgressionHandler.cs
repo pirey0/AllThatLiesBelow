@@ -28,6 +28,7 @@ public class ProgressionHandler : Singleton<ProgressionHandler>
 
     public void Aquired(string topic)
     {
+        Debug.Log(topic + " unlocked in the morning! (Not implemented yet!");
         dailyPurchaseExaused = true;
     }
 
