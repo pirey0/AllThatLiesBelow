@@ -8,7 +8,7 @@ public class InventoryCollectDisplayElement : MonoBehaviour
 {
     [SerializeField] float duration;
     [SerializeField] Text text;
-    [SerializeField] Image backdrop, icon;
+    [SerializeField] Image icon;
 
     [SerializeField] ItemInformationStorage ItemInformationStorage;
     private void Start()
@@ -23,7 +23,7 @@ public class InventoryCollectDisplayElement : MonoBehaviour
 
     public void SetItem(ItemAmountPair obj)
     {
-        text.text = "+ " + obj.amount;
+        text.text = "+" + obj.amount;
         icon.sprite = ItemInformationStorage.GetSpriteByItemType(obj.type);
     }
 
@@ -33,7 +33,6 @@ public class InventoryCollectDisplayElement : MonoBehaviour
 
         while (t < duration)
         {
-            backdrop.color = new Color(backdrop.color.r, backdrop.color.g, backdrop.color.b, 1 - t / duration);
             Color c = new Color(text.color.r, text.color.g, text.color.b, 1 - t / duration);
             text.color = c;
             icon.color = c;

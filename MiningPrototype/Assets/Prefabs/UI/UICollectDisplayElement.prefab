@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5011232338159001704}
   - component: {fileID: 5011232338159001706}
-  - component: {fileID: 1031880177505315962}
   - component: {fileID: 8596829682779143589}
   m_Layer: 5
   m_Name: UICollectDisplayElement
@@ -48,36 +47,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5011232338159001705}
   m_CullTransparentMesh: 0
---- !u!114 &1031880177505315962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5011232338159001705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &8596829682779143589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 3
   text: {fileID: 2983585805259226881}
-  backdrop: {fileID: 1031880177505315962}
+  backdrop: {fileID: 0}
   icon: {fileID: 561613536108877904}
   ItemInformationStorage: {fileID: 11400000, guid: 2599a2d98abf6734f995c2a4a1bdaebf, type: 2}
 --- !u!1 &6165054504558287918
