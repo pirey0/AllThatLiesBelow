@@ -17,7 +17,7 @@ public class DialogParser
         {"Exit", DialogConsequence.Exit },
         {"JumpBeforeSentence", DialogConsequence.JumpBeforeSentence },
         {"JumpAfterSentence", DialogConsequence.JumpAfterSentence },
-        {"AwaitPayment", DialogConsequence.AwaitPayment },
+        {"AwaitPayment", DialogConsequence.Null },
     };
     static Dictionary<string, DialogChoiceType> stringToType = new Dictionary<string, DialogChoiceType>()
     {

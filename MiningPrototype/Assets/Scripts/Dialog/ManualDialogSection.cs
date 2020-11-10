@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Dialog/Section")]
-public class DialogSection : ScriptableObject, IDialogSection
+public class ManualDialogSection : IDialogSection
 {
     public string optionText;
     public DialogChoiceType optionType;
 
-    [TextArea(2, 10)]
     public string sentence;
 
     public DialogConsequence consequence;
 
-    public DialogSection[] choiches;
-    public DialogSection jumpToTarget;
+    public IDialogSection[] choiches;
+    public IDialogSection jumpToTarget;
 
     public string OptionText => optionText;
     public DialogChoiceType OptionType => optionType;
@@ -53,5 +52,6 @@ public enum DialogConsequence
     Exit,
     JumpBeforeSentence,
     JumpAfterSentence,
-    AwaitPayment
+    JumpBeforeSentenceToPayment,
+    JumpAfterSentenceToPayment
 }
