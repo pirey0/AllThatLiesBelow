@@ -23,6 +23,7 @@ public class DirectionBasedAnimator : MonoBehaviour
     }
     public void Play()
     {
+        gameObject.SetActive(true);
         StartCoroutine(PickingRoutine());
     }
 
