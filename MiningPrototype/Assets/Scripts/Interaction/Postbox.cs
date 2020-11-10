@@ -1,4 +1,5 @@
 ﻿using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -98,5 +99,13 @@ public class Postbox : MonoBehaviour, IInteractable
 
             status = newStatus;
         }
+    }
+
+    public void SubscribeToForceQuit(Action action)
+    {
+    }
+
+    public void UnsubscribeToForceQuit(Action action)
+    {
     }
 }

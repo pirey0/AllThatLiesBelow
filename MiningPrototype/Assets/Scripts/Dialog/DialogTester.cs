@@ -5,87 +5,46 @@ using UnityEngine;
 
 public class DialogTester : MonoBehaviour
 {
-    [SerializeField] DialogSection start;
+    [SerializeField] string dialogName;
     [SerializeField] Vector2 displayOffset;
 
-    DialogSection current;
-    DialogState state;
+    DialogIterator dialog;
 
     private void Awake()
     {
-        current = start;
+        dialog = new DialogIterator(DialogParser.GetDialogFromName(dialogName));
     }
 
     private void OnGUI()
     {
-        if (current == null)
+        if (dialog.CurrentSection == null)
             return;
 
         float y = displayOffset.y;
 
-        if (state == DialogState.Answer)
+        if (dialog.State == DialogState.Answer)
         {
-            GUI.Box(new Rect(displayOffset.x, y, 200, 50), current.Sentence);
+            GUI.Box(new Rect(displayOffset.x, y, 200, 50), dialog.CurrentSection.Sentence);
             y += 50;
             if (GUI.Button(new Rect(displayOffset.x, y, 200, 30), ".."))
-                Next();
+                dialog.Next();
         }
-        else if (state == DialogState.Choice)
+        else if (dialog.State == DialogState.Choice)
         {
-            for (int i = 0; i < current.Choiches.Length; i++)
+            for (int i = 0; i < dialog.CurrentSection.Choiches.Length; i++)
             {
-                var choice = current.Choiches[i];
+                var choice = dialog.CurrentSection.Choiches[i];
                 GUI.color = choice.OptionType == DialogChoiceType.Sentence ? Color.white : Color.yellow;
                 if (GUI.Button(new Rect(displayOffset.x, y, 200, 30), choice.OptionText))
                 {
-                    Select(i);
+                    dialog.Select(i);
                 }
                 y += 40;
             }
         }
-        else if (state == DialogState.AwaitPayment)
+        else if (dialog.State == DialogState.AwaitPayment)
         {
             GUI.Box(new Rect(displayOffset.x, y, 200, 50), "Await Payment");
         }
-
-    }
-
-    private void Select(int i)
-    {
-        current = current.Choiches[i];
-        state = DialogState.Answer;
-        switch (current.Consequence)
-        {
-            case DialogConsequence.JumpBeforeSentence:
-                current = current.JumpToTarget;
-                break;
-        }
-    }
-
-    private void Next()
-    {
-        switch (current.Consequence)
-        {
-            case DialogConsequence.Choice:
-                state = DialogState.Choice;
-                break;
-            case DialogConsequence.JumpAfterSentence:
-                current = current.JumpToTarget;
-                break;
-
-            case DialogConsequence.Exit:
-                current = null;
-                break;
-            case DialogConsequence.AwaitPayment:
-                state = DialogState.AwaitPayment;
-                break;
-        }
     }
 }
-public enum DialogState
-{
-    Answer,
-    Choice,
-    AwaitPayment
-}
-

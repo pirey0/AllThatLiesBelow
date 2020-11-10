@@ -7,5 +7,8 @@ public interface IInteractable
     void BeginInteracting(GameObject interactor);
     void EndInteracting(GameObject interactor);
 
+    void SubscribeToForceQuit(System.Action action);
+    void UnsubscribeToForceQuit(System.Action action);
+
     GameObject gameObject { get; }
 }

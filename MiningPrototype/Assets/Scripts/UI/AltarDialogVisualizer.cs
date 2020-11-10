@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AltarDialogVisualizer : MonoBehaviour
@@ -12,6 +13,7 @@ public class AltarDialogVisualizer : MonoBehaviour
     DialogElementVisualization[] dialogOptions = new DialogElementVisualization[3];
 
     [SerializeField] GameObject ray1, ray2, particleSystem;
+    public event System.Action<int> Progressed;
 
     [Button]
     public void StartDialog()
@@ -30,21 +32,25 @@ public class AltarDialogVisualizer : MonoBehaviour
     }
 
     [Button]
-    public void DisplaySentence()
+    public void DisplaySentence(string sentence)
     {
-        string[] str = new string[4] { "want?", "you", "do", "What" };
-        StartCoroutine(DisplayWords(str,2,0.5f,1.5f));
+        string[] words = sentence.Split(' ');
+        words = words.Reverse().ToArray();
+
+        StartCoroutine(DisplayWords(words,2,0.5f,1.5f, 5));
     }
 
     [Button]
-    public void DisplayOptions()
+    public void DisplayOptions(string[] options)
     {
-        dialogOptions[0] = PrintOption("Option1", Vector3.zero, 2);
-        dialogOptions[1] = PrintOption("Option2", Vector3.down, 2);
-        dialogOptions[2] = PrintOption("Option3", Vector3.down * 2, 2);
+        dialogOptions = new DialogElementVisualization[options.Length];
+        for (int i = 0; i < options.Length; i++)
+        {
+            dialogOptions[i] = PrintOption(options[i], Vector3.down * i, 2);
+        }
     }
 
-    IEnumerator DisplayWords(string[] words ,int wordsPerLine, float waitTimeBetweenWords, float waitTimeAfterLinebreak)
+    IEnumerator DisplayWords(string[] words ,int wordsPerLine, float waitTimeBetweenWords, float waitTimeAfterLinebreak, float waitTileAfterSentence)
     {
         int wordsInLine = 0;
         int wordsInGeneral = 0;
@@ -67,6 +73,10 @@ public class AltarDialogVisualizer : MonoBehaviour
             else
                 yield return new WaitForSeconds(waitTimeBetweenWords);
         }
+
+        yield return new WaitForSeconds(waitTileAfterSentence);
+
+        Progressed?.Invoke(0);
     }
 
     private void PrintWord (string textToPrint, Vector3 positionOffset, float duration = 5f)
@@ -85,11 +95,13 @@ public class AltarDialogVisualizer : MonoBehaviour
         {
             if (dialogOptions[i] != null && dialogOptions[i] == dialogElementVisualization)
             {
-                Debug.Log("clicked on option " + (i+1));
                 for (int j = dialogOptions.Length - 1; j >= 0; j--)
                 {
                     Destroy(dialogOptions[j].gameObject);
                 }
+
+                Debug.Log("clicked on option " + (i));
+                Progressed?.Invoke(i);
             }
         }
     }

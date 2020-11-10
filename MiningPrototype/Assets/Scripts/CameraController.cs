@@ -8,9 +8,10 @@ public class CameraController : Singleton<CameraController>
     [SerializeField] Vector3 generalOffset = new Vector3(0, 0, -10);
     [SerializeField] float constantSpeedMultiplyer;
     Vector3 offsetToTarget;
-
+    Transform defaultTarget;
     private void Start()
     {
+        defaultTarget = target;
         offsetToTarget = generalOffset;
     }
 
@@ -24,13 +25,18 @@ public class CameraController : Singleton<CameraController>
         target = newTarget;
     }
 
+    public void TransitionToDefault(bool constantSpeed= true, float time = 0)
+    {
+        TransitionToNewTarget(defaultTarget, constantSpeed, time);
+    }
+
     public void TransitionToNewTarget(Transform newTarget, bool constantSpeed = true, float time = 0)
     {
         StopAllCoroutines();
 
         if (constantSpeed)
         {
-            time = Vector2.Distance(target.position, newTarget.position) * constantSpeedMultiplyer;
+            time = Vector2.Distance(target.position, newTarget.position) / constantSpeedMultiplyer;
         }
 
         StartCoroutine(TransitionTo(target.position, newTarget, time));
