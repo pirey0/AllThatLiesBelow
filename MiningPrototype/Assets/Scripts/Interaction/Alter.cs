@@ -66,6 +66,7 @@ public class Alter : MonoBehaviour, IInteractable
                 }
                 visualizer.DisplayOptions(names);
                 break;
+
             case DialogState.AwaitPayment:
                 break;
         }
@@ -74,6 +75,8 @@ public class Alter : MonoBehaviour, IInteractable
     public void EndInteracting(GameObject interactor)
     {
         Debug.Log("End Altar Interaction");
+        iterator.StateChanged -= OnStateChanged;
+        visualizer.Progressed -= OnProgressed;
         visualizer.EndDialog();
         CameraController.Instance.TransitionToDefault();
         inInteraction = false;
