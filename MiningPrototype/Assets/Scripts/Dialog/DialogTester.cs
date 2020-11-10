@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class DialogTester : MonoBehaviour
 {
-    [SerializeField] DialogSection start;
+    [SerializeField] string dialogName;
     [SerializeField] Vector2 displayOffset;
 
-    DialogSection current;
+    IDialogSection current;
     DialogState state;
 
     private void Awake()
     {
-        current = start;
+        current = DialogParser.GetDialogFromName(dialogName);
     }
 
     private void OnGUI()
