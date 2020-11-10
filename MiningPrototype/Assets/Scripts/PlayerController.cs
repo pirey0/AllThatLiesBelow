@@ -123,11 +123,17 @@ public class PlayerController : InventoryOwner
             {
                 Debug.Log(hit.transform.name);
                 currentInteractable = interactable;
+                currentInteractable.SubscribeToForceQuit(OnInteractableForceQuit);
                 currentInteractable.BeginInteracting(gameObject);
                 Debug.DrawLine(GetPositionInGridV3(), hit.point, Color.green, 1f);
                 break;
             }
         }
+    }
+
+    private void OnInteractableForceQuit()
+    {
+        TryStopInteracting();
     }
 
     private bool CanJump()
@@ -214,6 +220,7 @@ public class PlayerController : InventoryOwner
         if (currentInteractable != null)
         {
             currentInteractable.EndInteracting(gameObject);
+            currentInteractable.UnsubscribeToForceQuit(OnInteractableForceQuit);
             currentInteractable = null;
         }
     }

@@ -83,6 +83,14 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner, IInteractable
     {
         CloseInventory();
     }
+
+    public void SubscribeToForceQuit(Action action)
+    {
+    }
+
+    public void UnsubscribeToForceQuit(Action action)
+    {
+    }
 }
 
 public enum InventoryState
