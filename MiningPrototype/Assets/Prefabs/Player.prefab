@@ -4998,7 +4998,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1237965333
-  m_SortingLayer: 7
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f5f4023f34b8bfc468da3c911e96684b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.2509804}
@@ -5237,7 +5237,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1237965333
-  m_SortingLayer: 7
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 253be4da77579e64e8277a8b2979c3dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
@@ -5688,7 +5688,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory:
-    content: []
+    content:
+    - type: 2
+      amount: 100
   canvas: {fileID: 0}
   inventoryVisualizerPrefab: {fileID: 8727063801762088802, guid: c396613fa9613cb4d8d82148ef5649a7, type: 3}
   openSource: {fileID: 1456414342}

@@ -54,7 +54,7 @@ public class Alter : MonoBehaviour, IInteractable
         switch (iterator.State)
         {
             case DialogState.Answer:
-                visualizer.DisplaySentence(iterator.CurrentSection.Sentence);
+                visualizer.DisplaySentence(iterator.GetCorrectedSentence());
                 break;
 
             case DialogState.Choice:
@@ -68,6 +68,7 @@ public class Alter : MonoBehaviour, IInteractable
                 break;
 
             case DialogState.AwaitPayment:
+                Debug.Log("Awaiting Payment");
                 break;
         }
     }

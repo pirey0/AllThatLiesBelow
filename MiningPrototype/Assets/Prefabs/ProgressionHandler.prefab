@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialog: Test1_0
+  alreadyTradedDialog: Test2_1

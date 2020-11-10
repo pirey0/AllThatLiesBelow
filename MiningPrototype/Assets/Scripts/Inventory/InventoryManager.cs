@@ -13,6 +13,7 @@ public class InventoryManager
     bool playerInventoryOpen;
 
     public event System.Action<ItemAmountPair> PlayerCollected;
+    public event System.Action<ItemAmountPair> AttemptedTransfer;
 
     private static InventoryManager GetInstance()
     {
@@ -64,6 +65,11 @@ public class InventoryManager
         Instance.PlayerCollected?.Invoke(new ItemAmountPair(itemType, amount));
     }
 
+    public static bool PlayerTryPay(ItemType itemType, int amount)
+    {
+        return Instance.playerInventory.TryRemove(new ItemAmountPair(itemType, amount));
+    }
+
     public static void TryMove(Inventory inventory, int stackIndex)
     {
         //player to other
@@ -73,7 +79,7 @@ public class InventoryManager
             {
                 if (Instance.playerInventoryOpen)
                 {
-                    var result = Instance.playerInventory.Remove(stackIndex);
+                    var result = Instance.playerInventory.RemoveStack(stackIndex);
                     if (result != null)
                         Instance.otherInventory.Add(result);
                     Debug.Log("InventoryResult: Moved to other");
@@ -85,7 +91,8 @@ public class InventoryManager
             }
             else
             {
-                Debug.Log("InventoryError: Other inventory closed");
+                Debug.Log("InventoryResult: Other inventory closed, attempting payment");
+                Instance.AttemptedTransfer?.Invoke(inventory[stackIndex]);
             }
         }
         //other to player
@@ -93,7 +100,7 @@ public class InventoryManager
         {
             if (Instance.playerInventoryOpen)
             {
-                var result = Instance.otherInventory.Remove(stackIndex);
+                var result = Instance.otherInventory.RemoveStack(stackIndex);
                 if (result != null)
                     Instance.playerInventory.Add(result);
 

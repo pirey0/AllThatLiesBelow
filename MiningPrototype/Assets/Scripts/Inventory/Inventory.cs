@@ -33,7 +33,29 @@ public class Inventory
         Add(pair.type, pair.amount);
     }
 
-    public ItemAmountPair Remove(int index)
+    public bool TryRemove(ItemAmountPair pair)
+    {
+        int id = GetStackIdFor(pair.type);
+
+        if (id >= 0)
+        {
+            if(content[id].amount >= pair.amount)
+            {
+                content[id].amount -= pair.amount;
+                InventoryChanged?.Invoke();
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private int GetStackIdFor(ItemType type)
+    {
+        return content.FindIndex((x) => x.type == type);
+    }
+
+    public ItemAmountPair RemoveStack(int index)
     {
         if (index < 0 || index >= content.Count)
             return null;
@@ -60,7 +82,6 @@ public class Inventory
             return content[index];
         }
     }
-
 
     public KeyValuePair<ItemType, int>[] GetContent()
     {

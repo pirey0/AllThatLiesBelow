@@ -24,7 +24,7 @@ public class DialogTester : MonoBehaviour
 
         if (dialog.State == DialogState.Answer)
         {
-            GUI.Box(new Rect(displayOffset.x, y, 200, 50), dialog.CurrentSection.Sentence);
+            GUI.Box(new Rect(displayOffset.x, y, 200, 50), dialog.GetCorrectedSentence());
             y += 50;
             if (GUI.Button(new Rect(displayOffset.x, y, 200, 30), ".."))
                 dialog.Next();

@@ -1,13 +1,13 @@
-SectionName;OptionText;OptionType;Sentence;Consequence;JumpTarget;Choices1;Choices2;Choices3;Choices4;Choices5;Choices6;Choices7;Choices8
-Test1_0;;Entry;What do you desire?;Choice;;Test1_01;Test1_02;Test1_03;Test1_04;Test1_05;;;
-Test1_01;Nothing;Sentence;poor soul...;Exit;;;;;;;;;
-Test1_02;Who are you?;Sentence;do you desire the answer to that question?;Choice;;Test1_021;Test1_022;;;;;;
-Test1_03;Wealth;Choice;;JumpBeforeSentence;Test1_07;;;;;;;;
-Test1_04;Strength;Choice;;JumpBeforeSentence;Test1_07;;;;;;;;
-Test1_05;Speed;Choice;;JumpBeforeSentence;Test1_07;;;;;;;;
-Test1_07;;;and how will you pay?;Choice;;Test1_071;Test1_072;Test1_073;;;;;
-Test1_021;Yes;Choice;;JumpBeforeSentence;Test1_07;;;;;;;;
-Test1_022;No;Choice;clear your mind...;Exit;;;;;;;;;
-Test1_071;Rocks;Choice;does it look like I need more rocks?;JumpAfterSentence;Test1_07;;;;;;;;
-Test1_072;Copper;Choice;{Amount} {Resource} will suffice;AwaitPayment;;;;;;;;;
-Test1_073;Gold;Choice;{Amount} {Resource} is the price;AwaitPayment;;;;;;;;;
+SectionName;OptionText;OptionType;Sentence;Consequence;JumpTarget;Choices1;Choices2;Choices3;Choices4;SetTopic;SetPayment
+Test1_0;;Entry;What do you desire?;Choice;;Test1_01;Test1_03;Test1_04;Test1_05;;
+Test1_01;Nothing;Sentence;poor soul...;Exit;;;;;;;
+Test1_03;Wealth;Choice;;JumpBeforeSentence;Test1_07;;;;;Wealth;
+Test1_04;Strength;Choice;;JumpBeforeSentence;Test1_07;;;;;Strength;
+Test1_05;Speed;Choice;;JumpBeforeSentence;Test1_07;;;;;Speed;
+Test1_07;;;and how will you pay?;Choice;;Test1_071;Test1_072;Test1_073;;;
+Test1_071;Rocks;Choice;does it look like I need more rocks?;JumpAfterSentence;Test1_07;;;;;;
+Test1_072;Copper;Choice;{Amount} {Payment} will suffice;AwaitPayment;Test1_08;;;;;;Copper
+Test1_073;Gold;Choice;{Amount} {Payment} is the price;AwaitPayment;Test1_08;;;;;;Gold
+Test1_08;;;Seek your reward in the morning;Exit;;;;;;;
+;;;;;;;;;;;
+Test2_1;DayExausted;Entry;Seek your reward in the morning;Exit;;;;;;;
