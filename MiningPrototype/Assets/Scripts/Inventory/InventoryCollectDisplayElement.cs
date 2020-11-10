@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +8,9 @@ public class InventoryCollectDisplayElement : MonoBehaviour
 {
     [SerializeField] float duration;
     [SerializeField] Text text;
+    [SerializeField] Image backdrop, icon;
+
+    [SerializeField] ItemInformationStorage ItemInformationStorage;
     private void Start()
     {
         StartCoroutine(FadeOut());
@@ -17,13 +21,23 @@ public class InventoryCollectDisplayElement : MonoBehaviour
         text.text = newText;
     }
 
+    public void SetItem(ItemAmountPair obj)
+    {
+        text.text = "+ " + obj.amount;
+        icon.sprite = ItemInformationStorage.GetSpriteByItemType(obj.type);
+    }
+
     private IEnumerator FadeOut()
     {
         float t = 0;
 
         while (t < duration)
         {
-            text.color = new Color(text.color.r, text.color.g, text.color.b, 1 - t / duration);
+            backdrop.color = new Color(backdrop.color.r, backdrop.color.g, backdrop.color.b, 1 - t / duration);
+            Color c = new Color(text.color.r, text.color.g, text.color.b, 1 - t / duration);
+            text.color = c;
+            icon.color = c;
+
             yield return null;
             t += Time.deltaTime;
         }

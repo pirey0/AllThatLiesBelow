@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class InventoryCollectDisplayer : MonoBehaviour
 {
-    [SerializeField] GameObject prefab;
+    [SerializeField] InventoryCollectDisplayElement prefab;
 
     private void Start()
     {
@@ -16,7 +16,7 @@ public class InventoryCollectDisplayer : MonoBehaviour
     private void OnPlayerCollected(ItemAmountPair obj)
     {
         var go = Instantiate(prefab, transform);
-        go.GetComponent<InventoryCollectDisplayElement>().SetText("+ " + obj.amount + " " + obj.type.ToString());
+        go.SetItem(obj);
     }
 
 }
