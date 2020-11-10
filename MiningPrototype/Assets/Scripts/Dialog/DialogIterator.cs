@@ -51,7 +51,8 @@ public class DialogIterator
             case DialogConsequence.Exit:
                 current = null;
                 break;
-            case DialogConsequence.AwaitPayment:
+            case DialogConsequence.JumpAfterSentenceToPayment:
+            case DialogConsequence.JumpBeforeSentenceToPayment:
                 state = DialogState.AwaitPayment;
                 break;
         }
