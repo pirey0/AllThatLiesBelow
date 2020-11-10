@@ -5067,11 +5067,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6814695091287791488}
+  - component: {fileID: 21532903457594183}
   - component: {fileID: 6814695091287791489}
   - component: {fileID: 2737784650533084980}
   - component: {fileID: -8800675860980122855}
   - component: {fileID: 1549756614959163788}
-  - component: {fileID: 727258366}
   m_Layer: 0
   m_Name: Altar
   m_TagString: Untagged
@@ -5098,6 +5098,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &21532903457594183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6814695091287791494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3666647b35fc37640a920506be0fe3b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &6814695091287791489
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5313,27 +5325,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &727258366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6814695091287791494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c783d16e49e341341999246ac89ecb55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventory:
-    content:
-    - type: 1
-      amount: 1
-    - type: 2
-      amount: 1
-  canvas: {fileID: 0}
-  inventoryVisualizerPrefab: {fileID: 8727063801762088802, guid: c396613fa9613cb4d8d82148ef5649a7, type: 3}
-  openSource: {fileID: 9220491323580797893}
 --- !u!1 &7216267869949320864
 GameObject:
   m_ObjectHideFlags: 0
