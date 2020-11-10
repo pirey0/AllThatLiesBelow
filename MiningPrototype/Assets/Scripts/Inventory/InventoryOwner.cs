@@ -14,9 +14,9 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner, IInteractable
     [SerializeField] Inventory inventory;
     [SerializeField] Canvas canvas;
     [SerializeField] InventoryVisualizer inventoryVisualizerPrefab;
-    [SerializeField] InventoryVisualizer inventoryVisualizer;
     [SerializeField] AudioSource openSource;
 
+    InventoryVisualizer inventoryVisualizer;
     InventoryState state = InventoryState.Closed;
     public Inventory Inventory { get => inventory; }
     public InventoryState InventoryDisplayState { get => state; }
@@ -28,7 +28,7 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner, IInteractable
 
     private void OnInventoryChanged()
     {
-        if (state == InventoryState.Open)
+        if (state == InventoryState.Open && inventoryVisualizer != null)
             inventoryVisualizer.RefreshInventoryDisplay();
     }
 
