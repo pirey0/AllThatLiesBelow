@@ -49674,22 +49674,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 696089490, guid: 3452a2521ce36be43b878861ba5a3b3b, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1956346956}
     - target: {fileID: 727258366, guid: 3452a2521ce36be43b878861ba5a3b3b, type: 3}
       propertyPath: canvas
       value: 
       objectReference: {fileID: 429891085}
-    - target: {fileID: 2181028810521304723, guid: 3452a2521ce36be43b878861ba5a3b3b, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 1237965333
-      objectReference: {fileID: 0}
-    - target: {fileID: 2181028810521304723, guid: 3452a2521ce36be43b878861ba5a3b3b, type: 3}
-      propertyPath: m_SortingLayer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2181028810521304723, guid: 3452a2521ce36be43b878861ba5a3b3b, type: 3}
-      propertyPath: m_SortingOrder
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 6814695091287791488, guid: 3452a2521ce36be43b878861ba5a3b3b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 85.5
@@ -49737,18 +49729,6 @@ PrefabInstance:
     - target: {fileID: 6814695091287791494, guid: 3452a2521ce36be43b878861ba5a3b3b, type: 3}
       propertyPath: m_Name
       value: Altar
-      objectReference: {fileID: 0}
-    - target: {fileID: 6884250310298843219, guid: 3452a2521ce36be43b878861ba5a3b3b, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 1237965333
-      objectReference: {fileID: 0}
-    - target: {fileID: 6884250310298843219, guid: 3452a2521ce36be43b878861ba5a3b3b, type: 3}
-      propertyPath: m_SortingLayer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6884250310298843219, guid: 3452a2521ce36be43b878861ba5a3b3b, type: 3}
-      propertyPath: m_SortingOrder
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3452a2521ce36be43b878861ba5a3b3b, type: 3}

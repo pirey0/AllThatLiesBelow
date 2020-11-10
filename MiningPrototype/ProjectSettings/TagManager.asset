@@ -62,6 +62,9 @@ TagManager:
   - name: Vignette
     uniqueID: 1237965333
     locked: 0
+  - name: Ray
+    uniqueID: 3485890961
+    locked: 0
   - name: UI
     uniqueID: 3299457843
     locked: 0
