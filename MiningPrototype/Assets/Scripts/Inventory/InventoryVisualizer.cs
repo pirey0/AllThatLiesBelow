@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryVisualizer : MonoBehaviour
+public class InventoryVisualizer : ScalingUIElementBase
 {
     [SerializeField] int widthInSlots, heightInSlots;
 
@@ -15,28 +15,15 @@ public class InventoryVisualizer : MonoBehaviour
     [SerializeField] InventorySlotVisualizer inventorySlotPrefab;
     [SerializeField] Transform gridLayoutParent;
 
-    [SerializeField] Transform transformToFollow;
-    [SerializeField] Vector2 followOffset;
-
-    [SerializeField] Vector3 targetScale;
-    [SerializeField] float openTimeMultiplier;
-
     Inventory inventory;
 
     public void Init(Transform target, Inventory inventoryToVisualize)
     {
         transformToFollow = target;
         inventory = inventoryToVisualize;
+        UpdatePosition();
         RefreshInventoryDisplay();
         StartCoroutine(ScaleCoroutine(scaleUp: true));
-    }
-
-    private void Update()
-    {
-        if (transformToFollow != null)
-        {
-            transform.position = new Vector3(transformToFollow.position.x + followOffset.x, transformToFollow.position.y + followOffset.y, 0);
-        }
     }
 
     [Button]
@@ -93,19 +80,5 @@ public class InventoryVisualizer : MonoBehaviour
     {
         StopAllCoroutines();
         StartCoroutine(ScaleCoroutine(scaleUp:false));
-    }
-
-    IEnumerator ScaleCoroutine (bool scaleUp = true)
-    {
-        while (scaleUp && transform.localScale.magnitude <= targetScale.magnitude || !scaleUp && transform.localScale.x > 0f)
-        {
-            transform.localScale = transform.localScale + Vector3.one * Time.deltaTime * openTimeMultiplier * (scaleUp ? 1 : -1);
-            yield return null;
-        }
-
-        if (scaleUp)
-            transform.localScale = targetScale;
-        else
-            Destroy(gameObject);
     }
 }

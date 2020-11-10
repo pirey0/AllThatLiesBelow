@@ -105,6 +105,11 @@ MonoBehaviour:
   storedItem:
     type: 3
     amount: 1
+  storedMessage: My heart is heavy with loss. I cannot see a way through. How can
+    I go on knowing that I have lost you? But I swear I hear your voice Whisper through
+    the breeze saying that you love me through the rustle of the leaves.
+  canvas: {fileID: 0}
+  messagePrefab: {fileID: 2481684509624394811, guid: 792491b9185146b439b16abe13758f74, type: 3}
 --- !u!82 &1265463392
 AudioSource:
   m_ObjectHideFlags: 0

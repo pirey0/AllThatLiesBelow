@@ -479,6 +479,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2547905131585938353, guid: ab8bb5ddea2a30f4db175780fbfe3a83, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 429891085}
     - target: {fileID: 6357320653061133600, guid: ab8bb5ddea2a30f4db175780fbfe3a83, type: 3}
       propertyPath: m_Name
       value: Postbox

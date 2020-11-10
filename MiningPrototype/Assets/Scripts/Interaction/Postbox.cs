@@ -18,6 +18,11 @@ public class Postbox : MonoBehaviour, IInteractable
     [SerializeField] AudioSource audioSource;
 
     [SerializeField] ItemAmountPair storedItem;
+    [SerializeField] string storedMessage;
+
+    [SerializeField] Canvas canvas;
+    [SerializeField] InteractableMessageVisualizer messagePrefab;
+    InteractableMessageVisualizer displayedMessage;
 
     PostboxStatus status;
 
@@ -32,6 +37,15 @@ public class Postbox : MonoBehaviour, IInteractable
     {
         SetBoxstatus(PostboxStatus.OPEN);
 
+        //display message
+        if (messagePrefab != null && displayedMessage == null && storedMessage != "")
+        {
+            displayedMessage = Instantiate(messagePrefab, canvas.transform);
+
+            displayedMessage.DisplayText(transform, storedMessage, showFamilyPhoto: (storedItem != null && storedItem.type == ItemType.FAMILY_PHOTO));
+            storedMessage = "";
+        }
+
         //add all stored items to player inventory
         if (storedItem != null && storedItem.amount > 0)
         {
@@ -44,6 +58,10 @@ public class Postbox : MonoBehaviour, IInteractable
     public void Close()
     {
         SetBoxstatus(PostboxStatus.CLOSED);
+
+        //hide message if one is displayed
+        if (displayedMessage != null)
+            displayedMessage.Hide();
     }
 
     public void BeginInteracting(GameObject interactor)
