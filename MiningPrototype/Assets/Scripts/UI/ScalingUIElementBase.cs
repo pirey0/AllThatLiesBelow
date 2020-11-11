@@ -19,6 +19,11 @@ public class ScalingUIElementBase : MonoBehaviour
         }
     }
 
+    public void SetFollowOnUpdate(bool enabled)
+    {
+        updateFollow = enabled;
+    }
+
     protected void UpdatePosition()
     {
         transform.position = new Vector3(transformToFollow.position.x + followOffset.x, transformToFollow.position.y + followOffset.y, 0);

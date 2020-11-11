@@ -15,6 +15,7 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner, IInteractable
     [SerializeField] Canvas canvas;
     [SerializeField] InventoryVisualizer inventoryVisualizerPrefab;
     [SerializeField] AudioSource openSource;
+    [SerializeField] bool inventoryVisualizerUpdates;
 
     InventoryVisualizer inventoryVisualizer;
     InventoryState state = InventoryState.Closed;
@@ -47,6 +48,7 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner, IInteractable
 
                 inventoryVisualizer = Instantiate(inventoryVisualizerPrefab, canvas.transform);
                 inventoryVisualizer.Init(transform, inventory);
+                inventoryVisualizer.SetFollowOnUpdate(inventoryVisualizerUpdates);
             }
 
             InventoryManager.NotifyInventoryOpen(this);

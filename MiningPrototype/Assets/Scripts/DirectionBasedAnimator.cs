@@ -42,7 +42,7 @@ public class DirectionBasedAnimator : MonoBehaviour
         {
             //Debug.Log("play curve");
             currentTime += Time.deltaTime;
-            int frameCurrent = GetFrameFromMouseAngle(Mathf.RoundToInt(animationCurve.Evaluate(currentTime)) * 45f);
+            int frameCurrent = GetFrameFromMouseAngle(Mathf.RoundToInt(animationCurve.Evaluate(currentTime) * 45f));
 
             if (frameCurrent != frameBefore)
             {
