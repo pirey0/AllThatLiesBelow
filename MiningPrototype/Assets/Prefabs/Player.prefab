@@ -5616,7 +5616,7 @@ MonoBehaviour:
   groundedAngle: 88
   jumpVelocity: 8
   moveSpeed: 5
-  jumpCooldown: 1
+  jumpCooldown: 0.85
   timeAfterGroundedToJump: 0.1
   feet: {fileID: 1786483705}
   feetRadius: 0.4
@@ -5876,6 +5876,10 @@ PrefabInstance:
       propertyPath: playerSpriteRenderer
       value: 
       objectReference: {fileID: 8633471933228471855}
+    - target: {fileID: 7720122279049008536, guid: 562e47677541fc741804e2557b49653b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7862656893741527902, guid: 562e47677541fc741804e2557b49653b, type: 3}
       propertyPath: m_Name
       value: Pickaxe

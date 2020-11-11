@@ -110,6 +110,9 @@ MonoBehaviour:
   oreTiles:
   - {fileID: 11400000, guid: 7e1e97604cdbd3a4bbc6131bc89e93f2, type: 2}
   - {fileID: 11400000, guid: e3d0884e79b7a174a8be2d46522038ec, type: 2}
+  oreVeinSize:
+  - {x: 8, y: 10}
+  - {x: 3, y: 7}
   snowTile1: {fileID: 11400000, guid: 1f9f712db903a89418f9f2fd7f8c4037, type: 2}
   snowTile2: {fileID: 11400000, guid: a3a09e70d78f5a64cb2238d2d2eeba68, type: 2}
   updateOnParameterChanged: 1
@@ -119,7 +122,7 @@ MonoBehaviour:
   initialAliveChance: 0.54
   deathLimit: 3
   birthLimit: 4
-  automataSteps: 3
+  automataSteps: 5
   heightMultiplyer:
     serializedVersion: 2
     m_Curve:
@@ -180,8 +183,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  goldMaxHeight: 0.2
-  goldVeinProbability: 0.01
-  copperMaxHeight: 0.5
-  copperVeinProbability: 0.03
+  goldMaxHeight: 0.5
+  goldVeinProbability: 0.005
+  copperMaxHeight: 0.7
+  copperVeinProbability: 0.01
   snowStartHeight: 75

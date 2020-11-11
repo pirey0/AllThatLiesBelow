@@ -38,4 +38,26 @@ public static class Util
     {
         return (float)(Mathf.Sin(Vector2.Dot(new Vector2(x, y), new Vector2(12.9898f, 78.233f))) * 43758.5453) % 1;
     }
+
+    public static int RandomInVector(Vector2Int vector)
+    {
+        return Random.Range(vector.x, vector.y);
+    }
+
+    public static Vector2Int RandomDirection()
+    {
+        int value = Random.Range(0, 4);
+
+        switch (value)
+        {
+            case 0:
+                return Vector2Int.right;
+            case 1:
+                return Vector2Int.down;
+            case 2:
+                return Vector2Int.left;
+            default:
+                return Vector2Int.up;
+        }
+    }
 }

@@ -12,6 +12,7 @@ public class TestGeneration : MonoBehaviour
     [SerializeField] TileBase[] groundTiles;
     [SerializeField] TileBase[] damageOverlayTiles;
     [SerializeField] TileBase[] oreTiles;
+    [SerializeField] Vector2Int[] oreVeinSize;
     [SerializeField] TileBase snowTile1, snowTile2;
 
     [Header("Settings")]
@@ -103,7 +104,7 @@ public class TestGeneration : MonoBehaviour
         var t = GetTileAt(x, y);
 
 
-        if (IsBlockAt(x, y) && ((t.NeighbourBitmask & 2) == 0)) 
+        if (IsBlockAt(x, y) && ((t.NeighbourBitmask & 2) == 0))
         {
             t.Type = TileType.Snow;
         }
@@ -164,24 +165,53 @@ public class TestGeneration : MonoBehaviour
     {
         int y = UnityEngine.Random.Range(0, (int)(copperMaxHeight * size));
         int x = UnityEngine.Random.Range(0, size);
+        int amount = Util.RandomInVector(oreVeinSize[0]);
 
-        if (IsBlockAt(x, y))
-        {
-            SetMapAt(x, y, Tile.Make(TileType.Copper), updateNeighbourBitmask: false, updateVisuals: false);
-            Debug.Assert(GetTileAt(x, y).Type == TileType.Copper);
-        }
+        GrowVeinAt(x, y, TileType.Copper, amount);
     }
 
     private void TryPlaceGoldVein(int obj)
     {
-        int y = UnityEngine.Random.Range(0, (int)(goldMaxHeight*size));
+        int y = UnityEngine.Random.Range(0, (int)(goldMaxHeight * size));
         int x = UnityEngine.Random.Range(0, size);
+        int amount = Util.RandomInVector(oreVeinSize[1]);
 
-        if (IsBlockAt(x, y))
+        GrowVeinAt(x, y, TileType.Gold, amount);
+    }
+
+    private void GrowVeinAt(int startX, int startY, TileType tile, int amount)
+    {
+        int x = startX;
+        int y = startY;
+        int attemptsLeft = amount * 10;
+
+        while (amount > 0 && attemptsLeft > 0)
         {
-            SetMapAt(x, y, Tile.Make(TileType.Gold), updateNeighbourBitmask: false, updateVisuals: false);
+            if (IsBlockAt(x, y))
+            {
+                if (GetTileAt(x, y).Type != tile)
+                {
+                    SetMapAt(x, y, Tile.Make(tile), updateNeighbourBitmask: false, updateVisuals: false);
+                    amount--;
+                    x = startX;
+                    y = startY;
+                }
+                else
+                {
+                    var dir = Util.RandomDirection();
+                    x += dir.x;
+                    y += dir.y;
+                }
+            }
+            else
+            {
+                x = startX;
+                y = startY;
+            }
+            attemptsLeft--;
         }
     }
+
 
     private void PopulateAt(int x, int y)
     {
@@ -455,7 +485,7 @@ public class TestGeneration : MonoBehaviour
         tilemap.SetTile(new Vector3Int(x, y, 0), GetVisualTileFor(x, y));
         damageOverlayTilemap.SetTile(new Vector3Int(x, y, 0), GetVisualDestructableOverlayFor(x, y));
         oreTilemap.SetTile(new Vector3Int(x, y, 0), GetVisualOreTileFor(x, y));
-        
+
     }
 
     private bool IsOutOfBounds(int x, int y)
