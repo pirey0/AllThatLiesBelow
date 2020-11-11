@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using NaughtyAttributes;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -9,7 +10,12 @@ public class DialogElementVisualization : MonoBehaviour
     [SerializeField] AnimationCurve alphaOverTime;
     [SerializeField] AnimationCurve heightOverTime;
     [SerializeField] AnimationCurve amountOfCharactersOverTime;
+    [SerializeField] AnimationCurve pivotXOffsetOverTime;
+    [SerializeField] AnimationCurve pivotYOffsetOverTime;
     [SerializeField] AnimationCurve pivotVarianceOverTime;
+
+    [Range(0f,1f)]
+    [SerializeField] float pivotOffsetChangeSpeedVariance = 0.1f;
     Vector3 positionInTheBeginning;
 
     [SerializeField] float displayTime;
@@ -34,7 +40,11 @@ public class DialogElementVisualization : MonoBehaviour
         float charactersLength = amountOfCharactersOverTime.keys[amountOfCharactersOverTime.length - 1].time;
         float pivotVarianceLength = pivotVarianceOverTime.keys[pivotVarianceOverTime.length - 1].time;
 
-        float pivotDistance = 0f;
+        float pivotXOffsetOffsetTime = Random.value * 10f;
+        float pivotYOffsetOffsetTime = Random.value * 10f;
+        float pivotXOffsetVarianceSpeed = Random.Range(1 - pivotOffsetChangeSpeedVariance, 1 + pivotOffsetChangeSpeedVariance);
+        float pivotYOffsetVarianceSpeed = Random.Range(1 - pivotOffsetChangeSpeedVariance, 1 + pivotOffsetChangeSpeedVariance);
+        //bool pivotXisReadBackwards = Random.value > 0.5f;
 
         float t = 0;
 
@@ -50,12 +60,9 @@ public class DialogElementVisualization : MonoBehaviour
 
             transform.position = positionInTheBeginning + Vector3.up * heightOverTime.Evaluate(progress * heightCurveLength);
 
-            //RectTransform rectTransform = (transform as RectTransform);
-            //float maxPivotDistance = pivotVarianceOverTime.Evaluate(progress * pivotVarianceLength) * Time.deltaTime;
-            //float targetPivotOffset = 0.5f + Random.Range(0, maxPivotDistance);
-            //float targetPivotSmoothed = Mathf.SmoothDamp(rectTransform.pivot.x, targetPivotOffset,ref pivotDistance,0.1f);
-            //rectTransform.pivot = Vector3.one * targetPivotSmoothed;
-            //pivotDistance = Mathf.Abs(rectTransform.pivot.x - targetPivotSmoothed);
+            float pivotXOffset = pivotXOffsetOverTime.Evaluate(pivotXOffsetOffsetTime + t * pivotXOffsetVarianceSpeed) * pivotVarianceOverTime.Evaluate(progress * pivotVarianceLength);
+            float pivotYOffset = pivotYOffsetOverTime.Evaluate(pivotYOffsetOffsetTime + t * pivotYOffsetVarianceSpeed) * pivotVarianceOverTime.Evaluate(progress * pivotVarianceLength);
+            (transform as RectTransform).pivot = new Vector2(0.5f + pivotXOffset, 0.5f + pivotYOffset);
 
             t += Time.deltaTime;
             yield return null;
