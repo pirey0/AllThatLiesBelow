@@ -75,7 +75,7 @@ public class TestGeneration : MonoBehaviour
 
         Populate();
 
-        IterateX(automataSteps, (x) => RunAutomataStep());
+        Util.IterateX(automataSteps, (x) => RunAutomataStep());
 
         PopulateOres();
 
@@ -92,7 +92,7 @@ public class TestGeneration : MonoBehaviour
 
     private void PopulateSnow()
     {
-        IterateXY(size, PopulateSnowAt);
+        Util.IterateXY(size, PopulateSnowAt);
     }
 
     private void PopulateSnowAt(int x, int y)
@@ -113,7 +113,7 @@ public class TestGeneration : MonoBehaviour
 
     private void CalculateNeighboursBitmask()
     {
-        IterateXY(size, CalculateNeighboursBitmaskAt);
+        Util.IterateXY(size, CalculateNeighboursBitmaskAt);
     }
 
     private void CalculateNeighboursBitmaskAt(int x, int y)
@@ -149,14 +149,14 @@ public class TestGeneration : MonoBehaviour
 
         map = new Tile[size, size];
 
-        IterateXY(size, PopulateAt);
+        Util.IterateXY(size, PopulateAt);
 
     }
 
     private void PopulateOres()
     {
-        IterateX((int)(size * size * goldVeinProbability), TryPlaceGoldVein);
-        IterateX((int)(size * size * copperVeinProbability), TryPlaceCopperVein);
+        Util.IterateX((int)(size * size * goldVeinProbability), TryPlaceGoldVein);
+        Util.IterateX((int)(size * size * copperVeinProbability), TryPlaceCopperVein);
 
     }
 
@@ -425,7 +425,7 @@ public class TestGeneration : MonoBehaviour
 
     private void RunAutomataStep()
     {
-        IterateXY(size, SingleAutomataSet);
+        Util.IterateXY(size, SingleAutomataSet);
     }
 
     private void SingleAutomataSet(int x, int y)
@@ -439,7 +439,7 @@ public class TestGeneration : MonoBehaviour
         tilemap.ClearAllTiles();
         damageOverlayTilemap.ClearAllTiles();
         oreTilemap.ClearAllTiles();
-        IterateXY(size, UpdateVisualsAt);
+        Util.IterateXY(size, UpdateVisualsAt);
     }
 
     void OnParameterChanged()
@@ -472,7 +472,7 @@ public class TestGeneration : MonoBehaviour
 
         if (tile.Type == TileType.Snow)
         {
-            return PseudoRandomValue(x, y) > 0.5f ? snowTile1 : snowTile2;
+            return Util.PseudoRandomValue(x, y) > 0.5f ? snowTile1 : snowTile2;
         }
 
         int tileIndex = BITMASK_TO_TILEINDEX[tile.NeighbourBitmask];
@@ -480,7 +480,7 @@ public class TestGeneration : MonoBehaviour
         //Casual random tile
         if (tileIndex == 46)
         {
-            tileIndex = PseudoRandomValue(x, y) > 0.5f ? 46 : 0;
+            tileIndex = Util.PseudoRandomValue(x, y) > 0.5f ? 46 : 0;
         }
 
         return groundTiles[tileIndex];
@@ -501,28 +501,6 @@ public class TestGeneration : MonoBehaviour
         return oreTiles[(int)t.Type - 2];
     }
 
-    private void IterateXY(int size, System.Action<int, int> action)
-    {
-        for (int x = 0; x < size; x++)
-        {
-            for (int y = 0; y < size; y++)
-            {
-                action(x, y);
-            }
-        }
-    }
 
-    private void IterateX(int size, System.Action<int> action)
-    {
-        for (int i = 0; i < size; i++)
-        {
-            action(i);
-        }
-    }
-
-    private float PseudoRandomValue(float x, float y)
-    {
-        return (float)(Mathf.Sin(Vector2.Dot(new Vector2(x, y), new Vector2(12.9898f, 78.233f))) * 43758.5453) % 1;
-    }
 
 }

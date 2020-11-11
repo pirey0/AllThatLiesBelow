@@ -4,16 +4,6 @@ using UnityEngine;
 
 public class ProgressionHandler : Singleton<ProgressionHandler>
 {
-    Dictionary<(string, string), float> priceMapping = new Dictionary<(string, string), float>()
-    {
-        {("Wealth", "Copper"), 100 },
-        {("Wealth", "Gold"), 15 },
-        {("Strength", "Copper"), 20 },
-        {("Strength", "Gold"), 3 },
-        {("Speed", "Copper"), 30 },
-        {("Speed", "Gold"), 5 }
-    };
-
     [SerializeField] string dialog;
     [SerializeField] string alreadyTradedDialog;
 
@@ -32,16 +22,8 @@ public class ProgressionHandler : Singleton<ProgressionHandler>
         dailyPurchaseExaused = true;
     }
 
-    public float GetPriceOf(string topic, string payment)
+    public float GetPriceOf(string reward, string resource)
     {
-        if (priceMapping.ContainsKey((topic, payment)))
-        {
-            return priceMapping[(topic, payment)];
-        }
-        else
-        {
-            Debug.Log("Updefined price for " + topic + " and " + payment);
-            return -1;
-        }
+        return PricesParser.GetPriceFor(reward, resource);
     }
 }
