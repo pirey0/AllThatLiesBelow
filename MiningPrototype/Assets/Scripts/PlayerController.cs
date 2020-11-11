@@ -55,6 +55,9 @@ public class PlayerController : InventoryOwner
     [ReadOnly]
     [SerializeField] bool inMining;
 
+    private bool canMove = true;
+    private bool isVisible = true;
+
     protected override void Start()
     {
         base.Start();
@@ -66,6 +69,8 @@ public class PlayerController : InventoryOwner
 
     private void Update()
     {
+        if (!canMove || !isVisible)
+            return;
 
         if (Vector2Int.Distance(GetPositionInGrid(), GetClickCoordinate()) <= maxDigDistance)
         {
@@ -262,6 +267,9 @@ public class PlayerController : InventoryOwner
 
     private void FixedUpdate()
     {
+        if (!canMove || !isVisible)
+            return;
+
         UpdateWalk();
         UpdateJump();
     }
@@ -365,6 +373,36 @@ public class PlayerController : InventoryOwner
                 walking.Pause();
             }
         }
+    }
+
+    [Button]
+    public void Hide()
+    {
+        isVisible = false;
+        pickaxe.GetComponent<SpriteRenderer>().enabled = false;
+        spriteRenderer.enabled = false;
+        walking.Pause();
+    }
+
+    [Button]
+    public void Show()
+    {
+        isVisible = true;
+        pickaxe.GetComponent<SpriteRenderer>().enabled = true;
+        spriteRenderer.enabled = true;
+    }
+
+    [Button]
+    public void Freeze ()
+    {
+        canMove = false;
+        walking.Pause();
+    }
+
+    [Button]
+    public void Defreeze()
+    {
+        canMove = true;
     }
 
     private void OnCollisionStay2D(Collision2D collision)

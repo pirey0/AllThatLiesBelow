@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class Hut : MonoBehaviour
 {
-    [SerializeField] GameObject outside_foreground;
+    [SerializeField] GameObject outside_foreground, inside_foreground;
     [SerializeField] bool isOpen = false;
+    [SerializeField] AudioSource doorAudio;
+    [SerializeField] Transform cameraTarget;
 
     public delegate void HutStateChange(bool isOpen);
     public event HutStateChange OnHutStateChange;
@@ -29,19 +31,35 @@ public class Hut : MonoBehaviour
         if (!isOpen)
             return;
 
-        isOpen = false;
-        OnHutStateChange(isOpen);
-
-        outside_foreground.SetActive(true);
+        Toggle();
     }
     private void Enter()
     {
         if (isOpen)
             return;
 
-        isOpen = true;
+        Toggle();
+    }
+
+    private void Toggle()
+    {
+        isOpen = !isOpen;
         OnHutStateChange(isOpen);
 
-        outside_foreground.SetActive(false);
+        outside_foreground.SetActive(!isOpen);
+        inside_foreground.SetActive(isOpen);
+
+        doorAudio.pitch = UnityEngine.Random.Range(0.75f,1.5f);
+        doorAudio.Play();
+
+        if (isOpen)
+            CameraController.Instance.TransitionToNewTarget(cameraTarget);
+        else
+            CameraController.Instance.TransitionToDefault();
+    }
+
+    public bool IsOpen()
+    {
+        return isOpen;
     }
 }
