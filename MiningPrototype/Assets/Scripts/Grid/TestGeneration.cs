@@ -12,7 +12,6 @@ public class TestGeneration : MonoBehaviour
     [SerializeField] TileBase[] groundTiles;
     [SerializeField] TileBase[] damageOverlayTiles;
     [SerializeField] TileBase[] oreTiles;
-    [SerializeField] Vector2Int[] oreVeinSize;
     [SerializeField] TileBase snowTile1, snowTile2;
 
     [Header("Settings")]
@@ -44,23 +43,12 @@ public class TestGeneration : MonoBehaviour
     [SerializeField] int automataSteps;
 
     [SerializeField] AnimationCurve heightMultiplyer;
-    [SerializeField] float goldMaxHeight;
-    [SerializeField] float goldVeinProbability;
-    [SerializeField] float copperMaxHeight;
-    [SerializeField] float copperVeinProbability;
-
     [SerializeField] int snowStartHeight;
+
+    [SerializeField] OrePass[] orePasses;
 
     Tile[,] map;
 
-    static readonly Dictionary<int, int> BITMASK_TO_TILEINDEX = new Dictionary<int, int>()
-    {{2, 1 },{ 8, 2 }, {10, 3 }, {11, 4 }, {16, 5 }, {18, 6 }, { 22, 7 },
-        { 24, 8 }, {26, 9 }, {27, 10 }, {30, 11 }, {31, 12 }, {64, 13 },{ 66 , 14},
-        { 72 , 15},{ 74 , 16},{ 75 , 17},{ 80 , 18},{ 82 , 19},{ 86 , 20},{ 88 , 21},
-        { 90 , 22},{ 91 , 23},{ 94 , 24},{ 95 , 25},{ 104 , 26},{ 106 , 27},{ 107 , 28},
-        { 120 , 29},{ 122 , 30},{ 123 , 31},{ 126 , 32},{ 127 , 33},{ 208 , 34},{ 210 , 35},
-        { 214 , 36},{ 216 , 37},{ 218 , 38},{ 219 , 39},{ 222 , 40},{ 223 , 41},{ 248 , 42},
-        { 250 , 43},{ 251 , 44},{ 254 , 45},{ 255 , 46},{ 0 , 47 } };
 
     private void Start()
     {
@@ -156,27 +144,18 @@ public class TestGeneration : MonoBehaviour
 
     private void PopulateOres()
     {
-        Util.IterateX((int)(size * size * goldVeinProbability), TryPlaceGoldVein);
-        Util.IterateX((int)(size * size * copperVeinProbability), TryPlaceCopperVein);
-
+        foreach (var pass in orePasses)
+        {
+            Util.IterateX((int)(size * size * pass.Probability * 0.01f), (x) => TryPlaceVein(pass.TileType, Util.RandomInVector(pass.OreVeinSize), pass.MaxHeight));
+        }
     }
 
-    private void TryPlaceCopperVein(int obj)
+    private void TryPlaceVein(TileType type, int amount, int maxHeight)
     {
-        int y = UnityEngine.Random.Range(0, (int)(copperMaxHeight * size));
+        int y = UnityEngine.Random.Range(0, maxHeight);
         int x = UnityEngine.Random.Range(0, size);
-        int amount = Util.RandomInVector(oreVeinSize[0]);
 
-        GrowVeinAt(x, y, TileType.Copper, amount);
-    }
-
-    private void TryPlaceGoldVein(int obj)
-    {
-        int y = UnityEngine.Random.Range(0, (int)(goldMaxHeight * size));
-        int x = UnityEngine.Random.Range(0, size);
-        int amount = Util.RandomInVector(oreVeinSize[1]);
-
-        GrowVeinAt(x, y, TileType.Gold, amount);
+        GrowVeinAt(x, y, type, amount);
     }
 
     private void GrowVeinAt(int startX, int startY, TileType tile, int amount)
@@ -409,7 +388,7 @@ public class TestGeneration : MonoBehaviour
     public void PlaceAt(int x, int y)
     {
         Debug.Log("Try Place " + x + " / " + y);
-        SetMapAt(x, y, Tile.Stone);
+        SetMapAt(x, y, Tile.Make(TileType.Stone));
     }
 
     private void SetMapAt(int x, int y, Tile value, bool updateNeighbourBitmask = true, bool updateVisuals = true)
@@ -461,7 +440,7 @@ public class TestGeneration : MonoBehaviour
     private void SingleAutomataSet(int x, int y)
     {
         int nbs = GetAliveNeightboursCountFor(x, y);
-        map[x, y] = IsBlockAt(x, y) ? (nbs > deathLimit ? Tile.Stone : Tile.Air) : (nbs > birthLimit ? Tile.Stone : Tile.Air);
+        map[x, y] = IsBlockAt(x, y) ? (nbs > deathLimit ? Tile.Make(TileType.Stone) : Tile.Air) : (nbs > birthLimit ? Tile.Make(TileType.Stone) : Tile.Air);
     }
 
     void UpdateVisuals()
@@ -505,7 +484,7 @@ public class TestGeneration : MonoBehaviour
             return Util.PseudoRandomValue(x, y) > 0.5f ? snowTile1 : snowTile2;
         }
 
-        int tileIndex = BITMASK_TO_TILEINDEX[tile.NeighbourBitmask];
+        int tileIndex = Util.BITMASK_TO_TILEINDEX[tile.NeighbourBitmask];
 
         //Casual random tile
         if (tileIndex == 46)
@@ -530,7 +509,5 @@ public class TestGeneration : MonoBehaviour
 
         return oreTiles[(int)t.Type - 2];
     }
-
-
 
 }

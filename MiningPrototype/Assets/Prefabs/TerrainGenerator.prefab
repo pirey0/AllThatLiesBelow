@@ -110,9 +110,10 @@ MonoBehaviour:
   oreTiles:
   - {fileID: 11400000, guid: 7e1e97604cdbd3a4bbc6131bc89e93f2, type: 2}
   - {fileID: 11400000, guid: e3d0884e79b7a174a8be2d46522038ec, type: 2}
-  oreVeinSize:
-  - {x: 8, y: 10}
-  - {x: 3, y: 7}
+  - {fileID: 11400000, guid: fcd84ecd4885b664d85f8c5443cbf208, type: 2}
+  - {fileID: 11400000, guid: fcd84ecd4885b664d85f8c5443cbf208, type: 2}
+  - {fileID: 11400000, guid: fcd84ecd4885b664d85f8c5443cbf208, type: 2}
+  - {fileID: 11400000, guid: fcd84ecd4885b664d85f8c5443cbf208, type: 2}
   snowTile1: {fileID: 11400000, guid: 1f9f712db903a89418f9f2fd7f8c4037, type: 2}
   snowTile2: {fileID: 11400000, guid: a3a09e70d78f5a64cb2238d2d2eeba68, type: 2}
   updateOnParameterChanged: 1
@@ -183,8 +184,17 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  goldMaxHeight: 0.5
-  goldVeinProbability: 0.005
-  copperMaxHeight: 0.7
-  copperVeinProbability: 0.01
   snowStartHeight: 75
+  orePasses:
+  - TileType: 2
+    OreVeinSize: {x: 7, y: 10}
+    MaxHeight: 60
+    Probability: 0.8
+  - TileType: 3
+    OreVeinSize: {x: 5, y: 8}
+    MaxHeight: 40
+    Probability: 0.3
+  - TileType: 5
+    OreVeinSize: {x: 3, y: 7}
+    MaxHeight: 15
+    Probability: 0.1

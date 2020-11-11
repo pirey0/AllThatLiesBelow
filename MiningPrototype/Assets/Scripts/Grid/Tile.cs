@@ -21,26 +21,6 @@ public struct Tile
         }
     }
 
-    public static Tile Stone
-    {
-        get
-        {
-            var t = Air;
-            t.Type = TileType.Stone;
-            return t;
-        }
-    }
-
-    public static Tile Snow
-    {
-        get
-        {
-            var t = Air;
-            t.Type = TileType.Snow;
-            return t;
-        }
-    }
-
     public static Tile Make(TileType t)
     {
         Tile tile = Air;
@@ -62,5 +42,6 @@ public enum TileType
     Stone = 1,
     Copper = 2,
     Gold = 3,
-    Snow = 4
+    Snow = 4,
+    Diamond = 5
 }
