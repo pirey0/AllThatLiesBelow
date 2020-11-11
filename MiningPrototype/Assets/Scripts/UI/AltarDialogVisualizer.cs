@@ -1,5 +1,4 @@
-﻿using Microsoft.Unity.VisualStudio.Editor;
-using NaughtyAttributes;
+﻿using NaughtyAttributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
