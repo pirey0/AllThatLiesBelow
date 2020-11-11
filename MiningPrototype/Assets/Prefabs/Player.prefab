@@ -4832,6 +4832,7 @@ MonoBehaviour:
   particleSystem: {fileID: 1264881364}
   amountOfParticles: 100
   audioSource: {fileID: 1278373005984055415}
+  hut: {fileID: 0}
 --- !u!82 &1278373005984055415
 AudioSource:
   m_ObjectHideFlags: 0

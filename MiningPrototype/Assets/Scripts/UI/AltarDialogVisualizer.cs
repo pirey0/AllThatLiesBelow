@@ -46,7 +46,6 @@ public class AltarDialogVisualizer : MonoBehaviour
         voicesVolumeTarget = Mathf.Clamp(voicesVolumeTarget - Time.deltaTime * voicesVolumeDecayMultiplier,0,1);
         voicesVolumeCurrent = Mathf.MoveTowards(voicesVolumeCurrent, voicesVolumeTarget, Time.deltaTime * voicesVolumeAdaptMultiplier);
 
-        Debug.LogWarning(voicesVolumeCurrent);
         voicesAudio.volume = voicesVolumeCurrent;
 
     }
