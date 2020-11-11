@@ -24,7 +24,7 @@ public class DialogElementVisualization : MonoBehaviour
 
     AltarDialogVisualizer altar;
 
-    public DialogElementVisualization Init (AltarDialogVisualizer _altar,string textToPrint, float duration)
+    public DialogElementVisualization Init(AltarDialogVisualizer _altar, string textToPrint, float duration)
     {
         positionInTheBeginning = transform.position;
         displayTime = duration;
@@ -72,6 +72,23 @@ public class DialogElementVisualization : MonoBehaviour
         {
             Destroy(gameObject);
         }    
+    }
+
+    public void Destroy()
+    {
+        StopAllCoroutines();
+        StartCoroutine(FadeOut());
+    }
+
+    IEnumerator FadeOut()
+    {
+        for (int i = 100; i > 0; i--)
+        {
+            text.color = new Color(1,1,1,((float)i/100));
+            yield return null;
+        }
+
+        Destroy(gameObject);
     }
 
     public void OnMouseEnter()

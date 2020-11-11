@@ -1,4 +1,5 @@
-﻿using NaughtyAttributes;
+﻿using Microsoft.Unity.VisualStudio.Editor;
+using NaughtyAttributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,27 +15,62 @@ public class AltarDialogVisualizer : MonoBehaviour
     [SerializeField] DialogElementVisualization dialogOptionPrefab, dialogCommentPrefab;
     DialogElementVisualization[] dialogOptions = new DialogElementVisualization[3];
 
-    [SerializeField] GameObject ray1, ray2, particleSystem;
+    [SerializeField] SpriteRenderer ray1, ray2;
+    [SerializeField] GameObject particleSystem;
+    [SerializeField] AnimationCurve opcacityVariance;
+    [SerializeField] float opacityAdaptationSpeed = 4;
+    float lightOpacityMultiplier = 0;
+    float lightOpacityMultiplierTarget = 0;
+
+    [SerializeField] AudioSource voicesAudio;
+    [SerializeField] float voicesVolumeDecayMultiplier = 1f;
+    [SerializeField] float voicesVolumeAdaptMultiplier = 1f;
+    [SerializeField] float voiceVolumePerWordOrOption = 1f;
+    float voicesVolumeCurrent;
+    float voicesVolumeTarget;
+
+
     public event System.Action<int> Progressed;
+
+    private void Update()
+    {
+        if (lightOpacityMultiplierTarget > lightOpacityMultiplier)
+            lightOpacityMultiplier =  Mathf.Clamp(lightOpacityMultiplier + Time.deltaTime * opacityAdaptationSpeed, 0,1);
+        else if (lightOpacityMultiplierTarget < lightOpacityMultiplier)
+            lightOpacityMultiplier = Mathf.Clamp(lightOpacityMultiplier - Time.deltaTime * opacityAdaptationSpeed, 0, 1);
+
+        Color c = new Color(1,1,1, opcacityVariance.Evaluate(Time.time) * lightOpacityMultiplier);
+        ray1.color = c;
+        ray2.color = c;
+
+        voicesVolumeTarget = Mathf.Clamp(voicesVolumeTarget - Time.deltaTime * voicesVolumeDecayMultiplier,0,1);
+        voicesVolumeCurrent = Mathf.MoveTowards(voicesVolumeCurrent, voicesVolumeTarget, Time.deltaTime * voicesVolumeAdaptMultiplier);
+
+        Debug.LogWarning(voicesVolumeCurrent);
+        voicesAudio.volume = voicesVolumeCurrent;
+
+    }
 
     [Button]
     public void StartDialog()
     {
-        ray1.SetActive(true);
-        ray2.SetActive(true);
+        lightOpacityMultiplierTarget = 1;
         particleSystem.SetActive(true);
     }
 
     [Button]
     public void EndDialog()
     {
-        ray1.SetActive(false);
-        ray2.SetActive(false);
+        StopAllCoroutines();
+
+        lightOpacityMultiplierTarget = 0;
         particleSystem.SetActive(false);
 
         foreach (Transform child in transform)
         {
-            GameObject.Destroy(child.gameObject);
+            DialogElementVisualization dev = child.GetComponent<DialogElementVisualization>();
+            if (dev != null)
+                dev.Destroy();
         }
     }
 
@@ -50,6 +86,7 @@ public class AltarDialogVisualizer : MonoBehaviour
     [Button]
     public void DisplayOptions(string[] options)
     {
+        voicesVolumeTarget += voiceVolumePerWordOrOption;
         dialogOptions = new DialogElementVisualization[options.Length];
         for (int i = 0; i < options.Length; i++)
         {
@@ -67,10 +104,8 @@ public class AltarDialogVisualizer : MonoBehaviour
         {
             float lerp = (float)wordsInLine / (float)(wordsPerLine-1);
             int row = Mathf.FloorToInt((float)wordsInGeneral / (float)wordsPerLine);
-            Debug.LogWarning(row);
 
             float offset = ((lerp > 0.5f ? 1f : -1f) * ((float)word.Length / 5f)) * wordLengthOffsetMultiplier;
-            Debug.LogWarning(word + " => " +  offset);
             Vector3 leftRight = Vector3.Lerp(leftSpawnPosition, rightSpawnposition, lerp) + Vector3.right * offset;
             Vector3 upDown = offsetWithRow * (row + 0.1f * wordsInGeneral);
 
@@ -95,6 +130,7 @@ public class AltarDialogVisualizer : MonoBehaviour
 
     private void PrintWord (string textToPrint, Vector3 positionOffset, float duration = 5f)
     {
+        voicesVolumeTarget += voiceVolumePerWordOrOption;
         Instantiate(dialogCommentPrefab, transform.position + positionOffset, Quaternion.identity, transform).Init(this,textToPrint, duration);
     }
 
