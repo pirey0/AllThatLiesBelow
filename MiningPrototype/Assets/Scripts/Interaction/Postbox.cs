@@ -25,6 +25,10 @@ public class Postbox : MonoBehaviour, IInteractable
     [SerializeField] InteractableMessageVisualizer messagePrefab;
     InteractableMessageVisualizer displayedMessage;
 
+    [SerializeField] Canvas orderCanvas;
+    [SerializeField] NewOrderVisualizer newOrderPrefab;
+    NewOrderVisualizer newOrder;
+
     PostboxStatus status;
 
     [Button]
@@ -45,13 +49,20 @@ public class Postbox : MonoBehaviour, IInteractable
 
             displayedMessage.DisplayText(transform, storedMessage, showFamilyPhoto: (storedItem != null && storedItem.type == ItemType.FAMILY_PHOTO));
             storedMessage = "";
+
+            //add all stored items to player inventory
+            if (storedItem != null && storedItem.amount > 0)
+            {
+                InventoryManager.PlayerCollects(storedItem.type,storedItem.amount);
+                storedItem = null;
+            }
         }
 
-        //add all stored items to player inventory
-        if (storedItem != null && storedItem.amount > 0)
+        //show order formular
+        else
         {
-            InventoryManager.PlayerCollects(storedItem.type,storedItem.amount);
-            storedItem = null;
+            if (newOrder == null)
+                newOrder = Instantiate(newOrderPrefab,orderCanvas.transform);
         }
     }
 
