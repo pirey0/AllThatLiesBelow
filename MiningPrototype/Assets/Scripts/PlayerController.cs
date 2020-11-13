@@ -240,15 +240,15 @@ public class PlayerController : InventoryOwner
         pickaxeAnimator.Play();
     }
 
-    private Vector2Int GetPositionInGrid()
+    public Vector2Int GetPositionInGrid()
     {
-        return new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y) + 1); //+1 to be at center of player
+        return transform.position.ToGridPosition() + new Vector2Int(0, 1); //+1 to be at center of player
     }
 
     /// <summary>
     /// Just +1 in Y compared to transform.position
     /// </summary>
-    private Vector3 GetPositionInGridV3()
+    public Vector3 GetPositionInGridV3()
     {
         return new Vector3(transform.position.x, transform.position.y + 1); //+1 to be at center of player
     }

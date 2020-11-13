@@ -198,3 +198,8 @@ MonoBehaviour:
     OreVeinSize: {x: 3, y: 7}
     MaxHeight: 15
     Probability: 0.1
+  physicalTilePrefab: {fileID: 1505758800330834963, guid: b97c886a8f31d534dbde7b2320b4d3e3, type: 3}
+  drawStabilityTexture: 0
+  drawStabilityGizmos: 0
+  stabilityGizmosSize: 10
+  player: {fileID: 0}
