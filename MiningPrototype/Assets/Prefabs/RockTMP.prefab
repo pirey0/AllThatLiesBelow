@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8886592050164078686}
   - component: {fileID: 8886592050164078685}
   - component: {fileID: 8886592050164078684}
-  - component: {fileID: 799143550701846918}
+  - component: {fileID: 5213772753128056833}
   m_Layer: 0
   m_Name: RockTMP
   m_TagString: Untagged
@@ -118,10 +118,10 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &799143550701846918
-BoxCollider2D:
+--- !u!58 &5213772753128056833
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -134,15 +134,5 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 2}
-  m_EdgeRadius: 0
+  m_Radius: 1
