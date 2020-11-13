@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d05716d329922cf4abb0b6513364aece, type: 3}
   m_Name: playerClimb
   m_EditorClassIdentifier: 
-  loop: 0
+  loop: 1
   speedMultiplyer: 1
-  frames: []
+  frames:
+  - Sprite: {fileID: -8686066621597271155, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
+    Duration: 0.25
+  - Sprite: {fileID: -3459094323893750147, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
+    Duration: 0.25
   fileToLoadFrom: {fileID: 0}
   defaultTime: 0.25
