@@ -23,6 +23,33 @@ TextureImporter:
   - first:
       213: -8686066621597271155
     second: playerPlaceholderThatTotallyDoesNotLookLikeCelesteSpritesheet_6
+  - first:
+      213: -3230435151190329587
+    second: playerPlaceholderThatTotallyDoesNotLookLikeCelesteSpritesheet_0
+  - first:
+      213: -4528701211638255772
+    second: playerPlaceholderThatTotallyDoesNotLookLikeCelesteSpritesheet_1
+  - first:
+      213: -1963059364071812416
+    second: playerPlaceholderThatTotallyDoesNotLookLikeCelesteSpritesheet_2
+  - first:
+      213: -9014894301964380968
+    second: playerPlaceholderThatTotallyDoesNotLookLikeCelesteSpritesheet_3
+  - first:
+      213: -1561419405098355310
+    second: playerPlaceholderThatTotallyDoesNotLookLikeCelesteSpritesheet_4
+  - first:
+      213: 1535079340796650238
+    second: playerPlaceholderThatTotallyDoesNotLookLikeCelesteSpritesheet_5
+  - first:
+      213: 1757963875510853288
+    second: playerPlaceholderThatTotallyDoesNotLookLikeCelesteSpritesheet_6
+  - first:
+      213: -3459094323893750147
+    second: playerPlaceholderThatTotallyDoesNotLookLikeCelesteSpritesheet_7
+  - first:
+      213: -7421760489059935519
+    second: playerPlaceholderThatTotallyDoesNotLookLikeCelesteSpritesheet_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -114,18 +141,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
+        y: 64
         width: 32
         height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21ad40a1d4431d100800000000000000
-      internalID: 130943369924106770
+      spriteID: d077d5778503b23d0800000000000000
+      internalID: -3230435151190329587
       vertices: []
       indices: 
       edges: []
@@ -135,18 +162,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 32
+        y: 64
         width: 32
         height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f782fc9996b19040800000000000000
-      internalID: 4652700660929824753
+      spriteID: 46fab6afd32d621c0800000000000000
+      internalID: -4528701211638255772
       vertices: []
       indices: 
       edges: []
@@ -156,18 +183,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 32
+        y: 64
         width: 32
         height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a86a17a26d2b4d3d0800000000000000
-      internalID: -3182722403739261302
+      spriteID: 0c2de7bb8efc1c4e0800000000000000
+      internalID: -1963059364071812416
       vertices: []
       indices: 
       edges: []
@@ -177,18 +204,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 32
         width: 32
         height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b9f6eed70b9b2310800000000000000
-      internalID: 1381368168825944498
+      spriteID: 8d458b33569a4e280800000000000000
+      internalID: -9014894301964380968
       vertices: []
       indices: 
       edges: []
@@ -198,18 +225,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 0
+        y: 32
         width: 32
         height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5b02bb5b3dc435900800000000000000
-      internalID: 671965241579086005
+      spriteID: 295f5b5e259b45ae0800000000000000
+      internalID: -1561419405098355310
       vertices: []
       indices: 
       edges: []
@@ -219,18 +246,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 0
+        y: 32
         width: 32
         height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53aa9402e9c0104c0800000000000000
-      internalID: -4323160294012900811
+      spriteID: ef2a93af682bd4510800000000000000
+      internalID: 1535079340796650238
       vertices: []
       indices: 
       edges: []
@@ -241,17 +268,59 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 96
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8b315cad64e47780800000000000000
-      internalID: -8686066621597271155
+      spriteID: 8ae1bc7a4da856810800000000000000
+      internalID: 1757963875510853288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: playerPlaceholderThatTotallyDoesNotLookLikeCelesteSpritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d763ebb1a04deffc0800000000000000
+      internalID: -3459094323893750147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: playerPlaceholderThatTotallyDoesNotLookLikeCelesteSpritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ea9d89482c900990800000000000000
+      internalID: -7421760489059935519
       vertices: []
       indices: 
       edges: []
