@@ -118,4 +118,30 @@ public static class TileMapHelper
         else
             return Color.black;
     }
+
+    public static bool IsAllAirAt(TileMap map, Vector2Int[] locations)
+    {
+
+        foreach (var loc in locations)
+        {
+            if(!map.IsAirAt(loc.x, loc.y))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static bool IsAllBlockAt(TileMap map, Vector2Int[] locations)
+    {
+
+        foreach (var loc in locations)
+        {
+            if (!map.IsBlockAt(loc.x, loc.y))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 }

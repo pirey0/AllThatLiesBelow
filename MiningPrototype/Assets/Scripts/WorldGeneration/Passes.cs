@@ -10,3 +10,13 @@ public class OrePass
     public int MaxHeight;
     public float Probability;
 }
+
+
+[System.Serializable]
+public class RockPass
+{
+    public Vector2Int Size;
+    public int MaxHeight;
+    public float Probability;
+    public GameObject Prefab;
+}

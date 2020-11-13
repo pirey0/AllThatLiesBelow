@@ -6,6 +6,7 @@ public class CameraPanner : MonoBehaviour
 {
     [SerializeField] Transform player;
     [SerializeField] AnimationCurve curve;
+
     private void Update()
     {
         UpdatePosition();

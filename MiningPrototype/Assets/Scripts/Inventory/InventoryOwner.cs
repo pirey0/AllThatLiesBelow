@@ -23,6 +23,8 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner, IInteractable
     public Inventory Inventory { get => inventory; }
     public InventoryState InventoryDisplayState { get => state; }
 
+    public virtual bool IsFlipped { get => false;}
+
     protected virtual void Start()
     {
         inventory.InventoryChanged += OnInventoryChanged;

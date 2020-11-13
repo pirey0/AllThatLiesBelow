@@ -56,11 +56,14 @@ TagManager:
   - name: Support
     uniqueID: 3730815779
     locked: 0
-  - name: Rock
+  - name: TileRock
     uniqueID: 2348705865
     locked: 0
   - name: Ores
     uniqueID: 1017125745
+    locked: 0
+  - name: Entity
+    uniqueID: 2049621373
     locked: 0
   - name: DamageOverlay
     uniqueID: 3040625225

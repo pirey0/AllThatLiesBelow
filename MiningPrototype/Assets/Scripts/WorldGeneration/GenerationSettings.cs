@@ -29,6 +29,7 @@ public class GenerationSettings : ScriptableObject
     public int SnowStartHeight;
 
     public OrePass[] OrePasses;
+    public RockPass[] RockPasses;
 
     public GameObject PhysicalTilePrefab;
 }

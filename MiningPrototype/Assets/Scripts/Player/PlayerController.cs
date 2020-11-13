@@ -13,7 +13,7 @@ public enum PlayerState
     Climbing
 }
 
-public class PlayerController : InventoryOwner
+public class PlayerController : InventoryOwner, IEntity
 {
     [Header("Player")]
     [SerializeField] float groundedAngle;
@@ -74,6 +74,8 @@ public class PlayerController : InventoryOwner
 
     private bool InFrontOfLadder { get => currentLadder != null; }
     private bool IsLocked { get => state != PlayerState.Locked; }
+
+    public override bool IsFlipped { get => spriteRenderer.flipX; }
 
     protected override void Start()
     {

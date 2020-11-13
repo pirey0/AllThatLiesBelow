@@ -35,7 +35,7 @@ public static class Util
         }
     }
 
-    public static  void IterateX(int size, System.Action<int> action)
+    public static void IterateX(int size, System.Action<int> action)
     {
         for (int i = 0; i < size; i++)
         {
@@ -83,5 +83,23 @@ public static class Util
     public static float Sign(this float f)
     {
         return Mathf.Sign(f);
+    }
+
+    public static Vector3 AsV3(this Vector2Int v)
+    {
+        return new Vector3(v.x, v.y);
+    }
+
+    public static void DebugDrawTile(Vector2Int location)
+    {
+        DebugDrawTile(location, Color.white, 1);
+    }
+
+    public static void DebugDrawTile(Vector2Int location, Color color, float duration = 1)
+    {
+        Debug.DrawLine(location.AsV3(), location.AsV3() + Vector3.up, color, duration);
+        Debug.DrawLine(location.AsV3(), location.AsV3() + Vector3.right, color, duration);
+        Debug.DrawLine(location.AsV3() + Vector3.up, location.AsV3() + Vector3.up + Vector3.right, color, duration);
+        Debug.DrawLine(location.AsV3() + Vector3.right, location.AsV3() + Vector3.up + Vector3.right, color, duration);
     }
 }

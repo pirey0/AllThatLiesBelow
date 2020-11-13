@@ -36,6 +36,10 @@ public class TileMap : MonoBehaviour
 
     private void Start()
     {
+        tilemap.GetComponent<GridElement>()?.Setup(this);
+        damageOverlayTilemap.GetComponent<GridElement>()?.Setup(this);
+        oreTilemap.GetComponent<GridElement>()?.Setup(this);
+
         RunCompleteGeneration();
     }
 

@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileMapGenerator 
+public class TileMapGenerator
 {
     private TileMap map;
     private GenerationSettings settings;
@@ -18,11 +19,15 @@ public class TileMapGenerator
         var stopwatch = new System.Diagnostics.Stopwatch();
         stopwatch.Start();
 
+        ClearAllEntities();
+
         Populate();
 
         Util.IterateX(settings.AutomataSteps, (x) => RunAutomataStep());
 
         PopulateOres();
+
+        PupulateRocks();
 
         CalculateNeighboursBitmask();
 
@@ -33,6 +38,49 @@ public class TileMapGenerator
         stopwatch.Stop();
 
         Debug.Log("Update Duration: " + stopwatch.ElapsedMilliseconds + "ms");
+    }
+
+    private void ClearAllEntities()
+    {
+        for (int i = map.transform.childCount - 1; i >= 0; i--)
+        {
+            GameObject.DestroyImmediate(map.transform.GetChild(i).gameObject);
+        }
+    }
+
+    private void PupulateRocks()
+    {
+        foreach (var pass in settings.RockPasses)
+        {
+            Util.IterateX((int)(pass.MaxHeight * settings.Size * pass.Probability * 0.01f), (x) => TryPlaceRock(pass));
+        }
+    }
+
+    private void TryPlaceRock(RockPass pass)
+    {
+        int y = UnityEngine.Random.Range(0, pass.MaxHeight);
+        int x = UnityEngine.Random.Range(0, settings.Size);
+
+        List<Vector2Int> locations = new List<Vector2Int>();
+
+        for (int px = 0; px < pass.Size.x; px++)
+        {
+            for (int py = 0; py < pass.Size.y; py++)
+            {
+                locations.Add(new Vector2Int(x + px, y + py));
+            }
+        }
+
+        if (TileMapHelper.IsAllBlockAt(map, locations.ToArray()))
+        {
+            foreach (var loc in locations)
+            {
+                map.SetMapAt(loc.x, loc.y, Tile.Air, updateProperties: false, updateVisuals: false);
+            }
+
+            Vector3 pos = new Vector3(x + pass.Size.x * 0.5f, y + pass.Size.y * 0.5f);
+            var go = GameObject.Instantiate(pass.Prefab, pos, Quaternion.identity, map.transform);
+        }
     }
 
     public void UpdatePropertiesAt(int x, int y)
@@ -67,10 +115,10 @@ public class TileMapGenerator
 
     private void CalculateStabilityAll()
     {
-        Util.IterateXY(settings.Size, (x, y) => CalcuateStabilityAt( x, y));
+        Util.IterateXY(settings.Size, (x, y) => CalcuateStabilityAt(x, y));
     }
 
-    private void CalcuateStabilityAt( int x, int y)
+    private void CalcuateStabilityAt(int x, int y)
     {
         if (map.IsAirAt(x, y))
             return;
@@ -158,7 +206,7 @@ public class TileMapGenerator
     {
         foreach (var pass in settings.OrePasses)
         {
-            Util.IterateX((int)(settings.Size * settings.Size * pass.Probability * 0.01f), (x) => TryPlaceVein(pass.TileType, Util.RandomInVector(pass.OreVeinSize), pass.MaxHeight));
+            Util.IterateX((int)(pass.MaxHeight * settings.Size * pass.Probability * 0.01f), (x) => TryPlaceVein(pass.TileType, Util.RandomInVector(pass.OreVeinSize), pass.MaxHeight));
         }
     }
 
