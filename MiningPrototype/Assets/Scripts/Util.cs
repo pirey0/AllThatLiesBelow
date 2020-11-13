@@ -69,4 +69,9 @@ public static class Util
                 return Vector2Int.up;
         }
     }
+
+    public static Vector2Int ToGridPosition(this Vector3 vector)
+    {
+        return new Vector2Int(Mathf.RoundToInt(vector.x), Mathf.RoundToInt(vector.y));
+    }
 }

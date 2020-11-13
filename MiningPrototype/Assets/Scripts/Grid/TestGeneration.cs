@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+
 public class TestGeneration : MonoBehaviour
 {
     [SerializeField] Tilemap tilemap, damageOverlayTilemap, oreTilemap;
@@ -47,8 +48,16 @@ public class TestGeneration : MonoBehaviour
 
     [SerializeField] OrePass[] orePasses;
 
-    Tile[,] map;
+    [SerializeField] GameObject physicalTilePrefab;
 
+    [Header("Debug")]
+    [SerializeField] bool drawStabilityTexture;
+    [SerializeField] bool drawStabilityGizmos;
+    [SerializeField] int stabilityGizmosSize;
+    [SerializeField] PlayerController player;
+
+    Tile[,] map;
+    Texture2D stabilityDebugTexture;
 
     private void Start()
     {
@@ -70,6 +79,8 @@ public class TestGeneration : MonoBehaviour
 
         CalculateNeighboursBitmask();
 
+        CalculateStability();
+
         PopulateSnow();
 
         UpdateVisuals();
@@ -77,6 +88,33 @@ public class TestGeneration : MonoBehaviour
         stopwatch.Stop();
 
         Debug.Log("Update Duration: " + stopwatch.ElapsedMilliseconds + "ms");
+    }
+
+    private void CalculateStability()
+    {
+        Util.IterateXY(size, (x, y) => CalcuateStabilityAt(x, y));
+
+    }
+
+    private void CalcuateStabilityAt(int x, int y)
+    {
+        if (IsAirAt(x, y))
+            return;
+
+        int[] stabilityEffect = { 0, 5, 0, 10, 10, 0, 20, 0 };
+        var neighbours = GetNeighboursIndiciesOf(x, y);
+
+        int stability = 0;
+        for (int i = 0; i < neighbours.Length; i++)
+        {
+            var neighbour = neighbours[i];
+            stability += IsBlockAt(neighbour.x, neighbour.y) ? stabilityEffect[i] : 0;
+        }
+
+
+        var tile = GetTileAt(x, y);
+        tile.Stability = stability;
+        SetMapAt(x, y, tile, updateProperties: false, updateVisuals: false);
     }
 
     private void PopulateSnow()
@@ -97,7 +135,7 @@ public class TestGeneration : MonoBehaviour
             t.Type = TileType.Snow;
         }
 
-        SetMapAt(x, y, t, updateNeighbourBitmask: false, updateVisuals: false);
+        SetMapAt(x, y, t, updateProperties: false, updateVisuals: false);
     }
 
     private void CalculateNeighboursBitmask()
@@ -170,7 +208,7 @@ public class TestGeneration : MonoBehaviour
             {
                 if (GetTileAt(x, y).Type != tile)
                 {
-                    SetMapAt(x, y, Tile.Make(tile), updateNeighbourBitmask: false, updateVisuals: false);
+                    SetMapAt(x, y, Tile.Make(tile), updateProperties: false, updateVisuals: false);
                     amount--;
                     x = startX;
                     y = startY;
@@ -354,7 +392,7 @@ public class TestGeneration : MonoBehaviour
         }
         else
         {
-            SetMapAt(x, y, t, updateNeighbourBitmask: false, updateVisuals: true);
+            SetMapAt(x, y, t, updateProperties: false, updateVisuals: true);
             return false;
         }
     }
@@ -391,18 +429,28 @@ public class TestGeneration : MonoBehaviour
         SetMapAt(x, y, Tile.Make(TileType.Stone));
     }
 
-    private void SetMapAt(int x, int y, Tile value, bool updateNeighbourBitmask = true, bool updateVisuals = true)
+    private void SetMapAt(int x, int y, Tile value, bool updateProperties = true, bool updateVisuals = true)
     {
         if (IsOutOfBounds(x, y))
             return;
 
         map[x, y] = value;
 
-        if (updateNeighbourBitmask)
+        if (updateProperties)
         {
+            CalcuateStabilityAt(x, y);
             CalculateNeighboursBitmaskAt(x, y);
+
+
             foreach (var nIndex in GetNeighboursIndiciesOf(x, y))
             {
+                CalcuateStabilityAt(nIndex.x, nIndex.y);
+
+                if(ShouldCollapseAt(nIndex.x, nIndex.y))
+                {
+                    CollapseAt(nIndex.x, nIndex.y);
+                }
+
                 CalculateNeighboursBitmaskAt(nIndex.x, nIndex.y);
             }
         }
@@ -417,18 +465,30 @@ public class TestGeneration : MonoBehaviour
         }
     }
 
+    private bool ShouldCollapseAt(int x, int y)
+    {
+        return IsBlockAt(x,y) && GetTileAt(x, y).Stability <= 10;
+    }
+
+    private void CollapseAt(int x, int y)
+    {
+        SetMapAt(x, y, Tile.Air, updateProperties: true, updateVisuals: false);
+        var go = Instantiate(physicalTilePrefab, new Vector3(x + 0.5f, y + 0.5f, 0), Quaternion.identity);
+        go.GetComponent<PhysicalTile>().Setup(this);
+    }
+
     private Vector2Int[] GetNeighboursIndiciesOf(int x, int y)
     {
         return new Vector2Int[]
         {
-            new Vector2Int(x+1,y),
+            new Vector2Int(x-1,y+1),
             new Vector2Int(x,y+1),
             new Vector2Int(x+1,y+1),
             new Vector2Int(x-1,y),
-            new Vector2Int(x,y-1),
+            new Vector2Int(x+1,y),
             new Vector2Int(x-1,y-1),
-            new Vector2Int(x+1,y-1),
-            new Vector2Int(x-1,y+1)
+            new Vector2Int(x,y-1),
+            new Vector2Int(x+1,y-1)
         };
     }
 
@@ -510,4 +570,56 @@ public class TestGeneration : MonoBehaviour
         return oreTiles[(int)t.Type - 2];
     }
 
+    private void OnGUI()
+    {
+        if (drawStabilityTexture)
+        {
+            if (stabilityDebugTexture == null)
+                UpdateDebugTextures();
+
+            GUI.DrawTexture(new Rect(10, 10, size * 4, size * 4), stabilityDebugTexture);
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (!drawStabilityGizmos || map == null)
+            return;
+
+
+        for (int y = -stabilityGizmosSize; y < stabilityGizmosSize; y++)
+        {
+            for (int x = -stabilityGizmosSize; x < stabilityGizmosSize; x++)
+            {
+                Vector2Int pos = player.GetPositionInGrid() + new Vector2Int(x, y);
+                Gizmos.color = StabilityToColor(GetTileAt(pos.x, pos.y).Stability);
+                Gizmos.DrawCube((Vector3Int)pos + new Vector3(0.5f, 0.5f), new Vector3(1, 1, 0));
+            }
+        }
+
+    }
+
+    [Button(null, EButtonEnableMode.Playmode)]
+    private void UpdateDebugTextures()
+    {
+        stabilityDebugTexture = new Texture2D(size, size);
+        stabilityDebugTexture.filterMode = FilterMode.Point;
+
+        Util.IterateXY(size, (x, y) => stabilityDebugTexture.SetPixel(x, y, StabilityToColor(GetTileAt(x, y).Stability)));
+        stabilityDebugTexture.Apply();
+    }
+
+    private Color StabilityToColor(float stability)
+    {
+
+
+        if (stability > 20)
+            return Color.white;
+        else if (stability > 10)
+            return Color.grey;
+        else if (stability >= 0)
+            return Color.red;
+        else
+            return Color.black;
+    }
 }

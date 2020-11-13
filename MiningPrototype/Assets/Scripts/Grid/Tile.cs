@@ -8,6 +8,7 @@ public struct Tile
     public TileType Type;
     public byte NeighbourBitmask;
     public float Damage;
+    public int Stability;
 
     public static Tile Air
     {
@@ -17,6 +18,7 @@ public struct Tile
             t.Type = TileType.Air;
             t.NeighbourBitmask = 0;
             t.Damage = 0;
+            t.Stability = -1;
             return t;
         }
     }
