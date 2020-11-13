@@ -62,6 +62,7 @@ public class TileMapGenerator
         int x = UnityEngine.Random.Range(0, settings.Size);
 
         List<Vector2Int> locations = new List<Vector2Int>();
+        List<Vector2Int> spawnCheckLocations = new List<Vector2Int>();
 
         for (int px = 0; px < pass.Size.x; px++)
         {
@@ -71,7 +72,16 @@ public class TileMapGenerator
             }
         }
 
-        if (TileMapHelper.IsAllBlockAt(map, locations.ToArray()))
+        for (int px = -1; px < pass.Size.x+1; px++)
+        {
+            for (int py = -1; py < pass.Size.y+1; py++)
+            {
+                spawnCheckLocations.Add(new Vector2Int(x + px, y + py));
+            }
+        }
+
+
+        if (TileMapHelper.IsAllBlockAt(map, spawnCheckLocations.ToArray()))
         {
             foreach (var loc in locations)
             {
