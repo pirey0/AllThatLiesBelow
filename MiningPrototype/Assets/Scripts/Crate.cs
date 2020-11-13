@@ -17,7 +17,6 @@ public class Crate : MonoBehaviour, IMinableNonGrid
     public void Damage(float v)
     {
         float d = v * (damageMultiplier/10f);
-        Debug.LogWarning("damage: " + d + " (" + damage + ")");
         overlayAnimator.ActiveUpdate(d);
         damage += d;
 

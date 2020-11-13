@@ -13,7 +13,9 @@ public class InventoryVisualizer : ScalingUIElementBase
     [SerializeField] Vector2 additonalSpacePerSlotNeeded;
 
     [SerializeField] InventorySlotVisualizer inventorySlotPrefab;
+    [SerializeField] Transform gridBox;
     [SerializeField] Transform gridLayoutParent;
+    SpriteRenderer spriteRendererToGetOrientatioFrom;
 
     Inventory inventory;
 
@@ -21,9 +23,19 @@ public class InventoryVisualizer : ScalingUIElementBase
     {
         transformToFollow = target;
         inventory = inventoryToVisualize;
-        UpdatePosition();
+        spriteRendererToGetOrientatioFrom = target.GetComponent<SpriteRenderer>();
+
+        bool flipX = (spriteRendererToGetOrientatioFrom != null && spriteRendererToGetOrientatioFrom.flipX) ? true : false;
+        UpdatePosition(flipX);
+
         RefreshInventoryDisplay();
         StartCoroutine(ScaleCoroutine(scaleUp: true));
+    }
+
+    protected override void Update()
+    {
+        bool flipX = (spriteRendererToGetOrientatioFrom != null && spriteRendererToGetOrientatioFrom.flipX) ? true : false;
+        UpdatePosition(flipX);
     }
 
     [Button]
@@ -37,6 +49,7 @@ public class InventoryVisualizer : ScalingUIElementBase
         KeyValuePair<ItemType, int>[] content = inventory.GetContent();
         SpawnItemElements(content);
         RecalculateUISize(content.Length);
+        RecalculateUIOrientation(spriteRendererToGetOrientatioFrom);
     }
 
     private void RecalculateUISize (int sizeCurrent)
@@ -61,6 +74,20 @@ public class InventoryVisualizer : ScalingUIElementBase
         }
 
         boxTransform.sizeDelta = new Vector2(basePadding.x + additonalSpacePerSlotNeeded.x * width, basePadding.y + additonalSpacePerSlotNeeded.y * height);
+    }
+
+    public void RecalculateUIOrientation(SpriteRenderer spriteRendererToGetOrientatioFrom)
+    {
+        if (spriteRendererToGetOrientatioFrom == null)
+            return;
+
+        Vector3 flipX = new Vector3(spriteRendererToGetOrientatioFrom.flipX? -1 : 1, 1, 1);
+
+        if (gridBox != null)
+            gridBox.localScale = flipX;
+
+        if(gridLayoutParent != null)
+            gridLayoutParent.localScale = flipX;
     }
 
     private void SpawnItemElements(KeyValuePair<ItemType, int>[] itemsToVisualize)

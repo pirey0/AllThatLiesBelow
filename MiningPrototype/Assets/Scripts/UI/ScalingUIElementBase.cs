@@ -11,7 +11,7 @@ public class ScalingUIElementBase : MonoBehaviour
     [SerializeField] protected Transform transformToFollow;
     [SerializeField] protected Vector2 followOffset;
 
-    private void Update()
+    protected virtual void Update()
     {
         if (updateFollow && transformToFollow != null)
         {
@@ -24,9 +24,9 @@ public class ScalingUIElementBase : MonoBehaviour
         updateFollow = enabled;
     }
 
-    protected void UpdatePosition()
+    protected virtual void UpdatePosition(bool flipX = false)
     {
-        transform.position = new Vector3(transformToFollow.position.x + followOffset.x, transformToFollow.position.y + followOffset.y, 0);
+        transform.position = new Vector3(transformToFollow.position.x + followOffset.x * (flipX?-1:1), transformToFollow.position.y + followOffset.y, 0);
     }
 
     protected IEnumerator ScaleCoroutine(bool scaleUp = true)
