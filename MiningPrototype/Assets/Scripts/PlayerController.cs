@@ -6,6 +6,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngineInternal;
 
+public enum PlayerState
+{
+    Normal,
+    Locked,
+    Climbing
+}
+
 public class PlayerController : InventoryOwner
 {
     [Header("Player")]
@@ -26,7 +33,7 @@ public class PlayerController : InventoryOwner
     [SerializeField] float digSpeed = 10;
     [SerializeField] Transform mouseHighlight;
 
-    [SerializeField] SpriteAnimation an_Walk, an_Idle, an_Fall, an_Inventory;
+    [SerializeField] SpriteAnimation an_Walk, an_Idle, an_Fall, an_Inventory, an_Climb, an_ClimbIdle;
 
     [SerializeField] ParticleSystem miningParticles;
     [SerializeField] int miningBreakParticlesCount;
@@ -39,6 +46,9 @@ public class PlayerController : InventoryOwner
     [SerializeField] float maxInteractableDistance;
     [SerializeField] EventSystem eventSystem;
 
+    [SerializeField] float climbSpeed;
+    [SerializeField] float climbPanSpeed;
+    [SerializeField] float climbIdleThreshold;
 
     Rigidbody2D rigidbody;
     SpriteAnimator spriteAnimator;
@@ -56,8 +66,14 @@ public class PlayerController : InventoryOwner
     [ReadOnly]
     [SerializeField] bool inMining;
 
-    private bool canMove = true;
+    private PlayerState state;
     private bool isVisible = true;
+    private Ladder currentLadder;
+    private float gravityScale;
+
+
+    private bool InFrontOfLadder { get => currentLadder != null; }
+    private bool IsLocked { get => state != PlayerState.Locked; }
 
     protected override void Start()
     {
@@ -66,11 +82,12 @@ public class PlayerController : InventoryOwner
         rigidbody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteAnimator = GetComponent<SpriteAnimator>();
+        gravityScale = rigidbody.gravityScale;
     }
 
     private void Update()
     {
-        if (!canMove || !isVisible)
+        if (!IsLocked || !isVisible)
             return;
 
         if (Vector2Int.Distance(GetPositionInGrid(), GetClickCoordinate()) <= maxDigDistance)
@@ -100,15 +117,13 @@ public class PlayerController : InventoryOwner
             }
             else
             {
-                if (inMining)
-                    DisableMiningParticles();
+                TryDisableMiningVisuals();
             }
         }
         else
         {
             gridDigTarget = null;
-            if (inMining)
-                DisableMiningParticles();
+            TryDisableMiningVisuals();
         }
 
         UpdateDigHighlight();
@@ -136,7 +151,7 @@ public class PlayerController : InventoryOwner
         }
     }
 
-    private RaycastHit2D [] DoRaycast2DFromMouse ()
+    private RaycastHit2D[] DoRaycast2DFromMouse()
     {
         Vector3 mousePos = Input.mousePosition;
         Ray r = camera.ScreenPointToRay(mousePos);
@@ -155,7 +170,7 @@ public class PlayerController : InventoryOwner
 
     private void UpdateDigTarget()
     {
-        gridDigTarget = TileMapHelper.GetClosestSolidBlock(generation,GetPositionInGrid(), GetClickCoordinate());
+        gridDigTarget = TileMapHelper.GetClosestSolidBlock(generation, GetPositionInGrid(), GetClickCoordinate());
         if (generation.IsAirAt(gridDigTarget.Value.x, gridDigTarget.Value.y))
         {
             gridDigTarget = null;
@@ -229,27 +244,26 @@ public class PlayerController : InventoryOwner
                 miningParticles.Emit(miningBreakParticlesCount);
                 breakBlock.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
                 breakBlock.Play();
-                DisableMiningParticles();
+                TryDisableMiningVisuals();
             }
             else
             {
                 UpdateMiningParticlesPositions();
             }
 
-            if (!inMining)
-            {
-                StartMiningParticles();
-            }
+            TryEnableMiningVisuals();
         }
         else
         {
             if (nonGridDigTarget != null)
             {
                 nonGridDigTarget.Damage(Time.deltaTime * digSpeed);
-            } else
+
+                TryEnableMiningVisuals();
+            }
+            else
             {
-            if (inMining)
-                DisableMiningParticles();
+                TryDisableMiningVisuals();
             }
         }
     }
@@ -260,14 +274,16 @@ public class PlayerController : InventoryOwner
         Debug.DrawLine((Vector3Int)GetPositionInGrid(), miningParticles.transform.position, Color.yellow, 0.1f);
     }
 
-
-    private void DisableMiningParticles()
+    private void TryDisableMiningVisuals()
     {
-        inMining = false;
-        var emission = miningParticles.emission;
-        emission.rateOverTimeMultiplier = 0;
-        startMining.Stop();
-        pickaxeAnimator.Stop();
+        if (inMining)
+        {
+            inMining = false;
+            var emission = miningParticles.emission;
+            emission.rateOverTimeMultiplier = 0;
+            startMining.Stop();
+            pickaxeAnimator.Stop();
+        }
     }
 
     private void TryStopInteracting()
@@ -280,14 +296,17 @@ public class PlayerController : InventoryOwner
         }
     }
 
-    private void StartMiningParticles()
+    private void TryEnableMiningVisuals()
     {
-        var emission = miningParticles.emission;
-        emission.rateOverTimeMultiplier = miningParticlesRateOverTime;
-        inMining = true;
-        startMining.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
-        startMining.Play();
-        pickaxeAnimator.Play();
+        if (!inMining)
+        {
+            var emission = miningParticles.emission;
+            emission.rateOverTimeMultiplier = miningParticlesRateOverTime;
+            inMining = true;
+            startMining.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+            startMining.Play();
+            pickaxeAnimator.Play();
+        }
     }
 
     public Vector2Int GetPositionInGrid()
@@ -317,11 +336,66 @@ public class PlayerController : InventoryOwner
 
     private void FixedUpdate()
     {
-        if (!canMove || !isVisible)
+        if (!isVisible)
             return;
 
-        UpdateWalk();
-        UpdateJump();
+        switch (state)
+        {
+            case PlayerState.Normal:
+                UpdateWalk();
+                if (InFrontOfLadder)
+                    TryStartClimb();
+                else
+                    UpdateJump();
+                break;
+
+            case PlayerState.Climbing:
+                UpdateClimb();
+                break;
+        }
+    }
+
+    private void UpdateClimb()
+    {
+        if (InFrontOfLadder)
+        {
+            var horizontal = Input.GetAxis("Horizontal");
+            var vertical = Input.GetAxis("Vertical");
+
+            Vector2 climbVelocity = new Vector2(horizontal * climbPanSpeed, vertical * climbSpeed);
+            rigidbody.velocity = climbVelocity;
+
+            if (climbVelocity.magnitude > climbIdleThreshold)
+            {
+                spriteAnimator.Play(an_Climb, false);
+            }
+            else
+            {
+                spriteAnimator.Play(an_ClimbIdle, false);
+            }
+
+            if (vertical > 0)
+                currentLadder.NotifyGoingUp();
+            else
+                currentLadder.NotifyGoingDown();
+
+        }
+        else
+        {
+            ChangeStateTo(PlayerState.Normal);
+        }
+
+
+    }
+
+    private void TryStartClimb()
+    {
+        var vertical = Input.GetAxis("Vertical");
+
+        if (Mathf.Abs(vertical) > 0.75f)
+        {
+            ChangeStateTo(PlayerState.Climbing);
+        }
     }
 
     private void UpdateWalk()
@@ -425,11 +499,43 @@ public class PlayerController : InventoryOwner
         }
     }
 
+    private void ChangeStateTo(PlayerState newState)
+    {
+        if (state == newState)
+            return;
+
+        LeaveState(state);
+        state = newState;
+        EnterState(newState);
+    }
+
+    private void LeaveState(PlayerState stateLeft)
+    {
+        switch (stateLeft)
+        {
+            case PlayerState.Climbing:
+                rigidbody.gravityScale = gravityScale;
+                SetPickaxeVisible(true);
+                break;
+        }
+    }
+
+    private void EnterState(PlayerState stateEntered)
+    {
+        switch (stateEntered)
+        {
+            case PlayerState.Climbing:
+                SetPickaxeVisible(false);
+                rigidbody.gravityScale = 0; 
+                break;
+        }
+    }
+
     [Button]
     public void Hide()
     {
         isVisible = false;
-        pickaxe.GetComponent<SpriteRenderer>().enabled = false;
+        SetPickaxeVisible(false);
         spriteRenderer.enabled = false;
         walking.Pause();
     }
@@ -438,21 +544,21 @@ public class PlayerController : InventoryOwner
     public void Show()
     {
         isVisible = true;
-        pickaxe.GetComponent<SpriteRenderer>().enabled = true;
+        SetPickaxeVisible(false);
         spriteRenderer.enabled = true;
     }
 
     [Button]
-    public void Freeze ()
+    public void Freeze()
     {
-        canMove = false;
+        ChangeStateTo(PlayerState.Locked);
         walking.Pause();
     }
 
     [Button]
     public void Defreeze()
     {
-        canMove = true;
+        ChangeStateTo(PlayerState.Normal);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -468,6 +574,22 @@ public class PlayerController : InventoryOwner
     private void OnCollisionExit2D(Collision2D collision)
     {
         rightWalkVector = Vector2.right;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out Ladder ladder))
+        {
+            currentLadder = ladder;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out Ladder ladder))
+        {
+            currentLadder = null;
+        }
     }
 
     private void UpdateWalkVector(Collision2D collision)

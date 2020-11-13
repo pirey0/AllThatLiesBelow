@@ -5629,6 +5629,8 @@ MonoBehaviour:
   an_Idle: {fileID: 11400000, guid: 032cff1f8108c1743afb6adbae6af0c4, type: 2}
   an_Fall: {fileID: 11400000, guid: 5bac872074f697147ae4b8f027fb547f, type: 2}
   an_Inventory: {fileID: 11400000, guid: 896fb86e033db8243bbed2e1d93c6fc2, type: 2}
+  an_Climb: {fileID: 11400000, guid: b5cd5621b64cd6b43abf14303ce482c3, type: 2}
+  an_ClimbIdle: {fileID: 11400000, guid: 4193ed70d1e11224c962dbb4da9c9d5b, type: 2}
   miningParticles: {fileID: 265151543036608254}
   miningBreakParticlesCount: 20
   miningParticlesRateOverTime: 4
@@ -5639,6 +5641,9 @@ MonoBehaviour:
   inventoryOpenDistance: 0.75
   maxInteractableDistance: 5
   eventSystem: {fileID: 0}
+  climbSpeed: 4
+  climbPanSpeed: 2
+  climbIdleThreshold: 0.2
   inMining: 0
 --- !u!114 &6332330309916232596
 MonoBehaviour:

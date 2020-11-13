@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,6 +46,11 @@ public class SpriteAnimator : MonoBehaviour
 
         if(sprite != null)
         renderer.sprite = sprite;
+    }
+
+    internal void Play(object an_ClimbIdle, bool v)
+    {
+        throw new NotImplementedException();
     }
 }
 
