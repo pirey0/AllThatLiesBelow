@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8232243671930714984}
-  - component: {fileID: 8232243671930714987}
+  - component: {fileID: 8232243670924525463}
   m_Layer: 0
   m_Name: TerrainGenerator
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8232243671930714987
+--- !u!114 &8232243670924525463
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,165 +40,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8232243671930714985}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf10764171198b14eaeab9120ed3eae6, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a53dd95f432dc64bb874c24b0ae701b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 0}
   damageOverlayTilemap: {fileID: 0}
   oreTilemap: {fileID: 0}
-  groundTiles:
-  - {fileID: 11400000, guid: a36febf07089986479169c7da38520bc, type: 2}
-  - {fileID: 11400000, guid: 8151e566e662bc249b0383ccdbb9ae05, type: 2}
-  - {fileID: 11400000, guid: 6aeb7cad737c41245a11f36ad41781c6, type: 2}
-  - {fileID: 11400000, guid: 0d5c7238f60d1294abed550a539140ca, type: 2}
-  - {fileID: 11400000, guid: 1cc8855a70146b349ad0a017cd225794, type: 2}
-  - {fileID: 11400000, guid: 0f1dfdeeb2a169a469c5834dff4e0130, type: 2}
-  - {fileID: 11400000, guid: fe37def53e6df174ea5dcdba8f33b2b5, type: 2}
-  - {fileID: 11400000, guid: fa75d00b4091c834697796f8fcea0fa0, type: 2}
-  - {fileID: 11400000, guid: 293a1390e8557ad4aa60bb522c30bf47, type: 2}
-  - {fileID: 11400000, guid: b932fde257616af4bbc4fec2701d8afd, type: 2}
-  - {fileID: 11400000, guid: 17c250a98f06f274a99bd244057dd07c, type: 2}
-  - {fileID: 11400000, guid: cdb30c187eda48d41b53cda8e7185d6b, type: 2}
-  - {fileID: 11400000, guid: bef52226350c7464fba02994a043eb66, type: 2}
-  - {fileID: 11400000, guid: 94e9ae89c8291114d8519f23ee509130, type: 2}
-  - {fileID: 11400000, guid: ad1968151621ac844a4dccc2faf05ad0, type: 2}
-  - {fileID: 11400000, guid: 9a2f4af39357507459ab951e1fa1d915, type: 2}
-  - {fileID: 11400000, guid: 4c3fc03b6dbc2064b89f19a46e3e25d0, type: 2}
-  - {fileID: 11400000, guid: 9af1f9ad3e39e55439a7b8c2b2b29e9a, type: 2}
-  - {fileID: 11400000, guid: 6d06341a2303a1e42b5d3cfdf72e31ef, type: 2}
-  - {fileID: 11400000, guid: 4ca8a54f583ec0649b90cf958a07df57, type: 2}
-  - {fileID: 11400000, guid: 1b9163da950238141ace20442b95b588, type: 2}
-  - {fileID: 11400000, guid: 21b6072e40abda1469b768652b390364, type: 2}
-  - {fileID: 11400000, guid: 65862ad9e0d0651409deab20dd08ed1c, type: 2}
-  - {fileID: 11400000, guid: ac7186f2e90103f41a3093188c26dde2, type: 2}
-  - {fileID: 11400000, guid: 6152503e6d8fa664aa002e154fb16e28, type: 2}
-  - {fileID: 11400000, guid: 9f4dc6cab11b3c54085aac8470eca1d1, type: 2}
-  - {fileID: 11400000, guid: 5773e741fb419374eb11ad17e3b95f29, type: 2}
-  - {fileID: 11400000, guid: 5b472e4040f2f7c46ad6b8937847dff9, type: 2}
-  - {fileID: 11400000, guid: af67fd57fac12d34eb505305227bdf7a, type: 2}
-  - {fileID: 11400000, guid: 4d869ad1c4ffaff4d8362ba7c7c122ab, type: 2}
-  - {fileID: 11400000, guid: 6477f55437bd41a40a16fdbc2f590d13, type: 2}
-  - {fileID: 11400000, guid: 2d4856f2010dc0b41bb5a3012435ba30, type: 2}
-  - {fileID: 11400000, guid: 40675fe55291fe34384a396338fd9662, type: 2}
-  - {fileID: 11400000, guid: 8ab4c89abd8a9da41ae2f563baafe2f1, type: 2}
-  - {fileID: 11400000, guid: 098f6484a49b3e14c9748e3ea502e5bd, type: 2}
-  - {fileID: 11400000, guid: d4951b286ad2a30428dc20794c0230dc, type: 2}
-  - {fileID: 11400000, guid: dbe285e52e09f4e4183563ec55ca48fb, type: 2}
-  - {fileID: 11400000, guid: b4ac11f1c1b1c824bbb2bb14dbcfb8e6, type: 2}
-  - {fileID: 11400000, guid: 5b2e7ad53eb3361418cd9752a5349785, type: 2}
-  - {fileID: 11400000, guid: 560adf508d2deab479fa151449f629ae, type: 2}
-  - {fileID: 11400000, guid: b983f95b961ff814b864ab10ac999bfc, type: 2}
-  - {fileID: 11400000, guid: 5736873e0e9bb104c88d267c9cc90619, type: 2}
-  - {fileID: 11400000, guid: e95249ee0c13fce4b9bd58e746e0c77e, type: 2}
-  - {fileID: 11400000, guid: e4e67dc416a5ab640a34a753cf39e2f3, type: 2}
-  - {fileID: 11400000, guid: 16aabbf7271906944ba27d28462645b1, type: 2}
-  - {fileID: 11400000, guid: b5051975910347e478eef769b5e18bf9, type: 2}
-  - {fileID: 11400000, guid: f2badcaa583391443a977f441768cb39, type: 2}
-  - {fileID: 11400000, guid: 59c7e75c8d906314189eadb8d2d1586f, type: 2}
-  damageOverlayTiles:
-  - {fileID: 0}
-  - {fileID: 11400000, guid: ab62f49b0d19e9d4389ac6d165d7bd0e, type: 2}
-  - {fileID: 11400000, guid: add5a0ce75a92ad45b96fd132c4f755e, type: 2}
-  - {fileID: 11400000, guid: 804aec9eff66c994ca8640107d7f5942, type: 2}
-  - {fileID: 11400000, guid: ad591d8660251014c9ca5b9d34bafa96, type: 2}
-  - {fileID: 11400000, guid: d54426b4721bb0b4ba4349fa88035657, type: 2}
-  - {fileID: 11400000, guid: 361cfedcae2e4784ab63a02a73844b46, type: 2}
-  - {fileID: 11400000, guid: 4beb922940fe919468096c992d5a8db4, type: 2}
-  - {fileID: 11400000, guid: 46330f0dc5b279c48837144879f14b29, type: 2}
-  - {fileID: 11400000, guid: ee0c7ed288d70a14e8f20176e453128f, type: 2}
-  - {fileID: 11400000, guid: d7c51f4b80084cf40b6edcc4a9b40106, type: 2}
-  oreTiles:
-  - {fileID: 11400000, guid: 7e1e97604cdbd3a4bbc6131bc89e93f2, type: 2}
-  - {fileID: 11400000, guid: e3d0884e79b7a174a8be2d46522038ec, type: 2}
-  - {fileID: 11400000, guid: fcd84ecd4885b664d85f8c5443cbf208, type: 2}
-  - {fileID: 11400000, guid: fcd84ecd4885b664d85f8c5443cbf208, type: 2}
-  - {fileID: 11400000, guid: fcd84ecd4885b664d85f8c5443cbf208, type: 2}
-  - {fileID: 11400000, guid: fcd84ecd4885b664d85f8c5443cbf208, type: 2}
-  snowTile1: {fileID: 11400000, guid: 1f9f712db903a89418f9f2fd7f8c4037, type: 2}
-  snowTile2: {fileID: 11400000, guid: a3a09e70d78f5a64cb2238d2d2eeba68, type: 2}
-  updateOnParameterChanged: 1
-  seedIsRandom: 0
-  seed: 0
-  size: 100
-  initialAliveChance: 0.54
-  deathLimit: 3
-  birthLimit: 4
-  automataSteps: 5
-  heightMultiplyer:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: -0.0021003694
-      outSlope: -0.0021003694
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.7368676
-      value: 0.9984523
-      inSlope: 0.02227801
-      outSlope: 0.02227801
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.78188497
-      value: 0.11877394
-      inSlope: 0.026955921
-      outSlope: 0.026955921
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.7953182
-      value: 1
-      inSlope: 0.030846119
-      outSlope: 0.030846119
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.15513173
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.8189695
-      value: 3.4706664
-      inSlope: 3.9060838
-      outSlope: 3.9060838
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1.0005168
-      value: 3.476242
-      inSlope: 0.030711873
-      outSlope: 0.030711873
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  snowStartHeight: 75
-  orePasses:
-  - TileType: 2
-    OreVeinSize: {x: 7, y: 10}
-    MaxHeight: 60
-    Probability: 0.8
-  - TileType: 3
-    OreVeinSize: {x: 5, y: 8}
-    MaxHeight: 40
-    Probability: 0.3
-  - TileType: 5
-    OreVeinSize: {x: 3, y: 7}
-    MaxHeight: 15
-    Probability: 0.1
-  physicalTilePrefab: {fileID: 1505758800330834963, guid: b97c886a8f31d534dbde7b2320b4d3e3, type: 3}
+  mapSettings: {fileID: 11400000, guid: cb933fe4e5151f14d8a9ed1be88a0e33, type: 2}
+  generationSettings: {fileID: 11400000, guid: 9ada1e3054219d644a18b003c8174420, type: 2}
   drawStabilityTexture: 0
   drawStabilityGizmos: 0
   stabilityGizmosSize: 10

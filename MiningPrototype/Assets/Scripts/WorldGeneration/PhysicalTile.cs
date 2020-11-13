@@ -7,9 +7,9 @@ public class PhysicalTile : MonoBehaviour
 {
     [SerializeField] SpriteRenderer renderer;
 
-    private TestGeneration generator;
+    private TileMap generator;
 
-    public void Setup( TestGeneration testGeneration)
+    public void Setup( TileMap testGeneration)
     {
         generator = testGeneration;
     }
