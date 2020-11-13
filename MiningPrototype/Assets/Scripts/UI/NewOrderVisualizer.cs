@@ -13,6 +13,11 @@ public class NewOrderVisualizer : MonoBehaviour
     [SerializeField] Button buyButton;
     [SerializeField] Sprite checkmark, x;
 
+    private void Start()
+    {
+        UpdateCost();
+    }
+
     public void UpdateAmount(string elementName, int amount)
     {
         orderedElementsWithAmounts[elementName] = amount;
@@ -31,10 +36,13 @@ public class NewOrderVisualizer : MonoBehaviour
 
         string cost = copper + " copper";
 
+        if (amount == 0)
+            cost = "please select what you want to order.";
+
         if (gold > 0)
             cost += " & " + gold + " gold";
 
-        if (!CheckIfCanBuy(gold))
+        if (!CheckIfCanBuy(amount, gold))
             cost += "\n- too expensive -";
 
         costText.text = cost;
@@ -42,16 +50,25 @@ public class NewOrderVisualizer : MonoBehaviour
         
     }
 
-    private bool CheckIfCanBuy(int amountOfGold)
+    private bool CheckIfCanBuy(float amountOfElementsOrdered,int amountOfGold)
     {
-        if (amountOfGold > 2)
+        if (amountOfElementsOrdered == 0)
         {
             CanBuy(false);
-            return false;
-        } else
-        {
-            CanBuy(true);
             return true;
+        }
+        else
+        {
+            if (amountOfGold > 2)
+            {
+                CanBuy(false);
+                return false;
+            }
+            else
+            {
+                CanBuy(true);
+                return true;
+            }
         }
     }
     private void CanBuy(bool canBuy)
@@ -60,7 +77,12 @@ public class NewOrderVisualizer : MonoBehaviour
         buyButton.interactable = canBuy;
     }
 
-    public void Submit ()
+    public void Cancel ()
+    {
+        Destroy(gameObject);
+    }
+
+    public void Submit()
     {
         Destroy(gameObject);
     }
