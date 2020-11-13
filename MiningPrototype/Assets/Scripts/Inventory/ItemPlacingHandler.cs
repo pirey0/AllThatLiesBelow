@@ -38,7 +38,7 @@ public class ItemPlacingHandler : Singleton<ItemPlacingHandler>
         if (preview != null)
         {
             var info = ItemsData.GetItemInfo(type);
-            if (info.CanBePlaced && info.Prefab != null)
+            if (info.CanBePlaced && info.Prefab != null && preview.WouldPlaceSuccessfully())
             {
                 if (InventoryManager.PlayerTryPay(type, 1))
                 {

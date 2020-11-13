@@ -150,9 +150,9 @@ public static class TileMapHelper
         int count = 0;
         while (!map.IsOutOfBounds(coordinate.x, coordinate.y))
         {
-            coordinate.y += 1;
-            if(map.IsAirAt(coordinate.x, coordinate.y))
+            if (map.IsAirAt(coordinate.x, coordinate.y))
             {
+                coordinate.y ++;
                 count++;
             }
             else
