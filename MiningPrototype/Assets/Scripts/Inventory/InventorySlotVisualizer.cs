@@ -56,19 +56,15 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!inUI)
+        {
+            Debug.Log("Dropped outside UI");
+            ItemPlacingHandler.Instance?.TryPlace(type, rectTransform.position);
+        }
+        ItemPlacingHandler.Instance?.Hide();
         inDrag = false;
         EnableVisuals();
-        ItemPlacingHandler.Instance.Hide();
-
-        if (inUI)
-        {
-            rectTransform.anchoredPosition = defaultAnchorPosition;
-        }
-        else
-        {
-            rectTransform.anchoredPosition = defaultAnchorPosition;
-            Debug.Log("Dropped outside UI");
-        }
+        rectTransform.anchoredPosition = defaultAnchorPosition;
     }
 
     //to also update when not moving the mouse
@@ -85,7 +81,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
     private void UpdatePlacingPreview()
     {
         ItemInfo info = ItemsData.GetItemInfo(type);
-        if (!info.CanBePickedUp)
+        if (!info.CanBePlaced)
             return;
 
         Vector2 distance = rectTransform.position - rectTransform.parent.position;
@@ -93,17 +89,17 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         {
             if (inUI)
             {
-                ItemPlacingHandler.Instance.Show(type);
+                ItemPlacingHandler.Instance?.Show(type);
                 inUI = false;
                 DisableVisuals();
             }
-            ItemPlacingHandler.Instance.UpdatePosition(rectTransform.position);
+            ItemPlacingHandler.Instance?.UpdatePosition(rectTransform.position);
         }
         else
         {
             if (!inUI)
             {
-                ItemPlacingHandler.Instance.Hide();
+                ItemPlacingHandler.Instance?.Hide();
                 inUI = true;
                 EnableVisuals();
             }

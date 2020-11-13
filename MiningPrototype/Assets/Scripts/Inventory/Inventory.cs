@@ -39,9 +39,16 @@ public class Inventory
 
         if (id >= 0)
         {
-            if(content[id].amount >= pair.amount)
+            if(content[id].amount > pair.amount)
             {
                 content[id].amount -= pair.amount;
+
+                InventoryChanged?.Invoke();
+                return true;
+            }else if (content[id].amount == pair.amount)
+            {
+                content.RemoveAt(id);
+
                 InventoryChanged?.Invoke();
                 return true;
             }

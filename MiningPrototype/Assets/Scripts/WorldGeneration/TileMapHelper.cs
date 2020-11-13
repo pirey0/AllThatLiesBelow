@@ -124,7 +124,7 @@ public static class TileMapHelper
 
         foreach (var loc in locations)
         {
-            if(!map.IsAirAt(loc.x, loc.y))
+            if (!map.IsAirAt(loc.x, loc.y))
             {
                 return false;
             }
@@ -144,4 +144,24 @@ public static class TileMapHelper
         }
         return true;
     }
+
+    public static int AirTileCountAbove(TileMap map, Vector2Int coordinate)
+    {
+        int count = 0;
+        while (!map.IsOutOfBounds(coordinate.x, coordinate.y))
+        {
+            coordinate.y += 1;
+            if(map.IsAirAt(coordinate.x, coordinate.y))
+            {
+                count++;
+            }
+            else
+            {
+                break;
+            }
+
+        }
+        return count;
+    }
+
 }

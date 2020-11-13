@@ -7,13 +7,12 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 
-public class TileMap : MonoBehaviour
+public class TileMap : Singleton<TileMap>
 {
     [SerializeField] Tilemap tilemap, damageOverlayTilemap, oreTilemap;
 
     [SerializeField] TileMapSettings mapSettings;
     [SerializeField] GenerationSettings generationSettings;
-
 
     [Header("Debug")]
     [SerializeField] bool drawStabilityTexture;

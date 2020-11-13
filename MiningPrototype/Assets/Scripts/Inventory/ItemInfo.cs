@@ -11,6 +11,9 @@ public class ItemInfo : ScriptableObject
     public string DisplayTooltip;
     public Sprite DisplaySprite;
 
-    public bool CanBePickedUp;
-    public Sprite PickupSprite;
+    [Header("PlacableObject")]
+    public bool CanBePlaced;
+    public Sprite PickupHoldSprite;
+    public GameObject PickupPreviewPrefab;
+    public GameObject Prefab;
 }

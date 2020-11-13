@@ -16,5 +16,7 @@ MonoBehaviour:
   DisplayName: 
   DisplayTooltip: 
   DisplaySprite: {fileID: 21300000, guid: 49e17535157056a4b94e3a0c95f39128, type: 3}
-  CanBePickedUp: 1
-  PickupSprite: {fileID: 21300000, guid: 49e17535157056a4b94e3a0c95f39128, type: 3}
+  CanBePlaced: 1
+  PickupHoldSprite: {fileID: 21300000, guid: 49e17535157056a4b94e3a0c95f39128, type: 3}
+  PickupPreviewPrefab: {fileID: 0}
+  Prefab: {fileID: 0}
