@@ -74,4 +74,14 @@ public static class Util
     {
         return new Vector2Int(Mathf.RoundToInt(vector.x), Mathf.RoundToInt(vector.y));
     }
+
+    public static float Abs(this float f)
+    {
+        return Mathf.Abs(f);
+    }
+
+    public static float Sign(this float f)
+    {
+        return Mathf.Sign(f);
+    }
 }
