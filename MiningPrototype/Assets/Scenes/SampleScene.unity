@@ -788,17 +788,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3dba8eb587f4be41ad2743d67999b51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1141556478 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8232243671930714987, guid: 18bfcd81277c0d24c9ecd515d23b0b76, type: 3}
-  m_PrefabInstance: {fileID: 8232243670924525461}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf10764171198b14eaeab9120ed3eae6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1457237172 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5930427534588966322, guid: 0ef3d3d9ac15aad4b94aff8d1ece9908, type: 3}
@@ -82054,6 +82043,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8232243670924525463, guid: 18bfcd81277c0d24c9ecd515d23b0b76, type: 3}
+      propertyPath: tilemap
+      value: 
+      objectReference: {fileID: 1474943186}
+    - target: {fileID: 8232243670924525463, guid: 18bfcd81277c0d24c9ecd515d23b0b76, type: 3}
+      propertyPath: damageOverlayTilemap
+      value: 
+      objectReference: {fileID: 65351566}
+    - target: {fileID: 8232243670924525463, guid: 18bfcd81277c0d24c9ecd515d23b0b76, type: 3}
+      propertyPath: oreTilemap
+      value: 
+      objectReference: {fileID: 1784881859}
+    - target: {fileID: 8232243670924525463, guid: 18bfcd81277c0d24c9ecd515d23b0b76, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2088955024}
     - target: {fileID: 8232243671930714984, guid: 18bfcd81277c0d24c9ecd515d23b0b76, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -82102,24 +82107,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: TerrainGenerator
       objectReference: {fileID: 0}
-    - target: {fileID: 8232243671930714987, guid: 18bfcd81277c0d24c9ecd515d23b0b76, type: 3}
-      propertyPath: tilemap
-      value: 
-      objectReference: {fileID: 1474943186}
-    - target: {fileID: 8232243671930714987, guid: 18bfcd81277c0d24c9ecd515d23b0b76, type: 3}
-      propertyPath: damageOverlayTilemap
-      value: 
-      objectReference: {fileID: 65351566}
-    - target: {fileID: 8232243671930714987, guid: 18bfcd81277c0d24c9ecd515d23b0b76, type: 3}
-      propertyPath: oreTilemap
-      value: 
-      objectReference: {fileID: 1784881859}
-    - target: {fileID: 8232243671930714987, guid: 18bfcd81277c0d24c9ecd515d23b0b76, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 2088955024}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18bfcd81277c0d24c9ecd515d23b0b76, type: 3}
+--- !u!114 &8232243670924525462 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8232243670924525463, guid: 18bfcd81277c0d24c9ecd515d23b0b76, type: 3}
+  m_PrefabInstance: {fileID: 8232243670924525461}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a53dd95f432dc64bb874c24b0ae701b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8363841713916620502
 GameObject:
   m_ObjectHideFlags: 0
@@ -82261,7 +82261,7 @@ PrefabInstance:
     - target: {fileID: 497824006148765930, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
       propertyPath: generation
       value: 
-      objectReference: {fileID: 1141556478}
+      objectReference: {fileID: 8232243670924525462}
     - target: {fileID: 497824006148765930, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
       propertyPath: eventSystem
       value: 
