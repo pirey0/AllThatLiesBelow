@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ladder : MonoBehaviour
+public class Ladder : MineableObject
 {
     [SerializeField] EdgeCollider2D edge;
 

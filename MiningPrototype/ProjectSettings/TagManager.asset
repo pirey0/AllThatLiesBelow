@@ -47,6 +47,9 @@ TagManager:
   - name: Altar
     uniqueID: 1254969039
     locked: 0
+  - name: MineableObject
+    uniqueID: 3382482131
+    locked: 0
   - name: Player
     uniqueID: 3081657953
     locked: 0
