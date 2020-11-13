@@ -66,14 +66,14 @@ public class PlayerController : InventoryOwner, IEntity
     [ReadOnly]
     [SerializeField] bool inMining;
 
-    private PlayerState state;
+    private PlayerState playerState;
     private bool isVisible = true;
     private Ladder currentLadder;
     private float gravityScale;
 
 
     private bool InFrontOfLadder { get => currentLadder != null; }
-    private bool IsLocked { get => state != PlayerState.Locked; }
+    private bool IsLocked { get => playerState != PlayerState.Locked; }
 
     public override bool IsFlipped { get => spriteRenderer.flipX; }
 
@@ -243,7 +243,7 @@ public class PlayerController : InventoryOwner, IEntity
 
         if (gridDigTarget.HasValue)
         {
-            bool broken = generation.DamageAt(gridDigTarget.Value.x, gridDigTarget.Value.y, Time.deltaTime * digSpeed);
+            bool broken = generation.DamageAt(gridDigTarget.Value.x, gridDigTarget.Value.y, Time.deltaTime * digSpeed * ProgressionHandler.Instance.DigSpeedMultiplyer);
 
             if (broken)
             {
@@ -346,7 +346,7 @@ public class PlayerController : InventoryOwner, IEntity
         if (!isVisible)
             return;
 
-        switch (state)
+        switch (playerState)
         {
             case PlayerState.Normal:
                 UpdateWalk();
@@ -420,7 +420,7 @@ public class PlayerController : InventoryOwner, IEntity
                 TryStopInteracting();
         }
 
-        rigidbody.position += horizontal * rightWalkVector * moveSpeed * Time.fixedDeltaTime;
+        rigidbody.position += horizontal * rightWalkVector * moveSpeed * Time.fixedDeltaTime * ProgressionHandler.Instance.SpeedMultiplyer;
         rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
 
         if (Mathf.Abs(horizontal) > 0.2f)
@@ -508,11 +508,11 @@ public class PlayerController : InventoryOwner, IEntity
 
     private void ChangeStateTo(PlayerState newState)
     {
-        if (state == newState)
+        if (playerState == newState)
             return;
 
-        LeaveState(state);
-        state = newState;
+        LeaveState(playerState);
+        playerState = newState;
         EnterState(newState);
     }
 
