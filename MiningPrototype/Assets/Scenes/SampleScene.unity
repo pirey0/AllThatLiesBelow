@@ -81060,6 +81060,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3406168617041001974, guid: 9d58063e6aaa63242a46db0776b9d3c9, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3406168617041001975, guid: 9d58063e6aaa63242a46db0776b9d3c9, type: 3}
       propertyPath: m_Name
       value: Crate
@@ -81112,6 +81116,10 @@ PrefabInstance:
       propertyPath: spriteRenderer
       value: 
       objectReference: {fileID: 1528621728}
+    - target: {fileID: 5284739364809391638, guid: 9d58063e6aaa63242a46db0776b9d3c9, type: 3}
+      propertyPath: destroyEffects
+      value: 
+      objectReference: {fileID: 4888635124280202427, guid: c7333c0e8139a984db63c0ab6a7f05ac, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d58063e6aaa63242a46db0776b9d3c9, type: 3}
 --- !u!1001 &5207827282766066091
