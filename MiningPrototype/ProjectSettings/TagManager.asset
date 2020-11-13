@@ -53,6 +53,9 @@ TagManager:
   - name: Snow
     uniqueID: 2119514055
     locked: 0
+  - name: Support
+    uniqueID: 3730815779
+    locked: 0
   - name: Rock
     uniqueID: 2348705865
     locked: 0
