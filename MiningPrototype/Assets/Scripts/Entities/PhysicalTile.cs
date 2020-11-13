@@ -30,6 +30,7 @@ public class PhysicalTile : MonoBehaviour, IEntity
         {
             var position = transform.position.ToGridPosition();
             generator.PlaceAt(position.x, position.y);
+            Util.DebugDrawTile(position);
             Destroy(gameObject);
         }
     }

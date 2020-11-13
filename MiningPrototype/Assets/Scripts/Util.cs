@@ -72,7 +72,7 @@ public static class Util
 
     public static Vector2Int ToGridPosition(this Vector3 vector)
     {
-        return new Vector2Int(Mathf.RoundToInt(vector.x), Mathf.RoundToInt(vector.y));
+        return new Vector2Int(Mathf.FloorToInt(vector.x), Mathf.FloorToInt(vector.y));
     }
 
     public static float Abs(this float f)
