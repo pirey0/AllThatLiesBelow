@@ -49,8 +49,9 @@ public class PlayerController : InventoryOwner
     Vector2 rightWalkVector = Vector3.right;
     Camera camera;
     SpriteRenderer spriteRenderer;
-    Vector2Int? digTarget;
+    Vector2Int? gridDigTarget;
     IInteractable currentInteractable;
+    IMinableNonGrid nonGridDigTarget;
 
     [ReadOnly]
     [SerializeField] bool inMining;
@@ -76,6 +77,7 @@ public class PlayerController : InventoryOwner
         {
             Debug.DrawLine(GetPositionInGridV3(), GetClickPositionV3(), Color.yellow, Time.deltaTime);
             UpdateDigTarget();
+            UpdateNonGridDigTarget();
 
             if (Input.GetMouseButton(0))
             {
@@ -104,7 +106,7 @@ public class PlayerController : InventoryOwner
         }
         else
         {
-            digTarget = null;
+            gridDigTarget = null;
             if (inMining)
                 DisableMiningParticles();
         }
@@ -114,9 +116,7 @@ public class PlayerController : InventoryOwner
 
     private void TryInteract()
     {
-        Vector3 mousePos = Input.mousePosition;
-        Ray r = camera.ScreenPointToRay(mousePos);
-        var hits = Physics2D.RaycastAll(r.origin, r.direction, 100000);
+        var hits = DoRaycast2DFromMouse();
 
         currentInteractable = null;
         foreach (var hit in hits)
@@ -136,6 +136,13 @@ public class PlayerController : InventoryOwner
         }
     }
 
+    private RaycastHit2D [] DoRaycast2DFromMouse ()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        Ray r = camera.ScreenPointToRay(mousePos);
+        return Physics2D.RaycastAll(r.origin, r.direction, 100000);
+    }
+
     private void OnInteractableForceQuit()
     {
         TryStopInteracting();
@@ -148,20 +155,57 @@ public class PlayerController : InventoryOwner
 
     private void UpdateDigTarget()
     {
-        digTarget = generation.GetClosestSolidBlock(GetPositionInGrid(), GetClickCoordinate());
-        if (generation.IsAirAt(digTarget.Value.x, digTarget.Value.y))
+        gridDigTarget = generation.GetClosestSolidBlock(GetPositionInGrid(), GetClickCoordinate());
+        if (generation.IsAirAt(gridDigTarget.Value.x, gridDigTarget.Value.y))
         {
-            digTarget = null;
+            gridDigTarget = null;
+        }
+    }
+
+    private void UpdateNonGridDigTarget()
+    {
+        var hits = DoRaycast2DFromMouse();
+
+        IMinableNonGrid newTarget = null;
+        foreach (var hit in hits)
+        {
+            if (hit.transform == transform)
+                continue;
+
+            if (hit.transform.TryGetComponent(out IMinableNonGrid minable))
+            {
+                Debug.Log(hit.transform.name);
+                newTarget = minable;
+                break;
+            }
+        }
+
+        //Debug.Log("new target: " + (newTarget != null).ToString() + " / old target:" + (nonGridDigTarget != null).ToString());
+
+        if (newTarget != nonGridDigTarget)
+        {
+            if (nonGridDigTarget != null)
+                nonGridDigTarget.MouseLeave();
+
+            if (newTarget != null)
+                newTarget.MouseEnter();
+
+            nonGridDigTarget = newTarget;
         }
     }
 
     private void UpdateDigHighlight()
     {
 
-        if (digTarget == null)
-            mouseHighlight.position = new Vector3(-1000, -1000);
+        if (gridDigTarget == null)
+        {
+            if (nonGridDigTarget == null)
+                mouseHighlight.position = new Vector3(-1000, -1000);
+            else
+                mouseHighlight.position = new Vector3(nonGridDigTarget.GetPosition().x, nonGridDigTarget.GetPosition().y, 0);
+        }
         else
-            mouseHighlight.position = new Vector3(digTarget.Value.x, digTarget.Value.y, 0) + new Vector3(0.5f, 0.5f, 0);
+            mouseHighlight.position = new Vector3(gridDigTarget.Value.x, gridDigTarget.Value.y, 0) + new Vector3(0.5f, 0.5f, 0);
     }
 
     private void TryPlace()
@@ -175,13 +219,13 @@ public class PlayerController : InventoryOwner
     {
         CloseInventory();
 
-        if (digTarget.HasValue)
+        if (gridDigTarget.HasValue)
         {
-            bool broken = generation.DamageAt(digTarget.Value.x, digTarget.Value.y, Time.deltaTime * digSpeed);
+            bool broken = generation.DamageAt(gridDigTarget.Value.x, gridDigTarget.Value.y, Time.deltaTime * digSpeed);
 
             if (broken)
             {
-                miningParticles.transform.position = (Vector3Int)digTarget + new Vector3(0.5f, 0.5f);
+                miningParticles.transform.position = (Vector3Int)gridDigTarget + new Vector3(0.5f, 0.5f);
                 miningParticles.Emit(miningBreakParticlesCount);
                 breakBlock.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
                 breakBlock.Play();
@@ -199,14 +243,20 @@ public class PlayerController : InventoryOwner
         }
         else
         {
+            if (nonGridDigTarget != null)
+            {
+                nonGridDigTarget.Damage(Time.deltaTime * digSpeed);
+            } else
+            {
             if (inMining)
                 DisableMiningParticles();
+            }
         }
     }
 
     private void UpdateMiningParticlesPositions()
     {
-        miningParticles.transform.position = generation.GetWorldLocationOfFreeFaceFromSource(digTarget.Value, GetPositionInGrid());
+        miningParticles.transform.position = generation.GetWorldLocationOfFreeFaceFromSource(gridDigTarget.Value, GetPositionInGrid());
         Debug.DrawLine((Vector3Int)GetPositionInGrid(), miningParticles.transform.position, Color.yellow, 0.1f);
     }
 

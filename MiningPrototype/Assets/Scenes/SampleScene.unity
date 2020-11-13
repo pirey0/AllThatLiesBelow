@@ -68607,6 +68607,11 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!212 &1528621728 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 3406168617041001972, guid: 9d58063e6aaa63242a46db0776b9d3c9, type: 3}
+  m_PrefabInstance: {fileID: 2918519698559185566}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1551555539
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -81542,6 +81547,67 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f9d573c8734bb14092a75f0f481e070, type: 3}
+--- !u!1001 &2918519698559185566
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3406168617041001975, guid: 9d58063e6aaa63242a46db0776b9d3c9, type: 3}
+      propertyPath: m_Name
+      value: Crate
+      objectReference: {fileID: 0}
+    - target: {fileID: 3406168617041001979, guid: 9d58063e6aaa63242a46db0776b9d3c9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 3406168617041001979, guid: 9d58063e6aaa63242a46db0776b9d3c9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 81
+      objectReference: {fileID: 0}
+    - target: {fileID: 3406168617041001979, guid: 9d58063e6aaa63242a46db0776b9d3c9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3406168617041001979, guid: 9d58063e6aaa63242a46db0776b9d3c9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3406168617041001979, guid: 9d58063e6aaa63242a46db0776b9d3c9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3406168617041001979, guid: 9d58063e6aaa63242a46db0776b9d3c9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3406168617041001979, guid: 9d58063e6aaa63242a46db0776b9d3c9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3406168617041001979, guid: 9d58063e6aaa63242a46db0776b9d3c9, type: 3}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3406168617041001979, guid: 9d58063e6aaa63242a46db0776b9d3c9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3406168617041001979, guid: 9d58063e6aaa63242a46db0776b9d3c9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3406168617041001979, guid: 9d58063e6aaa63242a46db0776b9d3c9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5284739364809391638, guid: 9d58063e6aaa63242a46db0776b9d3c9, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 1528621728}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9d58063e6aaa63242a46db0776b9d3c9, type: 3}
 --- !u!1001 &5207827282766066091
 PrefabInstance:
   m_ObjectHideFlags: 0
