@@ -49,6 +49,7 @@ public class PlayerController : InventoryOwner, IEntity
     [SerializeField] float climbSpeed;
     [SerializeField] float climbPanSpeed;
     [SerializeField] float climbIdleThreshold;
+    [SerializeField] SpriteRenderer heldItemPreview;
 
     Rigidbody2D rigidbody;
     SpriteAnimator spriteAnimator;
@@ -70,6 +71,7 @@ public class PlayerController : InventoryOwner, IEntity
     private bool isVisible = true;
     private Ladder currentLadder;
     private float gravityScale;
+    private bool heldIsPickaxe = true;
 
 
     private bool InFrontOfLadder { get => currentLadder != null; }
@@ -436,33 +438,59 @@ public class PlayerController : InventoryOwner, IEntity
                 if (InventoryDisplayState == InventoryState.Open)
                 {
                     spriteAnimator.Play(an_Inventory, false);
-                    SetPickaxeVisible(false);
+                    SetHeldVisible(false);
                 }
                 else
                 {
                     spriteAnimator.Play(an_Idle, false);
-                    SetPickaxeVisible(true);
+                    SetHeldVisible(true);
                 }
             }
             else
             {
                 spriteAnimator.Play(an_Walk, false);
-                SetPickaxeVisible(true);
+                SetHeldVisible(true);
             }
         }
         else
         {
             spriteAnimator.Play(an_Fall);
-            SetPickaxeVisible(true);
+            SetHeldVisible(true);
         }
 
         UpdateWalkingSound(horizontal);
     }
 
-    private void SetPickaxeVisible(bool isVisible = true)
+    public void SetHeldVisible(bool isVisible = true)
     {
-        if (isVisible != pickaxe.activeSelf)
-            pickaxe.SetActive(isVisible);
+        if (heldIsPickaxe)
+        {
+            if (isVisible != pickaxe.activeSelf)
+            {
+                pickaxe.SetActive(isVisible);
+            }
+            heldItemPreview.enabled = false;
+        }
+        else
+        {
+            if (isVisible != heldItemPreview.enabled)
+            {
+                heldItemPreview.enabled = true;
+            }
+
+            if (pickaxe.activeSelf)
+                pickaxe.SetActive(false);
+        }
+    }
+
+    public void SetHeldItem(bool setToPickaxe)
+    {
+        heldIsPickaxe = setToPickaxe;
+    }
+
+    public void SetHeldItemSprite(Sprite sprite)
+    {
+        heldItemPreview.sprite = sprite;
     }
 
     private void UpdateJump()
@@ -525,7 +553,7 @@ public class PlayerController : InventoryOwner, IEntity
         {
             case PlayerState.Climbing:
                 rigidbody.gravityScale = gravityScale;
-                SetPickaxeVisible(true);
+                SetHeldVisible(true);
                 break;
         }
     }
@@ -535,7 +563,7 @@ public class PlayerController : InventoryOwner, IEntity
         switch (stateEntered)
         {
             case PlayerState.Climbing:
-                SetPickaxeVisible(false);
+                SetHeldVisible(false);
                 rigidbody.gravityScale = 0;
                 break;
         }
@@ -545,7 +573,7 @@ public class PlayerController : InventoryOwner, IEntity
     public void Hide()
     {
         isVisible = false;
-        SetPickaxeVisible(false);
+        SetHeldVisible(false);
         spriteRenderer.enabled = false;
         walking.Pause();
     }
@@ -554,7 +582,7 @@ public class PlayerController : InventoryOwner, IEntity
     public void Show()
     {
         isVisible = true;
-        SetPickaxeVisible(false);
+        SetHeldVisible(false);
         spriteRenderer.enabled = true;
     }
 

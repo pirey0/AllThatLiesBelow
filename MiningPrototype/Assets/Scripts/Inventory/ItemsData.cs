@@ -35,6 +35,14 @@ public static class ItemsData
         }
     }
 
+    public static ItemInfo GetItemInfo(ItemType itemType)
+    {
+        if (itemInfos.ContainsKey(itemType))
+        {
+            return itemInfos[itemType];
+        }
+        return null;
+    }
 
     public static Sprite GetSpriteByItemType(ItemType itemType)
     {

@@ -9,10 +9,13 @@ public class CameraController : Singleton<CameraController>
     [SerializeField] float constantSpeedMultiplyer;
     Vector3 offsetToTarget;
     Transform defaultTarget;
+
+    public Camera Camera { get; private set; }
     private void Start()
     {
         defaultTarget = target;
         offsetToTarget = generalOffset;
+        Camera = GetComponent<Camera>();
     }
 
     private void OnPreRender()

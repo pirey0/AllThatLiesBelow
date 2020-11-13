@@ -104,4 +104,17 @@ public static class Util
     }
 
     public static Vector2 ScreenCenter { get => new Vector2(Screen.width / 2, Screen.height / 2); }
+
+    public static Vector3 MouseToWorld(Camera camera)
+    {
+        var ray = camera.ScreenPointToRay(Input.mousePosition);
+
+        Plane p = new Plane(Vector3.forward, Vector3.zero);
+        if(p.Raycast(ray, out float distance))
+        {
+            return ray.GetPoint(distance);
+        }
+        return Vector3.zero;
+    }
+
 }
