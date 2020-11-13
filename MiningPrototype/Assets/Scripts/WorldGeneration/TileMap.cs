@@ -127,7 +127,7 @@ public class TileMap : MonoBehaviour
                 break;
         }
 
-        InventoryManager.PlayerCollects(itemType, 1);
+        InventoryManager.PlayerCollects(itemType, UnityEngine.Random.Range(1, ProgressionHandler.Instance.ExtraDrop));
     }
 
     public void CarveAt(int x, int y)
@@ -138,7 +138,7 @@ public class TileMap : MonoBehaviour
 
     public void PlaceAt(int x, int y)
     {
-        Debug.Log("Try Place " + x + " / " + y);
+        //Debug.Log("Try Place " + x + " / " + y);
         SetMapAt(x, y, Tile.Make(TileType.Stone));
     }
 
@@ -201,10 +201,6 @@ public class TileMap : MonoBehaviour
         if (IsOutOfBounds(x, y) || IsAirAt(x, y))
             return null;
 
-        if (tile.Type == TileType.Snow)
-        {
-            return Util.PseudoRandomValue(x, y) > 0.5f ? mapSettings.SnowTile1 : mapSettings.SnowTile2;
-        }
 
         int tileIndex = Util.BITMASK_TO_TILEINDEX[tile.NeighbourBitmask];
 
@@ -214,7 +210,7 @@ public class TileMap : MonoBehaviour
             tileIndex = Util.PseudoRandomValue(x, y) > 0.5f ? 46 : 0;
         }
 
-        return mapSettings.GroundTiles[tileIndex];
+        return tile.Type == TileType.Snow? mapSettings.SnowTiles[tileIndex] : mapSettings.GroundTiles[tileIndex];
     }
 
     private TileBase GetVisualDestructableOverlayFor(int x, int y)

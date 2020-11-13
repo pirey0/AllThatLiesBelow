@@ -50,19 +50,21 @@ public class Bed : MonoBehaviour, IInteractable
 
     IEnumerator SleepCoroutine(PlayerController playerToEnableAgain)
     {
-        if (nightFadeToBlack!= null)
+        if (nightFadeToBlack != null)
         {
             float nightOpacity = 0f;
 
             while (nightOpacity < 1f)
             {
                 nightOpacity += Time.deltaTime;
-                nightFadeToBlack.color = new Color(0,0,0,nightOpacity);
+                nightFadeToBlack.color = new Color(0, 0, 0, nightOpacity);
 
                 yield return null;
             }
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.25f);
+            ProgressionHandler.Instance.StartNextDay();
+            yield return new WaitForSeconds(0.25f);
 
             while (nightOpacity > 0f)
             {
