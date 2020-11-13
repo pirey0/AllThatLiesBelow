@@ -74,6 +74,9 @@ public class Postbox : MonoBehaviour, IInteractable
         //hide message if one is displayed
         if (displayedMessage != null)
             displayedMessage.Hide();
+
+        if (newOrder != null)
+            newOrder.Cancel();
     }
 
     public void BeginInteracting(GameObject interactor)

@@ -102,4 +102,6 @@ public static class Util
         Debug.DrawLine(location.AsV3() + Vector3.up, location.AsV3() + Vector3.up + Vector3.right, color, duration);
         Debug.DrawLine(location.AsV3() + Vector3.right, location.AsV3() + Vector3.up + Vector3.right, color, duration);
     }
+
+    public static Vector2 ScreenCenter { get => new Vector2(Screen.width / 2, Screen.height / 2); }
 }
