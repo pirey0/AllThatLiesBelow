@@ -22,27 +22,20 @@ public class Rock : MonoBehaviour, IEntity
                 return;
             }
 
-            var right = (transform.position + new Vector3(0, -2f)).ToGridPosition();
-            var left = (transform.position + new Vector3(-width * 0.3f, -2f)).ToGridPosition();
+            Vector3[] offsets = { new Vector3(0,-1), new Vector3(-0.55f,-1), new Vector3(0.55f, -1) };
 
-            Util.DebugDrawTile(right);
-            Util.DebugDrawTile(left);
-
-            bool blockLeft = gridElement.TileMap.IsBlockAt(left.x, left.y);
-            bool blockRight = gridElement.TileMap.IsBlockAt(right.x, right.y);
-
-            if (!blockLeft || !blockRight)
+            foreach (var offset in offsets)
             {
-                if (blockRight)
+                var pos = (transform.position + offset).ToGridPosition();
+                Util.DebugDrawTile(pos);
+                bool block = gridElement.TileMap.IsBlockAt(pos.x, pos.y);
+                if (block)
                 {
-                    gridElement.TileMap.DamageAt(right.x, right.y, 100);
-                }
-                else
-                {
-                    gridElement.TileMap.DamageAt(left.x, left.y, 100);
+                    gridElement.TileMap.DamageAt(pos.x, pos.y, 100);
                 }
             }
+
         }
     }
-
 }
+
