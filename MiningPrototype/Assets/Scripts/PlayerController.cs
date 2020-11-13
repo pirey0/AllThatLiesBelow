@@ -90,6 +90,11 @@ public class PlayerController : InventoryOwner
         if (!IsLocked || !isVisible)
             return;
 
+        if (Input.GetKeyDown(KeyCode.Tab) && isGrounded)
+        {
+            OpenInventory();
+        }
+
         if (Vector2Int.Distance(GetPositionInGrid(), GetClickCoordinate()) <= maxDigDistance)
         {
             Debug.DrawLine(GetPositionInGridV3(), GetClickPositionV3(), Color.yellow, Time.deltaTime);
