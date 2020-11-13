@@ -59,6 +59,8 @@ public class ProgressionHandler : Singleton<ProgressionHandler>
 
             }
         }
+
+        aquiredList.Clear();
     }
 
     public float GetPriceOf(string reward, string resource)
