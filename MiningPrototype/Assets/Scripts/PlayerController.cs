@@ -19,7 +19,7 @@ public class PlayerController : InventoryOwner
     [SerializeField] Transform feet;
     [SerializeField] float feetRadius;
 
-    [SerializeField] TestGeneration generation;
+    [SerializeField] TileMap generation;
     [SerializeField] float maxDigDistance = 3;
 
     [SerializeField] GameObject pickaxe;
@@ -148,7 +148,7 @@ public class PlayerController : InventoryOwner
 
     private void UpdateDigTarget()
     {
-        digTarget = generation.GetClosestSolidBlock(GetPositionInGrid(), GetClickCoordinate());
+        digTarget = TileMapHelper.GetClosestSolidBlock(generation, GetPositionInGrid(), GetClickCoordinate());
         if (generation.IsAirAt(digTarget.Value.x, digTarget.Value.y))
         {
             digTarget = null;
@@ -167,7 +167,7 @@ public class PlayerController : InventoryOwner
     private void TryPlace()
     {
         Vector2Int clickPos = GetClickCoordinate();
-        if (generation.HasLineOfSight(GetPositionInGrid(), clickPos, debugVisualize: true))
+        if (TileMapHelper.HasLineOfSight(generation, GetPositionInGrid(), clickPos, debugVisualize: true))
             generation.PlaceAt(clickPos.x, clickPos.y);
     }
 
@@ -206,7 +206,7 @@ public class PlayerController : InventoryOwner
 
     private void UpdateMiningParticlesPositions()
     {
-        miningParticles.transform.position = generation.GetWorldLocationOfFreeFaceFromSource(digTarget.Value, GetPositionInGrid());
+        miningParticles.transform.position = TileMapHelper.GetWorldLocationOfFreeFaceFromSource(generation,digTarget.Value, GetPositionInGrid());
         Debug.DrawLine((Vector3Int)GetPositionInGrid(), miningParticles.transform.position, Color.yellow, 0.1f);
     }
 
