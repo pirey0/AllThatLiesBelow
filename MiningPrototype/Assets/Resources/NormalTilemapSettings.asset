@@ -128,3 +128,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fcd84ecd4885b664d85f8c5443cbf208, type: 2}
   - {fileID: 11400000, guid: fcd84ecd4885b664d85f8c5443cbf208, type: 2}
   - {fileID: 11400000, guid: fcd84ecd4885b664d85f8c5443cbf208, type: 2}
+  TileToDropType: 000000000100000003000000020000000100000005000000

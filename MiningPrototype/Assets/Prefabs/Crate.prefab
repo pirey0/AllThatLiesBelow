@@ -1,24 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &38971001031533995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6653240713815217932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb4ce245df07b8f41803ddcd621696fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  overlayAnimator: {fileID: 8520543258188593246}
-  damageMultiplier: 1
-  contains:
-    type: 1
-    amount: 100
-  destroyEffects: {fileID: 4888635124280202427, guid: c7333c0e8139a984db63c0ab6a7f05ac, type: 3}
-  spriteRenderer: {fileID: 1248040165442377592}
 --- !u!50 &1997833944
 Rigidbody2D:
   serializedVersion: 4
@@ -40,6 +21,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &38971001031533995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6653240713815217932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb4ce245df07b8f41803ddcd621696fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overlayAnimator: {fileID: 8520543258188593246}
+  damageMultiplier: 1
+  contains:
+    type: 7
+    amount: 5
+  destroyEffects: {fileID: 4888635124280202427, guid: c7333c0e8139a984db63c0ab6a7f05ac, type: 3}
+  spriteRenderer: {fileID: 1248040165442377592}
 --- !u!1001 &6266148904577691169
 PrefabInstance:
   m_ObjectHideFlags: 0

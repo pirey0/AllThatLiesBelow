@@ -10,8 +10,6 @@ public class InventorySlotVisualizer : MonoBehaviour
     [SerializeField] Text amountDisplay;
     [SerializeField] Button button;
 
-    [SerializeField] ItemInformationStorage ItemInformationStorage;
-
     int amount;
     ItemType type;
 
@@ -21,7 +19,7 @@ public class InventorySlotVisualizer : MonoBehaviour
         type = pair.Key;
 
         if (icon != null)
-            icon.sprite = ItemInformationStorage.GetSpriteByItemType(type);
+            icon.sprite = ItemsData.GetSpriteByItemType(type);
 
         if (amountDisplay != null)
             amountDisplay.text = amount.ToString();

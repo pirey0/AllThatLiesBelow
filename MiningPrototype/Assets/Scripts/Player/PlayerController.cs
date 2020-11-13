@@ -92,9 +92,9 @@ public class PlayerController : InventoryOwner, IEntity
         if (!IsLocked || !isVisible)
             return;
 
-        if (Input.GetKeyDown(KeyCode.Tab) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            OpenInventory();
+            ToggleInventory();
         }
 
         if (Vector2Int.Distance(GetPositionInGrid(), GetClickCoordinate()) <= maxDigDistance)
@@ -112,7 +112,7 @@ public class PlayerController : InventoryOwner, IEntity
             {
                 if (Vector3.Distance(GetPositionInGridV3(), GetClickPositionV3()) <= inventoryOpenDistance && isGrounded)
                 {
-                    OpenInventory();
+                    ToggleInventory();
                 }
                 else
                 {
@@ -134,6 +134,14 @@ public class PlayerController : InventoryOwner, IEntity
         }
 
         UpdateDigHighlight();
+    }
+
+    private void ToggleInventory()
+    {
+        if (InventoryDisplayState == InventoryState.Closed)
+            OpenInventory();
+        else
+            CloseInventory();
     }
 
     private void TryInteract()
@@ -409,11 +417,6 @@ public class PlayerController : InventoryOwner, IEntity
     {
         var horizontal = Input.GetAxis("Horizontal");
 
-        if (Mathf.Abs(horizontal) > 0.15f)
-        {
-            CloseInventory();
-        }
-
         if (currentInteractable != null)
         {
             if (Vector3.Distance(GetPositionInGridV3(), currentInteractable.gameObject.transform.position) > maxInteractableDistance)
@@ -533,7 +536,7 @@ public class PlayerController : InventoryOwner, IEntity
         {
             case PlayerState.Climbing:
                 SetPickaxeVisible(false);
-                rigidbody.gravityScale = 0; 
+                rigidbody.gravityScale = 0;
                 break;
         }
     }

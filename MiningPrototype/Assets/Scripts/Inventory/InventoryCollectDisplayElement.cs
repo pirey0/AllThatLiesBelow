@@ -9,8 +9,6 @@ public class InventoryCollectDisplayElement : MonoBehaviour
     [SerializeField] float duration;
     [SerializeField] Text text;
     [SerializeField] Image icon;
-
-    [SerializeField] ItemInformationStorage ItemInformationStorage;
     private void Start()
     {
         StartCoroutine(FadeOut());
@@ -24,7 +22,7 @@ public class InventoryCollectDisplayElement : MonoBehaviour
     public void SetItem(ItemAmountPair obj)
     {
         text.text = "+" + obj.amount;
-        icon.sprite = ItemInformationStorage.GetSpriteByItemType(obj.type);
+        icon.sprite = ItemsData.GetSpriteByItemType(obj.type);
     }
 
     private IEnumerator FadeOut()

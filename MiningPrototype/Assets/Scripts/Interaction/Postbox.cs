@@ -47,7 +47,7 @@ public class Postbox : MonoBehaviour, IInteractable
         {
             displayedMessage = Instantiate(messagePrefab, canvas.transform);
 
-            displayedMessage.DisplayText(transform, storedMessage, showFamilyPhoto: (storedItem != null && storedItem.type == ItemType.FAMILY_PHOTO));
+            displayedMessage.DisplayText(transform, storedMessage, showFamilyPhoto: (storedItem != null && storedItem.type == ItemType.Family_Photo));
             storedMessage = "";
 
             //add all stored items to player inventory

@@ -3,6 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum TileType
+{
+    Air = 0,
+    Stone = 1,
+    Copper = 2,
+    Gold = 3,
+    Snow = 4,
+    Diamond = 5
+}
+
 public struct Tile
 {
     public TileType Type;
@@ -36,14 +47,4 @@ public struct Tile
             return;
         Damage += amount;
     }
-}
-
-public enum TileType
-{
-    Air = 0,
-    Stone = 1,
-    Copper = 2,
-    Gold = 3,
-    Snow = 4,
-    Diamond = 5
 }

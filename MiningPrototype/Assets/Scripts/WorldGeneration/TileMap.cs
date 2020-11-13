@@ -114,18 +114,7 @@ public class TileMap : MonoBehaviour
     {
         CarveAt(x, y);
 
-        ItemType itemType = ItemType.ROCKS;
-
-        switch (t.Type)
-        {
-            case TileType.Gold:
-                itemType = ItemType.GOLD;
-                break;
-
-            case TileType.Copper:
-                itemType = ItemType.COPPER;
-                break;
-        }
+        ItemType itemType = mapSettings.GetItemTypeForTile(t.Type);
 
         InventoryManager.PlayerCollects(itemType, UnityEngine.Random.Range(1, ProgressionHandler.Instance.ExtraDrop));
     }
