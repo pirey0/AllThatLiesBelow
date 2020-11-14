@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using NaughtyAttributes;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class CameraController : Singleton<CameraController>
     [SerializeField] Transform target;
     [SerializeField] Vector3 generalOffset = new Vector3(0, 0, -10);
     [SerializeField] float constantSpeedMultiplyer;
+    [SerializeField] CameraShaker cameraShaker;
     Vector3 offsetToTarget;
     Transform defaultTarget;
 
@@ -20,7 +22,7 @@ public class CameraController : Singleton<CameraController>
 
     private void OnPreRender()
     {
-        transform.position = target.position + offsetToTarget;
+        transform.position = target.position + offsetToTarget + cameraShaker.GetShakeAmount();
     }
 
     public void FollowNewTarget(Transform newTarget)
@@ -64,5 +66,13 @@ public class CameraController : Singleton<CameraController>
         Destroy(temporary.gameObject);
     }
 
-
+    private void Update()
+    {
+        if (Input.GetMouseButtonUp(2))
+            Shake(Util.MouseToWorld());
+    }
+    public void Shake(Vector2 location, CameraShakeType shakeType = CameraShakeType.hill, float duration = 1f, float range = 10f)
+    {
+        cameraShaker.StartShake(shakeType, duration, location, range);
+    }
 }

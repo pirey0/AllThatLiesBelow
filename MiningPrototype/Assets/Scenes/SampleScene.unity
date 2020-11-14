@@ -71844,6 +71844,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 764608496}
+    - target: {fileID: 5930427534588966323, guid: 0ef3d3d9ac15aad4b94aff8d1ece9908, type: 3}
+      propertyPath: cameraShaker
+      value: 
+      objectReference: {fileID: 1993120918}
     - target: {fileID: 5930427534588966326, guid: 0ef3d3d9ac15aad4b94aff8d1ece9908, type: 3}
       propertyPath: m_Name
       value: Main Camera
@@ -84303,6 +84307,123 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 2
   destructionSpeed: 5
+--- !u!1 &1993120915 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5930427534588966326, guid: 0ef3d3d9ac15aad4b94aff8d1ece9908, type: 3}
+  m_PrefabInstance: {fileID: 1551555539}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1993120918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1993120915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ccb75546061001469650d1535b28389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hill:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -2
+      outSlope: -2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  explosion:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 7.6515055
+      outSlope: 7.6515055
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.018148819
+    - serializedVersion: 3
+      time: 0.12517864
+      value: 0.9788467
+      inSlope: -3.6398635
+      outSlope: -3.6398635
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.028061874
+    - serializedVersion: 3
+      time: 0.37396216
+      value: 0.7662871
+      inSlope: -3.6976705
+      outSlope: -3.6976705
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.044055596
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.18996622
+      outSlope: -0.18996622
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.17063382
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  raising:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  showShakes: 1
 --- !u!1 &1999113739
 GameObject:
   m_ObjectHideFlags: 0
@@ -90460,6 +90581,7 @@ MonoBehaviour:
   cameraTarget: {fileID: 1660025775463097441}
   visualizer: {fileID: 831396577832569627}
   testDialog: Test3_0
+  overlay: {fileID: 0}
 --- !u!1 &1363716615358390779
 GameObject:
   m_ObjectHideFlags: 0
