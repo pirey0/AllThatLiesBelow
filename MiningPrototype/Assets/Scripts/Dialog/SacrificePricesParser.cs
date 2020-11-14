@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PricesParser
+public class SacrificePricesParser
 {
-    const string PATH = "PricesData";
+    const string PATH = "SacrificesData";
 
     private static Dictionary<(string, string), int> pricingTable;
 

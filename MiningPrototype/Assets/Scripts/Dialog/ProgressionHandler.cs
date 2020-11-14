@@ -78,6 +78,6 @@ public class ProgressionHandler : Singleton<ProgressionHandler>
 
     public float GetPriceOf(string reward, string resource)
     {
-        return PricesParser.GetPriceFor(reward, resource);
+        return SacrificePricesParser.GetPriceFor(reward, resource);
     }
 }
