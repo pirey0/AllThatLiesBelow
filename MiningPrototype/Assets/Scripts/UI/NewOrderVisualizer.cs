@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NaughtyAttributes.Test;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -7,50 +8,76 @@ using UnityEngine.UI;
 
 public class NewOrderVisualizer : MonoBehaviour
 {
-    Dictionary<string, int> orderedElementsWithAmounts = new Dictionary<string, int>();
+    Dictionary<ItemType, int> orderedElementsWithAmounts = new Dictionary<ItemType, int>();
+    Dictionary<ItemType, int> cost = new Dictionary<ItemType, int>();
     [SerializeField] TMP_Text costText;
 
     [SerializeField] Button buyButton;
     [SerializeField] Sprite checkmark, x;
+
+    [SerializeField] TMP_Text costElementPrefab;
+    [SerializeField] Transform costGrid;
 
     private void Start()
     {
         UpdateCost();
     }
 
-    public void UpdateAmount(string elementName, int amount)
+    public void UpdateAmount(ItemType itemType, int amount)
     {
-        orderedElementsWithAmounts[elementName] = amount;
+        orderedElementsWithAmounts[itemType] = amount;
         UpdateCost();
     }
 
     private void UpdateCost()
     {
+        //clear cost display
+        foreach (Transform child in costGrid)
+        {
+            Destroy(child.gameObject);
+        }
+
+        //calculate the new cost
         float amount = 0;
 
         foreach (int i in orderedElementsWithAmounts.Values)
             amount += i;
 
-        int gold = Mathf.FloorToInt((1f / 3f) * amount);
-        int copper = Mathf.FloorToInt(((2f/3f) * amount * 2f) - gold * 2f);
+        if (amount <= 0)
+            return;
 
-        string cost = copper + " copper";
+        cost[ItemType.Gold] = Mathf.FloorToInt((1f / 3f) * amount);
+        cost[ItemType.Copper] = Mathf.FloorToInt(((2f/3f) * amount * 2f) - cost[ItemType.Gold] * 2f);
 
-        if (amount == 0)
-            cost = "please select what you want to order.";
+        //create cost visualization
+        foreach (KeyValuePair<ItemType, int> costElement in cost)
+        {
+            if (costElement.Value > 0)
+            {
+                TMP_Text costText = Instantiate(costElementPrefab, costGrid);
+                Image costIcon = costText.GetComponentInChildren<Image>();
 
-        if (gold > 0)
-            cost += " & " + gold + " gold";
+                ItemInfo costInfo = ItemsData.GetItemInfo(costElement.Key);
 
-        if (!CheckIfCanBuy(amount, gold))
-            cost += "\n- too expensive -";
+                //costText.text = costInfo.DisplayName;
+                costText.text = costElement.Value.ToString() + "x";
+                costIcon.sprite = costInfo.DisplaySprite;
+            }
+        }
 
-        costText.text = cost;
+
+        //update text and checkbox
+        string text = "check this box to buy.";
+
+        if (!CheckIfCanBuy(amount, cost))
+            text += "\n- too expensive -";
+
+        costText.text = text;
 
         
     }
 
-    private bool CheckIfCanBuy(float amountOfElementsOrdered,int amountOfGold)
+    private bool CheckIfCanBuy(float amountOfElementsOrdered, Dictionary<ItemType, int> costsToOrder)
     {
         if (amountOfElementsOrdered == 0)
         {
@@ -59,7 +86,7 @@ public class NewOrderVisualizer : MonoBehaviour
         }
         else
         {
-            if (amountOfGold > 2)
+            if (costsToOrder[ItemType.Gold] > 2)
             {
                 CanBuy(false);
                 return false;
@@ -84,6 +111,13 @@ public class NewOrderVisualizer : MonoBehaviour
 
     public void Submit()
     {
+        List<ItemAmountPair> itemAmountPairs = new List<ItemAmountPair>();
+
+        foreach (KeyValuePair<ItemType, int> i in orderedElementsWithAmounts)
+            itemAmountPairs.Add(new ItemAmountPair(i.Key, i.Value));
+
+        ProgressionHandler.Instance.AddOrderForNextDay(itemAmountPairs);
+
         Destroy(gameObject);
     }
 }

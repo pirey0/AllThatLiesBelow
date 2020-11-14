@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class NewOrderUIElement : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] TMP_Text text;
-    [SerializeField] string elementName;
+    [SerializeField] ItemType elementType;
     [SerializeField] Color color_zero, color_moreThanZero;
 
     int amount = 0;
@@ -21,7 +21,7 @@ public class NewOrderUIElement : MonoBehaviour, IPointerClickHandler
 
     private void UpdateText()
     {
-        text.text = amount + " x " + elementName;
+        text.text = amount + " x " + elementType.ToString();
         text.color = (amount > 0) ? color_moreThanZero : color_zero;
     }
 
@@ -34,14 +34,14 @@ public class NewOrderUIElement : MonoBehaviour, IPointerClickHandler
     public void Increase()
     {
         amount = Mathf.Clamp(amount + 1, 0, 999);
-        order?.UpdateAmount(elementName, amount);
+        order?.UpdateAmount(elementType, amount);
         UpdateText();
     }
 
     public void Decrease()
     {
         amount = Mathf.Clamp(amount - 1, 0, 999);
-        order?.UpdateAmount(elementName, amount);
+        order?.UpdateAmount(elementType, amount);
         UpdateText();
     }
 }
