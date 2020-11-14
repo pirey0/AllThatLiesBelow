@@ -9,6 +9,8 @@ public class InventoryCollectDisplayElement : MonoBehaviour
     [SerializeField] float duration;
     [SerializeField] Text text;
     [SerializeField] Image icon;
+    [SerializeField] float moveSpeed;
+    [SerializeField] AnimationCurve fadeCurve;
     private void Start()
     {
         StartCoroutine(FadeOut());
@@ -31,9 +33,10 @@ public class InventoryCollectDisplayElement : MonoBehaviour
 
         while (t < duration)
         {
-            Color c = new Color(text.color.r, text.color.g, text.color.b, 1 - t / duration);
+            Color c = new Color(text.color.r, text.color.g, text.color.b, fadeCurve.Evaluate(t / duration));
             text.color = c;
             icon.color = c;
+            transform.position += new Vector3(0, moveSpeed*Time.deltaTime, 0);
 
             yield return null;
             t += Time.deltaTime;
