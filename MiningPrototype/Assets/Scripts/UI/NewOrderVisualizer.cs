@@ -25,7 +25,11 @@ public class NewOrderVisualizer : MonoBehaviour
 
     public void UpdateAmount(ItemType itemType, int amount)
     {
-        orderedElementsWithAmounts[itemType] = amount;
+        if (amount <= 0)
+            orderedElementsWithAmounts.Remove(itemType);
+        else
+            orderedElementsWithAmounts[itemType] = amount;
+        
         UpdateCost();
     }
 
@@ -40,23 +44,27 @@ public class NewOrderVisualizer : MonoBehaviour
         cost.Clear();
 
         //new cost fetching after implementation
-        //foreach (KeyValuePair<ItemType, int> item in orderedElementsWithAmounts)
-        //{
-        //    ItemAmountPair price = GetPriceFor(item.Key, item.Value);
-        //    cost[price.type] += price.amount;
-        //}
+        foreach (KeyValuePair<ItemType, int> item in orderedElementsWithAmounts)
+        {
+            ItemAmountPair price = ShopPricesParser.GetPriceFor(item.Key, item.Value);
 
-        //calculate the new cost
-        float amount = 0;
+            if (cost.ContainsKey(price.type))
+                cost[price.type] += price.amount;
+            else
+                cost.Add(price.type,price.amount);
+        }
 
-        foreach (int i in orderedElementsWithAmounts.Values)
-            amount += i;
-
-        if (amount <= 0)
-            return;
-
-        cost[ItemType.Gold] = Mathf.FloorToInt((1f / 3f) * amount);
-        cost[ItemType.Copper] = Mathf.FloorToInt(((2f/3f) * amount * 2f) - cost[ItemType.Gold] * 2f);
+        ////calculate the new cost
+        //float amount = 0;
+        //
+        //foreach (int i in orderedElementsWithAmounts.Values)
+        //    amount += i;
+        //
+        //if (amount <= 0)
+        //    return;
+        //
+        //cost[ItemType.Gold] = Mathf.FloorToInt((1f / 3f) * amount);
+        //cost[ItemType.Copper] = Mathf.FloorToInt(((2f/3f) * amount * 2f) - cost[ItemType.Gold] * 2f);
 
         //create cost visualization
         foreach (KeyValuePair<ItemType, int> costElement in cost)
@@ -78,39 +86,30 @@ public class NewOrderVisualizer : MonoBehaviour
         //update text and checkbox
         string text = "check this box to buy.";
 
-        if (!CheckIfCanBuy(amount, cost))
-            text += "\n- too expensive -";
+        if (!CheckIfCanBuy(cost))
+            text = "- too expensive -";
 
         costText.text = text;
 
         
     }
 
-    private bool CheckIfCanBuy(float amountOfElementsOrdered, Dictionary<ItemType, int> costsToOrder)
+    private bool CheckIfCanBuy(Dictionary<ItemType, int> costsToOrder)
     {
-        if (amountOfElementsOrdered == 0)
+        foreach (KeyValuePair<ItemType, int> i in costsToOrder)
         {
-            CanBuy(false);
-            return true;
+            if (!InventoryManager.PlayerHas(i.Key, i.Value))
+                return SetCanBuy(false);
         }
-        else
-        {
-            if (costsToOrder[ItemType.Gold] > 2)
-            {
-                CanBuy(false);
-                return false;
-            }
-            else
-            {
-                CanBuy(true);
-                return true;
-            }
-        }
+
+        return SetCanBuy(true);
     }
-    private void CanBuy(bool canBuy)
+    private bool SetCanBuy(bool canBuy)
     {
         (buyButton.targetGraphic as Image).sprite = canBuy ? checkmark : x;
         buyButton.interactable = canBuy;
+
+        return canBuy;
     }
 
     public void Cancel ()
