@@ -37,6 +37,15 @@ public class NewOrderVisualizer : MonoBehaviour
             Destroy(child.gameObject);
         }
 
+        cost.Clear();
+
+        //new cost fetching after implementation
+        //foreach (KeyValuePair<ItemType, int> item in orderedElementsWithAmounts)
+        //{
+        //    ItemAmountPair price = GetPriceFor(item.Key, item.Value);
+        //    cost[price.type] += price.amount;
+        //}
+
         //calculate the new cost
         float amount = 0;
 
