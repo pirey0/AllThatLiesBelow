@@ -41,6 +41,19 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         onClick.AddListener(action);
     }
 
+    public override void OnPointerDown(PointerEventData eventData)
+    {
+        base.OnPointerDown(eventData);
+        var info = ItemsData.GetItemInfo(type);
+        TooltipHandler.Instance?.Display(transform, info.DisplayName, info.DisplayTooltip);
+    }
+
+    public override void OnPointerUp(PointerEventData eventData)
+    {
+        base.OnPointerUp(eventData);
+        TooltipHandler.Instance?.StopDisplaying(transform);
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         defaultAnchorPosition = rectTransform.anchoredPosition;

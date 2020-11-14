@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ItemSupport
   m_EditorClassIdentifier: 
   ItemType: 7
-  DisplayName: 
-  DisplayTooltip: 
+  DisplayName: Support
+  DisplayTooltip: Can be used to stop cave ins.
   DisplaySprite: {fileID: 3661299028102994143, guid: 949e8161680f49940943047337904a65, type: 3}
   CanBePlaced: 1
   PickupHoldSprite: {fileID: 3661299028102994143, guid: 949e8161680f49940943047337904a65, type: 3}
