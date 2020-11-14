@@ -128,4 +128,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fcd84ecd4885b664d85f8c5443cbf208, type: 2}
   - {fileID: 11400000, guid: fcd84ecd4885b664d85f8c5443cbf208, type: 2}
   - {fileID: 11400000, guid: fcd84ecd4885b664d85f8c5443cbf208, type: 2}
+  CrumbleEffects: {fileID: 4718119467889540382, guid: 29b481f2814058a4fa2a97c2c2cdc4c8, type: 3}
   TileToDropType: 000000000100000003000000020000000100000005000000

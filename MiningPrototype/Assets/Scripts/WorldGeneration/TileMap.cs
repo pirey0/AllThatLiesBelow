@@ -24,7 +24,9 @@ public class TileMap : Singleton<TileMap>
     Tile[,] map;
     TileMapGenerator generator;
     Texture2D stabilityDebugTexture;
-    List<Vector2Int> unstableTiles;
+
+    List<Vector2Int> unstableTiles = new List<Vector2Int>();
+    List<GameObject> unstableTilesEffects = new List<GameObject>();
 
     private int size;
     public int Size { get => size; }
@@ -43,56 +45,60 @@ public class TileMap : Singleton<TileMap>
 
     private void Start()
     {
-        unstableTiles = new List<Vector2Int>();
         tilemap.GetComponent<GridElement>()?.Setup(this);
         damageOverlayTilemap.GetComponent<GridElement>()?.Setup(this);
         oreTilemap.GetComponent<GridElement>()?.Setup(this);
 
         RunCompleteGeneration();
 
-        InvokeRepeating("UpdateUnstableTiles", 1, 1);
+        StartCoroutine(UpdateUnstableTilesRoutine());
     }
 
     private void Update()
     {
-        if(toolTipStability)
+        if (toolTipStability)
         {
             TooltipHandler.Instance?.Display(transform, this[Util.MouseToWorld().ToGridPosition()].Stability.ToString(), "");
-        }   
+        }
     }
 
-    private void UpdateUnstableTiles()
+    private IEnumerator UpdateUnstableTilesRoutine()
     {
-        Debug.Log("Updating " + unstableTiles.Count + " unstable tiles.");
-        int counter = 0;
-
-        
-        for (int i = 0; i < unstableTiles.Count;)
+        int i = 0;
+        while (true)
         {
-            if (counter++ > 1000)
+
+            if (unstableTiles.Count == 0)
             {
-                Debug.Log("Infinite Loop");
-                break;
+                yield return new WaitForSeconds(0.3f);
+                continue;
+            }
+            else if (i >= unstableTiles.Count)
+            {
+                yield return new WaitForSeconds(1f);
+                i = 0;
             }
 
             var t = this[unstableTiles[i]];
             int x = unstableTiles[i].x;
             int y = unstableTiles[i].y;
 
-            if(t.Stability <= generationSettings.CollapseThreshhold)
+            if (t.Stability <= generationSettings.CollapseThreshhold)
             {
-                unstableTiles.RemoveAt(i);
-                generator.CollapseAt(x,y, updateVisuals: true);
+                RemoveUnstableTileAt(i);
+                if (t.Type != TileType.Air)
+                    generator.CollapseAt(x, y, updateVisuals: true);
             }
-            else if(t.Stability <= generationSettings.UnstableThreshhold)
+            else if (t.Stability <= generationSettings.UnstableThreshhold)
             {
                 t.Stability -= 1;
+
                 SetMapRawAt(x, y, t);
                 i++;
             }
             else
             {
-                unstableTiles.RemoveAt(i);
+                RemoveUnstableTileAt(i);
             }
         }
     }
@@ -109,7 +115,20 @@ public class TileMap : Singleton<TileMap>
     public void AddUnstableTile(Vector2Int unstableTile)
     {
         if (!unstableTiles.Contains(unstableTile))
+        {
             unstableTiles.Add(unstableTile);
+            var go = Instantiate(mapSettings.CrumbleEffects, new Vector3(unstableTile.x + 0.5f, unstableTile.y), quaternion.identity, transform);
+            unstableTilesEffects.Add(go);
+        }
+    }
+
+    public void RemoveUnstableTileAt(int i)
+    {
+        unstableTiles.RemoveAt(i);
+
+        var go = unstableTilesEffects[i];
+        Destroy(go);
+        unstableTilesEffects.RemoveAt(i);
     }
 
 
@@ -261,7 +280,7 @@ public class TileMap : Singleton<TileMap>
             tileIndex = Util.PseudoRandomValue(x, y) > 0.5f ? 46 : 0;
         }
 
-        return tile.Type == TileType.Snow? mapSettings.SnowTiles[tileIndex] : mapSettings.GroundTiles[tileIndex];
+        return tile.Type == TileType.Snow ? mapSettings.SnowTiles[tileIndex] : mapSettings.GroundTiles[tileIndex];
     }
 
     private TileBase GetVisualDestructableOverlayFor(int x, int y)

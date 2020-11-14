@@ -12,7 +12,10 @@ public class TileMapSettings : ScriptableObject
     public TileBase[] DamageOverlayTiles;
     public TileBase[] OreTiles;
 
+    public GameObject CrumbleEffects;
+
     public ItemType[] TileToDropType;
+
 
     public ItemType GetItemTypeForTile(TileType t)
     {

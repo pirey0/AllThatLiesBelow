@@ -34,5 +34,6 @@ public class GenerationSettings : ScriptableObject
     public int UnstableThreshhold = 40;
     public int CollapseThreshhold = 40;
 
+    public int CrumbleEmitAmount;
     public GameObject PhysicalTilePrefab;
 }
