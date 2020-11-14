@@ -198,7 +198,7 @@ MonoBehaviour:
   openTimeMultiplier: 3
   updateFollow: 0
   transformToFollow: {fileID: 0}
-  followOffset: {x: -1, y: 2}
+  followOffset: {x: -1.25, y: 2}
   widthInSlots: 4
   heightInSlots: 2
   boxTransform: {fileID: 8727063801738303664}
@@ -207,4 +207,4 @@ MonoBehaviour:
   inventorySlotPrefab: {fileID: 2541443755640501489, guid: 8e5e1b66aa6c0994b9f4a49b79d80a04, type: 3}
   gridBox: {fileID: 8727063801738303664}
   gridLayoutParent: {fileID: 7116935718377473132}
-  spriteRendererToGetOrientatioFrom: {fileID: 0}
+  updateContinously: 1

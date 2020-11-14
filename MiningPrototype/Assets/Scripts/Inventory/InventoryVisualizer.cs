@@ -15,6 +15,7 @@ public class InventoryVisualizer : ScalingUIElementBase
     [SerializeField] InventorySlotVisualizer inventorySlotPrefab;
     [SerializeField] Transform gridBox;
     [SerializeField] Transform gridLayoutParent;
+    [SerializeField] bool updateContinously = true;
     SpriteRenderer spriteRendererToGetOrientatioFrom;
 
     Inventory inventory;
@@ -25,17 +26,18 @@ public class InventoryVisualizer : ScalingUIElementBase
         inventory = inventoryToVisualize;
         spriteRendererToGetOrientatioFrom = target.GetComponent<SpriteRenderer>();
 
-        bool flipX = (spriteRendererToGetOrientatioFrom != null && spriteRendererToGetOrientatioFrom.flipX) ? true : false;
-        UpdatePosition(flipX);
-
         RefreshInventoryDisplay();
         StartCoroutine(ScaleCoroutine(scaleUp: true));
     }
 
     protected override void Update()
     {
-        bool flipX = (spriteRendererToGetOrientatioFrom != null && spriteRendererToGetOrientatioFrom.flipX) ? true : false;
-        UpdatePosition(flipX);
+        if (updateContinously)
+        {
+            bool flipX = (spriteRendererToGetOrientatioFrom != null && spriteRendererToGetOrientatioFrom.flipX) ? false : true;
+            UpdatePosition(flipX);
+            RecalculateUIOrientation(spriteRendererToGetOrientatioFrom);
+        }
     }
 
     [Button]
@@ -81,7 +83,7 @@ public class InventoryVisualizer : ScalingUIElementBase
         if (spriteRendererToGetOrientatioFrom == null)
             return;
 
-        Vector3 flipX = new Vector3(spriteRendererToGetOrientatioFrom.flipX? -1 : 1, 1, 1);
+        Vector3 flipX = new Vector3(spriteRendererToGetOrientatioFrom.flipX? 1 : -1, 1, 1);
 
         if (gridBox != null)
             gridBox.localScale = flipX;
@@ -96,10 +98,6 @@ public class InventoryVisualizer : ScalingUIElementBase
         {
             InventorySlotVisualizer newSlot = Instantiate(inventorySlotPrefab, gridLayoutParent);
             newSlot.Display(itemsToVisualize[i]);
-
-            //Old System
-            //int index = i;
-            //newSlot.SetButtonToSlot(() => InventoryManager.TryMove(inventory, index));
         }
     }
 

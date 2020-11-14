@@ -29,7 +29,7 @@ public class NewOrderVisualizer : MonoBehaviour
             orderedElementsWithAmounts.Remove(itemType);
         else
             orderedElementsWithAmounts[itemType] = amount;
-        
+
         UpdateCost();
     }
 
@@ -51,7 +51,7 @@ public class NewOrderVisualizer : MonoBehaviour
             if (cost.ContainsKey(price.type))
                 cost[price.type] += price.amount;
             else
-                cost.Add(price.type,price.amount);
+                cost.Add(price.type, price.amount);
         }
 
         ////calculate the new cost
@@ -91,7 +91,7 @@ public class NewOrderVisualizer : MonoBehaviour
 
         costText.text = text;
 
-        
+
     }
 
     private bool CheckIfCanBuy(Dictionary<ItemType, int> costsToOrder)
@@ -112,7 +112,7 @@ public class NewOrderVisualizer : MonoBehaviour
         return canBuy;
     }
 
-    public void Cancel ()
+    public void Cancel()
     {
         Destroy(gameObject);
     }
@@ -125,6 +125,11 @@ public class NewOrderVisualizer : MonoBehaviour
             itemAmountPairs.Add(new ItemAmountPair(i.Key, i.Value));
 
         ProgressionHandler.Instance.AddOrderForNextDay(itemAmountPairs);
+
+        foreach (var singlePrice in cost)
+        {
+            InventoryManager.PlayerTryPay(singlePrice.Key, singlePrice.Value);
+        }
 
         Destroy(gameObject);
     }
