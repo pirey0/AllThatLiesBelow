@@ -19,9 +19,13 @@ PrefabInstance:
       propertyPath: m_Size.x
       value: 2.125
       objectReference: {fileID: 0}
+    - target: {fileID: 4956452875583665653, guid: 19fbc9777a2bf6240af49b2b685d7fe5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.875
+      objectReference: {fileID: 0}
     - target: {fileID: 6653240713815217932, guid: 19fbc9777a2bf6240af49b2b685d7fe5, type: 3}
       propertyPath: m_Name
-      value: CrateWider
+      value: CrateWider Variant
       objectReference: {fileID: 0}
     - target: {fileID: 9006310891839704574, guid: 19fbc9777a2bf6240af49b2b685d7fe5, type: 3}
       propertyPath: m_LocalPosition.x
