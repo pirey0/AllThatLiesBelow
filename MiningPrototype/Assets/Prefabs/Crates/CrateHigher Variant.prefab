@@ -25,11 +25,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4956452875583665653, guid: 19fbc9777a2bf6240af49b2b685d7fe5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.25
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6653240713815217932, guid: 19fbc9777a2bf6240af49b2b685d7fe5, type: 3}
       propertyPath: m_Name
-      value: CrateHigher
+      value: CrateHigher Variant
       objectReference: {fileID: 0}
     - target: {fileID: 9006310891839704574, guid: 19fbc9777a2bf6240af49b2b685d7fe5, type: 3}
       propertyPath: m_LocalPosition.x

@@ -13,6 +13,9 @@ public class Crate : MineableObject
     }
     public override Vector2 GetPosition()
     {
-        return transform.position + (spriteRenderer.size.y / 2) * Vector3.up;
+        if (overlayAnimator != null)
+            return overlayAnimator.transform.position;
+        else
+            return transform.position + (spriteRenderer.size.y / 2) * transform.up;
     }
 }

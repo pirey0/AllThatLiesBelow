@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MineableObject : MonoBehaviour, IMinableNonGrid
 {
-    [SerializeField] PassiveSpriteAnimator overlayAnimator;
+    [SerializeField] protected PassiveSpriteAnimator overlayAnimator;
     [SerializeField] float damageMultiplier = 1;
 
     [SerializeField] protected ItemAmountPair contains;
