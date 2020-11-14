@@ -108,6 +108,7 @@ public class DialogIterator
                     SetStateTo(DialogState.Answer);
 
                     //Doing this here is quite dirty!
+                    InventoryManager.ForcePlayerInventoryClose();
                     ProgressionHandler.Instance.Aquired(topic);
                     return;
                 }
