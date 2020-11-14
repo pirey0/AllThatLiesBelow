@@ -11,7 +11,7 @@ public class TooltipHandler : Singleton<TooltipHandler>
 
     private void Update()
     {
-        transform.position = Util.MouseToWorld(CameraController.Instance.Camera);
+        transform.position = Util.MouseToWorld();
     }
 
     public void Display(Transform target, string text, string subText)

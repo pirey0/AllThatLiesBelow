@@ -70,7 +70,9 @@ public class InventoryManager
         return Instance.playerInventory.TryRemove(new ItemAmountPair(itemType, amount));
     }
 
-    public static void TryMove(Inventory inventory, int stackIndex)
+
+    [System.Obsolete("Click transfer system, outdated")]
+    private static void TryMove(Inventory inventory, int stackIndex)
     {
         //player to other
         if (inventory == Instance.playerInventory)

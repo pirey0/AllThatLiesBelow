@@ -3,11 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Altar : MonoBehaviour, IInteractable
+public interface IDropReceiver
+{
+    bool WouldTakeDrop(ItemAmountPair pair);
+    void BeginHoverWith(ItemAmountPair pair);
+    void EndHover();
+    void HoverUpdate(ItemAmountPair pair);
+    void ReceiveDrop(ItemAmountPair pair);
+}
+
+public class Altar : MonoBehaviour, IInteractable, IDropReceiver
 {
     [SerializeField] Transform cameraTarget;
     [SerializeField] AltarDialogVisualizer visualizer;
     [SerializeField] string testDialog;
+    [SerializeField] SpriteRenderer overlay;
 
     bool inInteraction = false;
     DialogIterator iterator;
@@ -48,7 +58,7 @@ public class Altar : MonoBehaviour, IInteractable
         if (!inInteraction)
             return;
 
-        if(iterator.CurrentSection == null)
+        if (iterator.CurrentSection == null)
         {
             NotifyForcedEnd?.Invoke();
             return;
@@ -94,5 +104,46 @@ public class Altar : MonoBehaviour, IInteractable
     public void UnsubscribeToForceQuit(Action action)
     {
         NotifyForcedEnd -= action;
+    }
+
+    public bool WouldTakeDrop(ItemAmountPair pair)
+    {
+        if (iterator == null)
+            return false;
+
+        if (iterator.State == DialogState.AwaitPayment)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void BeginHoverWith(ItemAmountPair pair)
+    {
+        Debug.Log("Begin hover with: " + pair.type);
+        overlay.enabled = true;
+    }
+
+    public void EndHover()
+    {
+        overlay.enabled = false;
+        Debug.Log("End Hover");
+    }
+
+    public void ReceiveDrop(ItemAmountPair pair)
+    {
+        Debug.Log("Try receive drop of " + pair.type);
+    }
+
+    public void HoverUpdate(ItemAmountPair pair)
+    {
+        if (WouldTakeDrop(pair))
+        {
+            overlay.color = Color.green;
+        }
+        else
+        {
+            overlay.color = Color.red;
+        }
     }
 }

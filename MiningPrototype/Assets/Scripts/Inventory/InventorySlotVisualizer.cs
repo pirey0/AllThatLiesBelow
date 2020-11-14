@@ -63,7 +63,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.position = Util.MouseToWorld(CameraController.Instance.Camera);
+        rectTransform.position = Util.MouseToWorld();
         UpdatePlacingPreview();
     }
 
@@ -85,7 +85,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
     {
         while (inDrag)
         {
-            rectTransform.position = Util.MouseToWorld(CameraController.Instance.Camera);
+            rectTransform.position = Util.MouseToWorld();
             UpdatePlacingPreview();
             yield return null;
         }
@@ -93,18 +93,17 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
     private void UpdatePlacingPreview()
     {
-        ItemInfo info = ItemsData.GetItemInfo(type);
-        if (!info.CanBePlaced)
-            return;
-
         Vector2 distance = rectTransform.position - rectTransform.parent.position;
+        var info = ItemsData.GetItemInfo(type);
+
         if (distance.magnitude > 2)
         {
             if (inUI)
             {
-                ItemPlacingHandler.Instance?.Show(type);
+                ItemPlacingHandler.Instance?.Show(new ItemAmountPair(type, amount));
                 inUI = false;
-                DisableVisuals();
+                if (info.CanBePlaced)
+                    DisableVisuals();
             }
             ItemPlacingHandler.Instance?.UpdatePosition(rectTransform.position);
         }

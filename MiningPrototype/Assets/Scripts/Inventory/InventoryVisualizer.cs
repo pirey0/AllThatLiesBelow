@@ -97,9 +97,9 @@ public class InventoryVisualizer : ScalingUIElementBase
             InventorySlotVisualizer newSlot = Instantiate(inventorySlotPrefab, gridLayoutParent);
             newSlot.Display(itemsToVisualize[i]);
 
-            //Set button so click tries to move items
-            int index = i;
-            newSlot.SetButtonToSlot(() => InventoryManager.TryMove(inventory, index));
+            //Old System
+            //int index = i;
+            //newSlot.SetButtonToSlot(() => InventoryManager.TryMove(inventory, index));
         }
     }
 
