@@ -111,11 +111,7 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
         if (iterator == null)
             return false;
 
-        if (iterator.State == DialogState.AwaitPayment)
-        {
-            return true;
-        }
-        return false;
+        return iterator.WouldAcceptPaymentWith(pair);
     }
 
     public void BeginHoverWith(ItemAmountPair pair)
@@ -133,6 +129,9 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
     public void ReceiveDrop(ItemAmountPair pair)
     {
         Debug.Log("Try receive drop of " + pair.type);
+
+        if (iterator.WouldAcceptPaymentWith(pair))
+            iterator.PayWith(pair);
     }
 
     public void HoverUpdate(ItemAmountPair pair)

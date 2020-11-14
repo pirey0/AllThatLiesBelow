@@ -13,7 +13,6 @@ public class InventoryManager
     bool playerInventoryOpen;
 
     public event System.Action<ItemAmountPair> PlayerCollected;
-    public event System.Action<ItemAmountPair> AttemptedTransfer;
 
     private static InventoryManager GetInstance()
     {
@@ -70,52 +69,9 @@ public class InventoryManager
         return Instance.playerInventory.TryRemove(new ItemAmountPair(itemType, amount));
     }
 
-
-    [System.Obsolete("Click transfer system, outdated")]
-    private static void TryMove(Inventory inventory, int stackIndex)
+    public static bool PlayerHas(ItemType type, int amount)
     {
-        //player to other
-        if (inventory == Instance.playerInventory)
-        {
-            if (Instance.otherInventory != null)
-            {
-                if (Instance.playerInventoryOpen)
-                {
-                    var result = Instance.playerInventory.RemoveStack(stackIndex);
-                    if (result != null)
-                        Instance.otherInventory.Add(result);
-                    Debug.Log("InventoryResult: Moved to other");
-                }
-                else
-                {
-                    Debug.Log("InventoryError: Player inventory closed");
-                }
-            }
-            else
-            {
-                Debug.Log("InventoryResult: Other inventory closed, attempting payment");
-                Instance.AttemptedTransfer?.Invoke(inventory[stackIndex]);
-            }
-        }
-        //other to player
-        else if (inventory == Instance.otherInventory)
-        {
-            if (Instance.playerInventoryOpen)
-            {
-                var result = Instance.otherInventory.RemoveStack(stackIndex);
-                if (result != null)
-                    Instance.playerInventory.Add(result);
-
-                Debug.Log("InventoryResult: Moved to player");
-            }
-            else
-            {
-                Debug.Log("InventoryError: Player inventory closed");
-            }
-        }
-        else
-        {
-            Debug.Log("InventoryError: Moving failed unknown error");
-        }
+        return Instance.playerInventory.Contains(new ItemAmountPair(type, amount));
     }
+
 }

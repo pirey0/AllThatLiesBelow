@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,6 +32,21 @@ public class Inventory
     public void Add(ItemAmountPair pair)
     {
         Add(pair.type, pair.amount);
+    }
+
+    public bool Contains(ItemAmountPair pair)
+    {
+        int id = GetStackIdFor(pair.type);
+
+        if (id >= 0)
+        {
+            if (content[id].amount >= pair.amount)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public bool TryRemove(ItemAmountPair pair)
@@ -102,6 +118,8 @@ public class Inventory
 
         return list.ToArray();
     }
+
+
 }
 
 [System.Serializable]

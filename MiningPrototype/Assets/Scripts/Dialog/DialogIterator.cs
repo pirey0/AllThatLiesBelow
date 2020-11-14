@@ -73,7 +73,27 @@ public class DialogIterator
         }
     }
 
-    private void OnAttemptedTransfer(ItemAmountPair obj)
+    public bool WouldAcceptPaymentWith(ItemAmountPair obj)
+    {
+        if (state != DialogState.AwaitPayment)
+            return false;
+
+        if (payment.ToLowerInvariant() == obj.type.ToString().ToLowerInvariant())
+        {
+            if (obj.amount >= amount)
+            {
+                if (InventoryManager.PlayerHas(obj.type, (int)amount))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+
+    }
+
+    public void PayWith(ItemAmountPair obj)
     {
         Debug.Log("Payment attempted: " + obj.amount + " " + obj.type.ToString() + " for " + amount + payment);
 
@@ -89,17 +109,12 @@ public class DialogIterator
 
                     //Doing this here is quite dirty!
                     ProgressionHandler.Instance.Aquired(topic);
+                    return;
                 }
             }
-            else
-            {
-                //Not enough
-            }
         }
-        else
-        {
-            //Wrong thing
-        }
+
+        Debug.LogError("Payment Failed");
     }
 
     private void SetCurrentTo(IDialogSection section)
@@ -122,11 +137,6 @@ public class DialogIterator
 
     private void SetStateTo(DialogState newState)
     {
-        if (state == DialogState.AwaitPayment && newState != DialogState.AwaitPayment)
-            InventoryManager.Instance.AttemptedTransfer -= OnAttemptedTransfer;
-        else if (state != DialogState.AwaitPayment && newState == DialogState.AwaitPayment)
-            InventoryManager.Instance.AttemptedTransfer += OnAttemptedTransfer;
-
         state = newState;
         StateChanged?.Invoke();
     }
