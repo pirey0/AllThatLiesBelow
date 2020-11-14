@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class TileMapHelper
 {
+    public static byte DirectNeighboursSolidBitMap { get => 0b01011010; }
+
     public static Vector2Int[] GetNeighboursIndiciesOf(int x, int y)
     {
         return new Vector2Int[]
@@ -16,6 +18,17 @@ public static class TileMapHelper
             new Vector2Int(x-1,y-1),
             new Vector2Int(x,y-1),
             new Vector2Int(x+1,y-1)
+        };
+    }
+
+    public static Vector2Int[] GetDirectNeighboursIndiciesOf(int x, int y)
+    {
+        return new Vector2Int[]
+        {
+            new Vector2Int(x,y+1),
+            new Vector2Int(x-1,y),
+            new Vector2Int(x+1,y),
+            new Vector2Int(x,y-1)
         };
     }
 
@@ -108,15 +121,19 @@ public static class TileMapHelper
     }
     public static Color StabilityToColor(float stability)
     {
-
-        if (stability > 20)
-            return Color.white;
-        else if (stability > 10)
-            return Color.grey;
-        else if (stability >= 0)
-            return Color.red;
+        float v = stability / 100;
+        if (stability >= 0)
+            return new Color(v, v, v, 1);
         else
             return Color.black;
+    }
+
+    public static bool OnEdgeOfMap(TileMap map, Vector2Int position)
+    {
+        if (position.x == 0 || position.y == 0 || position.x == map.Size - 1 || position.y == map.Size - 1)
+            return true;
+
+        return false;
     }
 
     public static bool IsAllAirAt(TileMap map, Vector2Int[] locations)
@@ -152,7 +169,7 @@ public static class TileMapHelper
         {
             if (map.IsAirAt(coordinate.x, coordinate.y))
             {
-                coordinate.y ++;
+                coordinate.y++;
                 count++;
             }
             else

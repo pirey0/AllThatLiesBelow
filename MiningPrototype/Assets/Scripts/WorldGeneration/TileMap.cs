@@ -17,12 +17,14 @@ public class TileMap : Singleton<TileMap>
     [Header("Debug")]
     [SerializeField] bool drawStabilityTexture;
     [SerializeField] bool drawStabilityGizmos;
+    [SerializeField] bool toolTipStability;
     [SerializeField] int stabilityGizmosSize;
     [SerializeField] PlayerController player;
 
     Tile[,] map;
     TileMapGenerator generator;
     Texture2D stabilityDebugTexture;
+    List<Vector2Int> unstableTiles;
 
     private int size;
     public int Size { get => size; }
@@ -33,14 +35,68 @@ public class TileMap : Singleton<TileMap>
         set => SetMapRawAt(x, y, value);
     }
 
+    public Tile this[Vector2Int v]
+    {
+        get => GetTileAt(v.x, v.y);
+        set => SetMapRawAt(v.x, v.y, value);
+    }
+
     private void Start()
     {
+        unstableTiles = new List<Vector2Int>();
         tilemap.GetComponent<GridElement>()?.Setup(this);
         damageOverlayTilemap.GetComponent<GridElement>()?.Setup(this);
         oreTilemap.GetComponent<GridElement>()?.Setup(this);
 
         RunCompleteGeneration();
+
+        InvokeRepeating("UpdateUnstableTiles", 1, 1);
     }
+
+    private void Update()
+    {
+        if(toolTipStability)
+        {
+            TooltipHandler.Instance?.Display(transform, this[Util.MouseToWorld().ToGridPosition()].Stability.ToString(), "");
+        }   
+    }
+
+    private void UpdateUnstableTiles()
+    {
+        Debug.Log("Updating " + unstableTiles.Count + " unstable tiles.");
+        int counter = 0;
+
+        
+        for (int i = 0; i < unstableTiles.Count;)
+        {
+            if (counter++ > 1000)
+            {
+                Debug.Log("Infinite Loop");
+                break;
+            }
+
+            var t = this[unstableTiles[i]];
+            int x = unstableTiles[i].x;
+            int y = unstableTiles[i].y;
+
+            if(t.Stability <= generationSettings.CollapseThreshhold)
+            {
+                unstableTiles.RemoveAt(i);
+                generator.CollapseAt(x,y, updateVisuals: true);
+            }
+            else if(t.Stability <= generationSettings.UnstableThreshhold)
+            {
+                t.Stability -= 1;
+                SetMapRawAt(x, y, t);
+                i++;
+            }
+            else
+            {
+                unstableTiles.RemoveAt(i);
+            }
+        }
+    }
+
 
     [Button]
     private void RunCompleteGeneration()
@@ -49,6 +105,13 @@ public class TileMap : Singleton<TileMap>
         generator.RunCompleteGeneration();
         UpdateVisuals();
     }
+
+    public void AddUnstableTile(Vector2Int unstableTile)
+    {
+        if (!unstableTiles.Contains(unstableTile))
+            unstableTiles.Add(unstableTile);
+    }
+
 
     private void Setup()
     {
