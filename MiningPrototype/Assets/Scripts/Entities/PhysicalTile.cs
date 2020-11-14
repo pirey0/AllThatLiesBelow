@@ -8,7 +8,7 @@ public interface IEntity
 
 }
 
-public class PhysicalTile : MonoBehaviour, IEntity
+public class PhysicalTile : MineableObject, IEntity
 {
     [SerializeField] SpriteRenderer renderer;
 
