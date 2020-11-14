@@ -15,6 +15,9 @@ public class Hut : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.GetComponent<PlayerController>() == null)
+            return;
+
         //enable this section when you want the hut to stay open when the player digs into the ground
         //Debug.LogWarning(collision.transform.position + 0.5f * Vector3.up + " > " + transform.position + ((collision.transform.position.y - 0.5f) > transform.position.y).ToString());
         //if ((collision.transform.position.y+0.5f) > transform.position.y)
@@ -23,6 +26,9 @@ public class Hut : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.GetComponent<PlayerController>() == null)
+            return;
+
         Enter();
     }
 
