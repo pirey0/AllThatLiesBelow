@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TileMapGenerator
@@ -72,9 +73,9 @@ public class TileMapGenerator
             }
         }
 
-        for (int px = -1; px < pass.Size.x+1; px++)
+        for (int px = -1; px < pass.Size.x + 1; px++)
         {
-            for (int py = -1; py < pass.Size.y+1; py++)
+            for (int py = -1; py < pass.Size.y + 1; py++)
             {
                 spawnCheckLocations.Add(new Vector2Int(x + px, y + py));
             }
@@ -95,58 +96,106 @@ public class TileMapGenerator
 
     public void UpdatePropertiesAt(int x, int y)
     {
-        CalcuateStabilityAt(x, y);
         CalculateNeighboursBitmaskAt(x, y);
-
+        ApproxCalculateStabilityAt(x, y);
 
         foreach (var nIndex in TileMapHelper.GetNeighboursIndiciesOf(x, y))
         {
-            CalcuateStabilityAt(nIndex.x, nIndex.y);
-
-            if (ShouldCollapseAt(nIndex.x, nIndex.y))
-            {
-                CollapseAt(nIndex.x, nIndex.y);
-            }
-
             CalculateNeighboursBitmaskAt(nIndex.x, nIndex.y);
+
+            ApproxCalculateStabilityAt(nIndex.x, nIndex.y);
         }
     }
     private bool ShouldCollapseAt(int x, int y)
     {
-        return map.IsBlockAt(x, y) && map.GetTileAt(x, y).Stability <= 10;
+        return map.IsBlockAt(x, y) && map.GetTileAt(x, y).Stability <= settings.CollapseThreshhold;
     }
 
-    private void CollapseAt(int x, int y)
+    public void CollapseAt(int x, int y, bool updateVisuals)
     {
-        map.SetMapAt(x, y, Tile.Air, updateProperties: true, updateVisuals: false);
+        map.SetMapAt(x, y, Tile.Air, updateProperties: true, updateVisuals);
         var go = GameObject.Instantiate(settings.PhysicalTilePrefab, new Vector3(x + 0.5f, y + 0.5f, 0), Quaternion.identity);
         go.GetComponent<PhysicalTile>().Setup(map);
     }
 
     private void CalculateStabilityAll()
     {
-        Util.IterateXY(settings.Size, (x, y) => CalcuateStabilityAt(x, y));
+        Util.IterateXY(settings.Size, (x, y) => CalculateBaseAndLeftStabilityAt(x, y));
+
+        //Top
+        for (int y = settings.Size; y >= 0; y--)
+        {
+            for (int x = 0; x < settings.Size; x++)
+            {
+                AddStabilityFrom(x, y, new Vector2Int(0, 1));
+            }
+        }
+
+        for (int y = 0; y < settings.Size; y++)
+        {
+            //Left
+            for (int x = 0; x < settings.Size; x++)
+            {
+                AddStabilityFrom(x, y, new Vector2Int(-1, 0));
+            }
+            //Right
+            for (int x = settings.Size; x >= 0; x--)
+            {
+                AddStabilityFrom(x, y, new Vector2Int(1, 0));
+                //CheckToAddUnstable(x, y); <- No instability from start
+            }
+        }
+
     }
 
-    private void CalcuateStabilityAt(int x, int y)
+    //To change
+    private void ApproxCalculateStabilityAt(int x, int y)
+    {
+        CalculateBaseAndLeftStabilityAt(x, y);
+        AddStabilityFrom(x, y, new Vector2Int(0, 1));
+        AddStabilityFrom(x, y, new Vector2Int(1, 0));
+        AddStabilityFrom(x, y, new Vector2Int(-1, 0));
+        CheckToAddUnstable(x, y);
+    }
+
+    private void CalculateBaseAndLeftStabilityAt(int x, int y)
     {
         if (map.IsAirAt(x, y))
             return;
 
-        int[] stabilityEffect = { 0, 5, 0, 10, 10, 0, 20, 0 };
-        var neighbours = TileMapHelper.GetNeighboursIndiciesOf(x, y);
+        var tile = map.GetTileAt(x, y);
 
-        int stability = 0;
-        for (int i = 0; i < neighbours.Length; i++)
-        {
-            var neighbour = neighbours[i];
-            stability += map.IsBlockAt(neighbour.x, neighbour.y) ? stabilityEffect[i] : 0;
-        }
+        if ((tile.NeighbourBitmask & 64) == 64 || TileMapHelper.OnEdgeOfMap(map, new Vector2Int(x, y)))
+            tile.Stability = 100;
+        else
+            tile.Stability = 0;
 
+
+        map[x, y] = tile;
+    }
+
+    private void AddStabilityFrom(int x, int y, Vector2Int offset)
+    {
+        if (map.IsAirAt(x, y))
+            return;
 
         var tile = map.GetTileAt(x, y);
-        tile.Stability = stability;
-        map.SetMapAt(x, y, tile, updateProperties: false, updateVisuals: false);
+        if (tile.Stability >= 100)
+        {
+            return;
+        }
+
+        tile.Stability += map[x + offset.x, y + offset.y].Stability / 4;
+        map[x, y] = tile;
+    }
+
+    private void CheckToAddUnstable(int x, int y)
+    {
+        var t = map[x, y];
+        if (t.Stability > -1 && t.Stability <= settings.UnstableThreshhold)
+        {
+            map.AddUnstableTile(new Vector2Int(x, y));
+        }
     }
 
     private void PopulateSnow()

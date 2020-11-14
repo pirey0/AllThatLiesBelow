@@ -31,5 +31,8 @@ public class GenerationSettings : ScriptableObject
     public OrePass[] OrePasses;
     public RockPass[] RockPasses;
 
+    public int UnstableThreshhold = 40;
+    public int CollapseThreshhold = 40;
+
     public GameObject PhysicalTilePrefab;
 }
