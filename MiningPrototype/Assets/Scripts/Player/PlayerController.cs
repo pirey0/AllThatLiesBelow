@@ -121,7 +121,10 @@ public class PlayerController : InventoryOwner, IEntity
                     if (currentInteractable == null)
                         TryInteract();
                     else
-                        TryStopInteracting();
+                    {
+                        if (eventSystem.IsPointerOverGameObject() == false)
+                            TryStopInteracting();
+                    }
                 }
             }
             else
