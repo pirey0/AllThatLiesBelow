@@ -8,12 +8,10 @@ public class InventoryCollectDisplayer : MonoBehaviour
 {
     [SerializeField] Image backdrop;
     [SerializeField] InventoryCollectDisplayElement prefab;
-    Camera main;
 
     private void Start()
     {
         InventoryManager.Instance.PlayerCollected += OnPlayerCollected;
-        main = Camera.main;
     }
 
     private void FixedUpdate()
@@ -24,7 +22,7 @@ public class InventoryCollectDisplayer : MonoBehaviour
 
     private void OnPlayerCollected(ItemAmountPair obj)
     {
-        Vector3 position = Util.MouseToWorld(main);
+        Vector3 position = Util.MouseToWorld();
         var go = Instantiate(prefab, position, Quaternion.identity, transform);
         go.SetItem(obj);
     }

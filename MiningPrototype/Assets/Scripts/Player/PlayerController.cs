@@ -148,7 +148,7 @@ public class PlayerController : InventoryOwner, IEntity
 
     private void TryInteract()
     {
-        var hits = DoRaycast2DFromMouse();
+        var hits = Util.RaycastFromMouse();
 
         currentInteractable = null;
         foreach (var hit in hits)
@@ -166,13 +166,6 @@ public class PlayerController : InventoryOwner, IEntity
                 break;
             }
         }
-    }
-
-    private RaycastHit2D[] DoRaycast2DFromMouse()
-    {
-        Vector3 mousePos = Input.mousePosition;
-        Ray r = camera.ScreenPointToRay(mousePos);
-        return Physics2D.RaycastAll(r.origin, r.direction, 100000);
     }
 
     private void OnInteractableForceQuit()
@@ -196,7 +189,7 @@ public class PlayerController : InventoryOwner, IEntity
 
     private void UpdateNonGridDigTarget()
     {
-        var hits = DoRaycast2DFromMouse();
+        var hits = Util.RaycastFromMouse();
 
         IMinableNonGrid newTarget = null;
         foreach (var hit in hits)
