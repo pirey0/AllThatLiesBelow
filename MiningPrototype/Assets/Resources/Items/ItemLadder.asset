@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ItemLadder
   m_EditorClassIdentifier: 
   ItemType: 6
-  DisplayName: 
+  DisplayName: Ladder
   DisplayTooltip: 
   DisplaySprite: {fileID: 21300000, guid: 49e17535157056a4b94e3a0c95f39128, type: 3}
   CanBePlaced: 1
