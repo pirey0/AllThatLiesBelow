@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class SupportBase : MonoBehaviour
+public abstract class SupportBase : MineableObject
 {
     [SerializeField] protected SpriteRenderer front, back;
     [SerializeField] protected int maxHeight;
