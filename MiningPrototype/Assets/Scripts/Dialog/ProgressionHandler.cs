@@ -9,7 +9,10 @@ public class ProgressionHandler : Singleton<ProgressionHandler>
     [SerializeField] float speedPerBlessing, digSpeedPerBlessing;
 
     List<string> aquiredList = new List<string>();
+    List<ItemAmountPair> orderForNextDay = new List<ItemAmountPair>();
 
+    [SerializeField] NewOrderCrateSpawner newOrderCrateSpawner;
+ 
     private float speedMultiplyer = 1;
     private float digSpeedMultiplyer = 1;
     private int extraDrop = 1;
@@ -36,6 +39,7 @@ public class ProgressionHandler : Singleton<ProgressionHandler>
 
     public void StartNextDay()
     {
+        //sacrifices
         dailyPurchaseExaused = false;
 
         foreach (var aquired in aquiredList)
@@ -61,6 +65,15 @@ public class ProgressionHandler : Singleton<ProgressionHandler>
         }
 
         aquiredList.Clear();
+
+        //order
+        newOrderCrateSpawner.SpawnOrder(orderForNextDay);
+        orderForNextDay.Clear();
+    }
+
+    public void AddOrderForNextDay(List<ItemAmountPair> newOrder)
+    {
+        orderForNextDay.AddRange(newOrder);
     }
 
     public float GetPriceOf(string reward, string resource)

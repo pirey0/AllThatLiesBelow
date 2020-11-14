@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2388821100420778844}
   - component: {fileID: 2388821100420778847}
+  - component: {fileID: 2388821099892900699}
   m_Layer: 0
   m_Name: ProgressionHandler
   m_TagString: Untagged
@@ -47,3 +48,30 @@ MonoBehaviour:
   alreadyTradedDialog: Test2_1
   speedPerBlessing: 3
   digSpeedPerBlessing: 3
+  newOrderCrateSpawner: {fileID: 2388821099892900699}
+--- !u!114 &2388821099892900699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2388821100420778845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 659643f109dfdf748a7271996e9803f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toSpawnForTesting:
+  - type: 6
+    amount: 25
+  - type: 4
+    amount: 8
+  - type: 7
+    amount: 33
+  boxPrefabs:
+  - {fileID: 38971001031533995, guid: 19fbc9777a2bf6240af49b2b685d7fe5, type: 3}
+  - {fileID: 8183834578867117475, guid: 0bdd952744c8c0740a7bca6ea5db5c5c, type: 3}
+  - {fileID: 458482118684250189, guid: a3dd813a25b7d62428f5aedaec7adaaa, type: 3}
+  - {fileID: 5732743233576879497, guid: 430d7d77dc6b46d4791dbdef9f4e9c55, type: 3}
+  - {fileID: 5473750792176655221, guid: 8da7791bf9f93fe49a86c11c045ea2e4, type: 3}
+  boxSpawnLocation: {x: 23, y: 90, z: 0}

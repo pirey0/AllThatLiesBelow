@@ -144,9 +144,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4795206521112447199}
   - component: {fileID: 4795206521112447196}
+  - component: {fileID: 5292199689761788640}
   - component: {fileID: 4795206521112447197}
   - component: {fileID: 4795206521112447198}
-  - component: {fileID: 5292199689761788640}
   m_Layer: 5
   m_Name: UINewOrderElement
   m_TagString: Untagged
@@ -182,6 +182,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4795206521112447200}
   m_CullTransparentMesh: 0
+--- !u!114 &5292199689761788640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4795206521112447200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89e9c633969e98b4b95746690a26be94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 4795206521028861191}
+  elementType: 0
+  color_zero: {r: 0.64705884, g: 0.6509804, b: 0.5803922, a: 1}
+  color_moreThanZero: {r: 0.5411765, g: 0.18431373, b: 0.31764707, a: 1}
 --- !u!114 &4795206521112447197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,19 +283,3 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &5292199689761788640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4795206521112447200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89e9c633969e98b4b95746690a26be94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 4795206521028861191}
-  elementName: Name
-  color_zero: {r: 0.64705884, g: 0.6509804, b: 0.5803922, a: 1}
-  color_moreThanZero: {r: 0.5411765, g: 0.18431373, b: 0.31764707, a: 1}

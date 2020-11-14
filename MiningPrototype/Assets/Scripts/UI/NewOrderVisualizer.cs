@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NaughtyAttributes.Test;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 
 public class NewOrderVisualizer : MonoBehaviour
 {
-    Dictionary<string, int> orderedElementsWithAmounts = new Dictionary<string, int>();
+    Dictionary<ItemType, int> orderedElementsWithAmounts = new Dictionary<ItemType, int>();
     [SerializeField] TMP_Text costText;
 
     [SerializeField] Button buyButton;
@@ -18,9 +19,9 @@ public class NewOrderVisualizer : MonoBehaviour
         UpdateCost();
     }
 
-    public void UpdateAmount(string elementName, int amount)
+    public void UpdateAmount(ItemType itemType, int amount)
     {
-        orderedElementsWithAmounts[elementName] = amount;
+        orderedElementsWithAmounts[itemType] = amount;
         UpdateCost();
     }
 
@@ -84,6 +85,13 @@ public class NewOrderVisualizer : MonoBehaviour
 
     public void Submit()
     {
+        List<ItemAmountPair> itemAmountPairs = new List<ItemAmountPair>();
+
+        foreach (KeyValuePair<ItemType, int> i in orderedElementsWithAmounts)
+            itemAmountPairs.Add(new ItemAmountPair(i.Key, i.Value));
+
+        ProgressionHandler.Instance.AddOrderForNextDay(itemAmountPairs);
+
         Destroy(gameObject);
     }
 }

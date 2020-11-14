@@ -7,7 +7,7 @@ public class MineableObject : MonoBehaviour, IMinableNonGrid
     [SerializeField] PassiveSpriteAnimator overlayAnimator;
     [SerializeField] float damageMultiplier = 1;
 
-    [SerializeField] ItemAmountPair contains;
+    [SerializeField] protected ItemAmountPair contains;
     [SerializeField] GameObject destroyEffects;
 
     float damage = 0;
