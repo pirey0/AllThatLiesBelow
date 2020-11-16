@@ -6,24 +6,10 @@ using UnityEngine.Tilemaps;
 [CreateAssetMenu(menuName ="TileMap Settings")]
 public class TileMapSettings : ScriptableObject
 {
+    public TileInfo[] TileInfos;
 
-    public TileBase[] GroundTiles;
-    public TileBase[] SnowTiles;
     public TileBase[] DamageOverlayTiles;
-    public TileBase[] OreTiles;
 
     public GameObject CrumbleEffects;
 
-    public ItemType[] TileToDropType;
-
-
-    public ItemType GetItemTypeForTile(TileType t)
-    {
-        int i = (int)t;
-
-        if (i >= TileToDropType.Length)
-            return ItemType.None;
-
-        return TileToDropType[i];
-    }
 }

@@ -11,7 +11,9 @@ public enum TileType
     Copper = 2,
     Gold = 3,
     Snow = 4,
-    Diamond = 5
+    Diamond = 5,
+    HardStone = 6,
+    BedStone = 7
 }
 
 public struct Tile

@@ -30,6 +30,8 @@ public class TileMapGenerator
 
         PupulateRocks();
 
+        PopulateBorders();
+
         CalculateNeighboursBitmask();
 
         CalculateStabilityAll();
@@ -39,6 +41,13 @@ public class TileMapGenerator
         stopwatch.Stop();
 
         Debug.Log("Update Duration: " + stopwatch.ElapsedMilliseconds + "ms");
+    }
+
+    private void PopulateBorders()
+    {
+        Util.IterateX(settings.Size, (x) => map[x, 0] = Tile.Make(TileType.BedStone));
+        Util.IterateX(settings.Size, (x) => map[0, x] = Tile.Make(TileType.BedStone));
+        Util.IterateX(settings.Size, (x) => map[settings.Size-1,x] = Tile.Make(TileType.BedStone));
     }
 
     private void ClearAllEntities()

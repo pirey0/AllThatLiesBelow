@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c44c8a584f6c2194fa5a252688113e23, type: 3}
+  m_Name: Tile_4_Snow
+  m_EditorClassIdentifier: 
+  Type: 4
+  ItemToDrop: 1
+  damageMultiplyer: 1
+  Targetable: 1
+  Tiles:
+  - {fileID: 11400000, guid: a36febf07089986479169c7da38520bc, type: 2}
+  - {fileID: 11400000, guid: 8151e566e662bc249b0383ccdbb9ae05, type: 2}
+  - {fileID: 11400000, guid: 6aeb7cad737c41245a11f36ad41781c6, type: 2}
+  - {fileID: 11400000, guid: 0d5c7238f60d1294abed550a539140ca, type: 2}
+  - {fileID: 11400000, guid: 1cc8855a70146b349ad0a017cd225794, type: 2}
+  - {fileID: 11400000, guid: 0f1dfdeeb2a169a469c5834dff4e0130, type: 2}
+  - {fileID: 11400000, guid: fe37def53e6df174ea5dcdba8f33b2b5, type: 2}
+  - {fileID: 11400000, guid: fa75d00b4091c834697796f8fcea0fa0, type: 2}
+  - {fileID: 11400000, guid: 293a1390e8557ad4aa60bb522c30bf47, type: 2}
+  - {fileID: 11400000, guid: b932fde257616af4bbc4fec2701d8afd, type: 2}
+  - {fileID: 11400000, guid: 17c250a98f06f274a99bd244057dd07c, type: 2}
+  - {fileID: 11400000, guid: cdb30c187eda48d41b53cda8e7185d6b, type: 2}
+  - {fileID: 11400000, guid: bef52226350c7464fba02994a043eb66, type: 2}
+  - {fileID: 11400000, guid: 94e9ae89c8291114d8519f23ee509130, type: 2}
+  - {fileID: 11400000, guid: ad1968151621ac844a4dccc2faf05ad0, type: 2}
+  - {fileID: 11400000, guid: 9a2f4af39357507459ab951e1fa1d915, type: 2}
+  - {fileID: 11400000, guid: 4c3fc03b6dbc2064b89f19a46e3e25d0, type: 2}
+  - {fileID: 11400000, guid: 9af1f9ad3e39e55439a7b8c2b2b29e9a, type: 2}
+  - {fileID: 11400000, guid: 6d06341a2303a1e42b5d3cfdf72e31ef, type: 2}
+  - {fileID: 11400000, guid: 4ca8a54f583ec0649b90cf958a07df57, type: 2}
+  - {fileID: 11400000, guid: 1b9163da950238141ace20442b95b588, type: 2}
+  - {fileID: 11400000, guid: 21b6072e40abda1469b768652b390364, type: 2}
+  - {fileID: 11400000, guid: 65862ad9e0d0651409deab20dd08ed1c, type: 2}
+  - {fileID: 11400000, guid: ac7186f2e90103f41a3093188c26dde2, type: 2}
+  - {fileID: 11400000, guid: 6152503e6d8fa664aa002e154fb16e28, type: 2}
+  - {fileID: 11400000, guid: 9f4dc6cab11b3c54085aac8470eca1d1, type: 2}
+  - {fileID: 11400000, guid: 9d4df9b4aa4431149a25aa343791bf05, type: 2}
+  - {fileID: 11400000, guid: 5b472e4040f2f7c46ad6b8937847dff9, type: 2}
+  - {fileID: 11400000, guid: af67fd57fac12d34eb505305227bdf7a, type: 2}
+  - {fileID: 11400000, guid: 4d869ad1c4ffaff4d8362ba7c7c122ab, type: 2}
+  - {fileID: 11400000, guid: 6477f55437bd41a40a16fdbc2f590d13, type: 2}
+  - {fileID: 11400000, guid: 2d4856f2010dc0b41bb5a3012435ba30, type: 2}
+  - {fileID: 11400000, guid: 40675fe55291fe34384a396338fd9662, type: 2}
+  - {fileID: 11400000, guid: 8ab4c89abd8a9da41ae2f563baafe2f1, type: 2}
+  - {fileID: 11400000, guid: 81a98e5daea8d1c448b6445582a872ff, type: 2}
+  - {fileID: 11400000, guid: d4951b286ad2a30428dc20794c0230dc, type: 2}
+  - {fileID: 11400000, guid: dbe285e52e09f4e4183563ec55ca48fb, type: 2}
+  - {fileID: 11400000, guid: b4ac11f1c1b1c824bbb2bb14dbcfb8e6, type: 2}
+  - {fileID: 11400000, guid: 5b2e7ad53eb3361418cd9752a5349785, type: 2}
+  - {fileID: 11400000, guid: 560adf508d2deab479fa151449f629ae, type: 2}
+  - {fileID: 11400000, guid: b983f95b961ff814b864ab10ac999bfc, type: 2}
+  - {fileID: 11400000, guid: 5736873e0e9bb104c88d267c9cc90619, type: 2}
+  - {fileID: 11400000, guid: 463ae45c8e78d624485882bbbfb99212, type: 2}
+  - {fileID: 11400000, guid: e4e67dc416a5ab640a34a753cf39e2f3, type: 2}
+  - {fileID: 11400000, guid: 86922031bf422b245a6b264a7398e0a8, type: 2}
+  - {fileID: 11400000, guid: 44db0538d89c9164083f4070834169ec, type: 2}
+  - {fileID: 11400000, guid: c87785912a6b7894a8059bcb90fd3092, type: 2}
+  - {fileID: 11400000, guid: 59c7e75c8d906314189eadb8d2d1586f, type: 2}
+  UseTilesFromOtherInfo: 0
+  TileSourceInfo: {fileID: 0}
+  Overlay: {fileID: 0}

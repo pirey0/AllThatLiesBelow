@@ -112,6 +112,15 @@ public class TileMap : Singleton<TileMap>
         UpdateVisuals();
     }
 
+    public TileInfo GetTileInfo(TileType type)
+    {
+        if ((int)type < mapSettings.TileInfos.Length)
+            return mapSettings.TileInfos[(int)type];
+
+        return null;
+        return null;
+    }
+
     public void AddUnstableTile(Vector2Int unstableTile)
     {
         if (!unstableTiles.Contains(unstableTile))
@@ -175,7 +184,9 @@ public class TileMap : Singleton<TileMap>
             return false;
 
         Tile t = GetTileAt(x, y);
-        t.TakeDamage(amount);
+        TileInfo info = GetTileInfo(t.Type);
+
+        t.TakeDamage(amount*info.damageMultiplyer);
 
         if (t.Damage > 10)
         {
@@ -196,8 +207,10 @@ public class TileMap : Singleton<TileMap>
 
         if (playerCaused)
         {
-            ItemType itemType = mapSettings.GetItemTypeForTile(t.Type);
-            InventoryManager.PlayerCollects(itemType, UnityEngine.Random.Range(1, ProgressionHandler.Instance.ExtraDrop));
+            TileInfo info = GetTileInfo(t.Type);
+
+            if (info.ItemToDrop != ItemType.None)
+                InventoryManager.PlayerCollects(info.ItemToDrop, UnityEngine.Random.Range(1, ProgressionHandler.Instance.ExtraDrop));
         }
 
     }
@@ -257,7 +270,7 @@ public class TileMap : Singleton<TileMap>
     {
         tilemap.SetTile(new Vector3Int(x, y, 0), GetVisualTileFor(x, y));
         damageOverlayTilemap.SetTile(new Vector3Int(x, y, 0), GetVisualDestructableOverlayFor(x, y));
-        oreTilemap.SetTile(new Vector3Int(x, y, 0), GetVisualOreTileFor(x, y));
+        oreTilemap.SetTile(new Vector3Int(x, y, 0), GetVisualOverlayTileFor(x, y));
 
     }
 
@@ -276,13 +289,20 @@ public class TileMap : Singleton<TileMap>
 
         int tileIndex = Util.BITMASK_TO_TILEINDEX[tile.NeighbourBitmask];
 
-        //Casual random tile
-        if (tileIndex == 46)
+        TileInfo tileInfo = GetTileInfo(tile.Type);
+        TileBase tileVis = null;
+
+        if (tileInfo.UseTilesFromOtherInfo && tileInfo.TileSourceInfo != null)
         {
-            tileIndex = Util.PseudoRandomValue(x, y) > 0.5f ? 46 : 0;
+            tileInfo = tileInfo.TileSourceInfo;
         }
 
-        return tile.Type == TileType.Snow ? mapSettings.SnowTiles[tileIndex] : mapSettings.GroundTiles[tileIndex];
+        if (tileInfo.Tiles.Length >= 48)
+        {
+            tileVis = tileInfo.Tiles[tileIndex];
+        }
+
+        return tileVis;
     }
 
     private TileBase GetVisualDestructableOverlayFor(int x, int y)
@@ -291,13 +311,11 @@ public class TileMap : Singleton<TileMap>
         return mapSettings.DamageOverlayTiles[Mathf.FloorToInt(t.Damage)];
     }
 
-    private TileBase GetVisualOreTileFor(int x, int y)
+    private TileBase GetVisualOverlayTileFor(int x, int y)
     {
         var t = GetTileAt(x, y);
-        if ((int)t.Type < 2 || (int)t.Type == 4)
-            return null;
-
-        return mapSettings.OreTiles[(int)t.Type - 2];
+        var info = GetTileInfo(t.Type);
+        return info.Overlay;
     }
 
     private void OnGUI()
