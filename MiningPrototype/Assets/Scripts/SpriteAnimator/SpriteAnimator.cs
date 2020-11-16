@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SpriteAnimator : MonoBehaviour
 {
@@ -9,8 +10,7 @@ public class SpriteAnimator : MonoBehaviour
 
     [SerializeField] new SpriteRenderer renderer;
 
-    public delegate void SpriteChange(Sprite sprite);
-    public event SpriteChange OnSpriteChange;
+    public event Action<Sprite> OnSpriteChange;
 
     BasicSpriteAnimator basicSA = new BasicSpriteAnimator();
 
