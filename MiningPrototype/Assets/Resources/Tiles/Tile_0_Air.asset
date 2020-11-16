@@ -15,6 +15,7 @@ MonoBehaviour:
   Type: 0
   ItemToDrop: 0
   damageMultiplyer: 0
+  AirLike: 1
   Targetable: 0
   StabilityAffected: 0
   Tiles: []

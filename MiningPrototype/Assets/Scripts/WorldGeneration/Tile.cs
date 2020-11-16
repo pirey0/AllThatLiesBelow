@@ -47,8 +47,6 @@ public struct Tile
 
     public void TakeDamage(float amount)
     {
-        if (Type == TileType.Air)
-            return;
         Damage += amount;
     }
 

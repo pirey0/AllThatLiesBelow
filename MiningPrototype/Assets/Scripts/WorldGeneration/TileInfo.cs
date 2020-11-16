@@ -9,6 +9,8 @@ public class TileInfo : ScriptableObject
     public TileType Type = TileType.Air;
     public ItemType ItemToDrop = ItemType.None;
     public float damageMultiplyer = 1;
+
+    public bool AirLike = false;
     public bool Targetable = true;
     public bool StabilityAffected = true;
 

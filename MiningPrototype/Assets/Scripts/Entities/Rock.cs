@@ -42,7 +42,6 @@ public class Rock : TilemapCarvingEntity
         if (collision.collider.TryGetComponent(out IEntity entity))
         {
             float speed = collision.relativeVelocity.magnitude;
-            Debug.Log("Entity: " + entity);
             //Damage
         }
         else if (collision.collider.TryGetComponent(out GridElement gridElement))

@@ -28,6 +28,8 @@ public class TileMap : Singleton<TileMap>
 
     List<Vector2Int> unstableTiles = new List<Vector2Int>();
     List<GameObject> unstableTilesEffects = new List<GameObject>();
+    Dictionary<TileType, bool> IsAirLike;
+
 
     private int size;
     public int Size { get => size; }
@@ -53,9 +55,21 @@ public class TileMap : Singleton<TileMap>
         damageOverlayTilemap.GetComponent<GridElement>()?.Setup(this);
         oreTilemap.GetComponent<GridElement>()?.Setup(this);
 
+        PopulateIsAirLikeDictionary();
+        
         RunCompleteGeneration();
 
         StartCoroutine(UpdateUnstableTilesRoutine());
+    }
+
+    private void PopulateIsAirLikeDictionary()
+    {
+        IsAirLike = new Dictionary<TileType, bool>();
+
+        foreach (var info in mapSettings.TileInfos)
+        {
+            IsAirLike.Add(info.Type, info.AirLike);
+        }
     }
 
     private void Update()
@@ -171,12 +185,12 @@ public class TileMap : Singleton<TileMap>
 
     public bool IsAirAt(int x, int y)
     {
-        return GetTileAt(x, y).Type == TileType.Air;
+        return IsAirLike[GetTileAt(x, y).Type];
     }
 
     public bool IsBlockAt(int x, int y)
     {
-        return GetTileAt(x, y).Type != TileType.Air;
+        return !IsAirLike[GetTileAt(x, y).Type];
     }
 
     public Tile GetTileAt(int x, int y)

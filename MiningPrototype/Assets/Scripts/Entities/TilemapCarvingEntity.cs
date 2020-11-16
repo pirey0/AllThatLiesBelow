@@ -7,10 +7,8 @@ public abstract class TilemapCarvingEntity : MonoBehaviour, ITileUpdateReceiver,
 {
     [SerializeField] TileType type = TileType.CarvedEntity;
     [SerializeField] Vector2Int[] tilesToOccupy = new Vector2Int[] { Vector2Int.zero };
-    Rigidbody2D rigidbody;
 
     Vector2Int tilemapPos = new Vector2Int(-1, -1);
-
 
     public virtual void OnTileUpdated(int x, int y, Tile newTile)
     {
