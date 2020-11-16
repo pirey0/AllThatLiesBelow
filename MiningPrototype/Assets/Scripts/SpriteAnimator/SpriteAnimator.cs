@@ -9,6 +9,9 @@ public class SpriteAnimator : MonoBehaviour
 
     [SerializeField] new SpriteRenderer renderer;
 
+    public delegate void SpriteChange(Sprite sprite);
+    public event SpriteChange OnSpriteChange;
+
     BasicSpriteAnimator basicSA = new BasicSpriteAnimator();
 
     public SpriteAnimation Animation { get => basicSA.Animation; }
@@ -42,9 +45,13 @@ public class SpriteAnimator : MonoBehaviour
         if (renderer == null)
             return;
 
+        Sprite before = renderer.sprite;
         var sprite = basicSA.Update(Time.deltaTime);
 
-        if(sprite != null)
+        if (sprite != before)
+            OnSpriteChange?.Invoke(sprite);
+
+        if (sprite != null)
         renderer.sprite = sprite;
     }
 

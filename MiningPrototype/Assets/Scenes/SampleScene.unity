@@ -72355,8 +72355,8 @@ Transform:
   m_Father: {fileID: 1530585473}
   m_RootOrder: 60
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &1735093263
-CircleCollider2D:
+--- !u!61 &1735093263
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -72368,9 +72368,19 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0625, y: 0.0625}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5263158, y: 0.47368422}
+    oldSize: {x: 2.375, y: 2.375}
+    newSize: {x: 2, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 1
+  m_Size: {x: 2.375, y: 2.375}
+  m_EdgeRadius: 0
 --- !u!50 &1735093264
 Rigidbody2D:
   serializedVersion: 4
