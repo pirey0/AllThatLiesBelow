@@ -54,8 +54,6 @@ public class TileMap : Singleton<TileMap>
         tilemap.GetComponent<GridElement>()?.Setup(this);
         damageOverlayTilemap.GetComponent<GridElement>()?.Setup(this);
         oreTilemap.GetComponent<GridElement>()?.Setup(this);
-
-        PopulateIsAirLikeDictionary();
         
         RunCompleteGeneration();
 
@@ -175,6 +173,7 @@ public class TileMap : Singleton<TileMap>
 
         size = generationSettings.Size;
         generator = new TileMapGenerator(this, generationSettings);
+        PopulateIsAirLikeDictionary();
     }
 
     public void InitMap(int sizeX, int sizeY)
