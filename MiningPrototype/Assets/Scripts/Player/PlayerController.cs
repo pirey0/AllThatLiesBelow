@@ -271,7 +271,7 @@ public class PlayerController : InventoryOwner, IEntity
             if (nonGridDigTarget != null)
             {
                 nonGridDigTarget.Damage(Time.deltaTime * digSpeed);
-
+                miningParticles.transform.position = nonGridDigTarget.GetPosition();
                 TryEnableMiningVisuals();
             }
             else
@@ -280,6 +280,7 @@ public class PlayerController : InventoryOwner, IEntity
             }
         }
     }
+
 
     private void UpdateMiningParticlesPositions()
     {
