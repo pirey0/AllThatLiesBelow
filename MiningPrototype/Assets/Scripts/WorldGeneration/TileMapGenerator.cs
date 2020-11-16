@@ -107,14 +107,13 @@ public class TileMapGenerator
     public void UpdatePropertiesAt(int x, int y)
     {
         CalculateNeighboursBitmaskAt(x, y);
-        ApproxCalculateStabilityAt(x, y);
 
         foreach (var nIndex in TileMapHelper.GetNeighboursIndiciesOf(x, y))
         {
-            CalculateNeighboursBitmaskAt(nIndex.x, nIndex.y);
-
-            ApproxCalculateStabilityAt(nIndex.x, nIndex.y);
+           CalculateNeighboursBitmaskAt(nIndex.x, nIndex.y);
         }
+
+        PropagateStabilityUpdatesFrom(x, y);
     }
     private bool ShouldCollapseAt(int x, int y)
     {
@@ -131,82 +130,96 @@ public class TileMapGenerator
 
     private void CalculateStabilityAll()
     {
-        Util.IterateXY(settings.Size, (x, y) => CalculateBaseAndLeftStabilityAt(x, y));
+        Util.IterateXY(settings.Size, (x, y) => CalculateBaseStability(x, y));
 
-        //Top
         for (int y = settings.Size; y >= 0; y--)
         {
             for (int x = 0; x < settings.Size; x++)
             {
-                AddStabilityFrom(x, y, new Vector2Int(0, 1));
+                SetDirectionalStabilityAt(x, y, Direction.Up);
             }
         }
 
         for (int y = 0; y < settings.Size; y++)
         {
-            //Left
             for (int x = 0; x < settings.Size; x++)
             {
-                AddStabilityFrom(x, y, new Vector2Int(-1, 0));
+                SetDirectionalStabilityAt(x, y, Direction.Left);
             }
-            //Right
+
             for (int x = settings.Size; x >= 0; x--)
             {
-                AddStabilityFrom(x, y, new Vector2Int(1, 0));
-                //CheckToAddUnstable(x, y); <- No instability from start
+                SetDirectionalStabilityAt(x, y, Direction.Right);
             }
         }
 
     }
 
     //To change
-    private void ApproxCalculateStabilityAt(int x, int y)
+    private void PropagateStabilityUpdatesFrom(int x, int y)
     {
-        CalculateBaseAndLeftStabilityAt(x, y);
-        AddStabilityFrom(x, y, new Vector2Int(0, 1));
-        AddStabilityFrom(x, y, new Vector2Int(1, 0));
-        AddStabilityFrom(x, y, new Vector2Int(-1, 0));
-        CheckToAddUnstable(x, y);
+        CalculateBaseStability(x, y);
+        MarkToCheckForStability(x, y);
+        DirectionalStabilityIterator(x, y - 1, Direction.Up);
+        DirectionalStabilityIterator(x - 1, y, Direction.Right);
+        DirectionalStabilityIterator(x, y + 1, Direction.Down);
+        DirectionalStabilityIterator(x + 1, y, Direction.Left);
     }
 
-    private void CalculateBaseAndLeftStabilityAt(int x, int y)
+    private void DirectionalStabilityIterator(int x, int y, Direction dir)
+    {
+        Vector2Int offset = dir.Inverse().AsV2Int();
+
+        do
+        {
+            SetDirectionalStabilityAt(x, y, dir);
+            MarkToCheckForStability(x, y);
+            x += offset.x;
+            y += offset.y;
+        }
+        while (!map[x, y].IsStable());
+    }
+
+    [System.Obsolete("Old Temporary System")]
+    private void ApproximateStabilityFor(int x, int y)
+    {
+        CalculateBaseStability(x, y);
+        SetDirectionalStabilityAt(x, y, Direction.Up);
+        SetDirectionalStabilityAt(x, y, Direction.Right);
+        SetDirectionalStabilityAt(x, y, Direction.Left);
+        MarkToCheckForStability(x, y);
+    }
+
+    private void CalculateBaseStability(int x, int y)
     {
         if (map.IsAirAt(x, y))
             return;
 
         var tile = map.GetTileAt(x, y);
+        tile.ResetStability();
 
-        if ((tile.NeighbourBitmask & 64) == 64 || TileMapHelper.OnEdgeOfMap(map, new Vector2Int(x, y)))
-            tile.Stability = 100;
-        else
-            tile.Stability = 0;
-
+        if ((tile.NeighbourBitmask & 64) == 64)
+            tile.SetStability(Direction.Down, 100);
 
         map[x, y] = tile;
     }
 
-    private void AddStabilityFrom(int x, int y, Vector2Int offset)
+    private void SetDirectionalStabilityAt(int x, int y, Direction direction)
     {
         if (map.IsAirAt(x, y))
             return;
 
         var tile = map.GetTileAt(x, y);
-        if (tile.Stability >= 100)
-        {
-            return;
-        }
+        int divisor = direction == Direction.Down ? 1 : 4;
 
-        tile.Stability += map[x + offset.x, y + offset.y].Stability / 4;
+        Vector2Int offset = direction.AsV2Int();
+        tile.SetStability(direction, map[x + offset.x, y + offset.y].Stabilities[(int)direction] / divisor);
         map[x, y] = tile;
     }
 
-    private void CheckToAddUnstable(int x, int y)
+    private void MarkToCheckForStability(int x, int y)
     {
-        var t = map[x, y];
-        if (t.Stability > -1 && t.Stability <= settings.UnstableThreshhold)
-        {
-            map.AddUnstableTile(new Vector2Int(x, y));
-        }
+        map.AddTileToCheckForStability(new Vector2Int(x, y));
     }
 
     private void PopulateSnow()

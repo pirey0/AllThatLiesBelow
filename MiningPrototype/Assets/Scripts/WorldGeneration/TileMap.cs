@@ -15,9 +15,9 @@ public class TileMap : Singleton<TileMap>
     [SerializeField] GenerationSettings generationSettings;
 
     [Header("Debug")]
+    [SerializeField] bool debug;
     [SerializeField] bool drawStabilityTexture;
     [SerializeField] bool drawStabilityGizmos;
-    [SerializeField] bool toolTipStability;
     [SerializeField] int stabilityGizmosSize;
     [SerializeField] PlayerController player;
 
@@ -28,6 +28,9 @@ public class TileMap : Singleton<TileMap>
 
     List<Vector2Int> unstableTiles = new List<Vector2Int>();
     List<GameObject> unstableTilesEffects = new List<GameObject>();
+
+    Stack<Vector2Int> tilesToStabilityCheck = new Stack<Vector2Int>();
+
     Dictionary<TileType, bool> IsAirLike;
 
 
@@ -54,7 +57,7 @@ public class TileMap : Singleton<TileMap>
         tilemap.GetComponent<GridElement>()?.Setup(this);
         damageOverlayTilemap.GetComponent<GridElement>()?.Setup(this);
         oreTilemap.GetComponent<GridElement>()?.Setup(this);
-        
+
         RunCompleteGeneration();
 
         StartCoroutine(UpdateUnstableTilesRoutine());
@@ -72,7 +75,7 @@ public class TileMap : Singleton<TileMap>
 
     private void Update()
     {
-        if (toolTipStability)
+        if (debug)
         {
             TooltipHandler.Instance?.Display(transform, this[Util.MouseToWorld().ToGridPosition()].ToString(), "");
         }
@@ -83,7 +86,22 @@ public class TileMap : Singleton<TileMap>
         int i = 0;
         while (true)
         {
+            //loop through tiles to check
+            while (tilesToStabilityCheck.Count > 0)
+            {
+                var loc = tilesToStabilityCheck.Pop();
+                var tile = this[loc];
+                var info = GetTileInfo(tile.Type);
+                if (info.StabilityAffected)
+                {
+                    if (tile.Stability <= generationSettings.UnstableThreshhold)
+                    {
+                        AddUnstableTile(loc);
+                    }
+                }
+            }
 
+            //iterate through unstable tiles
             if (unstableTiles.Count == 0)
             {
                 yield return new WaitForSeconds(0.3f);
@@ -107,7 +125,7 @@ public class TileMap : Singleton<TileMap>
             }
             else if (t.Stability <= generationSettings.UnstableThreshhold)
             {
-                t.Stability -= 1;
+                t.ReduceStabilityBy(1);
 
                 SetMapRawAt(x, y, t);
                 i++;
@@ -134,21 +152,23 @@ public class TileMap : Singleton<TileMap>
             return mapSettings.TileInfos[(int)type];
 
         return null;
-        return null;
     }
 
-    public void AddUnstableTile(Vector2Int unstableTile)
+    public void AddTileToCheckForStability(Vector2Int tileLoc)
+    {
+        tilesToStabilityCheck.Push(tileLoc);
+    }
+
+    private void AddUnstableTile(Vector2Int unstableTile)
     {
         if (!unstableTiles.Contains(unstableTile))
         {
-            var info = GetTileInfo(GetTileAt(unstableTile.x, unstableTile.y).Type);
-            if (info.StabilityAffected)
-            {
-                unstableTiles.Add(unstableTile);
-                var go = Instantiate(mapSettings.CrumbleEffects, new Vector3(unstableTile.x + 0.5f, unstableTile.y), quaternion.identity, transform);
-                unstableTilesEffects.Add(go);
-            }
+
+            unstableTiles.Add(unstableTile);
+            var go = Instantiate(mapSettings.CrumbleEffects, new Vector3(unstableTile.x + 0.5f, unstableTile.y), quaternion.identity, transform);
+            unstableTilesEffects.Add(go);
         }
+
     }
 
     public void RemoveUnstableTileAt(int i)
@@ -214,7 +234,7 @@ public class TileMap : Singleton<TileMap>
         Tile t = GetTileAt(x, y);
         TileInfo info = GetTileInfo(t.Type);
 
-        t.TakeDamage(amount*info.damageMultiplyer);
+        t.TakeDamage(amount * info.damageMultiplyer);
 
         if (t.Damage > 10)
         {
@@ -255,6 +275,9 @@ public class TileMap : Singleton<TileMap>
             return;
 
         map[x, y] = tile;
+
+        if (debug)
+            Util.DebugDrawTile(new Vector2Int(x, y), Color.white, 0.5f);
     }
 
     public void SetMapAt(int x, int y, Tile value, bool updateProperties = true, bool updateVisuals = true)
@@ -285,7 +308,8 @@ public class TileMap : Singleton<TileMap>
             }
         }
 
-
+        if (debug)
+            Util.DebugDrawTile(new Vector2Int(x, y), Color.yellow, 1);
     }
 
     public void SetReceiverMapAt(int x, int y, ITileUpdateReceiver receiver)

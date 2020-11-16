@@ -509,7 +509,6 @@ public class PlayerController : InventoryOwner, IEntity
 
     private void Jump()
     {
-        Debug.Log("Jump");
         rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpVelocity);
         lastJumpTimeStamp = Time.time;
     }

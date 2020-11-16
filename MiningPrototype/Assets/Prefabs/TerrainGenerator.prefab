@@ -48,6 +48,7 @@ MonoBehaviour:
   oreTilemap: {fileID: 0}
   mapSettings: {fileID: 11400000, guid: cb933fe4e5151f14d8a9ed1be88a0e33, type: 2}
   generationSettings: {fileID: 11400000, guid: 9ada1e3054219d644a18b003c8174420, type: 2}
+  debug: 1
   drawStabilityTexture: 0
   drawStabilityGizmos: 0
   stabilityGizmosSize: 10

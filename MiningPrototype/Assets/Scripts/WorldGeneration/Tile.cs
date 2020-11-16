@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -23,7 +24,11 @@ public struct Tile
     public TileType Type;
     public byte NeighbourBitmask;
     public float Damage;
-    public int Stability;
+
+    //Up Right Down Left
+    public int[] Stabilities;
+
+    public int Stability { get => Stabilities.Sum(); }
 
     public static Tile Air
     {
@@ -33,7 +38,7 @@ public struct Tile
             t.Type = TileType.Air;
             t.NeighbourBitmask = 0;
             t.Damage = 0;
-            t.Stability = -1;
+            t.Stabilities = new int[4];
             return t;
         }
     }
@@ -45,6 +50,26 @@ public struct Tile
         return tile;
     }
 
+    public void SetStability(Direction dir, int value)
+    {
+        Stabilities[(int)dir] = value;
+    }
+
+    public void ReduceStabilityBy(int i)
+    {
+        Stabilities[(int)Direction.Down] -= i;
+    }
+
+    public void ResetStability()
+    {
+        Stabilities = new int[4];
+    }
+
+    public bool IsStable()
+    {
+        return Stability >= 100 || Type == TileType.Air;
+    }
+
     public void TakeDamage(float amount)
     {
         Damage += amount;
@@ -52,9 +77,15 @@ public struct Tile
 
     public override string ToString()
     {
-        return Type.ToString() + " Damage:" + Damage.ToString("n1") + " Stability:" + Stability; 
+        return Type.ToString() + " Damage:" + Damage.ToString("n1") + " Stability: " +Stability + " (" +  string.Join(", " , Stabilities) + ")"; 
     }
 }
+
+public enum Direction
+{
+    Up, Right, Down, Left
+}
+
 
 public interface ITileUpdateReceiver
 {

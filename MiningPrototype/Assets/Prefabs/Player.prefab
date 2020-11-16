@@ -5813,13 +5813,12 @@ MonoBehaviour:
   openSource: {fileID: 1456414342}
   inventoryVisualizerUpdates: 1
   groundedAngle: 88
-  jumpVelocity: 8
+  jumpVelocity: 9
   moveSpeed: 5
   jumpCooldown: 0.85
   timeAfterGroundedToJump: 0.1
   feet: {fileID: 1786483705}
   feetRadius: 0.4
-  generation: {fileID: 0}
   maxDigDistance: 5
   pickaxe: {fileID: 4724523066374434780}
   digSpeed: 10

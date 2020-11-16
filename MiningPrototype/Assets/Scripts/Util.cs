@@ -121,7 +121,7 @@ public static class Util
         var ray = CameraController.Instance.Camera.ScreenPointToRay(Input.mousePosition);
 
         Plane p = new Plane(Vector3.forward, Vector3.zero);
-        if(p.Raycast(ray, out float distance))
+        if (p.Raycast(ray, out float distance))
         {
             return ray.GetPoint(distance);
         }
@@ -136,4 +136,27 @@ public static class Util
         Vector3 position = MouseToWorld();
         return Physics2D.CircleCastAll(position, 0.2f, Vector2.zero);
     }
+
+    public static Vector2Int AsV2Int(this Direction dir)
+    {
+        switch (dir)
+        {
+            case Direction.Up:
+                return new Vector2Int(0, 1);
+            case Direction.Right:
+                return new Vector2Int(1, 0);
+            case Direction.Down:
+                return new Vector2Int(0, -1);
+            case Direction.Left:
+                return new Vector2Int(-1, 0);
+
+            default:
+                return Vector2Int.zero;
+        }
+    }
+    public static Direction Inverse(this Direction dir)
+    {
+        return (Direction)(((int)dir + 4) % 4);
+    }
+
 }
