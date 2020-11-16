@@ -249,7 +249,7 @@ public class PlayerController : InventoryOwner, IEntity
 
         if (gridDigTarget.HasValue)
         {
-            bool broken = generation.DamageAt(gridDigTarget.Value.x, gridDigTarget.Value.y, Time.deltaTime * digSpeed * ProgressionHandler.Instance.DigSpeedMultiplyer);
+            bool broken = generation.DamageAt(gridDigTarget.Value.x, gridDigTarget.Value.y, Time.deltaTime * digSpeed * ProgressionHandler.Instance.DigSpeedMultiplyer, playerCaused: true);
 
             if (broken)
             {

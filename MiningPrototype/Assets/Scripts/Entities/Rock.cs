@@ -31,7 +31,7 @@ public class Rock : MonoBehaviour, IEntity
                 bool block = gridElement.TileMap.IsBlockAt(pos.x, pos.y);
                 if (block)
                 {
-                    gridElement.TileMap.DamageAt(pos.x, pos.y, 100);
+                    gridElement.TileMap.DamageAt(pos.x, pos.y, 100, playerCaused:false);
                 }
             }
 

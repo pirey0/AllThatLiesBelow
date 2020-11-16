@@ -169,7 +169,7 @@ public class TileMap : Singleton<TileMap>
         return map[x, y];
     }
 
-    public bool DamageAt(int x, int y, float amount)
+    public bool DamageAt(int x, int y, float amount, bool playerCaused)
     {
         if (IsOutOfBounds(x, y))
             return false;
@@ -177,10 +177,9 @@ public class TileMap : Singleton<TileMap>
         Tile t = GetTileAt(x, y);
         t.TakeDamage(amount);
 
-        //
         if (t.Damage > 10)
         {
-            BreakBlock(x, y, t);
+            BreakBlock(x, y, t, playerCaused);
 
             return true;
         }
@@ -191,13 +190,16 @@ public class TileMap : Singleton<TileMap>
         }
     }
 
-    private void BreakBlock(int x, int y, Tile t)
+    private void BreakBlock(int x, int y, Tile t, bool playerCaused)
     {
         CarveAt(x, y);
 
-        ItemType itemType = mapSettings.GetItemTypeForTile(t.Type);
+        if (playerCaused)
+        {
+            ItemType itemType = mapSettings.GetItemTypeForTile(t.Type);
+            InventoryManager.PlayerCollects(itemType, UnityEngine.Random.Range(1, ProgressionHandler.Instance.ExtraDrop));
+        }
 
-        InventoryManager.PlayerCollects(itemType, UnityEngine.Random.Range(1, ProgressionHandler.Instance.ExtraDrop));
     }
 
     public void CarveAt(int x, int y)
