@@ -38,13 +38,12 @@ public class MineableObject : MonoBehaviour, IMinableNonGrid
         return transform.position;
     }
 
-    public void MouseEnter()
-    {
-        //
-    }
-
+    //NOT USED AT ALL
     public void MouseLeave()
     {
-        //
+    }
+
+    public void MouseEnter()
+    {
     }
 }

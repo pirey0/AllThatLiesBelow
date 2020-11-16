@@ -6,7 +6,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-
+[DefaultExecutionOrder(-100)]
 public class TileMap : Singleton<TileMap>
 {
     [SerializeField] Tilemap tilemap, damageOverlayTilemap, oreTilemap;
@@ -22,6 +22,7 @@ public class TileMap : Singleton<TileMap>
     [SerializeField] PlayerController player;
 
     Tile[,] map;
+    ITileUpdateReceiver[,] receiverMap;
     TileMapGenerator generator;
     Texture2D stabilityDebugTexture;
 
@@ -31,6 +32,9 @@ public class TileMap : Singleton<TileMap>
     private int size;
     public int Size { get => size; }
 
+    /// <summary>
+    /// Use SetTMapAt for full control / visual updates
+    /// </summary>
     public Tile this[int x, int y]
     {
         get => GetTileAt(x, y);
@@ -58,7 +62,7 @@ public class TileMap : Singleton<TileMap>
     {
         if (toolTipStability)
         {
-            TooltipHandler.Instance?.Display(transform, this[Util.MouseToWorld().ToGridPosition()].Stability.ToString(), "");
+            TooltipHandler.Instance?.Display(transform, this[Util.MouseToWorld().ToGridPosition()].ToString(), "");
         }
     }
 
@@ -125,9 +129,13 @@ public class TileMap : Singleton<TileMap>
     {
         if (!unstableTiles.Contains(unstableTile))
         {
-            unstableTiles.Add(unstableTile);
-            var go = Instantiate(mapSettings.CrumbleEffects, new Vector3(unstableTile.x + 0.5f, unstableTile.y), quaternion.identity, transform);
-            unstableTilesEffects.Add(go);
+            var info = GetTileInfo(GetTileAt(unstableTile.x, unstableTile.y).Type);
+            if (info.StabilityAffected)
+            {
+                unstableTiles.Add(unstableTile);
+                var go = Instantiate(mapSettings.CrumbleEffects, new Vector3(unstableTile.x + 0.5f, unstableTile.y), quaternion.identity, transform);
+                unstableTilesEffects.Add(go);
+            }
         }
     }
 
@@ -158,6 +166,7 @@ public class TileMap : Singleton<TileMap>
     public void InitMap(int sizeX, int sizeY)
     {
         map = new Tile[sizeX, sizeY];
+        receiverMap = new ITileUpdateReceiver[sizeX, sizeY];
     }
 
     public bool IsAirAt(int x, int y)
@@ -203,7 +212,7 @@ public class TileMap : Singleton<TileMap>
 
     private void BreakBlock(int x, int y, Tile t, bool playerCaused)
     {
-        CarveAt(x, y);
+        SetMapAt(x, y, Tile.Air);
 
         if (playerCaused)
         {
@@ -213,12 +222,6 @@ public class TileMap : Singleton<TileMap>
                 InventoryManager.PlayerCollects(info.ItemToDrop, UnityEngine.Random.Range(1, ProgressionHandler.Instance.ExtraDrop));
         }
 
-    }
-
-    public void CarveAt(int x, int y)
-    {
-        //Debug.Log("Try Carve " + x + " / " + y);
-        SetMapAt(x, y, Tile.Air);
     }
 
     public void PlaceAt(int x, int y)
@@ -240,11 +243,18 @@ public class TileMap : Singleton<TileMap>
         if (IsOutOfBounds(x, y))
             return;
 
+        var prev = map[x, y];
         map[x, y] = value;
 
         if (updateProperties)
         {
             generator.UpdatePropertiesAt(x, y);
+
+            if (prev.Type != value.Type)
+            {
+                receiverMap[x, y]?.OnTileUpdated(x, y, value);
+                receiverMap[x, y] = null;
+            }
         }
 
         if (updateVisuals)
@@ -255,6 +265,16 @@ public class TileMap : Singleton<TileMap>
                 UpdateVisualsAt(nIndex.x, nIndex.y);
             }
         }
+
+
+    }
+
+    public void SetReceiverMapAt(int x, int y, ITileUpdateReceiver receiver)
+    {
+        if (IsOutOfBounds(x, y))
+            return;
+
+        receiverMap[x, y] = receiver;
     }
 
     void UpdateVisuals()
@@ -354,6 +374,4 @@ public class TileMap : Singleton<TileMap>
         Util.IterateXY(Size, (x, y) => stabilityDebugTexture.SetPixel(x, y, TileMapHelper.StabilityToColor(GetTileAt(x, y).Stability)));
         stabilityDebugTexture.Apply();
     }
-
-
 }

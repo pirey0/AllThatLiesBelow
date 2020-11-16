@@ -16,6 +16,7 @@ MonoBehaviour:
   ItemToDrop: 1
   damageMultiplyer: 0
   Targetable: 1
+  StabilityAffected: 1
   Tiles:
   - {fileID: 11400000, guid: 4c70edfe5247fd34b8a2806b1369a08f, type: 2}
   - {fileID: 11400000, guid: 4c70edfe5247fd34b8a2806b1369a08f, type: 2}

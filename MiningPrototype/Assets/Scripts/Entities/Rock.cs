@@ -2,10 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rock : MonoBehaviour, IEntity
+public class Rock : TilemapCarvingEntity
 {
     [SerializeField] float width = 2;
     [SerializeField] float destructionSpeed;
+    [SerializeField] Rigidbody2D rigidbody;
+
+
+    protected void Start()
+    {
+        Carve();
+        rigidbody.isKinematic = true;
+    }
+
+    public override void OnTileUpdated(int x, int y, Tile newTile)
+    {
+        if (this == null)
+            return;
+
+        UnCarvePrevious();
+        rigidbody.isKinematic = false;
+        rigidbody.WakeUp();
+        StartCoroutine(FallingRoutine());
+    }
+
+    private IEnumerator FallingRoutine()
+    {
+        while (!rigidbody.IsSleeping())
+        {
+            yield return null;
+        }
+        rigidbody.isKinematic = true;
+        Carve();
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

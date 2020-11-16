@@ -10,7 +10,7 @@ public class TileInfo : ScriptableObject
     public ItemType ItemToDrop = ItemType.None;
     public float damageMultiplyer = 1;
     public bool Targetable = true;
-
+    public bool StabilityAffected = true;
 
     public TileBase[] Tiles;
     public bool UseTilesFromOtherInfo;

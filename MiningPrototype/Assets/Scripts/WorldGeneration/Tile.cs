@@ -13,7 +13,9 @@ public enum TileType
     Snow = 4,
     Diamond = 5,
     HardStone = 6,
-    BedStone = 7
+    BedStone = 7,
+    Rock,
+    CarvedEntity
 }
 
 public struct Tile
@@ -49,4 +51,15 @@ public struct Tile
             return;
         Damage += amount;
     }
+
+    public override string ToString()
+    {
+        return Type.ToString() + " Damage:" + Damage.ToString("n1") + " Stability:" + Stability; 
+    }
 }
+
+public interface ITileUpdateReceiver
+{
+    void OnTileUpdated(int x, int y, Tile newTile);
+}
+

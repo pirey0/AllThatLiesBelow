@@ -103,6 +103,14 @@ public static class Util
         Debug.DrawLine(location.AsV3() + Vector3.right, location.AsV3() + Vector3.up + Vector3.right, color, duration);
     }
 
+    public static void GizmosDrawTile(Vector2Int location)
+    {
+        Gizmos.DrawLine(location.AsV3(), location.AsV3() + Vector3.up);
+        Gizmos.DrawLine(location.AsV3(), location.AsV3() + Vector3.right);
+        Gizmos.DrawLine(location.AsV3() + Vector3.up, location.AsV3() + Vector3.up + Vector3.right);
+        Gizmos.DrawLine(location.AsV3() + Vector3.right, location.AsV3() + Vector3.up + Vector3.right);
+    }
+
     public static Vector2 ScreenCenter { get => new Vector2(Screen.width / 2, Screen.height / 2); }
 
     public static Vector3 MouseToWorld()
