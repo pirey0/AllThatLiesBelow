@@ -15,7 +15,7 @@ MonoBehaviour:
   SeedIsRandom: 0
   Seed: 0
   Size: 100
-  InitialAliveChance: 0.54
+  InitialAliveChance: 0.746
   DeathLimit: 3
   BirthLimit: 4
   AutomataSteps: 5
