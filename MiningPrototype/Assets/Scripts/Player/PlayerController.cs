@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Tilemaps;
 using UnityEngineInternal;
 
 public enum PlayerState
@@ -26,7 +27,6 @@ public class PlayerController : InventoryOwner, IEntity
     [SerializeField] Transform feet;
     [SerializeField] float feetRadius;
 
-    [SerializeField] TileMap generation;
     [SerializeField] float maxDigDistance = 3;
 
     [SerializeField] GameObject pickaxe;
@@ -183,8 +183,8 @@ public class PlayerController : InventoryOwner, IEntity
 
     private void UpdateDigTarget()
     {
-        gridDigTarget = TileMapHelper.GetClosestSolidBlock(generation, GetPositionInGrid(), GetClickCoordinate());
-        if (generation.IsAirAt(gridDigTarget.Value.x, gridDigTarget.Value.y))
+        gridDigTarget = TileMapHelper.GetClosestSolidBlock(TileMap.Instance, GetPositionInGrid(), GetClickCoordinate());
+        if (!TileMap.Instance.CanTarget(gridDigTarget.Value.x, gridDigTarget.Value.y))
         {
             gridDigTarget = null;
         }
@@ -239,8 +239,8 @@ public class PlayerController : InventoryOwner, IEntity
     private void TryPlace()
     {
         Vector2Int clickPos = GetClickCoordinate();
-        if (TileMapHelper.HasLineOfSight(generation, GetPositionInGrid(), clickPos, debugVisualize: true))
-            generation.PlaceAt(clickPos.x, clickPos.y);
+        if (TileMapHelper.HasLineOfSight(TileMap.Instance, GetPositionInGrid(), clickPos, debugVisualize: true))
+            TileMap.Instance.PlaceAt(clickPos.x, clickPos.y, Tile.Make(TileType.Stone));
     }
 
     private void TryDig()
@@ -249,7 +249,7 @@ public class PlayerController : InventoryOwner, IEntity
 
         if (gridDigTarget.HasValue)
         {
-            bool broken = generation.DamageAt(gridDigTarget.Value.x, gridDigTarget.Value.y, Time.deltaTime * digSpeed * ProgressionHandler.Instance.DigSpeedMultiplyer, playerCaused: true);
+            bool broken = TileMap.Instance.DamageAt(gridDigTarget.Value.x, gridDigTarget.Value.y, Time.deltaTime * digSpeed * ProgressionHandler.Instance.DigSpeedMultiplyer, playerCaused: true);
 
             if (broken)
             {
@@ -284,7 +284,7 @@ public class PlayerController : InventoryOwner, IEntity
 
     private void UpdateMiningParticlesPositions()
     {
-        miningParticles.transform.position = TileMapHelper.GetWorldLocationOfFreeFaceFromSource(generation, gridDigTarget.Value, GetPositionInGrid());
+        miningParticles.transform.position = TileMapHelper.GetWorldLocationOfFreeFaceFromSource(TileMap.Instance, gridDigTarget.Value, GetPositionInGrid());
         Debug.DrawLine((Vector3Int)GetPositionInGrid(), miningParticles.transform.position, Color.yellow, 0.1f);
     }
 

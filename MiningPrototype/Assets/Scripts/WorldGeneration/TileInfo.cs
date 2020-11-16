@@ -14,10 +14,14 @@ public class TileInfo : ScriptableObject
     public bool Targetable = true;
     public bool StabilityAffected = true;
 
-    public TileBase[] Tiles;
     public bool UseTilesFromOtherInfo;
+    public TileBase[] Tiles;
     public TileInfo TileSourceInfo;
 
     public TileBase Overlay;
+
+    public Sprite physicalTileSprite;
+    public Sprite physicalTileOverlay;
+
     
 }

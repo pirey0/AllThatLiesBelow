@@ -47,7 +47,7 @@ public class TileMapGenerator
     {
         Util.IterateX(settings.Size, (x) => map[x, 0] = Tile.Make(TileType.BedStone));
         Util.IterateX(settings.Size, (x) => map[0, x] = Tile.Make(TileType.BedStone));
-        Util.IterateX(settings.Size, (x) => map[settings.Size-1,x] = Tile.Make(TileType.BedStone));
+        Util.IterateX(settings.Size, (x) => map[settings.Size - 1, x] = Tile.Make(TileType.BedStone));
     }
 
     private void ClearAllEntities()
@@ -100,6 +100,7 @@ public class TileMapGenerator
 
             Vector3 pos = new Vector3(x + pass.Size.x * 0.5f, y + pass.Size.y * 0.5f);
             var go = GameObject.Instantiate(pass.Prefab, pos, Quaternion.identity, map.transform);
+            go.GetComponent<GridElement>().Setup(map);
         }
     }
 
@@ -122,9 +123,10 @@ public class TileMapGenerator
 
     public void CollapseAt(int x, int y, bool updateVisuals)
     {
+        Tile t = map[x, y];
         map.SetMapAt(x, y, Tile.Air, updateProperties: true, updateVisuals);
         var go = GameObject.Instantiate(settings.PhysicalTilePrefab, new Vector3(x + 0.5f, y + 0.5f, 0), Quaternion.identity);
-        go.GetComponent<PhysicalTile>().Setup(map);
+        go.GetComponent<PhysicalTile>().Setup(map, t, map.GetTileInfo(t.Type));
     }
 
     private void CalculateStabilityAll()

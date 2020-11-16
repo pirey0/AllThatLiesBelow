@@ -74,7 +74,7 @@ MonoBehaviour:
   OrePasses:
   - TileType: 2
     OreVeinSize: {x: 7, y: 10}
-    MaxHeight: 60
+    MaxHeight: 72
     Probability: 2
   - TileType: 3
     OreVeinSize: {x: 5, y: 8}
@@ -86,7 +86,7 @@ MonoBehaviour:
     Probability: 1
   RockPasses:
   - Size: {x: 2, y: 2}
-    MaxHeight: 70
+    MaxHeight: 75
     Probability: 5
     Prefab: {fileID: 8886592050164078683, guid: 94d8faed3d48d2a4b95add8b4bbc9945, type: 3}
   UnstableThreshhold: 40

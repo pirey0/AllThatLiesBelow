@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class TilemapCarvingEntity : MonoBehaviour, ITileUpdateReceiver, IEntity
+public abstract class TilemapCarvingEntity : GridElement, ITileUpdateReceiver
 {
     [SerializeField] TileType type = TileType.CarvedEntity;
     [SerializeField] Vector2Int[] tilesToOccupy = new Vector2Int[] { Vector2Int.zero };

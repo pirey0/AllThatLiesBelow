@@ -12,7 +12,7 @@ public class MineableObject : MonoBehaviour, IMinableNonGrid
 
     float damage = 0;
 
-    public void Damage(float v)
+    public virtual void Damage(float v)
     {
         float d = v * (damageMultiplier / 10f);
         overlayAnimator.ActiveUpdate(d);
@@ -22,7 +22,7 @@ public class MineableObject : MonoBehaviour, IMinableNonGrid
             Destroyed();
     }
 
-    private void Destroyed()
+    protected virtual void Destroyed()
     {
         if (contains != null && contains.amount > 0)
             InventoryManager.PlayerCollects(contains.type, contains.amount);

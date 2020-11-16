@@ -15,8 +15,12 @@ MonoBehaviour:
   Type: 3
   ItemToDrop: 2
   damageMultiplyer: 1
+  AirLike: 0
   Targetable: 1
-  Tiles: []
+  StabilityAffected: 1
   UseTilesFromOtherInfo: 1
+  Tiles: []
   TileSourceInfo: {fileID: 11400000, guid: b3eaa7d6a02e5524d9b3ee029c880b69, type: 2}
   Overlay: {fileID: 11400000, guid: e3d0884e79b7a174a8be2d46522038ec, type: 2}
+  physicalTileSprite: {fileID: 0}
+  physicalTileOverlay: {fileID: 21300000, guid: 1b3b3d6561f0d954d99699f1e3ebafa9, type: 3}

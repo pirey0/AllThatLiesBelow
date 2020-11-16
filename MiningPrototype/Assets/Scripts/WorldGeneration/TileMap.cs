@@ -187,6 +187,12 @@ public class TileMap : Singleton<TileMap>
         return IsAirLike[GetTileAt(x, y).Type];
     }
 
+    public bool CanTarget(int x, int y)
+    {
+        var info = GetTileInfo(GetTileAt(x, y).Type);
+        return info.Targetable;
+    }
+
     public bool IsBlockAt(int x, int y)
     {
         return !IsAirLike[GetTileAt(x, y).Type];
@@ -237,10 +243,10 @@ public class TileMap : Singleton<TileMap>
 
     }
 
-    public void PlaceAt(int x, int y)
+    public void PlaceAt(int x, int y, Tile t)
     {
         //Debug.Log("Try Place " + x + " / " + y);
-        SetMapAt(x, y, Tile.Make(TileType.Stone));
+        SetMapAt(x, y, t);
     }
 
     private void SetMapRawAt(int x, int y, Tile tile)

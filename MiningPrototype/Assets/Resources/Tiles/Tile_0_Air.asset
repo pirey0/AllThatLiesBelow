@@ -21,4 +21,6 @@ MonoBehaviour:
   Tiles: []
   UseTilesFromOtherInfo: 0
   TileSourceInfo: {fileID: 0}
+  physicalTileSprite: {fileID: 21300000, guid: a1a842a2a375daf46852252416bba0d4, type: 3}
+  physicalTileOverlay: {fileID: 0}
   Overlay: {fileID: 0}
