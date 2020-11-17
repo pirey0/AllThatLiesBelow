@@ -193,6 +193,8 @@ MonoBehaviour:
   - {fileID: -2575515358818419761, guid: baac8c3d0632707418553213e4dbf49a, type: 3}
   flipX: 0
   playerSpriteRenderer: {fileID: 8633471933228471855}
+  mouseFollowMultiplier: 0.5
+  correctionultiplier: 2
 --- !u!114 &154330392
 MonoBehaviour:
   m_ObjectHideFlags: 0
