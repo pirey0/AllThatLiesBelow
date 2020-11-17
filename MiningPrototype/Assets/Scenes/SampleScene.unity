@@ -126712,7 +126712,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 8633471934036723826}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 821c3d5db7c601149833a368a8b9b4bb, type: 3}
   m_Name: 
@@ -133506,30 +133506,6 @@ PrefabInstance:
       propertyPath: eventSystem
       value: 
       objectReference: {fileID: 575531986}
-    - target: {fileID: 2214841632456959460, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
-      propertyPath: sprites.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2214841632456959460, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
-      propertyPath: sprites.Array.data[4].sprite
-      value: 
-      objectReference: {fileID: 1106305723913688297, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
-    - target: {fileID: 2214841632456959460, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
-      propertyPath: sprites.Array.data[4].offset.y
-      value: -0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2214841632456959460, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
-      propertyPath: sprites.Array.data[5].sprite
-      value: 
-      objectReference: {fileID: -8736164668747230439, guid: 94421b5b25e63b4479deff0229d1ed28, type: 3}
-    - target: {fileID: 2214841632456959460, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
-      propertyPath: sprites.Array.data[5].offset.y
-      value: -0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2214841632456959460, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
-      propertyPath: sprites.Array.data[5].offset.x
-      value: -0.125
-      objectReference: {fileID: 0}
     - target: {fileID: 8633471933228471848, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
       propertyPath: m_Name
       value: Player
@@ -133586,10 +133562,6 @@ PrefabInstance:
       propertyPath: hut
       value: 
       objectReference: {fileID: 864956639}
-    - target: {fileID: 9156434778629824202, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
-      propertyPath: visualStates.Array.data[11].BodyAnimation
-      value: 
-      objectReference: {fileID: 11400000, guid: 297bdfe3faf178542aadae04167b9770, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
 --- !u!1001 &9196140733106249652

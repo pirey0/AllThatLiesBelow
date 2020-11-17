@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -50,7 +51,13 @@ public class Rock : TilemapCarvingEntity, ITileMapElement
         if (collision.collider.TryGetComponent(out IEntity entity))
         {
             float speed = collision.relativeVelocity.magnitude;
-            //Damage
+            float angle = Mathf.Acos(Vector2.Dot(collision.contacts[0].normal, Vector2.up)) * Mathf.Rad2Deg;
+
+            //Debug.Log(angle + " " + speed);
+            if (angle < 70 && !rigidbody.isKinematic)
+            {
+                entity.TakeDamage(DamageStrength.Strong);
+            }
         }
         else if (collision.collider.TryGetComponent(out ITileMapElement gridElement))
         {
@@ -59,7 +66,7 @@ public class Rock : TilemapCarvingEntity, ITileMapElement
                 return;
             }
 
-            Vector3[] offsets = { new Vector3(0,-1), new Vector3(-0.55f,-1), new Vector3(0.55f, -1) };
+            Vector3[] offsets = { new Vector3(0, -1), new Vector3(-0.55f, -1), new Vector3(0.55f, -1) };
 
             foreach (var offset in offsets)
             {
@@ -68,7 +75,7 @@ public class Rock : TilemapCarvingEntity, ITileMapElement
                 bool block = gridElement.TileMap.IsBlockAt(pos.x, pos.y);
                 if (block)
                 {
-                    gridElement.TileMap.DamageAt(pos.x, pos.y, 100, playerCaused:false);
+                    gridElement.TileMap.DamageAt(pos.x, pos.y, 100, playerCaused: false);
                 }
             }
 
