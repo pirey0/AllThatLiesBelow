@@ -7,8 +7,11 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [DefaultExecutionOrder(-100)]
-public class TileMap : Singleton<TileMap>
+public class TileMap : Singleton<TileMap>, ISavable
 {
+    [ReadOnly]
+    [SerializeField] string saveID = Util.GenerateNewSaveGUID(); 
+
     [SerializeField] Tilemap tilemap, damageOverlayTilemap, oreTilemap;
 
     [SerializeField] TileMapSettings mapSettings;
@@ -460,4 +463,40 @@ public class TileMap : Singleton<TileMap>
         Util.IterateXY(Size, (x, y) => stabilityDebugTexture.SetPixel(x, y, TileMapHelper.StabilityToColor(GetTileAt(x, y).Stability)));
         stabilityDebugTexture.Apply();
     }
+
+    public SaveData ToSaveData()
+    {
+        TileMapSaveData saveData = new TileMapSaveData();
+        saveData.GUID = saveID;
+
+        saveData.Map = map;
+        Debug.Log("Saving with ID: " + saveData.GUID);
+        return saveData;
+    }
+
+    public void Load(SaveData data)
+    {
+        if(data is TileMapSaveData saveData)
+        {
+            map = saveData.Map;
+            UpdateVisuals();
+        }
+        else
+        {
+            Debug.LogError("Wrong SaveData received");
+        }
+
+    }
+
+    public string GetSaveID()
+    {
+        return saveID;
+    }
+}
+
+[System.Serializable]
+public class TileMapSaveData : SaveData
+{
+    public Tile[,] Map;
+
 }

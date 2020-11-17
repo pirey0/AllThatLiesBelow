@@ -9,13 +9,12 @@ public interface ISavable
 
     void Load(SaveData data);
 
-    int GetInstanceID();
+    string GetSaveID();
 }
 
 [System.Serializable]
 public class SaveData
 {
-    public int InstanceID;
-
+    public string GUID;
     
 }

@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public static class Util
@@ -157,6 +159,11 @@ public static class Util
     public static Direction Inverse(this Direction dir)
     {
         return (Direction)(((int)dir + 2) % 4);
+    }
+
+    public static string GenerateNewSaveGUID()
+    {
+        return System.Guid.NewGuid().ToString();
     }
 
 }
