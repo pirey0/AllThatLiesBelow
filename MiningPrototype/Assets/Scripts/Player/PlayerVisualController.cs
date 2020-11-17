@@ -10,6 +10,7 @@ public class PlayerVisualController : MonoBehaviour
     [SerializeField] SpriteRenderer itemRenderer;
     [SerializeField] DirectionBasedAnimator pickaxe;
     [SerializeField] GameObject pickaxeObject;
+    [SerializeField] SpriteRenderer pickaxeRenderer;
 
     [SerializeField] PlayerVisualState[] visualStates;
 
@@ -93,10 +94,12 @@ public class PlayerVisualController : MonoBehaviour
 
                 case AnimationPickaxeState.Behind:
                     pickaxeObject.SetActive(true);
+                    pickaxeRenderer.sortingOrder = -10;
                     break;
 
                 case AnimationPickaxeState.Conditional:
                     pickaxeObject.SetActive(true);
+                    pickaxeRenderer.sortingOrder = 10;
                     break;
             }
 
