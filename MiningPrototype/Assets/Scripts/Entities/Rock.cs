@@ -57,6 +57,7 @@ public class Rock : TilemapCarvingEntity, ITileMapElement
             if (angle < 70 && !rigidbody.isKinematic)
             {
                 entity.TakeDamage(DamageStrength.Strong);
+                rigidbody.velocity = collision.relativeVelocity * -1;
             }
         }
         else if (collision.collider.TryGetComponent(out ITileMapElement gridElement))
