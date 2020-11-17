@@ -32,9 +32,12 @@ public class ParameterBasedAnimator : MonoBehaviour
     private int GetFrameFromMouseAngle()
     {
         Vector2 center = new Vector3(Screen.width / 2, Screen.height / 2, 0);
-        float angle = (Mathf.Atan2(Input.mousePosition.y - center.y, (Input.mousePosition.x - center.x) * (flipX?-1:1))) * Mathf.Rad2Deg;
-        int angleAdapted = Mathf.RoundToInt(Mathf.Clamp((angle / -90f) * 3,-5,5));
+        float angle = Mathf.Atan2(Input.mousePosition.x - center.x, Input.mousePosition.y - center.y) * Mathf.Rad2Deg;
+
+        float angleGeneralized = ((Mathf.Abs(angle) - 90) / 90f);
+        float angleAdapted = Mathf.Clamp(Mathf.Pow(angleGeneralized * 2.3f,2) * Mathf.Sign(angleGeneralized), -5,5);
+
         Debug.Log(angleAdapted);
-       return Mathf.RoundToInt(5 + angleAdapted);
+       return Mathf.RoundToInt(5 + Mathf.RoundToInt(angleAdapted));
     }
 }
