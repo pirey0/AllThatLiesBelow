@@ -8,9 +8,10 @@ using UnityEngine.Tilemaps;
 using UnityEngineInternal;
 
 
-public class PlayerController : InventoryOwner
+public class PlayerInteractionHandler : InventoryOwner
 {
     [SerializeField] PlayerSettings settings;
+    [SerializeField] PlayerStateMachine player;
 
     [SerializeField] GameObject pickaxe;
     [SerializeField] Transform mouseHighlight;
@@ -33,12 +34,9 @@ public class PlayerController : InventoryOwner
     [ReadOnly]
     [SerializeField] bool inMining;
 
-
-    private bool isVisible = true;
-
     private bool heldIsPickaxe = true;
 
-    public override bool IsFlipped { get => spriteRenderer.flipX; }
+    public event System.Action PlayerActivity;
 
     protected override void Start()
     {
@@ -49,7 +47,7 @@ public class PlayerController : InventoryOwner
 
     private void Update()
     {
-        if (!isVisible)
+        if (!player.CanInteract())
             return;
 
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -70,6 +68,8 @@ public class PlayerController : InventoryOwner
             }
             else if (Input.GetMouseButtonDown(1))
             {
+                PlayerActivity?.Invoke();
+
                 if (Vector3.Distance(GetPositionInGridV3(), GetClickPositionV3()) <= settings.inventoryOpenDistance)
                 {
                     ToggleInventory();
@@ -200,7 +200,7 @@ public class PlayerController : InventoryOwner
     private void TryDig()
     {
         CloseInventory();
-
+        PlayerActivity?.Invoke();
         if (gridDigTarget.HasValue)
         {
             bool broken = TileMap.Instance.DamageAt(gridDigTarget.Value.x, gridDigTarget.Value.y, Time.deltaTime * settings.digSpeed * ProgressionHandler.Instance.DigSpeedMultiplyer, playerCaused: true);
@@ -332,25 +332,6 @@ public class PlayerController : InventoryOwner
     public void SetHeldItemSprite(Sprite sprite)
     {
         heldItemPreview.sprite = sprite;
-    }
-
-    
-    //To remove -> set disabled
-    [Button]
-    public void Hide()
-    {
-        isVisible = false;
-        SetHeldVisible(false);
-        spriteRenderer.enabled = false;
-    }
-
-    //To remove -> set enabled
-    [Button]
-    public void Show()
-    {
-        isVisible = true;
-        SetHeldVisible(false);
-        spriteRenderer.enabled = true;
     }
 
 

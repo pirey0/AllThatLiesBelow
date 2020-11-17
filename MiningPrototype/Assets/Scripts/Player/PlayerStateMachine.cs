@@ -36,6 +36,13 @@ public enum AnimationPickaxeState
     Integrated, Behind, Conditional
 }
 
+[System.Serializable]
+public struct StringBoolPair
+{
+    public string String;
+    public bool Bool;
+}
+
 [DefaultExecutionOrder(-20)]
 public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
 {
@@ -43,15 +50,18 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
     [SerializeField] Transform feet;
     [SerializeField] AudioSource walking;
     [SerializeField] bool slowWalkMode;
+    [SerializeField] StringBoolPair[] statesCanInteract;
+    [SerializeField] PlayerInteractionHandler playerInteraction;
 
     StateMachine stateMachine;
     StateMachine.State s_idle, s_jump, s_fall, s_walk, s_slowWalk, s_climb, s_climbIde, s_inventory, s_death, s_hit, s_longIdle, s_disabled;
+    Dictionary<string, bool> canInteractInStateMap;
 
     private Ladder currentLadder;
     private float gravityScale;
     float lastGroundedTimeStamp;
     float lastJumpTimeStamp;
-    float lastMovingTimeStamp;
+    float lastActivityTimeStamp;
     private bool isGrounded;
     Vector2 rightWalkVector = Vector3.right;
     Rigidbody2D rigidbody;
@@ -67,6 +77,20 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
 
         SetupStateMachine();
         stateMachine.Start();
+
+        canInteractInStateMap = new Dictionary<string, bool>();
+
+        foreach (var val in statesCanInteract)
+        {
+            canInteractInStateMap.Add(val.String, val.Bool);
+        }
+
+        playerInteraction.PlayerActivity += OnInteractionActivity;
+    }
+
+    private void OnInteractionActivity()
+    {
+        lastActivityTimeStamp = Time.time;
     }
 
     private void OnGUI()
@@ -123,6 +147,7 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
 
         s_idle.AddTransition(IsProlongedIdle, s_longIdle);
         s_longIdle.AddTransition(IsMoving, s_walk);
+        s_longIdle.AddTransition(IsProlongedIdle, s_idle);
 
         s_idle.AddTransition(IsFalling, s_fall);
         s_fall.AddTransition(IsGrounded, s_idle);
@@ -162,7 +187,7 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
 
     private bool HitFinished()
     {
-        return Time.time - lastMovingTimeStamp > settings.hitDuration;
+        return Time.time - lastActivityTimeStamp > settings.hitDuration;
     }
 
     private bool IsSlowWalking()
@@ -206,7 +231,7 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
         if (IsMoving())
         {
             transform.localScale = new Vector3(horizontalSpeed > 0 ? 1 : -1, 1, 1);
-            lastMovingTimeStamp = Time.time;
+            lastActivityTimeStamp = Time.time;
         }
 
         SetMovingSound(true);
@@ -300,7 +325,7 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
 
     private bool IsProlongedIdle()
     {
-        return Time.time - lastMovingTimeStamp > settings.timeToLongIdle;
+        return Time.time - lastActivityTimeStamp > settings.timeToLongIdle;
     }
 
     private bool InInventory()
@@ -400,5 +425,26 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
                 stateMachine.ForceTransitionTo(s_death);
                 break;
         }
+    }
+
+    public bool CanInteract()
+    {
+        if (canInteractInStateMap.ContainsKey(stateMachine.CurrentState.Name))
+            return canInteractInStateMap[stateMachine.CurrentState.Name];
+        else
+            Debug.LogError("No canInteract set for " + stateMachine.CurrentState.Name);
+
+
+        return false;
+    }
+
+    public void Disable()
+    {
+        stateMachine.ForceTransitionTo(s_disabled);
+    }
+
+    public void Enable()
+    {
+        stateMachine.ForceTransitionTo(s_idle);
     }
 }

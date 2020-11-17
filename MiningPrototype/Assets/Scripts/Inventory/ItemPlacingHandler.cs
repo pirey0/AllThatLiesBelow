@@ -5,7 +5,7 @@ using UnityEngine;
 public class ItemPlacingHandler : Singleton<ItemPlacingHandler>
 {
 
-    [SerializeField] PlayerController player;
+    [SerializeField] PlayerInteractionHandler player;
 
     bool holdingPlacable;
     ItemAmountPair currentHeld;

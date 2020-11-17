@@ -9,7 +9,7 @@ public class TransitionTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.TryGetComponent(out PlayerController pc))
+        if (collision.transform.TryGetComponent(out PlayerInteractionHandler pc))
         {
             if(target != null)
             {

@@ -19,7 +19,7 @@ public class TileMap : Singleton<TileMap>
     [SerializeField] bool drawStabilityTexture;
     [SerializeField] bool drawStabilityGizmos;
     [SerializeField] int stabilityGizmosSize;
-    [SerializeField] PlayerController player;
+    [SerializeField] PlayerInteractionHandler player;
 
     Tile[,] map;
     ITileUpdateReceiver[,] receiverMap;

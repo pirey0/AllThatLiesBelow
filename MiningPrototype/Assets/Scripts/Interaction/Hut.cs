@@ -15,7 +15,7 @@ public class Hut : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.GetComponent<PlayerController>() == null)
+        if (collision.GetComponent<PlayerInteractionHandler>() == null)
             return;
 
         //enable this section when you want the hut to stay open when the player digs into the ground
@@ -26,7 +26,7 @@ public class Hut : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<PlayerController>() == null)
+        if (collision.GetComponent<PlayerInteractionHandler>() == null)
             return;
 
         Enter();

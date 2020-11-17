@@ -5902,13 +5902,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8633471933228471852}
+  - component: {fileID: 5704201079326970389}
   - component: {fileID: 497824006148765930}
+  - component: {fileID: 9156434778629824202}
   - component: {fileID: 6332330309916232596}
   - component: {fileID: 8633471933228471855}
   - component: {fileID: 1894981212}
   - component: {fileID: 1894981211}
-  - component: {fileID: 9156434778629824202}
-  - component: {fileID: 5704201079326970389}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -5942,6 +5942,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5704201079326970389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8633471933228471848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c3be5cbd4a3764eb07ec41c218a664, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings: {fileID: 11400000, guid: e0b2ba0468d7ff1498765ca6c35bf0e8, type: 2}
+  feet: {fileID: 1786483705}
+  walking: {fileID: 8148473555476766029}
+  slowWalkMode: 0
+  statesCanInteract:
+  - String: Idle
+    Bool: 1
+  - String: Jump
+    Bool: 1
+  - String: Walk
+    Bool: 1
+  - String: SlowWalk
+    Bool: 1
+  - String: Climb
+    Bool: 0
+  - String: ClimbIdle
+    Bool: 0
+  - String: Inventory
+    Bool: 1
+  - String: Death
+    Bool: 0
+  - String: Hit
+    Bool: 0
+  - String: LongIdle
+    Bool: 0
+  - String: Fall
+    Bool: 1
+  - String: Disabled
+    Bool: 0
+  playerInteraction: {fileID: 497824006148765930}
 --- !u!114 &497824006148765930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5965,6 +6007,7 @@ MonoBehaviour:
   openSource: {fileID: 1456414342}
   inventoryVisualizerUpdates: 1
   settings: {fileID: 11400000, guid: e0b2ba0468d7ff1498765ca6c35bf0e8, type: 2}
+  player: {fileID: 5704201079326970389}
   pickaxe: {fileID: 4724523066374434780}
   mouseHighlight: {fileID: 1281847263}
   breakBlock: {fileID: 3471564094401374700}
@@ -5974,6 +6017,98 @@ MonoBehaviour:
   miningParticles: {fileID: 265151543036608254}
   heldItemPreview: {fileID: 3794947}
   inMining: 0
+--- !u!114 &9156434778629824202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8633471933228471848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed030853bb8b0ac4c9a2e003c5ad9c1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyAnimator: {fileID: 6332330309916232596}
+  headAnimator: {fileID: 154330390}
+  handsRenderer: {fileID: 852425621}
+  itemRenderer: {fileID: 3794947}
+  pickaxe: {fileID: 5520157571960154573}
+  pickaxeObject: {fileID: 4724523066374434780}
+  pickaxeRenderer: {fileID: 5165143014864439578}
+  visualStates:
+  - StateName: Idle
+    BodyAnimation: {fileID: 11400000, guid: 032cff1f8108c1743afb6adbae6af0c4, type: 2}
+    HeadState: 1
+    HandsState: 0
+    CarryItemState: 1
+    PickaxeState: 2
+  - StateName: Jump
+    BodyAnimation: {fileID: 11400000, guid: bc3639492c1177943913ff537fe6e6e9, type: 2}
+    HeadState: 1
+    HandsState: 1
+    CarryItemState: 1
+    PickaxeState: 2
+  - StateName: Walk
+    BodyAnimation: {fileID: 11400000, guid: a277db9a3fae53741b035a9c4fb2951b, type: 2}
+    HeadState: 1
+    HandsState: 1
+    CarryItemState: 1
+    PickaxeState: 2
+  - StateName: SlowWalk
+    BodyAnimation: {fileID: 11400000, guid: 23a47d0c626ff5a4c94e9148c9f0f4e1, type: 2}
+    HeadState: 0
+    HandsState: 0
+    CarryItemState: 0
+    PickaxeState: 1
+  - StateName: Climb
+    BodyAnimation: {fileID: 11400000, guid: b5cd5621b64cd6b43abf14303ce482c3, type: 2}
+    HeadState: 0
+    HandsState: 0
+    CarryItemState: 2
+    PickaxeState: 0
+  - StateName: ClimbIdle
+    BodyAnimation: {fileID: 11400000, guid: 4193ed70d1e11224c962dbb4da9c9d5b, type: 2}
+    HeadState: 0
+    HandsState: 0
+    CarryItemState: 2
+    PickaxeState: 0
+  - StateName: Inventory
+    BodyAnimation: {fileID: 11400000, guid: 896fb86e033db8243bbed2e1d93c6fc2, type: 2}
+    HeadState: 0
+    HandsState: 1
+    CarryItemState: 1
+    PickaxeState: 1
+  - StateName: Death
+    BodyAnimation: {fileID: 11400000, guid: 3a8d0745eb0ffe6458c0773bd89b913c, type: 2}
+    HeadState: 0
+    HandsState: 0
+    CarryItemState: 0
+    PickaxeState: 0
+  - StateName: Hit
+    BodyAnimation: {fileID: 11400000, guid: 2a750a01f3d7b3f4ea5b6da594480891, type: 2}
+    HeadState: 0
+    HandsState: 0
+    CarryItemState: 0
+    PickaxeState: 2
+  - StateName: LongIdle
+    BodyAnimation: {fileID: 11400000, guid: aebf58ac39ccc784d8500379c3235aac, type: 2}
+    HeadState: 0
+    HandsState: 0
+    CarryItemState: 0
+    PickaxeState: 0
+  - StateName: Fall
+    BodyAnimation: {fileID: 11400000, guid: 5bac872074f697147ae4b8f027fb547f, type: 2}
+    HeadState: 1
+    HandsState: 1
+    CarryItemState: 1
+    PickaxeState: 2
+  - StateName: Disabled
+    BodyAnimation: {fileID: 11400000, guid: 297bdfe3faf178542aadae04167b9770, type: 2}
+    HeadState: 0
+    HandsState: 0
+    CarryItemState: 0
+    PickaxeState: 0
 --- !u!114 &6332330309916232596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6076,114 +6211,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 1.1240654}
   m_Size: {x: 1, y: 1.9987106}
   m_Direction: 0
---- !u!114 &9156434778629824202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8633471933228471848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed030853bb8b0ac4c9a2e003c5ad9c1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bodyAnimator: {fileID: 6332330309916232596}
-  headAnimator: {fileID: 154330390}
-  handsRenderer: {fileID: 852425621}
-  itemRenderer: {fileID: 3794947}
-  pickaxe: {fileID: 5520157571960154573}
-  pickaxeObject: {fileID: 4724523066374434780}
-  pickaxeRenderer: {fileID: 5165143014864439578}
-  visualStates:
-  - StateName: Idle
-    BodyAnimation: {fileID: 11400000, guid: 032cff1f8108c1743afb6adbae6af0c4, type: 2}
-    HeadState: 1
-    HandsState: 0
-    CarryItemState: 1
-    PickaxeState: 2
-  - StateName: Jump
-    BodyAnimation: {fileID: 11400000, guid: bc3639492c1177943913ff537fe6e6e9, type: 2}
-    HeadState: 1
-    HandsState: 1
-    CarryItemState: 1
-    PickaxeState: 2
-  - StateName: Walk
-    BodyAnimation: {fileID: 11400000, guid: a277db9a3fae53741b035a9c4fb2951b, type: 2}
-    HeadState: 1
-    HandsState: 1
-    CarryItemState: 1
-    PickaxeState: 2
-  - StateName: SlowWalk
-    BodyAnimation: {fileID: 11400000, guid: 23a47d0c626ff5a4c94e9148c9f0f4e1, type: 2}
-    HeadState: 0
-    HandsState: 0
-    CarryItemState: 0
-    PickaxeState: 1
-  - StateName: Climb
-    BodyAnimation: {fileID: 11400000, guid: b5cd5621b64cd6b43abf14303ce482c3, type: 2}
-    HeadState: 0
-    HandsState: 0
-    CarryItemState: 2
-    PickaxeState: 0
-  - StateName: ClimbIdle
-    BodyAnimation: {fileID: 11400000, guid: 4193ed70d1e11224c962dbb4da9c9d5b, type: 2}
-    HeadState: 0
-    HandsState: 0
-    CarryItemState: 2
-    PickaxeState: 0
-  - StateName: Inventory
-    BodyAnimation: {fileID: 11400000, guid: 896fb86e033db8243bbed2e1d93c6fc2, type: 2}
-    HeadState: 0
-    HandsState: 1
-    CarryItemState: 1
-    PickaxeState: 1
-  - StateName: Death
-    BodyAnimation: {fileID: 11400000, guid: 3a8d0745eb0ffe6458c0773bd89b913c, type: 2}
-    HeadState: 0
-    HandsState: 0
-    CarryItemState: 0
-    PickaxeState: 0
-  - StateName: Hit
-    BodyAnimation: {fileID: 11400000, guid: 2a750a01f3d7b3f4ea5b6da594480891, type: 2}
-    HeadState: 0
-    HandsState: 0
-    CarryItemState: 0
-    PickaxeState: 2
-  - StateName: LongIdle
-    BodyAnimation: {fileID: 11400000, guid: aebf58ac39ccc784d8500379c3235aac, type: 2}
-    HeadState: 0
-    HandsState: 0
-    CarryItemState: 0
-    PickaxeState: 0
-  - StateName: Fall
-    BodyAnimation: {fileID: 11400000, guid: 5bac872074f697147ae4b8f027fb547f, type: 2}
-    HeadState: 1
-    HandsState: 1
-    CarryItemState: 1
-    PickaxeState: 2
-  - StateName: Disabled
-    BodyAnimation: {fileID: 11400000, guid: 297bdfe3faf178542aadae04167b9770, type: 2}
-    HeadState: 0
-    HandsState: 0
-    CarryItemState: 0
-    PickaxeState: 0
---- !u!114 &5704201079326970389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8633471933228471848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8c3be5cbd4a3764eb07ec41c218a664, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: e0b2ba0468d7ff1498765ca6c35bf0e8, type: 2}
-  feet: {fileID: 1786483705}
-  walking: {fileID: 8148473555476766029}
-  slowWalkMode: 0
 --- !u!1001 &1519042152031954263
 PrefabInstance:
   m_ObjectHideFlags: 0

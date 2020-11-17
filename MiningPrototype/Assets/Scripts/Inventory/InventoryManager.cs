@@ -9,7 +9,7 @@ public class InventoryManager
     public static InventoryManager Instance { get => GetInstance(); }
 
     private Inventory playerInventory;
-    private PlayerController player;
+    private PlayerInteractionHandler player;
     private Inventory otherInventory;
     bool playerInventoryOpen;
 
@@ -20,7 +20,7 @@ public class InventoryManager
         if (instance == null)
         {
             instance = new InventoryManager();
-            instance.player = GameObject.FindObjectOfType<PlayerController>();
+            instance.player = GameObject.FindObjectOfType<PlayerInteractionHandler>();
             if (instance.player != null)
             {
                 instance.playerInventory = instance.player.Inventory;

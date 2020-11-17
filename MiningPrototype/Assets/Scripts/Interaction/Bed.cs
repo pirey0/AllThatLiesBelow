@@ -12,7 +12,7 @@ public class Bed : MonoBehaviour, IInteractable
 
     public void BeginInteracting(GameObject interactor)
     {
-        PlayerController player = interactor.GetComponent<PlayerController>();
+        PlayerStateMachine player = interactor.GetComponent<PlayerStateMachine>();
 
         if (hut.IsOpen())
             EnterBed(player);
@@ -20,7 +20,7 @@ public class Bed : MonoBehaviour, IInteractable
 
     public void EndInteracting(GameObject interactor)
     {
-        PlayerController player = interactor.GetComponent<PlayerController>();
+        PlayerStateMachine player = interactor.GetComponent<PlayerStateMachine>();
 
         LeaveBed(player);
     }
@@ -35,20 +35,20 @@ public class Bed : MonoBehaviour, IInteractable
         //action -= LeaveBed;
     }
 
-    private void EnterBed(PlayerController playerToHide)
+    private void EnterBed(PlayerStateMachine playerToHide)
     {
-        playerToHide.Hide();
+        playerToHide.Disable();
         spriteRenderer.enabled = true;
         StartCoroutine(SleepCoroutine(playerToHide));
     }
 
-    private void LeaveBed(PlayerController playerToEnableAgain)
+    private void LeaveBed(PlayerStateMachine playerToEnableAgain)
     {
-        playerToEnableAgain.Show();
+        playerToEnableAgain.Enable();
         spriteRenderer.enabled = false;
     }
 
-    IEnumerator SleepCoroutine(PlayerController playerToEnableAgain)
+    IEnumerator SleepCoroutine(PlayerStateMachine playerToEnableAgain)
     {
         if (nightFadeToBlack != null)
         {
