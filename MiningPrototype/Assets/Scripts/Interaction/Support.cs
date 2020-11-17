@@ -10,11 +10,21 @@ public class Support : SupportBase
         Carve();
     }
 
+
+    public override void OnTileUpdated(int x, int y, TileUpdateReason reason)
+    {
+        if(this != null && reason == TileUpdateReason.Destroy)
+        {
+            Debug.Log("Support destroyed.");
+            UncarveDestroy();
+        }
+    }
+
     public override void OnTileCrumbleNotified(int x, int y)
     {
-        UnCarvePrevious();
-        Debug.Log("Support crumbled.");
-        Destroy(gameObject);
+        UncarveDestroy();
         //Support broke... What happens now?
     }
+
+
 }

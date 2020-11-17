@@ -13,8 +13,7 @@ public class GenerationSettings : ScriptableObject
 
     public int Size;
 
-    [Range(0, 1)]
-    public float InitialAliveChance;
+    public AnimationCurve InitialAliveCurve;
 
     [Range(0, 9)]
     public int DeathLimit;

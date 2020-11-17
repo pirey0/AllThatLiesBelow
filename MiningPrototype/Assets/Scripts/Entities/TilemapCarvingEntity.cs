@@ -5,12 +5,12 @@ using UnityEngine;
 
 public abstract class TilemapCarvingEntity : MonoBehaviour, ITileUpdateReceiver
 {
-    [SerializeField] TileType type = TileType.CarvedEntity;
-    [SerializeField] protected Vector2Int[] tilesToOccupy = new Vector2Int[] { Vector2Int.zero };
+    [SerializeField] protected TileOffsetTypePair[] tilesToOccupy;
+    [SerializeField] Vector3 carvingOffset;
 
     Vector2Int tilemapPos = new Vector2Int(-1, -1);
 
-    public virtual void OnTileUpdated(int x, int y, Tile newTile)
+    public virtual void OnTileUpdated(int x, int y, TileUpdateReason reason)
     {
     }
     
@@ -30,19 +30,24 @@ public abstract class TilemapCarvingEntity : MonoBehaviour, ITileUpdateReceiver
 
     protected bool CarveLocationChanged()
     {
-        return transform.position.ToGridPosition() != tilemapPos;
+        return (transform.position + carvingOffset).ToGridPosition() != tilemapPos;
     }
 
+    public void UncarveDestroy()
+    {
+        UnCarvePrevious();
+        Destroy(gameObject);
+    }
 
     protected void Carve()
     {
         if (TileMap.Instance != null)
         {
-            tilemapPos = transform.position.ToGridPosition();
+            tilemapPos = (transform.position + carvingOffset).ToGridPosition();
             foreach (var item in tilesToOccupy)
             {
-                Vector2Int pos = tilemapPos + item;
-                TileMap.Instance.SetMapAt(pos.x, pos.y, Tile.Make(type), updateProperties: true, updateVisuals: true);
+                Vector2Int pos = tilemapPos + item.Offset;
+                TileMap.Instance.SetMapAt(pos.x, pos.y, Tile.Make(item.Type), TileUpdateReason.Carve, updateProperties: true, updateVisuals: true);
                 TileMap.Instance.SetReceiverMapAt(pos.x, pos.y, this);
             }
         }
@@ -58,8 +63,8 @@ public abstract class TilemapCarvingEntity : MonoBehaviour, ITileUpdateReceiver
         {
             foreach (var item in tilesToOccupy)
             {
-                Vector2Int pos = tilemapPos + item;
-                TileMap.Instance.SetMapAt(pos.x, pos.y, Tile.Air, updateProperties: true, updateVisuals: true);
+                Vector2Int pos = tilemapPos + item.Offset;
+                TileMap.Instance.SetMapAt(pos.x, pos.y, Tile.Air, TileUpdateReason.Uncarve, updateProperties: true, updateVisuals: true);
                 TileMap.Instance.SetReceiverMapAt(pos.x, pos.y, this);
             }
             tilemapPos = new Vector2Int(-1, -1);
@@ -70,9 +75,29 @@ public abstract class TilemapCarvingEntity : MonoBehaviour, ITileUpdateReceiver
     {
         foreach (var disp in tilesToOccupy)
         {
-            Util.GizmosDrawTile(transform.position.ToGridPosition() + disp);
+            Gizmos.color = disp.Type == TileType.CollapsableEntity ? Color.yellow : Color.white;
+            Util.GizmosDrawTile((transform.position + carvingOffset).ToGridPosition() + disp.Offset);
         }
     }
 
 
+}
+
+[System.Serializable]
+public struct TileOffsetTypePair
+{
+    public Vector2Int Offset;
+    public TileType Type;
+
+    public TileOffsetTypePair(int x, int y, TileType type)
+    {
+        Offset = new Vector2Int(x, y);
+        Type = type;
+    }
+
+    public TileOffsetTypePair(Vector2Int offset, TileType type)
+    {
+        Offset = offset;
+        Type = type;
+    }
 }

@@ -19,6 +19,7 @@ MonoBehaviour:
   Targetable: 1
   StabilityAffected: 1
   NotifiesInsteadOfCrumbling: 1
+  CountsAsNeighbour: 1
   UseTilesFromOtherInfo: 0
   Tiles: []
   TileSourceInfo: {fileID: 0}

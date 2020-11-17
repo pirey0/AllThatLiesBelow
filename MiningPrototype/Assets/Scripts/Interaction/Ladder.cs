@@ -27,14 +27,13 @@ public class Ladder : TilemapCarvingEntity, ITileMapElement
         rigidbody.isKinematic = true;
     }
 
-    public override void OnTileUpdated(int x, int y, Tile newTile)
+    public override void OnTileUpdated(int x, int y, TileUpdateReason reason)
     {
-        if (this == null)
+        if (this == null || reason != TileUpdateReason.Destroy)
             return;
 
-        UnCarvePrevious();
-        Destroy(gameObject);
-        Debug.Log("Destroying ladder");
+        UncarveDestroy();
+        Debug.Log("Destroying ladder " + reason);
     }
 
     public override void OnTileCrumbleNotified(int x, int y)
@@ -50,16 +49,18 @@ public class Ladder : TilemapCarvingEntity, ITileMapElement
 
     private IEnumerator FallingRoutine()
     {
-        fallSound?.Play();
+        if (fallSound != null)
+            fallSound.Play();
 
         while (!rigidbody.IsSleeping())
         {
             yield return null;
         }
 
-        fallSound?.Stop();
+        if (fallSound != null)
+             fallSound?.Stop();
 
-        rigidbody.isKinematic = true;
+            rigidbody.isKinematic = true;
         Carve();
     }
 

@@ -7,8 +7,7 @@ public class OrePass
 {
     public TileType TileType;
     public Vector2Int OreVeinSize;
-    public int MaxHeight;
-    public float Probability;
+    public AnimationCurve Probability;
 }
 
 
@@ -16,7 +15,6 @@ public class OrePass
 public class RockPass
 {
     public Vector2Int Size;
-    public int MaxHeight;
-    public float Probability;
+    public AnimationCurve Probability;
     public GameObject Prefab;
 }

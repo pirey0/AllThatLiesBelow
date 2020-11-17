@@ -15,10 +15,33 @@ MonoBehaviour:
   SeedIsRandom: 0
   Seed: 0
   Size: 100
-  InitialAliveChance: 0.768
+  InitialAliveCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.002292633
+      value: 0.52960205
+      inSlope: -0.020117436
+      outSlope: -0.020117436
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.08965494
+    - serializedVersion: 3
+      time: 0.9954182
+      value: 0.70907634
+      inSlope: 0.021941375
+      outSlope: 0.021941375
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.07216496
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   DeathLimit: 3
   BirthLimit: 4
-  AutomataSteps: 5
+  AutomataSteps: 4
   HeightMultiplyer:
     serializedVersion: 2
     m_Curve:
@@ -74,20 +97,171 @@ MonoBehaviour:
   OrePasses:
   - TileType: 2
     OreVeinSize: {x: 7, y: 10}
-    MaxHeight: 72
-    Probability: 2
+    Probability:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.0029865718
+        value: 2.0039556
+        inSlope: 0.0075588855
+        outSlope: 0.0075588855
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.45440853
+        value: 2.0073678
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.8016026
+        value: 0.003396809
+        inSlope: -34.9396
+        outSlope: -34.9396
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.029301368
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -0.39378583
+        outSlope: -0.39378583
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.19412796
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   - TileType: 3
     OreVeinSize: {x: 5, y: 8}
-    MaxHeight: 40
-    Probability: 1
+    Probability:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.0029865718
+        value: 2.0039556
+        inSlope: -0.020461103
+        outSlope: -0.020461103
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.260001
+        value: 1.9986968
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.66206574
+        value: 0.50119555
+        inSlope: -10.33803
+        outSlope: 0
+        tangentMode: 1
+        weightedMode: 0
+        inWeight: 0.030264113
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -0.39378583
+        outSlope: -0.39378583
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.19412796
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   - TileType: 5
-    OreVeinSize: {x: 3, y: 7}
-    MaxHeight: 15
-    Probability: 1
+    OreVeinSize: {x: 2, y: 4}
+    Probability:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.0029865718
+        value: 2.0039556
+        inSlope: -10.476895
+        outSlope: -10.476895
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.1973014
+        value: -0.031860586
+        inSlope: -34.9396
+        outSlope: -34.9396
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.029301368
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -0.39378583
+        outSlope: -0.39378583
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.19412796
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   RockPasses:
   - Size: {x: 2, y: 2}
-    MaxHeight: 75
-    Probability: 5
+    Probability:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.0025593257
+        value: 10
+        inSlope: -14.784649
+        outSlope: -14.784649
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.42176527
+        value: 3.8021874
+        inSlope: 5.8342347
+        outSlope: 5.8342347
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.25381437
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.8016026
+        value: 0.003396809
+        inSlope: -21.532295
+        outSlope: -21.532295
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.067709595
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -0.39378583
+        outSlope: -0.39378583
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.19412796
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     Prefab: {fileID: 8886592050164078683, guid: 94d8faed3d48d2a4b95add8b4bbc9945, type: 3}
   UnstableThreshhold: 40
   CollapseThreshhold: 30

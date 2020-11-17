@@ -62,13 +62,15 @@ public class TileMapGenerator
     {
         foreach (var pass in settings.RockPasses)
         {
-            Util.IterateX((int)(pass.MaxHeight * settings.Size * pass.Probability * 0.01f), (x) => TryPlaceRock(pass));
+            for (int y = 0; y < settings.Size; y++)
+            {
+                Util.IterateX((int)(settings.Size * pass.Probability.Evaluate((float)y / settings.Size) * 0.01f), (x) => TryPlaceRock(pass, y));
+            }
         }
     }
 
-    private void TryPlaceRock(RockPass pass)
+    private void TryPlaceRock(RockPass pass, int y)
     {
-        int y = UnityEngine.Random.Range(0, pass.MaxHeight);
         int x = UnityEngine.Random.Range(0, settings.Size);
 
         List<Vector2Int> locations = new List<Vector2Int>();
@@ -95,7 +97,7 @@ public class TileMapGenerator
         {
             foreach (var loc in locations)
             {
-                map.SetMapAt(loc.x, loc.y, Tile.Air, updateProperties: false, updateVisuals: false);
+                map.SetMapAt(loc.x, loc.y, Tile.Air, TileUpdateReason.Generation, updateProperties: false, updateVisuals: false);
             }
 
             Vector3 pos = new Vector3(x + pass.Size.x * 0.5f, y + pass.Size.y * 0.5f);
@@ -123,7 +125,8 @@ public class TileMapGenerator
     public void CollapseAt(int x, int y, bool updateVisuals)
     {
         Tile t = map[x, y];
-        map.SetMapAt(x, y, Tile.Air, updateProperties: true, updateVisuals);
+        map.SetMapAt(x, y, Tile.Air, TileUpdateReason.Collapse, updateProperties: true, updateVisuals);
+
         var go = GameObject.Instantiate(settings.PhysicalTilePrefab, new Vector3(x + 0.5f, y + 0.5f, 0), Quaternion.identity);
         go.GetComponent<PhysicalTile>().Setup(map, t, map.GetTileInfo(t.Type));
     }
@@ -229,7 +232,7 @@ public class TileMapGenerator
             t.Type = TileType.Snow;
         }
 
-        map.SetMapAt(x, y, t, updateProperties: false, updateVisuals: false);
+        map.SetMapAt(x, y, t, TileUpdateReason.Generation, updateProperties: false, updateVisuals: false);
     }
 
     private void CalculateNeighboursBitmask()
@@ -242,14 +245,14 @@ public class TileMapGenerator
         if (map.IsOutOfBounds(x, y))
             return;
 
-        int topLeft = map.IsBlockAt(x - 1, y + 1) ? 1 : 0;
-        int topMid = map.IsBlockAt(x, y + 1) ? 1 : 0;
-        int topRight = map.IsBlockAt(x + 1, y + 1) ? 1 : 0;
-        int midLeft = map.IsBlockAt(x - 1, y) ? 1 : 0;
-        int midRight = map.IsBlockAt(x + 1, y) ? 1 : 0;
-        int botLeft = map.IsBlockAt(x - 1, y - 1) ? 1 : 0;
-        int botMid = map.IsBlockAt(x, y - 1) ? 1 : 0;
-        int botRight = map.IsBlockAt(x + 1, y - 1) ? 1 : 0;
+        int topLeft = map.IsNeighbourAt(x - 1, y + 1) ? 1 : 0;
+        int topMid = map.IsNeighbourAt(x, y + 1) ? 1 : 0;
+        int topRight = map.IsNeighbourAt(x + 1, y + 1) ? 1 : 0;
+        int midLeft = map.IsNeighbourAt(x - 1, y) ? 1 : 0;
+        int midRight = map.IsNeighbourAt(x + 1, y) ? 1 : 0;
+        int botLeft = map.IsNeighbourAt(x - 1, y - 1) ? 1 : 0;
+        int botMid = map.IsNeighbourAt(x, y - 1) ? 1 : 0;
+        int botRight = map.IsNeighbourAt(x + 1, y - 1) ? 1 : 0;
 
         int value = topMid * 2 + midLeft * 8 + midRight * 16 + botMid * 64;
         value += topLeft * topMid * midLeft;
@@ -278,13 +281,16 @@ public class TileMapGenerator
     {
         foreach (var pass in settings.OrePasses)
         {
-            Util.IterateX((int)(pass.MaxHeight * settings.Size * pass.Probability * 0.01f), (x) => TryPlaceVein(pass.TileType, Util.RandomInVector(pass.OreVeinSize), pass.MaxHeight));
+            for (int y = 0; y < settings.Size; y++)
+            {
+                Util.IterateX((int)(settings.Size * pass.Probability.Evaluate((float)y / settings.Size) * 0.01f), (x) => TryPlaceVein(pass.TileType, Util.RandomInVector(pass.OreVeinSize), y));
+            }
         }
     }
 
-    private void TryPlaceVein(TileType type, int amount, int maxHeight)
+    private void TryPlaceVein(TileType type, int amount, int y)
     {
-        int y = UnityEngine.Random.Range(0, maxHeight);
+        
         int x = UnityEngine.Random.Range(0, settings.Size);
 
         GrowVeinAt(x, y, type, amount);
@@ -302,7 +308,7 @@ public class TileMapGenerator
             {
                 if (map.GetTileAt(x, y).Type != tile)
                 {
-                    map.SetMapAt(x, y, Tile.Make(tile), updateProperties: false, updateVisuals: false);
+                    map.SetMapAt(x, y, Tile.Make(tile), TileUpdateReason.Generation, updateProperties: false, updateVisuals: false);
                     amount--;
                     x = startX;
                     y = startY;
@@ -327,7 +333,7 @@ public class TileMapGenerator
     {
         Tile t = Tile.Air;
 
-        bool occupied = settings.HeightMultiplyer.Evaluate((float)y / settings.Size) * UnityEngine.Random.value < settings.InitialAliveChance;
+        bool occupied = settings.HeightMultiplyer.Evaluate((float)y / settings.Size) * UnityEngine.Random.value < settings.InitialAliveCurve.Evaluate((float)y/settings.Size);
 
         if (occupied)
             t.Type = TileType.Stone;

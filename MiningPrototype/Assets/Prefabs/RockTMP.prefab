@@ -47,12 +47,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5160b0c55111f94e94638d0301d0f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 8
   tilesToOccupy:
-  - {x: 0, y: 0}
-  - {x: -1, y: 0}
-  - {x: -1, y: -1}
-  - {x: 0, y: -1}
+  - Offset: {x: 0, y: 0}
+    Type: 8
+  - Offset: {x: -1, y: 0}
+    Type: 8
+  - Offset: {x: -1, y: -1}
+    Type: 8
+  - Offset: {x: 0, y: -1}
+    Type: 8
+  carvingOffset: {x: 0, y: 0, z: 0}
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 8886592050164078684}

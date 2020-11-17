@@ -18,6 +18,8 @@ MonoBehaviour:
   AirLike: 0
   Targetable: 1
   StabilityAffected: 1
+  NotifiesInsteadOfCrumbling: 0
+  CountsAsNeighbour: 1
   UseTilesFromOtherInfo: 0
   Tiles:
   - {fileID: 11400000, guid: a36febf07089986479169c7da38520bc, type: 2}

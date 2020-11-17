@@ -10,19 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c44c8a584f6c2194fa5a252688113e23, type: 3}
-  m_Name: Tile_2_Copper
+  m_Name: Tile_9_EntityCollaps
   m_EditorClassIdentifier: 
-  Type: 2
-  ItemToDrop: 3
+  Type: 9
+  ItemToDrop: 0
   damageMultiplyer: 1
   AirLike: 0
   Targetable: 1
   StabilityAffected: 1
-  NotifiesInsteadOfCrumbling: 0
-  CountsAsNeighbour: 1
-  UseTilesFromOtherInfo: 1
+  NotifiesInsteadOfCrumbling: 1
+  UseTilesFromOtherInfo: 0
   Tiles: []
-  TileSourceInfo: {fileID: 11400000, guid: b3eaa7d6a02e5524d9b3ee029c880b69, type: 2}
-  Overlay: {fileID: 11400000, guid: 7e1e97604cdbd3a4bbc6131bc89e93f2, type: 2}
+  TileSourceInfo: {fileID: 0}
+  Overlay: {fileID: 0}
   physicalTileSprite: {fileID: 0}
-  physicalTileOverlay: {fileID: 21300000, guid: ac62153ce12f28d4cbcaf15cbac811c4, type: 3}
+  physicalTileOverlay: {fileID: 0}
