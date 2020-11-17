@@ -16,40 +16,21 @@ public enum PlayerState
 
 public class PlayerController : InventoryOwner, IEntity
 {
-    [Header("Player")]
-    [SerializeField] float groundedAngle;
-    [SerializeField] float jumpVelocity;
-    [SerializeField] float moveSpeed;
-
-    [SerializeField] float jumpCooldown = 0.1f;
-    [SerializeField] float timeAfterGroundedToJump = 0.1f;
+    [SerializeField] PlayerSettings settings;
 
     [SerializeField] Transform feet;
-    [SerializeField] float feetRadius;
-
-    [SerializeField] float maxDigDistance = 3;
 
     [SerializeField] GameObject pickaxe;
-    [SerializeField] float digSpeed = 10;
     [SerializeField] Transform mouseHighlight;
 
-    [SerializeField] SpriteAnimation an_Walk, an_Idle, an_Fall, an_Inventory, an_Climb, an_ClimbIdle;
-
-    [SerializeField] ParticleSystem miningParticles;
-    [SerializeField] int miningBreakParticlesCount;
-    [SerializeField] float miningParticlesRateOverTime = 4;
 
     [SerializeField] AudioSource breakBlock, startMining, walking;
     [SerializeField] DirectionBasedAnimator pickaxeAnimator;
 
-    [SerializeField] float inventoryOpenDistance;
-    [SerializeField] float maxInteractableDistance;
     [SerializeField] EventSystem eventSystem;
-
-    [SerializeField] float climbSpeed;
-    [SerializeField] float climbPanSpeed;
-    [SerializeField] float climbIdleThreshold;
+    [SerializeField] ParticleSystem miningParticles;
     [SerializeField] SpriteRenderer heldItemPreview;
+
 
     Rigidbody2D rigidbody;
     SpriteAnimator spriteAnimator;
@@ -99,7 +80,7 @@ public class PlayerController : InventoryOwner, IEntity
             ToggleInventory();
         }
 
-        if (Vector2Int.Distance(GetPositionInGrid(), GetClickCoordinate()) <= maxDigDistance)
+        if (Vector2Int.Distance(GetPositionInGrid(), GetClickCoordinate()) <= settings.maxDigDistance)
         {
             Debug.DrawLine(GetPositionInGridV3(), GetClickPositionV3(), Color.yellow, Time.deltaTime);
             UpdateDigTarget();
@@ -112,7 +93,7 @@ public class PlayerController : InventoryOwner, IEntity
             }
             else if (Input.GetMouseButtonDown(1))
             {
-                if (Vector3.Distance(GetPositionInGridV3(), GetClickPositionV3()) <= inventoryOpenDistance && isGrounded)
+                if (Vector3.Distance(GetPositionInGridV3(), GetClickPositionV3()) <= settings.inventoryOpenDistance && isGrounded)
                 {
                     ToggleInventory();
                 }
@@ -178,7 +159,7 @@ public class PlayerController : InventoryOwner, IEntity
 
     private bool CanJump()
     {
-        return Time.time - lastGroundedTimeStamp < timeAfterGroundedToJump && Time.time - lastJumpTimeStamp > jumpCooldown;
+        return Time.time - lastGroundedTimeStamp < settings.timeAfterGroundedToJump && Time.time - lastJumpTimeStamp > settings.jumpCooldown;
     }
 
     private void UpdateDigTarget()
@@ -249,12 +230,12 @@ public class PlayerController : InventoryOwner, IEntity
 
         if (gridDigTarget.HasValue)
         {
-            bool broken = TileMap.Instance.DamageAt(gridDigTarget.Value.x, gridDigTarget.Value.y, Time.deltaTime * digSpeed * ProgressionHandler.Instance.DigSpeedMultiplyer, playerCaused: true);
+            bool broken = TileMap.Instance.DamageAt(gridDigTarget.Value.x, gridDigTarget.Value.y, Time.deltaTime * settings.digSpeed * ProgressionHandler.Instance.DigSpeedMultiplyer, playerCaused: true);
 
             if (broken)
             {
                 miningParticles.transform.position = (Vector3Int)gridDigTarget + new Vector3(0.5f, 0.5f);
-                miningParticles.Emit(miningBreakParticlesCount);
+                miningParticles.Emit(settings.miningBreakParticlesCount);
                 breakBlock.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
                 breakBlock.Play();
                 TryDisableMiningVisuals();
@@ -270,7 +251,7 @@ public class PlayerController : InventoryOwner, IEntity
         {
             if (nonGridDigTarget != null)
             {
-                nonGridDigTarget.Damage(Time.deltaTime * digSpeed);
+                nonGridDigTarget.Damage(Time.deltaTime * settings.digSpeed);
                 miningParticles.transform.position = nonGridDigTarget.GetPosition();
                 TryEnableMiningVisuals();
             }
@@ -315,7 +296,7 @@ public class PlayerController : InventoryOwner, IEntity
         if (!inMining)
         {
             var emission = miningParticles.emission;
-            emission.rateOverTimeMultiplier = miningParticlesRateOverTime;
+            emission.rateOverTimeMultiplier = settings.miningParticlesRateOverTime;
             inMining = true;
             startMining.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
             startMining.Play();
@@ -376,16 +357,16 @@ public class PlayerController : InventoryOwner, IEntity
             var horizontal = Input.GetAxis("Horizontal");
             var vertical = Input.GetAxis("Vertical");
 
-            Vector2 climbVelocity = new Vector2(horizontal * climbPanSpeed, vertical * climbSpeed);
+            Vector2 climbVelocity = new Vector2(horizontal * settings.climbPanSpeed, vertical * settings.climbSpeed);
             rigidbody.velocity = climbVelocity;
 
-            if (climbVelocity.magnitude > climbIdleThreshold)
+            if (climbVelocity.magnitude > settings.climbIdleThreshold)
             {
-                spriteAnimator.Play(an_Climb, false);
+                spriteAnimator.Play(settings.an_Climb, false);
             }
             else
             {
-                spriteAnimator.Play(an_ClimbIdle, false);
+                spriteAnimator.Play(settings.an_ClimbIdle, false);
             }
 
             if (vertical > 0)
@@ -418,11 +399,11 @@ public class PlayerController : InventoryOwner, IEntity
 
         if (currentInteractable != null)
         {
-            if (Vector3.Distance(GetPositionInGridV3(), currentInteractable.gameObject.transform.position) > maxInteractableDistance)
+            if (Vector3.Distance(GetPositionInGridV3(), currentInteractable.gameObject.transform.position) > settings.maxInteractableDistance)
                 TryStopInteracting();
         }
 
-        rigidbody.position += horizontal * rightWalkVector * moveSpeed * Time.fixedDeltaTime * ProgressionHandler.Instance.SpeedMultiplyer;
+        rigidbody.position += horizontal * rightWalkVector * settings.moveSpeed * Time.fixedDeltaTime * ProgressionHandler.Instance.SpeedMultiplyer;
         rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
 
         if (Mathf.Abs(horizontal) > 0.2f)
@@ -434,24 +415,24 @@ public class PlayerController : InventoryOwner, IEntity
             {
                 if (InventoryDisplayState == InventoryState.Open)
                 {
-                    spriteAnimator.Play(an_Inventory, false);
+                    spriteAnimator.Play(settings.an_Inventory, false);
                     SetHeldVisible(false);
                 }
                 else
                 {
-                    spriteAnimator.Play(an_Idle, false);
+                    spriteAnimator.Play(settings.an_Idle, false);
                     SetHeldVisible(true);
                 }
             }
             else
             {
-                spriteAnimator.Play(an_Walk, false);
+                spriteAnimator.Play(settings.an_Walk, false);
                 SetHeldVisible(true);
             }
         }
         else
         {
-            spriteAnimator.Play(an_Fall);
+            spriteAnimator.Play(settings.an_Fall);
             SetHeldVisible(true);
         }
 
@@ -493,7 +474,7 @@ public class PlayerController : InventoryOwner, IEntity
     private void UpdateJump()
     {
         var vertical = Input.GetAxis("Vertical");
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(feet.position, feetRadius);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(feet.position, settings.feetRadius);
         isGrounded = colliders != null && colliders.Length > 1;
 
         if (isGrounded)
@@ -509,7 +490,7 @@ public class PlayerController : InventoryOwner, IEntity
 
     private void Jump()
     {
-        rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpVelocity);
+        rigidbody.velocity = new Vector2(rigidbody.velocity.x, settings.jumpVelocity);
         lastJumpTimeStamp = Time.time;
     }
 
@@ -633,7 +614,7 @@ public class PlayerController : InventoryOwner, IEntity
 
         Debug.DrawLine(transform.position, transform.position + (Vector3)contact.normal);
 
-        if (angle < groundedAngle)
+        if (angle < settings.groundedAngle)
         {
             rightWalkVector = Vector3.Cross(contact.normal, Vector3.forward).normalized;
         }
@@ -646,12 +627,12 @@ public class PlayerController : InventoryOwner, IEntity
     private void OnDrawGizmosSelected()
     {
         if (feet != null)
-            Gizmos.DrawWireSphere(feet.position, feetRadius);
+            Gizmos.DrawWireSphere(feet.position, settings.feetRadius);
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, transform.position + (Vector3)rightWalkVector);
 
-        Gizmos.DrawWireSphere((Vector3Int)GetPositionInGrid(), maxDigDistance);
-        Gizmos.DrawWireSphere(GetPositionInGridV3(), inventoryOpenDistance);
+        Gizmos.DrawWireSphere((Vector3Int)GetPositionInGrid(), settings.maxDigDistance);
+        Gizmos.DrawWireSphere(GetPositionInGridV3(), settings.inventoryOpenDistance);
     }
 }

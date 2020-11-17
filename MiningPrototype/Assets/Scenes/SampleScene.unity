@@ -133498,10 +133498,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 154330390, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
-      propertyPath: mouseFollowMultiplier
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 497824006148765930, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
       propertyPath: canvas
       value: 

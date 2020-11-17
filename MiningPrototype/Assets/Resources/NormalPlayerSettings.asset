@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b093e748584602c4ab7feccf43f0885e, type: 3}
+  m_Name: NormalPlayerSettings
+  m_EditorClassIdentifier: 
+  groundedAngle: 88
+  jumpVelocity: 9
+  moveSpeed: 5
+  jumpCooldown: 0.85
+  timeAfterGroundedToJump: 0.1
+  feetRadius: 0.4
+  maxDigDistance: 5
+  digSpeed: 10
+  an_Walk: {fileID: 11400000, guid: a277db9a3fae53741b035a9c4fb2951b, type: 2}
+  an_Idle: {fileID: 11400000, guid: 032cff1f8108c1743afb6adbae6af0c4, type: 2}
+  an_Fall: {fileID: 11400000, guid: 5bac872074f697147ae4b8f027fb547f, type: 2}
+  an_Inventory: {fileID: 11400000, guid: 896fb86e033db8243bbed2e1d93c6fc2, type: 2}
+  an_Climb: {fileID: 11400000, guid: b5cd5621b64cd6b43abf14303ce482c3, type: 2}
+  an_ClimbIdle: {fileID: 11400000, guid: 4193ed70d1e11224c962dbb4da9c9d5b, type: 2}
+  miningBreakParticlesCount: 20
+  miningParticlesRateOverTime: 4
+  inventoryOpenDistance: 0.75
+  maxInteractableDistance: 5
+  climbSpeed: 4
+  climbPanSpeed: 2
+  climbIdleThreshold: 0.2
