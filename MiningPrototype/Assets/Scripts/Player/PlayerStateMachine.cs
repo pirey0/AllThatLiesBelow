@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 
@@ -36,11 +37,12 @@ public enum AnimationPickaxeState
 }
 
 [DefaultExecutionOrder(-20)]
-public class PlayerStateMachine : MonoBehaviour, IStateMachineUser
+public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
 {
     [SerializeField] PlayerSettings settings;
     [SerializeField] Transform feet;
     [SerializeField] AudioSource walking;
+    [SerializeField] bool slowWalkMode;
 
     StateMachine stateMachine;
     StateMachine.State s_idle, s_jump, s_fall, s_walk, s_slowWalk, s_climb, s_climbIde, s_inventory, s_death, s_hit, s_longIdle, s_disabled;
@@ -49,6 +51,7 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser
     private float gravityScale;
     float lastGroundedTimeStamp;
     float lastJumpTimeStamp;
+    float lastMovingTimeStamp;
     private bool isGrounded;
     Vector2 rightWalkVector = Vector3.right;
     Rigidbody2D rigidbody;
@@ -105,13 +108,13 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser
         s_idle = stateMachine.AddState("Idle", IdleEnter, MoveUpdate);
         s_jump = stateMachine.AddState("Jump", JumpEnter, MoveUpdate);
         s_walk = stateMachine.AddState("Walk", null, MoveUpdate, null);
-        s_slowWalk = stateMachine.AddState("SlowWalk", null, null);
+        s_slowWalk = stateMachine.AddState("SlowWalk", null, SlowMoveUpdate);
         s_climb = stateMachine.AddState("Climb", ClimbingEnter, ClimbingUpdate, ClimbingExit);
         s_climbIde = stateMachine.AddState("ClimbIdle", ClimbingEnter, ClimbingUpdate, ClimbingExit);
         s_inventory = stateMachine.AddState("Inventory", null);
         s_death = stateMachine.AddState("Death", null);
         s_hit = stateMachine.AddState("Hit", null);
-        s_longIdle = stateMachine.AddState("LongIdle", null);
+        s_longIdle = stateMachine.AddState("LongIdle", null, SlowMoveUpdate);
         s_disabled = stateMachine.AddState("Disabled", null);
         s_fall = stateMachine.AddState("Fall", null, MoveUpdate);
 
@@ -119,7 +122,7 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser
         s_inventory.AddTransition(() => !InInventory(), s_idle);
 
         s_idle.AddTransition(IsProlongedIdle, s_longIdle);
-        s_longIdle.AddTransition(() => !IsProlongedIdle(), s_idle);
+        s_longIdle.AddTransition(IsMoving, s_walk);
 
         s_idle.AddTransition(IsFalling, s_fall);
         s_fall.AddTransition(IsGrounded, s_idle);
@@ -129,23 +132,37 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser
 
         s_idle.AddTransition(IsMoving, s_walk);
         s_walk.AddTransition(IsIdle, s_idle);
+        s_walk.AddTransition(IsSlowWalking, s_slowWalk);
+        s_slowWalk.AddTransition(IsIdle, s_idle);
 
         s_idle.AddTransition(ShouldClimb, s_climb);
         s_walk.AddTransition(ShouldClimb, s_climb);
         s_jump.AddTransition(ShouldClimb, s_climb);
         s_fall.AddTransition(ShouldClimb, s_climb);
         s_climb.AddTransition(IsNotClimbing, s_idle);
+        s_climbIde.AddTransition(IsNotClimbing, s_idle);
 
         s_climb.AddTransition(IsClimbingIdle, s_climbIde);
         s_climbIde.AddTransition(IsMovingIdle, s_climb);
 
         s_jump.AddTransition(IsFalling, s_fall);
 
+        s_hit.AddTransition(HitFinished, s_idle);
+    }
+
+    private bool HitFinished()
+    {
+        return Time.time - lastMovingTimeStamp > settings.hitDuration;
+    }
+
+    private bool IsSlowWalking()
+    {
+        return slowWalkMode;
     }
 
     private void IdleEnter()
     {
-        UpdateWalkingSound(0);
+        SetMovingSound(false);
     }
 
     private void JumpEnter()
@@ -154,19 +171,35 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser
         lastJumpTimeStamp = Time.time;
     }
 
+    private void SlowMoveUpdate()
+    {
+        var horizontal = Input.GetAxis("Horizontal");
+
+        rigidbody.position += horizontal * rightWalkVector * settings.slowMoveSpeed * Time.fixedDeltaTime * ProgressionHandler.Instance.SpeedMultiplyer;
+        BaseMoveUpdate(horizontal);
+    }
+
     private void MoveUpdate()
     {
         var horizontal = Input.GetAxis("Horizontal");
 
         rigidbody.position += horizontal * rightWalkVector * settings.moveSpeed * Time.fixedDeltaTime * ProgressionHandler.Instance.SpeedMultiplyer;
+        BaseMoveUpdate(horizontal);
+    }
+
+    private void BaseMoveUpdate(float horizontal)
+    {
         rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
 
         horizontalSpeed = horizontal * rightWalkVector.x;
 
         if (IsMoving())
+        {
             transform.localScale = new Vector3(horizontalSpeed > 0 ? 1 : -1, 1, 1);
+            lastMovingTimeStamp = Time.time;
+        }
 
-        UpdateWalkingSound(1);
+        SetMovingSound(true);
     }
 
     private void ClimbingEnter()
@@ -257,7 +290,7 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser
 
     private bool IsProlongedIdle()
     {
-        return false;
+        return Time.time - lastMovingTimeStamp > settings.timeToLongIdle;
     }
 
     private bool InInventory()
@@ -270,9 +303,9 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser
         return stateMachine;
     }
 
-    private void UpdateWalkingSound(float horizontal)
+    private void SetMovingSound(bool on)
     {
-        if (isGrounded && Mathf.Abs(horizontal) > 0.01f)
+        if (on)
         {
             if (!walking.isPlaying)
             {
@@ -343,5 +376,19 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, transform.position + (Vector3)rightWalkVector);
+    }
+
+    public void TakeDamage(DamageStrength strength)
+    {
+        switch (strength)
+        {
+            case DamageStrength.Weak:
+                stateMachine.ForceTransitionTo(s_hit);
+                break;
+
+            case DamageStrength.Strong:
+                stateMachine.ForceTransitionTo(s_death);
+                break;
+        }
     }
 }

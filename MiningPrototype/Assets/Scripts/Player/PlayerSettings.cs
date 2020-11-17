@@ -10,6 +10,9 @@ public class PlayerSettings : ScriptableObject
     public float groundedAngle;
     public float jumpVelocity;
     public float moveSpeed;
+    public float slowMoveSpeed;
+    public float timeToLongIdle;
+    public float hitDuration;
     
     public float jumpCooldown = 0.1f;
     public float timeAfterGroundedToJump = 0.1f;

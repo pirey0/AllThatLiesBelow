@@ -5891,6 +5891,8 @@ MonoBehaviour:
     offset: {x: 0, y: -0.125, z: 0}
   - sprite: {fileID: 1106305723913688297, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
     offset: {x: 0, y: -0.25, z: 0}
+  - sprite: {fileID: -8736164668747230439, guid: 94421b5b25e63b4479deff0229d1ed28, type: 3}
+    offset: {x: -0.125, y: -0.25, z: 0}
 --- !u!1 &8633471933228471848
 GameObject:
   m_ObjectHideFlags: 0
@@ -5947,7 +5949,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8633471933228471848}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 821c3d5db7c601149833a368a8b9b4bb, type: 3}
   m_Name: 
@@ -5963,12 +5965,10 @@ MonoBehaviour:
   openSource: {fileID: 1456414342}
   inventoryVisualizerUpdates: 1
   settings: {fileID: 11400000, guid: e0b2ba0468d7ff1498765ca6c35bf0e8, type: 2}
-  feet: {fileID: 1786483705}
   pickaxe: {fileID: 4724523066374434780}
   mouseHighlight: {fileID: 1281847263}
   breakBlock: {fileID: 3471564094401374700}
   startMining: {fileID: 4569569128638959811}
-  walking: {fileID: 8148473555476766029}
   pickaxeAnimator: {fileID: 5520157571960154573}
   eventSystem: {fileID: 0}
   miningParticles: {fileID: 265151543036608254}
@@ -6180,6 +6180,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c3be5cbd4a3764eb07ec41c218a664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settings: {fileID: 11400000, guid: e0b2ba0468d7ff1498765ca6c35bf0e8, type: 2}
+  feet: {fileID: 1786483705}
+  walking: {fileID: 8148473555476766029}
+  slowWalkMode: 0
 --- !u!1001 &1519042152031954263
 PrefabInstance:
   m_ObjectHideFlags: 0

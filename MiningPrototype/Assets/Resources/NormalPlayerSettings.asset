@@ -15,6 +15,9 @@ MonoBehaviour:
   groundedAngle: 88
   jumpVelocity: 9
   moveSpeed: 5
+  slowMoveSpeed: 3
+  timeToLongIdle: 10
+  hitDuration: 3
   jumpCooldown: 0.85
   timeAfterGroundedToJump: 0.1
   feetRadius: 0.4

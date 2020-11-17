@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+public enum DamageStrength { Weak, Strong}
 
 public interface IEntity
 {
-
+    void TakeDamage(DamageStrength strength);
 }
 
 public class PhysicalTile : MineableObject, IEntity
@@ -49,7 +50,7 @@ public class PhysicalTile : MineableObject, IEntity
     {
         if (collision.transform.TryGetComponent(out IEntity entity))
         {
-            //Damage?
+            entity.TakeDamage(DamageStrength.Weak);
         }
         else if (collision.transform.TryGetComponent(out ITileMapElement element))
         {
@@ -58,5 +59,10 @@ public class PhysicalTile : MineableObject, IEntity
             Util.DebugDrawTile(position);
             Destroy(gameObject);
         }
+    }
+
+    public void TakeDamage(DamageStrength strength)
+    {
+        Destroy(gameObject);
     }
 }

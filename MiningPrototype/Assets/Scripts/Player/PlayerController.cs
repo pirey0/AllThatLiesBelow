@@ -8,7 +8,7 @@ using UnityEngine.Tilemaps;
 using UnityEngineInternal;
 
 
-public class PlayerController : InventoryOwner, IEntity
+public class PlayerController : InventoryOwner
 {
     [SerializeField] PlayerSettings settings;
 
