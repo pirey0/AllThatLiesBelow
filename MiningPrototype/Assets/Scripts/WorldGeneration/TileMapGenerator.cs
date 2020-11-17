@@ -171,16 +171,12 @@ public class TileMapGenerator
     {
         Vector2Int offset = dir.Inverse().AsV2Int();
 
-        bool run = true;
-
-        while(run)
+        for (int i = 0; i < settings.StabilityPropagationDistance; i++)
         {
             SetDirectionalStabilityAt(x, y, dir);
             MarkToCheckForStability(x, y);
             x += offset.x;
             y += offset.y;
-
-            run = !map[x, y].StableWithout(dir);
         }
     }
 

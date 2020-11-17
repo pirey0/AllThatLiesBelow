@@ -18,6 +18,11 @@ public abstract class TilemapCarvingEntity : GridElement, ITileUpdateReceiver
             Destroy(gameObject);
         }
     }
+    
+    public virtual void OnTileCrumbleNotified(int x, int y)
+    {
+        
+    }
 
     [Button]
     protected void UpdateCarveIfNecessary()
@@ -74,5 +79,6 @@ public abstract class TilemapCarvingEntity : GridElement, ITileUpdateReceiver
             Util.GizmosDrawTile(transform.position.ToGridPosition() + disp);
         }
     }
+
 
 }

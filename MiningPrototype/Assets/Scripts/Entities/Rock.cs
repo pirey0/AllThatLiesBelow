@@ -18,6 +18,11 @@ public class Rock : TilemapCarvingEntity
 
     public override void OnTileUpdated(int x, int y, Tile newTile)
     {
+
+    }
+
+    public override void OnTileCrumbleNotified(int x, int y)
+    {
         if (this == null)
             return;
 

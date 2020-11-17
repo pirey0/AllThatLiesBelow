@@ -13,7 +13,9 @@ public class TileInfo : ScriptableObject
     public bool AirLike = false;
     public bool Targetable = true;
     public bool StabilityAffected = true;
+    public bool NotifiesInsteadOfCrumbling = false;
 
+    [Header("Visuals")]
     public bool UseTilesFromOtherInfo;
     public TileBase[] Tiles;
     public TileInfo TileSourceInfo;
@@ -23,5 +25,5 @@ public class TileInfo : ScriptableObject
     public Sprite physicalTileSprite;
     public Sprite physicalTileOverlay;
 
-    
+
 }
