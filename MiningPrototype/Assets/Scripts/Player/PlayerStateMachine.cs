@@ -22,7 +22,7 @@ public enum HeadState
 
 public enum HandsState
 {
-   Integrated, Conditional
+    Integrated, Conditional
 }
 
 public enum CarryItemState
@@ -35,10 +35,10 @@ public enum AnimationPickaxeState
     Integrated, Behind, Conditional
 }
 
-public class PlayerStateMachine : MonoBehaviour
+[DefaultExecutionOrder(-20)]
+public class PlayerStateMachine : MonoBehaviour, IStateMachineUser
 {
-    [SerializeField] PlayerVisualState[] visualStates;
-    Dictionary<string, PlayerVisualState> visualStateMap;
+    
     StateMachine stateMachine;
 
     StateMachine.State s_idle, s_jump, s_fall, s_walk, s_slowWalk, s_climb, s_climbIde, s_inventory, s_death, s_hit, s_longIdle, s_disabled;
@@ -46,14 +46,24 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void Start()
     {
-        visualStateMap = new Dictionary<string, PlayerVisualState>();
-
-        foreach (var item in visualStates)
-        {
-            visualStateMap.Add(item.StateName, item);
-        }
-
         SetupStateMachine();
+        stateMachine.Start();
+    }
+
+    private void OnGUI()
+    {
+        float y = 10;
+        for (int i = 0; i < stateMachine.States.Count; i++)
+        {
+            var s = stateMachine.States[i];
+
+            if (GUI.Button(new Rect(10, y, 200, 25), s.Name))
+            {
+                stateMachine.ForceTransitionTo(s);
+            }
+
+            y += 30;
+        }
     }
 
     private void SetupStateMachine()
@@ -71,7 +81,9 @@ public class PlayerStateMachine : MonoBehaviour
         s_hit = stateMachine.AddState("Hit", null);
         s_longIdle = stateMachine.AddState("LongIdle", null);
         s_disabled = stateMachine.AddState("Disabled", null);
+        s_fall = stateMachine.AddState("Fall", null);
 
+        return;
         s_idle.AddTransition(InInventory, s_inventory);
         s_inventory.AddTransition(() => !InInventory(), s_idle);
 
@@ -92,6 +104,13 @@ public class PlayerStateMachine : MonoBehaviour
         s_climb.AddTransition(IsIdle, s_climbIde);
         s_climbIde.AddTransition(IsMoving, s_climb);
     }
+
+    private void Update()
+    {
+        stateMachine.Update();
+    }
+
+
 
     private bool ShouldClimb()
     {
@@ -136,5 +155,10 @@ public class PlayerStateMachine : MonoBehaviour
     private bool InInventory()
     {
         throw new NotImplementedException();
+    }
+
+    public StateMachine GetStateMachine()
+    {
+        return stateMachine;
     }
 }

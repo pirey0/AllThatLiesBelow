@@ -5881,6 +5881,8 @@ GameObject:
   - component: {fileID: 8633471933228471855}
   - component: {fileID: 1894981212}
   - component: {fileID: 1894981211}
+  - component: {fileID: 9156434778629824202}
+  - component: {fileID: 5704201079326970389}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -5921,7 +5923,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8633471933228471848}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 821c3d5db7c601149833a368a8b9b4bb, type: 3}
   m_Name: 
@@ -6050,6 +6052,109 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 1.1240654}
   m_Size: {x: 1, y: 1.9987106}
   m_Direction: 0
+--- !u!114 &9156434778629824202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8633471933228471848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed030853bb8b0ac4c9a2e003c5ad9c1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyAnimator: {fileID: 6332330309916232596}
+  headAnimator: {fileID: 154330390}
+  handsRenderer: {fileID: 852425621}
+  itemRenderer: {fileID: 3794947}
+  pickaxe: {fileID: 5520157571960154573}
+  pickaxeObject: {fileID: 4724523066374434780}
+  visualStates:
+  - StateName: Idle
+    BodyAnimation: {fileID: 11400000, guid: 032cff1f8108c1743afb6adbae6af0c4, type: 2}
+    HeadState: 1
+    HandsState: 0
+    CarryItemState: 0
+    PickaxeState: 0
+  - StateName: Jump
+    BodyAnimation: {fileID: 11400000, guid: bc3639492c1177943913ff537fe6e6e9, type: 2}
+    HeadState: 0
+    HandsState: 0
+    CarryItemState: 0
+    PickaxeState: 0
+  - StateName: Walk
+    BodyAnimation: {fileID: 11400000, guid: a277db9a3fae53741b035a9c4fb2951b, type: 2}
+    HeadState: 0
+    HandsState: 0
+    CarryItemState: 0
+    PickaxeState: 0
+  - StateName: SlowWalk
+    BodyAnimation: {fileID: 11400000, guid: 23a47d0c626ff5a4c94e9148c9f0f4e1, type: 2}
+    HeadState: 0
+    HandsState: 0
+    CarryItemState: 0
+    PickaxeState: 0
+  - StateName: Climb
+    BodyAnimation: {fileID: 11400000, guid: b5cd5621b64cd6b43abf14303ce482c3, type: 2}
+    HeadState: 0
+    HandsState: 0
+    CarryItemState: 0
+    PickaxeState: 0
+  - StateName: ClimbIdle
+    BodyAnimation: {fileID: 11400000, guid: 4193ed70d1e11224c962dbb4da9c9d5b, type: 2}
+    HeadState: 0
+    HandsState: 0
+    CarryItemState: 0
+    PickaxeState: 0
+  - StateName: Inventory
+    BodyAnimation: {fileID: 11400000, guid: 896fb86e033db8243bbed2e1d93c6fc2, type: 2}
+    HeadState: 0
+    HandsState: 0
+    CarryItemState: 0
+    PickaxeState: 0
+  - StateName: Death
+    BodyAnimation: {fileID: 11400000, guid: 3a8d0745eb0ffe6458c0773bd89b913c, type: 2}
+    HeadState: 0
+    HandsState: 0
+    CarryItemState: 0
+    PickaxeState: 0
+  - StateName: Hit
+    BodyAnimation: {fileID: 0}
+    HeadState: 0
+    HandsState: 0
+    CarryItemState: 0
+    PickaxeState: 0
+  - StateName: LongIdle
+    BodyAnimation: {fileID: 11400000, guid: aebf58ac39ccc784d8500379c3235aac, type: 2}
+    HeadState: 0
+    HandsState: 0
+    CarryItemState: 0
+    PickaxeState: 0
+  - StateName: Fall
+    BodyAnimation: {fileID: 11400000, guid: 5bac872074f697147ae4b8f027fb547f, type: 2}
+    HeadState: 0
+    HandsState: 0
+    CarryItemState: 0
+    PickaxeState: 0
+  - StateName: Disabled
+    BodyAnimation: {fileID: 0}
+    HeadState: 0
+    HandsState: 0
+    CarryItemState: 0
+    PickaxeState: 0
+--- !u!114 &5704201079326970389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8633471933228471848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c3be5cbd4a3764eb07ec41c218a664, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1519042152031954263
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6198,11 +6303,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 562e47677541fc741804e2557b49653b, type: 3}
---- !u!1 &4724523066374434780 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7862656893741527902, guid: 562e47677541fc741804e2557b49653b, type: 3}
-  m_PrefabInstance: {fileID: 3210262223949552770}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5520157571960154573 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6923913253500253519, guid: 562e47677541fc741804e2557b49653b, type: 3}
@@ -6217,5 +6317,10 @@ MonoBehaviour:
 --- !u!4 &1191464639348439446 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4325085931206026516, guid: 562e47677541fc741804e2557b49653b, type: 3}
+  m_PrefabInstance: {fileID: 3210262223949552770}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4724523066374434780 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7862656893741527902, guid: 562e47677541fc741804e2557b49653b, type: 3}
   m_PrefabInstance: {fileID: 3210262223949552770}
   m_PrefabAsset: {fileID: 0}
