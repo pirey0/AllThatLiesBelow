@@ -102,7 +102,8 @@ public class TileMap : Singleton<TileMap>
                 {
                     if (tile.Stability <= generationSettings.UnstableThreshhold)
                     {
-                        AddUnstableTile(loc);
+                        float timeLeft = tile.Stability - generationSettings.CollapseThreshhold;
+                        AddUnstableTile(loc, timeLeft);
                     }
                 }
             }
@@ -173,13 +174,15 @@ public class TileMap : Singleton<TileMap>
         tilesToStabilityCheck.Push(tileLoc);
     }
 
-    private void AddUnstableTile(Vector2Int unstableTile)
+    private void AddUnstableTile(Vector2Int unstableTile, float timeLeftToCrumble)
     {
         if (!unstableTiles.Contains(unstableTile))
         {
 
             unstableTiles.Add(unstableTile);
             var go = Instantiate(mapSettings.CrumbleEffects, new Vector3(unstableTile.x + 0.5f, unstableTile.y), quaternion.identity, transform);
+            go.GetComponent<CrumblingParticle>().SetDuration(timeLeftToCrumble);
+
             unstableTilesEffects.Add(go);
         }
 
