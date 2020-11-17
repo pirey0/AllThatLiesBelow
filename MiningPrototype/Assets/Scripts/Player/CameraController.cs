@@ -1,4 +1,5 @@
 ﻿using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -71,8 +72,12 @@ public class CameraController : Singleton<CameraController>
         if (Input.GetMouseButtonUp(2))
             Shake(Util.MouseToWorld());
     }
-    public void Shake(Vector2 location, CameraShakeType shakeType = CameraShakeType.hill, float duration = 1f, float range = 10f)
+    public CameraShake Shake(Vector2 location, CameraShakeType shakeType = CameraShakeType.hill, float duration = 1f, float range = 10f)
     {
-        cameraShaker.StartShake(shakeType, duration, location, range);
+        return cameraShaker.StartShake(shakeType, duration, location, range);
+    }
+    public void StopShake(CameraShake shake)
+    {
+        cameraShaker.StopShake(shake);
     }
 }

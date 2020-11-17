@@ -77,6 +77,12 @@ TextureImporter:
   - first:
       213: 6903090546046238159
     second: playerSpritesheet_8
+  - first:
+      213: 3486974047226116618
+    second: playerSpritesheet_9
+  - first:
+      213: 6277849533615305770
+    second: playerSpritesheet_10
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -168,7 +174,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 7
@@ -189,7 +195,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 7
@@ -210,7 +216,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 7
@@ -231,7 +237,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
+        y: 64
         width: 32
         height: 32
       alignment: 7
@@ -252,7 +258,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 32
+        y: 64
         width: 32
         height: 32
       alignment: 7
@@ -273,7 +279,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 32
+        y: 64
         width: 32
         height: 32
       alignment: 7
@@ -294,7 +300,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 32
         width: 32
         height: 32
       alignment: 7
@@ -315,7 +321,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 0
+        y: 32
         width: 32
         height: 32
       alignment: 7
@@ -336,11 +342,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 0
+        y: 32
         width: 32
         height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -348,6 +354,48 @@ TextureImporter:
       bones: []
       spriteID: fcd71790744bccf50800000000000000
       internalID: 6903090546046238159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: playerSpritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0a3be1db68346030800000000000000
+      internalID: 3486974047226116618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: playerSpritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a24fd7ca3e66f1750800000000000000
+      internalID: 6277849533615305770
       vertices: []
       indices: 
       edges: []

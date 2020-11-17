@@ -26,9 +26,16 @@ public class CameraShaker : MonoBehaviour
         StartCoroutine(CameraShakeRoutine());
     }
 
-    public void StartShake(CameraShakeType type, float duration, Vector2 location, float range)
+    public CameraShake StartShake(CameraShakeType type, float duration, Vector2 location, float range)
     {
-        shakes.Add(new CameraShake(GetCurveForType(type), location, duration, range));
+        CameraShake cs = new CameraShake(GetCurveForType(type), location, duration, range);
+        shakes.Add(cs);
+        return cs;
+    }
+    internal void StopShake(CameraShake shake)
+    {
+        if (shakes.Contains(shake))
+            shakes.Remove(shake);
     }
 
     private IEnumerator CameraShakeRoutine ()

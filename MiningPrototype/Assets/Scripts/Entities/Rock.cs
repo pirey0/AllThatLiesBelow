@@ -7,6 +7,7 @@ public class Rock : TilemapCarvingEntity
     [SerializeField] float width = 2;
     [SerializeField] float destructionSpeed;
     [SerializeField] Rigidbody2D rigidbody;
+    [SerializeField] AudioSource rockFalling;
 
 
     protected void Start()
@@ -28,10 +29,15 @@ public class Rock : TilemapCarvingEntity
 
     private IEnumerator FallingRoutine()
     {
+        rockFalling?.Play();
+
         while (!rigidbody.IsSleeping())
         {
             yield return null;
         }
+
+        rockFalling?.Stop();
+
         rigidbody.isKinematic = true;
         Carve();
     }
