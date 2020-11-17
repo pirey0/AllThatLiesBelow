@@ -89,6 +89,7 @@ public enum Direction
 
 public interface ITileUpdateReceiver
 {
+    void OnTileCrumbleNotified(int x, int y);
     void OnTileUpdated(int x, int y, Tile newTile);
 }
 

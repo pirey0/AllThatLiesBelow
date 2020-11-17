@@ -36,4 +36,6 @@ public class GenerationSettings : ScriptableObject
 
     public int CrumbleEmitAmount;
     public GameObject PhysicalTilePrefab;
+
+    public int StabilityPropagationDistance = 5;
 }

@@ -120,8 +120,16 @@ public class TileMap : Singleton<TileMap>
             if (t.Stability <= generationSettings.CollapseThreshhold)
             {
                 RemoveUnstableTileAt(i);
-                if (t.Type != TileType.Air)
-                    generator.CollapseAt(x, y, updateVisuals: true);
+                var info = GetTileInfo(t.Type);
+                if (info.NotifiesInsteadOfCrumbling)
+                {
+                    receiverMap[x, y]?.OnTileCrumbleNotified(x, y);
+                }
+                else
+                {
+                    if (t.Type != TileType.Air)
+                        generator.CollapseAt(x, y, updateVisuals: true);
+                }
             }
             else if (t.Stability <= generationSettings.UnstableThreshhold)
             {
