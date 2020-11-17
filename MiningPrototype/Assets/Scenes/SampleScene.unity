@@ -276,6 +276,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 6084151}
+  rockFalling: {fileID: 0}
 --- !u!1 &9212839
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,6 +430,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 9212842}
+  rockFalling: {fileID: 0}
 --- !u!1 &11576504
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,6 +584,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 11576507}
+  rockFalling: {fileID: 0}
 --- !u!1 &19515989
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,6 +738,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 19515992}
+  rockFalling: {fileID: 0}
 --- !u!1 &36538431
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,6 +892,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 36538434}
+  rockFalling: {fileID: 0}
 --- !u!1 &47760979
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,6 +1046,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 47760982}
+  rockFalling: {fileID: 0}
 --- !u!1 &48690566
 GameObject:
   m_ObjectHideFlags: 0
@@ -1194,6 +1200,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 48690569}
+  rockFalling: {fileID: 0}
 --- !u!224 &50143936 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 301017887176749550, guid: a661964da61d64c4c9c92097e06f517d, type: 3}
@@ -1352,6 +1359,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 53788407}
+  rockFalling: {fileID: 0}
 --- !u!1 &62284533
 GameObject:
   m_ObjectHideFlags: 0
@@ -1505,6 +1513,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 62284536}
+  rockFalling: {fileID: 0}
 --- !u!1 &65351562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1776,6 +1785,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 65638254}
+  rockFalling: {fileID: 0}
 --- !u!1 &88352900
 GameObject:
   m_ObjectHideFlags: 0
@@ -1929,6 +1939,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 88352903}
+  rockFalling: {fileID: 0}
 --- !u!1 &97785501
 GameObject:
   m_ObjectHideFlags: 0
@@ -2082,6 +2093,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 97785504}
+  rockFalling: {fileID: 0}
 --- !u!1 &102427126
 GameObject:
   m_ObjectHideFlags: 0
@@ -2235,6 +2247,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 102427129}
+  rockFalling: {fileID: 0}
 --- !u!1 &105347533
 GameObject:
   m_ObjectHideFlags: 0
@@ -2388,6 +2401,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 105347536}
+  rockFalling: {fileID: 0}
 --- !u!1 &109496458
 GameObject:
   m_ObjectHideFlags: 0
@@ -2541,6 +2555,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 109496461}
+  rockFalling: {fileID: 0}
 --- !u!1 &111943365
 GameObject:
   m_ObjectHideFlags: 0
@@ -2694,6 +2709,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 111943368}
+  rockFalling: {fileID: 0}
 --- !u!1 &122794048
 GameObject:
   m_ObjectHideFlags: 0
@@ -2847,6 +2863,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 122794051}
+  rockFalling: {fileID: 0}
 --- !u!1 &142368470
 GameObject:
   m_ObjectHideFlags: 0
@@ -3000,6 +3017,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 142368473}
+  rockFalling: {fileID: 0}
 --- !u!1 &147146542
 GameObject:
   m_ObjectHideFlags: 0
@@ -3153,6 +3171,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 147146545}
+  rockFalling: {fileID: 0}
 --- !u!1 &150843088
 GameObject:
   m_ObjectHideFlags: 0
@@ -3306,6 +3325,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 150843091}
+  rockFalling: {fileID: 0}
 --- !u!1 &191464815
 GameObject:
   m_ObjectHideFlags: 0
@@ -3459,6 +3479,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 191464818}
+  rockFalling: {fileID: 0}
 --- !u!1 &192602415
 GameObject:
   m_ObjectHideFlags: 0
@@ -3612,6 +3633,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 192602418}
+  rockFalling: {fileID: 0}
 --- !u!1 &193008538
 GameObject:
   m_ObjectHideFlags: 0
@@ -3765,6 +3787,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 193008541}
+  rockFalling: {fileID: 0}
 --- !u!1 &200149930
 GameObject:
   m_ObjectHideFlags: 0
@@ -3918,6 +3941,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 200149933}
+  rockFalling: {fileID: 0}
 --- !u!1 &214658269
 GameObject:
   m_ObjectHideFlags: 0
@@ -4071,6 +4095,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 214658272}
+  rockFalling: {fileID: 0}
 --- !u!1 &225099745
 GameObject:
   m_ObjectHideFlags: 0
@@ -4268,6 +4293,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 229863268}
+  rockFalling: {fileID: 0}
 --- !u!1 &241991509
 GameObject:
   m_ObjectHideFlags: 0
@@ -4421,6 +4447,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 241991512}
+  rockFalling: {fileID: 0}
 --- !u!1 &253769737
 GameObject:
   m_ObjectHideFlags: 0
@@ -4574,6 +4601,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 253769740}
+  rockFalling: {fileID: 0}
 --- !u!1 &263434155
 GameObject:
   m_ObjectHideFlags: 0
@@ -4727,6 +4755,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 263434158}
+  rockFalling: {fileID: 0}
 --- !u!1 &270075032
 GameObject:
   m_ObjectHideFlags: 0
@@ -4880,6 +4909,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 270075035}
+  rockFalling: {fileID: 0}
 --- !u!1 &272711399
 GameObject:
   m_ObjectHideFlags: 0
@@ -5033,6 +5063,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 272711402}
+  rockFalling: {fileID: 0}
 --- !u!1 &285091936
 GameObject:
   m_ObjectHideFlags: 0
@@ -5186,6 +5217,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 285091939}
+  rockFalling: {fileID: 0}
 --- !u!1 &290878620
 GameObject:
   m_ObjectHideFlags: 0
@@ -5339,6 +5371,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 290878623}
+  rockFalling: {fileID: 0}
 --- !u!1 &295473796
 GameObject:
   m_ObjectHideFlags: 0
@@ -5492,6 +5525,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 295473799}
+  rockFalling: {fileID: 0}
 --- !u!1 &301943142
 GameObject:
   m_ObjectHideFlags: 0
@@ -5645,6 +5679,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 301943145}
+  rockFalling: {fileID: 0}
 --- !u!1 &303569685
 GameObject:
   m_ObjectHideFlags: 0
@@ -5798,6 +5833,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 303569688}
+  rockFalling: {fileID: 0}
 --- !u!1 &304031714
 GameObject:
   m_ObjectHideFlags: 0
@@ -5951,6 +5987,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 304031717}
+  rockFalling: {fileID: 0}
 --- !u!1 &317576362
 GameObject:
   m_ObjectHideFlags: 0
@@ -6104,6 +6141,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 317576365}
+  rockFalling: {fileID: 0}
 --- !u!212 &327259810 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 327259810, guid: 0ef3d3d9ac15aad4b94aff8d1ece9908, type: 3}
@@ -6262,6 +6300,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 339063298}
+  rockFalling: {fileID: 0}
 --- !u!1 &344763747
 GameObject:
   m_ObjectHideFlags: 0
@@ -6415,6 +6454,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 344763750}
+  rockFalling: {fileID: 0}
 --- !u!1 &380767950
 GameObject:
   m_ObjectHideFlags: 0
@@ -6568,6 +6608,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 380767953}
+  rockFalling: {fileID: 0}
 --- !u!1 &388554035
 GameObject:
   m_ObjectHideFlags: 0
@@ -6721,6 +6762,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 388554038}
+  rockFalling: {fileID: 0}
 --- !u!1001 &408938664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6935,6 +6977,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 409338986}
+  rockFalling: {fileID: 0}
 --- !u!1 &420270177
 GameObject:
   m_ObjectHideFlags: 0
@@ -7088,6 +7131,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 420270180}
+  rockFalling: {fileID: 0}
 --- !u!223 &429891085 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 3019894843303896128, guid: 68766b238d735f249bc21c83b2547f29, type: 3}
@@ -7246,6 +7290,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 450561730}
+  rockFalling: {fileID: 0}
 --- !u!1 &454429460
 GameObject:
   m_ObjectHideFlags: 0
@@ -7399,6 +7444,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 454429463}
+  rockFalling: {fileID: 0}
 --- !u!1 &455384864
 GameObject:
   m_ObjectHideFlags: 0
@@ -7552,6 +7598,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 455384867}
+  rockFalling: {fileID: 0}
 --- !u!1001 &459286384
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7766,6 +7813,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 471532726}
+  rockFalling: {fileID: 0}
 --- !u!1 &479772246
 GameObject:
   m_ObjectHideFlags: 0
@@ -7919,6 +7967,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 479772249}
+  rockFalling: {fileID: 0}
 --- !u!1 &482489531
 GameObject:
   m_ObjectHideFlags: 0
@@ -8072,6 +8121,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 482489534}
+  rockFalling: {fileID: 0}
 --- !u!1 &485263633
 GameObject:
   m_ObjectHideFlags: 0
@@ -8225,6 +8275,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 485263636}
+  rockFalling: {fileID: 0}
 --- !u!1 &485837263
 GameObject:
   m_ObjectHideFlags: 0
@@ -8378,6 +8429,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 485837266}
+  rockFalling: {fileID: 0}
 --- !u!1 &489967760
 GameObject:
   m_ObjectHideFlags: 0
@@ -8531,6 +8583,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 489967763}
+  rockFalling: {fileID: 0}
 --- !u!1 &493406571
 GameObject:
   m_ObjectHideFlags: 0
@@ -8684,6 +8737,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 493406574}
+  rockFalling: {fileID: 0}
 --- !u!1 &495356840
 GameObject:
   m_ObjectHideFlags: 0
@@ -8837,6 +8891,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 495356843}
+  rockFalling: {fileID: 0}
 --- !u!1 &498584502
 GameObject:
   m_ObjectHideFlags: 0
@@ -8990,6 +9045,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 498584505}
+  rockFalling: {fileID: 0}
 --- !u!1 &502049413
 GameObject:
   m_ObjectHideFlags: 0
@@ -9143,6 +9199,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 502049416}
+  rockFalling: {fileID: 0}
 --- !u!1 &529690929
 GameObject:
   m_ObjectHideFlags: 0
@@ -9296,6 +9353,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 529690932}
+  rockFalling: {fileID: 0}
 --- !u!1 &530821930
 GameObject:
   m_ObjectHideFlags: 0
@@ -9449,6 +9507,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 530821933}
+  rockFalling: {fileID: 0}
 --- !u!1001 &536739780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9663,6 +9722,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 553963910}
+  rockFalling: {fileID: 0}
 --- !u!1 &570788045
 GameObject:
   m_ObjectHideFlags: 0
@@ -9816,6 +9876,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 570788048}
+  rockFalling: {fileID: 0}
 --- !u!1 &573335039
 GameObject:
   m_ObjectHideFlags: 0
@@ -9969,6 +10030,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 573335042}
+  rockFalling: {fileID: 0}
 --- !u!1 &575531984
 GameObject:
   m_ObjectHideFlags: 0
@@ -10188,6 +10250,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 578246143}
+  rockFalling: {fileID: 0}
 --- !u!1 &579048629
 GameObject:
   m_ObjectHideFlags: 0
@@ -10341,6 +10404,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 579048632}
+  rockFalling: {fileID: 0}
 --- !u!1 &592727837
 GameObject:
   m_ObjectHideFlags: 0
@@ -10494,6 +10558,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 592727840}
+  rockFalling: {fileID: 0}
 --- !u!1 &598043039
 GameObject:
   m_ObjectHideFlags: 0
@@ -10647,6 +10712,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 598043042}
+  rockFalling: {fileID: 0}
 --- !u!1001 &599213806
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10861,6 +10927,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 606639335}
+  rockFalling: {fileID: 0}
 --- !u!1 &608010765
 GameObject:
   m_ObjectHideFlags: 0
@@ -11014,6 +11081,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 608010768}
+  rockFalling: {fileID: 0}
 --- !u!1 &608365840
 GameObject:
   m_ObjectHideFlags: 0
@@ -11167,6 +11235,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 608365843}
+  rockFalling: {fileID: 0}
 --- !u!1 &618319194
 GameObject:
   m_ObjectHideFlags: 0
@@ -11320,6 +11389,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 618319197}
+  rockFalling: {fileID: 0}
 --- !u!1 &623665362
 GameObject:
   m_ObjectHideFlags: 0
@@ -11473,6 +11543,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 623665365}
+  rockFalling: {fileID: 0}
 --- !u!1 &624089209
 GameObject:
   m_ObjectHideFlags: 0
@@ -11626,6 +11697,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 624089212}
+  rockFalling: {fileID: 0}
 --- !u!1 &643535913
 GameObject:
   m_ObjectHideFlags: 0
@@ -11779,6 +11851,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 643535916}
+  rockFalling: {fileID: 0}
 --- !u!1 &649831110
 GameObject:
   m_ObjectHideFlags: 0
@@ -11932,6 +12005,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 649831113}
+  rockFalling: {fileID: 0}
 --- !u!1 &653752355
 GameObject:
   m_ObjectHideFlags: 0
@@ -12085,6 +12159,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 653752358}
+  rockFalling: {fileID: 0}
 --- !u!1 &655851047
 GameObject:
   m_ObjectHideFlags: 0
@@ -12238,6 +12313,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 655851050}
+  rockFalling: {fileID: 0}
 --- !u!1 &656502473
 GameObject:
   m_ObjectHideFlags: 0
@@ -12391,6 +12467,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 656502476}
+  rockFalling: {fileID: 0}
 --- !u!1 &663840377
 GameObject:
   m_ObjectHideFlags: 0
@@ -12544,6 +12621,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 663840380}
+  rockFalling: {fileID: 0}
 --- !u!1 &680493835
 GameObject:
   m_ObjectHideFlags: 0
@@ -12697,6 +12775,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 680493838}
+  rockFalling: {fileID: 0}
 --- !u!1 &713447182
 GameObject:
   m_ObjectHideFlags: 0
@@ -12850,6 +12929,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 713447185}
+  rockFalling: {fileID: 0}
 --- !u!1 &724126566
 GameObject:
   m_ObjectHideFlags: 0
@@ -13003,6 +13083,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 724126569}
+  rockFalling: {fileID: 0}
 --- !u!1 &739437751
 GameObject:
   m_ObjectHideFlags: 0
@@ -13156,6 +13237,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 739437754}
+  rockFalling: {fileID: 0}
 --- !u!1 &756255463
 GameObject:
   m_ObjectHideFlags: 0
@@ -13309,6 +13391,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 756255466}
+  rockFalling: {fileID: 0}
 --- !u!1 &758348417
 GameObject:
   m_ObjectHideFlags: 0
@@ -13462,6 +13545,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 758348420}
+  rockFalling: {fileID: 0}
 --- !u!1 &759656756
 GameObject:
   m_ObjectHideFlags: 0
@@ -13615,6 +13699,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 759656759}
+  rockFalling: {fileID: 0}
 --- !u!1 &761087889
 GameObject:
   m_ObjectHideFlags: 0
@@ -13768,6 +13853,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 761087892}
+  rockFalling: {fileID: 0}
 --- !u!4 &764608496 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3841827697160721099, guid: 34b68ab6d1c273b4790ef6b88022039c, type: 3}
@@ -13926,6 +14012,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 771859039}
+  rockFalling: {fileID: 0}
 --- !u!1 &774986063
 GameObject:
   m_ObjectHideFlags: 0
@@ -14079,6 +14166,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 774986066}
+  rockFalling: {fileID: 0}
 --- !u!1 &787118275
 GameObject:
   m_ObjectHideFlags: 0
@@ -14232,6 +14320,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 787118278}
+  rockFalling: {fileID: 0}
 --- !u!1 &796865761
 GameObject:
   m_ObjectHideFlags: 0
@@ -14385,6 +14474,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 796865764}
+  rockFalling: {fileID: 0}
 --- !u!1 &803643620
 GameObject:
   m_ObjectHideFlags: 0
@@ -14538,6 +14628,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 803643623}
+  rockFalling: {fileID: 0}
 --- !u!1 &813746654
 GameObject:
   m_ObjectHideFlags: 0
@@ -14691,6 +14782,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 813746657}
+  rockFalling: {fileID: 0}
 --- !u!1 &819697862
 GameObject:
   m_ObjectHideFlags: 0
@@ -14844,6 +14936,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 819697865}
+  rockFalling: {fileID: 0}
 --- !u!1 &826432468
 GameObject:
   m_ObjectHideFlags: 0
@@ -14997,6 +15090,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 826432471}
+  rockFalling: {fileID: 0}
 --- !u!1 &827138719
 GameObject:
   m_ObjectHideFlags: 0
@@ -15196,6 +15290,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 827832216}
+  rockFalling: {fileID: 0}
 --- !u!1 &863860584
 GameObject:
   m_ObjectHideFlags: 0
@@ -15349,6 +15444,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 863860587}
+  rockFalling: {fileID: 0}
 --- !u!114 &864956639 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9196140733936070507, guid: a661964da61d64c4c9c92097e06f517d, type: 3}
@@ -15513,6 +15609,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 866811353}
+  rockFalling: {fileID: 0}
 --- !u!1 &875074068
 GameObject:
   m_ObjectHideFlags: 0
@@ -15666,6 +15763,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 875074071}
+  rockFalling: {fileID: 0}
 --- !u!1 &876959188
 GameObject:
   m_ObjectHideFlags: 0
@@ -15819,6 +15917,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 876959191}
+  rockFalling: {fileID: 0}
 --- !u!1 &901010807
 GameObject:
   m_ObjectHideFlags: 0
@@ -15972,6 +16071,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 901010810}
+  rockFalling: {fileID: 0}
 --- !u!1 &922256775
 GameObject:
   m_ObjectHideFlags: 0
@@ -16125,6 +16225,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 922256778}
+  rockFalling: {fileID: 0}
 --- !u!1 &928115576
 GameObject:
   m_ObjectHideFlags: 0
@@ -16278,6 +16379,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 928115579}
+  rockFalling: {fileID: 0}
 --- !u!1 &930582813
 GameObject:
   m_ObjectHideFlags: 0
@@ -16431,6 +16533,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 930582816}
+  rockFalling: {fileID: 0}
 --- !u!1 &939695144
 GameObject:
   m_ObjectHideFlags: 0
@@ -16584,6 +16687,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 939695147}
+  rockFalling: {fileID: 0}
 --- !u!1 &946529200
 GameObject:
   m_ObjectHideFlags: 0
@@ -16737,6 +16841,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 946529203}
+  rockFalling: {fileID: 0}
 --- !u!1 &947761273
 GameObject:
   m_ObjectHideFlags: 0
@@ -16890,6 +16995,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 947761276}
+  rockFalling: {fileID: 0}
 --- !u!1 &960484410
 GameObject:
   m_ObjectHideFlags: 0
@@ -17043,6 +17149,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 960484413}
+  rockFalling: {fileID: 0}
 --- !u!1 &979867126
 GameObject:
   m_ObjectHideFlags: 0
@@ -17196,6 +17303,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 979867129}
+  rockFalling: {fileID: 0}
 --- !u!1 &981964389
 GameObject:
   m_ObjectHideFlags: 0
@@ -17349,6 +17457,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 981964392}
+  rockFalling: {fileID: 0}
 --- !u!1 &1008892746
 GameObject:
   m_ObjectHideFlags: 0
@@ -17502,6 +17611,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1008892749}
+  rockFalling: {fileID: 0}
 --- !u!1 &1015443478
 GameObject:
   m_ObjectHideFlags: 0
@@ -17655,6 +17765,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1015443481}
+  rockFalling: {fileID: 0}
 --- !u!1 &1027676157
 GameObject:
   m_ObjectHideFlags: 0
@@ -17808,6 +17919,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1027676160}
+  rockFalling: {fileID: 0}
 --- !u!1 &1032477291
 GameObject:
   m_ObjectHideFlags: 0
@@ -17961,6 +18073,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1032477294}
+  rockFalling: {fileID: 0}
 --- !u!1 &1036692475
 GameObject:
   m_ObjectHideFlags: 0
@@ -18114,6 +18227,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1036692478}
+  rockFalling: {fileID: 0}
 --- !u!1 &1044694748
 GameObject:
   m_ObjectHideFlags: 0
@@ -18267,6 +18381,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1044694751}
+  rockFalling: {fileID: 0}
 --- !u!1 &1050128747
 GameObject:
   m_ObjectHideFlags: 0
@@ -18420,6 +18535,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1050128750}
+  rockFalling: {fileID: 0}
 --- !u!1 &1061910462
 GameObject:
   m_ObjectHideFlags: 0
@@ -18573,6 +18689,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1061910465}
+  rockFalling: {fileID: 0}
 --- !u!1 &1089108418
 GameObject:
   m_ObjectHideFlags: 0
@@ -18726,6 +18843,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1089108421}
+  rockFalling: {fileID: 0}
 --- !u!1 &1091372858
 GameObject:
   m_ObjectHideFlags: 0
@@ -18879,6 +18997,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1091372861}
+  rockFalling: {fileID: 0}
 --- !u!1 &1099590732
 GameObject:
   m_ObjectHideFlags: 0
@@ -19032,6 +19151,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1099590735}
+  rockFalling: {fileID: 0}
 --- !u!1 &1101585939
 GameObject:
   m_ObjectHideFlags: 0
@@ -19185,6 +19305,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1101585942}
+  rockFalling: {fileID: 0}
 --- !u!1 &1104687324
 GameObject:
   m_ObjectHideFlags: 0
@@ -19338,6 +19459,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1104687327}
+  rockFalling: {fileID: 0}
 --- !u!1 &1121957044
 GameObject:
   m_ObjectHideFlags: 0
@@ -19491,6 +19613,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1121957047}
+  rockFalling: {fileID: 0}
 --- !u!1 &1124478768
 GameObject:
   m_ObjectHideFlags: 0
@@ -19644,6 +19767,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1124478771}
+  rockFalling: {fileID: 0}
 --- !u!1 &1136748656
 GameObject:
   m_ObjectHideFlags: 0
@@ -19797,6 +19921,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1136748659}
+  rockFalling: {fileID: 0}
 --- !u!1 &1139109522
 GameObject:
   m_ObjectHideFlags: 0
@@ -19950,6 +20075,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1139109525}
+  rockFalling: {fileID: 0}
 --- !u!1 &1158800680
 GameObject:
   m_ObjectHideFlags: 0
@@ -20103,6 +20229,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1158800683}
+  rockFalling: {fileID: 0}
 --- !u!1 &1167700208
 GameObject:
   m_ObjectHideFlags: 0
@@ -20256,6 +20383,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1167700211}
+  rockFalling: {fileID: 0}
 --- !u!1 &1193513622
 GameObject:
   m_ObjectHideFlags: 0
@@ -20409,6 +20537,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1193513625}
+  rockFalling: {fileID: 0}
 --- !u!1 &1194415057
 GameObject:
   m_ObjectHideFlags: 0
@@ -20562,6 +20691,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1194415060}
+  rockFalling: {fileID: 0}
 --- !u!1 &1197663353
 GameObject:
   m_ObjectHideFlags: 0
@@ -20715,6 +20845,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1197663356}
+  rockFalling: {fileID: 0}
 --- !u!1 &1200313564
 GameObject:
   m_ObjectHideFlags: 0
@@ -20868,6 +20999,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1200313567}
+  rockFalling: {fileID: 0}
 --- !u!1 &1204784478
 GameObject:
   m_ObjectHideFlags: 0
@@ -21021,6 +21153,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1204784481}
+  rockFalling: {fileID: 0}
 --- !u!1 &1211955009
 GameObject:
   m_ObjectHideFlags: 0
@@ -21174,6 +21307,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1211955012}
+  rockFalling: {fileID: 0}
 --- !u!1 &1214527277
 GameObject:
   m_ObjectHideFlags: 0
@@ -21327,6 +21461,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1214527280}
+  rockFalling: {fileID: 0}
 --- !u!1 &1225977309
 GameObject:
   m_ObjectHideFlags: 0
@@ -21480,6 +21615,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1225977312}
+  rockFalling: {fileID: 0}
 --- !u!1 &1235703144
 GameObject:
   m_ObjectHideFlags: 0
@@ -21633,6 +21769,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1235703147}
+  rockFalling: {fileID: 0}
 --- !u!1 &1247655940
 GameObject:
   m_ObjectHideFlags: 0
@@ -21786,6 +21923,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1247655943}
+  rockFalling: {fileID: 0}
 --- !u!1 &1298726986
 GameObject:
   m_ObjectHideFlags: 0
@@ -21939,6 +22077,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1298726989}
+  rockFalling: {fileID: 0}
 --- !u!1 &1305709613
 GameObject:
   m_ObjectHideFlags: 0
@@ -22092,6 +22231,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1305709616}
+  rockFalling: {fileID: 0}
 --- !u!1 &1328173197
 GameObject:
   m_ObjectHideFlags: 0
@@ -22245,6 +22385,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1328173200}
+  rockFalling: {fileID: 0}
 --- !u!1 &1336069456
 GameObject:
   m_ObjectHideFlags: 0
@@ -22398,6 +22539,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1336069459}
+  rockFalling: {fileID: 0}
 --- !u!1 &1344076619
 GameObject:
   m_ObjectHideFlags: 0
@@ -22551,6 +22693,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1344076622}
+  rockFalling: {fileID: 0}
 --- !u!1 &1349807146
 GameObject:
   m_ObjectHideFlags: 0
@@ -22704,6 +22847,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1349807149}
+  rockFalling: {fileID: 0}
 --- !u!1 &1356646088
 GameObject:
   m_ObjectHideFlags: 0
@@ -22857,6 +23001,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1356646091}
+  rockFalling: {fileID: 0}
 --- !u!1 &1362279175
 GameObject:
   m_ObjectHideFlags: 0
@@ -23010,6 +23155,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1362279178}
+  rockFalling: {fileID: 0}
 --- !u!1 &1374636678
 GameObject:
   m_ObjectHideFlags: 0
@@ -23163,6 +23309,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1374636681}
+  rockFalling: {fileID: 0}
 --- !u!1 &1375184923
 GameObject:
   m_ObjectHideFlags: 0
@@ -23316,6 +23463,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1375184926}
+  rockFalling: {fileID: 0}
 --- !u!1 &1395899178
 GameObject:
   m_ObjectHideFlags: 0
@@ -23469,6 +23617,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1395899181}
+  rockFalling: {fileID: 0}
 --- !u!1 &1396114705
 GameObject:
   m_ObjectHideFlags: 0
@@ -23622,6 +23771,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1396114708}
+  rockFalling: {fileID: 0}
 --- !u!1 &1407164756
 GameObject:
   m_ObjectHideFlags: 0
@@ -23775,6 +23925,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1407164759}
+  rockFalling: {fileID: 0}
 --- !u!1 &1409807807
 GameObject:
   m_ObjectHideFlags: 0
@@ -23928,6 +24079,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1409807810}
+  rockFalling: {fileID: 0}
 --- !u!1 &1418537891
 GameObject:
   m_ObjectHideFlags: 0
@@ -24081,6 +24233,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1418537894}
+  rockFalling: {fileID: 0}
 --- !u!1 &1425768206
 GameObject:
   m_ObjectHideFlags: 0
@@ -24234,6 +24387,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1425768209}
+  rockFalling: {fileID: 0}
 --- !u!1 &1430986276
 GameObject:
   m_ObjectHideFlags: 0
@@ -24387,6 +24541,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1430986279}
+  rockFalling: {fileID: 0}
 --- !u!1 &1431038443
 GameObject:
   m_ObjectHideFlags: 0
@@ -24540,6 +24695,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1431038446}
+  rockFalling: {fileID: 0}
 --- !u!1 &1434236847
 GameObject:
   m_ObjectHideFlags: 0
@@ -24693,6 +24849,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1434236850}
+  rockFalling: {fileID: 0}
 --- !u!1 &1440230607
 GameObject:
   m_ObjectHideFlags: 0
@@ -24846,6 +25003,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1440230610}
+  rockFalling: {fileID: 0}
 --- !u!1 &1452065287
 GameObject:
   m_ObjectHideFlags: 0
@@ -24999,6 +25157,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1452065290}
+  rockFalling: {fileID: 0}
 --- !u!1 &1470713079
 GameObject:
   m_ObjectHideFlags: 0
@@ -25152,6 +25311,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1470713082}
+  rockFalling: {fileID: 0}
 --- !u!1 &1474943183
 GameObject:
   m_ObjectHideFlags: 0
@@ -97883,6 +98043,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1504472218}
+  rockFalling: {fileID: 0}
 --- !u!1 &1517820261
 GameObject:
   m_ObjectHideFlags: 0
@@ -98036,6 +98197,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1517820264}
+  rockFalling: {fileID: 0}
 --- !u!1 &1525501679
 GameObject:
   m_ObjectHideFlags: 0
@@ -98189,6 +98351,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1525501682}
+  rockFalling: {fileID: 0}
 --- !u!4 &1530585473 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8232243671930714984, guid: 18bfcd81277c0d24c9ecd515d23b0b76, type: 3}
@@ -98347,6 +98510,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1537835878}
+  rockFalling: {fileID: 0}
 --- !u!1 &1544382980
 GameObject:
   m_ObjectHideFlags: 0
@@ -98500,6 +98664,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1544382983}
+  rockFalling: {fileID: 0}
 --- !u!1001 &1551555539
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -98714,6 +98879,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1590726338}
+  rockFalling: {fileID: 0}
 --- !u!1 &1592350267
 GameObject:
   m_ObjectHideFlags: 0
@@ -98867,6 +99033,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1592350270}
+  rockFalling: {fileID: 0}
 --- !u!1 &1592452890
 GameObject:
   m_ObjectHideFlags: 0
@@ -99020,6 +99187,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1592452893}
+  rockFalling: {fileID: 0}
 --- !u!1 &1602734897
 GameObject:
   m_ObjectHideFlags: 0
@@ -99173,6 +99341,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1602734900}
+  rockFalling: {fileID: 0}
 --- !u!1 &1617093831
 GameObject:
   m_ObjectHideFlags: 0
@@ -99326,6 +99495,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1617093834}
+  rockFalling: {fileID: 0}
 --- !u!1 &1619337014
 GameObject:
   m_ObjectHideFlags: 0
@@ -99479,6 +99649,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1619337017}
+  rockFalling: {fileID: 0}
 --- !u!1 &1630976019
 GameObject:
   m_ObjectHideFlags: 0
@@ -99632,6 +99803,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1630976022}
+  rockFalling: {fileID: 0}
 --- !u!1 &1633538334
 GameObject:
   m_ObjectHideFlags: 0
@@ -99785,6 +99957,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1633538337}
+  rockFalling: {fileID: 0}
 --- !u!1 &1642553677
 GameObject:
   m_ObjectHideFlags: 0
@@ -99938,6 +100111,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1642553680}
+  rockFalling: {fileID: 0}
 --- !u!1 &1649279651
 GameObject:
   m_ObjectHideFlags: 0
@@ -100091,6 +100265,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1649279654}
+  rockFalling: {fileID: 0}
 --- !u!1 &1659381180
 GameObject:
   m_ObjectHideFlags: 0
@@ -100244,6 +100419,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1659381183}
+  rockFalling: {fileID: 0}
 --- !u!1 &1660831555
 GameObject:
   m_ObjectHideFlags: 0
@@ -100397,6 +100573,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1660831558}
+  rockFalling: {fileID: 0}
 --- !u!20 &1682881557 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 5930427534588966324, guid: 0ef3d3d9ac15aad4b94aff8d1ece9908, type: 3}
@@ -100555,6 +100732,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1694830416}
+  rockFalling: {fileID: 0}
 --- !u!1 &1709615969
 GameObject:
   m_ObjectHideFlags: 0
@@ -100708,6 +100886,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1709615972}
+  rockFalling: {fileID: 0}
 --- !u!1 &1721868209
 GameObject:
   m_ObjectHideFlags: 0
@@ -100861,6 +101040,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1721868212}
+  rockFalling: {fileID: 0}
 --- !u!1 &1727345601
 GameObject:
   m_ObjectHideFlags: 0
@@ -101014,6 +101194,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1727345604}
+  rockFalling: {fileID: 0}
 --- !u!1 &1736797080
 GameObject:
   m_ObjectHideFlags: 0
@@ -101167,6 +101348,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1736797083}
+  rockFalling: {fileID: 0}
 --- !u!1 &1740336792
 GameObject:
   m_ObjectHideFlags: 0
@@ -101320,6 +101502,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1740336795}
+  rockFalling: {fileID: 0}
 --- !u!1 &1742332574
 GameObject:
   m_ObjectHideFlags: 0
@@ -101473,6 +101656,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1742332577}
+  rockFalling: {fileID: 0}
 --- !u!1 &1751811564
 GameObject:
   m_ObjectHideFlags: 0
@@ -101626,6 +101810,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1751811567}
+  rockFalling: {fileID: 0}
 --- !u!1 &1759117941
 GameObject:
   m_ObjectHideFlags: 0
@@ -101779,6 +101964,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1759117944}
+  rockFalling: {fileID: 0}
 --- !u!1 &1765644938
 GameObject:
   m_ObjectHideFlags: 0
@@ -101932,6 +102118,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1765644941}
+  rockFalling: {fileID: 0}
 --- !u!1 &1770757068
 GameObject:
   m_ObjectHideFlags: 0
@@ -102085,6 +102272,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1770757071}
+  rockFalling: {fileID: 0}
 --- !u!1 &1778738963
 GameObject:
   m_ObjectHideFlags: 0
@@ -102238,6 +102426,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1778738966}
+  rockFalling: {fileID: 0}
 --- !u!1 &1784881856
 GameObject:
   m_ObjectHideFlags: 0
@@ -114211,6 +114400,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1790314172}
+  rockFalling: {fileID: 0}
 --- !u!1 &1801328166
 GameObject:
   m_ObjectHideFlags: 0
@@ -114364,6 +114554,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1801328169}
+  rockFalling: {fileID: 0}
 --- !u!1 &1808260203
 GameObject:
   m_ObjectHideFlags: 0
@@ -114517,6 +114708,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1808260206}
+  rockFalling: {fileID: 0}
 --- !u!1 &1811579846
 GameObject:
   m_ObjectHideFlags: 0
@@ -114670,6 +114862,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1811579849}
+  rockFalling: {fileID: 0}
 --- !u!1 &1828047275
 GameObject:
   m_ObjectHideFlags: 0
@@ -114823,6 +115016,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1828047278}
+  rockFalling: {fileID: 0}
 --- !u!1 &1859017065
 GameObject:
   m_ObjectHideFlags: 0
@@ -114976,6 +115170,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1859017068}
+  rockFalling: {fileID: 0}
 --- !u!1 &1865084578
 GameObject:
   m_ObjectHideFlags: 0
@@ -115129,6 +115324,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1865084581}
+  rockFalling: {fileID: 0}
 --- !u!1 &1865317316
 GameObject:
   m_ObjectHideFlags: 0
@@ -115282,6 +115478,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1865317319}
+  rockFalling: {fileID: 0}
 --- !u!1 &1869065860
 GameObject:
   m_ObjectHideFlags: 0
@@ -115435,6 +115632,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1869065863}
+  rockFalling: {fileID: 0}
 --- !u!1 &1878562506
 GameObject:
   m_ObjectHideFlags: 0
@@ -115588,6 +115786,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1878562509}
+  rockFalling: {fileID: 0}
 --- !u!1 &1889489221
 GameObject:
   m_ObjectHideFlags: 0
@@ -115741,6 +115940,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1889489224}
+  rockFalling: {fileID: 0}
 --- !u!1 &1899849039
 GameObject:
   m_ObjectHideFlags: 0
@@ -115894,6 +116094,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1899849042}
+  rockFalling: {fileID: 0}
 --- !u!1 &1909077503
 GameObject:
   m_ObjectHideFlags: 0
@@ -116047,6 +116248,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1909077506}
+  rockFalling: {fileID: 0}
 --- !u!1 &1916204561
 GameObject:
   m_ObjectHideFlags: 0
@@ -116200,6 +116402,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1916204564}
+  rockFalling: {fileID: 0}
 --- !u!1 &1917416129
 GameObject:
   m_ObjectHideFlags: 0
@@ -116353,6 +116556,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1917416132}
+  rockFalling: {fileID: 0}
 --- !u!1 &1951992441
 GameObject:
   m_ObjectHideFlags: 0
@@ -116506,6 +116710,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1951992444}
+  rockFalling: {fileID: 0}
 --- !u!1 &1953231860
 GameObject:
   m_ObjectHideFlags: 0
@@ -116659,6 +116864,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1953231863}
+  rockFalling: {fileID: 0}
 --- !u!1 &1958299152
 GameObject:
   m_ObjectHideFlags: 0
@@ -116812,6 +117018,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1958299155}
+  rockFalling: {fileID: 0}
 --- !u!1 &1970343862
 GameObject:
   m_ObjectHideFlags: 0
@@ -116965,6 +117172,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1970343865}
+  rockFalling: {fileID: 0}
 --- !u!1 &1970564324
 GameObject:
   m_ObjectHideFlags: 0
@@ -117118,6 +117326,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1970564327}
+  rockFalling: {fileID: 0}
 --- !u!1 &1974869320
 GameObject:
   m_ObjectHideFlags: 0
@@ -117271,6 +117480,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1974869323}
+  rockFalling: {fileID: 0}
 --- !u!1 &1990354799
 GameObject:
   m_ObjectHideFlags: 0
@@ -117424,6 +117634,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1990354802}
+  rockFalling: {fileID: 0}
 --- !u!1 &1990731837
 GameObject:
   m_ObjectHideFlags: 0
@@ -117577,6 +117788,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 1990731840}
+  rockFalling: {fileID: 0}
 --- !u!1 &2006445030
 GameObject:
   m_ObjectHideFlags: 0
@@ -117730,6 +117942,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 2006445033}
+  rockFalling: {fileID: 0}
 --- !u!1 &2009595061
 GameObject:
   m_ObjectHideFlags: 0
@@ -117883,6 +118096,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 2009595064}
+  rockFalling: {fileID: 0}
 --- !u!1 &2010143938
 GameObject:
   m_ObjectHideFlags: 0
@@ -118036,6 +118250,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 2010143941}
+  rockFalling: {fileID: 0}
 --- !u!1 &2011904524
 GameObject:
   m_ObjectHideFlags: 0
@@ -118189,6 +118404,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 2011904527}
+  rockFalling: {fileID: 0}
 --- !u!1 &2012074431
 GameObject:
   m_ObjectHideFlags: 0
@@ -118342,6 +118558,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 2012074434}
+  rockFalling: {fileID: 0}
 --- !u!1 &2015273195
 GameObject:
   m_ObjectHideFlags: 0
@@ -118495,6 +118712,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 2015273198}
+  rockFalling: {fileID: 0}
 --- !u!4 &2017679433 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8633471933228471852, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
@@ -118653,6 +118871,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 2040668529}
+  rockFalling: {fileID: 0}
 --- !u!1 &2055231853
 GameObject:
   m_ObjectHideFlags: 0
@@ -118806,6 +119025,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 2055231856}
+  rockFalling: {fileID: 0}
 --- !u!1 &2056621512
 GameObject:
   m_ObjectHideFlags: 0
@@ -118959,6 +119179,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 2056621515}
+  rockFalling: {fileID: 0}
 --- !u!1 &2075511980
 GameObject:
   m_ObjectHideFlags: 0
@@ -119112,6 +119333,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 2075511983}
+  rockFalling: {fileID: 0}
 --- !u!114 &2088955024 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 497824006148765930, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
@@ -119276,6 +119498,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 2098102256}
+  rockFalling: {fileID: 0}
 --- !u!1 &2115262726
 GameObject:
   m_ObjectHideFlags: 0
@@ -119429,6 +119652,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 2115262729}
+  rockFalling: {fileID: 0}
 --- !u!1 &2118232083
 GameObject:
   m_ObjectHideFlags: 0
@@ -119582,6 +119806,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 2118232086}
+  rockFalling: {fileID: 0}
 --- !u!1 &2131207278
 GameObject:
   m_ObjectHideFlags: 0
@@ -119735,6 +119960,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 2131207281}
+  rockFalling: {fileID: 0}
 --- !u!1 &2134094347
 GameObject:
   m_ObjectHideFlags: 0
@@ -120022,6 +120248,7 @@ MonoBehaviour:
   width: 2
   destructionSpeed: 5
   rigidbody: {fileID: 2140171125}
+  rockFalling: {fileID: 0}
 --- !u!114 &831396577832569604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126021,17 +126248,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18bfcd81277c0d24c9ecd515d23b0b76, type: 3}
---- !u!114 &8232243670924525462 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8232243670924525463, guid: 18bfcd81277c0d24c9ecd515d23b0b76, type: 3}
-  m_PrefabInstance: {fileID: 8232243670924525461}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a53dd95f432dc64bb874c24b0ae701b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8363841713916620502
 GameObject:
   m_ObjectHideFlags: 0
@@ -126170,10 +126386,6 @@ PrefabInstance:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 429891085}
-    - target: {fileID: 497824006148765930, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
-      propertyPath: generation
-      value: 
-      objectReference: {fileID: 8232243670924525462}
     - target: {fileID: 497824006148765930, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
       propertyPath: eventSystem
       value: 

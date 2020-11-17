@@ -7,11 +7,10 @@ using UnityEngine;
 public class HeadbobToLocaloffsetUpdater : MonoBehaviour
 {
     [SerializeField] SpriteAnimator toListenTo;
-    [SerializeField] Sprite[] bob;
+    [SerializeField] List<SpriteOffsetPair> sprites;
     bool isBobbed = false;
 
     Vector3 localPosition;
-    [SerializeField] Vector3 offsetOnBob;
 
     private void Start()
     {
@@ -30,16 +29,32 @@ public class HeadbobToLocaloffsetUpdater : MonoBehaviour
 
     private void OnSpriteChange(Sprite newSprite)
     {
-            DoBob(bob.Contains(newSprite));
+        foreach (SpriteOffsetPair pair in sprites)
+        {
+            if (pair.sprite == newSprite)
+            {
+                DoBob(true, pair.offset);
+                return;
+            }
+        }
+
+        DoBob(false, Vector3.zero);
     }
 
-    private void DoBob(bool bob)
+    private void DoBob(bool bob, Vector3 offsetOnBob)
     {
         if (bob == isBobbed)
             return;
 
         isBobbed = bob;
 
-        transform.localPosition = localPosition + ((isBobbed) ? offsetOnBob:Vector3.zero);
+        transform.localPosition = localPosition + ((isBobbed) ? offsetOnBob : Vector3.zero);
     }
+}
+
+[System.Serializable]
+public class SpriteOffsetPair
+{
+    public Sprite sprite;
+    public Vector3 offset;
 }
