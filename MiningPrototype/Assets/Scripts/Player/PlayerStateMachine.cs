@@ -452,4 +452,9 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
     {
         stateMachine.ForceTransitionTo(s_idle);
     }
+
+    public void ForceToState(string name)
+    {
+        stateMachine.ForceTransitionTo(name);
+    }
 }
