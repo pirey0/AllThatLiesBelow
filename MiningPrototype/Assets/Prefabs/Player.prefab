@@ -5966,7 +5966,7 @@ MonoBehaviour:
   - String: Walk
     Bool: 1
   - String: SlowWalk
-    Bool: 1
+    Bool: 0
   - String: Climb
     Bool: 0
   - String: ClimbIdle
