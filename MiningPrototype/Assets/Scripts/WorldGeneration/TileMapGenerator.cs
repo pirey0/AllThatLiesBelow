@@ -62,13 +62,15 @@ public class TileMapGenerator
     {
         foreach (var pass in settings.RockPasses)
         {
-            Util.IterateX((int)(pass.MaxHeight * settings.Size * pass.Probability * 0.01f), (x) => TryPlaceRock(pass));
+            for (int y = 0; y < settings.Size; y++)
+            {
+                Util.IterateX((int)(settings.Size * pass.Probability.Evaluate((float)y / settings.Size) * 0.01f), (x) => TryPlaceRock(pass, y));
+            }
         }
     }
 
-    private void TryPlaceRock(RockPass pass)
+    private void TryPlaceRock(RockPass pass, int y)
     {
-        int y = UnityEngine.Random.Range(0, pass.MaxHeight);
         int x = UnityEngine.Random.Range(0, settings.Size);
 
         List<Vector2Int> locations = new List<Vector2Int>();
@@ -279,13 +281,16 @@ public class TileMapGenerator
     {
         foreach (var pass in settings.OrePasses)
         {
-            Util.IterateX((int)(pass.MaxHeight * settings.Size * pass.Probability * 0.01f), (x) => TryPlaceVein(pass.TileType, Util.RandomInVector(pass.OreVeinSize), pass.MaxHeight));
+            for (int y = 0; y < settings.Size; y++)
+            {
+                Util.IterateX((int)(settings.Size * pass.Probability.Evaluate((float)y / settings.Size) * 0.01f), (x) => TryPlaceVein(pass.TileType, Util.RandomInVector(pass.OreVeinSize), y));
+            }
         }
     }
 
-    private void TryPlaceVein(TileType type, int amount, int maxHeight)
+    private void TryPlaceVein(TileType type, int amount, int y)
     {
-        int y = UnityEngine.Random.Range(0, maxHeight);
+        
         int x = UnityEngine.Random.Range(0, settings.Size);
 
         GrowVeinAt(x, y, type, amount);
@@ -328,7 +333,7 @@ public class TileMapGenerator
     {
         Tile t = Tile.Air;
 
-        bool occupied = settings.HeightMultiplyer.Evaluate((float)y / settings.Size) * UnityEngine.Random.value < settings.InitialAliveChance;
+        bool occupied = settings.HeightMultiplyer.Evaluate((float)y / settings.Size) * UnityEngine.Random.value < settings.InitialAliveCurve.Evaluate((float)y/settings.Size);
 
         if (occupied)
             t.Type = TileType.Stone;
