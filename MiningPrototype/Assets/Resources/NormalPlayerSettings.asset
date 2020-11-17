@@ -17,7 +17,7 @@ MonoBehaviour:
   moveSpeed: 5
   slowMoveSpeed: 3
   timeToLongIdle: 10
-  hitDuration: 3
+  hitDuration: 1
   jumpCooldown: 0.85
   timeAfterGroundedToJump: 0.1
   feetRadius: 0.4

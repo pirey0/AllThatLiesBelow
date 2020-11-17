@@ -12,13 +12,6 @@ public class CrumblingParticle : MonoBehaviour
 
     float duration;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        shake = CameraController.Instance.Shake(transform.position,type, duration, range);
-        crumblingSound.time = Mathf.Max(0f,10f - duration);
-    }
-
     private void OnDestroy()
     {
         CameraController.Instance.StopShake(shake);
@@ -27,5 +20,14 @@ public class CrumblingParticle : MonoBehaviour
     public void SetDuration(float f)
     {
         duration = f;
+
+        if (duration <= 0)
+            return;
+
+        if (duration > 10)
+            Debug.LogError("Duration greater than 10: " + f);
+
+        crumblingSound.time = Mathf.Max(0f, 10f - duration);
+        shake = CameraController.Instance.Shake(transform.position, type, duration, range);
     }
 }

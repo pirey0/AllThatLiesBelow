@@ -12,6 +12,7 @@ public interface IEntity
 public class PhysicalTile : MineableObject, IEntity
 {
     [SerializeField] SpriteRenderer renderer, overlayRenderer;
+    [SerializeField] AudioSource hit;
 
     private TileMap generator;
     Tile tile;
@@ -51,6 +52,8 @@ public class PhysicalTile : MineableObject, IEntity
         if (collision.transform.TryGetComponent(out IEntity entity))
         {
             entity.TakeDamage(DamageStrength.Weak);
+            hit?.Play();
+            //TakeDamage(DamageStrength.Strong);
         }
         else if (collision.transform.TryGetComponent(out ITileMapElement element))
         {

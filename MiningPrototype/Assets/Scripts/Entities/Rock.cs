@@ -9,6 +9,7 @@ public class Rock : TilemapCarvingEntity, ITileMapElement
     [SerializeField] float destructionSpeed;
     [SerializeField] Rigidbody2D rigidbody;
     [SerializeField] AudioSource rockFalling;
+    [SerializeField] AudioSource rockSmashing;
 
     public TileMap TileMap { get; private set; }
 
@@ -48,6 +49,9 @@ public class Rock : TilemapCarvingEntity, ITileMapElement
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (!rockSmashing.isPlaying)
+            rockSmashing.Play();
+
         if (collision.collider.TryGetComponent(out IEntity entity))
         {
             float speed = collision.relativeVelocity.magnitude;
