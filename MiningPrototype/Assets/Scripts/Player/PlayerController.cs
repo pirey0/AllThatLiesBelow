@@ -7,38 +7,23 @@ using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 using UnityEngineInternal;
 
-public enum PlayerState
-{
-    Normal,
-    Locked,
-    Climbing
-}
 
 public class PlayerController : InventoryOwner, IEntity
 {
     [SerializeField] PlayerSettings settings;
 
-    [SerializeField] Transform feet;
-
     [SerializeField] GameObject pickaxe;
     [SerializeField] Transform mouseHighlight;
 
-
-    [SerializeField] AudioSource breakBlock, startMining, walking;
+    [SerializeField] AudioSource breakBlock, startMining;
     [SerializeField] DirectionBasedAnimator pickaxeAnimator;
 
     [SerializeField] EventSystem eventSystem;
     [SerializeField] ParticleSystem miningParticles;
     [SerializeField] SpriteRenderer heldItemPreview;
 
-
-    Rigidbody2D rigidbody;
     SpriteAnimator spriteAnimator;
-    float lastGroundedTimeStamp;
-    float lastJumpTimeStamp;
 
-    private bool isGrounded;
-    Vector2 rightWalkVector = Vector3.right;
     Camera camera;
     SpriteRenderer spriteRenderer;
     Vector2Int? gridDigTarget;
@@ -48,31 +33,23 @@ public class PlayerController : InventoryOwner, IEntity
     [ReadOnly]
     [SerializeField] bool inMining;
 
-    private PlayerState playerState;
+
     private bool isVisible = true;
-    private Ladder currentLadder;
-    private float gravityScale;
+
     private bool heldIsPickaxe = true;
-
-
-    private bool InFrontOfLadder { get => currentLadder != null; }
-    private bool IsLocked { get => playerState != PlayerState.Locked; }
 
     public override bool IsFlipped { get => spriteRenderer.flipX; }
 
     protected override void Start()
     {
         base.Start();
-        camera = Camera.main;
-        rigidbody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteAnimator = GetComponent<SpriteAnimator>();
-        gravityScale = rigidbody.gravityScale;
     }
 
     private void Update()
     {
-        if (!IsLocked || !isVisible)
+        if (!isVisible)
             return;
 
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -93,7 +70,7 @@ public class PlayerController : InventoryOwner, IEntity
             }
             else if (Input.GetMouseButtonDown(1))
             {
-                if (Vector3.Distance(GetPositionInGridV3(), GetClickPositionV3()) <= settings.inventoryOpenDistance && isGrounded)
+                if (Vector3.Distance(GetPositionInGridV3(), GetClickPositionV3()) <= settings.inventoryOpenDistance)
                 {
                     ToggleInventory();
                 }
@@ -156,12 +133,7 @@ public class PlayerController : InventoryOwner, IEntity
     {
         TryStopInteracting();
     }
-
-    private bool CanJump()
-    {
-        return Time.time - lastGroundedTimeStamp < settings.timeAfterGroundedToJump && Time.time - lastJumpTimeStamp > settings.jumpCooldown;
-    }
-
+    
     private void UpdateDigTarget()
     {
         gridDigTarget = TileMapHelper.GetClosestSolidBlock(TileMap.Instance, GetPositionInGrid(), GetClickCoordinate());
@@ -170,6 +142,7 @@ public class PlayerController : InventoryOwner, IEntity
             gridDigTarget = null;
         }
     }
+
 
     private void UpdateNonGridDigTarget()
     {
@@ -325,119 +298,9 @@ public class PlayerController : InventoryOwner, IEntity
 
     private Vector3 GetClickPositionV3()
     {
-        Vector3 position = Input.mousePosition + Vector3.back * camera.transform.position.z;
-        return camera.ScreenToWorldPoint(position);
+        return Util.MouseToWorld();
     }
 
-    private void FixedUpdate()
-    {
-        if (!isVisible)
-            return;
-
-        switch (playerState)
-        {
-            case PlayerState.Normal:
-                UpdateWalk();
-                if (InFrontOfLadder)
-                    TryStartClimb();
-                else
-                    UpdateJump();
-                break;
-
-            case PlayerState.Climbing:
-                UpdateClimb();
-                break;
-        }
-    }
-
-    private void UpdateClimb()
-    {
-        if (InFrontOfLadder)
-        {
-            var horizontal = Input.GetAxis("Horizontal");
-            var vertical = Input.GetAxis("Vertical");
-
-            Vector2 climbVelocity = new Vector2(horizontal * settings.climbPanSpeed, vertical * settings.climbSpeed);
-            rigidbody.velocity = climbVelocity;
-
-            if (climbVelocity.magnitude > settings.climbIdleThreshold)
-            {
-                spriteAnimator.Play(settings.an_Climb, false);
-            }
-            else
-            {
-                spriteAnimator.Play(settings.an_ClimbIdle, false);
-            }
-
-            if (vertical > 0)
-                currentLadder.NotifyGoingUp();
-            else
-                currentLadder.NotifyGoingDown();
-
-        }
-        else
-        {
-            ChangeStateTo(PlayerState.Normal);
-        }
-
-
-    }
-
-    private void TryStartClimb()
-    {
-        var vertical = Input.GetAxis("Vertical");
-
-        if (Mathf.Abs(vertical) > 0.75f)
-        {
-            ChangeStateTo(PlayerState.Climbing);
-        }
-    }
-
-    private void UpdateWalk()
-    {
-        var horizontal = Input.GetAxis("Horizontal");
-
-        if (currentInteractable != null)
-        {
-            if (Vector3.Distance(GetPositionInGridV3(), currentInteractable.gameObject.transform.position) > settings.maxInteractableDistance)
-                TryStopInteracting();
-        }
-
-        rigidbody.position += horizontal * rightWalkVector * settings.moveSpeed * Time.fixedDeltaTime * ProgressionHandler.Instance.SpeedMultiplyer;
-        rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
-
-        if (Mathf.Abs(horizontal) > 0.2f)
-            spriteRenderer.flipX = horizontal < 0;
-
-        if (isGrounded)
-        {
-            if (horizontal == 0)
-            {
-                if (InventoryDisplayState == InventoryState.Open)
-                {
-                    spriteAnimator.Play(settings.an_Inventory, false);
-                    SetHeldVisible(false);
-                }
-                else
-                {
-                    spriteAnimator.Play(settings.an_Idle, false);
-                    SetHeldVisible(true);
-                }
-            }
-            else
-            {
-                spriteAnimator.Play(settings.an_Walk, false);
-                SetHeldVisible(true);
-            }
-        }
-        else
-        {
-            spriteAnimator.Play(settings.an_Fall);
-            SetHeldVisible(true);
-        }
-
-        UpdateWalkingSound(horizontal);
-    }
 
     public void SetHeldVisible(bool isVisible = true)
     {
@@ -471,90 +334,17 @@ public class PlayerController : InventoryOwner, IEntity
         heldItemPreview.sprite = sprite;
     }
 
-    private void UpdateJump()
-    {
-        var vertical = Input.GetAxis("Vertical");
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(feet.position, settings.feetRadius);
-        isGrounded = colliders != null && colliders.Length > 1;
-
-        if (isGrounded)
-        {
-            lastGroundedTimeStamp = Time.time;
-        }
-
-        if (CanJump() && vertical > 0)
-        {
-            Jump();
-        }
-    }
-
-    private void Jump()
-    {
-        rigidbody.velocity = new Vector2(rigidbody.velocity.x, settings.jumpVelocity);
-        lastJumpTimeStamp = Time.time;
-    }
-
-    private void UpdateWalkingSound(float horizontal)
-    {
-        if (isGrounded && Mathf.Abs(horizontal) > 0.01f)
-        {
-            if (!walking.isPlaying)
-            {
-
-                walking.Play();
-            }
-        }
-        else
-        {
-            if (walking.isPlaying)
-            {
-
-                walking.Pause();
-            }
-        }
-    }
-
-    private void ChangeStateTo(PlayerState newState)
-    {
-        if (playerState == newState)
-            return;
-
-        LeaveState(playerState);
-        playerState = newState;
-        EnterState(newState);
-    }
-
-    private void LeaveState(PlayerState stateLeft)
-    {
-        switch (stateLeft)
-        {
-            case PlayerState.Climbing:
-                rigidbody.gravityScale = gravityScale;
-                SetHeldVisible(true);
-                break;
-        }
-    }
-
-    private void EnterState(PlayerState stateEntered)
-    {
-        switch (stateEntered)
-        {
-            case PlayerState.Climbing:
-                SetHeldVisible(false);
-                rigidbody.gravityScale = 0;
-                break;
-        }
-    }
-
+    
+    //To remove -> set disabled
     [Button]
     public void Hide()
     {
         isVisible = false;
         SetHeldVisible(false);
         spriteRenderer.enabled = false;
-        walking.Pause();
     }
 
+    //To remove -> set enabled
     [Button]
     public void Show()
     {
@@ -563,75 +353,9 @@ public class PlayerController : InventoryOwner, IEntity
         spriteRenderer.enabled = true;
     }
 
-    [Button]
-    public void Freeze()
-    {
-        ChangeStateTo(PlayerState.Locked);
-        walking.Pause();
-    }
-
-    [Button]
-    public void Defreeze()
-    {
-        ChangeStateTo(PlayerState.Normal);
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        UpdateWalkVector(collision);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        UpdateWalkVector(collision);
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        rightWalkVector = Vector2.right;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out Ladder ladder))
-        {
-            currentLadder = ladder;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out Ladder ladder))
-        {
-            currentLadder = null;
-        }
-    }
-
-    private void UpdateWalkVector(Collision2D collision)
-    {
-        var contact = collision.contacts[0];
-        float angle = Mathf.Acos(Vector3.Dot(contact.normal, Vector3.up)) * Mathf.Rad2Deg;
-
-        Debug.DrawLine(transform.position, transform.position + (Vector3)contact.normal);
-
-        if (angle < settings.groundedAngle)
-        {
-            rightWalkVector = Vector3.Cross(contact.normal, Vector3.forward).normalized;
-        }
-        else
-        {
-            rightWalkVector = Vector3.right;
-        }
-    }
 
     private void OnDrawGizmosSelected()
     {
-        if (feet != null)
-            Gizmos.DrawWireSphere(feet.position, settings.feetRadius);
-
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, transform.position + (Vector3)rightWalkVector);
-
         Gizmos.DrawWireSphere((Vector3Int)GetPositionInGrid(), settings.maxDigDistance);
         Gizmos.DrawWireSphere(GetPositionInGridV3(), settings.inventoryOpenDistance);
     }

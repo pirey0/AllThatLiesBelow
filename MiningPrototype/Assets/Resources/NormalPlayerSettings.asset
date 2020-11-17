@@ -33,3 +33,4 @@ MonoBehaviour:
   climbSpeed: 4
   climbPanSpeed: 2
   climbIdleThreshold: 0.2
+  idleThreshold: 0.2

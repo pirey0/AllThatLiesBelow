@@ -31,6 +31,6 @@ public class PlayerSettings : ScriptableObject
     public float climbSpeed;
     public float climbPanSpeed;
     public float climbIdleThreshold;
-
+    public float idleThreshold;
 
 }
