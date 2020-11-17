@@ -38,6 +38,16 @@ public class HeadAnimator : MonoBehaviour
         return xIsFlipped;
     }
 
+    private void OnEnable()
+    {
+        spriteRenderer.enabled = true;
+    }
+
+    private void OnDisable()
+    {
+        spriteRenderer.enabled = false;
+    }
+
     private int GetFrameFromMouseAngle()
     {
         Vector2 head = transform.position;

@@ -23,6 +23,8 @@ public class StateMachine
     public bool DoesLog { get => log; set => log = value; }
     public string Name { get => name; }
 
+    public List<State> States { get => states; }
+
     public StateMachine(string name = "Unnamed")
     {
         this.name = name;
