@@ -37,7 +37,7 @@ public class ParameterBasedAnimator : MonoBehaviour
         float angleGeneralized = ((Mathf.Abs(angle) - 90) / 90f);
         float angleAdapted = Mathf.Clamp(Mathf.Pow(angleGeneralized * 2.3f,2) * Mathf.Sign(angleGeneralized), -5,5);
 
-        Debug.Log(angleAdapted);
-       return Mathf.RoundToInt(5 + Mathf.RoundToInt(angleAdapted));
+        //Debug.Log(angleAdapted);
+        return Mathf.RoundToInt(5 + Mathf.RoundToInt(angleAdapted));
     }
 }

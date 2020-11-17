@@ -209,10 +209,10 @@ MonoBehaviour:
   sprites:
   - sprite: {fileID: -756095480010459852, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
     offset: {x: 0, y: 0.125, z: 0}
+  - sprite: {fileID: 9023619865659815301, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
+    offset: {x: 0, y: 0.125, z: 0}
   - sprite: {fileID: 8217411827828948073, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
-    offset: {x: 0, y: 0.125, z: 0}
-  - sprite: {fileID: 1106305723913688297, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
-    offset: {x: 0, y: 0.125, z: 0}
+    offset: {x: 0, y: 0.25, z: 0}
   - sprite: {fileID: 3644946514836814670, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
     offset: {x: 0, y: 100, z: 0}
   - sprite: {fileID: -4364568823649116938, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
