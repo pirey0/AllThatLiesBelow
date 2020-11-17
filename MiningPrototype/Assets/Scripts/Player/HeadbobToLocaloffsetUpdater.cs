@@ -29,6 +29,7 @@ public class HeadbobToLocaloffsetUpdater : MonoBehaviour
 
     private void OnSpriteChange(Sprite newSprite)
     {
+
         foreach (SpriteOffsetPair pair in sprites)
         {
             if (pair.sprite == newSprite)
@@ -43,10 +44,8 @@ public class HeadbobToLocaloffsetUpdater : MonoBehaviour
 
     private void DoBob(bool bob, Vector3 offsetOnBob)
     {
-        if (bob == isBobbed)
-            return;
-
-        isBobbed = bob;
+        if (bob != isBobbed)
+            isBobbed = bob;
 
         transform.localPosition = localPosition + ((isBobbed) ? offsetOnBob : Vector3.zero);
     }

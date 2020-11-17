@@ -1964,7 +1964,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 35bcf6a0c7301d64a91ff3aec36f06c1, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -32600,7 +32600,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 35bcf6a0c7301d64a91ff3aec36f06c1, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -108612,7 +108612,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 35bcf6a0c7301d64a91ff3aec36f06c1, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -133506,6 +133506,30 @@ PrefabInstance:
       propertyPath: eventSystem
       value: 
       objectReference: {fileID: 575531986}
+    - target: {fileID: 2214841632456959460, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
+      propertyPath: sprites.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2214841632456959460, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
+      propertyPath: sprites.Array.data[4].sprite
+      value: 
+      objectReference: {fileID: 1106305723913688297, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
+    - target: {fileID: 2214841632456959460, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
+      propertyPath: sprites.Array.data[4].offset.y
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2214841632456959460, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
+      propertyPath: sprites.Array.data[5].sprite
+      value: 
+      objectReference: {fileID: -8736164668747230439, guid: 94421b5b25e63b4479deff0229d1ed28, type: 3}
+    - target: {fileID: 2214841632456959460, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
+      propertyPath: sprites.Array.data[5].offset.y
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2214841632456959460, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
+      propertyPath: sprites.Array.data[5].offset.x
+      value: -0.125
+      objectReference: {fileID: 0}
     - target: {fileID: 8633471933228471848, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
       propertyPath: m_Name
       value: Player
@@ -133562,6 +133586,10 @@ PrefabInstance:
       propertyPath: hut
       value: 
       objectReference: {fileID: 864956639}
+    - target: {fileID: 9156434778629824202, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
+      propertyPath: visualStates.Array.data[11].BodyAnimation
+      value: 
+      objectReference: {fileID: 11400000, guid: 297bdfe3faf178542aadae04167b9770, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
 --- !u!1001 &9196140733106249652
