@@ -3,25 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class TilemapCarvingEntity : GridElement, ITileUpdateReceiver
+public abstract class TilemapCarvingEntity : MonoBehaviour, ITileUpdateReceiver
 {
     [SerializeField] TileType type = TileType.CarvedEntity;
-    [SerializeField] Vector2Int[] tilesToOccupy = new Vector2Int[] { Vector2Int.zero };
+    [SerializeField] protected Vector2Int[] tilesToOccupy = new Vector2Int[] { Vector2Int.zero };
 
     Vector2Int tilemapPos = new Vector2Int(-1, -1);
 
     public virtual void OnTileUpdated(int x, int y, Tile newTile)
     {
-        if (newTile.Type != type && gameObject != null)
-        {
-            Debug.Log(name + " representative tile at (" + x + "/" + y + ") destroyed. Destroying self");
-            Destroy(gameObject);
-        }
     }
     
     public virtual void OnTileCrumbleNotified(int x, int y)
     {
-        
     }
 
     [Button]

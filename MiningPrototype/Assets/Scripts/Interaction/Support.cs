@@ -7,6 +7,13 @@ public class Support : SupportBase
     private void Start()
     {
         AdaptHeightTo(CalculateHeight());
+        Carve();
     }
 
+    public override void OnTileCrumbleNotified(int x, int y)
+    {
+        UnCarvePrevious();
+        Debug.Log("Support crumbled.");
+        //Support broke... What happens now?
+    }
 }

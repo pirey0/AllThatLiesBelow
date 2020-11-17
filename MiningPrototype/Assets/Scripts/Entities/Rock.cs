@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rock : TilemapCarvingEntity
+public class Rock : TilemapCarvingEntity, ITileMapElement
 {
     [SerializeField] float width = 2;
     [SerializeField] float destructionSpeed;
     [SerializeField] Rigidbody2D rigidbody;
     [SerializeField] AudioSource rockFalling;
 
+    public TileMap TileMap { get; private set; }
 
     protected void Start()
     {
@@ -16,10 +17,6 @@ public class Rock : TilemapCarvingEntity
         rigidbody.isKinematic = true;
     }
 
-    public override void OnTileUpdated(int x, int y, Tile newTile)
-    {
-
-    }
 
     public override void OnTileCrumbleNotified(int x, int y)
     {
@@ -55,7 +52,7 @@ public class Rock : TilemapCarvingEntity
             float speed = collision.relativeVelocity.magnitude;
             //Damage
         }
-        else if (collision.collider.TryGetComponent(out GridElement gridElement))
+        else if (collision.collider.TryGetComponent(out TileMapElement gridElement))
         {
             if (gridElement.TileMap == null || collision.relativeVelocity.magnitude < destructionSpeed)
             {
@@ -76,6 +73,11 @@ public class Rock : TilemapCarvingEntity
             }
 
         }
+    }
+
+    public void Setup(TileMap tileMap)
+    {
+        TileMap = tileMap;
     }
 }
 

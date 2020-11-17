@@ -100,7 +100,7 @@ public class TileMapGenerator
 
             Vector3 pos = new Vector3(x + pass.Size.x * 0.5f, y + pass.Size.y * 0.5f);
             var go = GameObject.Instantiate(pass.Prefab, pos, Quaternion.identity, map.transform);
-            go.GetComponent<GridElement>().Setup(map);
+            go.GetComponent<ITileMapElement>().Setup(map);
         }
     }
 
