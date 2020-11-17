@@ -112,7 +112,7 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
         s_climb = stateMachine.AddState("Climb", ClimbingEnter, ClimbingUpdate, ClimbingExit);
         s_climbIde = stateMachine.AddState("ClimbIdle", ClimbingEnter, ClimbingUpdate, ClimbingExit);
         s_inventory = stateMachine.AddState("Inventory", null);
-        s_death = stateMachine.AddState("Death", null);
+        s_death = stateMachine.AddState("Death", DeathEnter, null, DeathExit);
         s_hit = stateMachine.AddState("Hit", null);
         s_longIdle = stateMachine.AddState("LongIdle", null, SlowMoveUpdate);
         s_disabled = stateMachine.AddState("Disabled", null);
@@ -148,6 +148,16 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
         s_jump.AddTransition(IsFalling, s_fall);
 
         s_hit.AddTransition(HitFinished, s_idle);
+    }
+
+    private void DeathEnter()
+    {
+        rigidbody.simulated = false;
+    }
+
+    private void DeathExit()
+    {
+        rigidbody.simulated = true;
     }
 
     private bool HitFinished()
