@@ -9,6 +9,7 @@ public class Inventory
 {
     [SerializeField] List<ItemAmountPair> content = new List<ItemAmountPair>();
 
+    [field: NonSerialized]
     public event System.Action InventoryChanged;
 
     public void Add(ItemType type, int amount)
@@ -118,8 +119,6 @@ public class Inventory
 
         return list.ToArray();
     }
-
-
 }
 
 [System.Serializable]

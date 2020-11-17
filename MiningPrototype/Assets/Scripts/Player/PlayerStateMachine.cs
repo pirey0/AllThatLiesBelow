@@ -52,6 +52,7 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
     [SerializeField] bool slowWalkMode;
     [SerializeField] StringBoolPair[] statesCanInteract;
     [SerializeField] PlayerInteractionHandler playerInteraction;
+    [SerializeField] bool debug;
 
     StateMachine stateMachine;
     StateMachine.State s_idle, s_jump, s_fall, s_walk, s_slowWalk, s_climb, s_climbIde, s_inventory, s_death, s_hit, s_longIdle, s_disabled;
@@ -95,6 +96,9 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
 
     private void OnGUI()
     {
+        if (!debug)
+            return;
+
         GUI.color = Color.black;
         GUI.Label(new Rect(10, 10, 200, 25), stateMachine.CurrentState.Name);
 
@@ -451,5 +455,10 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
     public void Enable()
     {
         stateMachine.ForceTransitionTo(s_idle);
+    }
+
+    public void ForceToState(string name)
+    {
+        stateMachine.ForceTransitionTo(name);
     }
 }
