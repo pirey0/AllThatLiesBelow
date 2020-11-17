@@ -20,6 +20,7 @@ public enum TileType
     FloatingEntity
 }
 
+[System.Serializable]
 public struct Tile
 {
     public TileType Type;
