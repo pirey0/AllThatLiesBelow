@@ -12,16 +12,10 @@ public abstract class TilemapCarvingEntity : MonoBehaviour, ITileUpdateReceiver
 
     public virtual void OnTileUpdated(int x, int y, Tile newTile)
     {
-        if (newTile.Type != type && gameObject != null)
-        {
-            Debug.Log(name + " representative tile at (" + x + "/" + y + ") destroyed. Destroying self");
-            Destroy(gameObject);
-        }
     }
     
     public virtual void OnTileCrumbleNotified(int x, int y)
     {
-        
     }
 
     [Button]
