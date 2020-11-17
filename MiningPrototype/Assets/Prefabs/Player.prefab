@@ -5884,7 +5884,7 @@ MonoBehaviour:
   - sprite: {fileID: -5010878985237893848, guid: e0e653eb664f99240af5fc835c92efaa, type: 3}
     offset: {x: 0, y: -0.375, z: 0}
   - sprite: {fileID: -7194323726269135038, guid: e0e653eb664f99240af5fc835c92efaa, type: 3}
-    offset: {x: 0, y: 0.25, z: 0}
+    offset: {x: 0, y: -0.25, z: 0}
   - sprite: {fileID: 3644946514836814670, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
     offset: {x: 0.25, y: -0.25, z: 0}
   - sprite: {fileID: 6277849533615305770, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
