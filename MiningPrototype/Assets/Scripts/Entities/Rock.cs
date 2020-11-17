@@ -52,7 +52,7 @@ public class Rock : TilemapCarvingEntity, ITileMapElement
             float speed = collision.relativeVelocity.magnitude;
             //Damage
         }
-        else if (collision.collider.TryGetComponent(out TileMapElement gridElement))
+        else if (collision.collider.TryGetComponent(out ITileMapElement gridElement))
         {
             if (gridElement.TileMap == null || collision.relativeVelocity.magnitude < destructionSpeed)
             {

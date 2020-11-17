@@ -14,6 +14,7 @@ public class Support : SupportBase
     {
         UnCarvePrevious();
         Debug.Log("Support crumbled.");
+        Destroy(gameObject);
         //Support broke... What happens now?
     }
 }

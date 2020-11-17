@@ -51,7 +51,7 @@ public class PhysicalTile : MineableObject, IEntity
         {
             //Damage?
         }
-        else if (collision.transform.TryGetComponent(out TileMapElement element))
+        else if (collision.transform.TryGetComponent(out ITileMapElement element))
         {
             var position = transform.position.ToGridPosition();
             generator.PlaceAt(position.x, position.y, tile);

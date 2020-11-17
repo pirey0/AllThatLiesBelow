@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 9
   ItemToDrop: 0
-  damageMultiplyer: 0
-  AirLike: 1
-  Targetable: 0
+  damageMultiplyer: 1
+  AirLike: 0
+  Targetable: 1
   StabilityAffected: 1
   NotifiesInsteadOfCrumbling: 1
   UseTilesFromOtherInfo: 0
   Tiles: []
   TileSourceInfo: {fileID: 0}
-  Overlay: {fileID: 11400000, guid: 83bdee7d6ca23f245834cd231c6e7afd, type: 2}
+  Overlay: {fileID: 0}
   physicalTileSprite: {fileID: 0}
   physicalTileOverlay: {fileID: 0}

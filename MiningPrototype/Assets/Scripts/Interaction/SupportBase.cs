@@ -14,8 +14,8 @@ public abstract class SupportBase : TilemapCarvingEntity
         front.size = new Vector2(3, spriteHeight);
         back.size = new Vector2(3, spriteHeight);
 
-        tilesToOccupy = new Vector2Int[height];
-        for (int i = 0; i < height; i++)
+        tilesToOccupy = new Vector2Int[height+1];
+        for (int i = 0; i < tilesToOccupy.Length; i++)
         {
             tilesToOccupy[i] = new Vector2Int(0, i);
         }
