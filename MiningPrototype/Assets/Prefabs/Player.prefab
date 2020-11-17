@@ -6114,7 +6114,7 @@ MonoBehaviour:
     CarryItemState: 0
     PickaxeState: 0
   - StateName: Death
-    BodyAnimation: {fileID: 0}
+    BodyAnimation: {fileID: 11400000, guid: 3a8d0745eb0ffe6458c0773bd89b913c, type: 2}
     HeadState: 0
     HandsState: 0
     CarryItemState: 0

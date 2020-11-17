@@ -18,6 +18,7 @@ public class StateMachine
     bool log;
 
     public event System.Action<string> Log;
+    public event System.Action<State, State> StateChanged;
 
     public State CurrentState { get => currentState; }
     public bool DoesLog { get => log; set => log = value; }
@@ -122,6 +123,8 @@ public class StateMachine
         {
             newState.Enter?.Invoke();
         }
+
+        StateChanged?.Invoke(currentState, newState);
 
         currentState = newState;
     }

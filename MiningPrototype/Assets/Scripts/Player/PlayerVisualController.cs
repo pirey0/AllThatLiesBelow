@@ -30,21 +30,22 @@ public class PlayerVisualController : MonoBehaviour
 
         var smUser = GetComponent<IStateMachineUser>();
         if (smUser != null)
-            stateMachine = smUser.GetStateMachine();
-        else
-            Debug.LogError("No StateMachine found");
-    }
-
-    private void Update()
-    {
-        VisualUpdate();
-    }
-
-    private void VisualUpdate()
-    {
-        if (visualStateMap.ContainsKey(stateMachine.CurrentState.Name))
         {
-            var visState = visualStateMap[stateMachine.CurrentState.Name];
+            stateMachine = smUser.GetStateMachine();
+            stateMachine.StateChanged += VisualUpdate;
+        }
+        else
+        {
+            Debug.LogError("No StateMachine found");
+        }
+
+    }
+
+    private void VisualUpdate(StateMachine.State leavingState, StateMachine.State enteringState)
+    {
+        if (visualStateMap.ContainsKey(enteringState.Name))
+        {
+            var visState = visualStateMap[enteringState.Name];
 
             bodyAnimator.Play(visState.BodyAnimation, resetSame: false);
 
