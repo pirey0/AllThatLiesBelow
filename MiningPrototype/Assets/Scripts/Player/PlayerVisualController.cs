@@ -58,10 +58,12 @@ public class PlayerVisualController : MonoBehaviour
 
                 case CarryItemState.Conditional:
                     itemRenderer.enabled = true;
+                    itemRenderer.sortingOrder = 5;
                     break;
 
                 case CarryItemState.ConditionalBehindPlayer:
                     itemRenderer.enabled = true;
+                    itemRenderer.sortingOrder = -5;
                     break;
             }
 
