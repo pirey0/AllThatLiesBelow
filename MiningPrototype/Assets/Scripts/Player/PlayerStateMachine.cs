@@ -147,7 +147,7 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
 
         s_idle.AddTransition(IsProlongedIdle, s_longIdle);
         s_longIdle.AddTransition(IsMoving, s_walk);
-        s_longIdle.AddTransition(IsProlongedIdle, s_idle);
+        s_longIdle.AddTransition(NotInProlongedIdle, s_idle);
 
         s_idle.AddTransition(IsFalling, s_fall);
         s_fall.AddTransition(IsGrounded, s_idle);
@@ -321,6 +321,11 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
     private bool IsFalling()
     {
         return !isGrounded && rigidbody.velocity.y < 0;
+    }
+
+    private bool NotInProlongedIdle()
+    {
+        return !IsProlongedIdle();
     }
 
     private bool IsProlongedIdle()
