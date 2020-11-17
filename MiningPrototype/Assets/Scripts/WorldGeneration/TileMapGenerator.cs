@@ -110,7 +110,7 @@ public class TileMapGenerator
 
         foreach (var nIndex in TileMapHelper.GetNeighboursIndiciesOf(x, y))
         {
-           CalculateNeighboursBitmaskAt(nIndex.x, nIndex.y);
+            CalculateNeighboursBitmaskAt(nIndex.x, nIndex.y);
         }
 
         PropagateStabilityUpdatesFrom(x, y);
@@ -130,7 +130,9 @@ public class TileMapGenerator
 
     private void CalculateStabilityAll()
     {
-        Util.IterateXY(settings.Size, (x, y) => CalculateBaseStability(x, y));
+        Util.IterateXY(settings.Size, (x, y) => ResetStability(x, y));
+
+        Util.IterateXY(settings.Size, (x, y) => SetDirectionalStabilityAt(x, y, Direction.Down));
 
         for (int y = settings.Size; y >= 0; y--)
         {
@@ -152,54 +154,40 @@ public class TileMapGenerator
                 SetDirectionalStabilityAt(x, y, Direction.Right);
             }
         }
-
     }
 
     //To change
     private void PropagateStabilityUpdatesFrom(int x, int y)
     {
-        CalculateBaseStability(x, y);
         MarkToCheckForStability(x, y);
-        DirectionalStabilityIterator(x, y - 1, Direction.Up);
-        DirectionalStabilityIterator(x - 1, y, Direction.Right);
-        DirectionalStabilityIterator(x, y + 1, Direction.Down);
-        DirectionalStabilityIterator(x + 1, y, Direction.Left);
+        ResetStability(x, y);
+        DirectionalStabilityIterator(x, y, Direction.Up);
+        DirectionalStabilityIterator(x, y, Direction.Right);
+        DirectionalStabilityIterator(x, y, Direction.Down);
+        DirectionalStabilityIterator(x, y, Direction.Left);
     }
 
     private void DirectionalStabilityIterator(int x, int y, Direction dir)
     {
         Vector2Int offset = dir.Inverse().AsV2Int();
 
-        do
+        bool run = true;
+
+        while(run)
         {
             SetDirectionalStabilityAt(x, y, dir);
             MarkToCheckForStability(x, y);
             x += offset.x;
             y += offset.y;
+
+            run = !map[x, y].StableWithout(dir);
         }
-        while (!map[x, y].IsStable());
     }
 
-    [System.Obsolete("Old Temporary System")]
-    private void ApproximateStabilityFor(int x, int y)
+    private void ResetStability(int x, int y)
     {
-        CalculateBaseStability(x, y);
-        SetDirectionalStabilityAt(x, y, Direction.Up);
-        SetDirectionalStabilityAt(x, y, Direction.Right);
-        SetDirectionalStabilityAt(x, y, Direction.Left);
-        MarkToCheckForStability(x, y);
-    }
-
-    private void CalculateBaseStability(int x, int y)
-    {
-        if (map.IsAirAt(x, y))
-            return;
-
         var tile = map.GetTileAt(x, y);
         tile.ResetStability();
-
-        if ((tile.NeighbourBitmask & 64) == 64)
-            tile.SetStability(Direction.Down, 100);
 
         map[x, y] = tile;
     }
@@ -210,10 +198,15 @@ public class TileMapGenerator
             return;
 
         var tile = map.GetTileAt(x, y);
-        int divisor = direction == Direction.Down ? 1 : 4;
 
-        Vector2Int offset = direction.AsV2Int();
-        tile.SetStability(direction, map[x + offset.x, y + offset.y].Stabilities[(int)direction] / divisor);
+        if (direction == Direction.Down)
+            tile.SetStability(direction, map.IsBlockAt(x, y - 1) ? 100 : 0);
+        else
+        {
+            Vector2Int offset = direction.AsV2Int();
+            tile.SetStability(direction, Mathf.Min(25, map[x + offset.x, y + offset.y].Stability / 4));
+        }
+
         map[x, y] = tile;
     }
 

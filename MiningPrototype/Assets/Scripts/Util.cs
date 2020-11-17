@@ -156,7 +156,7 @@ public static class Util
     }
     public static Direction Inverse(this Direction dir)
     {
-        return (Direction)(((int)dir + 4) % 4);
+        return (Direction)(((int)dir + 2) % 4);
     }
 
 }

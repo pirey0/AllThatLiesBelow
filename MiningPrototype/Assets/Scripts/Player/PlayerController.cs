@@ -202,7 +202,7 @@ public class PlayerController : InventoryOwner, IEntity
 
             if (hit.transform.TryGetComponent(out IMinableNonGrid minable))
             {
-                Debug.Log(hit.transform.name);
+                //Debug.Log(hit.transform.name);
                 newTarget = minable;
                 break;
             }

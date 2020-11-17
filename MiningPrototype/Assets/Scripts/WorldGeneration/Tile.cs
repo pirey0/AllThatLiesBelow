@@ -65,9 +65,9 @@ public struct Tile
         Stabilities = new int[4];
     }
 
-    public bool IsStable()
+    public bool StableWithout(Direction dir)
     {
-        return Stability >= 100 || Type == TileType.Air;
+        return Type == TileType.Air || (Stability-Stabilities[(int)dir] >= 100 );
     }
 
     public void TakeDamage(float amount)
