@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  length: 6
   range: 10
+  crumblingSound: {fileID: 6539750217721665930}
 --- !u!198 &4718119467889540380
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4897,7 +4897,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 42a36697dd849cf46810e86e13be0dad, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 2b432794cc5edd34d97a7c2bf9db2d74, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -4943,7 +4943,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.803
+      value: 0.6
       inSlope: 0
       outSlope: 0
       tangentMode: 0
