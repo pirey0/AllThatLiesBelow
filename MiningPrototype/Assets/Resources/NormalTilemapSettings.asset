@@ -22,6 +22,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ebcef3dc0b326324bb658bca23247055, type: 2}
   - {fileID: 11400000, guid: 44a4c9ec7b5e5b64fa4216c5813d65cb, type: 2}
   - {fileID: 11400000, guid: 055367cafc74d2f47a86a60b8f121223, type: 2}
+  - {fileID: 11400000, guid: cc7084b028cbe4e44b82497f8f514348, type: 2}
   - {fileID: 11400000, guid: f847158a01f57664cba2edc2068a13b0, type: 2}
   DamageOverlayTiles:
   - {fileID: 0}

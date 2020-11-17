@@ -16,7 +16,8 @@ public enum TileType
     HardStone = 6,
     BedStone = 7,
     Rock,
-    CarvedEntity
+    CollapsableEntity,
+    FloatingEntity
 }
 
 public struct Tile
@@ -90,6 +91,16 @@ public enum Direction
 public interface ITileUpdateReceiver
 {
     void OnTileCrumbleNotified(int x, int y);
-    void OnTileUpdated(int x, int y, Tile newTile);
+    void OnTileUpdated(int x, int y, TileUpdateReason reason);
 }
 
+public enum TileUpdateReason
+{
+    VisualUpdate,
+    Destroy,
+    Collapse,
+    Uncarve,
+    Carve,
+    Place,
+    Generation
+}

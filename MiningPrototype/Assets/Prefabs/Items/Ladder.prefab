@@ -21,6 +21,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 5
+--- !u!68 &7136442466677974563
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8917149696465416293}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.5, y: 0}
+  - {x: 0.5, y: 0}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!68 &7171593314812153326
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -37,8 +59,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 3}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -1, y: 3}
-  - {x: 1, y: 3}
+  - {x: -0.5, y: 3}
+  - {x: 0.5, y: 3}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -74,14 +96,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38f63b1cbf6d5494098524d3120cc5cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 9
   tilesToOccupy:
-  - {x: 0, y: 0}
-  - {x: 0, y: 1}
-  - {x: 0, y: 2}
-  - {x: 0, y: 3}
-  - {x: 0, y: 4}
-  - {x: 0, y: 5}
+  - Offset: {x: 0, y: 0}
+    Type: 9
+  - Offset: {x: 0, y: 1}
+    Type: 10
+  - Offset: {x: 0, y: 2}
+    Type: 10
+  - Offset: {x: 0, y: 3}
+    Type: 10
+  - Offset: {x: 0, y: 4}
+    Type: 10
+  - Offset: {x: 0, y: 5}
+    Type: 10
+  carvingOffset: {x: 0, y: 0.4, z: 0}
   edge: {fileID: 7171593314812153326}
   rigidbody: {fileID: 3617977427120275901}
   fallSound: {fileID: 0}

@@ -32,7 +32,7 @@ public class TileMap : Singleton<TileMap>
     Stack<Vector2Int> tilesToStabilityCheck = new Stack<Vector2Int>();
 
     Dictionary<TileType, bool> IsAirLike;
-
+    Dictionary<TileType, bool> countsAsNeighbour;
 
     private int size;
     public int Size { get => size; }
@@ -63,13 +63,19 @@ public class TileMap : Singleton<TileMap>
         StartCoroutine(UpdateUnstableTilesRoutine());
     }
 
-    private void PopulateIsAirLikeDictionary()
+    private void PopulateLookupDictionaries()
     {
         IsAirLike = new Dictionary<TileType, bool>();
 
         foreach (var info in mapSettings.TileInfos)
         {
             IsAirLike.Add(info.Type, info.AirLike);
+        }
+
+        countsAsNeighbour = new Dictionary<TileType, bool>();
+        foreach (var info in mapSettings.TileInfos)
+        {
+            countsAsNeighbour.Add(info.Type, info.CountsAsNeighbour);
         }
     }
 
@@ -201,7 +207,7 @@ public class TileMap : Singleton<TileMap>
 
         size = generationSettings.Size;
         generator = new TileMapGenerator(this, generationSettings);
-        PopulateIsAirLikeDictionary();
+        PopulateLookupDictionaries();
     }
 
     public void InitMap(int sizeX, int sizeY)
@@ -225,6 +231,12 @@ public class TileMap : Singleton<TileMap>
     {
         return !IsAirLike[GetTileAt(x, y).Type];
     }
+
+    public bool IsNeighbourAt(int x, int y)
+    {
+        return countsAsNeighbour[GetTileAt(x, y).Type];
+    }
+
 
     public Tile GetTileAt(int x, int y)
     {
@@ -252,14 +264,15 @@ public class TileMap : Singleton<TileMap>
         }
         else
         {
-            SetMapAt(x, y, t, updateProperties: false, updateVisuals: true);
+            SetMapAt(x, y, t, TileUpdateReason.VisualUpdate, updateProperties: false, updateVisuals: true);
             return false;
         }
     }
 
+
     private void BreakBlock(int x, int y, Tile t, bool playerCaused)
     {
-        SetMapAt(x, y, Tile.Air);
+        SetMapAt(x, y, Tile.Air, TileUpdateReason.Destroy);
 
         if (playerCaused)
         {
@@ -274,7 +287,7 @@ public class TileMap : Singleton<TileMap>
     public void PlaceAt(int x, int y, Tile t)
     {
         //Debug.Log("Try Place " + x + " / " + y);
-        SetMapAt(x, y, t);
+        SetMapAt(x, y, t, TileUpdateReason.Place);
     }
 
     private void SetMapRawAt(int x, int y, Tile tile)
@@ -288,7 +301,7 @@ public class TileMap : Singleton<TileMap>
             Util.DebugDrawTile(new Vector2Int(x, y), Color.white, 0.5f);
     }
 
-    public void SetMapAt(int x, int y, Tile value, bool updateProperties = true, bool updateVisuals = true)
+    public void SetMapAt(int x, int y, Tile value, TileUpdateReason reason, bool updateProperties = true, bool updateVisuals = true)
     {
         if (IsOutOfBounds(x, y))
             return;
@@ -302,7 +315,7 @@ public class TileMap : Singleton<TileMap>
 
             if (prev.Type != value.Type)
             {
-                receiverMap[x, y]?.OnTileUpdated(x, y, value);
+                receiverMap[x, y]?.OnTileUpdated(x, y, reason);
                 receiverMap[x, y] = null;
             }
         }
@@ -317,7 +330,26 @@ public class TileMap : Singleton<TileMap>
         }
 
         if (debug)
-            Util.DebugDrawTile(new Vector2Int(x, y), Color.yellow, 1);
+        {
+            switch (reason)
+            {
+                case TileUpdateReason.VisualUpdate:
+                    Util.DebugDrawTile(new Vector2Int(x, y), Color.yellow, 1);
+                    break;
+
+                case TileUpdateReason.Uncarve:
+                case TileUpdateReason.Carve:
+                case TileUpdateReason.Place:
+                    Util.DebugDrawTile(new Vector2Int(x, y), Color.blue, 1);
+                    break;
+
+                case TileUpdateReason.Destroy:
+                case TileUpdateReason.Collapse:
+                    Util.DebugDrawTile(new Vector2Int(x, y), Color.red, 1);
+                    break;
+            }
+        }
+            
     }
 
     public void SetReceiverMapAt(int x, int y, ITileUpdateReceiver receiver)

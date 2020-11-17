@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c44c8a584f6c2194fa5a252688113e23, type: 3}
-  m_Name: Tile_9_CarvedEntity
+  m_Name: Tile_10_EntityFloat
   m_EditorClassIdentifier: 
-  Type: 9
+  Type: 10
   ItemToDrop: 0
   damageMultiplyer: 1
   AirLike: 0
   Targetable: 1
-  StabilityAffected: 1
+  StabilityAffected: 0
   NotifiesInsteadOfCrumbling: 1
   UseTilesFromOtherInfo: 0
   Tiles: []
