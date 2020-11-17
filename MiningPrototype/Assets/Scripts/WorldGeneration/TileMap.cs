@@ -54,9 +54,9 @@ public class TileMap : Singleton<TileMap>
 
     private void Start()
     {
-        tilemap.GetComponent<GridElement>()?.Setup(this);
-        damageOverlayTilemap.GetComponent<GridElement>()?.Setup(this);
-        oreTilemap.GetComponent<GridElement>()?.Setup(this);
+        tilemap.GetComponent<ITileMapElement>()?.Setup(this);
+        damageOverlayTilemap.GetComponent<ITileMapElement>()?.Setup(this);
+        oreTilemap.GetComponent<ITileMapElement>()?.Setup(this);
 
         RunCompleteGeneration();
 

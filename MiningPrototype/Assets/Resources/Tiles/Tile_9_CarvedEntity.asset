@@ -17,8 +17,11 @@ MonoBehaviour:
   damageMultiplyer: 0
   AirLike: 1
   Targetable: 0
-  StabilityAffected: 0
-  Tiles: []
+  StabilityAffected: 1
+  NotifiesInsteadOfCrumbling: 1
   UseTilesFromOtherInfo: 0
+  Tiles: []
   TileSourceInfo: {fileID: 0}
   Overlay: {fileID: 11400000, guid: 83bdee7d6ca23f245834cd231c6e7afd, type: 2}
+  physicalTileSprite: {fileID: 0}
+  physicalTileOverlay: {fileID: 0}
