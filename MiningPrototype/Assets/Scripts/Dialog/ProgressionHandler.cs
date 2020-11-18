@@ -1,22 +1,24 @@
-﻿using System.Collections;
+﻿using NaughtyAttributes;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProgressionHandler : Singleton<ProgressionHandler>
+public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
 {
+    [ReadOnly] [SerializeField] string saveID = Util.GenerateNewSaveGUID();
+
     [SerializeField] string dialog;
     [SerializeField] string alreadyTradedDialog;
     [SerializeField] float speedPerBlessing, digSpeedPerBlessing;
+    [SerializeField] NewOrderCrateSpawner newOrderCrateSpawner;
 
     List<string> aquiredList = new List<string>();
     List<ItemAmountPair> orderForNextDay = new List<ItemAmountPair>();
-
-    [SerializeField] NewOrderCrateSpawner newOrderCrateSpawner;
  
     private float speedMultiplyer = 1;
     private float digSpeedMultiplyer = 1;
     private int extraDrop = 1;
-
+    private int day = 0;
     bool dailyPurchaseExaused;
 
     public float SpeedMultiplyer { get => speedMultiplyer; }
@@ -69,6 +71,7 @@ public class ProgressionHandler : Singleton<ProgressionHandler>
         //order
         newOrderCrateSpawner.SpawnOrder(orderForNextDay);
         orderForNextDay.Clear();
+        day++;
     }
 
     public void AddOrderForNextDay(List<ItemAmountPair> newOrder)
@@ -80,4 +83,56 @@ public class ProgressionHandler : Singleton<ProgressionHandler>
     {
         return SacrificePricesParser.GetPriceFor(reward, resource);
     }
+
+    public SaveData ToSaveData()
+    {
+        ProgressionSaveData saveData = new ProgressionSaveData();
+        saveData.GUID = GetSaveID();
+        saveData.AquiredList = aquiredList;
+        saveData.OrderForNextDay = orderForNextDay;
+        saveData.SpeedMultiplyer = speedMultiplyer;
+        saveData.DigSpeedMultiplyer = digSpeedMultiplyer;
+        saveData.ExtraDrop = extraDrop;
+        saveData.DailyPurchaseExaused = dailyPurchaseExaused;
+        saveData.Day = day;
+
+        return saveData;
+    }
+
+    public void Load(SaveData data)
+    {
+        if(data is ProgressionSaveData saveData)
+        {
+            aquiredList = saveData.AquiredList;
+            orderForNextDay = saveData.OrderForNextDay;
+            speedMultiplyer = saveData.SpeedMultiplyer;
+            digSpeedMultiplyer = saveData.DigSpeedMultiplyer;
+            extraDrop = saveData.ExtraDrop;
+            dailyPurchaseExaused = saveData.DailyPurchaseExaused;
+            day = saveData.Day;
+        }
+        else
+        {
+            Debug.LogError("Wrong SaveData type for ProgressionHandler");
+        }
+    }
+
+    public string GetSaveID()
+    {
+        return saveID;
+    }
+}
+
+
+[System.Serializable]
+public class ProgressionSaveData : SaveData
+{
+    public List<string> AquiredList = new List<string>();
+    public List<ItemAmountPair> OrderForNextDay = new List<ItemAmountPair>();
+
+    public float SpeedMultiplyer = 1;
+    public float DigSpeedMultiplyer = 1;
+    public int ExtraDrop = 1;
+    public int Day;
+    public bool DailyPurchaseExaused;
 }

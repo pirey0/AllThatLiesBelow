@@ -102,6 +102,13 @@ public class SaveDataCollection
 
     public void Add(SaveData data)
     {
-        SaveDatas.Add(data.GUID, data);
+        if (string.IsNullOrEmpty(data.GUID))
+        {
+            Debug.LogError("SaveData " + data.GetType() + " has no GUID assigned.");
+        }
+        else
+        {
+            SaveDatas.Add(data.GUID, data);
+        }
     }
 }

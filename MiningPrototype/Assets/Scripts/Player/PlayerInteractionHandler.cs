@@ -327,6 +327,8 @@ public class PlayerInteractionHandler : InventoryOwner
     public void SetHeldItem(bool setToPickaxe)
     {
         heldIsPickaxe = setToPickaxe;
+        if (setToPickaxe)
+            heldItemPreview.sprite = null;
     }
 
     public void SetHeldItemSprite(Sprite sprite)

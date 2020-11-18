@@ -238,7 +238,7 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
             lastActivityTimeStamp = Time.time;
         }
 
-        SetMovingSound(true);
+        SetMovingSound(IsMoving());
     }
 
     private void ClimbingEnter()

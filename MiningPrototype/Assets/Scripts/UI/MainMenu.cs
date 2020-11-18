@@ -7,6 +7,11 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] Animator animator;
 
+    private void Start()
+    {
+        SaveHandler.LoadedFromSaveFile = false;
+    }
+
     public void MenueAction(string coroutineName)
     {
         StartCoroutine(coroutineName);
@@ -21,7 +26,8 @@ public class MainMenu : MonoBehaviour
 
     private IEnumerator Load()
     {
-        yield return null;
+        SaveHandler.LoadedFromSaveFile = true;
+        yield return Play();
     }
 
     private IEnumerator Settings()
