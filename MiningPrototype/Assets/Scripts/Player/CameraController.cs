@@ -76,6 +76,11 @@ public class CameraController : Singleton<CameraController>
     {
         return cameraShaker.StartShake(shakeType, duration, location, range);
     }
+    public CameraShake Shake(Vector2 location, AnimationCurve customCurve, float duration = 1f, float range = 10f)
+    {
+        return cameraShaker.StartShake(customCurve, duration, location, range);
+    }
+
     public void StopShake(CameraShake shake)
     {
         cameraShaker.StopShake(shake);
