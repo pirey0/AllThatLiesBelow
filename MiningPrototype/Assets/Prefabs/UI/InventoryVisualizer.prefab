@@ -95,8 +95,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 4}
+  m_AnchoredPosition: {x: 0.3354, y: 0}
+  m_SizeDelta: {x: 4, y: 4}
   m_Pivot: {x: 0.25, y: 0}
 --- !u!222 &8727063801738303676
 CanvasRenderer:
@@ -126,8 +126,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 664749b9be3464740849a8df80570299, type: 3}
-  m_Type: 2
+  m_Sprite: {fileID: -2780150225327706969, guid: 9bf8772c9d95be6488791bf8589cbffb, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 75
+  m_PixelsPerUnitMultiplier: 100
 --- !u!1 &8727063801762088806
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 8727063801762088805}
   - component: {fileID: 8727063801762088803}
   - component: {fileID: 8727063801762088802}
+  - component: {fileID: 7444784132658660086}
   m_Layer: 5
   m_Name: InventoryVisualizer
   m_TagString: Untagged
@@ -208,3 +209,19 @@ MonoBehaviour:
   gridBox: {fileID: 8727063801738303664}
   gridLayoutParent: {fileID: 7116935718377473132}
   updateContinously: 1
+  animator: {fileID: 7444784132658660086}
+  closeAnimation: {fileID: 11400000, guid: 81b4b76f95b55b64e952d4fa2e1c55f1, type: 2}
+--- !u!114 &7444784132658660086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8727063801762088806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9163fffbd5e86a46a5633ad6c4458c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 8727063801738303677}
+  startingAnimation: {fileID: 11400000, guid: 87316d018e4b5fd4382653770afad572, type: 2}

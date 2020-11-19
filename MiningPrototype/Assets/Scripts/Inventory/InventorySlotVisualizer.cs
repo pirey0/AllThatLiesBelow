@@ -5,11 +5,14 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
+using UnityEditor.Timeline;
 
 public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-    [SerializeField] Image icon;
-    [SerializeField] Text amountDisplay;
+    [SerializeField] public Image icon;
+    [SerializeField] public TMP_Text amountDisplay;
+    [SerializeField] AnimationCurve scaleOnOpenAndCloseCurve;
 
     int amount;
     ItemType type;
@@ -35,6 +38,8 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
         if (amountDisplay != null)
             amountDisplay.text = amount.ToString();
+
+        StartCoroutine(ScaleCoroutine(scaleUp: true));
     }
     public void SetButtonToSlot(UnityAction action)
     {
@@ -131,6 +136,32 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         image.color = Color.white;
         icon.enabled = true;
         amountDisplay.enabled = true;
+    }
+
+    public void CloseInventory()
+    {
+        StopAllCoroutines();
+        StartCoroutine(ScaleCoroutine(scaleUp: false));
+    }
+
+    IEnumerator ScaleCoroutine(bool scaleUp)
+    {
+        Debug.Log("started scale: up?" +scaleUp);
+        float timeMin = scaleOnOpenAndCloseCurve.keys[0].time;
+        float timeMax = scaleOnOpenAndCloseCurve.keys[scaleOnOpenAndCloseCurve.length - 1].time;
+        float time = (scaleUp ? timeMin : timeMax);
+
+        while (scaleUp && time < timeMax || !scaleUp && time > timeMin)
+        {
+            time += (scaleUp ? 1 : -1) * Time.deltaTime;
+            transform.localScale = Vector3.one * scaleOnOpenAndCloseCurve.Evaluate(time);
+            yield return null;
+        }
+
+        Debug.Log("finished scale: up?" + scaleUp);
+
+        if (!scaleUp)
+            Destroy(gameObject);
     }
 
 }

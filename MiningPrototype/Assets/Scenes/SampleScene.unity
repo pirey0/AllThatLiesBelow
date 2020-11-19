@@ -133786,22 +133786,6 @@ PrefabInstance:
       propertyPath: eventSystem
       value: 
       objectReference: {fileID: 575531986}
-    - target: {fileID: 1278373005984055415, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
-      propertyPath: m_Volume
-      value: 0.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 3471564094401374700, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
-      propertyPath: m_Volume
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4569569128638959811, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
-      propertyPath: m_Volume
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8148473555476766029, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
-      propertyPath: m_Volume
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 8633471933228471848, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
       propertyPath: m_Name
       value: Player

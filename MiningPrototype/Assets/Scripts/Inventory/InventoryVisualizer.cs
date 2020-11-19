@@ -16,9 +16,12 @@ public class InventoryVisualizer : ScalingUIElementBase
     [SerializeField] Transform gridBox;
     [SerializeField] Transform gridLayoutParent;
     [SerializeField] bool updateContinously = true;
+    [SerializeField] ImageSpriteAnimator animator;
+    [SerializeField] SpriteAnimation closeAnimation;
     SpriteRenderer spriteRendererToGetOrientatioFrom;
 
     Inventory inventory;
+    List<InventorySlotVisualizer> slots = new List<InventorySlotVisualizer>();
 
     public void Init(Transform target, Inventory inventoryToVisualize)
     {
@@ -27,7 +30,6 @@ public class InventoryVisualizer : ScalingUIElementBase
         spriteRendererToGetOrientatioFrom = target.GetComponent<SpriteRenderer>();
 
         RefreshInventoryDisplay();
-        StartCoroutine(ScaleCoroutine(scaleUp: true));
     }
 
     protected override void Update()
@@ -43,13 +45,16 @@ public class InventoryVisualizer : ScalingUIElementBase
     [Button]
     public void RefreshInventoryDisplay ()
     {
+        Debug.Log("refresh inventorx display");
+
         foreach (Transform child in gridLayoutParent)
         {
             GameObject.Destroy(child.gameObject);
         }
 
         KeyValuePair<ItemType, int>[] content = inventory.GetContent();
-        SpawnItemElements(content);
+        StopAllCoroutines();
+        StartCoroutine(SpawnItemElements(content));
         RecalculateUISize(content.Length);
         RecalculateUIOrientation(spriteRendererToGetOrientatioFrom);
     }
@@ -92,18 +97,41 @@ public class InventoryVisualizer : ScalingUIElementBase
             gridLayoutParent.localScale = flipX;
     }
 
-    private void SpawnItemElements(KeyValuePair<ItemType, int>[] itemsToVisualize)
+    private IEnumerator SpawnItemElements(KeyValuePair<ItemType, int>[] itemsToVisualize)
     {
+        yield return new WaitForSeconds(0.2f);
+
         for (int i = 0; i < itemsToVisualize.Length; i++)
         {
             InventorySlotVisualizer newSlot = Instantiate(inventorySlotPrefab, gridLayoutParent);
             newSlot.Display(itemsToVisualize[i]);
+            slots.Add(newSlot);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
     internal void Close()
     {
+        animator.Play(closeAnimation);
+        float closeLength = closeAnimation.GetLength();
         StopAllCoroutines();
-        StartCoroutine(ScaleCoroutine(scaleUp:false));
+        StartCoroutine(DestroyItemElements(closeLength));
+        Invoke("Selfdestroy", closeLength);
     }
+
+    private IEnumerator DestroyItemElements(float length)
+    {
+        float delay = (length * (2/3)) / (float)slots.Count; 
+
+        foreach (InventorySlotVisualizer slot in slots)
+        {
+            yield return new WaitForSeconds(delay);
+            slot.CloseInventory();
+        }
+    }
+    private void Selfdestroy()
+    {
+        Destroy(gameObject);
+    }
+
 }

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d05716d329922cf4abb0b6513364aece, type: 3}
+  m_Name: inventoryOpen
+  m_EditorClassIdentifier: 
+  loop: 0
+  speedMultiplyer: 1
+  frames:
+  - Sprite: {fileID: -2780150225327706969, guid: 9bf8772c9d95be6488791bf8589cbffb, type: 3}
+    Duration: 0.05
+  - Sprite: {fileID: -1042823906018628781, guid: 9bf8772c9d95be6488791bf8589cbffb, type: 3}
+    Duration: 0.05
+  - Sprite: {fileID: 4982245135724690064, guid: 9bf8772c9d95be6488791bf8589cbffb, type: 3}
+    Duration: 0.05
+  - Sprite: {fileID: 1870234990901542776, guid: 9bf8772c9d95be6488791bf8589cbffb, type: 3}
+    Duration: 0.05
+  - Sprite: {fileID: 2754955959618882612, guid: 9bf8772c9d95be6488791bf8589cbffb, type: 3}
+    Duration: 0.05
+  - Sprite: {fileID: 5988395869993827607, guid: 9bf8772c9d95be6488791bf8589cbffb, type: 3}
+    Duration: 0.05
+  - Sprite: {fileID: -2148106778854359138, guid: 9bf8772c9d95be6488791bf8589cbffb, type: 3}
+    Duration: 0.05
+  - Sprite: {fileID: 8451522371892530961, guid: 9bf8772c9d95be6488791bf8589cbffb, type: 3}
+    Duration: 0.05
+  fileToLoadFrom: {fileID: 2800000, guid: 9bf8772c9d95be6488791bf8589cbffb, type: 3}
+  defaultTime: 0.05
+  loadFromLastToFirst: 1
