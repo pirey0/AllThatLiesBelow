@@ -126,12 +126,18 @@ public class Inventory
 [System.Serializable]
 public class ItemAmountPair
 {
+    public ItemType type;
+    public int amount;
+
     public ItemAmountPair(ItemType itemType, int itemAmount)
     {
         type = itemType;
         amount = itemAmount;
     }
 
-    public ItemType type;
-    public int amount;
+    public int GetTotalWeight()
+    {
+        return amount * ItemsData.GetItemInfo(type).Weight;
+    }
+
 }

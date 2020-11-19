@@ -16,6 +16,7 @@ MonoBehaviour:
   DisplayName: Gold
   DisplayTooltip: 
   DisplaySprite: {fileID: 21300000, guid: 1b3b3d6561f0d954d99699f1e3ebafa9, type: 3}
+  Weight: 10
   CanBePlaced: 0
   PickupHoldSprite: {fileID: 0}
   PickupPreviewPrefab: {fileID: 0}

@@ -11,6 +11,8 @@ public class ItemInfo : ScriptableObject
     public string DisplayTooltip;
     public Sprite DisplaySprite;
 
+    public int Weight;
+
     [Header("PlacableObject")]
     public bool CanBePlaced;
     public Sprite PickupHoldSprite;
