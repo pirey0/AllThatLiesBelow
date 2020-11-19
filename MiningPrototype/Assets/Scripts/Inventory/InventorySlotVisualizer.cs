@@ -139,8 +139,11 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
     public void CloseInventory()
     {
-        StopAllCoroutines();
-        StartCoroutine(ScaleCoroutine(scaleUp: false));
+        if(this != null)
+        {
+            StopAllCoroutines();
+            StartCoroutine(ScaleCoroutine(scaleUp: false));
+        }
     }
 
     IEnumerator ScaleCoroutine(bool scaleUp)
