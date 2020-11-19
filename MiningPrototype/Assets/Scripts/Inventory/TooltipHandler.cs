@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class TooltipHandler : Singleton<TooltipHandler>
 {
     [SerializeField] TMPro.TMP_Text textUI, subTextUI;
+    [SerializeField] Image box;
 
     Transform currentTarget;
 
@@ -19,6 +20,7 @@ public class TooltipHandler : Singleton<TooltipHandler>
         currentTarget = target;
         textUI.text = text;
         subTextUI.text = subText;
+        box.enabled = true;
      }
 
     public void StopDisplaying(Transform transform)
@@ -28,6 +30,7 @@ public class TooltipHandler : Singleton<TooltipHandler>
             currentTarget = null;
             textUI.text = "";
             subTextUI.text = "";
+            box.enabled = false;
         }
     }
 
