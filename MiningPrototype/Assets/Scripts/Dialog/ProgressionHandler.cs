@@ -72,6 +72,7 @@ public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
         newOrderCrateSpawner.SpawnOrder(orderForNextDay);
         orderForNextDay.Clear();
         day++;
+        SaveHandler.Save();
     }
 
     public void AddOrderForNextDay(List<ItemAmountPair> newOrder)
