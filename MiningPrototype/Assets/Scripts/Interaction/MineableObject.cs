@@ -24,7 +24,7 @@ public class MineableObject : MonoBehaviour, IMinableNonGrid
 
     protected virtual void Destroyed()
     {
-        if (contains != null && contains.amount > 0)
+        if (!contains.IsNull() && contains.amount > 0)
             InventoryManager.PlayerCollects(contains.type, contains.amount);
 
         if (destroyEffects != null)

@@ -26,8 +26,9 @@ public class NewOrderCrateSpawner : MonoBehaviour
         SpawnOrder(testOrder);
     }
 
-    public void SpawnOrder(List<ItemAmountPair> order)
+    public void SpawnOrder(List<ItemAmountPair> orderSource)
     {
+        var order = new List<ItemAmountPair>(orderSource);
 
         for (int i = 0; i < order.Count; i++)
         {

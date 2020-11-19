@@ -17,7 +17,7 @@ public class Inventory
         get
         {
             if (index < 0 || index >= content.Count)
-                return null;
+                return ItemAmountPair.Nothing;
 
             return content[index];
         }
@@ -27,11 +27,13 @@ public class Inventory
     {
         if (content.Count > 0)
         {
-            foreach (ItemAmountPair item in content)
+            for (int i = 0; i < content.Count; i++)
             {
+                var item = content[i];
+
                 if (item.type == type)
                 {
-                    item.amount += amount;
+                    content[i] = new ItemAmountPair(item.type, item.amount + amount);
                     return;
                 }
             }
@@ -67,13 +69,15 @@ public class Inventory
 
         if (id >= 0)
         {
-            if(content[id].amount > pair.amount)
+            if (content[id].amount > pair.amount)
             {
-                content[id].amount -= pair.amount;
+                var newPair = new ItemAmountPair(pair.type, content[id].amount - pair.amount);
+                content[id] = newPair;
 
                 InventoryChanged?.Invoke();
                 return true;
-            }else if (content[id].amount == pair.amount)
+            }
+            else if (content[id].amount == pair.amount)
             {
                 content.RemoveAt(id);
 
@@ -93,21 +97,21 @@ public class Inventory
     public ItemAmountPair RemoveStack(int index)
     {
         if (index < 0 || index >= content.Count)
-            return null;
+            return ItemAmountPair.Nothing;
 
         var c = content[index];
 
-        if(c != null)
+        if (c.IsNull())
         {
             content.RemoveAt(index);
             InventoryChanged?.Invoke();
             return c;
         }
 
-        return null;
+        return ItemAmountPair.Nothing;
     }
 
- 
+
 
     public KeyValuePair<ItemType, int>[] GetContent()
     {
@@ -124,7 +128,7 @@ public class Inventory
 }
 
 [System.Serializable]
-public class ItemAmountPair
+public struct ItemAmountPair
 {
     public ItemType type;
     public int amount;
@@ -133,6 +137,16 @@ public class ItemAmountPair
     {
         type = itemType;
         amount = itemAmount;
+    }
+
+    public bool IsNull()
+    {
+        return amount <= 0 || type == ItemType.None;
+    }
+
+    public static ItemAmountPair Nothing
+    {
+        get => new ItemAmountPair(ItemType.None, -1);
     }
 
     public int GetTotalWeight()

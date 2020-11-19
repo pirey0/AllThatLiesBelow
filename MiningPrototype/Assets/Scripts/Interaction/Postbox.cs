@@ -47,14 +47,14 @@ public class Postbox : MonoBehaviour, IInteractable
         {
             displayedMessage = Instantiate(messagePrefab, canvas.transform);
 
-            displayedMessage.DisplayText(transform, storedMessage, showFamilyPhoto: (storedItem != null && storedItem.type == ItemType.Family_Photo));
+            displayedMessage.DisplayText(transform, storedMessage, showFamilyPhoto: (!storedItem.IsNull() && storedItem.type == ItemType.Family_Photo));
             storedMessage = "";
 
             //add all stored items to player inventory
-            if (storedItem != null && storedItem.amount > 0)
+            if (!storedItem.IsNull() && storedItem.amount > 0)
             {
                 InventoryManager.PlayerCollects(storedItem.type,storedItem.amount);
-                storedItem = null;
+                storedItem = ItemAmountPair.Nothing;
             }
         }
 
