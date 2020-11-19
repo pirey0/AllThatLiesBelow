@@ -17,7 +17,9 @@ public enum TileType
     BedStone = 7,
     Rock,
     CollapsableEntity,
-    FloatingEntity
+    FloatingEntity,
+    CollapsableEntityNotNeighbour,
+    FloatingEntityNotNeighbour
 }
 
 [System.Serializable]

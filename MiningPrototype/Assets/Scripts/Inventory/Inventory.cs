@@ -12,6 +12,17 @@ public class Inventory
     [field: NonSerialized]
     public event System.Action InventoryChanged;
 
+    public ItemAmountPair this[int index]
+    {
+        get
+        {
+            if (index < 0 || index >= content.Count)
+                return null;
+
+            return content[index];
+        }
+    }
+
     public void Add(ItemType type, int amount)
     {
         if (content.Count > 0)
@@ -96,16 +107,7 @@ public class Inventory
         return null;
     }
 
-    public ItemAmountPair this[int index]
-    {
-        get
-        {
-            if (index < 0 || index >= content.Count)
-                return null;
-
-            return content[index];
-        }
-    }
+ 
 
     public KeyValuePair<ItemType, int>[] GetContent()
     {

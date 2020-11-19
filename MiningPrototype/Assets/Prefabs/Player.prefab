@@ -5962,32 +5962,44 @@ MonoBehaviour:
   walking: {fileID: 8148473555476766029}
   slowWalkMode: 0
   statesCanInteract:
-  - String: Idle
-    Bool: 1
-  - String: Jump
-    Bool: 1
-  - String: Walk
-    Bool: 1
-  - String: SlowWalk
-    Bool: 0
-  - String: Climb
-    Bool: 0
-  - String: ClimbIdle
-    Bool: 0
-  - String: Inventory
-    Bool: 1
-  - String: Death
-    Bool: 0
-  - String: Hit
-    Bool: 0
-  - String: LongIdle
-    Bool: 0
-  - String: Fall
-    Bool: 1
-  - String: Disabled
-    Bool: 0
+  - StateName: Idle
+    CanInteract: 1
+    CanInventory: 1
+  - StateName: Jump
+    CanInteract: 1
+    CanInventory: 1
+  - StateName: Walk
+    CanInteract: 1
+    CanInventory: 1
+  - StateName: SlowWalk
+    CanInteract: 1
+    CanInventory: 1
+  - StateName: Climb
+    CanInteract: 0
+    CanInventory: 1
+  - StateName: ClimbIdle
+    CanInteract: 0
+    CanInventory: 1
+  - StateName: Inventory
+    CanInteract: 0
+    CanInventory: 1
+  - StateName: Death
+    CanInteract: 0
+    CanInventory: 0
+  - StateName: Hit
+    CanInteract: 0
+    CanInventory: 0
+  - StateName: LongIdle
+    CanInteract: 0
+    CanInventory: 0
+  - StateName: Fall
+    CanInteract: 1
+    CanInventory: 1
+  - StateName: Disabled
+    CanInteract: 0
+    CanInventory: 0
   playerInteraction: {fileID: 497824006148765930}
-  debug: 0
+  debug: 1
 --- !u!114 &497824006148765930
 MonoBehaviour:
   m_ObjectHideFlags: 0

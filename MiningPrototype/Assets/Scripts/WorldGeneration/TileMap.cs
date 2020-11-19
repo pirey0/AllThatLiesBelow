@@ -34,9 +34,6 @@ public class TileMap : Singleton<TileMap>, ISavable
 
     Stack<Vector2Int> tilesToStabilityCheck = new Stack<Vector2Int>();
 
-    Dictionary<TileType, bool> IsAirLike;
-    Dictionary<TileType, bool> countsAsNeighbour;
-
     private int size;
     public int Size { get => size; }
 
@@ -64,22 +61,6 @@ public class TileMap : Singleton<TileMap>, ISavable
         RunCompleteGeneration();
 
         StartCoroutine(UpdateUnstableTilesRoutine());
-    }
-
-    private void PopulateLookupDictionaries()
-    {
-        IsAirLike = new Dictionary<TileType, bool>();
-
-        foreach (var info in mapSettings.TileInfos)
-        {
-            IsAirLike.Add(info.Type, info.AirLike);
-        }
-
-        countsAsNeighbour = new Dictionary<TileType, bool>();
-        foreach (var info in mapSettings.TileInfos)
-        {
-            countsAsNeighbour.Add(info.Type, info.CountsAsNeighbour);
-        }
     }
 
     private void Update()
@@ -166,10 +147,7 @@ public class TileMap : Singleton<TileMap>, ISavable
 
     public TileInfo GetTileInfo(TileType type)
     {
-        if ((int)type < mapSettings.TileInfos.Length)
-            return mapSettings.TileInfos[(int)type];
-
-        return null;
+        return TilesData.GetTileInfo(type);
     }
 
     public void AddTileToCheckForStability(Vector2Int tileLoc)
@@ -213,7 +191,6 @@ public class TileMap : Singleton<TileMap>, ISavable
 
         size = generationSettings.Size;
         generator = new TileMapGenerator(this, generationSettings);
-        PopulateLookupDictionaries();
     }
 
     public void InitMap(int sizeX, int sizeY)
@@ -224,7 +201,7 @@ public class TileMap : Singleton<TileMap>, ISavable
 
     public bool IsAirAt(int x, int y)
     {
-        return IsAirLike[GetTileAt(x, y).Type];
+        return GetTileInfo(this[x,y].Type).AirLike;
     }
 
     public bool CanTarget(int x, int y)
@@ -235,12 +212,12 @@ public class TileMap : Singleton<TileMap>, ISavable
 
     public bool IsBlockAt(int x, int y)
     {
-        return !IsAirLike[GetTileAt(x, y).Type];
+        return !IsAirAt(x,y);
     }
 
     public bool IsNeighbourAt(int x, int y)
     {
-        return countsAsNeighbour[GetTileAt(x, y).Type];
+        return GetTileInfo(this[x, y].Type).CountsAsNeighbour;
     }
 
 

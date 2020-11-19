@@ -37,10 +37,11 @@ public enum AnimationPickaxeState
 }
 
 [System.Serializable]
-public struct StringBoolPair
+public struct PlayerStateInfo
 {
-    public string String;
-    public bool Bool;
+    public string StateName;
+    public bool CanInteract;
+    public bool CanInventory;
 }
 
 [DefaultExecutionOrder(-20)]
@@ -50,13 +51,14 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
     [SerializeField] Transform feet;
     [SerializeField] AudioSource walking;
     [SerializeField] bool slowWalkMode;
-    [SerializeField] StringBoolPair[] statesCanInteract;
+    [SerializeField] PlayerStateInfo[] statesCanInteract;
+
     [SerializeField] PlayerInteractionHandler playerInteraction;
     [SerializeField] bool debug;
 
     StateMachine stateMachine;
     StateMachine.State s_idle, s_jump, s_fall, s_walk, s_slowWalk, s_climb, s_climbIde, s_inventory, s_death, s_hit, s_longIdle, s_disabled;
-    Dictionary<string, bool> canInteractInStateMap;
+    Dictionary<string, PlayerStateInfo> canInteractInStateMap;
 
     private Ladder currentLadder;
     private float gravityScale;
@@ -79,11 +81,11 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
         SetupStateMachine();
         stateMachine.Start();
 
-        canInteractInStateMap = new Dictionary<string, bool>();
+        canInteractInStateMap = new Dictionary<string, PlayerStateInfo>();
 
         foreach (var val in statesCanInteract)
         {
-            canInteractInStateMap.Add(val.String, val.Bool);
+            canInteractInStateMap.Add(val.StateName, val);
         }
 
         playerInteraction.PlayerActivity += OnInteractionActivity;
@@ -101,6 +103,7 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
 
         GUI.color = Color.black;
         GUI.Label(new Rect(10, 10, 200, 25), stateMachine.CurrentState.Name);
+        GUI.Label(new Rect(10, 30, 200, 25), isGrounded ? "Grounded" : "Not Grounded");
 
         float y = 40;
         for (int i = 0; i < stateMachine.States.Count; i++)
@@ -135,11 +138,11 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
 
         s_idle = stateMachine.AddState("Idle", IdleEnter, MoveUpdate);
         s_jump = stateMachine.AddState("Jump", JumpEnter, MoveUpdate);
-        s_walk = stateMachine.AddState("Walk", null, MoveUpdate, null);
-        s_slowWalk = stateMachine.AddState("SlowWalk", null, SlowMoveUpdate);
+        s_walk = stateMachine.AddState("Walk", null, MoveUpdate, WalkExit);
+        s_slowWalk = stateMachine.AddState("SlowWalk", null, SlowMoveUpdate, WalkExit);
         s_climb = stateMachine.AddState("Climb", ClimbingEnter, ClimbingUpdate, ClimbingExit);
         s_climbIde = stateMachine.AddState("ClimbIdle", ClimbingEnter, ClimbingUpdate, ClimbingExit);
-        s_inventory = stateMachine.AddState("Inventory", null);
+        s_inventory = stateMachine.AddState("Inventory", null, MoveUpdate);
         s_death = stateMachine.AddState("Death", DeathEnter, null, DeathExit);
         s_hit = stateMachine.AddState("Hit", null);
         s_longIdle = stateMachine.AddState("LongIdle", null, SlowMoveUpdate);
@@ -155,11 +158,14 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
 
         s_idle.AddTransition(IsFalling, s_fall);
         s_fall.AddTransition(IsGrounded, s_idle);
+        s_jump.AddTransition(IsGrounded, s_idle);
 
         s_idle.AddTransition(ShouldJump, s_jump);
         s_walk.AddTransition(ShouldJump, s_jump);
+        s_inventory.AddTransition(ShouldJump, s_jump);
 
         s_idle.AddTransition(IsMoving, s_walk);
+        s_inventory.AddTransition(IsMoving, s_walk);
         s_walk.AddTransition(IsIdle, s_idle);
         s_walk.AddTransition(IsSlowWalking, s_slowWalk);
         s_slowWalk.AddTransition(IsIdle, s_idle);
@@ -177,6 +183,11 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
         s_jump.AddTransition(IsFalling, s_fall);
 
         s_hit.AddTransition(HitFinished, s_idle);
+    }
+
+    private void WalkExit()
+    {
+        SetMovingSound(false);
     }
 
     private void DeathEnter()
@@ -270,10 +281,8 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
 
     private bool IsGrounded()
     {
-        return isGrounded;
+        return isGrounded && Time.time-lastJumpTimeStamp > 0.1f;
     }
-
-
 
     private bool ShouldClimb()
     {
@@ -339,7 +348,7 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
 
     private bool InInventory()
     {
-        return false;
+        return playerInteraction.InventoryDisplayState == InventoryState.Open;
     }
 
     public StateMachine GetStateMachine()
@@ -439,9 +448,20 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
     public bool CanInteract()
     {
         if (canInteractInStateMap.ContainsKey(stateMachine.CurrentState.Name))
-            return canInteractInStateMap[stateMachine.CurrentState.Name];
+            return canInteractInStateMap[stateMachine.CurrentState.Name].CanInteract;
         else
             Debug.LogError("No canInteract set for " + stateMachine.CurrentState.Name);
+
+
+        return false;
+    }
+
+    public bool CanUseInventory()
+    {
+        if (canInteractInStateMap.ContainsKey(stateMachine.CurrentState.Name))
+            return canInteractInStateMap[stateMachine.CurrentState.Name].CanInventory;
+        else
+            Debug.LogError("No canInventory set for " + stateMachine.CurrentState.Name);
 
 
         return false;

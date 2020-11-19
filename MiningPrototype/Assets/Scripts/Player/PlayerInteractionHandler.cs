@@ -47,56 +47,66 @@ public class PlayerInteractionHandler : InventoryOwner
 
     private void Update()
     {
-        if (!player.CanInteract())
-            return;
-
-        if (Input.GetKeyDown(KeyCode.Tab))
+        bool mouseInInventoryRange = Vector3.Distance(GetPositionInGridV3(), GetClickPositionV3()) <= settings.inventoryOpenDistance;
+        if (player.CanUseInventory())
         {
-            ToggleInventory();
-        }
 
-        if (Vector2Int.Distance(GetPositionInGrid(), GetClickCoordinate()) <= settings.maxDigDistance)
-        {
-            Debug.DrawLine(GetPositionInGridV3(), GetClickPositionV3(), Color.yellow, Time.deltaTime);
-            UpdateDigTarget();
-            UpdateNonGridDigTarget();
-
-            if (Input.GetMouseButton(0))
+            if (Input.GetKeyDown(KeyCode.Tab))
             {
-                if (eventSystem.currentSelectedGameObject == null)
-                    TryDig();
+                ToggleInventory();
             }
-            else if (Input.GetMouseButtonDown(1))
+
+            if (Input.GetMouseButtonDown(1))
             {
                 PlayerActivity?.Invoke();
-
-                if (Vector3.Distance(GetPositionInGridV3(), GetClickPositionV3()) <= settings.inventoryOpenDistance)
+                if (mouseInInventoryRange)
                 {
                     ToggleInventory();
                 }
+            }
+        }
+
+        if (player.CanInteract())
+        {
+            if (Vector2Int.Distance(GetPositionInGrid(), GetClickCoordinate()) <= settings.maxDigDistance)
+            {
+                UpdateDigTarget();
+                UpdateNonGridDigTarget();
+
+                if (Input.GetMouseButton(0))
+                {
+                    if (eventSystem.currentSelectedGameObject == null)
+                        TryDig();
+                }
+                else if (Input.GetMouseButtonDown(1))
+                {
+                    PlayerActivity?.Invoke();
+
+                    if (!mouseInInventoryRange)
+                    {
+                        if (currentInteractable == null)
+                        {
+                            TryInteract();
+                        }
+                        else
+                        {
+                            if (eventSystem.IsPointerOverGameObject() == false)
+                                TryStopInteracting();
+                        }
+                    }
+                }
                 else
                 {
-                    if (currentInteractable == null)
-                        TryInteract();
-                    else
-                    {
-                        if (eventSystem.IsPointerOverGameObject() == false)
-                            TryStopInteracting();
-                    }
+                    TryDisableMiningVisuals();
                 }
             }
             else
             {
+                gridDigTarget = null;
                 TryDisableMiningVisuals();
             }
+            UpdateDigHighlight();
         }
-        else
-        {
-            gridDigTarget = null;
-            TryDisableMiningVisuals();
-        }
-
-        UpdateDigHighlight();
     }
 
     private void ToggleInventory()
@@ -133,7 +143,7 @@ public class PlayerInteractionHandler : InventoryOwner
     {
         TryStopInteracting();
     }
-    
+
     private void UpdateDigTarget()
     {
         gridDigTarget = TileMapHelper.GetClosestSolidBlock(TileMap.Instance, GetPositionInGrid(), GetClickCoordinate());

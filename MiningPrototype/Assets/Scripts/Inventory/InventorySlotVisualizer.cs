@@ -6,7 +6,6 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
-using UnityEditor.Timeline;
 
 public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
