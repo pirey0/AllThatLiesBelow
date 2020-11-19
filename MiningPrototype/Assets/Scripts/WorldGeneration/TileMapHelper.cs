@@ -130,7 +130,7 @@ public static class TileMapHelper
 
     public static bool OnEdgeOfMap(TileMap map, Vector2Int position)
     {
-        if (position.x == 0 || position.y == 0 || position.x == map.Size - 1 || position.y == map.Size - 1)
+        if (position.x == 0 || position.y == 0 || position.x == map.SizeX - 1 || position.y == map.SizeY - 1)
             return true;
 
         return false;

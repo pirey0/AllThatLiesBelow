@@ -11,7 +11,8 @@ public class GenerationSettings : ScriptableObject
 
     public int Seed;
 
-    public int Size;
+    public int SizeX;
+    public int SizeY;
 
     public AnimationCurve InitialAliveCurve;
 

@@ -10,7 +10,7 @@ using UnityEngine.Tilemaps;
 public class TileMap : Singleton<TileMap>, ISavable
 {
     [ReadOnly]
-    [SerializeField] string saveID = Util.GenerateNewSaveGUID(); 
+    [SerializeField] string saveID = Util.GenerateNewSaveGUID();
 
     [SerializeField] Tilemap tilemap, damageOverlayTilemap, oreTilemap;
 
@@ -34,8 +34,9 @@ public class TileMap : Singleton<TileMap>, ISavable
 
     Stack<Vector2Int> tilesToStabilityCheck = new Stack<Vector2Int>();
 
-    private int size;
-    public int Size { get => size; }
+    private int sizeX, sizeY;
+    public int SizeX { get => sizeX; }
+    public int SizeY { get => sizeY; }
 
     /// <summary>
     /// Use SetTMapAt for full control / visual updates
@@ -189,7 +190,8 @@ public class TileMap : Singleton<TileMap>, ISavable
             return;
         }
 
-        size = generationSettings.Size;
+        sizeX = generationSettings.SizeX;
+        sizeY = generationSettings.SizeY;
         generator = new TileMapGenerator(this, generationSettings);
     }
 
@@ -201,7 +203,7 @@ public class TileMap : Singleton<TileMap>, ISavable
 
     public bool IsAirAt(int x, int y)
     {
-        return GetTileInfo(this[x,y].Type).AirLike;
+        return GetTileInfo(this[x, y].Type).AirLike;
     }
 
     public bool CanTarget(int x, int y)
@@ -212,7 +214,7 @@ public class TileMap : Singleton<TileMap>, ISavable
 
     public bool IsBlockAt(int x, int y)
     {
-        return !IsAirAt(x,y);
+        return !IsAirAt(x, y);
     }
 
     public bool IsNeighbourAt(int x, int y)
@@ -332,7 +334,7 @@ public class TileMap : Singleton<TileMap>, ISavable
                     break;
             }
         }
-            
+
     }
 
     public void SetReceiverMapAt(int x, int y, ITileUpdateReceiver receiver)
@@ -348,7 +350,7 @@ public class TileMap : Singleton<TileMap>, ISavable
         tilemap.ClearAllTiles();
         damageOverlayTilemap.ClearAllTiles();
         oreTilemap.ClearAllTiles();
-        Util.IterateXY(Size, UpdateVisualsAt);
+        Util.IterateXY(SizeX, SizeY, UpdateVisualsAt);
     }
 
 
@@ -362,7 +364,7 @@ public class TileMap : Singleton<TileMap>, ISavable
 
     public bool IsOutOfBounds(int x, int y)
     {
-        return (x < 0 || y < 0 || x >= Size || y >= Size);
+        return (x < 0 || y < 0 || x >= SizeX || y >= SizeY);
     }
 
     private TileBase GetVisualTileFor(int x, int y)
@@ -411,7 +413,7 @@ public class TileMap : Singleton<TileMap>, ISavable
             if (stabilityDebugTexture == null)
                 UpdateDebugTextures();
 
-            GUI.DrawTexture(new Rect(10, 10, Size * 4, Size * 4), stabilityDebugTexture);
+            GUI.DrawTexture(new Rect(10, 10, SizeX * 4, SizeY * 4), stabilityDebugTexture);
         }
     }
 
@@ -434,10 +436,10 @@ public class TileMap : Singleton<TileMap>, ISavable
     [Button(null, EButtonEnableMode.Playmode)]
     private void UpdateDebugTextures()
     {
-        stabilityDebugTexture = new Texture2D(Size, Size);
+        stabilityDebugTexture = new Texture2D(SizeX, SizeY);
         stabilityDebugTexture.filterMode = FilterMode.Point;
 
-        Util.IterateXY(Size, (x, y) => stabilityDebugTexture.SetPixel(x, y, TileMapHelper.StabilityToColor(GetTileAt(x, y).Stability)));
+        Util.IterateXY(SizeX, SizeY, (x, y) => stabilityDebugTexture.SetPixel(x, y, TileMapHelper.StabilityToColor(GetTileAt(x, y).Stability)));
         stabilityDebugTexture.Apply();
     }
 
@@ -453,7 +455,7 @@ public class TileMap : Singleton<TileMap>, ISavable
 
     public void Load(SaveData data)
     {
-        if(data is TileMapSaveData saveData)
+        if (data is TileMapSaveData saveData)
         {
             map = saveData.Map;
             UpdateVisuals();

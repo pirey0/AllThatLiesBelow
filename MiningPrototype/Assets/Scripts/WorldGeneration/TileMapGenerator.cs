@@ -45,9 +45,9 @@ public class TileMapGenerator
 
     private void PopulateBorders()
     {
-        Util.IterateX(settings.Size, (x) => map[x, 0] = Tile.Make(TileType.BedStone));
-        Util.IterateX(settings.Size, (x) => map[0, x] = Tile.Make(TileType.BedStone));
-        Util.IterateX(settings.Size, (x) => map[settings.Size - 1, x] = Tile.Make(TileType.BedStone));
+        Util.IterateX(settings.SizeX, (x) => map[x, 0] = Tile.Make(TileType.BedStone));
+        Util.IterateX(settings.SizeY, (y) => map[0, y] = Tile.Make(TileType.BedStone));
+        Util.IterateX(settings.SizeX, (x) => map[settings.SizeX - 1, x] = Tile.Make(TileType.BedStone));
     }
 
     private void ClearAllEntities()
@@ -62,16 +62,16 @@ public class TileMapGenerator
     {
         foreach (var pass in settings.RockPasses)
         {
-            for (int y = 0; y < settings.Size; y++)
+            for (int y = 0; y < settings.SizeY; y++)
             {
-                Util.IterateX((int)(settings.Size * pass.Probability.Evaluate((float)y / settings.Size) * 0.01f), (x) => TryPlaceRock(pass, y));
+                Util.IterateX((int)(settings.SizeX * pass.Probability.Evaluate((float)y / settings.SizeY) * 0.01f), (x) => TryPlaceRock(pass, y));
             }
         }
     }
 
     private void TryPlaceRock(RockPass pass, int y)
     {
-        int x = UnityEngine.Random.Range(0, settings.Size);
+        int x = UnityEngine.Random.Range(0, settings.SizeX);
 
         List<Vector2Int> locations = new List<Vector2Int>();
         List<Vector2Int> spawnCheckLocations = new List<Vector2Int>();
@@ -101,7 +101,7 @@ public class TileMapGenerator
             }
 
             Vector3 pos = new Vector3(x + pass.Size.x * 0.5f, y + pass.Size.y * 0.5f);
-            var go = GameObject.Instantiate(pass.Prefab, pos, Quaternion.identity, map.transform);
+            var go = GameObject.Instantiate(pass.Prefab, map.transform.position + pos, Quaternion.identity, map.transform);
             go.GetComponent<ITileMapElement>().Setup(map);
         }
     }
@@ -133,26 +133,26 @@ public class TileMapGenerator
 
     private void CalculateStabilityAll()
     {
-        Util.IterateXY(settings.Size, (x, y) => ResetStability(x, y));
+        Util.IterateXY(settings.SizeX, settings.SizeY, (x, y) => ResetStability(x, y));
 
-        Util.IterateXY(settings.Size, (x, y) => SetDirectionalStabilityAt(x, y, Direction.Down));
+        Util.IterateXY(settings.SizeX, settings.SizeY, (x, y) => SetDirectionalStabilityAt(x, y, Direction.Down));
 
-        for (int y = settings.Size; y >= 0; y--)
+        for (int y = settings.SizeY; y >= 0; y--)
         {
-            for (int x = 0; x < settings.Size; x++)
+            for (int x = 0; x < settings.SizeX; x++)
             {
                 SetDirectionalStabilityAt(x, y, Direction.Up);
             }
         }
 
-        for (int y = 0; y < settings.Size; y++)
+        for (int y = 0; y < settings.SizeY; y++)
         {
-            for (int x = 0; x < settings.Size; x++)
+            for (int x = 0; x < settings.SizeX; x++)
             {
                 SetDirectionalStabilityAt(x, y, Direction.Left);
             }
 
-            for (int x = settings.Size; x >= 0; x--)
+            for (int x = settings.SizeX; x >= 0; x--)
             {
                 SetDirectionalStabilityAt(x, y, Direction.Right);
             }
@@ -216,7 +216,7 @@ public class TileMapGenerator
 
     private void PopulateSnow()
     {
-        Util.IterateXY(settings.Size, PopulateSnowAt);
+        Util.IterateXY(settings.SizeX, settings.SizeY, PopulateSnowAt);
     }
 
     private void PopulateSnowAt(int x, int y)
@@ -237,7 +237,7 @@ public class TileMapGenerator
 
     private void CalculateNeighboursBitmask()
     {
-        Util.IterateXY(settings.Size, CalculateNeighboursBitmaskAt);
+        Util.IterateXY(settings.SizeX, settings.SizeY, CalculateNeighboursBitmaskAt);
     }
 
     private void CalculateNeighboursBitmaskAt(int x, int y)
@@ -271,9 +271,9 @@ public class TileMapGenerator
         if (!settings.SeedIsRandom)
             UnityEngine.Random.InitState(settings.Seed);
 
-        map.InitMap(settings.Size, settings.Size);
+        map.InitMap(settings.SizeX, settings.SizeY);
 
-        Util.IterateXY(settings.Size, PopulateAt);
+        Util.IterateXY(settings.SizeX, settings.SizeY, PopulateAt);
 
     }
 
@@ -281,9 +281,9 @@ public class TileMapGenerator
     {
         foreach (var pass in settings.OrePasses)
         {
-            for (int y = 0; y < settings.Size; y++)
+            for (int y = 0; y < settings.SizeY; y++)
             {
-                Util.IterateX((int)(settings.Size * pass.Probability.Evaluate((float)y / settings.Size) * 0.01f), (x) => TryPlaceVein(pass.TileType, Util.RandomInVector(pass.OreVeinSize), y));
+                Util.IterateX((int)(settings.SizeX * pass.Probability.Evaluate((float)y / settings.SizeY) * 0.01f), (x) => TryPlaceVein(pass.TileType, Util.RandomInVector(pass.OreVeinSize), y));
             }
         }
     }
@@ -291,7 +291,7 @@ public class TileMapGenerator
     private void TryPlaceVein(TileType type, int amount, int y)
     {
         
-        int x = UnityEngine.Random.Range(0, settings.Size);
+        int x = UnityEngine.Random.Range(0, settings.SizeX);
 
         GrowVeinAt(x, y, type, amount);
     }
@@ -333,7 +333,7 @@ public class TileMapGenerator
     {
         Tile t = Tile.Air;
 
-        bool occupied = settings.HeightMultiplyer.Evaluate((float)y / settings.Size) * UnityEngine.Random.value < settings.InitialAliveCurve.Evaluate((float)y/settings.Size);
+        bool occupied = settings.HeightMultiplyer.Evaluate((float)y / settings.SizeY) * UnityEngine.Random.value < settings.InitialAliveCurve.Evaluate((float)y/settings.SizeY);
 
         if (occupied)
             t.Type = TileType.Stone;
@@ -355,7 +355,7 @@ public class TileMapGenerator
                 if (i == 0 && j == 0)
                 {
                 }
-                else if (nx < 0 || ny < 0 || nx >= settings.Size || ny >= settings.Size)
+                else if (nx < 0 || ny < 0 || nx >= settings.SizeX || ny >= settings.SizeY)
                 {
                     count = count + 1;
                 }
@@ -371,7 +371,7 @@ public class TileMapGenerator
 
     private void RunAutomataStep()
     {
-        Util.IterateXY(settings.Size, SingleAutomataSet);
+        Util.IterateXY(settings.SizeX, settings.SizeY, SingleAutomataSet);
     }
 
     private void SingleAutomataSet(int x, int y)
