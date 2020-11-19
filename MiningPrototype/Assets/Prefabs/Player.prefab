@@ -213,14 +213,16 @@ MonoBehaviour:
     offset: {x: 0, y: 0.125, z: 0}
   - sprite: {fileID: 9023619865659815301, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
     offset: {x: 0, y: 0.125, z: 0}
-  - sprite: {fileID: 8217411827828948073, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
-    offset: {x: 0, y: 0.25, z: 0}
+  - sprite: {fileID: 7127391226831221617, guid: bea1749c2a5f10742902c491aa0fcc1e, type: 3}
+    offset: {x: 0, y: -0.125, z: 0}
   - sprite: {fileID: 3644946514836814670, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
     offset: {x: 0, y: 100, z: 0}
   - sprite: {fileID: -4364568823649116938, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
     offset: {x: 0, y: 100, z: 0}
   - sprite: {fileID: -1164896322992288394, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
     offset: {x: 0, y: 100, z: 0}
+  - sprite: {fileID: 3339554163223783994, guid: bea1749c2a5f10742902c491aa0fcc1e, type: 3}
+    offset: {x: 0, y: 0.125, z: 0}
 --- !u!1 &852425618
 GameObject:
   m_ObjectHideFlags: 0
@@ -5163,7 +5165,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 845327831356a9d47967605d33230540, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.33
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -5529,7 +5531,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4373a402a67f2f6468c01195791823d9, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -5656,7 +5658,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7bb413c9f147d134386cdb54c674571b, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5783,7 +5785,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9b070c764f565c04eb28d5bf88027b1f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -5889,7 +5891,7 @@ MonoBehaviour:
     offset: {x: 0.25, y: -0.25, z: 0}
   - sprite: {fileID: 6277849533615305770, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
     offset: {x: 0, y: -0.125, z: 0}
-  - sprite: {fileID: 1106305723913688297, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
+  - sprite: {fileID: 7127391226831221617, guid: bea1749c2a5f10742902c491aa0fcc1e, type: 3}
     offset: {x: 0, y: -0.25, z: 0}
   - sprite: {fileID: -8736164668747230439, guid: 94421b5b25e63b4479deff0229d1ed28, type: 3}
     offset: {x: -0.125, y: -0.25, z: 0}
@@ -5985,6 +5987,7 @@ MonoBehaviour:
   - String: Disabled
     Bool: 0
   playerInteraction: {fileID: 497824006148765930}
+  debug: 0
 --- !u!114 &497824006148765930
 MonoBehaviour:
   m_ObjectHideFlags: 0
