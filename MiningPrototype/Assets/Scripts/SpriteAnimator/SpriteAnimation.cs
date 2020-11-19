@@ -14,6 +14,7 @@ public class SpriteAnimation : ScriptableObject
     [Header("Auto")]
     [SerializeField] Object fileToLoadFrom;
     [SerializeField] float defaultTime = 0.25f;
+    [SerializeField] bool loadFromLastToFirst = false;
 
     private int index = 0;
     private float timer = 0;
@@ -66,6 +67,18 @@ public class SpriteAnimation : ScriptableObject
         this.loop = loop;
     }
 
+    public float GetLength()
+    {
+        float length = 0;
+
+        foreach (AnimationFrame frame in frames)
+        {
+            length += frame.Duration;
+        }
+
+        return length;
+    }
+
     public void LoadFromObject()
     {
     #if UNITY_EDITOR
@@ -77,13 +90,26 @@ public class SpriteAnimation : ScriptableObject
 
         frames = new List<AnimationFrame>();
 
-        for (int i = 0; i < sprites.Length; i++)
+        if (loadFromLastToFirst)
         {
-            frames.Add(new AnimationFrame());
-            frames[i].Sprite = sprites[i];
-            frames[i].Duration = defaultTime;
+            for (int i = sprites.Length -1; i >= 0; i--)
+            {
+                AnimationFrame frame = new AnimationFrame();
+                frame.Sprite = sprites[i];
+                frame.Duration = defaultTime;
+                frames.Add(frame);
+            }
         }
-#endif
+        else
+        {
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                frames.Add(new AnimationFrame());
+                frames[i].Sprite = sprites[i];
+                frames[i].Duration = defaultTime;
+            }
+        }
+    #endif
     }
 }
 
