@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -111,6 +112,10 @@ public class Inventory
         return ItemAmountPair.Nothing;
     }
 
+    public int GetTotalWeight()
+    {
+        return content.Sum((x) => x.GetTotalWeight());
+    }
 
 
     public KeyValuePair<ItemType, int>[] GetContent()

@@ -73,7 +73,7 @@ MonoBehaviour:
   - CratePrefab: {fileID: 458482118684250189, guid: a3dd813a25b7d62428f5aedaec7adaaa, type: 3}
     MaxCapacity: 5
   - CratePrefab: {fileID: 5732743233576879497, guid: 430d7d77dc6b46d4791dbdef9f4e9c55, type: 3}
-    MaxCapacity: 60
+    MaxCapacity: 50
   - CratePrefab: {fileID: 5473750792176655221, guid: 8da7791bf9f93fe49a86c11c045ea2e4, type: 3}
     MaxCapacity: 50
   boxSpawnLocation: {x: 38, y: 90, z: 0}
