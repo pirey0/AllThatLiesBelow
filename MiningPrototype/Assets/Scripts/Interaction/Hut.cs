@@ -50,7 +50,7 @@ public class Hut : MonoBehaviour
     private void Toggle()
     {
         isOpen = !isOpen;
-        OnHutStateChange(isOpen);
+        OnHutStateChange?.Invoke(isOpen);
 
         outside_foreground.SetActive(!isOpen);
         inside_foreground.SetActive(isOpen);

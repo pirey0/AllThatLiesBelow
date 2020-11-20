@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] Animator animator;
+    [SerializeField] SceneReference playScene;
 
     private void Start()
     {
@@ -21,7 +22,7 @@ public class MainMenu : MonoBehaviour
     {
         animator.SetTrigger("FadeOut");
         yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene(playScene);
     }
 
     private IEnumerator Load()

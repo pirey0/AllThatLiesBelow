@@ -43,11 +43,8 @@ public class SceneAdder : MonoBehaviour
             if (obj.TryGetComponent(out Map map))
             {
                 Debug.Log("Adding from data " + map.Data);
-                var copy = ScriptableObject.Instantiate(map.Data);
-                Debug.Log(copy[0, 0]);
-                thisMap.LoadFromMap(copy, offset.x, offset.y);
+                thisMap.LoadFromMap(map.Data, offset.x, offset.y);
                 DestroyImmediate(obj);
-                break;
             }
             else
             {
