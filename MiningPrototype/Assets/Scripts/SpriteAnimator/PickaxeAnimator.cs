@@ -2,21 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DirectionBasedAnimator : MonoBehaviour
+public class PickaxeAnimator : MonoBehaviour
 {
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] int idleFrameRight,idleFrameLeft;
     [SerializeField] Sprite[] sprites;
     [SerializeField] AnimationCurve animationCurve;
-    
-    [SerializeField] bool flipX;
-    [SerializeField] SpriteRenderer playerSpriteRenderer;
 
-    private void Update()
-    {
-        flipX = TryFlipX();
-        //SetFrame(GetFrameFromMouseAngle(Input.GetMouseButton(1) ? 45f : 0f));
-    }
+
     private void Start()
     {
         SetFrame(idleFrameRight);
@@ -30,7 +23,6 @@ public class DirectionBasedAnimator : MonoBehaviour
     public void Stop()
     {
         StopAllCoroutines();
-        SetFrame(flipX?idleFrameLeft:idleFrameRight);
     }
 
     IEnumerator PickingRoutine()
@@ -69,18 +61,11 @@ public class DirectionBasedAnimator : MonoBehaviour
         }
     }
 
-    private bool TryFlipX()
-    {
-        bool xIsFlipped = playerSpriteRenderer == null ? false : playerSpriteRenderer.flipX;
-        spriteRenderer.flipX = xIsFlipped;
-        return xIsFlipped;
-    }
-
     private int GetFrameFromMouseAngle(float additionalAngle = 0)
     {
         Vector2 p2 = new Vector3(Screen.width / 2, Screen.height / 2, 0);
-        float angle = (Mathf.Atan2(Input.mousePosition.y - p2.y, Input.mousePosition.x - p2.x)) * Mathf.Rad2Deg + additionalAngle * (flipX ? 1 : -1);
-        float angleAsFloat = (angle + (flipX ? -135 : -45)) / (flipX ? 45f : -45f);
+        float angle = (Mathf.Atan2(Input.mousePosition.y - p2.y, Input.mousePosition.x - p2.x)) * Mathf.Rad2Deg + additionalAngle * (-1);
+        float angleAsFloat = (angle + (45)) / (45f);
         return Mathf.RoundToInt(angleAsFloat);
     }
 }

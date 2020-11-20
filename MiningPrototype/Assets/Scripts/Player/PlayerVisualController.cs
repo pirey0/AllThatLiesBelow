@@ -8,7 +8,7 @@ public class PlayerVisualController : MonoBehaviour
     [SerializeField] HeadAnimator headAnimator;
     [SerializeField] SpriteRenderer handsRenderer;
     [SerializeField] SpriteRenderer itemRenderer;
-    [SerializeField] DirectionBasedAnimator pickaxe;
+    [SerializeField] PickaxeAnimator pickaxe;
     [SerializeField] GameObject pickaxeObject;
     [SerializeField] SpriteRenderer pickaxeRenderer;
 

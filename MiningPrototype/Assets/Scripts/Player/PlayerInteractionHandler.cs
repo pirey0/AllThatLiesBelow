@@ -17,7 +17,7 @@ public class PlayerInteractionHandler : InventoryOwner
     [SerializeField] Transform mouseHighlight;
 
     [SerializeField] AudioSource breakBlock, startMining;
-    [SerializeField] DirectionBasedAnimator pickaxeAnimator;
+    [SerializeField] PickaxeAnimator pickaxeAnimator;
 
     [SerializeField] EventSystem eventSystem;
     [SerializeField] ParticleSystem miningParticles;
