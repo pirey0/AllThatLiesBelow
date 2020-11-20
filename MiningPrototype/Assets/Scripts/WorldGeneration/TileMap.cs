@@ -225,16 +225,10 @@ public class TileMap : Singleton<TileMap>, ISavable
 
     public Tile GetTileAt(int x, int y)
     {
+        WrapXIfNecessary(ref x);
+
         if (IsOutOfBounds(x, y))
         {
-            if (x < 0)
-            {
-                return GetTileAt(x + SizeX, y); //Our map is topologically a cylinder 
-            }
-            else if (x >= sizeX)
-            {
-                return GetTileAt(x - SizeX, y);
-            }
             return Tile.Air;
         }
         else
@@ -246,8 +240,11 @@ public class TileMap : Singleton<TileMap>, ISavable
 
     public bool DamageAt(int x, int y, float amount, bool playerCaused)
     {
+        WrapXIfNecessary(ref x);
         if (IsOutOfBounds(x, y))
+        {
             return false;
+        }
 
         Tile t = GetTileAt(x, y);
         TileInfo info = GetTileInfo(t.Type);
@@ -369,6 +366,13 @@ public class TileMap : Singleton<TileMap>, ISavable
 
     private void UpdateVisualsAt(int x, int y)
     {
+        WrapXIfNecessary(ref x);
+
+        if (IsOutOfBounds(x, y))
+        {
+            return;
+        }
+
         var tile = GetVisualTileFor(x, y);
         var destTile = GetVisualDestructableOverlayFor(x, y);
         var oreTile = GetVisualOverlayTileFor(x, y);
@@ -390,6 +394,14 @@ public class TileMap : Singleton<TileMap>, ISavable
             damageOverlayTilemap.SetTile(new Vector3Int(x - SizeX, y, 0), destTile);
             oreTilemap.SetTile(new Vector3Int(x - SizeX, y, 0), oreTile);
         }
+    }
+
+    private void WrapXIfNecessary(ref int x)
+    {
+        if (x < 0)
+            x += SizeX;
+        else if (x >= sizeX)
+            x -= sizeX;
     }
 
     public bool IsOutOfBounds(int x, int y)
