@@ -19,7 +19,8 @@ public enum TileType
     CollapsableEntity,
     FloatingEntity,
     CollapsableEntityNotNeighbour,
-    FloatingEntityNotNeighbour
+    FloatingEntityNotNeighbour,
+    Ignore
 }
 
 [System.Serializable]
