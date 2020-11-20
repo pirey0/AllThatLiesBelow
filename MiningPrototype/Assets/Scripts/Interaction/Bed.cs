@@ -7,8 +7,10 @@ using UnityEngine.UI;
 public class Bed : MonoBehaviour, IInteractable
 {
     [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] Sprite empty, sleeping, wakeup, badDream;
     [SerializeField] Hut hut;
     [SerializeField] Image nightFadeToBlack;
+    [SerializeField] bool sleepsBadly;
 
     public void BeginInteracting(GameObject interactor)
     {
@@ -38,14 +40,14 @@ public class Bed : MonoBehaviour, IInteractable
     private void EnterBed(PlayerStateMachine playerToHide)
     {
         playerToHide.Disable();
-        spriteRenderer.enabled = true;
+        spriteRenderer.sprite = sleeping;
         StartCoroutine(SleepCoroutine(playerToHide));
     }
 
     private void LeaveBed(PlayerStateMachine playerToEnableAgain)
     {
         playerToEnableAgain.Enable();
-        spriteRenderer.enabled = false;
+        spriteRenderer.sprite = empty;
     }
 
     IEnumerator SleepCoroutine(PlayerStateMachine playerToEnableAgain)
@@ -64,6 +66,7 @@ public class Bed : MonoBehaviour, IInteractable
 
             yield return new WaitForSeconds(0.25f);
             ProgressionHandler.Instance.StartNextDay();
+            spriteRenderer.sprite = sleepsBadly ? badDream : wakeup;
             yield return new WaitForSeconds(0.25f);
 
             while (nightOpacity > 0f)

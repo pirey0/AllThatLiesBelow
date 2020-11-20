@@ -8,6 +8,21 @@ TextureImporter:
   - first:
       213: -1773357907223801851
     second: bed_spritesheet_1
+  - first:
+      213: 4428898254068966891
+    second: bed_spritesheet_0
+  - first:
+      213: 2584362555043085953
+    second: bed_spritesheet_1
+  - first:
+      213: -1296848925404449055
+    second: bed_spritesheet_2
+  - first:
+      213: -4470011864136784022
+    second: bed_spritesheet_2
+  - first:
+      213: -3701871119570471886
+    second: bed_spritesheet_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -100,7 +115,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 28
+        width: 26
         height: 24
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -109,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 171a0806d156ae280800000000000000
-      internalID: -9013280527381126799
+      spriteID: be5e02c2f7b967d30800000000000000
+      internalID: 4428898254068966891
       vertices: []
       indices: 
       edges: []
@@ -119,9 +134,9 @@ TextureImporter:
       name: bed_spritesheet_1
       rect:
         serializedVersion: 2
-        x: 28
+        x: 26
         y: 0
-        width: 28
+        width: 26
         height: 24
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -130,8 +145,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5009b480164c367e0800000000000000
-      internalID: -1773357907223801851
+      spriteID: 18ef9202d008dd320800000000000000
+      internalID: 2584362555043085953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bed_spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 0
+        width: 26
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a67685884e357f1c0800000000000000
+      internalID: -4470011864136784022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bed_spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 0
+        width: 26
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23479b184df40acc0800000000000000
+      internalID: -3701871119570471886
       vertices: []
       indices: 
       edges: []
