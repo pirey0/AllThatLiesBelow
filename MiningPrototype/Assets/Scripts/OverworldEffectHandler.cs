@@ -3,30 +3,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OverworldEffectHandler : MonoBehaviour
+public class OverworldEffectHandler : StateListenerBehaviour
 {
     [SerializeField] float fadeHeight;
     [SerializeField] float fadeThickness;
 
-    float alphaCalculatedBasedOnHeightOfPlayer;
-
     [SerializeField] SpriteRenderer vignetteRenderer;
     [SerializeField] ParticleSystem particleSystem;
     [SerializeField] float amountOfParticles;
-
     [SerializeField] AudioSource audioSource;
-    float audioSourceVolumeMultiplierThroughHut = 1;
-    [SerializeField] Hut hut;
 
-    void OnEnable()
+    float alphaCalculatedBasedOnHeightOfPlayer;
+    float audioSourceVolumeMultiplierThroughHut = 1;
+    Hut hut;
+
+    protected override void OnStateChanged(GameState.State newState)
     {
-        hut.OnHutStateChange += OnHutStateChange;
+        if (newState == GameState.State.Ready)
+        {
+            hut = FindObjectOfType<Hut>();
+            if (hut != null)
+                hut.OnHutStateChange += OnHutStateChange;
+        }
     }
 
-
-    void OnDisable()
+    protected override void OnDisable()
     {
-        hut.OnHutStateChange -= OnHutStateChange;
+        base.OnDisable();
+
+        if (hut != null)
+            hut.OnHutStateChange -= OnHutStateChange;
     }
 
     private void FixedUpdate()
@@ -41,7 +47,7 @@ public class OverworldEffectHandler : MonoBehaviour
         if (particleSystem != null)
         {
             var emissionModule = particleSystem.emission;
-            emissionModule.rateOverTime = (1-alphaCalculatedBasedOnHeightOfPlayer) * amountOfParticles;
+            emissionModule.rateOverTime = (1 - alphaCalculatedBasedOnHeightOfPlayer) * amountOfParticles;
         }
 
 
