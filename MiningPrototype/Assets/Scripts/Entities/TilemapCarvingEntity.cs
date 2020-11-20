@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class TilemapCarvingEntity : MonoBehaviour, ITileUpdateReceiver
+public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateReceiver
 {
     [SerializeField] protected TileOffsetTypePair[] tilesToOccupy;
     [SerializeField] Vector3 carvingOffset;

@@ -69,7 +69,7 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
     Vector2 rightWalkVector = Vector3.right;
     Rigidbody2D rigidbody;
     float horizontalSpeed;
-
+    TileMap.MirrorState currentMirrorLoc;
     private bool InFrontOfLadder { get => currentLadder != null; }
     private bool IsLocked { get => stateMachine.CurrentState == s_disabled; }
 
@@ -102,8 +102,9 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
             return;
 
         GUI.color = Color.black;
-        GUI.Label(new Rect(10, 10, 200, 25), stateMachine.CurrentState.Name);
-        GUI.Label(new Rect(10, 30, 200, 25), isGrounded ? "Grounded" : "Not Grounded");
+        GUI.Label(new Rect(10, 10, 100, 25), stateMachine.CurrentState.Name);
+        GUI.Label(new Rect(110, 10, 100, 25), isGrounded ? "Grounded" : "Not Grounded");
+        GUI.Label(new Rect(210, 10, 100, 25), currentMirrorLoc.ToString());
 
         float y = 40;
         for (int i = 0; i < stateMachine.States.Count; i++)
@@ -251,15 +252,41 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
 
         SetMovingSound(IsMoving());
 
+        UpdateWorldMirroring();
+    }
+
+    private void UpdateWorldMirroring()
+    {
         if (rigidbody.position.x < 0)
         {
             rigidbody.position = new Vector2(rigidbody.position.x + TileMap.Instance.SizeX, rigidbody.position.y);
-            //Notify wrap around
         }
         else if (rigidbody.position.x > TileMap.Instance.SizeX)
         {
             rigidbody.position = new Vector2(rigidbody.position.x - TileMap.Instance.SizeX, rigidbody.position.y);
-            //Notify wrap around
+        }
+
+        var oldMirrorLoc = currentMirrorLoc;
+        currentMirrorLoc = GetMirrorLocation();
+        if (currentMirrorLoc != oldMirrorLoc)
+        {
+            TileMap.Instance.NotifyMirrorWorldSideChange(currentMirrorLoc);
+        }
+    }
+
+    private TileMap.MirrorState GetMirrorLocation()
+    {
+        if (rigidbody.position.x < TileMap.Instance.SizeX / 3)
+        {
+            return TileMap.MirrorState.Left;
+        }
+        else if (rigidbody.position.x > TileMap.Instance.SizeX * 2 / 3)
+        {
+            return TileMap.MirrorState.Right;
+        }
+        else
+        {
+            return TileMap.MirrorState.Center;
         }
     }
 

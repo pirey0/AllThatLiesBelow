@@ -34,6 +34,8 @@ public class TileMap : Singleton<TileMap>, ISavable
 
     Stack<Vector2Int> tilesToStabilityCheck = new Stack<Vector2Int>();
 
+    public event System.Action<MirrorState> MirrorSideChanged;
+
     private int sizeX, sizeY;
     public int SizeX { get => sizeX; }
     public int SizeY { get => sizeY; }
@@ -145,6 +147,13 @@ public class TileMap : Singleton<TileMap>, ISavable
         generator.RunCompleteGeneration();
         UpdateVisuals();
     }
+
+    public void NotifyMirrorWorldSideChange(MirrorState newState)
+    {
+        MirrorSideChanged?.Invoke(newState);
+    }
+
+    public enum MirrorState { Center, Right, Left};
 
     public TileInfo GetTileInfo(TileType type)
     {
