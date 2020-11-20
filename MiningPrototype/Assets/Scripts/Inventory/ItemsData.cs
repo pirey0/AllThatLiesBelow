@@ -11,7 +11,8 @@ public enum ItemType
     Family_Photo,
     Diamond,
     Ladder,
-    Support
+    Support,
+    Family_Letter,
 }
 
 
@@ -44,9 +45,10 @@ public static class ItemsData
         return null;
     }
 
-    public static Sprite GetSpriteByItemType(ItemType itemType)
+    public static Sprite GetSpriteByItemType(ItemAmountPair pair)
     {
-        return itemInfos[itemType].DisplaySprite;
+        ItemInfo info = itemInfos[pair.type];
+        return (info.IsReadableItem)?ReadableItemHandler.Instance.GetSpriteOfLetter(pair.amount):info.DisplaySprite;
     }
 }
 

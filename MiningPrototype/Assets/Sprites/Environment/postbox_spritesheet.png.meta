@@ -17,6 +17,9 @@ TextureImporter:
   - first:
       213: -3027598413621054980
     second: postbox_spritesheet_2
+  - first:
+      213: 1687519701141723176
+    second: postbox_spritesheet_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -162,6 +165,27 @@ TextureImporter:
       bones: []
       spriteID: cf1b491a84fcbf5d0800000000000000
       internalID: -3027598413621054980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: postbox_spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 0
+        width: 10
+        height: 13
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82896023a364b6710800000000000000
+      internalID: 1687519701141723176
       vertices: []
       indices: 
       edges: []

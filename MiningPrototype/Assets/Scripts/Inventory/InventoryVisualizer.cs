@@ -114,6 +114,7 @@ public class InventoryVisualizer : ScalingUIElementBase
     {
         animator.Play(closeAnimation);
         float closeLength = closeAnimation.GetLength();
+        ReadableItemHandler.Instance?.Hide();
         StopAllCoroutines();
         StartCoroutine(DestroyItemElements(closeLength));
         Invoke("Selfdestroy", closeLength);

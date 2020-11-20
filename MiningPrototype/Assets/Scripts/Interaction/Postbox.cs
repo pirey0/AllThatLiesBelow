@@ -11,19 +11,19 @@ public enum PostboxStatus
     ACTIVE
 }
 
-public class Postbox : MonoBehaviour, IInteractable
+public class Postbox : MonoBehaviour, IInteractable, IDropReceiver
 {
     [SerializeField] SpriteRenderer spriteRenderer;
-    [SerializeField] Sprite closed, open, active;
+    [SerializeField] Sprite closed, open, active, openFull;
 
-    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioSource openCloseAudio, storeItemAudio;
 
     [SerializeField] ItemAmountPair storedItem;
     [SerializeField] string storedMessage;
 
     [SerializeField] Canvas canvas;
-    [SerializeField] InteractableMessageVisualizer messagePrefab;
-    InteractableMessageVisualizer displayedMessage;
+    [SerializeField] ReadableItemVisualizer messagePrefab;
+    ReadableItemVisualizer displayedMessage;
 
     [SerializeField] Canvas orderCanvas;
     [SerializeField] NewOrderVisualizer newOrderPrefab;
@@ -40,43 +40,39 @@ public class Postbox : MonoBehaviour, IInteractable
     [Button]
     public void Open()
     {
-        SetBoxstatus(PostboxStatus.OPEN);
+        ////display message
+        //if (messagePrefab != null && displayedMessage == null && storedMessage != "")
+        //{
+        //    displayedMessage = Instantiate(messagePrefab, canvas.transform);
+        //
+        //    displayedMessage.DisplayText(transform, storedMessage, showFamilyPhoto: (!storedItem.IsNull() && storedItem.type == ItemType.Family_Photo));
+        //    storedMessage = "";
+        //}
 
-        //display message
-        if (messagePrefab != null && displayedMessage == null && storedMessage != "")
-        {
-            displayedMessage = Instantiate(messagePrefab, canvas.transform);
-
-            displayedMessage.DisplayText(transform, storedMessage, showFamilyPhoto: (!storedItem.IsNull() && storedItem.type == ItemType.Family_Photo));
-            storedMessage = "";
-
-            //add all stored items to player inventory
-            if (!storedItem.IsNull() && storedItem.amount > 0)
+        //add all stored items to player inventory
+        if (!storedItem.IsNull() && storedItem.amount > 0)
             {
                 InventoryManager.PlayerCollects(storedItem.type,storedItem.amount);
                 storedItem = ItemAmountPair.Nothing;
             }
-        }
 
-        //show order formular
-        else
-        {
-            if (newOrder == null)
-                newOrder = Instantiate(newOrderPrefab,orderCanvas.transform);
-        }
+        ////show order formular
+        //else
+        //{
+        //    if (newOrder == null)
+        //        newOrder = Instantiate(newOrderPrefab,orderCanvas.transform);
+        //}
+
+        SetBoxstatus(PostboxStatus.OPEN);
     }
 
     [Button]
     public void Close()
     {
-        SetBoxstatus(PostboxStatus.CLOSED);
-
-        //hide message if one is displayed
-        if (displayedMessage != null)
-            displayedMessage.Hide();
-
-        if (newOrder != null)
-            newOrder.Cancel();
+        if (IsEmpty())
+            SetBoxstatus(PostboxStatus.CLOSED);
+        else
+            SetBoxstatus(PostboxStatus.ACTIVE);
     }
 
     public void BeginInteracting(GameObject interactor)
@@ -100,16 +96,15 @@ public class Postbox : MonoBehaviour, IInteractable
                     break;
 
                 case PostboxStatus.OPEN:
-                    spriteRenderer.sprite = open;
+                    spriteRenderer.sprite = IsEmpty()?open:openFull;
                     break;
 
                 case PostboxStatus.CLOSED:
                     spriteRenderer.sprite = closed;
                     break;
             }
-
-            if (newStatus != PostboxStatus.ACTIVE)
-                audioSource.Play();
+            
+            openCloseAudio.Play();
 
             status = newStatus;
         }
@@ -121,5 +116,41 @@ public class Postbox : MonoBehaviour, IInteractable
 
     public void UnsubscribeToForceQuit(Action action)
     {
+    }
+
+    public bool WouldTakeDrop(ItemAmountPair pair)
+    {
+        return (storedItem.amount <= 0);
+    }
+
+    public void BeginHoverWith(ItemAmountPair pair)
+    {
+        SetBoxstatus(PostboxStatus.OPEN);
+    }
+
+    public void EndHover()
+    {
+        if (IsEmpty())
+            SetBoxstatus(PostboxStatus.CLOSED);
+    }
+
+    public void HoverUpdate(ItemAmountPair pair)
+    {
+        //
+    }
+
+    public void ReceiveDrop(ItemAmountPair pair)
+    {
+        if (InventoryManager.PlayerTryPay(pair.type, pair.amount))
+        {
+            storedItem = pair;
+            storeItemAudio?.Play();
+            SetBoxstatus(PostboxStatus.ACTIVE);
+        }
+    }
+
+    public bool IsEmpty()
+    {
+        return storedItem.amount <= 0;
     }
 }
