@@ -18,9 +18,17 @@ public class NewOrderVisualizer : MonoBehaviour
     [SerializeField] TMP_Text costElementPrefab;
     [SerializeField] Transform costGrid;
 
+    System.Action OnClose;
+
     private void Start()
     {
         UpdateCost();
+        Debug.Log("SpawnedNewOrder");
+    }
+
+    public void Handshake(System.Action onClose)
+    {
+        OnClose = onClose;
     }
 
     public void UpdateAmount(ItemType itemType, int amount)
@@ -114,6 +122,7 @@ public class NewOrderVisualizer : MonoBehaviour
 
     public void Cancel()
     {
+        OnClose?.Invoke();
         Destroy(gameObject);
     }
 
@@ -124,13 +133,16 @@ public class NewOrderVisualizer : MonoBehaviour
         foreach (KeyValuePair<ItemType, int> i in orderedElementsWithAmounts)
             itemAmountPairs.Add(new ItemAmountPair(i.Key, i.Value));
 
-        ProgressionHandler.Instance.AddOrderForNextDay(itemAmountPairs);
+        int readableId = ReadableItemHandler.AddNewReadable(itemAmountPairs);
+        ProgressionHandler.Instance.RegisterOrder(readableId, itemAmountPairs);
+        InventoryManager.PlayerCollects(ItemType.Family_Letter, readableId);
 
         foreach (var singlePrice in cost)
         {
             InventoryManager.PlayerTryPay(singlePrice.Key, singlePrice.Value);
         }
 
+        OnClose?.Invoke();
         Destroy(gameObject);
     }
 }

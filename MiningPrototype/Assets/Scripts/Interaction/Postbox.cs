@@ -110,6 +110,16 @@ public class Postbox : MonoBehaviour, IInteractable, IDropReceiver
         }
     }
 
+    public ItemAmountPair GetStoredItem()
+    {
+        return storedItem;
+    }
+
+    public void SetStoredItem(ItemAmountPair itemAmountPair)
+    {
+        storedItem = itemAmountPair;
+    }
+
     public void SubscribeToForceQuit(Action action)
     {
     }
