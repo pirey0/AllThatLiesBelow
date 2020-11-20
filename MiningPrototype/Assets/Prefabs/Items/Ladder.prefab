@@ -96,6 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38f63b1cbf6d5494098524d3120cc5cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drop:
+    type: 6
+    amount: 1
   tilesToOccupy:
   - Offset: {x: 0, y: 0}
     Type: 11

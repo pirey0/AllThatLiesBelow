@@ -149,6 +149,11 @@ public struct ItemAmountPair
         return amount <= 0 || type == ItemType.None;
     }
 
+    public bool IsValid()
+    {
+        return !IsNull();
+    }
+
     public static ItemAmountPair Nothing
     {
         get => new ItemAmountPair(ItemType.None, -1);
