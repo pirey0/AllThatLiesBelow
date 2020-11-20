@@ -65,6 +65,8 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     float lastGroundedTimeStamp;
     float lastJumpTimeStamp;
     float lastActivityTimeStamp;
+    float lastDeathTimeStamp;
+
     private bool isGrounded;
     Vector2 rightWalkVector = Vector3.right;
     Rigidbody2D rigidbody;
@@ -166,7 +168,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         s_climb = stateMachine.AddState("Climb", ClimbingEnter, ClimbingUpdate, ClimbingExit);
         s_climbIde = stateMachine.AddState("ClimbIdle", ClimbingEnter, ClimbingUpdate, ClimbingExit);
         s_inventory = stateMachine.AddState("Inventory", null, MoveUpdate);
-        s_death = stateMachine.AddState("Death", DeathEnter, null, DeathExit);
+        s_death = stateMachine.AddState("Death", DeathEnter, DeathUpdate, DeathExit);
         s_hit = stateMachine.AddState("Hit", null);
         s_longIdle = stateMachine.AddState("LongIdle", null, SlowMoveUpdate);
         s_disabled = stateMachine.AddState("Disabled", null);
@@ -208,6 +210,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         s_hit.AddTransition(HitFinished, s_idle);
     }
 
+
     private void FallExit()
     {
         jumpLand?.Play();
@@ -221,11 +224,44 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     private void DeathEnter()
     {
         rigidbody.simulated = false;
+        lastDeathTimeStamp = Time.time;
+        GameState.Instance.ChangeStateTo(GameState.State.Respawning);
+    }
+    private void DeathUpdate()
+    {
+        if(Time.time - lastDeathTimeStamp > settings.respawnCooldown)
+        {
+            Respawn();
+        }
+    }
+
+    private void Respawn()
+    {
+        var bed = GameObject.FindObjectOfType<Bed>();
+
+        if(bed != null)
+        {
+            transform.position = bed.transform.position;
+            stateMachine.ForceTransitionTo(s_idle);
+            bed.BeginInteracting(gameObject);
+            Debug.Log("Respawning at bed: " + bed.name);
+        }
+        else
+        {
+            Debug.LogError("No bed found to respawn");
+            var pStart = GameObject.FindObjectOfType<PlayerStart>();
+            if(pStart != null)
+            {
+                transform.position = pStart.transform.position;
+                stateMachine.ForceTransitionTo(s_longIdle);
+            }
+        }
     }
 
     private void DeathExit()
     {
         rigidbody.simulated = true;
+        GameState.Instance.ChangeStateTo(GameState.State.Playing);
     }
 
     private bool HitFinished()

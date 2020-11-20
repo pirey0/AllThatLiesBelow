@@ -25,13 +25,24 @@ public class GameState
             Debug.Log("Gamestate changed to " + state);
             currentState = state;
             StateChanged?.Invoke(state);
+            OnStateChanged();
+        }
+    }
+
+    private void OnStateChanged()
+    {
+        if(currentState == State.Ready)
+        {
+            ChangeStateTo(State.Playing);
         }
     }
 
     public enum State
     {
         Loading,
-        Ready
+        Ready,
+        Playing,
+        Respawning
     }
 }
 

@@ -13,6 +13,7 @@ public class PlayerSettings : ScriptableObject
     public float slowMoveSpeed;
     public float timeToLongIdle;
     public float hitDuration;
+    public float respawnCooldown = 5;
     
     public float jumpCooldown = 0.1f;
     public float timeAfterGroundedToJump = 0.1f;
