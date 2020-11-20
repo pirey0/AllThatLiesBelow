@@ -63,7 +63,7 @@ public class Map : MonoBehaviour, ISavable
 
     private void Awake()
     {
-        if(Instance != this && instance != null)
+        if (Instance != this && instance != null)
         {
             return;
         }
@@ -189,6 +189,27 @@ public class Map : MonoBehaviour, ISavable
         InitMap(SizeX, SizeY);
         DestroyAllEntities();
         renderer.UpdateVisuals();
+    }
+
+    [Button]
+    private void ReFitData()
+    {
+        if (data.SizeX != sizeX || data.SizeY != sizeY)
+        {
+            MapArray mapArray = new MapArray(sizeX, SizeY);
+
+            Util.IterateXY(SizeX, sizeY, (x, y) => mapArray[x, y] = data[x, y]);
+            data.Map = mapArray;
+        }
+    }
+
+    [Button]
+    private void Save()
+    {
+        #if UNITY_EDITOR
+        UnityEditor.EditorUtility.SetDirty(Data);
+        UnityEditor.AssetDatabase.SaveAssets();
+        #endif
     }
 
     public GameObject InstantiateEntity(GameObject prefab, Vector3 position)
@@ -471,7 +492,10 @@ public class Map : MonoBehaviour, ISavable
 
     private void LoadFromMapAt(TileMapData loadedData, int x, int y, int xOffset, int yOffset)
     {
-        SetMapAt(x + xOffset, y + yOffset, loadedData[x, y], TileUpdateReason.Generation, updateProperties: true, updateVisuals: true);
+        var t = loadedData[x, y];
+
+        if (t.Type != TileType.Ignore)
+            SetMapAt(x + xOffset, y + yOffset, t, TileUpdateReason.Generation, updateProperties: true, updateVisuals: true);
     }
 }
 
@@ -491,8 +515,20 @@ public class MapArray
 
     public Tile this[int x, int y]
     {
-        get => rows[x][y];
-        set => rows[x][y] = value;
+        get
+        {
+            if (x < 0 || x >= SizeX || y < 0 || y >= SizeY)
+                return Tile.Air;
+
+            return rows[x][y];
+        }
+        set
+        {
+            if (x < 0 || x >= SizeX || y < 0 || y >= SizeY)
+                return;
+
+            rows[x][y] = value;
+        }
     }
 
     public MapArray(int sizeX, int sizeY)

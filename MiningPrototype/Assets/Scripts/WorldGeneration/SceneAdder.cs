@@ -17,7 +17,12 @@ public class SceneAdder : MonoBehaviour
             LoadAddititve();
     }
 
-    [Button(null, EButtonEnableMode.Playmode) ]
+    private void OnValidate()
+    {
+        this.name = "SceneAdder_" + addition.SceneToAdd;
+    }
+
+    [Button(null, EButtonEnableMode.Playmode)]
     private void LoadAddititve()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -31,20 +36,25 @@ public class SceneAdder : MonoBehaviour
 
         Debug.Log("Loaded: " + scene.name + " " + scene.rootCount);
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        Vector2Int offset = new Vector2Int(addition.XOffset, addition.FromTop ? thisMap.SizeY - addition.YOffset : addition.YOffset);
 
         foreach (var obj in scene.GetRootGameObjects())
         {
             if (obj.TryGetComponent(out Map map))
             {
                 Debug.Log("Adding from data " + map.Data);
-                thisMap.LoadFromMap(map.Data, addition.XOffset, addition.YOffset);
+                var copy = ScriptableObject.Instantiate(map.Data);
+                Debug.Log(copy[0, 0]);
+                thisMap.LoadFromMap(copy, offset.x, offset.y);
                 DestroyImmediate(obj);
+                break;
             }
             else
             {
-                obj.transform.position += new Vector3(addition.XOffset, addition.YOffset);
+                obj.transform.position += offset.AsV3();
             }
         }
+
     }
 }
 
@@ -53,6 +63,7 @@ public struct MapAddition
 {
     public int XOffset;
     public int YOffset;
+    public bool FromTop;
     public SceneReference SceneToAdd;
 
 }
