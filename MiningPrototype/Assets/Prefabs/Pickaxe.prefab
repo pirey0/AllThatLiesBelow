@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4325085931206026516}
   - component: {fileID: 7720122279049008536}
-  - component: {fileID: 6923913253500253519}
+  - component: {fileID: 1566438266}
+  - component: {fileID: 2214841632456959460}
   m_Layer: 0
   m_Name: Pickaxe
   m_TagString: Untagged
@@ -70,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1213309343
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 10
   m_Sprite: {fileID: -7303096387755746053, guid: c099f4890c297984490ff015018f9495, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -83,7 +84,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6923913253500253519
+--- !u!114 &1566438266
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,12 +93,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7862656893741527902}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9834c954e4f9577488347bffcb55d1c0, type: 3}
+  m_Script: {fileID: 11500000, guid: c429d83c33032e640814e00af29a6c1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 7720122279049008536}
-  idleFrameRight: 6
-  idleFrameLeft: 6
+  idleFrame: 6
   sprites:
   - {fileID: 1522097905951984030, guid: c099f4890c297984490ff015018f9495, type: 3}
   - {fileID: -4857031402594571213, guid: c099f4890c297984490ff015018f9495, type: 3}
@@ -107,38 +107,64 @@ MonoBehaviour:
   - {fileID: -3189682528193580246, guid: c099f4890c297984490ff015018f9495, type: 3}
   - {fileID: -7303096387755746053, guid: c099f4890c297984490ff015018f9495, type: 3}
   - {fileID: 7585674902419984140, guid: c099f4890c297984490ff015018f9495, type: 3}
-  animationCurve:
+  offsetOnSwing:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.0019688979
-      value: -2.116807
-      inSlope: 0.35958713
-      outSlope: 0.35958713
+      time: 0
+      value: -2
+      inSlope: -0.61204815
+      outSlope: -0.61204815
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.1737142
+      outWeight: 0.18491235
     - serializedVersion: 3
-      time: 0.19409724
-      value: -0.22233117
-      inSlope: 20.688328
-      outSlope: 20.688328
+      time: 0.12737055
+      value: -0.3830927
+      inSlope: 16.14762
+      outSlope: 16.14762
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.06817653
-      outWeight: 0.1839246
+      inWeight: 0.06027767
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.25068593
-      value: 0.08398819
-      inSlope: 0.31880352
-      outSlope: 0.31880352
+      time: 0.25
+      value: 0
+      inSlope: -1.734364
+      outSlope: -1.734364
       tangentMode: 0
       weightedMode: 0
-      inWeight: 1
+      inWeight: 0.5856226
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 1
     m_RotationOrder: 4
-  flipX: 0
-  playerSpriteRenderer: {fileID: 0}
+  offsetToMouse: 1
+  hideSwing: 0
+--- !u!114 &2214841632456959460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7862656893741527902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2127d15acbd258b4e8b0e4f1faf4e50f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toListenTo: {fileID: 0}
+  sprites:
+  - sprite: {fileID: -5010878985237893848, guid: e0e653eb664f99240af5fc835c92efaa, type: 3}
+    offset: {x: 0, y: -0.375, z: 0}
+  - sprite: {fileID: -7194323726269135038, guid: e0e653eb664f99240af5fc835c92efaa, type: 3}
+    offset: {x: 0, y: -0.25, z: 0}
+  - sprite: {fileID: 3644946514836814670, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
+    offset: {x: 0.25, y: -0.25, z: 0}
+  - sprite: {fileID: 6277849533615305770, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
+    offset: {x: 0, y: -0.125, z: 0}
+  - sprite: {fileID: 7127391226831221617, guid: bea1749c2a5f10742902c491aa0fcc1e, type: 3}
+    offset: {x: 0, y: -0.25, z: 0}
+  - sprite: {fileID: -8736164668747230439, guid: 94421b5b25e63b4479deff0229d1ed28, type: 3}
+    offset: {x: -0.125, y: -0.25, z: 0}

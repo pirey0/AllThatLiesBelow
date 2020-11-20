@@ -5,14 +5,15 @@ using UnityEngine;
 public class PickaxeAnimator : MonoBehaviour
 {
     [SerializeField] SpriteRenderer spriteRenderer;
-    [SerializeField] int idleFrameRight,idleFrameLeft;
+    [SerializeField] int idleFrame;
     [SerializeField] Sprite[] sprites;
-    [SerializeField] AnimationCurve animationCurve;
-
+    [SerializeField] AnimationCurve offsetOnSwing;
+    [SerializeField] int offsetToMouse = 2;
+    [SerializeField] bool hideSwing;
 
     private void Start()
     {
-        SetFrame(idleFrameRight);
+        SetFrame(idleFrame);
     }
     public void Play()
     {
@@ -22,19 +23,20 @@ public class PickaxeAnimator : MonoBehaviour
 
     public void Stop()
     {
+        SetFrame(idleFrame);
         StopAllCoroutines();
     }
 
     IEnumerator PickingRoutine()
     {
         float currentTime = 0;
-        int frameBefore = GetFrameFromMouseAngle();
+        int frameBefore = idleFrame;
 
         while (true)
         {
             //Debug.Log("play curve");
             currentTime += Time.deltaTime;
-            int frameCurrent = GetFrameFromMouseAngle(Mathf.RoundToInt(animationCurve.Evaluate(currentTime) * 45f));
+            int frameCurrent = GetFrameFromMouseAngle(!hideSwing?Mathf.RoundToInt(offsetOnSwing.Evaluate(currentTime)):0f);
 
             if (frameCurrent != frameBefore)
             {
@@ -63,9 +65,12 @@ public class PickaxeAnimator : MonoBehaviour
 
     private int GetFrameFromMouseAngle(float additionalAngle = 0)
     {
-        Vector2 p2 = new Vector3(Screen.width / 2, Screen.height / 2, 0);
-        float angle = (Mathf.Atan2(Input.mousePosition.y - p2.y, Input.mousePosition.x - p2.x)) * Mathf.Rad2Deg + additionalAngle * (-1);
-        float angleAsFloat = (angle + (45)) / (45f);
-        return Mathf.RoundToInt(angleAsFloat);
+        Vector2 head = transform.position;
+        Vector2 target = Util.MouseToWorld();
+
+        float angle = Mathf.Atan2((target.x - head.x) / 2, target.y - head.y) * Mathf.Rad2Deg; //range between -180 and 180 (top is 0)
+        float angleGeneralized = ((((Mathf.Abs(angle) - 90) / 90f) + 1) * 2) - offsetToMouse; //maps it onto 0 to 4 for the full range on one side
+
+        return Mathf.RoundToInt(angleGeneralized + additionalAngle);
     }
 }
