@@ -514,9 +514,9 @@ MonoBehaviour:
   generationSettings: {fileID: 11400000, guid: 9ada1e3054219d644a18b003c8174420, type: 2}
   entitiesParent: {fileID: 5931673587162925482}
   renderer: {fileID: 6387888150443123061}
-  createOwnData: 1
+  createOwnData: 0
   runGeneration: 1
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: ac68272e71e211a4e84a2f1b921dba4b, type: 2}
   debug: 0
 --- !u!114 &6387888150443123061
 MonoBehaviour:
@@ -531,6 +531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   on: 1
+  map: {fileID: 2853969872600182810}
   tilemap: {fileID: 1474943186}
   damageOverlayTilemap: {fileID: 65351566}
   oreTilemap: {fileID: 1784881859}

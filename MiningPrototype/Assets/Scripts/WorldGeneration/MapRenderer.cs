@@ -7,11 +7,11 @@ using UnityEngine.Tilemaps;
 public class MapRenderer : MonoBehaviour
 {
     [SerializeField] bool on;
+    [SerializeField] Map map;
     [SerializeField] Tilemap tilemap, damageOverlayTilemap, oreTilemap;
 
     private int SizeX { get => map.SizeX; }
     private int SizeY { get => map.SizeY; }
-    Map map;
 
     public void Setup(Map map)
     {
