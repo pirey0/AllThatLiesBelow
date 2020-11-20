@@ -49,7 +49,7 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
 {
     [SerializeField] PlayerSettings settings;
     [SerializeField] Transform feet;
-    [SerializeField] AudioSource walking;
+    [SerializeField] AudioSource walking, jumpStart, jumpLand;
     [SerializeField] bool slowWalkMode;
     [SerializeField] PlayerStateInfo[] statesCanInteract;
 
@@ -148,7 +148,7 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
         s_hit = stateMachine.AddState("Hit", null);
         s_longIdle = stateMachine.AddState("LongIdle", null, SlowMoveUpdate);
         s_disabled = stateMachine.AddState("Disabled", null);
-        s_fall = stateMachine.AddState("Fall", null, MoveUpdate);
+        s_fall = stateMachine.AddState("Fall", null, MoveUpdate, FallExit);
 
         s_idle.AddTransition(InInventory, s_inventory);
         s_inventory.AddTransition(() => !InInventory(), s_idle);
@@ -186,6 +186,11 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
         s_hit.AddTransition(HitFinished, s_idle);
     }
 
+    private void FallExit()
+    {
+        jumpLand?.Play();
+    }
+
     private void WalkExit()
     {
         SetMovingSound(false);
@@ -220,6 +225,7 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
     {
         rigidbody.velocity = new Vector2(rigidbody.velocity.x, settings.jumpVelocity);
         lastJumpTimeStamp = Time.time;
+        jumpStart?.Play();
     }
 
     private void SlowMoveUpdate()
@@ -250,7 +256,7 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
             lastActivityTimeStamp = Time.time;
         }
 
-        SetMovingSound(IsMoving());
+        SetMovingSound(IsMoving() && IsGrounded());
 
         UpdateWorldMirroring();
     }
