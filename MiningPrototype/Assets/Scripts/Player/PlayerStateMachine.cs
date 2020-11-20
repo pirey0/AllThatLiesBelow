@@ -69,7 +69,7 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
     Vector2 rightWalkVector = Vector3.right;
     Rigidbody2D rigidbody;
     float horizontalSpeed;
-    TileMap.MirrorState currentMirrorLoc;
+    Map.MirrorState currentMirrorLoc;
     private bool InFrontOfLadder { get => currentLadder != null; }
     private bool IsLocked { get => stateMachine.CurrentState == s_disabled; }
 
@@ -265,34 +265,34 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
     {
         if (rigidbody.position.x < 0)
         {
-            rigidbody.position = new Vector2(rigidbody.position.x + TileMap.Instance.SizeX, rigidbody.position.y);
+            rigidbody.position = new Vector2(rigidbody.position.x + Map.Instance.SizeX, rigidbody.position.y);
         }
-        else if (rigidbody.position.x > TileMap.Instance.SizeX)
+        else if (rigidbody.position.x > Map.Instance.SizeX)
         {
-            rigidbody.position = new Vector2(rigidbody.position.x - TileMap.Instance.SizeX, rigidbody.position.y);
+            rigidbody.position = new Vector2(rigidbody.position.x - Map.Instance.SizeX, rigidbody.position.y);
         }
 
         var oldMirrorLoc = currentMirrorLoc;
         currentMirrorLoc = GetMirrorLocation();
         if (currentMirrorLoc != oldMirrorLoc)
         {
-            TileMap.Instance.NotifyMirrorWorldSideChange(currentMirrorLoc);
+            Map.Instance.NotifyMirrorWorldSideChange(currentMirrorLoc);
         }
     }
 
-    private TileMap.MirrorState GetMirrorLocation()
+    private Map.MirrorState GetMirrorLocation()
     {
-        if (rigidbody.position.x < TileMap.Instance.SizeX / 3)
+        if (rigidbody.position.x < Map.Instance.SizeX / 3)
         {
-            return TileMap.MirrorState.Left;
+            return Map.MirrorState.Left;
         }
-        else if (rigidbody.position.x > TileMap.Instance.SizeX * 2 / 3)
+        else if (rigidbody.position.x > Map.Instance.SizeX * 2 / 3)
         {
-            return TileMap.MirrorState.Right;
+            return Map.MirrorState.Right;
         }
         else
         {
-            return TileMap.MirrorState.Center;
+            return Map.MirrorState.Center;
         }
     }
 

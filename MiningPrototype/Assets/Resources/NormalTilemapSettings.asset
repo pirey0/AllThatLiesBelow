@@ -12,18 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfe483cd8b96a8744a567db6b7c6778e, type: 3}
   m_Name: NormalTilemapSettings
   m_EditorClassIdentifier: 
-  TileInfos:
-  - {fileID: 11400000, guid: bb470b8ff6a364143b786bf042d95045, type: 2}
-  - {fileID: 11400000, guid: b3eaa7d6a02e5524d9b3ee029c880b69, type: 2}
-  - {fileID: 11400000, guid: 206e2e9ab5a93f44fbe09ce99956fd3b, type: 2}
-  - {fileID: 11400000, guid: 63044305458e6694e8506c3e46a07000, type: 2}
-  - {fileID: 11400000, guid: f89d2429a9c5e354cb2e4545a4635fe0, type: 2}
-  - {fileID: 11400000, guid: d87309737a47fe24ba9cefbeae060abf, type: 2}
-  - {fileID: 11400000, guid: ebcef3dc0b326324bb658bca23247055, type: 2}
-  - {fileID: 11400000, guid: 44a4c9ec7b5e5b64fa4216c5813d65cb, type: 2}
-  - {fileID: 11400000, guid: 055367cafc74d2f47a86a60b8f121223, type: 2}
-  - {fileID: 11400000, guid: cc7084b028cbe4e44b82497f8f514348, type: 2}
-  - {fileID: 11400000, guid: f847158a01f57664cba2edc2068a13b0, type: 2}
+  MirroringAmount: 20
   DamageOverlayTiles:
   - {fileID: 0}
   - {fileID: 11400000, guid: ab62f49b0d19e9d4389ac6d165d7bd0e, type: 2}

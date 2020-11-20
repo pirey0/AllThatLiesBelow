@@ -26,7 +26,7 @@ public class SupportPreview : SupportBase, IItemPreview
         var gridPos = position.ToGridPosition();
         transform.position = gridPos.AsV3() + new Vector3(0.5f, 0);
 
-        if (TileMap.Instance.IsAirAt(gridPos.x, gridPos.y) && TileMap.Instance.IsBlockAt(gridPos.x, gridPos.y - 1))
+        if (Map.Instance.IsAirAt(gridPos.x, gridPos.y) && Map.Instance.IsBlockAt(gridPos.x, gridPos.y - 1))
         {
             AdaptHeightTo(CalculateHeight());
             front.color = Color.green;

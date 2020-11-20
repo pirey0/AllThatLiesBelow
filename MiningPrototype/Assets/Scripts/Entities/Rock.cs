@@ -11,7 +11,7 @@ public class Rock : TilemapCarvingEntity, ITileMapElement
     [SerializeField] AudioSource rockFalling;
     [SerializeField] AudioSource rockSmashing;
 
-    public TileMap TileMap { get; private set; }
+    public Map TileMap { get; private set; }
 
     protected void Start()
     {
@@ -87,7 +87,7 @@ public class Rock : TilemapCarvingEntity, ITileMapElement
         }
     }
 
-    public void Setup(TileMap tileMap)
+    public void Setup(Map tileMap)
     {
         TileMap = tileMap;
     }

@@ -11,10 +11,6 @@ public class GenerationSettings : ScriptableObject
 
     public int Seed;
 
-    public int SizeX;
-    public int SizeY;
-    public int MirroringAmount;
-
     public AnimationCurve InitialAliveCurve;
 
     [Range(0, 9)]
