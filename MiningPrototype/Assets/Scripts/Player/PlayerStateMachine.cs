@@ -97,7 +97,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         {
             case GameState.State.Ready:
                 var start = GameObject.FindObjectOfType<PlayerStart>();
-                if(start != null)
+                if (start != null)
                 {
                     transform.position = start.transform.position;
                 }
@@ -137,7 +137,15 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     private void FixedUpdate()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(feet.position, settings.feetRadius);
-        isGrounded = colliders != null && colliders.Length > 1;
+        isGrounded = false;
+        foreach (var c in colliders)
+        {
+            if (!c.isTrigger && c.gameObject != gameObject)
+            {
+                isGrounded = true;
+                break;
+            }
+        }
 
         if (isGrounded)
         {
@@ -351,7 +359,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
 
     private bool IsNotClimbing()
     {
-        return !InFrontOfLadder;
+        return !InFrontOfLadder || IsGrounded();
     }
 
     private bool IsIdle()
