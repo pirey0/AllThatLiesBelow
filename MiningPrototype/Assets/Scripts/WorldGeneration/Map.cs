@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [DefaultExecutionOrder(-100)]
-public class Map : MonoBehaviour, ISavable
+public class Map : StateListenerBehaviour, ISavable
 {
     private static Map instance;
 
@@ -81,8 +81,15 @@ public class Map : MonoBehaviour, ISavable
         if (runGeneration)
             RunCompleteGeneration();
 
-        if (updateUnstable)
-            StartCoroutine(UpdateUnstableTilesRoutine());
+    }
+
+    protected override void OnStateChanged(GameState.State newState)
+    {
+        if(newState == GameState.State.Ready)
+        {
+            if (updateUnstable)
+                StartCoroutine(UpdateUnstableTilesRoutine());
+        }
     }
 
     private void Update()
@@ -95,6 +102,8 @@ public class Map : MonoBehaviour, ISavable
 
     private IEnumerator UpdateUnstableTilesRoutine()
     {
+        tilesToStabilityCheck.Clear(); //clear on real start
+
         int i = 0;
         while (true)
         {

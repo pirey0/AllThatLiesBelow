@@ -166,4 +166,9 @@ public static class Util
         return System.Guid.NewGuid().ToString();
     }
 
+    public static int RandomInV2(Vector2Int vector2Int)
+    {
+        return Random.Range(vector2Int.x, vector2Int.y+1);
+    }
+
 }

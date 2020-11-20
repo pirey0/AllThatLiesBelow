@@ -45,7 +45,7 @@ public struct PlayerStateInfo
 }
 
 [DefaultExecutionOrder(-20)]
-public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
+public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEntity
 {
     [SerializeField] PlayerSettings settings;
     [SerializeField] Transform feet;
@@ -89,6 +89,20 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
         }
 
         playerInteraction.PlayerActivity += OnInteractionActivity;
+    }
+
+    protected override void OnStateChanged(GameState.State newState)
+    {
+        switch (newState)
+        {
+            case GameState.State.Ready:
+                var start = GameObject.FindObjectOfType<PlayerStart>();
+                if(start != null)
+                {
+                    transform.position = start.transform.position;
+                }
+                break;
+        }
     }
 
     private void OnInteractionActivity()

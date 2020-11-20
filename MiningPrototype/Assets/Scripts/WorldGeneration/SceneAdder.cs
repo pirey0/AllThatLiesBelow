@@ -8,25 +8,43 @@ using UnityEngine.SceneManagement;
 public class SceneAdder : MonoBehaviour
 {
     [SerializeField] Map thisMap;
-    [SerializeField] MapAddition addition;
-
+    [SerializeField] List<MapAddition> addition;
+    bool loaded = false;
+    MapAddition current;
 
     private void Start()
     {
-        if (addition.SceneToAdd != null)
-            LoadAddititve();
+        if (addition.Count > 0)
+            StartCoroutine(LoadAdditive());
     }
 
     private void OnValidate()
     {
-        this.name = "SceneAdder_" + addition.SceneToAdd;
+        this.name = "SceneAdder";
     }
 
-    [Button(null, EButtonEnableMode.Playmode)]
-    private void LoadAddititve()
+    private IEnumerator LoadAdditive()
     {
+        GameState.Instance.ChangeStateTo(GameState.State.Loading);
+
+        int i = 0;
         SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.LoadScene(addition.SceneToAdd, LoadSceneMode.Additive);
+
+        while (i < addition.Count)
+        {
+            current = addition[i];
+            
+            SceneManager.LoadScene(current.SceneToAdd, LoadSceneMode.Additive);
+            loaded = false;
+
+            while (!loaded) 
+                yield return null;
+            
+            i++;
+        }
+
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        GameState.Instance.ChangeStateTo(GameState.State.Ready);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
@@ -34,9 +52,8 @@ public class SceneAdder : MonoBehaviour
         if (loadMode != LoadSceneMode.Additive)
             return;
 
-        Debug.Log("Loaded: " + scene.name + " " + scene.rootCount);
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-        Vector2Int offset = new Vector2Int(addition.XOffset, addition.FromTop ? thisMap.SizeY - addition.YOffset : addition.YOffset);
+        Vector2Int offset = new Vector2Int(Util.RandomInV2(current.XOffsetRange), current.FromTop ? thisMap.SizeY - current.YOffset : current.YOffset);
+        Debug.Log("Loaded: " + scene.name + " " + scene.rootCount + " at " + offset);
 
         foreach (var obj in scene.GetRootGameObjects())
         {
@@ -51,14 +68,14 @@ public class SceneAdder : MonoBehaviour
                 obj.transform.position += offset.AsV3();
             }
         }
-
+        loaded = true;
     }
 }
 
 [System.Serializable]
 public struct MapAddition
 {
-    public int XOffset;
+    public Vector2Int XOffsetRange;
     public int YOffset;
     public bool FromTop;
     public SceneReference SceneToAdd;
