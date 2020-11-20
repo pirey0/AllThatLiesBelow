@@ -6,54 +6,46 @@ using UnityEngine.Tilemaps;
 
 public class MapRenderer : MonoBehaviour
 {
-    [SerializeField] Map map;
+    [SerializeField] bool on;
     [SerializeField] Tilemap tilemap, damageOverlayTilemap, oreTilemap;
 
-    private Map Map { get => map; }
-    private int SizeX { get => Map.SizeX; }
-    private int SizeY { get => Map.SizeY; }
+    private int SizeX { get => map.SizeX; }
+    private int SizeY { get => map.SizeY; }
+    Map map;
 
-    private void Start()
-    {
-        if (map == null)
-        {
-            Destroy(this);
-            return;
-        }
-
-        Setup();
-        UpdateVisuals();
-    }
-
-    [Button]
-    public void Setup()
+    public void Setup(Map map)
     {
         if (map == null)
             return;
 
-        tilemap.GetComponent<ITileMapElement>()?.Setup(Map);
-        damageOverlayTilemap.GetComponent<ITileMapElement>()?.Setup(Map);
-        oreTilemap.GetComponent<ITileMapElement>()?.Setup(Map);
+        this.map = map;
 
-        map.FullVisualUpdate += UpdateVisuals;
-        map.VisualUpdateAt += UpdateVisualsAt;
+        tilemap.GetComponent<ITileMapElement>()?.Setup(map);
+        damageOverlayTilemap.GetComponent<ITileMapElement>()?.Setup(map);
+        oreTilemap.GetComponent<ITileMapElement>()?.Setup(map);
     }
 
     [Button]
-    void UpdateVisuals()
+    public void UpdateVisuals()
     {
+        if (!on)
+            return;
+
         tilemap.ClearAllTiles();
         damageOverlayTilemap.ClearAllTiles();
         oreTilemap.ClearAllTiles();
-        Util.IterateXY(Map.SizeX, Map.SizeY, UpdateVisualsAt);
+        Util.IterateXY(map.SizeX, map.SizeY, UpdateVisualsAt);
     }
 
 
-    private void UpdateVisualsAt(int x, int y)
+    public void UpdateVisualsAt(int x, int y)
     {
-        Map.WrapXIfNecessary(ref x);
+        if (!on)
+            return;
 
-        if (Map.IsOutOfBounds(x, y))
+        map.WrapXIfNecessary(ref x);
+
+        if (map.IsOutOfBounds(x, y))
         {
             return;
         }
@@ -66,14 +58,14 @@ public class MapRenderer : MonoBehaviour
         damageOverlayTilemap.SetTile(new Vector3Int(x, y, 0), destTile);
         oreTilemap.SetTile(new Vector3Int(x, y, 0), oreTile);
 
-        if (x < Map.Settings.MirroringAmount)
+        if (x < map.Settings.MirroringAmount)
         {
             tilemap.SetTile(new Vector3Int(SizeX + x, y, 0), tile);
             damageOverlayTilemap.SetTile(new Vector3Int(SizeX + x, y, 0), destTile);
             oreTilemap.SetTile(new Vector3Int(SizeX + x, y, 0), oreTile);
         }
 
-        if (x > SizeX - Map.Settings.MirroringAmount)
+        if (x > SizeX - map.Settings.MirroringAmount)
         {
             tilemap.SetTile(new Vector3Int(x - SizeX, y, 0), tile);
             damageOverlayTilemap.SetTile(new Vector3Int(x - SizeX, y, 0), destTile);
@@ -83,15 +75,15 @@ public class MapRenderer : MonoBehaviour
 
     private TileBase GetVisualTileFor(int x, int y)
     {
-        Tile tile = Map[x, y];
+        Tile tile = map[x, y];
 
-        if (Map.IsOutOfBounds(x, y) || Map.IsAirAt(x, y))
+        if (map.IsOutOfBounds(x, y) || map.IsAirAt(x, y))
             return null;
 
 
         int tileIndex = Util.BITMASK_TO_TILEINDEX[tile.NeighbourBitmask];
 
-        TileInfo tileInfo = Map.GetTileInfo(tile.Type);
+        TileInfo tileInfo = map.GetTileInfo(tile.Type);
         TileBase tileVis = null;
 
         if (tileInfo.UseTilesFromOtherInfo && tileInfo.TileSourceInfo != null)
@@ -109,14 +101,14 @@ public class MapRenderer : MonoBehaviour
 
     private TileBase GetVisualDestructableOverlayFor(int x, int y)
     {
-        var t = Map[x, y];
-        return Map.Settings.DamageOverlayTiles[Mathf.FloorToInt(t.Damage)];
+        var t = map[x, y];
+        return map.Settings.DamageOverlayTiles[Mathf.FloorToInt(t.Damage)];
     }
 
     private TileBase GetVisualOverlayTileFor(int x, int y)
     {
-        var t = Map[x, y];
-        var info = Map.GetTileInfo(t.Type);
+        var t = map[x, y];
+        var info = map.GetTileInfo(t.Type);
         return info.Overlay;
     }
 }

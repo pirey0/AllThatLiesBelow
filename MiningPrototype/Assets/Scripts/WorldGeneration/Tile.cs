@@ -81,7 +81,7 @@ public struct Tile
 
     public override string ToString()
     {
-        return Type.ToString() + "Neighbours: " + NeighbourBitmask + " Damage:" + Damage.ToString("n1") + " Stability: " +Stability + " (" +  string.Join(", " , Stabilities) + ")"; 
+        return Type.ToString() + " [N: " + NeighbourBitmask + " D:" + Damage.ToString("n1") + " S: " +Stability + " (" +  string.Join(", " , Stabilities) + ")]"; 
     }
 }
 

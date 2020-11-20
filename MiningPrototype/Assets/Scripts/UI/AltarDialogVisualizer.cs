@@ -49,14 +49,12 @@ public class AltarDialogVisualizer : MonoBehaviour
 
     }
 
-    [Button]
     public void StartDialog()
     {
         lightOpacityMultiplierTarget = 1;
         particleSystem.SetActive(true);
     }
 
-    [Button]
     public void EndDialog()
     {
         StopAllCoroutines();
@@ -72,7 +70,6 @@ public class AltarDialogVisualizer : MonoBehaviour
         }
     }
 
-    [Button]
     public void DisplaySentence(string sentence)
     {
         string[] words = sentence.Split(' ');
@@ -81,7 +78,6 @@ public class AltarDialogVisualizer : MonoBehaviour
         StartCoroutine(DisplayWords(words,2,0.25f,0.5f, 5));
     }
 
-    [Button]
     public void DisplayOptions(string[] options)
     {
         voicesVolumeTarget += voiceVolumePerWordOrOption;

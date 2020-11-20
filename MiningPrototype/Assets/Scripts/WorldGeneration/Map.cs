@@ -15,32 +15,33 @@ public class Map : MonoBehaviour, ISavable
     [SerializeField] string saveID = Util.GenerateNewSaveGUID();
 
     [SerializeField] int sizeX, sizeY;
-    [SerializeField] bool generate, updateUnstable;
+    [SerializeField] bool updateUnstable;
 
     [SerializeField] MapSettings mapSettings;
     [SerializeField] GenerationSettings generationSettings;
     [SerializeField] Transform entitiesParent;
+    [SerializeField] MapRenderer renderer;
 
-    [Header("Debug")]
+    [SerializeField] bool createOwnData;
+    [SerializeField] bool runGeneration;
+
+    [SerializeField] TileMapData data;
+
     [SerializeField] bool debug;
 
-    Tile[,] map;
+    bool runtime = false;
     ITileUpdateReceiver[,] receiverMap;
     TileMapGenerator generator;
-    [SerializeField] List<GameObject> entities;
 
     List<Vector2Int> unstableTiles = new List<Vector2Int>();
     List<GameObject> unstableTilesEffects = new List<GameObject>();
     Stack<Vector2Int> tilesToStabilityCheck = new Stack<Vector2Int>();
 
     public event System.Action<MirrorState> MirrorSideChanged;
-    public event System.Action FullVisualUpdate;
-    public event System.Action<int, int> VisualUpdateAt;
 
     public static Map Instance { get => instance; }
     public int SizeX { get => sizeX; }
     public int SizeY { get => sizeY; }
-    public Transform EntitiesParent { get => entitiesParent; }
     public GenerationSettings GenerationSettings { get => generationSettings; }
     public MapSettings Settings { get => mapSettings; }
 
@@ -59,10 +60,20 @@ public class Map : MonoBehaviour, ISavable
         set => SetMapRawAt(v.x, v.y, value);
     }
 
-    private void Start()
+    private void Awake()
     {
+        if (createOwnData)
+            data = ScriptableObject.CreateInstance<TileMapData>();
+        else
+            data = ScriptableObject.Instantiate(data);
+
+
+        runtime = true;
+
         SelectThis();
-        RunCompleteGeneration();
+
+        if (runGeneration)
+            RunCompleteGeneration();
 
         if (updateUnstable)
             StartCoroutine(UpdateUnstableTilesRoutine());
@@ -142,36 +153,36 @@ public class Map : MonoBehaviour, ISavable
     }
 
     [Button]
-    private void SelectThis()
+    public void SelectThis()
     {
         instance = this;
+        Setup();
     }
 
     [Button]
     private void RunCompleteGeneration()
     {
-        if (!generate)
-            return;
-
         Setup();
         DestroyAllEntities();
         generator.RunCompleteGeneration();
-        FullVisualUpdate?.Invoke();
+        renderer.UpdateVisuals();
     }
 
     [Button]
     private void DestroyAllEntities()
     {
-        foreach (var item in entities)
-        {
-            GameObject.DestroyImmediate(item);
-        }
-        entities.Clear();
-
         for (int i = entitiesParent.childCount - 1; i >= 0; i--)
         {
             GameObject.DestroyImmediate(entitiesParent.GetChild(i).gameObject);
         }
+    }
+
+    [Button]
+    private void Clear()
+    {
+        InitMap(SizeX, SizeY);
+        DestroyAllEntities();
+        renderer.UpdateVisuals();
     }
 
     public GameObject InstantiateEntity(GameObject prefab, Vector3 position)
@@ -179,7 +190,6 @@ public class Map : MonoBehaviour, ISavable
         var go = GameObject.Instantiate(prefab, entitiesParent);
         go.transform.localPosition = position;
 
-        entities.Add(go);
         return go;
     }
 
@@ -226,21 +236,19 @@ public class Map : MonoBehaviour, ISavable
 
     private void Setup()
     {
+        renderer.Setup(this);
         if (mapSettings == null || generationSettings == null)
         {
             Debug.LogError("TileMap settings missing.");
-
-            Destroy(this);
             return;
         }
-
         generator = new TileMapGenerator(this, generationSettings);
+        receiverMap = new ITileUpdateReceiver[sizeX, sizeY];
     }
 
     public void InitMap(int sizeX, int sizeY)
     {
-        map = new Tile[sizeX, sizeY];
-        receiverMap = new ITileUpdateReceiver[sizeX, sizeY];
+        data.Initialize(sizeX, sizeY);
     }
 
     public bool IsAirAt(int x, int y)
@@ -275,7 +283,7 @@ public class Map : MonoBehaviour, ISavable
         }
         else
         {
-            return map[x, y];
+            return data[x, y];
         }
 
     }
@@ -332,7 +340,7 @@ public class Map : MonoBehaviour, ISavable
         if (IsOutOfBounds(x, y))
             return;
 
-        map[x, y] = tile;
+        data[x, y] = tile;
 
         if (debug)
             Util.DebugDrawTile(new Vector2Int(x, y), Color.white, 0.5f);
@@ -343,14 +351,14 @@ public class Map : MonoBehaviour, ISavable
         if (IsOutOfBounds(x, y))
             return;
 
-        var prev = map[x, y];
-        map[x, y] = value;
+        var prev = data[x, y];
+        data[x, y] = value;
 
         if (updateProperties)
         {
             generator.UpdatePropertiesAt(x, y);
 
-            if (prev.Type != value.Type)
+            if (prev.Type != value.Type && runtime)
             {
                 receiverMap[x, y]?.OnTileUpdated(x, y, reason);
                 receiverMap[x, y] = null;
@@ -359,10 +367,10 @@ public class Map : MonoBehaviour, ISavable
 
         if (updateVisuals)
         {
-            VisualUpdateAt?.Invoke(x, y);
+            renderer.UpdateVisualsAt(x, y);
             foreach (var nIndex in TileMapHelper.GetNeighboursIndiciesOf(x, y))
             {
-                VisualUpdateAt?.Invoke(nIndex.x, nIndex.y);
+                renderer.UpdateVisualsAt(nIndex.x, nIndex.y);
             }
         }
 
@@ -397,8 +405,6 @@ public class Map : MonoBehaviour, ISavable
         receiverMap[x, y] = receiver;
     }
 
-   
-
     public void WrapXIfNecessary(ref int x)
     {
         if (x < 0)
@@ -411,8 +417,6 @@ public class Map : MonoBehaviour, ISavable
     {
         return (x < 0 || y < 0 || x >= SizeX || y >= SizeY);
     }
-
-    
 
     private void OnDrawGizmos()
     {
@@ -431,7 +435,7 @@ public class Map : MonoBehaviour, ISavable
         TileMapSaveData saveData = new TileMapSaveData();
         saveData.GUID = saveID;
 
-        saveData.Map = map;
+        saveData.Map = data.Map;
         Debug.Log("Saving with ID: " + saveData.GUID);
         return saveData;
     }
@@ -440,8 +444,8 @@ public class Map : MonoBehaviour, ISavable
     {
         if (data is TileMapSaveData saveData)
         {
-            map = saveData.Map;
-            FullVisualUpdate?.Invoke();
+            this.data.Map = saveData.Map;
+            renderer.UpdateVisuals();
         }
         else
         {
@@ -458,6 +462,41 @@ public class Map : MonoBehaviour, ISavable
 [System.Serializable]
 public class TileMapSaveData : SaveData
 {
-    public Tile[,] Map;
+    public MapArray Map;
+}
 
+[System.Serializable]
+public class MapArray
+{
+    [SerializeField] TileMapColumn[] rows;
+
+    public Tile this[int x, int y]
+    {
+        get => rows[x][y];
+        set => rows[x][y] = value;
+    }
+
+    public MapArray(int sizeX, int sizeY)
+    {
+        rows = new TileMapColumn[sizeX];
+
+        for (int i = 0; i < rows.Length; i++)
+        {
+            rows[i] = new TileMapColumn(sizeY);
+        }
+    }
+}
+
+
+[System.Serializable]
+public class TileMapColumn
+{
+    public TileMapColumn(int sizeY)
+    {
+        column = new Tile[sizeY];
+    }
+
+    public Tile[] column;
+
+    public Tile this[int i] { get => column[i]; set => column[i] = value; }
 }
