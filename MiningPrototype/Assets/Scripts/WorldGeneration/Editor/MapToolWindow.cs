@@ -73,6 +73,11 @@ public class MapToolWindow : EditorWindow
                 selectedTileType = (TileType)System.Enum.Parse(typeof(TileType), tileTypeNames[i]);
             }
 
+            if (i % 5 == 4)
+            {
+                GUILayout.EndHorizontal();
+                GUILayout.BeginHorizontal();
+            }
         }
         GUILayout.EndHorizontal();
 
