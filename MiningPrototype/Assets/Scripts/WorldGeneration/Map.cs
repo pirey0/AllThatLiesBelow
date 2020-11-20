@@ -44,6 +44,7 @@ public class Map : MonoBehaviour, ISavable
     public int SizeY { get => sizeY; }
     public GenerationSettings GenerationSettings { get => generationSettings; }
     public MapSettings Settings { get => mapSettings; }
+    public TileMapData Data { get => data; }
 
     /// <summary>
     /// Use SetTMapAt for full control / visual updates
@@ -62,6 +63,11 @@ public class Map : MonoBehaviour, ISavable
 
     private void Awake()
     {
+        if(Instance != this && instance != null)
+        {
+            return;
+        }
+
         if (createOwnData)
             data = ScriptableObject.CreateInstance<TileMapData>();
         else
@@ -457,6 +463,16 @@ public class Map : MonoBehaviour, ISavable
     {
         return saveID;
     }
+
+    public void LoadFromMap(TileMapData loadedData, int xOffset, int yOffset)
+    {
+        Util.IterateXY(loadedData.SizeX, loadedData.SizeY, (x, y) => LoadFromMapAt(loadedData, x, y, xOffset, yOffset));
+    }
+
+    private void LoadFromMapAt(TileMapData loadedData, int x, int y, int xOffset, int yOffset)
+    {
+        SetMapAt(x + xOffset, y + yOffset, loadedData[x, y], TileUpdateReason.Generation, updateProperties: true, updateVisuals: true);
+    }
 }
 
 [System.Serializable]
@@ -470,6 +486,9 @@ public class MapArray
 {
     [SerializeField] TileMapColumn[] rows;
 
+    public int SizeX;
+    public int SizeY;
+
     public Tile this[int x, int y]
     {
         get => rows[x][y];
@@ -478,6 +497,8 @@ public class MapArray
 
     public MapArray(int sizeX, int sizeY)
     {
+        SizeX = sizeX;
+        SizeY = sizeY;
         rows = new TileMapColumn[sizeX];
 
         for (int i = 0; i < rows.Length; i++)

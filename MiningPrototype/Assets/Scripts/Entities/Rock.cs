@@ -31,6 +31,14 @@ public class Rock : TilemapCarvingEntity, ITileMapElement
         StartCoroutine(FallingRoutine());
     }
 
+    public override void OnTileUpdated(int x, int y, TileUpdateReason reason)
+    {
+        if(reason == TileUpdateReason.Destroy || reason == TileUpdateReason.Generation)
+        {
+            UncarveDestroy();
+        }
+    }
+
     private IEnumerator FallingRoutine()
     {
         rockFalling?.Play();

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MapToolWindow : EditorWindow
 {
@@ -63,12 +64,47 @@ public class MapToolWindow : EditorWindow
         if (tileTypeNames == null)
             LoadTileTypeNames();
 
+        GUILayout.BeginHorizontal();
         for (int i = 0; i < tileTypeNames.Length; i++)
         {
+
             if (GUILayout.Button(tileTypeNames[i]))
             {
                 selectedTileType = (TileType)System.Enum.Parse(typeof(TileType), tileTypeNames[i]);
             }
+
+        }
+        GUILayout.EndHorizontal();
+
+    }
+
+    /*
+    private static void Save()
+    {
+        var sav = ScriptableObject.CreateInstance>();
+
+        foreach (var item in SceneManager.GetActiveScene().GetRootGameObjects())
+        {
+            if (item.TryGetComponent(out Map map))
+            {
+                sav.mapData = map.Data;
+                break;
+            }
+        }
+        sav.GameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
+
+        string path = EditorUtility.SaveFilePanel("Save Loadable Map", Application.dataPath, "Map", "asset");
+
+        if (path != "")
+        {
+            if (path.StartsWith(Application.dataPath))
+            {
+                path = "Assets" + path.Substring(Application.dataPath.Length);
+            }
+
+            AssetDatabase.CreateAsset(sav, path);
+            Debug.Log("Saved at " + path);
         }
     }
+    */
 }

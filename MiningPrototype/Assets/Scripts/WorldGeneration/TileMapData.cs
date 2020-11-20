@@ -8,6 +8,9 @@ public class TileMapData : ScriptableObject
 {
     [SerializeField] MapArray map;
 
+    public int SizeX { get => map.SizeX; }
+    public int SizeY { get => map.SizeY; }
+
     public Tile this[int x, int y]
     {
         get => map[x, y];
