@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5b25d363f79b0478d15e5b8489e009, type: 3}
   m_Name: NormalGenerationSettings
   m_EditorClassIdentifier: 
-  SeedIsRandom: 0
-  Seed: 0
+  SeedIsRandom: 1
+  Seed: 1
   SizeX: 100
   SizeY: 100
+  MirroringAmount: 20
   InitialAliveCurve:
     serializedVersion: 2
     m_Curve:

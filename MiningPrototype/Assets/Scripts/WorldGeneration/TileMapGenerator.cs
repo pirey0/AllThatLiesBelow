@@ -46,8 +46,8 @@ public class TileMapGenerator
     private void PopulateBorders()
     {
         Util.IterateX(settings.SizeX, (x) => map[x, 0] = Tile.Make(TileType.BedStone));
-        Util.IterateX(settings.SizeY, (y) => map[0, y] = Tile.Make(TileType.BedStone));
-        Util.IterateX(settings.SizeX, (x) => map[settings.SizeX - 1, x] = Tile.Make(TileType.BedStone));
+        //Util.IterateX(settings.SizeY, (y) => map[0, y] = Tile.Make(TileType.BedStone));
+        //Util.IterateX(settings.SizeX, (y) => map[settings.SizeX - 1, y] = Tile.Make(TileType.BedStone));
     }
 
     private void ClearAllEntities()

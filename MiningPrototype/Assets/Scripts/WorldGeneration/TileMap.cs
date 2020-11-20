@@ -226,9 +226,22 @@ public class TileMap : Singleton<TileMap>, ISavable
     public Tile GetTileAt(int x, int y)
     {
         if (IsOutOfBounds(x, y))
+        {
+            if (x < 0)
+            {
+                return GetTileAt(x + SizeX, y); //Our map is topologically a cylinder 
+            }
+            else if (x >= sizeX)
+            {
+                return GetTileAt(x - SizeX, y);
+            }
             return Tile.Air;
+        }
+        else
+        {
+            return map[x, y];
+        }
 
-        return map[x, y];
     }
 
     public bool DamageAt(int x, int y, float amount, bool playerCaused)
@@ -356,10 +369,27 @@ public class TileMap : Singleton<TileMap>, ISavable
 
     private void UpdateVisualsAt(int x, int y)
     {
-        tilemap.SetTile(new Vector3Int(x, y, 0), GetVisualTileFor(x, y));
-        damageOverlayTilemap.SetTile(new Vector3Int(x, y, 0), GetVisualDestructableOverlayFor(x, y));
-        oreTilemap.SetTile(new Vector3Int(x, y, 0), GetVisualOverlayTileFor(x, y));
+        var tile = GetVisualTileFor(x, y);
+        var destTile = GetVisualDestructableOverlayFor(x, y);
+        var oreTile = GetVisualOverlayTileFor(x, y);
 
+        tilemap.SetTile(new Vector3Int(x, y, 0), tile);
+        damageOverlayTilemap.SetTile(new Vector3Int(x, y, 0), destTile);
+        oreTilemap.SetTile(new Vector3Int(x, y, 0), oreTile);
+
+        if (x < generationSettings.MirroringAmount)
+        {
+            tilemap.SetTile(new Vector3Int(SizeX + x, y, 0), tile);
+            damageOverlayTilemap.SetTile(new Vector3Int(SizeX + x, y, 0), destTile);
+            oreTilemap.SetTile(new Vector3Int(SizeX + x, y, 0), oreTile);
+        }
+
+        if (x > SizeX - generationSettings.MirroringAmount)
+        {
+            tilemap.SetTile(new Vector3Int(x - SizeX, y, 0), tile);
+            damageOverlayTilemap.SetTile(new Vector3Int(x - SizeX, y, 0), destTile);
+            oreTilemap.SetTile(new Vector3Int(x - SizeX, y, 0), oreTile);
+        }
     }
 
     public bool IsOutOfBounds(int x, int y)

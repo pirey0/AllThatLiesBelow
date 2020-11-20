@@ -250,6 +250,17 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
         }
 
         SetMovingSound(IsMoving());
+
+        if (rigidbody.position.x < 0)
+        {
+            rigidbody.position = new Vector2(rigidbody.position.x + TileMap.Instance.SizeX, rigidbody.position.y);
+            //Notify wrap around
+        }
+        else if (rigidbody.position.x > TileMap.Instance.SizeX)
+        {
+            rigidbody.position = new Vector2(rigidbody.position.x - TileMap.Instance.SizeX, rigidbody.position.y);
+            //Notify wrap around
+        }
     }
 
     private void ClimbingEnter()
@@ -281,7 +292,7 @@ public class PlayerStateMachine : MonoBehaviour, IStateMachineUser, IEntity
 
     private bool IsGrounded()
     {
-        return isGrounded && Time.time-lastJumpTimeStamp > 0.1f;
+        return isGrounded && Time.time - lastJumpTimeStamp > 0.1f;
     }
 
     private bool ShouldClimb()

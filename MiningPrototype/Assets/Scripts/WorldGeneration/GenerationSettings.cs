@@ -13,6 +13,7 @@ public class GenerationSettings : ScriptableObject
 
     public int SizeX;
     public int SizeY;
+    public int MirroringAmount;
 
     public AnimationCurve InitialAliveCurve;
 

@@ -9,4 +9,5 @@ public class TileMapSettings : ScriptableObject
     public TileBase[] DamageOverlayTiles;
 
     public GameObject CrumbleEffects;
+
 }
