@@ -24,7 +24,7 @@ public class InventoryCollectDisplayElement : MonoBehaviour
     public void SetItem(ItemAmountPair obj)
     {
         text.text = "+" + obj.amount;
-        icon.sprite = ItemsData.GetSpriteByItemType(obj.type);
+        icon.sprite = ItemsData.GetSpriteByItemType(obj);
     }
 
     private IEnumerator FadeOut()

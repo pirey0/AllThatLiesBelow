@@ -18,4 +18,7 @@ public class ItemInfo : ScriptableObject
     public Sprite PickupHoldSprite;
     public GameObject PickupPreviewPrefab;
     public GameObject Prefab;
+
+    [Header("ReadableItem")]
+    public bool IsReadableItem;
 }

@@ -33,9 +33,11 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         type = pair.Key;
 
         if (icon != null)
-            icon.sprite = ItemsData.GetSpriteByItemType(type);
+            icon.sprite = ItemsData.GetSpriteByItemType(new ItemAmountPair(type,amount));
 
-        if (amountDisplay != null)
+        
+
+        if (amountDisplay != null && !ItemsData.GetItemInfo(type).IsReadableItem)
             amountDisplay.text = amount.ToString();
 
         StartCoroutine(ScaleCoroutine(scaleUp: true));
@@ -49,7 +51,10 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
     {
         base.OnPointerDown(eventData);
         var info = ItemsData.GetItemInfo(type);
-        TooltipHandler.Instance?.Display(transform, info.DisplayName, info.DisplayTooltip);
+        if (info.IsReadableItem && eventData.button == PointerEventData.InputButton.Right)
+            ReadableItemHandler.Instance?.Display(amount);
+        else
+            TooltipHandler.Instance?.Display(transform, info.DisplayName, info.DisplayTooltip);
     }
 
     public override void OnPointerUp(PointerEventData eventData)
