@@ -47,11 +47,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveID: 7d6260ac-ce3e-445d-a457-567d3fea757e
-  sizeX: 100
-  sizeY: 100
+  sizeX: 20
+  sizeY: 20
   updateUnstable: 1
   mapSettings: {fileID: 11400000, guid: cb933fe4e5151f14d8a9ed1be88a0e33, type: 2}
-  generationSettings: {fileID: 0}
+  generationSettings: {fileID: 11400000, guid: 9ada1e3054219d644a18b003c8174420, type: 2}
   entitiesParent: {fileID: 4487784778877613469}
   renderer: {fileID: 3796551683779632450}
   createOwnData: 0
