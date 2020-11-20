@@ -26,13 +26,15 @@ public class Inventory
 
     public void Add(ItemType type, int amount)
     {
+        bool isReadable = ItemsData.GetItemInfo(type);
+
         if (content.Count > 0)
         {
             for (int i = 0; i < content.Count; i++)
             {
                 var item = content[i];
 
-                if (item.type == type)
+                if (item.type == type &&!isReadable)
                 {
                     content[i] = new ItemAmountPair(item.type, item.amount + amount);
                     return;

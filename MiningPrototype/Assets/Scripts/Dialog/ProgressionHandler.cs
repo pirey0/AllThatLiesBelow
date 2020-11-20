@@ -1,4 +1,5 @@
 ﻿using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,9 +13,10 @@ public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
     [SerializeField] float speedPerBlessing, digSpeedPerBlessing;
     [SerializeField] NewOrderCrateSpawner newOrderCrateSpawner;
 
+    [SerializeField] Postbox postbox;
+
     List<string> aquiredList = new List<string>();
-    List<ItemAmountPair> orderForNextDay = new List<ItemAmountPair>();
- 
+    Dictionary<int, List<ItemAmountPair>> ordersForNextDay = new Dictionary<int, List<ItemAmountPair>>();
     private float speedMultiplyer = 1;
     private float digSpeedMultiplyer = 1;
     private int extraDrop = 1;
@@ -69,15 +71,28 @@ public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
         aquiredList.Clear();
 
         //order
-        newOrderCrateSpawner.SpawnOrder(orderForNextDay);
-        orderForNextDay.Clear();
+        if (postbox != null)
+        {
+            ItemAmountPair storedItem = postbox.GetStoredItem();
+            if (ItemsData.GetItemInfo(storedItem.type).IsReadableItem && ordersForNextDay.ContainsKey(storedItem.amount))
+            {
+                List<ItemAmountPair> order = ordersForNextDay[postbox.GetStoredItem().amount];
+                newOrderCrateSpawner.SpawnOrder(order);
+                ordersForNextDay.Remove(storedItem.amount);
+                postbox.SetStoredItem(new ItemAmountPair(ItemType.None,-1));
+            }
+        }
+        else
+            Debug.LogError("please reference the postbox in the progression handler");
+
+
         day++;
         SaveHandler.Save();
     }
 
-    public void AddOrderForNextDay(List<ItemAmountPair> newOrder)
+    public void RegisterOrder(int id, List<ItemAmountPair> itemAmountPairs)
     {
-        orderForNextDay.AddRange(newOrder);
+        ordersForNextDay.Add(id, itemAmountPairs);
     }
 
     public float GetPriceOf(string reward, string resource)
@@ -90,7 +105,7 @@ public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
         ProgressionSaveData saveData = new ProgressionSaveData();
         saveData.GUID = GetSaveID();
         saveData.AquiredList = aquiredList;
-        saveData.OrderForNextDay = orderForNextDay;
+        saveData.OrdersForNextDay = ordersForNextDay;
         saveData.SpeedMultiplyer = speedMultiplyer;
         saveData.DigSpeedMultiplyer = digSpeedMultiplyer;
         saveData.ExtraDrop = extraDrop;
@@ -105,7 +120,7 @@ public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
         if(data is ProgressionSaveData saveData)
         {
             aquiredList = saveData.AquiredList;
-            orderForNextDay = saveData.OrderForNextDay;
+            ordersForNextDay = saveData.OrdersForNextDay;
             speedMultiplyer = saveData.SpeedMultiplyer;
             digSpeedMultiplyer = saveData.DigSpeedMultiplyer;
             extraDrop = saveData.ExtraDrop;
@@ -129,7 +144,7 @@ public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
 public class ProgressionSaveData : SaveData
 {
     public List<string> AquiredList = new List<string>();
-    public List<ItemAmountPair> OrderForNextDay = new List<ItemAmountPair>();
+    public Dictionary<int, List<ItemAmountPair>> OrdersForNextDay = new Dictionary<int, List<ItemAmountPair>>();
 
     public float SpeedMultiplyer = 1;
     public float DigSpeedMultiplyer = 1;

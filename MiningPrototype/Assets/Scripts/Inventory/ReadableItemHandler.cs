@@ -57,6 +57,25 @@ public class ReadableItemHandler : Singleton<ReadableItemHandler>
             ReadLetterSound.Play();
         }
     }
+
+    public static int AddNewReadable(List<ItemAmountPair> itemAmountPairs)
+    {
+        string str = "New Order:\n";
+
+        foreach (ItemAmountPair pair in itemAmountPairs)
+        {
+            str += ItemsData.GetItemInfo(pair.type).DisplayName + " x " + pair.amount + "\n";
+        }
+
+        Instance.readableItems.Add(new ReadableItem(str));
+        return Instance.readableItems.Count - 1;
+    }
+
+    public static int AddNewReadable(string str)
+    {
+        Instance.readableItems.Add(new ReadableItem(str));
+        return Instance.readableItems.Count - 1;
+    }
 }
 
 public class ReadableItem
