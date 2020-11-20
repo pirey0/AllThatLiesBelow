@@ -14,11 +14,11 @@ public class PhysicalTile : MineableObject, IEntity
     [SerializeField] SpriteRenderer renderer, overlayRenderer;
     [SerializeField] AudioSource hit;
 
-    private TileMap generator;
+    private Map generator;
     Tile tile;
     TileInfo info;
 
-    public void Setup(TileMap testGeneration, Tile tile, TileInfo info)
+    public void Setup(Map testGeneration, Tile tile, TileInfo info)
     {
         generator = testGeneration;
         this.tile = tile;

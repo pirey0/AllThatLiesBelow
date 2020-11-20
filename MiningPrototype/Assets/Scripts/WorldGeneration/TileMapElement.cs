@@ -6,17 +6,17 @@ using UnityEngine.Tilemaps;
 
 public interface ITileMapElement
 {
-    TileMap TileMap { get; }
-    void Setup(TileMap tileMap);
+    Map TileMap { get; }
+    void Setup(Map tileMap);
 }
 public class TileMapElement : MonoBehaviour,ITileMapElement
 {
-    TileMap tileMap;
+    Map tileMap;
 
 
-    public TileMap TileMap { get => tileMap; }
+    public Map TileMap { get => tileMap; }
 
-    public void Setup(TileMap tileMap)
+    public void Setup(Map tileMap)
     {
         this.tileMap = tileMap;
     }

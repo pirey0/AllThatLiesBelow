@@ -8,7 +8,7 @@ public class Ladder : TilemapCarvingEntity, ITileMapElement
     [SerializeField] Rigidbody2D rigidbody;
     [SerializeField] AudioSource fallSound;
 
-    public TileMap TileMap { get; private set; }
+    public Map TileMap { get; private set; }
 
     public void NotifyGoingDown()
     {
@@ -64,7 +64,7 @@ public class Ladder : TilemapCarvingEntity, ITileMapElement
         Carve();
     }
 
-    public void Setup(TileMap tileMap)
+    public void Setup(Map tileMap)
     {
         TileMap = tileMap;
     }

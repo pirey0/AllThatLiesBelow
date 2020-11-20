@@ -146,8 +146,8 @@ public class PlayerInteractionHandler : InventoryOwner
 
     private void UpdateDigTarget()
     {
-        gridDigTarget = TileMapHelper.GetClosestSolidBlock(TileMap.Instance, GetPositionInGrid(), GetClickCoordinate());
-        if (!TileMap.Instance.CanTarget(gridDigTarget.Value.x, gridDigTarget.Value.y))
+        gridDigTarget = TileMapHelper.GetClosestSolidBlock(Map.Instance, GetPositionInGrid(), GetClickCoordinate());
+        if (!Map.Instance.CanTarget(gridDigTarget.Value.x, gridDigTarget.Value.y))
         {
             gridDigTarget = null;
         }
@@ -203,8 +203,8 @@ public class PlayerInteractionHandler : InventoryOwner
     private void TryPlace()
     {
         Vector2Int clickPos = GetClickCoordinate();
-        if (TileMapHelper.HasLineOfSight(TileMap.Instance, GetPositionInGrid(), clickPos, debugVisualize: true))
-            TileMap.Instance.PlaceAt(clickPos.x, clickPos.y, Tile.Make(TileType.Stone));
+        if (TileMapHelper.HasLineOfSight(Map.Instance, GetPositionInGrid(), clickPos, debugVisualize: true))
+            Map.Instance.PlaceAt(clickPos.x, clickPos.y, Tile.Make(TileType.Stone));
     }
 
     private void TryDig()
@@ -213,7 +213,7 @@ public class PlayerInteractionHandler : InventoryOwner
         PlayerActivity?.Invoke();
         if (gridDigTarget.HasValue)
         {
-            bool broken = TileMap.Instance.DamageAt(gridDigTarget.Value.x, gridDigTarget.Value.y, Time.deltaTime * settings.digSpeed * ProgressionHandler.Instance.DigSpeedMultiplyer, playerCaused: true);
+            bool broken = Map.Instance.DamageAt(gridDigTarget.Value.x, gridDigTarget.Value.y, Time.deltaTime * settings.digSpeed * ProgressionHandler.Instance.DigSpeedMultiplyer, playerCaused: true);
 
             if (broken)
             {
@@ -248,7 +248,7 @@ public class PlayerInteractionHandler : InventoryOwner
 
     private void UpdateMiningParticlesPositions()
     {
-        miningParticles.transform.position = TileMapHelper.GetWorldLocationOfFreeFaceFromSource(TileMap.Instance, gridDigTarget.Value, GetPositionInGrid());
+        miningParticles.transform.position = TileMapHelper.GetWorldLocationOfFreeFaceFromSource(Map.Instance, gridDigTarget.Value, GetPositionInGrid());
         Debug.DrawLine((Vector3Int)GetPositionInGrid(), miningParticles.transform.position, Color.yellow, 0.1f);
     }
 

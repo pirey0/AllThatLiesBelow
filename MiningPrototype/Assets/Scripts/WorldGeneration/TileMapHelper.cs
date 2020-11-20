@@ -33,7 +33,7 @@ public static class TileMapHelper
     }
 
 
-    public static bool HasLineOfSight(TileMap map, Vector2Int start, Vector2Int end, bool debugVisualize = false)
+    public static bool HasLineOfSight(Map map, Vector2Int start, Vector2Int end, bool debugVisualize = false)
     {
         Vector2Int current = start;
 
@@ -85,7 +85,7 @@ public static class TileMapHelper
         return offset;
     }
 
-    public static Vector3 GetWorldLocationOfFreeFaceFromSource(TileMap map, Vector2Int target, Vector2Int source)
+    public static Vector3 GetWorldLocationOfFreeFaceFromSource(Map map, Vector2Int target, Vector2Int source)
     {
         Vector2Int disp = source - target;
 
@@ -108,7 +108,7 @@ public static class TileMapHelper
 
     }
 
-    public static Vector2Int GetClosestSolidBlock(TileMap map, Vector2Int current, Vector2Int end)
+    public static Vector2Int GetClosestSolidBlock(Map map, Vector2Int current, Vector2Int end)
     {
         while (current != end)
         {
@@ -128,7 +128,7 @@ public static class TileMapHelper
             return Color.black;
     }
 
-    public static bool OnEdgeOfMap(TileMap map, Vector2Int position)
+    public static bool OnEdgeOfMap(Map map, Vector2Int position)
     {
         if (position.x == 0 || position.y == 0 || position.x == map.SizeX - 1 || position.y == map.SizeY - 1)
             return true;
@@ -136,7 +136,7 @@ public static class TileMapHelper
         return false;
     }
 
-    public static bool IsAllAirAt(TileMap map, Vector2Int[] locations)
+    public static bool IsAllAirAt(Map map, Vector2Int[] locations)
     {
 
         foreach (var loc in locations)
@@ -149,7 +149,7 @@ public static class TileMapHelper
         return true;
     }
 
-    public static bool IsAllBlockAt(TileMap map, Vector2Int[] locations)
+    public static bool IsAllBlockAt(Map map, Vector2Int[] locations)
     {
 
         foreach (var loc in locations)
@@ -162,7 +162,7 @@ public static class TileMapHelper
         return true;
     }
 
-    public static int AirTileCountAbove(TileMap map, Vector2Int coordinate)
+    public static int AirTileCountAbove(Map map, Vector2Int coordinate)
     {
         int count = 0;
         while (!map.IsOutOfBounds(coordinate.x, coordinate.y))
