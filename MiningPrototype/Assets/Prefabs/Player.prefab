@@ -5869,89 +5869,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1566438266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4724523066374434780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c429d83c33032e640814e00af29a6c1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 5165143014864439578}
-  idleFrameRight: 6
-  idleFrameLeft: 6
-  sprites:
-  - {fileID: 1522097905951984030, guid: c099f4890c297984490ff015018f9495, type: 3}
-  - {fileID: -4857031402594571213, guid: c099f4890c297984490ff015018f9495, type: 3}
-  - {fileID: 2793686887763230910, guid: c099f4890c297984490ff015018f9495, type: 3}
-  - {fileID: -2140573764911733191, guid: c099f4890c297984490ff015018f9495, type: 3}
-  - {fileID: -3322022834941860738, guid: c099f4890c297984490ff015018f9495, type: 3}
-  - {fileID: -3189682528193580246, guid: c099f4890c297984490ff015018f9495, type: 3}
-  - {fileID: -7303096387755746053, guid: c099f4890c297984490ff015018f9495, type: 3}
-  - {fileID: 7585674902419984140, guid: c099f4890c297984490ff015018f9495, type: 3}
-  animationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: -2.1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.2
-      value: -0.22
-      inSlope: 21.84351
-      outSlope: 21.84351
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.117983826
-    - serializedVersion: 3
-      time: 0.25
-      value: 0.0834
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 1
-    m_RotationOrder: 4
---- !u!114 &2214841632456959460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4724523066374434780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2127d15acbd258b4e8b0e4f1faf4e50f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toListenTo: {fileID: 6332330309916232596}
-  sprites:
-  - sprite: {fileID: -5010878985237893848, guid: e0e653eb664f99240af5fc835c92efaa, type: 3}
-    offset: {x: 0, y: -0.375, z: 0}
-  - sprite: {fileID: -7194323726269135038, guid: e0e653eb664f99240af5fc835c92efaa, type: 3}
-    offset: {x: 0, y: -0.25, z: 0}
-  - sprite: {fileID: 3644946514836814670, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
-    offset: {x: 0.25, y: -0.25, z: 0}
-  - sprite: {fileID: 6277849533615305770, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
-    offset: {x: 0, y: -0.125, z: 0}
-  - sprite: {fileID: 7127391226831221617, guid: bea1749c2a5f10742902c491aa0fcc1e, type: 3}
-    offset: {x: 0, y: -0.25, z: 0}
-  - sprite: {fileID: -8736164668747230439, guid: 94421b5b25e63b4479deff0229d1ed28, type: 3}
-    offset: {x: -0.125, y: -0.25, z: 0}
 --- !u!1 &5249058579509750981
 GameObject:
   m_ObjectHideFlags: 0
@@ -6314,7 +6231,7 @@ MonoBehaviour:
   mouseHighlight: {fileID: 1281847263}
   breakBlock: {fileID: 3471564094401374700}
   startMining: {fileID: 4569569128638959811}
-  pickaxeAnimator: {fileID: 1566438266}
+  pickaxeAnimator: {fileID: 3210262223222190072}
   eventSystem: {fileID: 0}
   miningParticles: {fileID: 265151543036608254}
   heldItemPreview: {fileID: 3794947}
@@ -6335,7 +6252,7 @@ MonoBehaviour:
   headAnimator: {fileID: 154330390}
   handsRenderer: {fileID: 852425621}
   itemRenderer: {fileID: 3794947}
-  pickaxe: {fileID: 1566438266}
+  pickaxe: {fileID: 3210262223222190072}
   pickaxeObject: {fileID: 4724523066374434780}
   pickaxeRenderer: {fileID: 5165143014864439578}
   visualStates:
@@ -6614,6 +6531,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8633471933228471852}
     m_Modifications:
+    - target: {fileID: 2214841632456959460, guid: 562e47677541fc741804e2557b49653b, type: 3}
+      propertyPath: toListenTo
+      value: 
+      objectReference: {fileID: 6332330309916232596}
     - target: {fileID: 4325085931206026516, guid: 562e47677541fc741804e2557b49653b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6658,25 +6579,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6923913253500253519, guid: 562e47677541fc741804e2557b49653b, type: 3}
-      propertyPath: playerSpriteRenderer
-      value: 
-      objectReference: {fileID: 8633471933228471855}
-    - target: {fileID: 7720122279049008536, guid: 562e47677541fc741804e2557b49653b, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7720122279049008536, guid: 562e47677541fc741804e2557b49653b, type: 3}
-      propertyPath: m_SortingOrder
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 7862656893741527902, guid: 562e47677541fc741804e2557b49653b, type: 3}
       propertyPath: m_Name
       value: Pickaxe
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6923913253500253519, guid: 562e47677541fc741804e2557b49653b, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 562e47677541fc741804e2557b49653b, type: 3}
+--- !u!114 &3210262223222190072 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1566438266, guid: 562e47677541fc741804e2557b49653b, type: 3}
+  m_PrefabInstance: {fileID: 3210262223949552770}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4724523066374434780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c429d83c33032e640814e00af29a6c1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &5165143014864439578 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 7720122279049008536, guid: 562e47677541fc741804e2557b49653b, type: 3}
