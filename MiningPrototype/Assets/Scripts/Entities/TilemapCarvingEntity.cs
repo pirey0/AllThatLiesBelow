@@ -5,6 +5,7 @@ using UnityEngine;
 
 public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateReceiver
 {
+    [SerializeField] ItemAmountPair drop;
     [SerializeField] protected TileOffsetTypePair[] tilesToOccupy;
     [SerializeField] Vector3 carvingOffset;
 
@@ -13,7 +14,7 @@ public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateRec
     public virtual void OnTileUpdated(int x, int y, TileUpdateReason reason)
     {
     }
-    
+
     public virtual void OnTileCrumbleNotified(int x, int y)
     {
     }
@@ -36,7 +37,10 @@ public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateRec
     public void UncarveDestroy()
     {
         UnCarvePrevious();
+
         Destroy(gameObject);
+        if (drop.IsValid())
+            InventoryManager.PlayerCollects(drop.type, drop.amount);
     }
 
     protected void Carve()

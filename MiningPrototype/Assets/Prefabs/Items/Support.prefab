@@ -195,12 +195,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21ec20a614c8cbd4f852c3db9dcc0032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overlayAnimator: {fileID: 6501952104137814512}
-  damageMultiplier: 1
-  contains:
+  drop:
     type: 7
     amount: 1
-  destroyEffects: {fileID: 4888635124280202427, guid: c7333c0e8139a984db63c0ab6a7f05ac, type: 3}
+  tilesToOccupy: []
+  carvingOffset: {x: 0, y: 0, z: 0}
   front: {fileID: 8232163616218621377}
   back: {fileID: 8232163616488642127}
   maxHeight: 5
