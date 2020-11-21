@@ -12,7 +12,8 @@ public enum ItemType
     Diamond,
     Ladder,
     Support,
-    Family_Letter,
+    LetterFromFamily,
+    LetterToFamily
 }
 
 

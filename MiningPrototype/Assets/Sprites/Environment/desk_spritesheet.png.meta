@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 42f7edf6677c82d46a0b1b250712293e
+guid: 10b107675394172448d3560afba43a05
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -8,6 +8,30 @@ TextureImporter:
   - first:
       213: -9194601526799217329
     second: desk_spritesheet_1
+  - first:
+      213: 4578840018397341192
+    second: desk_spritesheet_2
+  - first:
+      213: -7698079103217006726
+    second: desk_spritesheet_3
+  - first:
+      213: 1797930520484709941
+    second: desk_spritesheet_4
+  - first:
+      213: 959468470212378334
+    second: desk_spritesheet_0
+  - first:
+      213: -1830206422679888818
+    second: desk_spritesheet_1
+  - first:
+      213: -5482772711450093491
+    second: desk_spritesheet_2
+  - first:
+      213: -8936833745755507250
+    second: desk_spritesheet_3
+  - first:
+      213: -8646043695135369530
+    second: desk_spritesheet_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -26,7 +50,7 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -101,7 +125,7 @@ TextureImporter:
         x: 0
         y: 0
         width: 18
-        height: 18
+        height: 16
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -109,8 +133,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38638406bcbfc3810800000000000000
-      internalID: 1746547606425187971
+      spriteID: ede323c7d77b05d00800000000000000
+      internalID: 959468470212378334
       vertices: []
       indices: 
       edges: []
@@ -122,7 +146,7 @@ TextureImporter:
         x: 18
         y: 0
         width: 18
-        height: 18
+        height: 16
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,8 +154,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f4d4edf50a6366080800000000000000
-      internalID: -9194601526799217329
+      spriteID: e4cd68694fcc996e0800000000000000
+      internalID: -1830206422679888818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: desk_spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 0
+        width: 18
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d48dfc5944749e3b0800000000000000
+      internalID: -5482772711450093491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: desk_spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 0
+        width: 18
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec5f48fbe0df9f380800000000000000
+      internalID: -8936833745755507250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: desk_spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 0
+        width: 18
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c653f66115130880800000000000000
+      internalID: -8646043695135369530
       vertices: []
       indices: 
       edges: []

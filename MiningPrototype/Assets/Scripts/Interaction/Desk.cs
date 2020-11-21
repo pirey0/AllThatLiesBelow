@@ -7,10 +7,13 @@ using UnityEngine;
 public class Desk : MonoBehaviour, IInteractable
 {
     [SerializeField] SpriteRenderer spriteRenderer;
-    [SerializeField] Sprite deskEmpty, deskFull;
+    [SerializeField] Sprite deskEmpty;
     [SerializeField] Canvas optionsCanvas;
     [SerializeField] GameObject option1, option2;
     [SerializeField] NewOrderVisualizer newOrderVisualizerPrefab;
+    [SerializeField] AudioSource letterWritingSource;
+    [SerializeField] SpriteAnimator animator;
+    [SerializeField] SpriteAnimation idleAnimation, writeAnimation;
     NewOrderVisualizer currentOrder;
     PlayerStateMachine seatedPlayer;
 
@@ -53,7 +56,7 @@ public class Desk : MonoBehaviour, IInteractable
             return;
 
         deskState = DeskState.Sitting;
-        spriteRenderer.sprite = deskFull;
+        animator.Play(idleAnimation);
         optionsCanvas.gameObject.SetActive(true);
         option1.SetActive(true);
         option2.SetActive(true);
@@ -67,6 +70,7 @@ public class Desk : MonoBehaviour, IInteractable
             return;
 
         deskState = DeskState.Empty;
+        animator.Play(null);
         spriteRenderer.sprite = deskEmpty;
         optionsCanvas.gameObject.SetActive(false);
         seatedPlayer.Enable();
@@ -102,16 +106,10 @@ public class Desk : MonoBehaviour, IInteractable
     {
         option1.SetActive(false);
         option2.SetActive(false);
+        animator.Play(writeAnimation);
+        letterWritingSource?.Play();
         yield return new WaitForSeconds(3);
-
-        string letterText = "My Dear Little Girl,\nI suppose by this time that you are sound asleep in [your] bunk and enjoying dreamland.Well, I’m not going to “waste” much time over this so after a few little scratches, will hit the sheets myself.\n" +
-            "I do hope that when you receive this you will be feeling a little better than you were when I left. For the life of me, on the other hand, that perhaps something was wrong with the person leaving. \n" +
-            "However, I’ll know tomorrow.\n" +
-            "Now Little Girlie, I must take this out to the box and file into bed.It’s freezing tonight so I supposed that means snowshoeing.\n\n" +
-            "Good night for this trip,\n" +
-            "Reg";
-
-        InventoryManager.PlayerCollects(ItemType.Family_Letter,ReadableItemHandler.AddNewReadable(letterText));
+        InventoryManager.PlayerCollects(ItemType.LetterToFamily, 1);
         LeaveDesk();
     }
 

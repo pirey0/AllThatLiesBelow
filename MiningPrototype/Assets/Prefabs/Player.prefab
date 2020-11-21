@@ -6213,7 +6213,7 @@ MonoBehaviour:
     CanInteract: 0
     CanInventory: 0
   playerInteraction: {fileID: 497824006148765930}
-  debug: 1
+  debug: 0
 --- !u!114 &497824006148765930
 MonoBehaviour:
   m_ObjectHideFlags: 0

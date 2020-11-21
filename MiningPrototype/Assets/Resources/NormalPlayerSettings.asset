@@ -38,5 +38,5 @@ MonoBehaviour:
   climbPanSpeed: 2
   climbIdleThreshold: 0.2
   idleThreshold: 0.2
-  overWorldHeight: 83
+  overWorldHeight: 79
   timeToHidePickaxe: 5

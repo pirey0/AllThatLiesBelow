@@ -17,6 +17,7 @@ MonoBehaviour:
   damageMultiplyer: 1
   AirLike: 0
   Targetable: 1
+  TargetPriority: 1
   StabilityAffected: 1
   NotifiesInsteadOfCrumbling: 0
   CountsAsNeighbour: 1

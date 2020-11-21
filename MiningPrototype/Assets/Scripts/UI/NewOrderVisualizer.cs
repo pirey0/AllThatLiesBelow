@@ -135,7 +135,7 @@ public class NewOrderVisualizer : MonoBehaviour
 
         int readableId = ReadableItemHandler.AddNewReadable(itemAmountPairs);
         ProgressionHandler.Instance.RegisterOrder(readableId, itemAmountPairs);
-        InventoryManager.PlayerCollects(ItemType.Family_Letter, readableId);
+        InventoryManager.PlayerCollects(ItemType.LetterFromFamily, readableId);
 
         foreach (var singlePrice in cost)
         {
