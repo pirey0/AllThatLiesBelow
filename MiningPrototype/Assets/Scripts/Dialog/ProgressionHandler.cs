@@ -13,6 +13,7 @@ public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
     [SerializeField] float speedPerBlessing, digSpeedPerBlessing;
     [SerializeField] NewOrderCrateSpawner newOrderCrateSpawner;
     [SerializeField] int startingLetterID = 100;
+    [SerializeField] List<ItemAmountPair> startingItems;
 
     //sacrific
     List<string> aquiredList = new List<string>();
@@ -36,9 +37,6 @@ public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
     private void OnEnable()
     {
         GameState.Instance.StateChanged += OnStateChanged;
-        Debug.Log(System.Security.Principal.WindowsIdentity.GetCurrent().Name + " <-- Security Name");
-        Debug.Log(Environment.UserName + "<- Environment");
-        Debug.Log(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + " <-- special folder");
     }
 
     private void OnDisable()
@@ -83,6 +81,9 @@ public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
         letterProgressionState = LetterProgressionState.RecievedDay;
         if (postbox != null)
             SetPostboxLetterToID(lastLetterID);
+
+        if (newOrderCrateSpawner != null)
+            newOrderCrateSpawner.SpawnOrder(startingItems);
     }
 
     [Button]

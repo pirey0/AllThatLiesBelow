@@ -1,14 +1,16 @@
 ﻿using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class NewOrderCrateSpawner : MonoBehaviour
+public class NewOrderCrateSpawner : StateListenerBehaviour
 {
     [SerializeField] List<ItemAmountPair> testOrder;
     [SerializeField] List<CrateInfo> crateInfos;
-    [SerializeField] Vector3 boxSpawnLocation;
+
+    LocationIndicator spawnLoc;
 
     private void Start()
     {
@@ -20,6 +22,15 @@ public class NewOrderCrateSpawner : MonoBehaviour
         crateInfos.Sort((x, y) => x.MaxCapacity - y.MaxCapacity);
     }
 
+    protected override void OnStateChanged(GameState.State newState)
+    {
+        if (newState == GameState.State.Ready)
+        {
+            spawnLoc = LocationIndicator.Find(IndicatorType.OrderSpawn);
+        }
+    }
+
+
     [Button]
     public void SpawnTestOrder()
     {
@@ -29,6 +40,7 @@ public class NewOrderCrateSpawner : MonoBehaviour
     public void SpawnOrder(List<ItemAmountPair> orderSource)
     {
         var order = new List<ItemAmountPair>(orderSource);
+        order.Sort((x, y) => y.GetTotalWeight() - x.GetTotalWeight());
 
         for (int i = 0; i < order.Count; i++)
         {
@@ -42,12 +54,12 @@ public class NewOrderCrateSpawner : MonoBehaviour
 
                 foreach (var s in split)
                 {
-                    order.Add(s);
+                    order.Insert(i+1,s);
                 }
             }
             else
             {
-                Crate newCrate = Instantiate(cratePrefab, boxSpawnLocation, Quaternion.identity);
+                Crate newCrate = Instantiate(cratePrefab, spawnLoc.transform.position + new Vector3(0, i*2), Quaternion.identity);
                 newCrate.Pack(item);
             }
         }
@@ -94,10 +106,7 @@ public class NewOrderCrateSpawner : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireCube(boxSpawnLocation, Vector3.one);
-    }
+
 }
 
 [System.Serializable]

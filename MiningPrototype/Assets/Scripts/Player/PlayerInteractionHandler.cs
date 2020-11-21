@@ -68,7 +68,7 @@ public class PlayerInteractionHandler : InventoryOwner
         }
 
         //Stop interacting when too far away
-        if(currentInteractable != null && Vector3.Distance(transform.position,currentInteractable.gameObject.transform.position) > settings.maxInteractableDistance)
+        if (currentInteractable != null && Vector3.Distance(transform.position, currentInteractable.gameObject.transform.position) > settings.maxInteractableDistance)
         {
             TryStopInteracting();
         }
@@ -82,7 +82,7 @@ public class PlayerInteractionHandler : InventoryOwner
 
                 if (Input.GetMouseButton(0))
                 {
-                    if (eventSystem.currentSelectedGameObject == null && !player.InOverworld())
+                    if (eventSystem.currentSelectedGameObject == null)
                         TryDig();
                 }
                 else if (Input.GetMouseButtonDown(1))
@@ -216,28 +216,35 @@ public class PlayerInteractionHandler : InventoryOwner
 
     private void TryDig()
     {
-        CloseInventory();
-        PlayerActivity?.Invoke();
         if (gridDigTarget.HasValue)
         {
-            bool broken = Map.Instance.DamageAt(gridDigTarget.Value.x, gridDigTarget.Value.y, Time.deltaTime * settings.digSpeed * ProgressionHandler.Instance.DigSpeedMultiplyer, playerCaused: true);
+            Tile t = Map.Instance[gridDigTarget.Value];
+            var info = TilesData.GetTileInfo(t.Type);
 
-            if (broken)
+            if (!player.InOverworld() || info.MinableInOverworld)
             {
-                miningParticles.transform.position = (Vector3Int)gridDigTarget + new Vector3(0.5f, 0.5f);
-                miningParticles.Emit(settings.miningBreakParticlesCount);
-                breakBlock.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
-                breakBlock.Play();
-                TryDisableMiningVisuals();
-            }
-            else
-            {
-                UpdateMiningParticlesPositions();
-            }
+                CloseInventory();
+                PlayerActivity?.Invoke();
 
-            TryEnableMiningVisuals();
-            player.NotifyPickaxeUse();
-            player.SetFaceDirection(gridDigTarget.Value.x - transform.position.x > 0);
+                bool broken = Map.Instance.DamageAt(gridDigTarget.Value.x, gridDigTarget.Value.y, Time.deltaTime * settings.digSpeed * ProgressionHandler.Instance.DigSpeedMultiplyer, playerCaused: true);
+
+                if (broken)
+                {
+                    miningParticles.transform.position = (Vector3Int)gridDigTarget + new Vector3(0.5f, 0.5f);
+                    miningParticles.Emit(settings.miningBreakParticlesCount);
+                    breakBlock.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+                    breakBlock.Play();
+                    TryDisableMiningVisuals();
+                }
+                else
+                {
+                    UpdateMiningParticlesPositions();
+                }
+
+                TryEnableMiningVisuals();
+                player.NotifyPickaxeUse();
+                player.SetFaceDirection(gridDigTarget.Value.x - transform.position.x > 0);
+            }
         }
         else
         {
