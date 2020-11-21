@@ -52,7 +52,7 @@ public class InventoryVisualizer : ScalingUIElementBase
             GameObject.Destroy(child.gameObject);
         }
 
-        KeyValuePair<ItemType, int>[] content = inventory.GetContent();
+        ItemAmountPair[] content = inventory.GetContent();
         StopAllCoroutines();
         StartCoroutine(SpawnItemElements(content));
         RecalculateUISize(content.Length);
@@ -97,7 +97,7 @@ public class InventoryVisualizer : ScalingUIElementBase
             gridLayoutParent.localScale = flipX;
     }
 
-    private IEnumerator SpawnItemElements(KeyValuePair<ItemType, int>[] itemsToVisualize)
+    private IEnumerator SpawnItemElements(ItemAmountPair[] itemsToVisualize)
     {
         yield return new WaitForSeconds(0.2f);
 

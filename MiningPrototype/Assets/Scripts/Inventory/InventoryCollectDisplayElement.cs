@@ -23,7 +23,9 @@ public class InventoryCollectDisplayElement : MonoBehaviour
 
     public void SetItem(ItemAmountPair obj)
     {
-        text.text = "+" + obj.amount;
+        var info = ItemsData.GetItemInfo(obj.type);
+
+        text.text = "+" + (info.AmountIsUniqueID ? 1 : obj.amount);
         icon.sprite = ItemsData.GetSpriteByItemType(obj);
     }
 
@@ -36,7 +38,7 @@ public class InventoryCollectDisplayElement : MonoBehaviour
             Color c = new Color(text.color.r, text.color.g, text.color.b, fadeCurve.Evaluate(t / duration));
             text.color = c;
             icon.color = c;
-            transform.position += new Vector3(0, moveSpeed*Time.deltaTime, 0);
+            transform.position += new Vector3(0, moveSpeed * Time.deltaTime, 0);
 
             yield return null;
             t += Time.deltaTime;
