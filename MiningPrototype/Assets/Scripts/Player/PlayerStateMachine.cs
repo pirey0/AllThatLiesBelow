@@ -224,7 +224,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
 
     private void DeathEnter()
     {
-        TransitionEffectHandler.FadeOut();
+        TransitionEffectHandler.FadeOut(FadeType.Death);
         rigidbody.simulated = false;
         lastDeathTimeStamp = Time.time;
         GameState.Instance.ChangeStateTo(GameState.State.Respawning);
@@ -244,8 +244,10 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         if(bed != null)
         {
             transform.position = bed.transform.position;
+            FindObjectOfType<CameraPanner>().UpdatePosition();
             stateMachine.ForceTransitionTo(s_idle);
             bed.BeginInteracting(gameObject);
+            bed.WakeUpFromNightmare(gameObject);
             Debug.Log("Respawning at bed: " + bed.name);
         }
         else
