@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconClosed: {fileID: 21300000, guid: 0d6d1ee0315ae1f41997aaa1a79a51f1, type: 3}
   iconOpen: {fileID: 21300000, guid: 35c3a92e197d60443aa96dae19542c71, type: 3}
+  iconNewOrder: {fileID: 21300000, guid: 85880727b886d7443a5163a381e671c6, type: 3}
   textDisplayPrefab: {fileID: 2481684509624394811, guid: 792491b9185146b439b16abe13758f74, type: 3}
   ReadLetterSound: {fileID: 1545727183}
   canvas: {fileID: 4457859654865479513}

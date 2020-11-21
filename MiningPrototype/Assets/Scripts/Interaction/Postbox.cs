@@ -142,6 +142,8 @@ public class Postbox : MonoBehaviour, IInteractable, IDropReceiver
     {
         if (IsEmpty())
             SetBoxstatus(PostboxStatus.CLOSED);
+        else
+            SetBoxstatus(PostboxStatus.ACTIVE);
     }
 
     public void HoverUpdate(ItemAmountPair pair)

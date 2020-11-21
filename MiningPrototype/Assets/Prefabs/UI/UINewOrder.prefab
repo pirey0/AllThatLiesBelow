@@ -140,8 +140,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4283510666
+  m_fontColor: {r: 0.5411765, g: 0.18431373, b: 0.31764707, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -395,7 +395,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.64705884, g: 0.6509804, b: 0.5803922, a: 1}
+    m_NormalColor: {r: 0.65882355, g: 0.5176471, b: 0.3529412, a: 1}
     m_HighlightedColor: {r: 0.5411765, g: 0.18431373, b: 0.31764707, a: 1}
     m_PressedColor: {r: 0.5411765, g: 0.18431373, b: 0.31764707, a: 1}
     m_SelectedColor: {r: 0.5411765, g: 0.18431373, b: 0.31764707, a: 1}
@@ -543,8 +543,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4283510666
+  m_fontColor: {r: 0.5411765, g: 0.18431373, b: 0.31764707, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -752,8 +752,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4283510666
+  m_fontColor: {r: 0.5411765, g: 0.18431373, b: 0.31764707, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1029,7 +1029,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.64705884, g: 0.6509804, b: 0.5803922, a: 1}
+    m_NormalColor: {r: 0.79215693, g: 0.6392157, b: 0.46274513, a: 1}
     m_HighlightedColor: {r: 0.5411765, g: 0.18431373, b: 0.31764707, a: 1}
     m_PressedColor: {r: 0.5411765, g: 0.18431373, b: 0.31764707, a: 1}
     m_SelectedColor: {r: 0.5411765, g: 0.18431373, b: 0.31764707, a: 1}
@@ -1359,10 +1359,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1035021040565101160}
     m_Modifications:
-    - target: {fileID: 4795206521028861192, guid: 368e74ecddb90f64a94cd958a5f835b1, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -3.105011
-      objectReference: {fileID: 0}
     - target: {fileID: 4795206521112447199, guid: 368e74ecddb90f64a94cd958a5f835b1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1450,14 +1446,6 @@ PrefabInstance:
     - target: {fileID: 4795206521112447200, guid: 368e74ecddb90f64a94cd958a5f835b1, type: 3}
       propertyPath: m_Name
       value: UINewOrderElement
-      objectReference: {fileID: 0}
-    - target: {fileID: 5292199689761788640, guid: 368e74ecddb90f64a94cd958a5f835b1, type: 3}
-      propertyPath: elementName
-      value: Ladder
-      objectReference: {fileID: 0}
-    - target: {fileID: 5292199689761788640, guid: 368e74ecddb90f64a94cd958a5f835b1, type: 3}
-      propertyPath: elementType
-      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 368e74ecddb90f64a94cd958a5f835b1, type: 3}
