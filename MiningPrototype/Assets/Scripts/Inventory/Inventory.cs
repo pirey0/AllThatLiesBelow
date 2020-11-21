@@ -76,6 +76,7 @@ public class Inventory
             if(i>0 && i < content.Count)
             {
                 content.RemoveAt(i);
+                InventoryChanged?.Invoke();
                 return true;
             }
         }
