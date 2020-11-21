@@ -45,7 +45,7 @@ public class ReadableItemHandler : Singleton<ReadableItemHandler>
         }
 
         if (current != null)
-            return;
+            Destroy(current.gameObject);
 
         itemToDisplay.hasRead = true;
 
