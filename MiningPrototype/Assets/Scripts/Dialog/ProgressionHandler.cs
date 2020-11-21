@@ -12,9 +12,9 @@ public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
     [SerializeField] string alreadyTradedDialog;
     [SerializeField] float speedPerBlessing, digSpeedPerBlessing;
     [SerializeField] NewOrderCrateSpawner newOrderCrateSpawner;
+    [SerializeField] int startingLetterID = 100;
 
-    [SerializeField] Postbox postbox;
-
+    //sacrific
     List<string> aquiredList = new List<string>();
     Dictionary<int, List<ItemAmountPair>> ordersForNextDay = new Dictionary<int, List<ItemAmountPair>>();
     private float speedMultiplyer = 1;
@@ -23,9 +23,45 @@ public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
     private int day = 0;
     bool dailyPurchaseExaused;
 
+    //postbox and letters
+    Postbox postbox;
+    int lastLetterID = -1;
+    bool wifeRecievedLetter = false;
+    LetterProgressionState letterProgressionState = LetterProgressionState.RecievedDay;
+
     public float SpeedMultiplyer { get => speedMultiplyer; }
     public float DigSpeedMultiplyer { get => digSpeedMultiplyer; }
     public int ExtraDrop { get => extraDrop; }
+
+    private void OnEnable()
+    {
+        GameState.Instance.StateChanged += OnStateChanged;
+        Debug.Log(System.Security.Principal.WindowsIdentity.GetCurrent().Name + " <-- Security Name");
+        Debug.Log(Environment.UserName + "<- Environment");
+        Debug.Log(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + " <-- special folder");
+    }
+
+    private void OnDisable()
+    {
+        GameState.Instance.StateChanged -= OnStateChanged;
+    }
+
+    private void OnStateChanged(GameState.State state)
+    {
+        if (state == GameState.State.Ready)
+        {
+            postbox = FindObjectOfType<Postbox>();
+
+            if (SaveHandler.LoadedFromSaveFile)
+            {
+
+            }
+            else
+            {
+                BeginFromStart();
+            }
+        }
+    }
 
     public IDialogSection GetCurrentAltarDialog()
     {
@@ -41,9 +77,115 @@ public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
         aquiredList.Add(topic);
     }
 
+    public void BeginFromStart()
+    {
+        lastLetterID = startingLetterID;
+        letterProgressionState = LetterProgressionState.RecievedDay;
+        if (postbox != null)
+            SetPostboxLetterToID(lastLetterID);
+    }
+
+    [Button]
     public void StartNextDay()
     {
-        //sacrifices
+        UpdateSacrifices();
+        UpdateLetters();
+
+        day++;
+        SaveHandler.Save();
+    }
+
+    [Button]
+    private void WifeRecievedLetter()
+    {
+        wifeRecievedLetter = true;
+    }
+
+    private void UpdateLetters()
+    {
+        if (postbox != null)
+        {
+            ItemAmountPair storedItem = postbox.GetStoredItem();
+            var info = ItemsData.GetItemInfo(storedItem.type);
+            postbox.SetStoredItem(ItemAmountPair.Nothing);
+
+            //orders
+            if (storedItem.type == ItemType.NewOrder)
+            {
+                if (ordersForNextDay.ContainsKey(storedItem.amount))
+                {
+                    List<ItemAmountPair> order = ordersForNextDay[storedItem.amount];
+                    newOrderCrateSpawner.SpawnOrder(order);
+                    ordersForNextDay.Remove(storedItem.amount);
+                }
+            }
+
+            StepLetterProgression(storedItem.type == ItemType.LetterToFamily);
+
+        }
+        else
+        {
+            Debug.LogError("please reference the postbox in the progression handler");
+        }
+    }
+
+    private void StepLetterProgression(bool sentLetterToWife)
+    {
+        //When out of content
+        if (lastLetterID <= 0)
+            return;
+
+        //Update old state
+        switch (letterProgressionState)
+        {
+            case LetterProgressionState.RecievedDay:
+                if (sentLetterToWife)
+                {
+                    letterProgressionState = LetterProgressionState.WaitDay2;
+                    wifeRecievedLetter = true;
+                }
+                else
+                {
+                    letterProgressionState = LetterProgressionState.WaitDay1;
+                }
+
+                break;
+            case LetterProgressionState.WaitDay1:
+                if (sentLetterToWife)
+                    wifeRecievedLetter = true;
+
+                letterProgressionState = LetterProgressionState.WaitDay2;
+                break;
+            case LetterProgressionState.WaitDay2:
+                if (sentLetterToWife)
+                    wifeRecievedLetter = true;
+                letterProgressionState = LetterProgressionState.RecievedDay;
+                break;
+        }
+
+        //Start new state
+        switch (letterProgressionState)
+        {
+            case LetterProgressionState.RecievedDay:
+                if (wifeRecievedLetter)
+                    lastLetterID = LettersParser.GetLetterWithID(lastLetterID).AnswerId;
+                else
+                    lastLetterID = LettersParser.GetLetterWithID(lastLetterID).IgnoreId;
+
+                if (lastLetterID > 0)
+                    SetPostboxLetterToID(lastLetterID);
+                wifeRecievedLetter = false;
+                break;
+        }
+    }
+
+    private void SetPostboxLetterToID(int id)
+    {
+        postbox.SetStoredItem(new ItemAmountPair(ItemType.LetterFromFamily, id));
+    }
+
+    private void UpdateSacrifices()
+    {
         dailyPurchaseExaused = false;
 
         foreach (var aquired in aquiredList)
@@ -67,27 +209,7 @@ public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
 
             }
         }
-
         aquiredList.Clear();
-
-        //order
-        if (postbox != null)
-        {
-            ItemAmountPair storedItem = postbox.GetStoredItem();
-            if (ItemsData.GetItemInfo(storedItem.type).IsReadableItem && ordersForNextDay.ContainsKey(storedItem.amount))
-            {
-                List<ItemAmountPair> order = ordersForNextDay[postbox.GetStoredItem().amount];
-                newOrderCrateSpawner.SpawnOrder(order);
-                ordersForNextDay.Remove(storedItem.amount);
-                postbox.SetStoredItem(new ItemAmountPair(ItemType.None,-1));
-            }
-        }
-        else
-            Debug.LogError("please reference the postbox in the progression handler");
-
-
-        day++;
-        SaveHandler.Save();
     }
 
     public void RegisterOrder(int id, List<ItemAmountPair> itemAmountPairs)
@@ -117,7 +239,7 @@ public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
 
     public void Load(SaveData data)
     {
-        if(data is ProgressionSaveData saveData)
+        if (data is ProgressionSaveData saveData)
         {
             aquiredList = saveData.AquiredList;
             ordersForNextDay = saveData.OrdersForNextDay;
@@ -137,6 +259,13 @@ public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
     {
         return saveID;
     }
+}
+
+public enum LetterProgressionState
+{
+    RecievedDay,
+    WaitDay1,
+    WaitDay2
 }
 
 
