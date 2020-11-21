@@ -11,11 +11,14 @@ public class OverworldEffectHandler : StateListenerBehaviour
     [SerializeField] SpriteRenderer vignetteRenderer;
     [SerializeField] ParticleSystem particleSystem;
     [SerializeField] float amountOfParticles;
-    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioSource snowstormSounds, caveSounds;
+    [SerializeField] float maxSnowStormVolume, maxCaveVolume;
 
     float alphaCalculatedBasedOnHeightOfPlayer;
     float audioSourceVolumeMultiplierThroughHut = 1;
     Hut hut;
+
+
 
     protected override void OnStateChanged(GameState.State newState)
     {
@@ -24,6 +27,9 @@ public class OverworldEffectHandler : StateListenerBehaviour
             hut = FindObjectOfType<Hut>();
             if (hut != null)
                 hut.OnHutStateChange += OnHutStateChange;
+        } else if (newState == GameState.State.Respawning)
+        {
+            UpdateOverworldEffects();
         }
     }
 
@@ -40,6 +46,11 @@ public class OverworldEffectHandler : StateListenerBehaviour
         if (transform.position.y < fadeHeight - fadeThickness || transform.position.y > fadeHeight + fadeThickness)
             return;
 
+        UpdateOverworldEffects();
+    }
+
+    private void UpdateOverworldEffects()
+    {
         float height = transform.position.y;
         alphaCalculatedBasedOnHeightOfPlayer = Mathf.Clamp((fadeHeight - height) / fadeThickness, 0, 1);
 
@@ -63,10 +74,11 @@ public class OverworldEffectHandler : StateListenerBehaviour
 
     private void UpdateSnowstormVolume()
     {
-        if (audioSource != null)
-        {
-            audioSource.volume = (1 - alphaCalculatedBasedOnHeightOfPlayer) * audioSourceVolumeMultiplierThroughHut;
-        }
+        if (snowstormSounds != null)
+            snowstormSounds.volume = (1 - alphaCalculatedBasedOnHeightOfPlayer) * audioSourceVolumeMultiplierThroughHut * maxSnowStormVolume;
+       
+        if (caveSounds != null)
+            caveSounds.volume = alphaCalculatedBasedOnHeightOfPlayer * maxCaveVolume;
     }
 
     private void OnHutStateChange(bool isOpen)
