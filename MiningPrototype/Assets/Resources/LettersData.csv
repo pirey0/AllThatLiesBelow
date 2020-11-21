@@ -1,32 +1,71 @@
 Id;Author;Answer;Ignore;Content
-100;Wife;;;"Deer ____,
+100;Wife;116;101;"Deer ____,
 by the time you will read this letter, we will have parted for many moons. For me, you just left a few days ago. I've organized the delivery of some basic necessities as we had discussed. Hopefully, they will be waiting for you at the cottage. The old mans house is not nothing spectacular, but it should keep you warm in your endevour.
 My nights have been filled with horror. I dream that you never arrive. I dream that you will never return.
  But as we decided I will wait for you.
 Yours truly,
 ______"
-101;Wife;;;
-102;Wife;;;
-103;Wife;;;
-104;;;;
-105;;;;
-106;;;;
-107;;;;
-108;;;;
-109;;;;
-110;;;;
-111;;;;
-112;;;;
-113;;;;
-114;;;;
-115;;;;
-116;;;;
-117;;;;
-118;;;;
-119;;;;
-120;;;;
-121;;;;
-122;;;;
+101;Wife;116;102;"My beloved _____,
+I knew the journy would be a long one, but I believed that by now I would have heard back from you. Maybe by the time you receive this letter your response will have already found its way back to me. I hope the land under the cottage is as blessed as you believed.
+The nights keep getting longer, yet i don't get more sleep.
+Please come back soon so i can sleep with you again.
+With love,
+_______"
+102;Wife;116;103;"Grief 1
+
+Shock and Denial"
+103;Wife;114;104;"Grief 2
+
+Pain and Guild"
+104;Wife;114;105;"Grief 3
+
+Anger and bargaining"
+105;Wife;114;106;"Grief 4
+
+Depression"
+106;Wife;109;107;"Grief 5
+
+Upward turn."
+107;Wife;109;108;"Grief 6
+
+Reconstruction"
+108;Wife;109;;"Grief 7
+
+Acceptance
+
+END"
+109;Wife;110;112;too late im out
+110;Wife;111;112;stop sending letters to me
+111;Wife;112;112;"i've moved foreward
+
+I want you out of my life
+
+I will not respond"
+112;Wife;;;goodbye.
+113;Wife;110;112;"Upset Raging
+
+Vengeful"
+114;Wife;115;113;"anger
+
+disappointment
+
+fear"
+115;Wife;117;120;Forgiving
+116;Wife;117;;"happiness
+
+relieved
+
+curiosity"
+117;Wife;118;;Excited, Hopeful
+118;Wife;119;;Loving Caring
+119;Wife;120;;"Melancholic
+
+Impatient"
+120;Wife;121;;"Troubled
+
+Helpless"
+121;Wife;122;;No future
+122;Wife;109;112;I've met someone else
 123;;;;
 124;;;;
 125;;;;

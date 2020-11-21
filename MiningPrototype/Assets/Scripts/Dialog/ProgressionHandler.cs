@@ -25,7 +25,7 @@ public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
 
     //postbox and letters
     Postbox postbox;
-    int nextLetterID = -1;
+    int lastLetterID = -1;
     bool wifeRecievedLetter = false;
     LetterProgressionState letterProgressionState = LetterProgressionState.RecievedDay;
 
@@ -38,6 +38,7 @@ public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
         GameState.Instance.StateChanged += OnStateChanged;
         Debug.Log(System.Security.Principal.WindowsIdentity.GetCurrent().Name + " <-- Security Name");
         Debug.Log(Environment.UserName + "<- Environment");
+        Debug.Log(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + " <-- special folder");
     }
 
     private void OnDisable()
@@ -78,12 +79,13 @@ public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
 
     public void BeginFromStart()
     {
-        nextLetterID = startingLetterID;
+        lastLetterID = startingLetterID;
         letterProgressionState = LetterProgressionState.RecievedDay;
         if (postbox != null)
-            SetPostboxLetterToID(nextLetterID);
+            SetPostboxLetterToID(lastLetterID);
     }
 
+    [Button]
     public void StartNextDay()
     {
         UpdateSacrifices();
@@ -91,6 +93,12 @@ public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
 
         day++;
         SaveHandler.Save();
+    }
+
+    [Button]
+    private void WifeRecievedLetter()
+    {
+        wifeRecievedLetter = true;
     }
 
     private void UpdateLetters()
@@ -124,7 +132,7 @@ public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
     private void StepLetterProgression(bool sentLetterToWife)
     {
         //When out of content
-        if (nextLetterID <= 0)
+        if (lastLetterID <= 0)
             return;
 
         //Update old state
@@ -159,8 +167,13 @@ public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
         switch (letterProgressionState)
         {
             case LetterProgressionState.RecievedDay:
-                if (nextLetterID > 0)
-                    SetPostboxLetterToID(nextLetterID);
+                if (wifeRecievedLetter)
+                    lastLetterID = LettersParser.GetLetterWithID(lastLetterID).AnswerId;
+                else
+                    lastLetterID = LettersParser.GetLetterWithID(lastLetterID).IgnoreId;
+
+                if (lastLetterID > 0)
+                    SetPostboxLetterToID(lastLetterID);
                 wifeRecievedLetter = false;
                 break;
         }
