@@ -85,6 +85,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         }
         ItemPlacingHandler.Instance?.Hide();
         inDrag = false;
+        inUI = false;
         EnableVisuals();
         rectTransform.anchoredPosition = defaultAnchorPosition;
     }
@@ -103,6 +104,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
     private void UpdatePlacingPreview()
     {
         Vector2 distance = rectTransform.position - rectTransform.parent.position;
+        Debug.DrawLine(rectTransform.position, rectTransform.parent.position);
         var info = ItemsData.GetItemInfo(type);
 
         if (distance.magnitude > 2)

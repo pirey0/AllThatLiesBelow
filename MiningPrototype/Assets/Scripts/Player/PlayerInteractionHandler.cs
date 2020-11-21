@@ -48,6 +48,7 @@ public class PlayerInteractionHandler : InventoryOwner
     private void Update()
     {
         bool mouseInInventoryRange = Vector3.Distance(GetPositionInGridV3(), GetClickPositionV3()) <= settings.inventoryOpenDistance;
+
         if (player.CanUseInventory())
         {
 
@@ -64,6 +65,12 @@ public class PlayerInteractionHandler : InventoryOwner
                     ToggleInventory();
                 }
             }
+        }
+
+        //Stop interacting when too far away
+        if(currentInteractable != null && Vector3.Distance(transform.position,currentInteractable.gameObject.transform.position) > settings.maxInteractableDistance)
+        {
+            TryStopInteracting();
         }
 
         if (player.CanInteract())

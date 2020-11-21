@@ -40,29 +40,12 @@ public class Postbox : MonoBehaviour, IInteractable, IDropReceiver
     [Button]
     public void Open()
     {
-        ////display message
-        //if (messagePrefab != null && displayedMessage == null && storedMessage != "")
-        //{
-        //    displayedMessage = Instantiate(messagePrefab, canvas.transform);
-        //
-        //    displayedMessage.DisplayText(transform, storedMessage, showFamilyPhoto: (!storedItem.IsNull() && storedItem.type == ItemType.Family_Photo));
-        //    storedMessage = "";
-        //}
-
         //add all stored items to player inventory
         if (!storedItem.IsNull() && storedItem.amount > 0)
             {
                 InventoryManager.PlayerCollects(storedItem.type,storedItem.amount);
                 storedItem = ItemAmountPair.Nothing;
             }
-
-        ////show order formular
-        //else
-        //{
-        //    if (newOrder == null)
-        //        newOrder = Instantiate(newOrderPrefab,orderCanvas.transform);
-        //}
-
         SetBoxstatus(PostboxStatus.OPEN);
     }
 
@@ -82,6 +65,7 @@ public class Postbox : MonoBehaviour, IInteractable, IDropReceiver
 
     public void EndInteracting(GameObject interactor)
     {
+        Debug.Log("Postbox end interacting.");
         Close();
     }
 
@@ -130,7 +114,7 @@ public class Postbox : MonoBehaviour, IInteractable, IDropReceiver
 
     public bool WouldTakeDrop(ItemAmountPair pair)
     {
-        return (storedItem.amount <= 0);
+        return (storedItem.IsNull());
     }
 
     public void BeginHoverWith(ItemAmountPair pair)
@@ -163,6 +147,6 @@ public class Postbox : MonoBehaviour, IInteractable, IDropReceiver
 
     public bool IsEmpty()
     {
-        return storedItem.amount <= 0;
+        return storedItem.IsNull();
     }
 }

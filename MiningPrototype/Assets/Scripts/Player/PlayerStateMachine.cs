@@ -139,7 +139,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
 
     private void FixedUpdate()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(feet.position, settings.feetRadius);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(feet.position, settings.feetRadius, settings.layerMask.value);
         isGrounded = false;
         foreach (var c in colliders)
         {
@@ -230,7 +230,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     }
     private void DeathUpdate()
     {
-        if(Time.time - lastDeathTimeStamp > settings.respawnCooldown)
+        if (Time.time - lastDeathTimeStamp > settings.respawnCooldown)
         {
             Respawn();
         }
@@ -240,7 +240,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     {
         var bed = GameObject.FindObjectOfType<Bed>();
 
-        if(bed != null)
+        if (bed != null)
         {
             transform.position = bed.transform.position;
             stateMachine.ForceTransitionTo(s_idle);
@@ -251,7 +251,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         {
             Debug.LogError("No bed found to respawn");
             var pStart = GameObject.FindObjectOfType<PlayerStart>();
-            if(pStart != null)
+            if (pStart != null)
             {
                 transform.position = pStart.transform.position;
                 stateMachine.ForceTransitionTo(s_longIdle);
@@ -395,13 +395,24 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     private bool ShouldClimb()
     {
         var vertical = Input.GetAxis("Vertical");
+        bool up = vertical > 0;
 
-        return InFrontOfLadder && Mathf.Abs(vertical) > 0.75f;
+        bool rightDirection = !(up ^ IsBelowLadderTop());
+
+        return InFrontOfLadder && Mathf.Abs(vertical) > 0.75f && rightDirection;
     }
 
     private bool IsNotClimbing()
     {
-        return !InFrontOfLadder || IsGrounded();
+        return !InFrontOfLadder || (IsGrounded() && IsBelowLadderTop());
+    }
+
+    private bool IsBelowLadderTop()
+    {
+        if (currentLadder == null)
+            return false;
+
+        return transform.position.y < (currentLadder.transform.position.y + 5.5f); //hardcoded ladder height
     }
 
     private bool IsIdle()
