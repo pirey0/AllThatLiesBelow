@@ -27,18 +27,18 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         rectTransform = GetComponent<RectTransform>();
     }
 
-    public void Display(KeyValuePair<ItemType, int> pair)
+    public void Display(ItemAmountPair pair)
     {
-        amount = pair.Value;
-        type = pair.Key;
+        amount = pair.amount;
+        type = pair.type;
 
         if (icon != null)
-            icon.sprite = ItemsData.GetSpriteByItemType(new ItemAmountPair(type,amount));
+            icon.sprite = ItemsData.GetSpriteByItemType(pair);
 
-        
-
-        if (amountDisplay != null && !ItemsData.GetItemInfo(type).IsReadableItem)
+        if (amountDisplay != null && !ItemsData.GetItemInfo(type).AmountIsUniqueID)
+        {
             amountDisplay.text = amount.ToString();
+        }
 
         StartCoroutine(ScaleCoroutine(scaleUp: true));
     }
@@ -51,7 +51,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
     {
         base.OnPointerDown(eventData);
         var info = ItemsData.GetItemInfo(type);
-        if (info.IsReadableItem && eventData.button == PointerEventData.InputButton.Right)
+        if (info.AmountIsUniqueID && eventData.button == PointerEventData.InputButton.Right)
             ReadableItemHandler.Instance?.Display(amount);
         else
             TooltipHandler.Instance?.Display(transform, info.DisplayName, info.DisplayTooltip);
@@ -146,7 +146,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
     public void CloseInventory()
     {
-        if(this != null)
+        if (this != null)
         {
             StopAllCoroutines();
             StartCoroutine(ScaleCoroutine(scaleUp: false));
@@ -155,7 +155,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
     IEnumerator ScaleCoroutine(bool scaleUp)
     {
-        Debug.Log("started scale: up?" +scaleUp);
+        Debug.Log("started scale: up?" + scaleUp);
         float timeMin = scaleOnOpenAndCloseCurve.keys[0].time;
         float timeMax = scaleOnOpenAndCloseCurve.keys[scaleOnOpenAndCloseCurve.length - 1].time;
         float time = (scaleUp ? timeMin : timeMax);

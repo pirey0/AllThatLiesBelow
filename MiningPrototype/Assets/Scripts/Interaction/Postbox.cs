@@ -42,10 +42,10 @@ public class Postbox : MonoBehaviour, IInteractable, IDropReceiver
     {
         //add all stored items to player inventory
         if (!storedItem.IsNull() && storedItem.amount > 0)
-            {
-                InventoryManager.PlayerCollects(storedItem.type,storedItem.amount);
-                storedItem = ItemAmountPair.Nothing;
-            }
+        {
+            InventoryManager.PlayerCollects(storedItem.type, storedItem.amount);
+            storedItem = ItemAmountPair.Nothing;
+        }
         SetBoxstatus(PostboxStatus.OPEN);
     }
 
@@ -80,14 +80,14 @@ public class Postbox : MonoBehaviour, IInteractable, IDropReceiver
                     break;
 
                 case PostboxStatus.OPEN:
-                    spriteRenderer.sprite = IsEmpty()?open:openFull;
+                    spriteRenderer.sprite = IsEmpty() ? open : openFull;
                     break;
 
                 case PostboxStatus.CLOSED:
                     spriteRenderer.sprite = closed;
                     break;
             }
-            
+
             openCloseAudio.Play();
 
             status = newStatus;
@@ -102,6 +102,10 @@ public class Postbox : MonoBehaviour, IInteractable, IDropReceiver
     public void SetStoredItem(ItemAmountPair itemAmountPair)
     {
         storedItem = itemAmountPair;
+        if (IsEmpty())
+            SetBoxstatus(PostboxStatus.CLOSED);
+        else
+            SetBoxstatus(PostboxStatus.ACTIVE);
     }
 
     public void SubscribeToForceQuit(Action action)

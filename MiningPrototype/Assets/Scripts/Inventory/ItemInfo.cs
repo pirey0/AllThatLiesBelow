@@ -20,5 +20,5 @@ public class ItemInfo : ScriptableObject
     public GameObject Prefab;
 
     [Header("ReadableItem")]
-    public bool IsReadableItem;
+    public bool AmountIsUniqueID;
 }

@@ -21,4 +21,4 @@ MonoBehaviour:
   PickupHoldSprite: {fileID: 0}
   PickupPreviewPrefab: {fileID: 0}
   Prefab: {fileID: 0}
-  IsReadableItem: 1
+  AmountIsUniqueID: 1

@@ -26,7 +26,7 @@ public class Inventory
 
     public void Add(ItemType type, int amount)
     {
-        bool isReadable = ItemsData.GetItemInfo(type).IsReadableItem;
+        bool isReadable = ItemsData.GetItemInfo(type).AmountIsUniqueID;
 
         if (content.Count > 0 && !isReadable)
         {
@@ -68,24 +68,38 @@ public class Inventory
 
     public bool TryRemove(ItemAmountPair pair)
     {
-        int id = GetStackIdFor(pair.type);
+        var info = ItemsData.GetItemInfo(pair.type);
 
-        if (id >= 0)
+        if (info.AmountIsUniqueID)
         {
-            if (content[id].amount > pair.amount)
+            int i = content.FindIndex(0,(x) => x == pair);
+            if(i>0 && i < content.Count)
             {
-                var newPair = new ItemAmountPair(pair.type, content[id].amount - pair.amount);
-                content[id] = newPair;
-
-                InventoryChanged?.Invoke();
+                content.RemoveAt(i);
                 return true;
             }
-            else if (content[id].amount == pair.amount)
-            {
-                content.RemoveAt(id);
+        }
+        else
+        {
+            int id = GetStackIdFor(pair.type);
 
-                InventoryChanged?.Invoke();
-                return true;
+            if (id >= 0)
+            {
+                if (content[id].amount > pair.amount)
+                {
+                    var newPair = new ItemAmountPair(pair.type, content[id].amount - pair.amount);
+                    content[id] = newPair;
+
+                    InventoryChanged?.Invoke();
+                    return true;
+                }
+                else if (content[id].amount == pair.amount)
+                {
+                    content.RemoveAt(id);
+
+                    InventoryChanged?.Invoke();
+                    return true;
+                }
             }
         }
 
@@ -120,17 +134,9 @@ public class Inventory
     }
 
 
-    public KeyValuePair<ItemType, int>[] GetContent()
+    public ItemAmountPair[] GetContent()
     {
-
-        List<KeyValuePair<ItemType, int>> list = new List<KeyValuePair<ItemType, int>>();
-
-        foreach (ItemAmountPair item in content)
-        {
-            list.Add(new KeyValuePair<ItemType, int>(item.type, item.amount));
-        }
-
-        return list.ToArray();
+        return content.ToArray();
     }
 }
 
@@ -164,6 +170,16 @@ public struct ItemAmountPair
     public int GetTotalWeight()
     {
         return amount * ItemsData.GetItemInfo(type).Weight;
+    }
+
+    public static bool operator ==(ItemAmountPair i1, ItemAmountPair i2)
+    {
+        return i1.type == i2.type && i1.amount == i2.amount;
+    }
+
+    public static bool operator !=(ItemAmountPair i1, ItemAmountPair i2)
+    {
+        return i1.type != i2.type || i1.amount != i2.amount;
     }
 
 }
