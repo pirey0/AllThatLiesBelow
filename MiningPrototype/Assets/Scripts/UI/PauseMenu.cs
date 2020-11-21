@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
+    [SerializeField] SceneReference mainMenu;
     [SerializeField] Image darkoverlay;
 
     bool isPaused;
@@ -53,5 +55,10 @@ public class PauseMenu : MonoBehaviour
         {
             child.gameObject.SetActive(false);
         }
+    }
+
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene(mainMenu);
     }
 }

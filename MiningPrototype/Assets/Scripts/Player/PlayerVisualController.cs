@@ -111,7 +111,8 @@ public class PlayerVisualController : MonoBehaviour
                     }
                     else
                     {
-                        pickaxeObject.SetActive(false);
+                        pickaxeRenderer.sortingOrder = -10;
+                        pickaxeObject.SetActive(true);
                     }
                     break;
             }
