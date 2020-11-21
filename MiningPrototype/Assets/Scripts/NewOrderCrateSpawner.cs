@@ -24,7 +24,7 @@ public class NewOrderCrateSpawner : StateListenerBehaviour
 
     protected override void OnStateChanged(GameState.State newState)
     {
-        if(newState == GameState.State.Ready)
+        if (newState == GameState.State.Ready)
         {
             spawnLoc = LocationIndicator.Find(IndicatorType.OrderSpawn);
         }
@@ -40,6 +40,7 @@ public class NewOrderCrateSpawner : StateListenerBehaviour
     public void SpawnOrder(List<ItemAmountPair> orderSource)
     {
         var order = new List<ItemAmountPair>(orderSource);
+        order.Sort((x, y) => y.GetTotalWeight() - x.GetTotalWeight());
 
         for (int i = 0; i < order.Count; i++)
         {
@@ -53,12 +54,12 @@ public class NewOrderCrateSpawner : StateListenerBehaviour
 
                 foreach (var s in split)
                 {
-                    order.Add(s);
+                    order.Insert(i+1,s);
                 }
             }
             else
             {
-                Crate newCrate = Instantiate(cratePrefab, spawnLoc.transform.position, Quaternion.identity);
+                Crate newCrate = Instantiate(cratePrefab, spawnLoc.transform.position + new Vector3(0, i*2), Quaternion.identity);
                 newCrate.Pack(item);
             }
         }
