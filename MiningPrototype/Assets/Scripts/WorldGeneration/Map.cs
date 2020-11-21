@@ -73,6 +73,8 @@ public class Map : StateListenerBehaviour, ISavable
         else
             data = ScriptableObject.Instantiate(data);
 
+        Debug.Log("Created TileMapData scriptable object");
+
 
         runtime = true;
 
@@ -81,6 +83,15 @@ public class Map : StateListenerBehaviour, ISavable
         if (runGeneration)
             RunCompleteGeneration();
 
+    }
+
+    private void OnDestroy()
+    {
+        data = null;
+        receiverMap = null;
+        unstableTiles = null;
+        unstableTilesEffects = null;
+        tilesToStabilityCheck = null;
     }
 
     protected override void OnStateChanged(GameState.State newState)
