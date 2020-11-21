@@ -10,7 +10,6 @@ public class Bed : MonoBehaviour, IInteractable
     [SerializeField] Sprite empty, sleeping, wakeup, badDream;
     [SerializeField] Hut hut;
     [SerializeField] Image nightFadeToBlack;
-    [SerializeField] bool sleepsBadly;
 
     public void BeginInteracting(GameObject interactor)
     {
@@ -66,7 +65,7 @@ public class Bed : MonoBehaviour, IInteractable
 
             yield return new WaitForSeconds(0.25f);
             ProgressionHandler.Instance.StartNextDay();
-            spriteRenderer.sprite = sleepsBadly ? badDream : wakeup;
+            spriteRenderer.sprite = wakeup;
             yield return new WaitForSeconds(0.25f);
 
             while (nightOpacity > 0f)
@@ -80,5 +79,19 @@ public class Bed : MonoBehaviour, IInteractable
         }
 
         LeaveBed(playerToEnableAgain);
+    }
+
+    internal void WakeUpFromNightmare(GameObject gameObject)
+    {
+        PlayerStateMachine playerToHide = gameObject.GetComponent<PlayerStateMachine>();
+        playerToHide.Disable();
+        StartCoroutine(NightmareCoroutine(playerToHide));
+    }
+
+    IEnumerator NightmareCoroutine(PlayerStateMachine playerToEnableAgain)
+    {
+       spriteRenderer.sprite = badDream;
+       yield return new WaitForSeconds(5f);
+       LeaveBed(playerToEnableAgain);
     }
 }

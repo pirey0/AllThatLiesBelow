@@ -23,7 +23,7 @@ public class CameraPanner : MonoBehaviour
         UpdatePosition();
     }
 
-    private void UpdatePosition()
+    public void UpdatePosition()
     {
         if (Time.timeScale == 0)
             return;
