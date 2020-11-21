@@ -22,16 +22,12 @@ public class OverworldEffectHandler : StateListenerBehaviour
 
     protected override void OnStateChanged(GameState.State newState)
     {
-        if (newState == GameState.State.Ready)
+        if (newState == GameState.State.Playing)
         {
             hut = FindObjectOfType<Hut>();
             if (hut != null)
                 hut.OnHutStateChange += OnHutStateChange;
 
-            UpdateOverworldEffects();
-        }
-        else if (newState == GameState.State.Respawning)
-        {
             UpdateOverworldEffects();
         }
     }
