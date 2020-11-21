@@ -12,6 +12,8 @@ public class TileInfo : ScriptableObject
 
     public bool AirLike = false;
     public bool Targetable = true;
+    public bool TargetPriority = false;
+
     public bool StabilityAffected = true;
     public bool NotifiesInsteadOfCrumbling = false;
     public bool CountsAsNeighbour = true;

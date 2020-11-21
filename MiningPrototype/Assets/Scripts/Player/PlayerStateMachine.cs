@@ -320,6 +320,11 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         UpdateWorldMirroring();
     }
 
+    public void SetFaceDirection(bool right)
+    {
+        transform.localScale = new Vector3(right ? 1 : -1, 1, 1);
+    }
+
     private void UpdateWorldMirroring()
     {
         if (rigidbody.position.x < 0)

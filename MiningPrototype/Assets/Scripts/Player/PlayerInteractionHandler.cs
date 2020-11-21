@@ -146,7 +146,7 @@ public class PlayerInteractionHandler : InventoryOwner
 
     private void UpdateDigTarget()
     {
-        gridDigTarget = TileMapHelper.GetClosestSolidBlock(Map.Instance, GetPositionInGrid(), GetClickCoordinate());
+        gridDigTarget = TileMapHelper.GetMiningTarget(Map.Instance, GetPositionInGrid(), GetClickCoordinate());
         if (!Map.Instance.CanTarget(gridDigTarget.Value.x, gridDigTarget.Value.y))
         {
             gridDigTarget = null;
@@ -230,6 +230,7 @@ public class PlayerInteractionHandler : InventoryOwner
 
             TryEnableMiningVisuals();
             player.NotifyPickaxeUse();
+            player.SetFaceDirection(gridDigTarget.Value.x - transform.position.x > 0);
         }
         else
         {

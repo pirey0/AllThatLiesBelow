@@ -108,16 +108,33 @@ public static class TileMapHelper
 
     }
 
-    public static Vector2Int GetClosestSolidBlock(Map map, Vector2Int current, Vector2Int end)
+    public static Vector2Int GetMiningTarget(Map map, Vector2Int current, Vector2Int end)
     {
+        Vector2Int? lastTargetable = null;
         while (current != end)
         {
-            if (map.IsBlockAt(current.x, current.y))
+            var t = map[current];
+            var info = TilesData.GetTileInfo(t.Type);
+
+            if (info.TargetPriority)
+            {
                 return current;
+            }
+            else if (info.Targetable)
+            {
+                lastTargetable = current;
+            }
 
             current += StepTowards(current, end);
         }
-        return end;
+
+        var endT = map[end];
+        var endInfo = TilesData.GetTileInfo(endT.Type);
+
+        if (endInfo.TargetPriority)
+            return end;
+        else
+            return lastTargetable.HasValue ? lastTargetable.Value : end;
     }
     public static Color StabilityToColor(float stability)
     {
