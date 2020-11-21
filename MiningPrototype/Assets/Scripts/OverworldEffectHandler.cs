@@ -27,7 +27,10 @@ public class OverworldEffectHandler : StateListenerBehaviour
             hut = FindObjectOfType<Hut>();
             if (hut != null)
                 hut.OnHutStateChange += OnHutStateChange;
-        } else if (newState == GameState.State.Respawning)
+
+            UpdateOverworldEffects();
+        }
+        else if (newState == GameState.State.Respawning)
         {
             UpdateOverworldEffects();
         }
@@ -76,7 +79,7 @@ public class OverworldEffectHandler : StateListenerBehaviour
     {
         if (snowstormSounds != null)
             snowstormSounds.volume = (1 - alphaCalculatedBasedOnHeightOfPlayer) * audioSourceVolumeMultiplierThroughHut * maxSnowStormVolume;
-       
+
         if (caveSounds != null)
             caveSounds.volume = alphaCalculatedBasedOnHeightOfPlayer * maxCaveVolume;
     }
