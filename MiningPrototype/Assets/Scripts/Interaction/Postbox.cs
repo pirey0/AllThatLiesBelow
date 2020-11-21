@@ -8,13 +8,14 @@ public enum PostboxStatus
 {
     CLOSED,
     OPEN,
-    ACTIVE
+    ACTIVE,
+    ACTIVEPLAYER
 }
 
 public class Postbox : MonoBehaviour, IInteractable, IDropReceiver
 {
-    [SerializeField] SpriteRenderer spriteRenderer;
-    [SerializeField] Sprite closed, open, active, openFull;
+    [SerializeField] SpriteAnimator spriteAnimator;
+    [SerializeField] SpriteAnimation closed, open, active, activePlayer, openFull;
 
     [SerializeField] AudioSource openCloseAudio, storeItemAudio;
 
@@ -52,10 +53,13 @@ public class Postbox : MonoBehaviour, IInteractable, IDropReceiver
     [Button]
     public void Close()
     {
+        if (status != PostboxStatus.OPEN)
+            return;
+
         if (IsEmpty())
             SetBoxstatus(PostboxStatus.CLOSED);
         else
-            SetBoxstatus(PostboxStatus.ACTIVE);
+            SetBoxstatus(PostboxStatus.ACTIVEPLAYER);
     }
 
     public void BeginInteracting(GameObject interactor)
@@ -76,15 +80,19 @@ public class Postbox : MonoBehaviour, IInteractable, IDropReceiver
             switch (newStatus)
             {
                 case PostboxStatus.ACTIVE:
-                    spriteRenderer.sprite = active;
+                    spriteAnimator.Play(active);
+                    break;
+
+                case PostboxStatus.ACTIVEPLAYER:
+                    spriteAnimator.Play(activePlayer);
                     break;
 
                 case PostboxStatus.OPEN:
-                    spriteRenderer.sprite = IsEmpty()?open:openFull;
+                    spriteAnimator.Play(IsEmpty() ? open : openFull);
                     break;
 
                 case PostboxStatus.CLOSED:
-                    spriteRenderer.sprite = closed;
+                    spriteAnimator.Play(closed);
                     break;
             }
             
@@ -126,8 +134,6 @@ public class Postbox : MonoBehaviour, IInteractable, IDropReceiver
     {
         if (IsEmpty())
             SetBoxstatus(PostboxStatus.CLOSED);
-        else
-            SetBoxstatus(PostboxStatus.ACTIVE);
     }
 
     public void HoverUpdate(ItemAmountPair pair)
@@ -141,7 +147,7 @@ public class Postbox : MonoBehaviour, IInteractable, IDropReceiver
         {
             storedItem = pair;
             storeItemAudio?.Play();
-            SetBoxstatus(PostboxStatus.ACTIVE);
+            SetBoxstatus(PostboxStatus.ACTIVEPLAYER);
         }
     }
 

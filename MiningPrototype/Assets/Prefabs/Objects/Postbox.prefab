@@ -108,6 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6357320653061133602}
   - component: {fileID: 6357320653061133603}
+  - component: {fileID: 5224793908363139977}
   - component: {fileID: 2547905131585938353}
   - component: {fileID: 1265463392}
   - component: {fileID: 3894012504384498775}
@@ -185,6 +186,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5224793908363139977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6357320653061133600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e54841db1ebc224b88bd82537e065cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingAnimation: {fileID: 11400000, guid: a38b41a9bc8db50458536371c12813c4, type: 2}
+  renderer: {fileID: 6357320653061133603}
 --- !u!114 &2547905131585938353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,11 +212,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aeb312a84374474ea2ba9e744bf8f9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 6357320653061133603}
-  closed: {fileID: -7617559424405392253, guid: 6ef3ab651b57e014d8b3b4195bf119df, type: 3}
-  open: {fileID: -3027598413621054980, guid: 6ef3ab651b57e014d8b3b4195bf119df, type: 3}
-  active: {fileID: -5347605606511437156, guid: 6ef3ab651b57e014d8b3b4195bf119df, type: 3}
-  openFull: {fileID: 0}
+  spriteAnimator: {fileID: 5224793908363139977}
+  closed: {fileID: 11400000, guid: e5726a3afa103f544a1fefb06639b13a, type: 2}
+  open: {fileID: 11400000, guid: a6950b60883fa3a44919954ab0bfbcd8, type: 2}
+  active: {fileID: 11400000, guid: a38b41a9bc8db50458536371c12813c4, type: 2}
+  activePlayer: {fileID: 11400000, guid: 323fc790e94c2a948b457c441375eda0, type: 2}
+  openFull: {fileID: 11400000, guid: 77a9bbea6eb21d14683fc2a1698c4c31, type: 2}
   openCloseAudio: {fileID: 1265463392}
   storeItemAudio: {fileID: 6648267811130666485}
   storedItem:
@@ -327,7 +343,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1.25, y: 1.625}
+    oldSize: {x: 1.5, y: 2}
     newSize: {x: 1.25, y: 1.625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
