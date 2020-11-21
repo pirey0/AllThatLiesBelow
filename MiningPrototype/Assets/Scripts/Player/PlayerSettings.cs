@@ -40,4 +40,6 @@ public class PlayerSettings : ScriptableObject
     public float overWorldHeight;
     public float timeToHidePickaxe;
 
+    public LayerMask layerMask;
+
 }

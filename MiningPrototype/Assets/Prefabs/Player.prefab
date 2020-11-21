@@ -6295,7 +6295,7 @@ MonoBehaviour:
     CanInteract: 0
     CanInventory: 1
   - StateName: Inventory
-    CanInteract: 0
+    CanInteract: 1
     CanInventory: 1
   - StateName: Death
     CanInteract: 0
