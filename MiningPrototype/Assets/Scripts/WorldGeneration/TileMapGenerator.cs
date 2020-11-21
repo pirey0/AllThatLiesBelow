@@ -17,8 +17,7 @@ public class TileMapGenerator
 
     public void RunCompleteGeneration()
     {
-        var stopwatch = new System.Diagnostics.Stopwatch();
-        stopwatch.Start();
+        DurationTracker tracker = new DurationTracker("Complete generation");
 
         Populate();
 
@@ -36,9 +35,7 @@ public class TileMapGenerator
 
         PopulateSnow();
 
-        stopwatch.Stop();
-
-        Debug.Log("Update Duration: " + stopwatch.ElapsedMilliseconds + "ms");
+        tracker.Stop();
     }
 
     private void PopulateBorders()

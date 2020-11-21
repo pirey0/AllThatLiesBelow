@@ -97,6 +97,8 @@ public class DialogParser
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     public static void ParseDialogs()
     {
+        DurationTracker tracker = new DurationTracker("DialogParser");
+
         string[] lines = CSVHelper.LoadLinesAtPath(PATH);
         if (lines == null || lines.Length == 0)
         {
@@ -147,6 +149,8 @@ public class DialogParser
             }
             e.choiceTargets = sections;
         }
+
+        tracker.Stop();
     }
 
     public static SVGDialogEntry GetDialogFromName(string name)

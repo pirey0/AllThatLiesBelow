@@ -11,6 +11,9 @@ public class SacrificePricesParser
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     public static void ParsePrices()
     {
+        DurationTracker tracker = new DurationTracker("SacrificePricesParser");
+
+
         if(CSVHelper.ResourceMissing(PATH))
             return;
 
@@ -30,6 +33,8 @@ public class SacrificePricesParser
                 }
             }
         }
+
+        tracker.Stop();
     }
 
     /// <summary>

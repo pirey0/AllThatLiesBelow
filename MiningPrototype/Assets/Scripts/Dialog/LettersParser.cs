@@ -11,6 +11,8 @@ public class LettersParser : MonoBehaviour
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     public static void ParseLetters()
     {
+        DurationTracker tracker = new DurationTracker("LetterParser");
+
         if (CSVHelper.ResourceMissing(PATH))
             return;
 
@@ -55,6 +57,7 @@ public class LettersParser : MonoBehaviour
         }
 
         Debug.Log("Loaded " + lettersTable.Keys.Count + " letters.");
+        tracker.Stop();
     }
 
     public static LetterInfo GetLetterWithID(int id)

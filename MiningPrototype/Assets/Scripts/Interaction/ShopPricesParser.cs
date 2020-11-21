@@ -12,6 +12,8 @@ public class ShopPricesParser
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     public static void ParsePrices()
     {
+        DurationTracker tracker = new DurationTracker("ShopPricesParser");
+
         if (CSVHelper.ResourceMissing(PATH))
             return;
 
@@ -54,6 +56,8 @@ public class ShopPricesParser
             if (!pricingTable.ContainsKey(product))
                 pricingTable.Add(product, new ItemAmountPair(costType, amount));
         }
+
+        tracker.Stop();
     }
 
     /// <summary>

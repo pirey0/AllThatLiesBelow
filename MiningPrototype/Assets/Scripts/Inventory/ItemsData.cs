@@ -26,6 +26,8 @@ public static class ItemsData
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     public static void FindItemInfos()
     {
+        DurationTracker tracker = new DurationTracker("ItemsData");
+
         itemInfos = new Dictionary<ItemType, ItemInfo>();
 
         ItemInfo[] items =  Resources.LoadAll<ItemInfo>("Items");
@@ -36,6 +38,8 @@ public static class ItemsData
         {
             itemInfos.Add(item.ItemType, item);
         }
+
+        tracker.Stop();
     }
 
     public static ItemInfo GetItemInfo(ItemType itemType)
