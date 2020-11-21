@@ -302,7 +302,6 @@ public class Map : StateListenerBehaviour, ISavable
         unstableTilesEffects.RemoveAt(i);
     }
 
-
     private void Setup()
     {
         renderer.Setup(this);
@@ -340,7 +339,6 @@ public class Map : StateListenerBehaviour, ISavable
     {
         return GetTileInfo(this[x, y].Type).CountsAsNeighbour;
     }
-
 
     public Tile GetTileAt(int x, int y)
     {
@@ -382,7 +380,6 @@ public class Map : StateListenerBehaviour, ISavable
             return false;
         }
     }
-
 
     private void BreakBlock(int x, int y, Tile t, bool playerCaused)
     {
@@ -545,13 +542,13 @@ public class Map : StateListenerBehaviour, ISavable
         return saveID;
     }
 
-    //Fix
-    public void LoadFromMap(Object loadedData, int xOffset, int yOffset)
+    //Outdated from SO Time
+    public void LoadFromMap(TextAsset loadedData, int xOffset, int yOffset)
     {
         //Util.IterateXY(loadedData.SizeX, loadedData.SizeY, (x, y) => LoadFromMapAt(loadedData, x, y, xOffset, yOffset));
     }
 
-    private void LoadFromMapAt(Object loadedData, int x, int y, int xOffset, int yOffset)
+    private void LoadFromMapAt(TextAsset loadedData, int x, int y, int xOffset, int yOffset)
     {
 
         //var t = loadedData.Map[x, y];
