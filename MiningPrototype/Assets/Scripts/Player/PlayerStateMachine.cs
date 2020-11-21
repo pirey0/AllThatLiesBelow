@@ -224,6 +224,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
 
     private void DeathEnter()
     {
+        TransitionEffectHandler.FadeOut();
         rigidbody.simulated = false;
         lastDeathTimeStamp = Time.time;
         GameState.Instance.ChangeStateTo(GameState.State.Respawning);
@@ -262,6 +263,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     private void DeathExit()
     {
         rigidbody.simulated = true;
+        TransitionEffectHandler.FadeIn(FadeType.Nightmare);
         GameState.Instance.ChangeStateTo(GameState.State.Playing);
     }
 
