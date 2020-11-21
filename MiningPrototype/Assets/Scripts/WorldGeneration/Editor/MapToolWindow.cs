@@ -81,6 +81,14 @@ public class MapToolWindow : EditorWindow
         }
         GUILayout.EndHorizontal();
 
+
+        GUILayout.Space(10);
+
+        if(GUILayout.Button("GC Collect"))
+        {
+            EditorUtility.UnloadUnusedAssetsImmediate();
+            GC.Collect();
+        }
     }
 
     /*

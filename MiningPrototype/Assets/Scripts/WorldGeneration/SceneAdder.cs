@@ -1,5 +1,4 @@
 ﻿using NaughtyAttributes;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -59,8 +58,8 @@ public class SceneAdder : MonoBehaviour
         {
             if (obj.TryGetComponent(out Map map))
             {
-                Debug.Log("Adding from data " + map.Data);
-                thisMap.LoadFromMap(map.Data, offset.x, offset.y);
+                Debug.Log("Adding from data " + map.LoadAsset);
+                thisMap.LoadFromMap(map.LoadAsset, offset.x, offset.y);
                 DestroyImmediate(obj);
             }
             else

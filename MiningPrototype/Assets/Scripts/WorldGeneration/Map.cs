@@ -1,7 +1,8 @@
 ﻿using NaughtyAttributes;
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -22,17 +23,17 @@ public class Map : StateListenerBehaviour, ISavable
     [SerializeField] Transform entitiesParent;
     [SerializeField] MapRenderer renderer;
 
-    [SerializeField] bool createOwnData;
+    [SerializeField] bool load;
+    [SerializeField] TextAsset loadAsset;
+
     [SerializeField] bool runGeneration;
-
-    [SerializeField] TileMapData data;
-
     [SerializeField] bool debug;
 
     bool runtime = false;
+
+    Tile[,] map;
     ITileUpdateReceiver[,] receiverMap;
     TileMapGenerator generator;
-
     List<Vector2Int> unstableTiles = new List<Vector2Int>();
     List<GameObject> unstableTilesEffects = new List<GameObject>();
     Stack<Vector2Int> tilesToStabilityCheck = new Stack<Vector2Int>();
@@ -44,7 +45,8 @@ public class Map : StateListenerBehaviour, ISavable
     public int SizeY { get => sizeY; }
     public GenerationSettings GenerationSettings { get => generationSettings; }
     public MapSettings Settings { get => mapSettings; }
-    public TileMapData Data { get => data; }
+
+    public UnityEngine.Object LoadAsset { get => loadAsset; }
 
     /// <summary>
     /// Use SetTMapAt for full control / visual updates
@@ -68,26 +70,26 @@ public class Map : StateListenerBehaviour, ISavable
             return;
         }
 
-        if (createOwnData)
-            data = ScriptableObject.CreateInstance<TileMapData>();
-        else
-            data = ScriptableObject.Instantiate(data);
-
         Debug.Log("Created TileMapData scriptable object");
 
 
         runtime = true;
 
         SelectThis();
-
-        if (runGeneration)
-            RunCompleteGeneration();
-
+        if (load)
+        {
+            LoadFromAsset(loadAsset);
+        }
+        else
+        {
+            if (runGeneration)
+                RunCompleteGeneration();
+        }
     }
 
     private void OnDestroy()
     {
-        data = null;
+        map = null;
         receiverMap = null;
         unstableTiles = null;
         unstableTilesEffects = null;
@@ -96,7 +98,7 @@ public class Map : StateListenerBehaviour, ISavable
 
     protected override void OnStateChanged(GameState.State newState)
     {
-        if(newState == GameState.State.Ready)
+        if (newState == GameState.State.Ready)
         {
             if (updateUnstable)
                 StartCoroutine(UpdateUnstableTilesRoutine());
@@ -211,25 +213,45 @@ public class Map : StateListenerBehaviour, ISavable
         renderer.UpdateVisuals();
     }
 
-    [Button]
-    private void ReFitData()
-    {
-        if (data.SizeX != sizeX || data.SizeY != sizeY)
-        {
-            MapArray mapArray = new MapArray(sizeX, SizeY);
-
-            Util.IterateXY(SizeX, sizeY, (x, y) => mapArray[x, y] = data[x, y]);
-            data.Map = mapArray;
-        }
-    }
-
+#if UNITY_EDITOR
     [Button]
     private void Save()
     {
-        #if UNITY_EDITOR
-        UnityEditor.EditorUtility.SetDirty(Data);
-        UnityEditor.AssetDatabase.SaveAssets();
-        #endif
+        string path;
+
+        if (loadAsset == null)
+        {
+            path = UnityEditor.EditorUtility.SaveFilePanel("Map", "Assets/Other/Maps", "NewMap", "bytes");
+        }
+        else
+        {
+            path = UnityEditor.AssetDatabase.GetAssetPath(loadAsset);
+        }
+
+        if (path != null)
+        {
+            DurationTracker tracker = new DurationTracker("Map saving");
+            BinaryFormatter formatter = new BinaryFormatter();
+
+            var stream = File.Open(path, FileMode.OpenOrCreate);
+            formatter.Serialize(stream, ToSaveData());
+            stream.Close();
+            UnityEditor.AssetDatabase.Refresh();
+            path = Util.MakePathRelative(path);
+            loadAsset = UnityEditor.AssetDatabase.LoadAssetAtPath<TextAsset>(path);
+            tracker.Stop();
+            Debug.Log("Saved at" + path);
+        }
+    }
+#endif
+
+    [Button]
+    private void Load()
+    {
+        DurationTracker tracker = new DurationTracker("Map Loading");
+        if (loadAsset != null)
+            LoadFromAsset(loadAsset);
+        tracker.Stop();
     }
 
     public GameObject InstantiateEntity(GameObject prefab, Vector3 position)
@@ -295,7 +317,7 @@ public class Map : StateListenerBehaviour, ISavable
 
     public void InitMap(int sizeX, int sizeY)
     {
-        data.Initialize(sizeX, sizeY);
+        map = new Tile[sizeX, sizeY];
     }
 
     public bool IsAirAt(int x, int y)
@@ -330,7 +352,7 @@ public class Map : StateListenerBehaviour, ISavable
         }
         else
         {
-            return data[x, y];
+            return map[x, y];
         }
 
     }
@@ -387,7 +409,7 @@ public class Map : StateListenerBehaviour, ISavable
         if (IsOutOfBounds(x, y))
             return;
 
-        data[x, y] = tile;
+        map[x, y] = tile;
 
         if (debug)
             Util.DebugDrawTile(new Vector2Int(x, y), Color.white, 0.5f);
@@ -398,8 +420,8 @@ public class Map : StateListenerBehaviour, ISavable
         if (IsOutOfBounds(x, y))
             return;
 
-        var prev = data[x, y];
-        data[x, y] = value;
+        var prev = map[x, y];
+        map[x, y] = value;
 
         if (updateProperties)
         {
@@ -482,8 +504,7 @@ public class Map : StateListenerBehaviour, ISavable
         TileMapSaveData saveData = new TileMapSaveData();
         saveData.GUID = saveID;
 
-        saveData.Map = data.Map;
-        Debug.Log("Saving with ID: " + saveData.GUID);
+        saveData.Map = map;
         return saveData;
     }
 
@@ -491,7 +512,9 @@ public class Map : StateListenerBehaviour, ISavable
     {
         if (data is TileMapSaveData saveData)
         {
-            this.data.Map = saveData.Map;
+            map = saveData.Map;
+            sizeX = map.GetLength(0);
+            sizeY = map.GetLength(1);
             renderer.UpdateVisuals();
         }
         else
@@ -500,80 +523,49 @@ public class Map : StateListenerBehaviour, ISavable
         }
     }
 
+    public void LoadFromAsset(TextAsset saveObject)
+    {
+        using (var memStream = new MemoryStream())
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            memStream.Write(saveObject.bytes, 0, saveObject.bytes.Length);
+            memStream.Seek(0, SeekOrigin.Begin);
+
+            TileMapSaveData saveData = (TileMapSaveData)formatter.Deserialize(memStream);
+            if (saveData != null)
+            {
+                Load(saveData);
+            }
+        }
+
+    }
+
     public string GetSaveID()
     {
         return saveID;
     }
 
-    public void LoadFromMap(TileMapData loadedData, int xOffset, int yOffset)
+    //Fix
+    public void LoadFromMap(Object loadedData, int xOffset, int yOffset)
     {
-        Util.IterateXY(loadedData.SizeX, loadedData.SizeY, (x, y) => LoadFromMapAt(loadedData, x, y, xOffset, yOffset));
+        //Util.IterateXY(loadedData.SizeX, loadedData.SizeY, (x, y) => LoadFromMapAt(loadedData, x, y, xOffset, yOffset));
     }
 
-    private void LoadFromMapAt(TileMapData loadedData, int x, int y, int xOffset, int yOffset)
+    private void LoadFromMapAt(Object loadedData, int x, int y, int xOffset, int yOffset)
     {
-        var t = loadedData[x, y];
 
-        if (t.Type != TileType.Ignore)
-            SetMapAt(x + xOffset, y + yOffset, t, TileUpdateReason.Generation, updateProperties: true, updateVisuals: true);
+        //var t = loadedData.Map[x, y];
+
+        //if (t.Type != TileType.Ignore)
+        //    SetMapAt(x + xOffset, y + yOffset, t, TileUpdateReason.Generation, updateProperties: true, updateVisuals: true);
     }
 }
 
 [System.Serializable]
 public class TileMapSaveData : SaveData
 {
-    public MapArray Map;
-}
+    public Tile[,] Map;
 
-[System.Serializable]
-public class MapArray
-{
-    [SerializeField] TileMapColumn[] rows;
-
-    public int SizeX;
-    public int SizeY;
-
-    public Tile this[int x, int y]
-    {
-        get
-        {
-            if (x < 0 || x >= SizeX || y < 0 || y >= SizeY)
-                return Tile.Air;
-
-            return rows[x][y];
-        }
-        set
-        {
-            if (x < 0 || x >= SizeX || y < 0 || y >= SizeY)
-                return;
-
-            rows[x][y] = value;
-        }
-    }
-
-    public MapArray(int sizeX, int sizeY)
-    {
-        SizeX = sizeX;
-        SizeY = sizeY;
-        rows = new TileMapColumn[sizeX];
-
-        for (int i = 0; i < rows.Length; i++)
-        {
-            rows[i] = new TileMapColumn(sizeY);
-        }
-    }
-}
-
-
-[System.Serializable]
-public class TileMapColumn
-{
-    public TileMapColumn(int sizeY)
-    {
-        column = new Tile[sizeY];
-    }
-
-    public Tile[] column;
-
-    public Tile this[int i] { get => column[i]; set => column[i] = value; }
+    public int SizeX { get => Map.GetLength(0); }
+    public int SizeY { get => Map.GetLength(1); }
 }

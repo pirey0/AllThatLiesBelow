@@ -170,5 +170,13 @@ public static class Util
     {
         return Random.Range(vector2Int.x, vector2Int.y+1);
     }
+    public static string MakePathRelative(string p)
+    {
+        if (p.StartsWith(Application.dataPath))
+        {
+            p = "Assets" + p.Substring(Application.dataPath.Length);
+        }
+        return p;
+    }
 
 }
