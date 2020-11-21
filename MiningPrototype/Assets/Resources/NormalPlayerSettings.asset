@@ -18,6 +18,7 @@ MonoBehaviour:
   slowMoveSpeed: 3
   timeToLongIdle: 10
   hitDuration: 1
+  respawnCooldown: 5
   jumpCooldown: 0.85
   timeAfterGroundedToJump: 0.1
   feetRadius: 0.4
@@ -37,3 +38,5 @@ MonoBehaviour:
   climbPanSpeed: 2
   climbIdleThreshold: 0.2
   idleThreshold: 0.2
+  overWorldHeight: 83
+  timeToHidePickaxe: 5

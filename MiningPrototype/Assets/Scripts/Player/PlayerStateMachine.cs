@@ -66,6 +66,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     float lastJumpTimeStamp;
     float lastActivityTimeStamp;
     float lastDeathTimeStamp;
+    float lastMineTimeStamp;
 
     private bool isGrounded;
     Vector2 rightWalkVector = Vector3.right;
@@ -451,6 +452,21 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     private bool InInventory()
     {
         return playerInteraction.InventoryDisplayState == InventoryState.Open;
+    }
+
+    public bool ShouldHoldPickaxe()
+    {
+        return !InOverworld() && Time.time - lastMineTimeStamp < settings.timeToHidePickaxe;
+    }
+
+    public bool InOverworld()
+    {
+        return transform.position.y >= settings.overWorldHeight;
+    }
+
+    public void NotifyPickaxeUse()
+    {
+        lastMineTimeStamp = Time.time;
     }
 
     public StateMachine GetStateMachine()

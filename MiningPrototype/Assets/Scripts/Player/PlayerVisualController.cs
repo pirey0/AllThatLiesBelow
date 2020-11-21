@@ -17,7 +17,7 @@ public class PlayerVisualController : MonoBehaviour
 
     Dictionary<string, PlayerVisualState> visualStateMap;
 
-
+    PlayerStateMachine player;
     StateMachine stateMachine;
 
     private void Start()
@@ -29,11 +29,12 @@ public class PlayerVisualController : MonoBehaviour
             visualStateMap.Add(item.StateName, item);
         }
 
-        var smUser = GetComponent<IStateMachineUser>();
+        var smUser = GetComponent<PlayerStateMachine>();
         if (smUser != null)
         {
             stateMachine = smUser.GetStateMachine();
             stateMachine.StateChanged += VisualUpdate;
+            player = smUser;
         }
         else
         {
@@ -84,7 +85,10 @@ public class PlayerVisualController : MonoBehaviour
                     handsRenderer.enabled = false;
                     break;
                 case HandsState.Conditional:
-                    handsRenderer.enabled = true;
+                    if (player.ShouldHoldPickaxe())
+                        handsRenderer.enabled = false;
+                    else
+                        handsRenderer.enabled = true;
                     break;
             }
 
@@ -100,8 +104,15 @@ public class PlayerVisualController : MonoBehaviour
                     break;
 
                 case AnimationPickaxeState.Conditional:
-                    pickaxeObject.SetActive(true);
-                    pickaxeRenderer.sortingOrder = 10;
+                    if (player.ShouldHoldPickaxe())
+                    {
+                        pickaxeRenderer.sortingOrder = 10;
+                        pickaxeObject.SetActive(true);
+                    }
+                    else
+                    {
+                        pickaxeObject.SetActive(false);
+                    }
                     break;
             }
 

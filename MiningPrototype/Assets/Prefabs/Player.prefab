@@ -233,14 +233,14 @@ GameObject:
   m_Component:
   - component: {fileID: 852425619}
   - component: {fileID: 852425621}
-  - component: {fileID: 852425620}
+  - component: {fileID: 6716828200991722712}
   m_Layer: 0
   m_Name: Hands
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &852425619
 Transform:
   m_ObjectHideFlags: 0
@@ -306,7 +306,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &852425620
+--- !u!114 &6716828200991722712
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -319,7 +319,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toListenTo: {fileID: 6332330309916232596}
-  sprites: []
+  sprites:
+  - sprite: {fileID: -756095480010459852, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
+    offset: {x: 0, y: 0.125, z: 0}
+  - sprite: {fileID: 9023619865659815301, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
+    offset: {x: 0, y: 0.125, z: 0}
+  - sprite: {fileID: 7127391226831221617, guid: bea1749c2a5f10742902c491aa0fcc1e, type: 3}
+    offset: {x: 0, y: -0.125, z: 0}
+  - sprite: {fileID: 3644946514836814670, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
+    offset: {x: 0, y: 100, z: 0}
+  - sprite: {fileID: -4364568823649116938, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
+    offset: {x: 0, y: 100, z: 0}
+  - sprite: {fileID: -1164896322992288394, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
+    offset: {x: 0, y: 100, z: 0}
+  - sprite: {fileID: 3339554163223783994, guid: bea1749c2a5f10742902c491aa0fcc1e, type: 3}
+    offset: {x: 0, y: 0.125, z: 0}
 --- !u!1 &1264881361
 GameObject:
   m_ObjectHideFlags: 0
@@ -6258,7 +6272,7 @@ MonoBehaviour:
   - StateName: Idle
     BodyAnimation: {fileID: 11400000, guid: 032cff1f8108c1743afb6adbae6af0c4, type: 2}
     HeadState: 1
-    HandsState: 0
+    HandsState: 1
     CarryItemState: 1
     PickaxeState: 2
   - StateName: Jump
