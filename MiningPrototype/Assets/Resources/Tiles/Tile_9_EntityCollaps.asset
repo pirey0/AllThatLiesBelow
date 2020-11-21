@@ -17,8 +17,11 @@ MonoBehaviour:
   damageMultiplyer: 1
   AirLike: 0
   Targetable: 1
+  TargetPriority: 0
   StabilityAffected: 1
   NotifiesInsteadOfCrumbling: 1
+  CountsAsNeighbour: 1
+  MinableInOverworld: 1
   UseTilesFromOtherInfo: 0
   Tiles: []
   TileSourceInfo: {fileID: 0}

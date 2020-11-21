@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using UnityEngine;
 
@@ -99,7 +100,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         switch (newState)
         {
             case GameState.State.Ready:
-                var start = GameObject.FindObjectOfType<PlayerStart>();
+                var start = LocationIndicator.Find(IndicatorType.PlayerStart);
                 if (start != null)
                 {
                     transform.position = start.transform.position;
@@ -253,7 +254,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         else
         {
             Debug.LogError("No bed found to respawn");
-            var pStart = GameObject.FindObjectOfType<PlayerStart>();
+            var pStart = GameObject.FindObjectOfType<LocationIndicator>();
             if (pStart != null)
             {
                 transform.position = pStart.transform.position;

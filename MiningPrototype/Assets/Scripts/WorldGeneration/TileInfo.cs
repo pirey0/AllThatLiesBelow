@@ -17,6 +17,7 @@ public class TileInfo : ScriptableObject
     public bool StabilityAffected = true;
     public bool NotifiesInsteadOfCrumbling = false;
     public bool CountsAsNeighbour = true;
+    public bool MinableInOverworld = false;
 
     [Header("Visuals")]
     public bool UseTilesFromOtherInfo;
@@ -27,6 +28,5 @@ public class TileInfo : ScriptableObject
 
     public Sprite physicalTileSprite;
     public Sprite physicalTileOverlay;
-
 
 }

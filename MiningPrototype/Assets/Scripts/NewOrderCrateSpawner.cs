@@ -1,14 +1,16 @@
 ﻿using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class NewOrderCrateSpawner : MonoBehaviour
+public class NewOrderCrateSpawner : StateListenerBehaviour
 {
     [SerializeField] List<ItemAmountPair> testOrder;
     [SerializeField] List<CrateInfo> crateInfos;
-    [SerializeField] Vector3 boxSpawnLocation;
+
+    LocationIndicator spawnLoc;
 
     private void Start()
     {
@@ -19,6 +21,15 @@ public class NewOrderCrateSpawner : MonoBehaviour
 
         crateInfos.Sort((x, y) => x.MaxCapacity - y.MaxCapacity);
     }
+
+    protected override void OnStateChanged(GameState.State newState)
+    {
+        if(newState == GameState.State.Ready)
+        {
+            spawnLoc = LocationIndicator.Find(IndicatorType.OrderSpawn);
+        }
+    }
+
 
     [Button]
     public void SpawnTestOrder()
@@ -47,7 +58,7 @@ public class NewOrderCrateSpawner : MonoBehaviour
             }
             else
             {
-                Crate newCrate = Instantiate(cratePrefab, boxSpawnLocation, Quaternion.identity);
+                Crate newCrate = Instantiate(cratePrefab, spawnLoc.transform.position, Quaternion.identity);
                 newCrate.Pack(item);
             }
         }
@@ -94,10 +105,7 @@ public class NewOrderCrateSpawner : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireCube(boxSpawnLocation, Vector3.one);
-    }
+
 }
 
 [System.Serializable]
