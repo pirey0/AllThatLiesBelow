@@ -15,9 +15,9 @@ MonoBehaviour:
   loop: 1
   speedMultiplyer: 1
   frames:
-  - Sprite: {fileID: 4578840018397341192, guid: 10b107675394172448d3560afba43a05, type: 3}
-    Duration: 0.25
   - Sprite: {fileID: -7698079103217006726, guid: 10b107675394172448d3560afba43a05, type: 3}
+    Duration: 0.25
+  - Sprite: {fileID: 1797930520484709941, guid: 10b107675394172448d3560afba43a05, type: 3}
     Duration: 0.25
   fileToLoadFrom: {fileID: 2800000, guid: 10b107675394172448d3560afba43a05, type: 3}
   defaultTime: 0.25
