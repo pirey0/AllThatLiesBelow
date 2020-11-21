@@ -21,8 +21,19 @@ public class DialogElementVisualization : MonoBehaviour
     [SerializeField] float displayTime;
     [SerializeField] bool dieAtTheEnd = true;
     [SerializeField] bool isInteractable = false;
+    [SerializeField] bool autoStart = false;
+    [SerializeField] bool useUnscaledTime = false;
 
     AltarDialogVisualizer altar;
+
+    private void Start()
+    {
+        if  (autoStart)
+        {
+            positionInTheBeginning = transform.position;
+            StartCoroutine(PrintTextDelayed(text.text));
+        }
+    }
 
     public DialogElementVisualization Init(AltarDialogVisualizer _altar, string textToPrint, float duration)
     {
@@ -35,6 +46,8 @@ public class DialogElementVisualization : MonoBehaviour
 
     IEnumerator PrintTextDelayed(string textToPrint)
     {
+        //Debug.Log("start text - " + displayTime);
+
         float alphaCurveLength = alphaOverTime.keys[alphaOverTime.length - 1].time;
         float heightCurveLength = heightOverTime.keys[heightOverTime.length - 1].time;
         float charactersLength = amountOfCharactersOverTime.keys[amountOfCharactersOverTime.length - 1].time;
@@ -50,6 +63,8 @@ public class DialogElementVisualization : MonoBehaviour
 
         while (t < displayTime)
         {
+            //Debug.Log("update text - " + t);
+
             float progress = (t / displayTime);
 
             int amountOfCharactersToShow =  (int)(Mathf.Clamp(amountOfCharactersOverTime.Evaluate(progress * charactersLength),0,1) * textToPrint.Length);
@@ -64,9 +79,11 @@ public class DialogElementVisualization : MonoBehaviour
             float pivotYOffset = pivotYOffsetOverTime.Evaluate(pivotYOffsetOffsetTime + t * pivotYOffsetVarianceSpeed) * pivotVarianceOverTime.Evaluate(progress * pivotVarianceLength);
             (transform as RectTransform).pivot = new Vector2(0.5f + pivotXOffset, 0.5f + pivotYOffset);
 
-            t += Time.deltaTime;
+            t += useUnscaledTime?Time.unscaledDeltaTime:Time.deltaTime;
             yield return null;
         }
+
+        //Debug.Log("finished text " + t + " / " + displayTime);
 
         if (dieAtTheEnd)
         {
