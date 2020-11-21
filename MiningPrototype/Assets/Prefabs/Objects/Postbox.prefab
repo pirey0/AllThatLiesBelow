@@ -171,9 +171,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 254087233
+  m_SortingLayer: 1
+  m_SortingOrder: 100
   m_Sprite: {fileID: -5347605606511437156, guid: 6ef3ab651b57e014d8b3b4195bf119df, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -201,6 +201,7 @@ MonoBehaviour:
   closed: {fileID: -7617559424405392253, guid: 6ef3ab651b57e014d8b3b4195bf119df, type: 3}
   open: {fileID: -3027598413621054980, guid: 6ef3ab651b57e014d8b3b4195bf119df, type: 3}
   active: {fileID: -5347605606511437156, guid: 6ef3ab651b57e014d8b3b4195bf119df, type: 3}
+  openFull: {fileID: 0}
   openCloseAudio: {fileID: 1265463392}
   storeItemAudio: {fileID: 6648267811130666485}
   storedItem:
