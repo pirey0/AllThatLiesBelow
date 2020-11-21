@@ -13,7 +13,8 @@ public enum ItemType
     Ladder,
     Support,
     LetterFromFamily,
-    LetterToFamily
+    LetterToFamily,
+    NewOrder
 }
 
 

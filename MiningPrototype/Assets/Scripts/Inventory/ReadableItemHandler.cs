@@ -20,7 +20,18 @@ public class ReadableItemHandler : Singleton<ReadableItemHandler>
 
     public Sprite GetSpriteOfLetter(int letterId)
     {
-        return (readableItems.Count - 1 >= letterId && readableItems[letterId].hasRead) ? iconOpen : iconClosed;
+        Sprite icon = iconClosed;
+
+        if (readableItems.Count - 1 >= letterId)
+        {
+            if (readableItems[letterId].itemType == ItemType.LetterFromFamily)
+                icon = readableItems[letterId].hasRead?iconOpen:iconClosed;
+            else
+                icon = ItemsData.GetItemInfo(readableItems[letterId].itemType).DisplaySprite;
+        }
+
+        return icon;
+
     }
 
     internal void Display(int id)
@@ -67,7 +78,7 @@ public class ReadableItemHandler : Singleton<ReadableItemHandler>
             str += ItemsData.GetItemInfo(pair.type).DisplayName + " x " + pair.amount + "\n";
         }
 
-        Instance.readableItems.Add(new ReadableItem(str));
+        Instance.readableItems.Add(new ReadableItem(str,ItemType.NewOrder));
         return Instance.readableItems.Count - 1;
     }
 
@@ -80,11 +91,13 @@ public class ReadableItemHandler : Singleton<ReadableItemHandler>
 
 public class ReadableItem
 {
+    public ItemType itemType;
     public bool hasRead;
     public string text;
 
-    public ReadableItem(string _text)
+    public ReadableItem(string _text, ItemType _itemType = ItemType.LetterFromFamily)
     {
         text = _text;
+        itemType = _itemType;
     }
 }

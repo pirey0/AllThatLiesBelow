@@ -89,6 +89,10 @@ public class Desk : MonoBehaviour, IInteractable
             currentOrder.Handshake(CloseNewOrder);
         }
 
+        letterWritingSource.loop = true;
+        letterWritingSource?.Play();
+        animator.Play(writeAnimation);
+
         option1.SetActive(false);
         option2.SetActive(false);
     }
@@ -115,6 +119,8 @@ public class Desk : MonoBehaviour, IInteractable
 
     public void CloseNewOrder()
     {
+        letterWritingSource.loop = false;
+        letterWritingSource?.Stop();
         LeaveDesk();
     }
 }
