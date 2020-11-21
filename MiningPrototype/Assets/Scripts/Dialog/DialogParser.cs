@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 public static class CSVHelper
 {
@@ -20,8 +21,16 @@ public static class CSVHelper
             return null;
         }
 
-        string[] lines = textAsset.text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-        return lines;
+        Regex regex = new Regex(@"^([^""\r\n]*(?:(?:""[^""]*"")*[^""\r\n]*))", RegexOptions.Multiline);
+        MatchCollection matchCollection = regex.Matches(textAsset.text);
+        List<string> results = new List<string>();
+        for (int i = 0; i < matchCollection.Count; i++)
+        {
+            Match match = matchCollection[i];
+            if (match.Value != "")
+                results.Add(match.Value);
+        }
+        return results.ToArray();
     }
 
     public static string[,] LoadTableAtPath(string path)
@@ -40,6 +49,7 @@ public static class CSVHelper
             string[] current = Split(lines[y]);
             for (int x = 0; x < table.GetLength(0); x++)
             {
+                Debug.Log("p: " + path + "x: " +x + " y:"+y);
                 table[x, y] = current[x];
             }
         }
