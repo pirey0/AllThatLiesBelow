@@ -572,6 +572,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
 
     public void TakeDamage(DamageStrength strength)
     {
+
         switch (strength)
         {
             case DamageStrength.Weak:
@@ -579,6 +580,10 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
                 break;
 
             case DamageStrength.Strong:
+
+                if (!isGrounded)
+                    return;
+
                 stateMachine.ForceTransitionTo(s_death);
                 break;
         }
