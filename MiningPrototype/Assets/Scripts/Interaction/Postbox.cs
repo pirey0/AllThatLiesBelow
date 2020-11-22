@@ -17,6 +17,8 @@ public class Postbox : MonoBehaviour, IInteractable, IDropReceiver
     [SerializeField] SpriteAnimator spriteAnimator;
     [SerializeField] SpriteAnimation closed, open, active, activePlayer, openFull;
 
+    [SerializeField] GameObject postboxIsFull;
+
     [SerializeField] AudioSource openCloseAudio, storeItemAudio;
 
     [SerializeField] ItemAmountPair storedItem;
@@ -132,12 +134,15 @@ public class Postbox : MonoBehaviour, IInteractable, IDropReceiver
     public void BeginHoverWith(ItemAmountPair pair)
     {
         SetBoxstatus(PostboxStatus.OPEN);
+        postboxIsFull.SetActive(!IsEmpty());
     }
 
     public void EndHover()
     {
         if (IsEmpty())
             SetBoxstatus(PostboxStatus.CLOSED);
+
+        postboxIsFull.SetActive(false);
     }
 
     public void HoverUpdate(ItemAmountPair pair)
