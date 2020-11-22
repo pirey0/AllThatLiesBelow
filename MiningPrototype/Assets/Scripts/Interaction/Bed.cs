@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Bed : MonoBehaviour, IInteractable
 {
+    [SerializeField] AudioSource wakeupSound;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Sprite empty, sleeping, wakeup, badDream;
     [SerializeField] Hut hut;
@@ -51,9 +52,12 @@ public class Bed : MonoBehaviour, IInteractable
 
     IEnumerator SleepCoroutine(PlayerStateMachine playerToEnableAgain)
     {
+        playerToEnableAgain.transform.position = transform.position;
+
         if (nightFadeToBlack != null)
         {
             float nightOpacity = 0f;
+
 
             while (nightOpacity < 1f)
             {
@@ -63,21 +67,22 @@ public class Bed : MonoBehaviour, IInteractable
                 yield return null;
             }
 
+            wakeupSound?.Play();
+
             yield return new WaitForSeconds(0.25f);
             ProgressionHandler.Instance.StartNextDay();
             spriteRenderer.sprite = wakeup;
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(1f);
 
             while (nightOpacity > 0f)
             {
-                nightOpacity -= Time.deltaTime;
+                nightOpacity -= Time.deltaTime * 0.33f;
                 nightFadeToBlack.color = new Color(0, 0, 0, nightOpacity);
 
                 yield return null;
             }
 
         }
-
         LeaveBed(playerToEnableAgain);
     }
 
