@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7685970453573342601}
   - component: {fileID: 1090961276}
   - component: {fileID: 2973298936022870862}
+  - component: {fileID: 8113314851914278576}
   m_Layer: 0
   m_Name: Desk
   m_TagString: Untagged
@@ -140,7 +141,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 2.25, y: 2}
+    oldSize: {x: 2.25, y: 2.25}
     newSize: {x: 2.25, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -245,6 +246,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8113314851914278576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090961274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df01105a907093e48993808b5c3fecd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 1090961277}
+  spriteDefault: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  spriteOuline: {fileID: 2100000, guid: 1fd08d97b3eb5c44cb2ebd251450f370, type: 2}
 --- !u!1 &2134094347
 GameObject:
   m_ObjectHideFlags: 0
@@ -6271,6 +6287,7 @@ GameObject:
   - component: {fileID: 9196140733356876434}
   - component: {fileID: 9196140733356876433}
   - component: {fileID: 9196140733356876432}
+  - component: {fileID: 304485021027826192}
   m_Layer: 0
   m_Name: Bed
   m_TagString: Untagged
@@ -6389,7 +6406,21 @@ MonoBehaviour:
   badDream: {fileID: -3701871119570471886, guid: de8e2dca06e05c9499a8494f5f3fc615, type: 3}
   hut: {fileID: 9196140733936070507}
   nightFadeToBlack: {fileID: 1265940254218353640}
-  sleepsBadly: 1
+--- !u!114 &304485021027826192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9196140733356876438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df01105a907093e48993808b5c3fecd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 9196140733356876433}
+  spriteDefault: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  spriteOuline: {fileID: 2100000, guid: 1fd08d97b3eb5c44cb2ebd251450f370, type: 2}
 --- !u!1 &9196140733791532750
 GameObject:
   m_ObjectHideFlags: 0

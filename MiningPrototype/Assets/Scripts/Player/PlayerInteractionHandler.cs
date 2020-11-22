@@ -30,6 +30,7 @@ public class PlayerInteractionHandler : InventoryOwner
     Vector2Int? gridDigTarget;
     IInteractable currentInteractable;
     IMinableNonGrid nonGridDigTarget;
+    IHoverable hover;
 
     [ReadOnly]
     [SerializeField] bool inMining;
@@ -77,8 +78,8 @@ public class PlayerInteractionHandler : InventoryOwner
         {
             if (Vector2Int.Distance(GetPositionInGrid(), GetClickCoordinate()) <= settings.maxDigDistance)
             {
-                UpdateDigTarget();
-                UpdateNonGridDigTarget();
+                //Update Hover and only show when no dig target was found
+                UpdateHover(UpdateDigTarget() || UpdateNonGridDigTarget());
 
                 if (Input.GetMouseButton(0))
                 {
@@ -116,6 +117,40 @@ public class PlayerInteractionHandler : InventoryOwner
         }
     }
 
+    private void UpdateHover(bool hasDigTarget)
+    {
+        var hits = Util.RaycastFromMouse();
+
+        IHoverable newHover = null;
+
+        if (!hasDigTarget)
+        {
+            foreach (var hit in hits)
+            {
+                if (hit.transform.TryGetComponent(out IHoverable hoverable))
+                {
+                    //Debug.Log(hit.transform.name);
+                    newHover = hoverable;
+                    break;
+                }
+            }
+        }
+
+        if (newHover != hover)
+        {
+            if (hover != null)
+                hover.HoverExit();
+
+            if (newHover != null)
+                newHover.HoverEnter();
+
+            hover = newHover;
+        }
+
+        if (hover != null)
+            hover.HoverUpdate();
+    }
+
     private void ToggleInventory()
     {
         if (InventoryDisplayState == InventoryState.Closed)
@@ -151,17 +186,20 @@ public class PlayerInteractionHandler : InventoryOwner
         TryStopInteracting();
     }
 
-    private void UpdateDigTarget()
+    private bool UpdateDigTarget()
     {
         gridDigTarget = MapHelper.GetMiningTarget(RuntimeProceduralMap.Instance, GetPositionInGrid(), GetClickCoordinate());
         if (!RuntimeProceduralMap.Instance.CanTarget(gridDigTarget.Value.x, gridDigTarget.Value.y))
         {
             gridDigTarget = null;
+            return false;
         }
+
+        return true;
     }
 
 
-    private void UpdateNonGridDigTarget()
+    private bool UpdateNonGridDigTarget()
     {
         var hits = Util.RaycastFromMouse();
 
@@ -191,6 +229,8 @@ public class PlayerInteractionHandler : InventoryOwner
 
             nonGridDigTarget = newTarget;
         }
+
+        return nonGridDigTarget != null;
     }
 
     private void UpdateDigHighlight()
