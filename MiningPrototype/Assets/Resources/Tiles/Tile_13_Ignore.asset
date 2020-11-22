@@ -17,12 +17,14 @@ MonoBehaviour:
   damageMultiplyer: 0
   AirLike: 1
   Targetable: 0
+  TargetPriority: 0
   StabilityAffected: 0
   NotifiesInsteadOfCrumbling: 0
   CountsAsNeighbour: 0
+  MinableInOverworld: 0
   UseTilesFromOtherInfo: 0
   Tiles: []
   TileSourceInfo: {fileID: 0}
-  Overlay: {fileID: 11400000, guid: 83bdee7d6ca23f245834cd231c6e7afd, type: 2}
+  Overlay: {fileID: 11400000, guid: 7ba1fc88d38d06043ad575eb9a2a38e7, type: 2}
   physicalTileSprite: {fileID: 0}
   physicalTileOverlay: {fileID: 0}
