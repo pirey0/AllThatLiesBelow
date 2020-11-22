@@ -211,4 +211,34 @@ public static class MapHelper
             return (BaseMapSaveData)formatter.Deserialize(memStream);
         }
     }
+
+    public static void FloodFill(BaseMap map, TileType target, TileType replacement, int x, int y)
+    {
+        if (target == replacement)
+            return;
+
+        if (map.IsSetup())
+            RecursiveFloodFill(map, target, replacement, x, y);
+
+        if (map is RenderedMap rm)
+        {
+            rm.CalculateAllNeighboursBitmask();
+            rm.CalculateStabilityAll();
+        }
+
+        map.UpdateAllVisuals();
+    }
+
+    private static void RecursiveFloodFill(BaseMap map, TileType target, TileType replacement, int x, int y)
+    {
+        if (map.IsOutOfBounds(x, y) || map[x, y].Type != target)
+            return;
+
+        map[x, y] = Tile.Make(replacement);
+
+        RecursiveFloodFill(map, target, replacement, x + 1, y);
+        RecursiveFloodFill(map, target, replacement, x - 1, y);
+        RecursiveFloodFill(map, target, replacement, x, y + 1);
+        RecursiveFloodFill(map, target, replacement, x, y - 1);
+    }
 }

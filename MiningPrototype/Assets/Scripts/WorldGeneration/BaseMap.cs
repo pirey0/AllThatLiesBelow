@@ -163,7 +163,7 @@ public class BaseMap : StateListenerBehaviour, ISavable
 
     }
 
-    protected virtual void UpdateAllVisuals()
+    public virtual void UpdateAllVisuals()
     {
 
     }
@@ -253,6 +253,11 @@ public class BaseMap : StateListenerBehaviour, ISavable
 
         if (t.Type != TileType.Ignore)
             SetMapAt(x + xOffset, y + yOffset, t, TileUpdateReason.Generation, updateProperties: true, updateVisuals: true);
+    }
+
+    public bool IsSetup()
+    {
+        return map != null;
     }
 }
 

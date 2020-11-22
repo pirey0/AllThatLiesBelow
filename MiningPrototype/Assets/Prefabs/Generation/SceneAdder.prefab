@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3510606058087648147
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3510606058087648145}
+  - component: {fileID: 3510606058087648146}
+  m_Layer: 0
+  m_Name: SceneAdder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3510606058087648145
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3510606058087648147}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3510606058087648146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3510606058087648147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e03091118b552a49b49193efa4013d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisMap: {fileID: 0}
+  addition:
+  - XOffsetRange: {x: 0, y: 0}
+    YOffset: 44
+    FromTop: 1
+    SceneToAdd:
+      sceneAsset: {fileID: 102900000, guid: 340830e5a969bf042aca61b557fb29b9, type: 3}
+      scenePath: Assets/Scenes/OverworldScene.unity
+  - XOffsetRange: {x: 20, y: 60}
+    YOffset: 45
+    FromTop: 0
+    SceneToAdd:
+      sceneAsset: {fileID: 102900000, guid: d81490d50168cfe4e9ca38a2e325f5a3, type: 3}
+      scenePath: Assets/Scenes/AltarScene.unity

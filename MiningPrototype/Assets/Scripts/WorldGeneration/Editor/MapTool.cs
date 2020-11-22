@@ -39,7 +39,7 @@ public class MapTool : EditorTool
         mousePosition = ray.origin;
 
         Vector3 worldPos = mousePosition.ToGridPosition().AsV3();
-
+        Handles.color = Color.white;
         Handles.DrawLine(worldPos, worldPos + Vector3.right);
         Handles.DrawLine(worldPos, worldPos + Vector3.up);
         Handles.DrawLine(worldPos + Vector3.up, worldPos + new Vector3(1, 1));

@@ -17,7 +17,7 @@ public class RenderedMap : BaseMap
         oreTilemap.GetComponent<ITileMapElement>()?.Setup(this);
     }
     
-    protected override void UpdateAllVisuals()
+    public override void UpdateAllVisuals()
     {
         tilemap.ClearAllTiles();
         damageOverlayTilemap.ClearAllTiles();
@@ -103,5 +103,129 @@ public class RenderedMap : BaseMap
         var t = map[x, y];
         var info = GetTileInfo(t.Type);
         return info.Overlay;
+    }
+
+    protected override void UpdatePropertiesAt(int x, int y, Tile newTile, Tile previousTile, TileUpdateReason reason)
+    {
+        CalculateNeighboursBitmaskAt(x, y);
+
+        foreach (var nIndex in MapHelper.GetNeighboursIndiciesOf(x, y))
+        {
+            CalculateNeighboursBitmaskAt(nIndex.x, nIndex.y);
+        }
+
+        PropagateStabilityUpdatesFrom(x, y);
+    }
+
+    private void CalculateNeighboursBitmaskAt(int x, int y)
+    {
+        if (IsOutOfBounds(x, y))
+            return;
+
+        int topLeft = IsNeighbourAt(x - 1, y + 1) ? 1 : 0;
+        int topMid = IsNeighbourAt(x, y + 1) ? 1 : 0;
+        int topRight = IsNeighbourAt(x + 1, y + 1) ? 1 : 0;
+        int midLeft = IsNeighbourAt(x - 1, y) ? 1 : 0;
+        int midRight = IsNeighbourAt(x + 1, y) ? 1 : 0;
+        int botLeft = IsNeighbourAt(x - 1, y - 1) ? 1 : 0;
+        int botMid = IsNeighbourAt(x, y - 1) ? 1 : 0;
+        int botRight = IsNeighbourAt(x + 1, y - 1) ? 1 : 0;
+
+        int value = topMid * 2 + midLeft * 8 + midRight * 16 + botMid * 64;
+        value += topLeft * topMid * midLeft;
+        value += topRight * topMid * midRight * 4;
+        value += botLeft * midLeft * botMid * 32;
+        value += botRight * midRight * botMid * 128;
+
+        Tile t = this[x, y];
+        t.NeighbourBitmask = (byte)value;
+        this[x, y] = t;
+
+    }
+
+    private void PropagateStabilityUpdatesFrom(int x, int y)
+    {
+        MarkToCheckForStability(x, y);
+        ResetStability(x, y);
+        DirectionalStabilityIterator(x, y, Direction.Up);
+        DirectionalStabilityIterator(x, y, Direction.Right);
+        DirectionalStabilityIterator(x, y, Direction.Down);
+        DirectionalStabilityIterator(x, y, Direction.Left);
+    }
+
+    private void DirectionalStabilityIterator(int x, int y, Direction dir)
+    {
+        Vector2Int offset = dir.Inverse().AsV2Int();
+
+        for (int i = 0; i < GenerationSettings.StabilityPropagationDistance; i++)
+        {
+            SetDirectionalStabilityAt(x, y, dir);
+            MarkToCheckForStability(x, y);
+            x += offset.x;
+            y += offset.y;
+        }
+    }
+
+    private void ResetStability(int x, int y)
+    {
+        var tile = GetTileAt(x, y);
+        tile.ResetStability();
+
+        this[x, y] = tile;
+    }
+
+    private void SetDirectionalStabilityAt(int x, int y, Direction direction)
+    {
+        if (IsAirAt(x, y))
+            return;
+
+        var tile = GetTileAt(x, y);
+
+        if (direction == Direction.Down)
+            tile.SetStability(direction, IsBlockAt(x, y - 1) ? 100 : 0);
+        else
+        {
+            Vector2Int offset = direction.AsV2Int();
+            tile.SetStability(direction, Mathf.Min(25, this[x + offset.x, y + offset.y].Stability / 4));
+        }
+
+        this[x, y] = tile;
+    }
+
+    protected virtual void MarkToCheckForStability(int x, int y)
+    {
+    }
+
+    public void CalculateStabilityAll()
+    {
+        Util.IterateXY(SizeX, SizeY, (x, y) => ResetStability(x, y));
+
+        Util.IterateXY(SizeX, SizeY, (x, y) => SetDirectionalStabilityAt(x, y, Direction.Down));
+
+        for (int y = SizeY; y >= 0; y--)
+        {
+            for (int x = 0; x < SizeX; x++)
+            {
+                SetDirectionalStabilityAt(x, y, Direction.Up);
+            }
+        }
+
+        for (int y = 0; y < SizeY; y++)
+        {
+            for (int x = 0; x < SizeX; x++)
+            {
+                SetDirectionalStabilityAt(x, y, Direction.Left);
+            }
+
+            for (int x = SizeX; x >= 0; x--)
+            {
+                SetDirectionalStabilityAt(x, y, Direction.Right);
+            }
+        }
+    }
+
+    public void CalculateAllNeighboursBitmask()
+    {
+        Util.IterateXY(SizeX, SizeY, CalculateNeighboursBitmaskAt);
     }
 }

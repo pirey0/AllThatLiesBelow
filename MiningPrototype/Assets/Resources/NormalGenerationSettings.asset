@@ -14,9 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SeedIsRandom: 1
   Seed: 1
-  SizeX: 100
-  SizeY: 100
-  MirroringAmount: 20
   InitialAliveCurve:
     serializedVersion: 2
     m_Curve:
