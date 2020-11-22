@@ -27,6 +27,8 @@ public class MainMenu : MonoBehaviour
 
     private IEnumerator Load()
     {
+        animator.SetTrigger("FadeOut");
+        yield return new WaitForSeconds(0.5f);
         SaveHandler.LoadedFromSaveFile = true;
         yield return Play();
     }

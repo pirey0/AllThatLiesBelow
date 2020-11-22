@@ -21,6 +21,11 @@ public class TransitionEffectHandler : Singleton<TransitionEffectHandler>
 	[SerializeField] bool testFadeOut;
 	[SerializeField] FadeType testFadeType;
 
+	private void Start()
+	{
+		FadeIn();
+	}
+
 	[Button]
 	public void FadeTest()
 	{
