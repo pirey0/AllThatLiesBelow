@@ -49,11 +49,11 @@ MonoBehaviour:
     YOffset: 44
     FromTop: 1
     SceneToAdd:
-      sceneAsset: {fileID: 102900000, guid: 340830e5a969bf042aca61b557fb29b9, type: 3}
+      sceneAsset: {fileID: 102900000, guid: ff72c84b8404c72448a5f4f2347572d0, type: 3}
       scenePath: Assets/Scenes/OverworldScene.unity
   - XOffsetRange: {x: 20, y: 60}
     YOffset: 45
     FromTop: 0
     SceneToAdd:
-      sceneAsset: {fileID: 102900000, guid: d81490d50168cfe4e9ca38a2e325f5a3, type: 3}
-      scenePath: Assets/Scenes/AltarScene.unity
+      sceneAsset: {fileID: 0}
+      scenePath: 

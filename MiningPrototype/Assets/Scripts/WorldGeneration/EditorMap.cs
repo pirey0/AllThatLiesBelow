@@ -61,7 +61,8 @@ public class EditorMap : RenderedMap
             UnityEditor.AssetDatabase.Refresh();
             path = Util.MakePathRelative(path);
             saveAsset = UnityEditor.AssetDatabase.LoadAssetAtPath<TextAsset>(path);
-            UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
+            UnityEditor.Undo.RecordObject(this, "SaveAsset changed");
+            UnityEditor.PrefabUtility.RecordPrefabInstancePropertyModifications(this);
             tracker.Stop();
             Debug.Log("Saved at " + path);
         }
@@ -83,6 +84,8 @@ public class EditorMap : RenderedMap
     public void Load(TextAsset asset)
     {
         saveAsset = asset;
+        UnityEditor.Undo.RecordObject(this, "SaveAsset changed");
+        UnityEditor.PrefabUtility.RecordPrefabInstancePropertyModifications(this);
         Load();
     }
 #endif
