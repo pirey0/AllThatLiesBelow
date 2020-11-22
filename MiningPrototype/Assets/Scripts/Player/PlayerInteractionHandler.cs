@@ -44,6 +44,12 @@ public class PlayerInteractionHandler : InventoryOwner
         base.Start();
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteAnimator = GetComponent<SpriteAnimator>();
+        player.PlayerDeath += OnDeath;
+    }
+
+    private void OnDeath()
+    {
+        TryDisableMiningVisuals();
     }
 
     private void Update()

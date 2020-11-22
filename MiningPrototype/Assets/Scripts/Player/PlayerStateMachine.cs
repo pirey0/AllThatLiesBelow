@@ -60,6 +60,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     StateMachine stateMachine;
     StateMachine.State s_idle, s_jump, s_fall, s_walk, s_slowWalk, s_climb, s_climbIde, s_inventory, s_death, s_hit, s_longIdle, s_disabled;
     Dictionary<string, PlayerStateInfo> canInteractInStateMap;
+    public event System.Action PlayerDeath;
 
     private Ladder currentLadder;
     private float gravityScale;
@@ -92,7 +93,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
             canInteractInStateMap.Add(val.StateName, val);
         }
 
-        playerInteraction.PlayerActivity += OnInteractionActivity;
+        playerInteraction.PlayerActivity += NotifyActivity;
     }
 
     protected override void OnStateChanged(GameState.State newState)
@@ -109,7 +110,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         }
     }
 
-    private void OnInteractionActivity()
+    private void NotifyActivity()
     {
         lastActivityTimeStamp = Time.time;
     }
@@ -173,7 +174,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         s_death = stateMachine.AddState("Death", DeathEnter, DeathUpdate, DeathExit);
         s_hit = stateMachine.AddState("Hit", null);
         s_longIdle = stateMachine.AddState("LongIdle", null, SlowMoveUpdate);
-        s_disabled = stateMachine.AddState("Disabled", null);
+        s_disabled = stateMachine.AddState("Disabled", null, null, DisableExit);
         s_fall = stateMachine.AddState("Fall", null, MoveUpdate, FallExit);
 
         s_idle.AddTransition(InInventory, s_inventory);
@@ -212,6 +213,10 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         s_hit.AddTransition(HitFinished, s_idle);
     }
 
+    private void DisableExit()
+    {
+        NotifyActivity();
+    }
 
     private void FallExit()
     {
@@ -228,8 +233,11 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         TransitionEffectHandler.FadeOut(FadeType.Death);
         rigidbody.simulated = false;
         lastDeathTimeStamp = Time.time;
+        NotifyActivity();
         GameState.Instance.ChangeStateTo(GameState.State.Respawning);
+        PlayerDeath?.Invoke();
     }
+
     private void DeathUpdate()
     {
         if (Time.time - lastDeathTimeStamp > settings.respawnCooldown)
@@ -266,6 +274,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     private void DeathExit()
     {
         rigidbody.simulated = true;
+        NotifyActivity();
         TransitionEffectHandler.FadeIn(FadeType.Nightmare);
         GameState.Instance.ChangeStateTo(GameState.State.Playing);
     }
@@ -368,11 +377,13 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     private void ClimbingEnter()
     {
         rigidbody.gravityScale = 0;
+        NotifyActivity();
     }
 
     private void ClimbingExit()
     {
         rigidbody.gravityScale = gravityScale;
+        NotifyActivity();
     }
 
     private void ClimbingUpdate()
