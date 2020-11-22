@@ -959,6 +959,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a03e4f99afb5f5478ba8441f863deb7, type: 3}
+--- !u!114 &1390067676 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 589325803474934636, guid: c4b3c62dd26f04b4b8fe68da9bd7447c, type: 3}
+  m_PrefabInstance: {fileID: 595997970}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc75e77c8c734664d9164c7f62733a8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1460968040
 GameObject:
   m_ObjectHideFlags: 0
@@ -1304,6 +1315,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: thisMap
+      value: 
+      objectReference: {fileID: 1390067676}
     - target: {fileID: 3510606058087648147, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: m_Name
       value: SceneAdder

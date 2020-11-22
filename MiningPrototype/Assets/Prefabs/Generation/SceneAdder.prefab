@@ -51,9 +51,3 @@ MonoBehaviour:
     SceneToAdd:
       sceneAsset: {fileID: 102900000, guid: ff72c84b8404c72448a5f4f2347572d0, type: 3}
       scenePath: Assets/Scenes/OverworldScene.unity
-  - XOffsetRange: {x: 20, y: 60}
-    YOffset: 45
-    FromTop: 0
-    SceneToAdd:
-      sceneAsset: {fileID: 0}
-      scenePath: 
