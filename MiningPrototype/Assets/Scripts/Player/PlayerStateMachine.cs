@@ -477,7 +477,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
 
     public bool ShouldHoldPickaxe()
     {
-        return !InOverworld() && Time.time - lastMineTimeStamp < settings.timeToHidePickaxe;
+        return Time.time - lastMineTimeStamp < (InOverworld() ? settings.overworldTimeToHidePickaxe : settings.timeToHidePickaxe);
     }
 
     public bool InOverworld()

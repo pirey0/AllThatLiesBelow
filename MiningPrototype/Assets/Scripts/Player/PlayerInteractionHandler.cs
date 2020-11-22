@@ -293,6 +293,7 @@ public class PlayerInteractionHandler : InventoryOwner
                 nonGridDigTarget.Damage(Time.deltaTime * settings.digSpeed);
                 miningParticles.transform.position = nonGridDigTarget.GetPosition();
                 TryEnableMiningVisuals();
+                player.NotifyPickaxeUse();
             }
             else
             {

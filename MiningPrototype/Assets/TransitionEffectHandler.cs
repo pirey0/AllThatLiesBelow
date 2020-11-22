@@ -76,13 +76,13 @@ public class TransitionEffectHandler : Singleton<TransitionEffectHandler>
 		float time = fadeIn ? curve[curve.length - 1].time : curve[0].time;
 		float endTime = fadeIn ? curve[0].time : curve[curve.length - 1].time;
 
-		Debug.Log("start" + (fadeIn?"fadeOut":"fadeIn") +  " routine : " + time + " -> " + endTime);
+		//Debug.Log("start" + (fadeIn?"fadeOut":"fadeIn") +  " routine : " + time + " -> " + endTime);
 
 		while (fadeIn && time > endTime || !fadeIn && time < endTime)
 		{
 			time += Time.deltaTime * (fadeIn ? -1f : 1f);
 			Instance.mat.SetFloat("_Cutoff", curve.Evaluate(time));
-			Debug.Log("fade update "+ curve.Evaluate(time));
+			//Debug.Log("fade update "+ curve.Evaluate(time));
 			yield return null;
 		}
 	}

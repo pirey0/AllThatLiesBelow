@@ -40,6 +40,7 @@ MonoBehaviour:
   idleThreshold: 0.2
   overWorldHeight: 79
   timeToHidePickaxe: 5
+  overworldTimeToHidePickaxe: 1
   layerMask:
     serializedVersion: 2
     m_Bits: 257
