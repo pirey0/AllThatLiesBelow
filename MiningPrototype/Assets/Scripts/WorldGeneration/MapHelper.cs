@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-public static class TileMapHelper
+public static class MapHelper
 {
     public static byte DirectNeighboursSolidBitMap { get => 0b01011010; }
 
@@ -33,7 +35,7 @@ public static class TileMapHelper
     }
 
 
-    public static bool HasLineOfSight(Map map, Vector2Int start, Vector2Int end, bool debugVisualize = false)
+    public static bool HasLineOfSight(RuntimeProceduralMap map, Vector2Int start, Vector2Int end, bool debugVisualize = false)
     {
         Vector2Int current = start;
 
@@ -85,7 +87,7 @@ public static class TileMapHelper
         return offset;
     }
 
-    public static Vector3 GetWorldLocationOfFreeFaceFromSource(Map map, Vector2Int target, Vector2Int source)
+    public static Vector3 GetWorldLocationOfFreeFaceFromSource(RuntimeProceduralMap map, Vector2Int target, Vector2Int source)
     {
         Vector2Int disp = source - target;
 
@@ -108,7 +110,7 @@ public static class TileMapHelper
 
     }
 
-    public static Vector2Int GetMiningTarget(Map map, Vector2Int current, Vector2Int end)
+    public static Vector2Int GetMiningTarget(RuntimeProceduralMap map, Vector2Int current, Vector2Int end)
     {
         Vector2Int? lastTargetable = null;
         while (current != end)
@@ -145,7 +147,7 @@ public static class TileMapHelper
             return Color.black;
     }
 
-    public static bool OnEdgeOfMap(Map map, Vector2Int position)
+    public static bool OnEdgeOfMap(RuntimeProceduralMap map, Vector2Int position)
     {
         if (position.x == 0 || position.y == 0 || position.x == map.SizeX - 1 || position.y == map.SizeY - 1)
             return true;
@@ -153,7 +155,7 @@ public static class TileMapHelper
         return false;
     }
 
-    public static bool IsAllAirAt(Map map, Vector2Int[] locations)
+    public static bool IsAllAirAt(RuntimeProceduralMap map, Vector2Int[] locations)
     {
 
         foreach (var loc in locations)
@@ -166,7 +168,7 @@ public static class TileMapHelper
         return true;
     }
 
-    public static bool IsAllBlockAt(Map map, Vector2Int[] locations)
+    public static bool IsAllBlockAt(RuntimeProceduralMap map, Vector2Int[] locations)
     {
 
         foreach (var loc in locations)
@@ -179,7 +181,7 @@ public static class TileMapHelper
         return true;
     }
 
-    public static int AirTileCountAbove(Map map, Vector2Int coordinate)
+    public static int AirTileCountAbove(RuntimeProceduralMap map, Vector2Int coordinate)
     {
         int count = 0;
         while (!map.IsOutOfBounds(coordinate.x, coordinate.y))
@@ -198,4 +200,15 @@ public static class TileMapHelper
         return count;
     }
 
+    public static BaseMapSaveData LoadMapSaveDataFromTextAsset(TextAsset asset)
+    {
+        using (var memStream = new MemoryStream())
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            memStream.Write(asset.bytes, 0, asset.bytes.Length);
+            memStream.Seek(0, SeekOrigin.Begin);
+
+            return (BaseMapSaveData)formatter.Deserialize(memStream);
+        }
+    }
 }

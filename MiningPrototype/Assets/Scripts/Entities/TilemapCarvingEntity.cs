@@ -45,14 +45,14 @@ public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateRec
 
     protected void Carve()
     {
-        if (Map.Instance != null)
+        if (RuntimeProceduralMap.Instance != null)
         {
             tilemapPos = (transform.position + carvingOffset).ToGridPosition();
             foreach (var item in tilesToOccupy)
             {
                 Vector2Int pos = tilemapPos + item.Offset;
-                Map.Instance.SetMapAt(pos.x, pos.y, Tile.Make(item.Type), TileUpdateReason.Carve, updateProperties: true, updateVisuals: true);
-                Map.Instance.SetReceiverMapAt(pos.x, pos.y, this);
+                RuntimeProceduralMap.Instance.SetMapAt(pos.x, pos.y, Tile.Make(item.Type), TileUpdateReason.Carve, updateProperties: true, updateVisuals: true);
+                RuntimeProceduralMap.Instance.SetReceiverMapAt(pos.x, pos.y, this);
             }
         }
         else
@@ -63,13 +63,13 @@ public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateRec
 
     protected void UnCarvePrevious()
     {
-        if (Map.Instance != null && tilemapPos.x >= 0)
+        if (RuntimeProceduralMap.Instance != null && tilemapPos.x >= 0)
         {
             foreach (var item in tilesToOccupy)
             {
                 Vector2Int pos = tilemapPos + item.Offset;
-                Map.Instance.SetMapAt(pos.x, pos.y, Tile.Air, TileUpdateReason.Uncarve, updateProperties: true, updateVisuals: true);
-                Map.Instance.SetReceiverMapAt(pos.x, pos.y, this);
+                RuntimeProceduralMap.Instance.SetMapAt(pos.x, pos.y, Tile.Air, TileUpdateReason.Uncarve, updateProperties: true, updateVisuals: true);
+                RuntimeProceduralMap.Instance.SetReceiverMapAt(pos.x, pos.y, this);
             }
             tilemapPos = new Vector2Int(-1, -1);
         }
@@ -83,8 +83,6 @@ public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateRec
             Util.GizmosDrawTile((transform.position + carvingOffset).ToGridPosition() + disp.Offset);
         }
     }
-
-
 }
 
 [System.Serializable]

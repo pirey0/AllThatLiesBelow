@@ -1,51 +1,44 @@
-﻿using NaughtyAttributes;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class MapRenderer : MonoBehaviour
+public class RenderedMap : BaseMap
 {
-    [SerializeField] bool on;
-    [SerializeField] Map map;
-    [SerializeField] Tilemap tilemap, damageOverlayTilemap, oreTilemap;
+    [Header("RenderedMap")]
+    [SerializeField] Tilemap tilemap;
+    [SerializeField] Tilemap damageOverlayTilemap, oreTilemap;
 
-    private int SizeX { get => map.SizeX; }
-    private int SizeY { get => map.SizeY; }
-
-    public void Setup(Map map)
+    protected virtual void Setup()
     {
-        if (map == null)
-            return;
 
-        this.map = map;
-
-        tilemap.GetComponent<ITileMapElement>()?.Setup(map);
-        damageOverlayTilemap.GetComponent<ITileMapElement>()?.Setup(map);
-        oreTilemap.GetComponent<ITileMapElement>()?.Setup(map);
+        tilemap.GetComponent<ITileMapElement>()?.Setup(this);
+        damageOverlayTilemap.GetComponent<ITileMapElement>()?.Setup(this);
+        oreTilemap.GetComponent<ITileMapElement>()?.Setup(this);
     }
-
-    [Button]
-    public void UpdateVisuals()
+    
+    protected override void UpdateAllVisuals()
     {
-        if (!on)
-            return;
-
         tilemap.ClearAllTiles();
         damageOverlayTilemap.ClearAllTiles();
         oreTilemap.ClearAllTiles();
-        Util.IterateXY(map.SizeX, map.SizeY, UpdateVisualsAt);
+        Util.IterateXY(SizeX, SizeY, UpdateVisualsAt);
     }
 
-
-    public void UpdateVisualsAt(int x, int y)
+    protected override void UpdateVisualsAt(int x, int y)
     {
-        if (!on)
-            return;
+        SetVisualsAt(x, y);
+        foreach (var nIndex in MapHelper.GetNeighboursIndiciesOf(x, y))
+        {
+            SetVisualsAt(nIndex.x, nIndex.y);
+        }
+    }
 
-        map.WrapXIfNecessary(ref x);
+    private void SetVisualsAt(int x, int y)
+    {
+        WrapXIfNecessary(ref x);
 
-        if (map.IsOutOfBounds(x, y))
+        if (IsOutOfBounds(x, y))
         {
             return;
         }
@@ -58,14 +51,14 @@ public class MapRenderer : MonoBehaviour
         damageOverlayTilemap.SetTile(new Vector3Int(x, y, 0), destTile);
         oreTilemap.SetTile(new Vector3Int(x, y, 0), oreTile);
 
-        if (x < map.Settings.MirroringAmount)
+        if (x < Settings.MirroringAmount)
         {
             tilemap.SetTile(new Vector3Int(SizeX + x, y, 0), tile);
             damageOverlayTilemap.SetTile(new Vector3Int(SizeX + x, y, 0), destTile);
             oreTilemap.SetTile(new Vector3Int(SizeX + x, y, 0), oreTile);
         }
 
-        if (x > SizeX - map.Settings.MirroringAmount)
+        if (x > SizeX - Settings.MirroringAmount)
         {
             tilemap.SetTile(new Vector3Int(x - SizeX, y, 0), tile);
             damageOverlayTilemap.SetTile(new Vector3Int(x - SizeX, y, 0), destTile);
@@ -77,13 +70,13 @@ public class MapRenderer : MonoBehaviour
     {
         Tile tile = map[x, y];
 
-        if (map.IsOutOfBounds(x, y) || map.IsAirAt(x, y))
+        if (IsOutOfBounds(x, y) || IsAirAt(x, y))
             return null;
 
 
         int tileIndex = Util.BITMASK_TO_TILEINDEX[tile.NeighbourBitmask];
 
-        TileInfo tileInfo = map.GetTileInfo(tile.Type);
+        TileInfo tileInfo = GetTileInfo(tile.Type);
         TileBase tileVis = null;
 
         if (tileInfo.UseTilesFromOtherInfo && tileInfo.TileSourceInfo != null)
@@ -102,13 +95,13 @@ public class MapRenderer : MonoBehaviour
     private TileBase GetVisualDestructableOverlayFor(int x, int y)
     {
         var t = map[x, y];
-        return map.Settings.DamageOverlayTiles[Mathf.FloorToInt(t.Damage)];
+        return Settings.DamageOverlayTiles[Mathf.FloorToInt(t.Damage)];
     }
 
     private TileBase GetVisualOverlayTileFor(int x, int y)
     {
         var t = map[x, y];
-        var info = map.GetTileInfo(t.Type);
+        var info = GetTileInfo(t.Type);
         return info.Overlay;
     }
 }

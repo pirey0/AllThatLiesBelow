@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneAdder : MonoBehaviour
 {
-    [SerializeField] Map thisMap;
+    [SerializeField] RuntimeProceduralMap thisMap;
     [SerializeField] List<MapAddition> addition;
     bool loaded = false;
     MapAddition current;
@@ -56,10 +56,10 @@ public class SceneAdder : MonoBehaviour
 
         foreach (var obj in scene.GetRootGameObjects())
         {
-            if (obj.TryGetComponent(out Map map))
+            if (obj.TryGetComponent(out EditorMap map))
             {
-                Debug.Log("Adding from data " + map.LoadAsset);
-                thisMap.LoadFromMap(map.LoadAsset, offset.x, offset.y);
+                Debug.Log("Adding from data " + map.SaveAsset);
+                thisMap.LoadFromMap(map.SaveAsset, offset.x, offset.y);
                 DestroyImmediate(obj);
             }
             else

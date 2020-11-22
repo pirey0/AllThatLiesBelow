@@ -9,23 +9,25 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [DefaultExecutionOrder(-100)]
-public class MapBase : StateListenerBehaviour, ISavable
+public class BaseMap : StateListenerBehaviour, ISavable
 {
+    [Header("BaseMap")]
+    [ReadOnly]
+    [SerializeField] string saveID = Util.GenerateNewSaveGUID();
+
     [SerializeField] int sizeX, sizeY;
     [SerializeField] MapSettings mapSettings;
     [SerializeField] GenerationSettings generationSettings;
 
-    [SerializeField] bool load;
-    [SerializeField] TextAsset loadAsset;
-
-    Tile[,] map;
+    protected Tile[,] map;
 
     public int SizeX { get => sizeX; }
     public int SizeY { get => sizeY; }
     public GenerationSettings GenerationSettings { get => generationSettings; }
+    public MapSettings MapSettings { get => mapSettings; }
     public MapSettings Settings { get => mapSettings; }
 
-    public UnityEngine.TextAsset LoadAsset { get => loadAsset; }
+
 
     /// <summary>
     /// Use SetTMapAt for full control / visual updates
@@ -42,66 +44,21 @@ public class MapBase : StateListenerBehaviour, ISavable
         set => SetMapRawAt(v.x, v.y, value);
     }
 
-    private void Awake()
-    {
-        if (load)
-            LoadFromAsset(loadAsset);
-    }
-
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         map = null;
     }
-
-    #if UNITY_EDITOR
-    [Button]
-    private void Save()
-    {
-        string path;
-
-        if (loadAsset == null)
-        {
-            path = UnityEditor.EditorUtility.SaveFilePanel("Map", "Assets/Other/Maps", "NewMap", "bytes");
-        }
-        else
-        {
-            path = UnityEditor.AssetDatabase.GetAssetPath(loadAsset);
-        }
-
-        if (path != null)
-        {
-            DurationTracker tracker = new DurationTracker("Map saving");
-            BinaryFormatter formatter = new BinaryFormatter();
-
-            var stream = File.Open(path, FileMode.OpenOrCreate);
-            formatter.Serialize(stream, ToSaveData());
-            stream.Close();
-            UnityEditor.AssetDatabase.Refresh();
-            path = Util.MakePathRelative(path);
-            loadAsset = UnityEditor.AssetDatabase.LoadAssetAtPath<TextAsset>(path);
-            tracker.Stop();
-            Debug.Log("Saved at" + path);
-        }
-    }
-    #endif
-
-    [Button]
-    private void Load()
-    {
-        DurationTracker tracker = new DurationTracker("Map Loading");
-        if (loadAsset != null)
-            LoadFromAsset(loadAsset);
-        tracker.Stop();
-    }
-
     public TileInfo GetTileInfo(TileType type)
     {
         return TilesData.GetTileInfo(type);
     }
 
-    public void InitMap(int sizeX, int sizeY)
+    protected void InitMap(int newX, int newY)
     {
-        map = new Tile[sizeX, sizeY];
+        map = new Tile[newX, newY];
+        sizeX = newX;
+        sizeY = newY;
+        Util.IterateXY(newX, newY, (x, y) => map[x, y] = Tile.Air);
     }
 
     public bool IsAirAt(int x, int y)
@@ -196,7 +153,7 @@ public class MapBase : StateListenerBehaviour, ISavable
 
         if (updateProperties)
         {
-            UpdatePropertiesAt(x, y);
+            UpdatePropertiesAt(x, y, value, prev, reason);
         }
 
         if (updateVisuals)
@@ -206,11 +163,16 @@ public class MapBase : StateListenerBehaviour, ISavable
 
     }
 
+    protected virtual void UpdateAllVisuals()
+    {
+
+    }
+
     protected virtual void UpdateVisualsAt(int x, int y)
     {
     }
 
-    protected virtual void UpdatePropertiesAt(int x, int y)
+    protected virtual void UpdatePropertiesAt(int x, int y, Tile newTile, Tile previousTile, TileUpdateReason reason)
     {
     }
 
@@ -241,8 +203,8 @@ public class MapBase : StateListenerBehaviour, ISavable
 
     public SaveData ToSaveData()
     {
-        TileMapSaveData saveData = new TileMapSaveData();
-        saveData.GUID = "";
+        BaseMapSaveData saveData = new BaseMapSaveData();
+        saveData.GUID = GetSaveID();
 
         saveData.Map = map;
         return saveData;
@@ -250,11 +212,12 @@ public class MapBase : StateListenerBehaviour, ISavable
 
     public void Load(SaveData data)
     {
-        if (data is TileMapSaveData saveData)
+        if (data is BaseMapSaveData saveData)
         {
             map = saveData.Map;
             sizeX = map.GetLength(0);
             sizeY = map.GetLength(1);
+            UpdateAllVisuals();
         }
         else
         {
@@ -264,37 +227,40 @@ public class MapBase : StateListenerBehaviour, ISavable
 
     public void LoadFromAsset(TextAsset saveObject)
     {
-        using (var memStream = new MemoryStream())
+        var saveData = MapHelper.LoadMapSaveDataFromTextAsset(saveObject);
+        if (saveData != null)
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            memStream.Write(saveObject.bytes, 0, saveObject.bytes.Length);
-            memStream.Seek(0, SeekOrigin.Begin);
-
-            TileMapSaveData saveData = (TileMapSaveData)formatter.Deserialize(memStream);
-            if (saveData != null)
-            {
-                Load(saveData);
-            }
+            Load(saveData);
         }
-
     }
 
     public virtual string GetSaveID()
     {
-        return "UNDEFINED";
+        return saveID;
     }
 
     //Outdated from SO Time
-    public void LoadFromMap(TextAsset loadedData, int xOffset, int yOffset)
+    public void LoadFromMap(TextAsset assetToLoad, int xOffset, int yOffset)
     {
-        //Util.IterateXY(loadedData.SizeX, loadedData.SizeY, (x, y) => LoadFromMapAt(loadedData, x, y, xOffset, yOffset));
+        var data = MapHelper.LoadMapSaveDataFromTextAsset(assetToLoad);
+
+        Util.IterateXY(data.SizeX, data.SizeY, (x, y) => LoadFromMapAt(data, x, y, xOffset, yOffset));
     }
 
-    private void LoadFromMapAt(TextAsset loadedData, int x, int y, int xOffset, int yOffset)
+    private void LoadFromMapAt(BaseMapSaveData loadedData, int x, int y, int xOffset, int yOffset)
     {
-        //var t = loadedData.Map[x, y];
+        var t = loadedData.Map[x, y];
 
-        //if (t.Type != TileType.Ignore)
-        //    SetMapAt(x + xOffset, y + yOffset, t, TileUpdateReason.Generation, updateProperties: true, updateVisuals: true);
+        if (t.Type != TileType.Ignore)
+            SetMapAt(x + xOffset, y + yOffset, t, TileUpdateReason.Generation, updateProperties: true, updateVisuals: true);
     }
+}
+
+
+[System.Serializable]
+public class BaseMapSaveData : SaveData
+{
+    public Tile[,] Map;
+    public int SizeX { get => Map.GetLength(0); }
+    public int SizeY { get => Map.GetLength(1); }
 }

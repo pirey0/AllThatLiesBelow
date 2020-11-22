@@ -46,9 +46,20 @@ public class MapTool : EditorTool
         Handles.DrawLine(worldPos + Vector3.right, worldPos + new Vector3(1, 1));
 
         string message = "No Map Selected";
-        if (Map.Instance != null)
+        if (MapToolWindow.Instance != null)
         {
-            message = Map.Instance[(int)worldPos.x, (int)worldPos.y].ToString();
+            var map = MapToolWindow.Instance.EditorMap;
+            if (map != null)
+            {
+                if (map.IsEditorReady())
+                {
+                    message = map[(int)worldPos.x, (int)worldPos.y].ToString();
+                }
+                else
+                {
+                    message = "Map not loaded.";
+                }
+            }
         }
         Handles.Label(mousePosition, message);
 
@@ -71,14 +82,17 @@ public class MapTool : EditorTool
         }
         else
         {
-            var map = Map.Instance;
+            var map = MapToolWindow.Instance.EditorMap;
             if (map == null)
             {
                 Debug.Log("No Map Selected.");
             }
             else
             {
-                map.SetMapAt((int)worldPos.x, (int)worldPos.y, Tile.Make(MapToolWindow.Instance.SelectedTile), TileUpdateReason.Generation);
+                if (map.IsEditorReady())
+                    map.SetMapAt((int)worldPos.x, (int)worldPos.y, Tile.Make(MapToolWindow.Instance.SelectedTile), TileUpdateReason.Generation);
+                else
+                    Debug.LogError("Map is not loaded.");
             }
         }
     }

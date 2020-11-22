@@ -49,7 +49,6 @@ public static class CSVHelper
             string[] current = Split(lines[y]);
             for (int x = 0; x < table.GetLength(0); x++)
             {
-                Debug.Log("p: " + path + "x: " +x + " y:"+y);
                 table[x, y] = current[x];
             }
         }

@@ -20,7 +20,7 @@ public class LadderPreview : MonoBehaviour, IItemPreview
     {
         transform.position = GetPlacePosition(position);
         var gridPos = position.ToGridPosition();
-        if (Map.Instance.IsBlockAt(gridPos.x, gridPos.y-1) &&  TileMapHelper.AirTileCountAbove(Map.Instance, gridPos) >= 6)
+        if (RuntimeProceduralMap.Instance.IsBlockAt(gridPos.x, gridPos.y-1) &&  MapHelper.AirTileCountAbove(RuntimeProceduralMap.Instance, gridPos) >= 6)
         {
             renderer.color = Color.green;
             couldPlace = true;

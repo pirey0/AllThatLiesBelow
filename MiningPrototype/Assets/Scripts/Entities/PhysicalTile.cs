@@ -14,11 +14,11 @@ public class PhysicalTile : MineableObject, IEntity
     [SerializeField] SpriteRenderer renderer, overlayRenderer;
     [SerializeField] AudioSource hit;
 
-    private Map generator;
+    private RuntimeProceduralMap generator;
     Tile tile;
     TileInfo info;
 
-    public void Setup(Map testGeneration, Tile tile, TileInfo info)
+    public void Setup(RuntimeProceduralMap testGeneration, Tile tile, TileInfo info)
     {
         generator = testGeneration;
         this.tile = tile;
@@ -58,7 +58,7 @@ public class PhysicalTile : MineableObject, IEntity
         else if (collision.transform.TryGetComponent(out ITileMapElement element))
         {
             var position = transform.position.ToGridPosition();
-            generator.PlaceAt(position.x, position.y, tile);
+            generator.SetMapAt(position.x, position.y, tile, TileUpdateReason.Place);
             Util.DebugDrawTile(position);
             Destroy(gameObject);
         }

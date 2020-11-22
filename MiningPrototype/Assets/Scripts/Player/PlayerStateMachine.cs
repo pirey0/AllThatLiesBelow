@@ -73,7 +73,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     Vector2 rightWalkVector = Vector3.right;
     Rigidbody2D rigidbody;
     float horizontalSpeed;
-    Map.MirrorState currentMirrorLoc;
+    RuntimeProceduralMap.MirrorState currentMirrorLoc;
     private bool InFrontOfLadder { get => currentLadder != null; }
     private bool IsLocked { get => stateMachine.CurrentState == s_disabled; }
 
@@ -334,34 +334,34 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     {
         if (rigidbody.position.x < 0)
         {
-            rigidbody.position = new Vector2(rigidbody.position.x + Map.Instance.SizeX, rigidbody.position.y);
+            rigidbody.position = new Vector2(rigidbody.position.x + RuntimeProceduralMap.Instance.SizeX, rigidbody.position.y);
         }
-        else if (rigidbody.position.x > Map.Instance.SizeX)
+        else if (rigidbody.position.x > RuntimeProceduralMap.Instance.SizeX)
         {
-            rigidbody.position = new Vector2(rigidbody.position.x - Map.Instance.SizeX, rigidbody.position.y);
+            rigidbody.position = new Vector2(rigidbody.position.x - RuntimeProceduralMap.Instance.SizeX, rigidbody.position.y);
         }
 
         var oldMirrorLoc = currentMirrorLoc;
         currentMirrorLoc = GetMirrorLocation();
         if (currentMirrorLoc != oldMirrorLoc)
         {
-            Map.Instance.NotifyMirrorWorldSideChange(currentMirrorLoc);
+            RuntimeProceduralMap.Instance.NotifyMirrorWorldSideChange(currentMirrorLoc);
         }
     }
 
-    private Map.MirrorState GetMirrorLocation()
+    private RuntimeProceduralMap.MirrorState GetMirrorLocation()
     {
-        if (rigidbody.position.x < Map.Instance.SizeX / 3)
+        if (rigidbody.position.x < RuntimeProceduralMap.Instance.SizeX / 3)
         {
-            return Map.MirrorState.Left;
+            return RuntimeProceduralMap.MirrorState.Left;
         }
-        else if (rigidbody.position.x > Map.Instance.SizeX * 2 / 3)
+        else if (rigidbody.position.x > RuntimeProceduralMap.Instance.SizeX * 2 / 3)
         {
-            return Map.MirrorState.Right;
+            return RuntimeProceduralMap.MirrorState.Right;
         }
         else
         {
-            return Map.MirrorState.Center;
+            return RuntimeProceduralMap.MirrorState.Center;
         }
     }
 

@@ -8,21 +8,21 @@ public class MirrorWorldFollower : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        Map.Instance.MirrorSideChanged += OnMirrorSideChanged;
+        RuntimeProceduralMap.Instance.MirrorSideChanged += OnMirrorSideChanged;
     }
 
     protected virtual void OnDisable()
     {
-        Map.Instance.MirrorSideChanged -= OnMirrorSideChanged;
+        RuntimeProceduralMap.Instance.MirrorSideChanged -= OnMirrorSideChanged;
     }
 
-    private void OnMirrorSideChanged(Map.MirrorState state)
+    private void OnMirrorSideChanged(RuntimeProceduralMap.MirrorState state)
     {
-        int sizeX = Map.Instance.SizeX;
+        int sizeX = RuntimeProceduralMap.Instance.SizeX;
 
         switch (state)
         {
-            case Map.MirrorState.Center:
+            case RuntimeProceduralMap.MirrorState.Center:
                 if (transform.position.x < 0)
                 {
                     transform.position = new Vector3(transform.position.x +sizeX, transform.position.y, transform.position.z);
@@ -33,14 +33,14 @@ public class MirrorWorldFollower : MonoBehaviour
                 }
                 break;
 
-            case Map.MirrorState.Left:
+            case RuntimeProceduralMap.MirrorState.Left:
                 if (transform.position.x > sizeX / 2)
                 {
                     transform.position = new Vector3(transform.position.x - sizeX, transform.position.y, transform.position.z);
                 }
                 break;
 
-            case Map.MirrorState.Right:
+            case RuntimeProceduralMap.MirrorState.Right:
                 if (transform.position.x < sizeX / 2)
                 {
                     transform.position = new Vector3(transform.position.x + sizeX, transform.position.y, transform.position.z);

@@ -11,9 +11,17 @@ public class MapToolWindow : EditorWindow
     private static MapToolWindow instance;
     private TileType selectedTileType;
     private string[] tileTypeNames;
+    private EditorMap currentEditorMap;
+    private TextAsset currentSelectedSaveData;
+    private int currentSizeX = 100, currentSizeY = 100;
+
     public static MapToolWindow Instance { get => GetInstance(); }
+    public EditorMap EditorMap { get => currentEditorMap; }
 
-
+    public bool MapSelected()
+    {
+        return currentEditorMap != null;
+    }
 
     public TileType SelectedTile { get => selectedTileType; }
 
@@ -32,6 +40,7 @@ public class MapToolWindow : EditorWindow
         if (instance == null)
         {
             MapToolWindow window = (MapToolWindow)EditorWindow.GetWindow(typeof(MapToolWindow));
+            window.Show();
             instance = window;
         }
         return instance;
@@ -49,18 +58,69 @@ public class MapToolWindow : EditorWindow
 
     void OnGUI()
     {
-        EditorGUILayout.LabelField(Map.Instance == null ? "No Map Selected" : "Selected Map: " + Map.Instance.name);
+        if (instance == null)
+            instance = this;
 
-        if (GUILayout.Button("Selected Map in Scene"))
-        {
-            var map = GameObject.FindObjectOfType<Map>();
-            map.SelectThis();
-        }
+        EditorGUILayout.ObjectField(currentEditorMap, typeof(EditorMap), allowSceneObjects: true);
+        if (GUILayout.Button("QuickSelect in Scene"))
+            currentEditorMap = GameObject.FindObjectOfType<EditorMap>();
+
+        if (currentEditorMap == null)
+            return;
 
         EditorGUILayout.Space();
 
         EditorGUILayout.LabelField("Selected Tile: " + selectedTileType.ToString());
+        DisplayTileTypeOptions();
 
+        EditorGUILayout.Space();
+
+       
+        EditorGUILayout.Space();
+
+        if (currentEditorMap.IsEditorReady())
+        {
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("Save"))
+                    currentEditorMap.Save();
+
+            if (GUILayout.Button("Save As"))
+                currentEditorMap.SaveAs();
+
+                EditorGUILayout.EndHorizontal();
+        }
+        else
+        {
+            GUILayout.Label("Nothing to Save");
+        }
+
+       
+
+        if (GUILayout.Button("Load Previous"))
+        {
+            currentEditorMap.Load();
+        }
+
+        if (GUILayout.Button("Load From"))
+        {
+            string path = EditorUtility.OpenFilePanelWithFilters("Pick Map", "Assets/Others/Maps/", new string[] {"Map", "bytes"});
+            var asset = AssetDatabase.LoadAssetAtPath<TextAsset>(Util.MakePathRelative(path));
+            currentEditorMap.Load(asset);
+        }
+
+        EditorGUILayout.BeginHorizontal();
+        if (GUILayout.Button("Initialize To Size"))
+        {
+            currentEditorMap.InitializeBlankOfSize(currentSizeX, currentSizeY);
+        }
+        currentSizeX = EditorGUILayout.IntField(currentSizeX);
+        currentSizeY = EditorGUILayout.IntField(currentSizeY);
+
+        EditorGUILayout.EndHorizontal();
+    }
+
+    private void DisplayTileTypeOptions()
+    {
         if (tileTypeNames == null)
             LoadTileTypeNames();
 
@@ -80,44 +140,5 @@ public class MapToolWindow : EditorWindow
             }
         }
         GUILayout.EndHorizontal();
-
-
-        GUILayout.Space(10);
-
-        if(GUILayout.Button("GC Collect"))
-        {
-            EditorUtility.UnloadUnusedAssetsImmediate();
-            GC.Collect();
-        }
     }
-
-    /*
-    private static void Save()
-    {
-        var sav = ScriptableObject.CreateInstance>();
-
-        foreach (var item in SceneManager.GetActiveScene().GetRootGameObjects())
-        {
-            if (item.TryGetComponent(out Map map))
-            {
-                sav.mapData = map.Data;
-                break;
-            }
-        }
-        sav.GameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
-
-        string path = EditorUtility.SaveFilePanel("Save Loadable Map", Application.dataPath, "Map", "asset");
-
-        if (path != "")
-        {
-            if (path.StartsWith(Application.dataPath))
-            {
-                path = "Assets" + path.Substring(Application.dataPath.Length);
-            }
-
-            AssetDatabase.CreateAsset(sav, path);
-            Debug.Log("Saved at " + path);
-        }
-    }
-    */
 }

@@ -9,10 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2173153710873331551}
-  - component: {fileID: 5444024790112160813}
-  - component: {fileID: 3796551683779632450}
+  - component: {fileID: 589325803474934636}
   m_Layer: 0
-  m_Name: BaseMap
+  m_Name: RuntimeProceduralMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5444024790112160813
+--- !u!114 &589325803474934636
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,38 +42,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2173153710873331550}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8832e3289cca7740b0c7264922622e9, type: 3}
+  m_Script: {fileID: 11500000, guid: fc75e77c8c734664d9164c7f62733a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveID: 7d6260ac-ce3e-445d-a457-567d3fea757e
-  sizeX: 20
-  sizeY: 20
-  updateUnstable: 1
+  saveID: 41d50015-c133-49af-b92a-208671ee1322
+  sizeX: 100
+  sizeY: 100
   mapSettings: {fileID: 11400000, guid: cb933fe4e5151f14d8a9ed1be88a0e33, type: 2}
   generationSettings: {fileID: 11400000, guid: 9ada1e3054219d644a18b003c8174420, type: 2}
-  entitiesParent: {fileID: 4487784778877613469}
-  renderer: {fileID: 3796551683779632450}
-  createOwnData: 0
-  runGeneration: 0
-  data: {fileID: 11400000, guid: ac68272e71e211a4e84a2f1b921dba4b, type: 2}
-  debug: 0
---- !u!114 &3796551683779632450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2173153710873331550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab587dc7e08e0fd4983c9efbddd4b747, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  on: 1
-  map: {fileID: 5444024790112160813}
   tilemap: {fileID: 7788511328844883173}
-  damageOverlayTilemap: {fileID: 7788511327972709305}
-  oreTilemap: {fileID: 7788511329457626868}
+  damageOverlayTilemap: {fileID: 7788511329457626868}
+  oreTilemap: {fileID: 7788511327972709305}
+  entitiesParent: {fileID: 4487784778877613469}
+  debug: 0
 --- !u!1 &3933181939200121959
 GameObject:
   m_ObjectHideFlags: 0
