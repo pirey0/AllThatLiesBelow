@@ -180,7 +180,6 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
     IEnumerator ScaleCoroutine(bool scaleUp)
     {
-        Debug.Log("started scale: up?" + scaleUp);
         float timeMin = scaleOnOpenAndCloseCurve.keys[0].time;
         float timeMax = scaleOnOpenAndCloseCurve.keys[scaleOnOpenAndCloseCurve.length - 1].time;
         float time = (scaleUp ? timeMin : timeMax);
@@ -192,7 +191,6 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
             yield return null;
         }
 
-        Debug.Log("finished scale: up?" + scaleUp);
 
         if (!scaleUp)
             Destroy(gameObject);

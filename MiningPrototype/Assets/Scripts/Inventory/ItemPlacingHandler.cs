@@ -97,7 +97,6 @@ public class ItemPlacingHandler : Singleton<ItemPlacingHandler>
                     dropReceiver = receiver;
                     break;
                 }
-                Debug.Log(hit.transform.name);
             }
 
             if (dropReceiver != currentReceiver)
