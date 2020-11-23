@@ -4,20 +4,23 @@ using UnityEngine;
 
 public class Ladder : TilemapCarvingEntity, ITileMapElement
 {
-    [SerializeField] EdgeCollider2D edge;
     [SerializeField] Rigidbody2D rigidbody;
     [SerializeField] AudioSource fallSound;
+    [SerializeField] GameObject topCollider, botCollider;
+    [SerializeField] int layerUse, layerNormal;
 
     public BaseMap TileMap { get; private set; }
 
-    public void NotifyGoingDown()
+    public void NotifyUse()
     {
-        edge.enabled = false;
+        botCollider.layer = layerUse;
+        topCollider.layer = layerUse;
     }
 
-    public void NotifyGoingUp()
+    public void NotifyLeave()
     {
-        edge.enabled = true;
+        botCollider.layer = layerNormal;
+        topCollider.layer = layerNormal;
     }
 
 

@@ -62,7 +62,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     Dictionary<string, PlayerStateInfo> canInteractInStateMap;
     public event System.Action PlayerDeath;
 
-    private Ladder currentLadder;
+    private List<Ladder> currentLadders = new List<Ladder>();
     private float gravityScale;
     float lastGroundedTimeStamp;
     float lastJumpTimeStamp;
@@ -75,7 +75,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     Rigidbody2D rigidbody;
     float horizontalSpeed;
     RuntimeProceduralMap.MirrorState currentMirrorLoc;
-    private bool InFrontOfLadder { get => currentLadder != null; }
+    private bool InFrontOfLadder { get => currentLadders.Count > 0; }
     private bool IsLocked { get => stateMachine.CurrentState == s_disabled; }
 
     private void Start()
@@ -147,6 +147,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         {
             if (!c.isTrigger && c.gameObject != gameObject)
             {
+                Debug.Log("C: " + c.gameObject.layer);
                 isGrounded = true;
                 break;
             }
@@ -378,17 +379,23 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     {
         rigidbody.gravityScale = 0;
         NotifyActivity();
+
+        if (currentLadders.Count > 0)
+            currentLadders.ForEach((x) => x.NotifyUse());
     }
 
     private void ClimbingExit()
     {
         rigidbody.gravityScale = gravityScale;
         NotifyActivity();
+
+        if (currentLadders.Count > 0)
+            currentLadders.ForEach((x) => x.NotifyLeave());
     }
 
     private void ClimbingUpdate()
     {
-        if (currentLadder == null)
+        if (currentLadders == null)
             return;
 
         var horizontal = Input.GetAxis("Horizontal");
@@ -396,11 +403,6 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
 
         Vector2 climbVelocity = new Vector2(horizontal * settings.climbPanSpeed, vertical * settings.climbSpeed);
         rigidbody.velocity = climbVelocity;
-
-        if (vertical > 0)
-            currentLadder.NotifyGoingUp();
-        else
-            currentLadder.NotifyGoingDown();
     }
 
     private bool IsGrounded()
@@ -413,22 +415,34 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         var vertical = Input.GetAxis("Vertical");
         bool up = vertical > 0;
 
-        bool rightDirection = !(up ^ IsBelowLadderTop());
+        bool rightDirection = !(up ^ IsBelowTopLadder());
 
         return InFrontOfLadder && Mathf.Abs(vertical) > 0.75f && rightDirection;
     }
 
     private bool IsNotClimbing()
     {
-        return !InFrontOfLadder || (IsGrounded() && IsBelowLadderTop());
+        bool ca = !InFrontOfLadder;
+        bool cb = (IsGrounded() && IsBelowTopLadder());
+
+        return ca || cb ;
     }
 
-    private bool IsBelowLadderTop()
+    private bool IsBelowTopLadder()
     {
-        if (currentLadder == null)
+        var topL = GetTopLadder();
+        if (topL == null)
             return false;
 
-        return transform.position.y < (currentLadder.transform.position.y + 5.5f); //hardcoded ladder height
+        return transform.position.y < (topL.transform.position.y + 5.5f); //hardcoded ladder height
+    }
+
+    private Ladder GetTopLadder()
+    {
+        if (currentLadders.Count == 0)
+            return null;
+
+        return currentLadders.OrderBy((x) => x.transform.position.y).First();
     }
 
     private bool IsIdle()
@@ -496,6 +510,11 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         return transform.position.y >= settings.overWorldHeight;
     }
 
+    private bool InClimbState()
+    {
+        return stateMachine.CurrentState == s_climb || stateMachine.CurrentState == s_climbIde;
+    }
+
     public void NotifyPickaxeUse()
     {
         lastMineTimeStamp = Time.time;
@@ -533,7 +552,9 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     {
         if (collision.TryGetComponent(out Ladder ladder))
         {
-            currentLadder = ladder;
+            currentLadders.Add(ladder);
+            if (InClimbState())
+                ladder.NotifyUse();
         }
     }
 
@@ -541,7 +562,8 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     {
         if (collision.TryGetComponent(out Ladder ladder))
         {
-            currentLadder = null;
+            currentLadders.Remove(ladder);
+            ladder.NotifyLeave();
         }
     }
 

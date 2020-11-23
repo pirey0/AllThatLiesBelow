@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3794946}
   - component: {fileID: 3794947}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ItemPreview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 154330391}
   - component: {fileID: 154330390}
   - component: {fileID: 154330392}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 852425619}
   - component: {fileID: 852425621}
   - component: {fileID: 6716828200991722712}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Hands
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 9050699914358008940}
   - component: {fileID: 1278373005984055415}
   - component: {fileID: 738830905}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: OverworldEffects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5372,7 +5372,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1281847263}
   - component: {fileID: 1281847262}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: mouseHighlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5454,7 +5454,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1456414341}
   - component: {fileID: 1456414342}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BackpackSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5580,7 +5580,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1786483705}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Feet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5611,7 +5611,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5173197427789016906}
   - component: {fileID: 8148473555476766029}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WalkingSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5738,7 +5738,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8509458055141723993}
   - component: {fileID: 3471564094401374700}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BreakSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5865,7 +5865,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2401824288520139214}
   - component: {fileID: 4569569128638959811}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: MiningSounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5993,7 +5993,7 @@ GameObject:
   - component: {fileID: 5490965416124485505}
   - component: {fileID: 6058378898912939930}
   - component: {fileID: 4176785031348637688}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: JumpSounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6224,7 +6224,7 @@ GameObject:
   - component: {fileID: 1894981212}
   - component: {fileID: 1894981211}
   - component: {fileID: 9132772843983619470}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6593,6 +6593,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: miningParticles
       objectReference: {fileID: 0}
+    - target: {fileID: 1637824985498278827, guid: 0e897a4e464652a4fb1a53fa37c6a52e, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 1637824985498278830, guid: 0e897a4e464652a4fb1a53fa37c6a52e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.53455
@@ -6707,6 +6711,10 @@ PrefabInstance:
     - target: {fileID: 7862656893741527902, guid: 562e47677541fc741804e2557b49653b, type: 3}
       propertyPath: m_Name
       value: Pickaxe
+      objectReference: {fileID: 0}
+    - target: {fileID: 7862656893741527902, guid: 562e47677541fc741804e2557b49653b, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 562e47677541fc741804e2557b49653b, type: 3}
