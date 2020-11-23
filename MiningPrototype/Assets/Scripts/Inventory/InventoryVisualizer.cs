@@ -69,14 +69,19 @@ public class InventoryVisualizer : ScalingUIElementBase
         {
             width = Mathf.Max(1,sizeCurrent);
             height = 1;
-        } else
+        } else if (sizeCurrent <= 6)
         {
-            float h = sizeCurrent / width;
+            width = 3;
+            height = 2;
+        } 
+        else
+        {
+            float h = (float)sizeCurrent / width;
 
-            if (h > width)
+            if (h > heightInSlots)
             {
-                height = width;
-                width = (int)h;
+                Debug.Log("h: " + h + " => " + Mathf.CeilToInt(h));
+                height = Mathf.CeilToInt(h);
             }
         }
 
