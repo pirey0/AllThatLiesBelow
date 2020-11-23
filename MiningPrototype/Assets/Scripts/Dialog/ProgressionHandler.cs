@@ -24,6 +24,8 @@ public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
     private int day = 0;
     bool dailyPurchaseExaused;
 
+    public static bool showNewOrderLeftClickInfo = true, showNewOrderRightClickInfo = true;
+
     //postbox and letters
     Postbox postbox;
     int lastLetterID = -1;

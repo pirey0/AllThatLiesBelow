@@ -18,11 +18,14 @@ public class NewOrderVisualizer : MonoBehaviour
     [SerializeField] TMP_Text costElementPrefab;
     [SerializeField] Transform costGrid;
 
+    [SerializeField] GameObject leftclick, rightclick;
+
     System.Action OnClose;
 
     private void Start()
     {
         UpdateCost();
+        UpdateTutorialDisplays();
         Debug.Log("SpawnedNewOrder");
     }
 
@@ -31,8 +34,15 @@ public class NewOrderVisualizer : MonoBehaviour
         OnClose = onClose;
     }
 
-    public void UpdateAmount(ItemType itemType, int amount)
+    public void UpdateAmount(ItemType itemType, int amount, bool increased)
     {
+        if (increased)
+            ProgressionHandler.showNewOrderLeftClickInfo = false;
+        else
+            ProgressionHandler.showNewOrderRightClickInfo = false;
+
+        UpdateTutorialDisplays();
+
         if (amount <= 0)
             orderedElementsWithAmounts.Remove(itemType);
         else
@@ -144,5 +154,11 @@ public class NewOrderVisualizer : MonoBehaviour
 
         OnClose?.Invoke();
         Destroy(gameObject);
+    }
+
+    private void UpdateTutorialDisplays()
+    {
+        leftclick.SetActive(ProgressionHandler.showNewOrderLeftClickInfo);
+        rightclick.SetActive(ProgressionHandler.showNewOrderRightClickInfo);
     }
 }
