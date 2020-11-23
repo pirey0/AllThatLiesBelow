@@ -402,6 +402,8 @@ public class RuntimeProceduralMap : RenderedMap
         Tile t = Tile.Air;
 
         bool occupied = GenerationSettings.HeightMultiplyer.Evaluate((float)y / SizeY) * UnityEngine.Random.value < GenerationSettings.InitialAliveCurve.Evaluate((float)y / SizeY);
+        if (y == 0)
+            occupied = true;
 
         if (occupied)
             t.Type = TileType.Stone;
@@ -422,12 +424,19 @@ public class RuntimeProceduralMap : RenderedMap
 
                 if (i == 0 && j == 0)
                 {
+                    continue;
                 }
-                else if (nx < 0 || ny < 0 || nx >= SizeX || ny >= SizeY)
+                else if (ny < 0 || ny >= SizeY)
                 {
-                    count = count + 1;
+                    continue;
                 }
-                else if (IsBlockAt(nx, ny))
+                
+                if (nx < 0 || nx >= SizeX)
+                {
+                    WrapXIfNecessary(ref x);
+                }
+                
+                if (IsBlockAt(nx, ny))
                 {
                     count = count + 1;
                 }
@@ -445,6 +454,7 @@ public class RuntimeProceduralMap : RenderedMap
     private void SingleAutomataSet(int x, int y)
     {
         int nbs = GetAliveNeightboursCountFor(x, y);
+
         map[x, y] = IsBlockAt(x, y) ? (nbs > GenerationSettings.DeathLimit ? Tile.Make(TileType.Stone) : Tile.Air) : (nbs > GenerationSettings.BirthLimit ? Tile.Make(TileType.Stone) : Tile.Air);
     }
 }
