@@ -147,7 +147,6 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         {
             if (!c.isTrigger && c.gameObject != gameObject)
             {
-                Debug.Log("C: " + c.gameObject.layer);
                 isGrounded = true;
                 break;
             }

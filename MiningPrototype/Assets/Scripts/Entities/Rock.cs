@@ -10,6 +10,9 @@ public class Rock : TilemapCarvingEntity, ITileMapElement
     [SerializeField] Rigidbody2D rigidbody;
     [SerializeField] AudioSource rockFalling;
     [SerializeField] AudioSource rockSmashing;
+    [SerializeField] float crumbleMinTime = 0.3f;
+
+    float lastCrumbleStamp = -1000;
 
     public BaseMap TileMap { get; private set; }
 
@@ -25,19 +28,30 @@ public class Rock : TilemapCarvingEntity, ITileMapElement
         if (this == null)
             return;
 
+        Debug.Log("Crumble " + (Time.time - lastCrumbleStamp));
+
+        if (Time.time - lastCrumbleStamp < crumbleMinTime)
+        {
+            TryDestroyBelow(RuntimeProceduralMap.Instance); //<-dirty
+            Debug.Log("Instant Crumble!");
+        }
+
+        lastCrumbleStamp = Time.time;
         UnCarvePrevious();
         rigidbody.isKinematic = false;
         rigidbody.WakeUp();
         StartCoroutine(FallingRoutine());
+
     }
 
     public override void OnTileUpdated(int x, int y, TileUpdateReason reason)
     {
-        if(reason == TileUpdateReason.Destroy || reason == TileUpdateReason.Generation)
+        if (reason == TileUpdateReason.Destroy || reason == TileUpdateReason.Generation)
         {
             UncarveDestroy();
         }
     }
+
 
     private IEnumerator FallingRoutine()
     {
@@ -80,19 +94,23 @@ public class Rock : TilemapCarvingEntity, ITileMapElement
                 return;
             }
 
-            Vector3[] offsets = { new Vector3(0, -1), new Vector3(-0.55f, -1), new Vector3(0.55f, -1) };
+            TryDestroyBelow(gridElement.TileMap);
+        }
+    }
 
-            foreach (var offset in offsets)
+    private void TryDestroyBelow(BaseMap map)
+    {
+        Vector3[] offsets = { new Vector3(0, -1), new Vector3(-0.55f, -1), new Vector3(0.55f, -1) };
+
+        foreach (var offset in offsets)
+        {
+            var pos = (transform.position + offset).ToGridPosition();
+            Util.DebugDrawTile(pos);
+            bool block = map.IsBlockAt(pos.x, pos.y);
+            if (block)
             {
-                var pos = (transform.position + offset).ToGridPosition();
-                Util.DebugDrawTile(pos);
-                bool block = gridElement.TileMap.IsBlockAt(pos.x, pos.y);
-                if (block)
-                {
-                    gridElement.TileMap.DamageAt(pos.x, pos.y, 100, playerCaused: false);
-                }
+                map.DamageAt(pos.x, pos.y, 100, playerCaused: false);
             }
-
         }
     }
 
