@@ -14,7 +14,8 @@ public enum ItemType
     Support,
     LetterFromFamily,
     LetterToFamily,
-    NewOrder
+    NewOrder,
+    Dynamite,
 }
 
 

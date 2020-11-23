@@ -45,7 +45,6 @@ public class InventoryVisualizer : ScalingUIElementBase
     [Button]
     public void RefreshInventoryDisplay ()
     {
-        Debug.Log("refresh inventorx display");
 
         foreach (Transform child in gridLayoutParent)
         {
