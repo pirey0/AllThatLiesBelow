@@ -175,8 +175,12 @@ public class PlayerInteractionHandler : InventoryOwner
             if (hit.transform == transform)
                 continue;
 
+            //begin interaction
             if (hit.transform.TryGetComponent(out IInteractable interactable))
             {
+                if (hover != null)
+                    hover.HoverExit();
+
                 Debug.Log(hit.transform.name);
                 currentInteractable = interactable;
                 currentInteractable.SubscribeToForceQuit(OnInteractableForceQuit);
