@@ -34,14 +34,14 @@ public class NewOrderUIElement : MonoBehaviour, IPointerClickHandler
     public void Increase()
     {
         amount = Mathf.Clamp(amount + 1, 0, 999);
-        order?.UpdateAmount(elementType, amount);
+        order?.UpdateAmount(elementType, amount, increased: true);
         UpdateText();
     }
 
     public void Decrease()
     {
         amount = Mathf.Clamp(amount - 1, 0, 999);
-        order?.UpdateAmount(elementType, amount);
+        order?.UpdateAmount(elementType, amount, increased: false);
         UpdateText();
     }
 }
