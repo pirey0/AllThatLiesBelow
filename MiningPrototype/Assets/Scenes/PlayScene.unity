@@ -182,14 +182,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 7455510420993846462, guid: 0ef3d3d9ac15aad4b94aff8d1ece9908, type: 3}
-      propertyPath: circleFadeTexture
-      value: 
-      objectReference: {fileID: 2800000, guid: 5aec7f60d7b7d954986873f6bbf261bc, type: 3}
-    - target: {fileID: 7455510420993846462, guid: 0ef3d3d9ac15aad4b94aff8d1ece9908, type: 3}
-      propertyPath: deathFadeTexture
-      value: 
-      objectReference: {fileID: 2800000, guid: 5aec7f60d7b7d954986873f6bbf261bc, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ef3d3d9ac15aad4b94aff8d1ece9908, type: 3}
 --- !u!212 &56649116 stripped
