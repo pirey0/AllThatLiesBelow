@@ -18,10 +18,11 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
     RectTransform rectTransform;
     Vector2 defaultAnchorPosition;
 
-    bool inUI;
     Coroutine updateRoutine;
     Coroutine showTooltipRoutine;
     bool inDrag;
+
+    private bool VisualsEnabled { get => icon.enabled; }
 
     protected override void Awake()
     {
@@ -103,6 +104,8 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        bool inUI = (rectTransform.position - rectTransform.parent.position ).magnitude < 2;
+
         if (!inUI)
         {
             Debug.Log("Dropped outside UI");
@@ -110,7 +113,6 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         }
         ItemPlacingHandler.Instance?.Hide();
         inDrag = false;
-        inUI = false;
         EnableVisuals();
         rectTransform.anchoredPosition = defaultAnchorPosition;
     }
@@ -131,13 +133,12 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         Vector2 distance = rectTransform.position - rectTransform.parent.position;
         Debug.DrawLine(rectTransform.position, rectTransform.parent.position);
         var info = ItemsData.GetItemInfo(type);
-
+        
         if (distance.magnitude > 2)
         {
-            if (inUI)
+            if (VisualsEnabled)
             {
                 ItemPlacingHandler.Instance?.Show(new ItemAmountPair(type, amount));
-                inUI = false;
                 if (info.CanBePlaced)
                     DisableVisuals();
             }
@@ -145,10 +146,9 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         }
         else
         {
-            if (!inUI)
+            if (!VisualsEnabled)
             {
                 ItemPlacingHandler.Instance?.Hide();
-                inUI = true;
                 EnableVisuals();
             }
         }
