@@ -186,7 +186,7 @@ public class PlayerInteractionHandler : InventoryOwner
                 if (hover != null)
                     hover.HoverExit();
 
-                Debug.Log(hit.transform.name);
+                Debug.Log("Started interacting with: " + hit.transform.name);
                 currentInteractable = interactable;
                 currentInteractable.SubscribeToForceQuit(OnInteractableForceQuit);
                 currentInteractable.BeginInteracting(gameObject);
