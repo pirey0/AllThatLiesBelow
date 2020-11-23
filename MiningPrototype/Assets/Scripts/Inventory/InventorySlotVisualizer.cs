@@ -20,6 +20,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
     bool inUI;
     Coroutine updateRoutine;
+    Coroutine showTooltipRoutine;
     bool inDrag;
 
     protected override void Awake()
@@ -55,6 +56,30 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
             ReadableItemHandler.Instance?.Display(amount);
         else
             TooltipHandler.Instance?.Display(transform, info.DisplayName, info.DisplayTooltip);
+    }
+
+    public override void OnPointerEnter(PointerEventData eventData)
+    {
+        if (showTooltipRoutine == null)
+            showTooltipRoutine = StartCoroutine(TooltipCounterRoutine());
+    }
+
+    IEnumerator TooltipCounterRoutine()
+    {
+        yield return new WaitForSeconds(0.66f);
+        var info = ItemsData.GetItemInfo(type);
+        TooltipHandler.Instance?.Display(transform, info.DisplayName, info.DisplayTooltip);
+    }
+
+    public override void OnPointerExit(PointerEventData eventData)
+    {
+        if (showTooltipRoutine != null)
+        {
+            StopCoroutine(showTooltipRoutine);
+            showTooltipRoutine = null;
+        }
+
+        TooltipHandler.Instance?.StopDisplaying(transform);
     }
 
     public override void OnPointerUp(PointerEventData eventData)
