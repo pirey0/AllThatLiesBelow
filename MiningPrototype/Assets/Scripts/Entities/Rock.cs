@@ -57,12 +57,13 @@ public class Rock : TilemapCarvingEntity, ITileMapElement
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!rockSmashing.isPlaying)
+        float speed = collision.relativeVelocity.magnitude;
+
+        if (!rockSmashing.isPlaying && speed >= 7)
             rockSmashing.Play();
 
         if (collision.collider.TryGetComponent(out IEntity entity))
         {
-            float speed = collision.relativeVelocity.magnitude;
             float angle = Mathf.Acos(Vector2.Dot(collision.contacts[0].normal, Vector2.up)) * Mathf.Rad2Deg;
 
             //Debug.Log(angle + " " + speed);
