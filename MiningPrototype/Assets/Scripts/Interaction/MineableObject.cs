@@ -35,6 +35,9 @@ public class MineableObject : MirrorWorldFollower, IMinableNonGrid
 
     public virtual Vector2 GetPosition()
     {
+        if (transform == null) //Still trying to access exception
+            return Vector3.zero;
+
         return transform.position;
     }
 

@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateReceiver
+public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateReceiver, ITileMapElement
 {
     [SerializeField] ItemAmountPair drop;
     [SerializeField] protected TileOffsetTypePair[] tilesToOccupy;
     [SerializeField] Vector3 carvingOffset;
 
     Vector2Int tilemapPos = new Vector2Int(-1, -1);
+
+    public BaseMap TileMap {get; private set;}
 
     public virtual void OnTileUpdated(int x, int y, TileUpdateReason reason)
     {
@@ -82,6 +84,11 @@ public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateRec
             Gizmos.color = disp.Type == TileType.CollapsableEntity ? Color.yellow : Color.white;
             Util.GizmosDrawTile((transform.position + carvingOffset).ToGridPosition() + disp.Offset);
         }
+    }
+
+    public void Setup(BaseMap tileMap)
+    {
+        TileMap = tileMap;
     }
 }
 

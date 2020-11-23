@@ -51,8 +51,8 @@ MonoBehaviour:
   mapSettings: {fileID: 11400000, guid: cb933fe4e5151f14d8a9ed1be88a0e33, type: 2}
   generationSettings: {fileID: 11400000, guid: 9ada1e3054219d644a18b003c8174420, type: 2}
   tilemap: {fileID: 7788511328844883173}
-  damageOverlayTilemap: {fileID: 7788511329457626868}
-  oreTilemap: {fileID: 7788511327972709305}
+  damageOverlayTilemap: {fileID: 7788511327972709305}
+  oreTilemap: {fileID: 7788511329457626868}
   entitiesParent: {fileID: 4487784778877613469}
   debug: 0
 --- !u!1 &3933181939200121959
@@ -115,7 +115,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7788511328263691926}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1839735485 &7788511327972709305
 Tilemap:
@@ -232,8 +232,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7788511328844883175}
-  - {fileID: 7788511329457626870}
   - {fileID: 7788511327972709308}
+  - {fileID: 7788511329457626870}
   m_Father: {fileID: 2173153710873331551}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -427,7 +427,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7788511328263691926}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1839735485 &7788511329457626868
 Tilemap:
