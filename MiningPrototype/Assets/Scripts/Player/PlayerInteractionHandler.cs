@@ -119,8 +119,8 @@ public class PlayerInteractionHandler : InventoryOwner
                 gridDigTarget = null;
                 TryDisableMiningVisuals();
             }
-            UpdateDigHighlight();
         }
+        UpdateDigHighlight();
     }
 
     private void UpdateHover(bool hasDigTarget)
