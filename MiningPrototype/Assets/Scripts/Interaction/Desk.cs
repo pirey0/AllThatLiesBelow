@@ -62,6 +62,7 @@ public class Desk : MonoBehaviour, IInteractable
         option2.SetActive(true);
 
         playerToHide.Disable();
+        InventoryManager.ForcePlayerInventoryClose();
         seatedPlayer.transform.position = transform.position;
     }
 

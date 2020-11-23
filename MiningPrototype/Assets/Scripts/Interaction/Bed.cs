@@ -40,6 +40,7 @@ public class Bed : MonoBehaviour, IInteractable
     private void EnterBed(PlayerStateMachine playerToHide)
     {
         playerToHide.Disable();
+        InventoryManager.ForcePlayerInventoryClose();
         spriteRenderer.sprite = sleeping;
         StartCoroutine(SleepCoroutine(playerToHide));
     }
