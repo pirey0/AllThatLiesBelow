@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2481684509624394813}
   - component: {fileID: 2481684509624394810}
   - component: {fileID: 2481684509624394811}
+  - component: {fileID: 8819730977770184519}
   m_Layer: 5
   m_Name: UIReadableItemVisualizer
   m_TagString: Untagged
@@ -36,10 +37,10 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -200, y: 0}
-  m_SizeDelta: {x: 300, y: -200}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -250, y: 0}
+  m_SizeDelta: {x: 400, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2481684509624394813
 CanvasRenderer:
@@ -69,8 +70,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a9a6e9cbbc1a01a4e8747a5f53e485a2, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: -9080332612451657214, guid: 27ed9f344ce6e5d41b7beb8e512950e5, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -93,6 +94,84 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 74387631846068004}
   familyPhoto: {fileID: 2481684510008483206}
+  spriteAnimator: {fileID: 8819730977770184519}
+  xToClose: {fileID: 4314500416299692797}
+  letterCloseAnimation: {fileID: 11400000, guid: 3fdc7f7d3aabb224d95fc646be599de6, type: 2}
+  openCloseMultiplier: 1.5
+  textHeightoverTime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.4
+      value: 0.225
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.49889076
+      value: 0.35
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 97
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.6
+      value: 0.7
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.69934314
+      value: 1.0041771
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.80180055
+      value: 1
+      inSlope: 0.33076388
+      outSlope: 4.6031737
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.15715134
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &8819730977770184519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2481684509624394809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9163fffbd5e86a46a5633ad6c4458c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 2481684509624394810}
+  startingAnimation: {fileID: 11400000, guid: 37f3b52917aa9ab4591d49107bf49cda, type: 2}
 --- !u!1 &2481684510008483206
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,8 +281,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 10, y: 10}
-  m_SizeDelta: {x: -80, y: -60}
+  m_AnchoredPosition: {x: 5, y: 0}
+  m_SizeDelta: {x: -90, y: -60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2481684510475961317
 CanvasRenderer:
@@ -251,8 +330,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282996625
-  m_fontColor: {r: 0.5686275, g: 0.34117648, b: 0.28627452, a: 1}
+    rgba: 4283379532
+  m_fontColor: {r: 0.29958302, g: 0.18620506, b: 0.31132078, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -269,7 +348,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 6
+  m_fontSize: 16.6
   m_fontSizeBase: 0
   m_fontWeight: 400
   m_enableAutoSizing: 1

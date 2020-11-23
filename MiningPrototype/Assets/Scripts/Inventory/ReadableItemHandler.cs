@@ -70,7 +70,7 @@ public class ReadableItemHandler : Singleton<ReadableItemHandler>
     {
         if (current != null)
         {
-            Destroy(current.gameObject);
+            current.Hide();
 
             ReadLetterSound.pitch = 0.66f;
             ReadLetterSound.Play();
