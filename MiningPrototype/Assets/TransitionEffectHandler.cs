@@ -116,4 +116,9 @@ public class TransitionEffectHandler : Singleton<TransitionEffectHandler>
 				return Instance.circleFadeTexture;
 		}
 	}
+
+	private void OnDestroy()
+	{
+		mat.SetFloat("_Cutoff", 1);
+	}
 }

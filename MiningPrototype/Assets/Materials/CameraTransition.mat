@@ -24,7 +24,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _PatternTex:
-        m_Texture: {fileID: 2800000, guid: 2a13bab7cabffec46a35986df88de9e2, type: 3}
+        m_Texture: {fileID: 2800000, guid: ca3907a14c413894690849b176476eed, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TranTex:
@@ -32,7 +32,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Cutoff: 0
+    - _Cutoff: 1
     - _UseColor: 0
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 0}
