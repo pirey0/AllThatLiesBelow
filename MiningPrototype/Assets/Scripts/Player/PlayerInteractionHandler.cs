@@ -59,7 +59,7 @@ public class PlayerInteractionHandler : InventoryOwner
         if (player.CanUseInventory())
         {
 
-            if (Input.GetKeyDown(KeyCode.Tab))
+            if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.I))
             {
                 ToggleInventory();
             }
