@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MirrorWorldFollower : MonoBehaviour
 {
-
+    const int MIRROR_AMOUNT = 20;
     protected virtual void OnEnable()
     {
         RuntimeProceduralMap.Instance.MirrorSideChanged += OnMirrorSideChanged;
@@ -34,14 +34,14 @@ public class MirrorWorldFollower : MonoBehaviour
                 break;
 
             case RuntimeProceduralMap.MirrorState.Left:
-                if (transform.position.x > sizeX / 2)
+                if (transform.position.x > sizeX - MIRROR_AMOUNT)
                 {
                     transform.position = new Vector3(transform.position.x - sizeX, transform.position.y, transform.position.z);
                 }
                 break;
 
             case RuntimeProceduralMap.MirrorState.Right:
-                if (transform.position.x < sizeX / 2)
+                if (transform.position.x < MIRROR_AMOUNT)
                 {
                     transform.position = new Vector3(transform.position.x + sizeX, transform.position.y, transform.position.z);
                 }

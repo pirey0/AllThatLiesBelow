@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MineableObject : MonoBehaviour, IMinableNonGrid
+public class MineableObject : MirrorWorldFollower, IMinableNonGrid
 {
     [SerializeField] protected PassiveSpriteAnimator overlayAnimator;
     [SerializeField] float damageMultiplier = 1;
