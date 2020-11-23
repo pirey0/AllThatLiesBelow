@@ -42,7 +42,9 @@ public class PhysicalTile : MineableObject, IEntity
 
     protected override void Destroyed()
     {
-        InventoryManager.PlayerCollects(info.ItemToDrop, contains.amount);
+        if (info.ItemToDrop != ItemType.None)
+            InventoryManager.PlayerCollects(info.ItemToDrop, contains.amount);
+
         Destroy(gameObject);
     }
 
