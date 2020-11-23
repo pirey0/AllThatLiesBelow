@@ -120,6 +120,11 @@ public class PlayerInteractionHandler : InventoryOwner
                 TryDisableMiningVisuals();
             }
         }
+        else
+        {
+            gridDigTarget = null;
+        }
+
         UpdateDigHighlight();
     }
 
