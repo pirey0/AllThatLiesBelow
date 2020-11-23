@@ -16,6 +16,7 @@ public class ReadableItemVisualizer : MonoBehaviour
     [SerializeField] Transform toScaleOnOpenAndClose;
 
     Coroutine close;
+    [HideInInspector] public int id;
 
     //[SerializeField] float width = 5;
     //[SerializeField] float numberOfCharactersPerHeightUnit = 1;

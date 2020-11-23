@@ -36,34 +36,42 @@ public class ReadableItemHandler : Singleton<ReadableItemHandler>
 
     internal void Display(int id)
     {
-        if (current != null)
-            Destroy(current.gameObject);
-        current = Instantiate(textDisplayPrefab, canvas.transform);
-        ReadLetterSound.pitch = 1;
-        ReadLetterSound.Play();
-
-
-        ReadableItem itemToDisplay = (readableItems.Count - 1 < id) ? null : readableItems[id];
-
-        if (itemToDisplay == null)
-        {
-            var letterInfo = LettersParser.GetLetterWithID(id);
-            if (letterInfo != null)
-                itemToDisplay = new ReadableItem(letterInfo.Content);
-        }
+        if (current != null && current.id == id)
+            current.Hide();
         else
         {
-            itemToDisplay.hasRead = true;
-        }
 
-        if(itemToDisplay == null)
-        {
-            Debug.LogError("No letter found matching ID " + id);
-            return;
-        }
+            if (current != null)
+                current.Hide();
 
-        current.DisplayText(transform, itemToDisplay);
-        Debug.Log("display letter with id:" + id);
+            current = Instantiate(textDisplayPrefab, canvas.transform);
+            current.id = id;
+            ReadLetterSound.pitch = 1;
+            ReadLetterSound.Play();
+
+
+            ReadableItem itemToDisplay = (readableItems.Count - 1 < id) ? null : readableItems[id];
+
+            if (itemToDisplay == null)
+            {
+                var letterInfo = LettersParser.GetLetterWithID(id);
+                if (letterInfo != null)
+                    itemToDisplay = new ReadableItem(letterInfo.Content);
+            }
+            else
+            {
+                itemToDisplay.hasRead = true;
+            }
+
+            if (itemToDisplay == null)
+            {
+                Debug.LogError("No letter found matching ID " + id);
+                return;
+            }
+
+            current.DisplayText(transform, itemToDisplay);
+            Debug.Log("display letter with id:" + id);
+        }
     }
 
     public void Hide()
