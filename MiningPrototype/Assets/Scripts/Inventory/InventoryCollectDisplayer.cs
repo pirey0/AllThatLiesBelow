@@ -8,6 +8,7 @@ public class InventoryCollectDisplayer : MonoBehaviour
 {
     [SerializeField] Image backdrop;
     [SerializeField] InventoryCollectDisplayElement prefab;
+    [SerializeField] AudioSource onCollectSound;
 
     private void Start()
     {
@@ -25,6 +26,7 @@ public class InventoryCollectDisplayer : MonoBehaviour
         Vector3 position = Util.MouseToWorld();
         var go = Instantiate(prefab, position, Quaternion.identity, transform);
         go.SetItem(obj);
+        onCollectSound?.Play();
     }
 
 }

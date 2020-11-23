@@ -11,7 +11,7 @@ public class Desk : MonoBehaviour, IInteractable
     [SerializeField] Canvas optionsCanvas;
     [SerializeField] GameObject option1, option2;
     [SerializeField] NewOrderVisualizer newOrderVisualizerPrefab;
-    [SerializeField] AudioSource letterWritingSource;
+    [SerializeField] AudioSource letterWritingSource, paperFold;
     [SerializeField] SpriteAnimator animator;
     [SerializeField] SpriteAnimation idleAnimation, writeAnimation;
     NewOrderVisualizer currentOrder;
@@ -87,8 +87,14 @@ public class Desk : MonoBehaviour, IInteractable
 
         if (currentOrder == null)
         {
-            currentOrder = Instantiate(newOrderVisualizerPrefab, optionsCanvas.transform);
+            currentOrder = Instantiate(newOrderVisualizerPrefab);
             currentOrder.Handshake(CloseNewOrder);
+
+            if (paperFold != null)
+            {
+                paperFold.pitch = 1;
+                paperFold.Play();
+            }
         }
 
         letterWritingSource.loop = true;
@@ -121,6 +127,12 @@ public class Desk : MonoBehaviour, IInteractable
 
     public void CloseNewOrder()
     {
+        if (paperFold != null)
+        {
+            paperFold.pitch = 0.66f;
+            paperFold.Play();
+        }
+
         letterWritingSource.loop = false;
         letterWritingSource?.Stop();
         LeaveDesk();

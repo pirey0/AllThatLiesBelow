@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NewOrderVisualizer : MonoBehaviour
+public class NewOrderVisualizer : ReadableItemVisualizer
 {
     Dictionary<ItemType, int> orderedElementsWithAmounts = new Dictionary<ItemType, int>();
     Dictionary<ItemType, int> cost = new Dictionary<ItemType, int>();
@@ -24,9 +24,9 @@ public class NewOrderVisualizer : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(ScaleCoroutine(scaleUp: true));
         UpdateCost();
         UpdateTutorialDisplays();
-        Debug.Log("SpawnedNewOrder");
     }
 
     public void Handshake(System.Action onClose)
@@ -133,7 +133,7 @@ public class NewOrderVisualizer : MonoBehaviour
     public void Cancel()
     {
         OnClose?.Invoke();
-        Destroy(gameObject);
+        Hide();
     }
 
     public void Submit()
@@ -153,7 +153,7 @@ public class NewOrderVisualizer : MonoBehaviour
         }
 
         OnClose?.Invoke();
-        Destroy(gameObject);
+        Hide();
     }
 
     private void UpdateTutorialDisplays()

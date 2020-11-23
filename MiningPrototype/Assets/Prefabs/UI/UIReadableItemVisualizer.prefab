@@ -158,6 +158,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  toScaleOnOpenAndClose: {fileID: 2481684510475961315}
 --- !u!114 &8819730977770184519
 MonoBehaviour:
   m_ObjectHideFlags: 0

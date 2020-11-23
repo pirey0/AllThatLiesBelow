@@ -13,6 +13,7 @@ public class ReadableItemVisualizer : MonoBehaviour
     [SerializeField] SpriteAnimation letterCloseAnimation;
     [SerializeField] float openCloseMultiplier;
     [SerializeField] AnimationCurve textHeightoverTime;
+    [SerializeField] Transform toScaleOnOpenAndClose;
 
     Coroutine close;
 
@@ -33,7 +34,7 @@ public class ReadableItemVisualizer : MonoBehaviour
             familyPhoto.SetActive(true);
     }
 
-    IEnumerator ScaleCoroutine(bool scaleUp)
+    protected IEnumerator ScaleCoroutine(bool scaleUp)
     {
         if (xToClose != null)
             xToClose.enabled = false;
@@ -46,7 +47,7 @@ public class ReadableItemVisualizer : MonoBehaviour
         while (scaleUp && time < timeMax || !scaleUp && time > timeMin)
         {
             time += (scaleUp ? 1 : -1) * Time.deltaTime * openCloseMultiplier;
-            text.transform.localScale = new Vector3(1, textHeightoverTime.Evaluate(time), 0);
+            toScaleOnOpenAndClose.localScale = new Vector3(1, textHeightoverTime.Evaluate(time), 0);
             yield return null;
         }
 
