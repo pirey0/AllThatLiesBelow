@@ -16,6 +16,7 @@ public enum ItemType
     LetterToFamily,
     NewOrder,
     Dynamite,
+    Chest,
 }
 
 

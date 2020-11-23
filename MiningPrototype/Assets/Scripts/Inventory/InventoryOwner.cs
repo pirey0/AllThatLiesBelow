@@ -13,7 +13,7 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner, IInteractable
 {
     [Header("Inventory Owner")]
     [SerializeField] Inventory inventory;
-    [SerializeField] Canvas canvas;
+    [SerializeField] protected Canvas canvas;
     [SerializeField] InventoryVisualizer inventoryVisualizerPrefab;
     [SerializeField] AudioSource openSource;
     [SerializeField] bool inventoryVisualizerUpdates;
@@ -46,7 +46,7 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner, IInteractable
             inventoryVisualizer.RefreshInventoryDisplay();
     }
 
-    public void OpenInventory()
+    public virtual void OpenInventory()
     {
         if (state == InventoryState.Closed)
         {
@@ -68,7 +68,7 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner, IInteractable
         }
     }
 
-    public void CloseInventory()
+    public virtual void CloseInventory()
     {
         if (state == InventoryState.Open)
         {
