@@ -40,7 +40,7 @@ public class ReadableItemVisualizer : MonoBehaviour
         if (xToClose != null)
             xToClose.enabled = false;
 
-        Debug.Log("started scale: up?" + scaleUp);
+        //Debug.Log("started scale: up?" + scaleUp);
         float timeMin = textHeightoverTime.keys[0].time;
         float timeMax = textHeightoverTime.keys[textHeightoverTime.length - 1].time;
         float time = (scaleUp ? timeMin : timeMax);
@@ -52,7 +52,7 @@ public class ReadableItemVisualizer : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log("finished scale: up?" + scaleUp);
+        //Debug.Log("finished scale: up?" + scaleUp);
 
 
         if (xToClose != null)
