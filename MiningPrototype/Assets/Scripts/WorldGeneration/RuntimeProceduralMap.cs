@@ -160,7 +160,8 @@ public class RuntimeProceduralMap : RenderedMap
     public GameObject InstantiateEntity(GameObject prefab, Vector3 position)
     {
         var go = GameObject.Instantiate(prefab, entitiesParent);
-        diContainer.InjectGameObject(go);
+        if (diContainer != null)
+            diContainer.InjectGameObject(go);
         go.transform.localPosition = position;
 
         return go;
@@ -441,12 +442,12 @@ public class RuntimeProceduralMap : RenderedMap
                 {
                     continue;
                 }
-                
+
                 if (nx < 0 || nx >= SizeX)
                 {
                     WrapXIfNecessary(ref x);
                 }
-                
+
                 if (IsBlockAt(nx, ny))
                 {
                     count = count + 1;

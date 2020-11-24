@@ -19,10 +19,15 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
+
+
         target = cameraPanner.transform;
         defaultTarget = target;
         offsetToTarget = generalOffset;
+
         Camera = GetComponent<Camera>();
+        if (Camera.main != null)
+            Camera.enabled = false;
     }
 
     private void OnPreRender()
