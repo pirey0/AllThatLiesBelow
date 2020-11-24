@@ -12,7 +12,7 @@ public class PickaxeAnimator : MonoBehaviour
     [SerializeField] int offsetToMouse = 2;
     [SerializeField] bool hideSwing;
 
-    public static bool isImproved  = false;
+    [SerializeField] bool isImproved  = false;
 
     [Zenject.Inject] CameraController cameraController;
     private void Start()
@@ -76,5 +76,10 @@ public class PickaxeAnimator : MonoBehaviour
         float angleGeneralized = ((((Mathf.Abs(angle) - 90) / 90f) + 1) * 2) - offsetToMouse; //maps it onto 0 to 4 for the full range on one side
 
         return Mathf.RoundToInt(angleGeneralized + additionalAngle);
+    }
+
+    public void Upgrade()
+    {
+        isImproved = true;
     }
 }
