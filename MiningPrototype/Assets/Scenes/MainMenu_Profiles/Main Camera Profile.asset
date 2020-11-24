@@ -117,7 +117,7 @@ MonoBehaviour:
     overrideState: 0
     value: 0
   postExposure:
-    overrideState: 1
+    overrideState: 0
     value: 0.1
   contrast:
     overrideState: 0
@@ -1379,7 +1379,7 @@ MonoBehaviour:
     value: 270
   sampleCount:
     overrideState: 1
-    value: 32
+    value: 14
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
