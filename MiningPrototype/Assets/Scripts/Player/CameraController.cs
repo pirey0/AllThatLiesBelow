@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour
         offsetToTarget = generalOffset;
 
         Camera = GetComponent<Camera>();
-        if (Camera.main != null)
+        if (Camera.main != Camera)
             Camera.enabled = false;
     }
 
