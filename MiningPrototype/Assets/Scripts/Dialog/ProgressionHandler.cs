@@ -52,7 +52,8 @@ public class ProgressionHandler : MonoBehaviour, ISavable
     public float JumpMultiplyer { get => jumpMultiplyer; }
     public bool DailySacrificeExpired { get => dailySacrificeExaused; }
     public int SacrificeProgressionLevel { get => sacrificeProgressionLevel; }
-
+    public bool IsMidas { get => isMidas; }
+    
 
     private void OnEnable()
     {

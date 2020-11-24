@@ -336,6 +336,25 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         SetMovingSound(IsMoving() && IsGrounded());
 
         UpdateWorldMirroring();
+
+        if (progressionHandler.IsMidas)
+        {
+            MidasUpdate();
+        }
+
+    }
+
+    private void MidasUpdate()
+    {
+        var pos = transform.position.ToGridPosition() + new Vector2Int(0, -1);
+
+        Util.DebugDrawTile(pos);
+        var t = RuntimeProceduralMap.Instance[pos];
+
+        if(t.Type == TileType.Stone)
+        {
+            RuntimeProceduralMap.Instance.SetMapAt(pos.x, pos.y, Tile.Make(TileType.Gold), TileUpdateReason.Place, updateProperties: true, updateVisuals: true);
+        }
     }
 
     public void SetFaceDirection(bool right)
