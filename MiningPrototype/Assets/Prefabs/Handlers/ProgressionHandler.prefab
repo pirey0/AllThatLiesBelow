@@ -57,6 +57,12 @@ MonoBehaviour:
   - type: 7
     amount: 5
   debugRewardToGet: Spring
+  debugCostForReward:
+    type: 0
+    amount: 0
+  youWonPrefab: {fileID: 3551563762525882506, guid: dcdedf87d2aac1f4ea09f66f4e056541, type: 3}
+  fontAsset: {fileID: 11400000, guid: c91df58b5dfd95a4bb3a43645f87ae0e, type: 2}
+  fontAsset2: {fileID: 11400000, guid: d4b1999f5a6dee24da6dc56286d165ff, type: 2}
   showNewOrderLeftClickInfo: 1
   showNewOrderRightClickInfo: 1
 --- !u!114 &2388821099892900699
