@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Note : MirrorWorldFollower, IInteractable
 {
+    [TextArea(5,10)]
     [SerializeField] string text;
 
     [Zenject.Inject] ReadableItemHandler readableItemHandler;
