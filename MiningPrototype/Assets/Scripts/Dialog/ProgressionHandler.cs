@@ -41,6 +41,7 @@ public class ProgressionHandler : MonoBehaviour, ISavable
     private bool hasWon = false;
     private bool hasWayOut = false;
     private bool isFree = false;
+    private float timeScale = 1;
 
     //sacriifce consequences
 
@@ -67,6 +68,8 @@ public class ProgressionHandler : MonoBehaviour, ISavable
     public bool IsMidas { get => isMidas; }
 
     public bool InstableWorld { get => instableWorld; }
+
+    public float TimeScale { get => timeScale; }
 
     private void OnEnable()
     {
@@ -304,6 +307,8 @@ public class ProgressionHandler : MonoBehaviour, ISavable
                     break;
 
                 case ItemType.Hourglass:
+                    Time.timeScale = 0.9f;
+                    timeScale = 0.9f;
                     //Your time?!
                     break;
 
