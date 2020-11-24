@@ -17,10 +17,10 @@ public class RuntimeProceduralMap : RenderedMap
     [SerializeField] Transform entitiesParent;
     [SerializeField] bool debug;
 
-    //Literally just for debug..
     [Zenject.Inject] TooltipHandler tooltipHandler;
     [Zenject.Inject] CameraController cameraController;
 
+    [Zenject.Inject] ProgressionHandler progressionHandler;
     [Zenject.Inject] Zenject.DiContainer diContainer;
 
     ITileUpdateReceiver[,] receiverMap;
@@ -93,6 +93,10 @@ public class RuntimeProceduralMap : RenderedMap
         int i = 0;
         while (true)
         {
+            int collapseThreshold = progressionHandler.InstableWorld ? GenerationSettings.instableWorldCollapseThreshhold : GenerationSettings.CollapseThreshhold;
+            int unstableThreshhold = progressionHandler.InstableWorld ? GenerationSettings.instableWorldUnstableThreshhold : GenerationSettings.UnstableThreshhold;
+            int speed = progressionHandler.InstableWorld ? 3 : 1;
+
             //loop through tiles to check
             while (tilesToStabilityCheck.Count > 0)
             {
@@ -101,9 +105,9 @@ public class RuntimeProceduralMap : RenderedMap
                 var info = GetTileInfo(tile.Type);
                 if (info.StabilityAffected)
                 {
-                    if (tile.Stability <= GenerationSettings.UnstableThreshhold)
+                    if (tile.Stability <= unstableThreshhold)
                     {
-                        float timeLeft = tile.Stability - GenerationSettings.CollapseThreshhold;
+                        float timeLeft = tile.Stability - GenerationSettings.CollapseThreshhold; // to adapt to unstable world
                         AddUnstableTile(loc, timeLeft);
                     }
                 }
@@ -125,7 +129,7 @@ public class RuntimeProceduralMap : RenderedMap
             int x = unstableTiles[i].x;
             int y = unstableTiles[i].y;
 
-            if (t.Stability <= GenerationSettings.CollapseThreshhold)
+            if (t.Stability <= collapseThreshold)
             {
                 RemoveUnstableTileAt(i);
                 var info = GetTileInfo(t.Type);
@@ -139,9 +143,9 @@ public class RuntimeProceduralMap : RenderedMap
                         CollapseAt(x, y, updateVisuals: true);
                 }
             }
-            else if (t.Stability <= GenerationSettings.UnstableThreshhold)
+            else if (t.Stability <= unstableThreshhold)
             {
-                t.ReduceStabilityBy(1);
+                t.ReduceStabilityBy(speed);
 
                 SetMapRawAt(x, y, t);
                 i++;
