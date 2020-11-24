@@ -113,8 +113,12 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
                 break;
 
             case AltarState.RewardSelection:
+                string[] rewardsContent = new string[availableRewards.Length];
+                
+                for (int i = 0; i < availableRewards.Length; i++)
+                    rewardsContent[i] = SacrificePricesParser.GetDisplayNameOf(availableRewards[i]);
 
-                visualizer.DisplayOptions(availableRewards);
+                visualizer.DisplayOptions(rewardsContent);
                 break;
 
             case AltarState.AskForPayment:

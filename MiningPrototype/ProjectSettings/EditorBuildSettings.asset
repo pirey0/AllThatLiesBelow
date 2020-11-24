@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AltarScene.unity
     guid: eefebb5b71de47e4e9da29653337e8d9
+  - enabled: 1
+    path: Assets/Scenes/ClockScene.unity
+    guid: 772c6d38dd969d24bb2ad158970d99e5
   m_configObjects: {}

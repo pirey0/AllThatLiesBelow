@@ -1,12 +1,12 @@
 OutputName;DisplayText;MinLevel;MaxLevel;Copper;Gold;Diamond;Support;LetterToFamily;Family_Photo;Hourglass;LetterFromFamily;Ball;Globe
-MiningSpeed;;1;4;50;15;1;;;;;;;
-WalkingSpeed;;1;4;30;10;1;;;;;;;
-Strength;;1;4;10;5;1;;;;;;;
-JumpHeight;;2;4;50;10;2;;;;;;;
-InstantDelivery;;3;5;;70;5;5;;;;;;
-Spring;;4;7;;;5;5;1;;;;;
-Midas Touch;;5;7;;;;;1;1;1;;;
-Love;;6;7;;;;;;1;1;1;;
-Victory;;7;7;;;;;;;;1;1;
-A Way Out;;8;10;;;;;;;;;;1
-Freedom;;8;10;;;;;;;;;;1
+MiningSpeed;I want to mine faster!;1;4;50;15;1;;;;;;;
+WalkingSpeed;I want to move quickly!;1;4;30;10;1;;;;;;;
+Strength;I want to be strong!;1;4;10;5;1;;;;;;;
+JumpHeight;I want to jump higher!;2;4;50;10;2;;;;;;;
+InstantDelivery;I don't want to wait for my oders!;3;5;;70;5;5;;;;;;
+Spring;I want the winter to end!;4;7;;;5;5;1;;;;;
+MidasTouch;I want Gold!;5;7;;;;;1;1;1;;;
+Love;I want to be loved!;6;7;;;;;;1;1;1;;
+Victory;I want to win the game!;7;7;;;;;;;;1;1;
+AWayOut;I want out!;8;10;;;;;;;;;;1
+Freedom;I want to be free!;8;10;;;;;;;;;;1
