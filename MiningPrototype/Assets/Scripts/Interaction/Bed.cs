@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,8 +17,19 @@ public class Bed : MonoBehaviour, IInteractable
     [SerializeField] RectTransform wakeUpTextParent;
 
     [SerializeField] string wakeUpText;
+    string defaultWakeUpTest;
+
+    [Zenject.Inject] TransitionEffectHandler transitionEffectHandler;
+
+    bool sacrificedHappyness = false;
 
     [Inject] ProgressionHandler progressionHandler;
+
+
+    private void Start()
+    {
+        defaultWakeUpTest = wakeUpText;
+    }
     public void BeginInteracting(GameObject interactor)
     {
         PlayerStateMachine player = interactor.GetComponent<PlayerStateMachine>();
@@ -74,23 +86,38 @@ public class Bed : MonoBehaviour, IInteractable
                 yield return null;
             }
 
-            wakeupSound?.Play();
+            if (sacrificedHappyness) {
+                transitionEffectHandler.FadeIn(FadeType.Nightmare);
+                nightFadeToBlack.color = new Color(0, 0, 0, 0);
+            }
+            else
+                wakeupSound?.Play();
 
             yield return new WaitForSeconds(0.25f);
             progressionHandler.StartNextDay();
-            spriteRenderer.sprite = wakeup;
+
+            spriteRenderer.sprite = sacrificedHappyness? badDream:wakeup;
 
             DialogElementVisualization text = Instantiate(wakeUpTextPrefab, wakeUpTextParent);
             text.Init(null,wakeUpText,7f);
 
-            yield return new WaitForSeconds(1f);
+            
 
-            while (nightOpacity > 0f)
+            if (!sacrificedHappyness)
             {
-                nightOpacity -= Time.deltaTime * 0.33f;
-                nightFadeToBlack.color = new Color(0, 0, 0, nightOpacity);
+                yield return new WaitForSeconds(1f);
 
-                yield return null;
+                while (nightOpacity > 0f)
+                {
+                    nightOpacity -= Time.deltaTime * 0.33f;
+                    nightFadeToBlack.color = new Color(0, 0, 0, nightOpacity);
+
+                    yield return null;
+                }
+
+            } else
+            {
+                yield return new WaitForSeconds(5f);
             }
 
         }
@@ -114,5 +141,14 @@ public class Bed : MonoBehaviour, IInteractable
     public void ChangeWakeUpText(string newWakeUpText)
     {
         wakeUpText = newWakeUpText;
+    }
+
+    [Button]
+    public void SacrificedHappyness()
+    {
+        if (wakeUpText == defaultWakeUpTest)
+            wakeUpText = "And yet another day of pain.";
+
+        sacrificedHappyness = true;
     }
 }
