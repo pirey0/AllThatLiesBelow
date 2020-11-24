@@ -11,7 +11,7 @@ public class DefaultSceneInstaller : ScriptableObjectInstaller<DefaultSceneInsta
 
     public override void InstallBindings()
     {
-        Container.Bind<PlayerStateMachine>().FromComponentInNewPrefab(playerPrefab).AsSingle().NonLazy();
+        Container.Bind(typeof(PlayerStateMachine), typeof(PlayerInteractionHandler)).FromComponentInNewPrefab(playerPrefab).AsSingle().NonLazy();
         Container.Bind<ProgressionHandler>().FromComponentInNewPrefab(progressionPrefab).AsSingle().NonLazy();
         Container.Bind<ReadableItemHandler>().FromComponentInNewPrefab(readableItemPrefab).AsSingle().NonLazy();
         Container.Bind<CameraPanner>().FromComponentInNewPrefab(cameraPannerPrefab).AsSingle().NonLazy();

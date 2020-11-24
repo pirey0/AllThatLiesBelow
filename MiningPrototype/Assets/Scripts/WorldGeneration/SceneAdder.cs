@@ -3,10 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 public class SceneAdder : MonoBehaviour
 {
     [SerializeField] List<MapAddition> addition;
+
+    //Should be factory? https://github.com/modesttree/Zenject/blob/master/Documentation/Factories.md#custom-factories
+    [Zenject.Inject] DiContainer diContainer;
+    
     bool loaded = false;
     MapAddition current;
 
@@ -63,6 +68,7 @@ public class SceneAdder : MonoBehaviour
             else
             {
                 obj.transform.position += offset.AsV3();
+                diContainer.InjectGameObject(obj);
             }
         }
         loaded = true;

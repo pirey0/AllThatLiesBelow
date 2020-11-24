@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 8727063801762088803}
   - component: {fileID: 8727063801762088802}
   - component: {fileID: 7444784132658660086}
+  - component: {fileID: 6876432576738778002}
   m_Layer: 5
   m_Name: InventoryVisualizer
   m_TagString: Untagged
@@ -225,3 +226,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderer: {fileID: 8727063801738303677}
   startingAnimation: {fileID: 11400000, guid: 87316d018e4b5fd4382653770afad572, type: 2}
+--- !u!114 &6876432576738778002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8727063801762088806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 717a02054ef2699498e6bd4234fd7995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _containerSource: 0

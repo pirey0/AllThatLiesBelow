@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class ItemPlacingHandler : MonoBehaviour
 {
-
-    [SerializeField] PlayerInteractionHandler player;
-
+    [Zenject.Inject] PlayerInteractionHandler player;
     [Zenject.Inject] CameraController cameraController;
 
     bool holdingPlacable;
