@@ -468,7 +468,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.13095427
+      time: 0.23628025
       value: 1.0931743
       inSlope: 2.4137404
       outSlope: 2.4137404
@@ -477,7 +477,7 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.20299073
+      time: 0.36625534
       value: 0.9986267
       inSlope: -0.009372475
       outSlope: -0.009372475
@@ -488,6 +488,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  toScale: {fileID: 3551563762927635956}
 --- !u!82 &3551563762525882505
 AudioSource:
   m_ObjectHideFlags: 0
@@ -611,7 +612,7 @@ RectTransform:
   m_GameObject: {fileID: 3551563762927635957}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 3551563761593576335}
   - {fileID: 3551563762277879605}

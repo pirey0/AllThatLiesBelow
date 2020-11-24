@@ -6,6 +6,7 @@ using UnityEngine.XR.WSA.Input;
 public class YouWon : MonoBehaviour
 {
     [SerializeField] AnimationCurve openCloseCurve;
+    [SerializeField] RectTransform toScale;
 
     private void Start()
     {
@@ -21,7 +22,7 @@ public class YouWon : MonoBehaviour
         while (scaleUp && time < timeMax || !scaleUp && time > timeMin)
         {
             time += (scaleUp ? 1 : -1) * Time.deltaTime;
-            transform.localScale = Vector3.one * openCloseCurve.Evaluate(time);
+            toScale.localScale = Vector3.one * openCloseCurve.Evaluate(time);
             yield return null;
         }
 
