@@ -20,6 +20,7 @@ public enum ItemType
     Hourglass,
     Globe,
     Ball,
+    Family_Photo_Empty,
 }
 
 
