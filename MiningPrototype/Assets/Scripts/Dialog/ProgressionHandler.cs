@@ -14,6 +14,8 @@ public class ProgressionHandler : MonoBehaviour, ISavable
     [SerializeField] List<ItemAmountPair> startingItems;
     [SerializeField] string debugRewardToGet;
     [SerializeField] ItemAmountPair debugCostForReward;
+    [SerializeField] GameObject youWonPrefab;
+    [SerializeField] TMPro.TMP_FontAsset fontAsset, fontAsset2;
 
     [Zenject.Inject] OverworldEffectHandler overworldEffectHandler;
     [Zenject.Inject] CameraController cameraController;
@@ -260,6 +262,7 @@ public class ProgressionHandler : MonoBehaviour, ISavable
 
                 case "Victory":
                     hasWon = true;
+                    Instantiate(youWonPrefab);
                     //Open victory screen
                     break;
 
@@ -304,6 +307,8 @@ public class ProgressionHandler : MonoBehaviour, ISavable
 
                 case ItemType.LetterFromFamily:
                     //analfabetism
+                    fontAsset.material.SetFloat("_Sharpness", -1);
+                    fontAsset2.material.SetFloat("_Sharpness", -1);
                     break;
 
                 case ItemType.Ball:
