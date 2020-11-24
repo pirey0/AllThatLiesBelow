@@ -222,7 +222,7 @@ public class ProgressionHandler : MonoBehaviour, ISavable
 
     public float GetPriceOf(string reward, string resource)
     {
-        return SacrificePricesParser.GetPriceFor(reward, resource);
+        return 0; // SacrificePricesParser.GetPriceFor(reward, resource);
     }
 
     public SaveData ToSaveData()
