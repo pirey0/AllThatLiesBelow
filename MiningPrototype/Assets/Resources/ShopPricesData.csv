@@ -1,5 +1,6 @@
 Product;Cost Amount;Cost Type
-Ladder;1;Copper
-Support;4;Copper
-Dynamite;1;Gold
-Chest;30;Copper
+Ladder;5;Copper
+Support;5;Copper
+Ball;1;Gold
+Dynamite;5;Gold
+Chest;10;Gold
