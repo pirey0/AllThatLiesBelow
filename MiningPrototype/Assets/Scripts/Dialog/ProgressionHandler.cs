@@ -22,7 +22,8 @@ public class ProgressionHandler : MonoBehaviour, ISavable
     private float digSpeedMultiplyer = 1;
     private int extraDrop = 1;
     private int day = 0;
-    bool dailyPurchaseExaused;
+    bool dailySacrificeExaused;
+    int sacrificeProgressionLevel = 1;
 
     public bool showNewOrderLeftClickInfo = true, showNewOrderRightClickInfo = true;
 
@@ -35,6 +36,9 @@ public class ProgressionHandler : MonoBehaviour, ISavable
     public float SpeedMultiplyer { get => speedMultiplyer; }
     public float DigSpeedMultiplyer { get => digSpeedMultiplyer; }
     public int ExtraDrop { get => extraDrop; }
+    public bool DailySacrificeExpired {  get => dailySacrificeExaused; }
+
+    public int SacrificeProgressionLevel { get => sacrificeProgressionLevel; }
 
     private void OnEnable()
     {
@@ -63,17 +67,10 @@ public class ProgressionHandler : MonoBehaviour, ISavable
         }
     }
 
-    public IDialogSection GetCurrentAltarDialog()
-    {
-        var di = DialogParser.GetDialogFromName(dailyPurchaseExaused ? alreadyTradedDialog : dialog);
-
-        return di;
-    }
-
     public void Aquired(string topic)
     {
         Debug.Log(topic + " unlocked in the morning!");
-        dailyPurchaseExaused = true;
+        dailySacrificeExaused = true;
         aquiredList.Add(topic);
     }
 
@@ -189,11 +186,10 @@ public class ProgressionHandler : MonoBehaviour, ISavable
 
     private void UpdateSacrifices()
     {
-        dailyPurchaseExaused = false;
+        dailySacrificeExaused = false;
 
         foreach (var aquired in aquiredList)
         {
-
             Debug.Log("Aquired: " + aquired);
             switch (aquired)
             {
@@ -211,6 +207,8 @@ public class ProgressionHandler : MonoBehaviour, ISavable
                     break;
 
             }
+
+            sacrificeProgressionLevel++;
         }
         aquiredList.Clear();
     }
@@ -234,7 +232,7 @@ public class ProgressionHandler : MonoBehaviour, ISavable
         saveData.SpeedMultiplyer = speedMultiplyer;
         saveData.DigSpeedMultiplyer = digSpeedMultiplyer;
         saveData.ExtraDrop = extraDrop;
-        saveData.DailyPurchaseExaused = dailyPurchaseExaused;
+        saveData.DailyPurchaseExaused = dailySacrificeExaused;
         saveData.Day = day;
 
         return saveData;
@@ -249,7 +247,7 @@ public class ProgressionHandler : MonoBehaviour, ISavable
             speedMultiplyer = saveData.SpeedMultiplyer;
             digSpeedMultiplyer = saveData.DigSpeedMultiplyer;
             extraDrop = saveData.ExtraDrop;
-            dailyPurchaseExaused = saveData.DailyPurchaseExaused;
+            dailySacrificeExaused = saveData.DailyPurchaseExaused;
             day = saveData.Day;
         }
         else

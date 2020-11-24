@@ -13,6 +13,17 @@ public interface IDropReceiver
     void ReceiveDrop(ItemAmountPair pair);
 }
 
+public enum AltarState
+{
+    Off,
+    Intro,
+    RewardSelection,
+    AwaitPayment,
+    PaymentAccepted,
+    PaymentInsufficient,
+    PaymentRefused
+}
+
 public class Altar : MonoBehaviour, IInteractable, IDropReceiver
 {
     [SerializeField] Transform cameraTarget;
@@ -23,81 +34,102 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
     [Inject] ProgressionHandler progressionHandler;
     [Inject] CameraController cameraController;
 
-    bool inInteraction = false;
-    DialogIterator iterator;
+    AltarState currentState = AltarState.Off;
+    string[] availableRewards;
+    string selectedReward;
+    ItemAmountPair[] acceptedPayments;
+
     private event System.Action NotifyForcedEnd;
+
+    private bool InInteraction { get => currentState != AltarState.Off; }
 
     public void BeginInteracting(GameObject interactor)
     {
-        inInteraction = true;
-        visualizer.StartDialog();
-        cameraController.TransitionToNewTarget(cameraTarget);
-
-        IDialogSection dialog = testDialog == "" ? progressionHandler.GetCurrentAltarDialog() : DialogParser.GetDialogFromName(testDialog);
-        iterator = new DialogIterator(dialog);
-        iterator.StateChanged += OnStateChanged;
+        gameObject.layer = 12;
         visualizer.Progressed += OnProgressed;
-        OnStateChanged();
+        if (progressionHandler.DailySacrificeExpired)
+            ChangeStateTo(AltarState.PaymentAccepted);
+        else
+            ChangeStateTo(AltarState.Intro);
     }
 
     private void OnProgressed(int index)
     {
-        if (!inInteraction)
+        if (!InInteraction)
             return;
 
-        switch (iterator.State)
+        switch (currentState)
         {
-            case DialogState.Answer:
-                iterator.Next();
+            case AltarState.Intro:
+                availableRewards = SacrificePricesParser.GetRewardsAvailableAtLevel(progressionHandler.SacrificeProgressionLevel);
+                ChangeStateTo(AltarState.RewardSelection);
                 break;
 
-            case DialogState.Choice:
-                iterator.Select(index);
+            case AltarState.RewardSelection:
+                selectedReward = availableRewards[index];
+                acceptedPayments = SacrificePricesParser.GetPaymentsFor(selectedReward);
+                ChangeStateTo(AltarState.AwaitPayment);
+                break;
+
+            case AltarState.PaymentRefused:
+            case AltarState.PaymentInsufficient:
+                ChangeStateTo(AltarState.AwaitPayment);
+                break;
+
+            case AltarState.PaymentAccepted:
+                progressionHandler.Aquired(selectedReward);
+                ChangeStateTo(AltarState.Off);
                 break;
         }
-    }
 
-    private void OnStateChanged()
-    {
-        if (!inInteraction)
-            return;
-
-        if (iterator.CurrentSection == null)
-        {
-            NotifyForcedEnd?.Invoke();
-            return;
-        }
-
-        switch (iterator.State)
-        {
-            case DialogState.Answer:
-                visualizer.DisplaySentence(iterator.GetCorrectedSentence());
-                break;
-
-            case DialogState.Choice:
-                var choices = iterator.CurrentSection.Choiches;
-                string[] names = new string[choices.Length];
-                for (int i = 0; i < names.Length; i++)
-                {
-                    names[i] = choices[i].OptionText;
-                }
-                visualizer.DisplayOptions(names);
-                break;
-
-            case DialogState.AwaitPayment:
-                Debug.Log("Awaiting Payment");
-                break;
-        }
     }
 
     public void EndInteracting(GameObject interactor)
     {
         Debug.Log("End Altar Interaction");
-        iterator.StateChanged -= OnStateChanged;
         visualizer.Progressed -= OnProgressed;
         visualizer.EndDialog();
         cameraController.TransitionToDefault();
-        inInteraction = false;
+        gameObject.layer = 0;
+        ChangeStateTo(AltarState.Off);
+    }
+
+    private void ChangeStateTo(AltarState newState)
+    {
+
+        switch (newState)
+        {
+            case AltarState.Intro:
+                visualizer.StartDialog();
+                cameraController.TransitionToNewTarget(cameraTarget);
+                visualizer.DisplaySentence("What do you desire?");
+                break;
+
+            case AltarState.RewardSelection:
+
+                visualizer.DisplayOptions(availableRewards);
+                break;
+
+            case AltarState.AwaitPayment:
+
+                visualizer.DisplaySentence("And how will you pay?");
+                break;
+
+            case AltarState.PaymentAccepted:
+                visualizer.DisplaySentence("Seek your reward in the morning");
+                break;
+
+            case AltarState.PaymentInsufficient:
+                visualizer.DisplaySentence("That will take more..");
+                break;
+
+            case AltarState.PaymentRefused:
+                visualizer.DisplaySentence("that will not work");
+                break;
+
+        }
+
+        currentState = newState;
     }
 
     public void SubscribeToForceQuit(Action action)
@@ -112,10 +144,29 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
 
     public bool WouldTakeDrop(ItemAmountPair pair)
     {
-        if (iterator == null)
-            return false;
 
-        return iterator.WouldAcceptPaymentWith(pair);
+        if(currentState == AltarState.AwaitPayment)
+        {
+            if(acceptedPayments == null ||acceptedPayments.Length == 0)
+            {
+                Debug.LogError("No accepted payments for " + selectedReward);
+                return false;
+            }
+
+            for (int i = 0; i < acceptedPayments.Length; i++)
+            {
+                if (acceptedPayments[i].type == pair.type)
+                {
+                    if(acceptedPayments[i].amount <= pair.amount)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+
     }
 
     public void BeginHoverWith(ItemAmountPair pair)
@@ -132,10 +183,9 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
 
     public void ReceiveDrop(ItemAmountPair pair)
     {
-        Debug.Log("Try receive drop of " + pair.type);
-
-        if (iterator.WouldAcceptPaymentWith(pair))
-            iterator.PayWith(pair);
+        Debug.Log("Received drop of " + pair.type);
+        InventoryManager.PlayerTryPay(pair.type, pair.amount);
+        ChangeStateTo(AltarState.PaymentAccepted);
     }
 
     public void HoverUpdate(ItemAmountPair pair)

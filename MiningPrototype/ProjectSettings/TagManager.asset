@@ -15,9 +15,9 @@ TagManager:
   - 
   - Ground
   - Decoration
-  - NoPlayerCollision
+  - NoCollisionNoInteraction
   - Player
-  - 
+  - CollisionButNoInteraction
   - 
   - 
   - 

@@ -107,7 +107,7 @@ public class PlayerInteractionHandler : InventoryOwner
                         else
                         {
                             if (eventSystem.IsPointerOverGameObject() == false)
-                                TryStopInteracting();
+                                TryStopInteractingIfHover();
                         }
                     }
                 }
@@ -174,7 +174,7 @@ public class PlayerInteractionHandler : InventoryOwner
 
     private void TryInteract()
     {
-        var hits = Util.RaycastFromMouse(cameraController.Camera);
+        var hits = Util.RaycastFromMouse(cameraController.Camera, settings.interactionMask.value);
 
         currentInteractable = null;
         foreach (var hit in hits)
@@ -345,6 +345,23 @@ public class PlayerInteractionHandler : InventoryOwner
             currentInteractable.EndInteracting(gameObject);
             currentInteractable.UnsubscribeToForceQuit(OnInteractableForceQuit);
             currentInteractable = null;
+        }
+    }
+
+    private void TryStopInteractingIfHover()
+    {
+        var hits = Util.RaycastFromMouse(cameraController.Camera, settings.interactionMask.value);
+
+        foreach (var hit in hits)
+        {
+            if (hit.transform == transform)
+                continue;
+
+            if (hit.transform.TryGetComponent(out IInteractable interactable))
+            {
+                if (interactable == currentInteractable)
+                    TryStopInteracting();
+            }
         }
     }
 
