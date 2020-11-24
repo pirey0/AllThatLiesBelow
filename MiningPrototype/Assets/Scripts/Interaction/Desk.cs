@@ -17,6 +17,8 @@ public class Desk : MonoBehaviour, IInteractable
     NewOrderVisualizer currentOrder;
     PlayerStateMachine seatedPlayer;
 
+    [Zenject.Inject] Zenject.DiContainer diContainer;
+
     DeskState deskState;
 
     private enum DeskState
@@ -87,7 +89,7 @@ public class Desk : MonoBehaviour, IInteractable
 
         if (currentOrder == null)
         {
-            currentOrder = Instantiate(newOrderVisualizerPrefab);
+            currentOrder = diContainer.InstantiatePrefab(newOrderVisualizerPrefab).GetComponent<NewOrderVisualizer>();
             currentOrder.Handshake(CloseNewOrder);
 
             if (paperFold != null)
