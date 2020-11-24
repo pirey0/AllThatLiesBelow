@@ -15,6 +15,8 @@ public class ProgressionHandler : MonoBehaviour, ISavable
     [SerializeField] int startingLetterID = 100;
     [SerializeField] List<ItemAmountPair> startingItems;
 
+    [Zenject.Inject] OverworldEffectHandler overworldEffectHandler;
+
     //sacrific
     List<(string,ItemAmountPair)> aquiredList = new List<(string, ItemAmountPair)>();
     Dictionary<int, List<ItemAmountPair>> ordersForNextDay = new Dictionary<int, List<ItemAmountPair>>();
