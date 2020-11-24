@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -18,6 +19,7 @@ public enum AltarState
     Off,
     Intro,
     RewardSelection,
+    AskForPayment,
     AwaitPayment,
     PaymentAccepted,
     PaymentInsufficient,
@@ -70,6 +72,10 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
             case AltarState.RewardSelection:
                 selectedReward = availableRewards[index];
                 acceptedPayments = SacrificePricesParser.GetPaymentsFor(selectedReward);
+                ChangeStateTo(AltarState.AskForPayment);
+                break;
+
+            case AltarState.AskForPayment:
                 ChangeStateTo(AltarState.AwaitPayment);
                 break;
 
@@ -111,7 +117,7 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
                 visualizer.DisplayOptions(availableRewards);
                 break;
 
-            case AltarState.AwaitPayment:
+            case AltarState.AskForPayment:
 
                 visualizer.DisplaySentence("And how will you pay?");
                 break;
@@ -125,12 +131,44 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
                 break;
 
             case AltarState.PaymentRefused:
-                visualizer.DisplaySentence("that will not work");
+                visualizer.DisplaySentence(SuggestPossiblePaymentMethods());
                 break;
 
         }
 
         currentState = newState;
+    }
+
+    public string SuggestPossiblePaymentMethods()
+    {
+        List<string> paymentWords = new List<string>();
+
+        foreach (ItemAmountPair payment in acceptedPayments)
+        {
+            string[] pw = ItemsData.GetItemInfo(payment.type).AltarWords;
+
+            if (pw != null && pw.Length > 0)
+                paymentWords.AddRange(pw);
+        }
+
+        string str = Util.ChooseRandomString("What about ", "Give me ", "I want ");
+        List<string> allreadyChoosen = new List<string>();
+
+        for (int i = 0; i < 5; i++)
+        {
+            string r = paymentWords[UnityEngine.Random.Range(0, paymentWords.Count)];
+
+            while (allreadyChoosen.Contains(r))
+            {
+                r = paymentWords[UnityEngine.Random.Range(0, paymentWords.Count)];
+            }
+
+            allreadyChoosen.Add(r);
+
+            str += r + " ";
+        }
+
+        return str;
     }
 
     public void SubscribeToForceQuit(Action action)
@@ -146,7 +184,7 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
     public bool WouldTakeDrop(ItemAmountPair pair)
     {
 
-        if(currentState == AltarState.AwaitPayment)
+        if(currentState == AltarState.AwaitPayment || currentState == AltarState.AskForPayment)
         {
             if(acceptedPayments == null ||acceptedPayments.Length == 0)
             {

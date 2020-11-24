@@ -188,4 +188,9 @@ public static class Util
         return p;
     }
 
+    public static string ChooseRandomString(params string[] stringArray)
+    {
+        return stringArray[Random.Range(0, stringArray.Length)];
+    }
+
 }

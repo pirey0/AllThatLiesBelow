@@ -16,8 +16,14 @@ MonoBehaviour:
   DisplayName: Diamond
   DisplayTooltip: 
   DisplaySprite: {fileID: 21300000, guid: 9758e021e6941f34c9d92f95839f2010, type: 3}
+  DisplaySpriteRead: {fileID: 0}
   Weight: 1
   CanBePlaced: 0
   PickupHoldSprite: {fileID: 0}
   PickupPreviewPrefab: {fileID: 0}
   Prefab: {fileID: 0}
+  AmountIsUniqueID: 0
+  AltarWords:
+  - Diamond
+  - shining
+  - valuable
