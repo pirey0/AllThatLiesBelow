@@ -77,6 +77,7 @@ public class InventoryManager
 
     public static bool PlayerTryPay(ItemType itemType, int amount)
     {
+        Debug.Log("Player try pay: " + itemType + " " + amount);
         return Instance.playerInventory.TryRemove(new ItemAmountPair(itemType, amount));
     }
 

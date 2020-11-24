@@ -231,7 +231,6 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
             {
 
                 Debug.Log("Received drop of " + pair.type);
-                InventoryManager.PlayerTryPay(pair.type, pair.amount);
 
                 ItemAmountPair payment = ItemAmountPair.Nothing;
                 for (int i = 0; i < acceptedPayments.Length; i++)
