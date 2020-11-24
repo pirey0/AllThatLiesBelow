@@ -68,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Hello World!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c07977cd435d14f4f887b57d8e243b58, type: 2}
-  m_sharedMaterial: {fileID: 5660908554486996195, guid: c07977cd435d14f4f887b57d8e243b58, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c91df58b5dfd95a4bb3a43645f87ae0e, type: 2}
+  m_sharedMaterial: {fileID: -7364954933653177434, guid: c91df58b5dfd95a4bb3a43645f87ae0e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1
+  m_fontSize: 0.95
   m_fontSizeBase: 0.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_fontSizeMax: 1
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 1024
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0

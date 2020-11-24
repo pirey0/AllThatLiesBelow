@@ -29,7 +29,9 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
     [SerializeField] Transform cameraTarget;
     [SerializeField] AltarDialogVisualizer visualizer;
     [SerializeField] string testDialog;
-    [SerializeField] SpriteRenderer overlay;
+
+    [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] Material spriteDefault, spriteOuline;
 
     [Inject] ProgressionHandler progressionHandler;
     [Inject] CameraController cameraController;
@@ -152,16 +154,7 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
                 return false;
             }
 
-            for (int i = 0; i < acceptedPayments.Length; i++)
-            {
-                if (acceptedPayments[i].type == pair.type)
-                {
-                    if(acceptedPayments[i].amount <= pair.amount)
-                    {
-                        return true;
-                    }
-                }
-            }
+            return true;
         }
 
         return false;
@@ -170,41 +163,89 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
 
     public void BeginHoverWith(ItemAmountPair pair)
     {
-        Debug.Log("Begin hover with: " + pair.type);
-        overlay.enabled = true;
+        if (!WouldTakeDrop(pair))
+            return;
+
+        spriteRenderer.material = spriteOuline;
+        spriteRenderer.color = new Color(0.8f, 0.8f, 0.8f);
     }
 
     public void EndHover()
     {
-        overlay.enabled = false;
-        Debug.Log("End Hover");
+        spriteRenderer.material = spriteDefault;
+        spriteRenderer.color = Color.white;
     }
 
     public void ReceiveDrop(ItemAmountPair pair)
     {
-        Debug.Log("Received drop of " + pair.type);
-        InventoryManager.PlayerTryPay(pair.type, pair.amount);
+        spriteRenderer.color = Color.grey;
 
-        ItemAmountPair payment = ItemAmountPair.Nothing;
-        for (int i = 0; i < acceptedPayments.Length; i++)
+        if (IsValidItemToPayWith(pair))
         {
-            if(acceptedPayments[i].type == pair.type)
-                payment = acceptedPayments[i];
+            if (IsEnoughToPayWith(pair))
+            {
+
+                Debug.Log("Received drop of " + pair.type);
+                InventoryManager.PlayerTryPay(pair.type, pair.amount);
+
+                ItemAmountPair payment = ItemAmountPair.Nothing;
+                for (int i = 0; i < acceptedPayments.Length; i++)
+                {
+                    if (acceptedPayments[i].type == pair.type)
+                        payment = acceptedPayments[i];
+                }
+
+                ChangeStateTo(AltarState.PaymentAccepted);
+                progressionHandler.Aquired(selectedReward, payment);
+            }
+            else
+            {
+                ChangeStateTo(AltarState.PaymentInsufficient);
+            }
+        } else
+        {
+            ChangeStateTo(AltarState.PaymentRefused);
         }
-        
-        ChangeStateTo(AltarState.PaymentAccepted);
-        progressionHandler.Aquired(selectedReward, payment);
     }
 
     public void HoverUpdate(ItemAmountPair pair)
     {
-        if (WouldTakeDrop(pair))
+        //if (WouldTakeDrop(pair))
+        //{
+        //    overlay.color = Color.green;
+        //}
+        //else
+        //{
+        //    overlay.color = Color.red;
+        //}
+    }
+
+    private bool IsValidItemToPayWith(ItemAmountPair pair)
+    {
+        for (int i = 0; i < acceptedPayments.Length; i++)
         {
-            overlay.color = Color.green;
+            if (acceptedPayments[i].type == pair.type)
+            {
+                return true;
+            }
         }
-        else
+
+        return false;
+    }
+
+    private bool IsEnoughToPayWith(ItemAmountPair pair)
+    {
+        for (int i = 0; i < acceptedPayments.Length; i++)
         {
-            overlay.color = Color.red;
+            if (acceptedPayments[i].type == pair.type)
+            {
+                if (acceptedPayments[i].amount <= pair.amount)
+                {
+                    return true;
+                }
+            }
         }
+
+        return false;
     }
 }
