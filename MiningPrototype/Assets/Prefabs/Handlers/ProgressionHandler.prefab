@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveID: 74e74007-1ac0-4ff3-b5ee-b9d9ecf0658f
-  dialog: Test1_0
-  alreadyTradedDialog: Test2_1
-  speedPerBlessing: 3
-  digSpeedPerBlessing: 3
+  rewardASpeedMultiplyer: 2
+  rewardDigSpeedMultiplyer: 2
+  rewardStrengthMultiplyer: 2
+  rewardJumpMultiplyer: 2
   newOrderCrateSpawner: {fileID: 2388821099892900699}
   startingLetterID: 100
   startingItems:
@@ -56,6 +56,9 @@ MonoBehaviour:
     amount: 5
   - type: 7
     amount: 5
+  debugRewardToGet: Spring
+  showNewOrderLeftClickInfo: 1
+  showNewOrderRightClickInfo: 1
 --- !u!114 &2388821099892900699
 MonoBehaviour:
   m_ObjectHideFlags: 0

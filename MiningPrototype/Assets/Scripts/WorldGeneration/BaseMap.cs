@@ -168,12 +168,37 @@ public class BaseMap : StateListenerBehaviour, ISavable
 
     }
 
+    public virtual void CalculateStabilityAll()
+    {
+
+    }
+
     protected virtual void UpdateVisualsAt(int x, int y)
     {
     }
 
     protected virtual void UpdatePropertiesAt(int x, int y, Tile newTile, Tile previousTile, TileUpdateReason reason)
     {
+    }
+
+    public virtual void CalculateAllNeighboursBitmask()
+    {
+    }
+
+
+    public void ReplaceAll(TileType target, TileType replacer)
+    {
+        Util.IterateXY(SizeX, sizeY, (x,y) => ReplaceAt(x,y,target, replacer));
+
+        CalculateAllNeighboursBitmask();
+        CalculateStabilityAll();
+        UpdateAllVisuals();
+    }
+
+    private void ReplaceAt(int x, int y, TileType target, TileType replacer)
+    {
+        if (this[x, y].Type == target)
+            SetMapRawAt(x, y, Tile.Make(replacer));
     }
 
     public void WrapXIfNecessary(ref int x)

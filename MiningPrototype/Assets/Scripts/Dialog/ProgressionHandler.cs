@@ -8,24 +8,35 @@ public class ProgressionHandler : MonoBehaviour, ISavable
 {
     [ReadOnly] [SerializeField] string saveID = Util.GenerateNewSaveGUID();
 
-    [SerializeField] string dialog;
-    [SerializeField] string alreadyTradedDialog;
-    [SerializeField] float speedPerBlessing, digSpeedPerBlessing;
+    [SerializeField] float rewardASpeedMultiplyer, rewardDigSpeedMultiplyer, rewardStrengthMultiplyer, rewardJumpMultiplyer;
     [SerializeField] NewOrderCrateSpawner newOrderCrateSpawner;
     [SerializeField] int startingLetterID = 100;
     [SerializeField] List<ItemAmountPair> startingItems;
+    [SerializeField] string debugRewardToGet;
 
     [Zenject.Inject] OverworldEffectHandler overworldEffectHandler;
 
-    //sacrific
-    List<(string,ItemAmountPair)> aquiredList = new List<(string, ItemAmountPair)>();
+
+    List<(string, ItemAmountPair)> aquiredList = new List<(string, ItemAmountPair)>();
     Dictionary<int, List<ItemAmountPair>> ordersForNextDay = new Dictionary<int, List<ItemAmountPair>>();
-    private float speedMultiplyer = 1;
-    private float digSpeedMultiplyer = 1;
-    private int extraDrop = 1;
     private int day = 0;
     bool dailySacrificeExaused;
     int sacrificeProgressionLevel = 1;
+
+    //sacrifice rewards
+    private float speedMultiplyer = 1;
+    private float digSpeedMultiplyer = 1;
+    private float strengthMultiplyer = 1;
+    private float jumpMultiplyer = 1;
+    private bool instantDelivery = false;
+    private bool isSpring = false;
+    private bool isMidas = false;
+    private bool hasLove = false;
+    private bool hasWon = false;
+    private bool hasWayOut = false;
+    private bool isFree = false;
+
+    //sacriifce consequences
 
     public bool showNewOrderLeftClickInfo = true, showNewOrderRightClickInfo = true;
 
@@ -37,10 +48,12 @@ public class ProgressionHandler : MonoBehaviour, ISavable
 
     public float SpeedMultiplyer { get => speedMultiplyer; }
     public float DigSpeedMultiplyer { get => digSpeedMultiplyer; }
-    public int ExtraDrop { get => extraDrop; }
-    public bool DailySacrificeExpired {  get => dailySacrificeExaused; }
 
+    public float JumpMultiplyer { get => jumpMultiplyer; }
+    public bool DailySacrificeExpired { get => dailySacrificeExaused; }
     public int SacrificeProgressionLevel { get => sacrificeProgressionLevel; }
+    public bool IsMidas { get => isMidas; }
+    
 
     private void OnEnable()
     {
@@ -189,6 +202,12 @@ public class ProgressionHandler : MonoBehaviour, ISavable
         postbox.SetStoredItem(new ItemAmountPair(ItemType.LetterFromFamily, id));
     }
 
+    [Button]
+    private void DebugAquire()
+    {
+        Aquired(debugRewardToGet, ItemAmountPair.Nothing);
+    }
+
     private void UpdateSacrifices()
     {
         dailySacrificeExaused = false;
@@ -199,25 +218,87 @@ public class ProgressionHandler : MonoBehaviour, ISavable
             Debug.Log("Aquired: " + aquired.Item1 + " by paying with " + aquired.Item2.ToString());
             switch (aquired.Item1)
             {
-                case "Wealth":
-                    extraDrop += 1;
+                case "MiningSpeed":
+                    digSpeedMultiplyer = rewardDigSpeedMultiplyer;
+                    GameObject.FindObjectOfType<PickaxeAnimator>(includeInactive: true).Upgrade();
+                    break;
+                case "WalkingSpeed":
+                    speedMultiplyer = rewardASpeedMultiplyer;
                     break;
                 case "Strength":
-                    digSpeedMultiplyer *= digSpeedPerBlessing;
+                    strengthMultiplyer = rewardStrengthMultiplyer;
                     break;
-                case "Speed":
-                    speedMultiplyer *= speedPerBlessing;
+                case "JumpHeight":
+                    jumpMultiplyer = rewardJumpMultiplyer;
                     break;
+                case "InstantDelivery":
+                    instantDelivery = true;
+                    break;
+                case "Spring":
+                    isSpring = true;
+                    overworldEffectHandler.MakeSpring();
+                    RuntimeProceduralMap.Instance.ReplaceAll(TileType.Snow, TileType.Grass);
+                    break;
+                case "MidasTouch":
+                    isMidas = true;
+                    //everything you touch turns to gold
+                    break;
+
+                case "Love":
+                    hasLove = true;
+                    GameObject.FindObjectOfType<Bed>()?.ChangeWakeUpText("I Love you."); // Move to some text/Dialog system
+                    break;
+
+                case "Victory":
+                    hasWon = true;
+                    //Open victory screen
+                    break;
+
+                case "AWayOut":
+                    hasWayOut = true;
+                    //Remove bedrock
+                    break;
+
+                case "Freedom":
+                    isFree = true;
+                    //save game finished somewhere, or corrupt files sth like that
+                    Application.Quit();
+                    break;
+
                 default:
                     Debug.Log("Unimplemented aquired bonus: " + aquired);
                     break;
-
             }
 
             //consequence
             switch (aquired.Item2.type)
             {
+                case ItemType.Support:
+                    //Increase instability
+                    break;
 
+                case ItemType.LetterToFamily:
+                    //Cannot send 
+                    break;
+
+                case ItemType.Family_Photo:
+                    //No mail;
+                    break;
+
+                case ItemType.Hourglass:
+                    //Your time?!
+                    break;
+
+                case ItemType.LetterFromFamily:
+                    //analfabetism
+                    break;
+
+                case ItemType.Ball:
+                    //Happyness
+                    break;
+                case ItemType.Globe:
+                    //Everything
+                    break;
             }
 
             sacrificeProgressionLevel++;
@@ -227,7 +308,14 @@ public class ProgressionHandler : MonoBehaviour, ISavable
 
     public void RegisterOrder(int id, List<ItemAmountPair> itemAmountPairs)
     {
-        ordersForNextDay.Add(id, itemAmountPairs);
+        if (instantDelivery)
+        {
+            newOrderCrateSpawner.SpawnOrder(itemAmountPairs);
+        }
+        else
+        {
+            ordersForNextDay.Add(id, itemAmountPairs);
+        }
     }
 
     public float GetPriceOf(string reward, string resource)
@@ -243,7 +331,6 @@ public class ProgressionHandler : MonoBehaviour, ISavable
         saveData.OrdersForNextDay = ordersForNextDay;
         saveData.SpeedMultiplyer = speedMultiplyer;
         saveData.DigSpeedMultiplyer = digSpeedMultiplyer;
-        saveData.ExtraDrop = extraDrop;
         saveData.DailyPurchaseExaused = dailySacrificeExaused;
         saveData.Day = day;
 
@@ -258,7 +345,6 @@ public class ProgressionHandler : MonoBehaviour, ISavable
             ordersForNextDay = saveData.OrdersForNextDay;
             speedMultiplyer = saveData.SpeedMultiplyer;
             digSpeedMultiplyer = saveData.DigSpeedMultiplyer;
-            extraDrop = saveData.ExtraDrop;
             dailySacrificeExaused = saveData.DailyPurchaseExaused;
             day = saveData.Day;
         }
@@ -290,7 +376,6 @@ public class ProgressionSaveData : SaveData
 
     public float SpeedMultiplyer = 1;
     public float DigSpeedMultiplyer = 1;
-    public int ExtraDrop = 1;
     public int Day;
     public bool DailyPurchaseExaused;
 }
