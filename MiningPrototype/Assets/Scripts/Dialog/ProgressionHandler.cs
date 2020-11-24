@@ -295,6 +295,7 @@ public class ProgressionHandler : MonoBehaviour, ISavable
 
                 case ItemType.Family_Photo:
                     lastLetterID = -1;
+                    InventoryManager.PlayerCollects(ItemType.Family_Photo_Empty, 1);
                     break;
 
                 case ItemType.Hourglass:
