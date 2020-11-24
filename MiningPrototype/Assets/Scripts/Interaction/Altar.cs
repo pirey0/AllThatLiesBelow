@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public interface IDropReceiver
 {
@@ -19,6 +20,9 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
     [SerializeField] string testDialog;
     [SerializeField] SpriteRenderer overlay;
 
+    [Inject] ProgressionHandler progressionHandler;
+    [Inject] CameraController cameraController;
+
     bool inInteraction = false;
     DialogIterator iterator;
     private event System.Action NotifyForcedEnd;
@@ -27,9 +31,9 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
     {
         inInteraction = true;
         visualizer.StartDialog();
-        CameraController.Instance.TransitionToNewTarget(cameraTarget);
+        cameraController.TransitionToNewTarget(cameraTarget);
 
-        IDialogSection dialog = testDialog == "" ? ProgressionHandler.Instance.GetCurrentAltarDialog() : DialogParser.GetDialogFromName(testDialog);
+        IDialogSection dialog = testDialog == "" ? progressionHandler.GetCurrentAltarDialog() : DialogParser.GetDialogFromName(testDialog);
         iterator = new DialogIterator(dialog);
         iterator.StateChanged += OnStateChanged;
         visualizer.Progressed += OnProgressed;
@@ -92,7 +96,7 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
         iterator.StateChanged -= OnStateChanged;
         visualizer.Progressed -= OnProgressed;
         visualizer.EndDialog();
-        CameraController.Instance.TransitionToDefault();
+        cameraController.TransitionToDefault();
         inInteraction = false;
     }
 

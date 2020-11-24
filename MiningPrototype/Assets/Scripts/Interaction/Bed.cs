@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class Bed : MonoBehaviour, IInteractable
 {
@@ -12,6 +13,7 @@ public class Bed : MonoBehaviour, IInteractable
     [SerializeField] Hut hut;
     [SerializeField] Image nightFadeToBlack;
 
+    [Inject] ProgressionHandler progressionHandler;
     public void BeginInteracting(GameObject interactor)
     {
         PlayerStateMachine player = interactor.GetComponent<PlayerStateMachine>();
@@ -71,7 +73,7 @@ public class Bed : MonoBehaviour, IInteractable
             wakeupSound?.Play();
 
             yield return new WaitForSeconds(0.25f);
-            ProgressionHandler.Instance.StartNextDay();
+            progressionHandler.StartNextDay();
             spriteRenderer.sprite = wakeup;
             yield return new WaitForSeconds(1f);
 

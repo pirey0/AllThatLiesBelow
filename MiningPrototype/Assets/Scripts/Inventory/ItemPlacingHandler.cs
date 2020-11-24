@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemPlacingHandler : Singleton<ItemPlacingHandler>
+public class ItemPlacingHandler : MonoBehaviour
 {
 
     [SerializeField] PlayerInteractionHandler player;
+
+    [Zenject.Inject] CameraController cameraController;
 
     bool holdingPlacable;
     ItemAmountPair currentHeld;
@@ -88,7 +90,7 @@ public class ItemPlacingHandler : Singleton<ItemPlacingHandler>
         }
         else
         {
-            var hits = Util.RaycastFromMouse();
+            var hits = Util.RaycastFromMouse(cameraController.Camera);
             IDropReceiver dropReceiver = null;
             foreach (var hit in hits)
             {

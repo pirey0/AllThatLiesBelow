@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 using UnityEngineInternal;
-
+using Zenject;
 
 public class PlayerInteractionHandler : InventoryOwner
 {
@@ -19,12 +19,14 @@ public class PlayerInteractionHandler : InventoryOwner
     [SerializeField] AudioSource breakBlock, startMining;
     [SerializeField] PickaxeAnimator pickaxeAnimator;
 
-    [SerializeField] EventSystem eventSystem;
     [SerializeField] ParticleSystem miningParticles;
     [SerializeField] SpriteRenderer heldItemPreview;
 
-    SpriteAnimator spriteAnimator;
+    [Inject] ProgressionHandler progressionHandler;
+    [Inject] CameraController cameraController;
+    [Inject] EventSystem eventSystem;
 
+    SpriteAnimator spriteAnimator;
     Camera camera;
     SpriteRenderer spriteRenderer;
     Vector2Int? gridDigTarget;
@@ -130,7 +132,7 @@ public class PlayerInteractionHandler : InventoryOwner
 
     private void UpdateHover(bool hasDigTarget)
     {
-        var hits = Util.RaycastFromMouse();
+        var hits = Util.RaycastFromMouse(cameraController.Camera);
 
         IHoverable newHover = null;
 
@@ -172,7 +174,7 @@ public class PlayerInteractionHandler : InventoryOwner
 
     private void TryInteract()
     {
-        var hits = Util.RaycastFromMouse();
+        var hits = Util.RaycastFromMouse(cameraController.Camera);
 
         currentInteractable = null;
         foreach (var hit in hits)
@@ -216,7 +218,7 @@ public class PlayerInteractionHandler : InventoryOwner
 
     private bool UpdateNonGridDigTarget()
     {
-        var hits = Util.RaycastFromMouse();
+        var hits = Util.RaycastFromMouse(cameraController.Camera);
 
         IMinableNonGrid newTarget = null;
         foreach (var hit in hits)
@@ -281,7 +283,7 @@ public class PlayerInteractionHandler : InventoryOwner
                 CloseInventory();
                 PlayerActivity?.Invoke();
 
-                bool broken = RuntimeProceduralMap.Instance.DamageAt(gridDigTarget.Value.x, gridDigTarget.Value.y, Time.deltaTime * settings.digSpeed * ProgressionHandler.Instance.DigSpeedMultiplyer, playerCaused: true);
+                bool broken = RuntimeProceduralMap.Instance.DamageAt(gridDigTarget.Value.x, gridDigTarget.Value.y, Time.deltaTime * settings.digSpeed * progressionHandler.DigSpeedMultiplyer, playerCaused: true);
 
                 if (broken)
                 {
@@ -380,7 +382,7 @@ public class PlayerInteractionHandler : InventoryOwner
 
     private Vector3 GetClickPositionV3()
     {
-        return Util.MouseToWorld();
+        return Util.MouseToWorld(cameraController.Camera);
     }
 
 

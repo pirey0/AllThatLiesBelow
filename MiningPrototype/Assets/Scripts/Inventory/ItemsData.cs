@@ -56,7 +56,7 @@ public static class ItemsData
     public static Sprite GetSpriteByItemType(ItemAmountPair pair)
     {
         ItemInfo info = itemInfos[pair.type];
-        return (info.AmountIsUniqueID)?ReadableItemHandler.Instance?.GetSpriteOfLetter(pair.amount):info.DisplaySprite;
+        return info.DisplaySprite;
     }
 }
 

@@ -2,14 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class DialogIterator
 {
-    public DialogIterator(IDialogSection startSection)
-    {
-        current = startSection;
-        state = DialogState.Answer;
-    }
+    [Inject] ProgressionHandler progressionHandler;
 
     IDialogSection current;
     DialogState state;
@@ -22,6 +19,12 @@ public class DialogIterator
     public DialogState State { get => state; }
 
     public event System.Action StateChanged;
+
+    public DialogIterator(IDialogSection startSection)
+    {
+        current = startSection;
+        state = DialogState.Answer;
+    }
 
     public string GetCorrectedSentence()
     {
@@ -109,7 +112,7 @@ public class DialogIterator
 
                     //Doing this here is quite dirty!
                     InventoryManager.ForcePlayerInventoryClose();
-                    ProgressionHandler.Instance.Aquired(topic);
+                    progressionHandler.Aquired(topic);
                     return;
                 }
             }
@@ -131,7 +134,7 @@ public class DialogIterator
 
             if (topic != "NONE" && payment != "NONE")
             {
-                amount = ProgressionHandler.Instance.GetPriceOf(topic, payment);
+                amount = progressionHandler.GetPriceOf(topic, payment);
             }
         }
     }

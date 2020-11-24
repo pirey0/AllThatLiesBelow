@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using UnityEngine;
-
+using Zenject;
 
 [System.Serializable]
 public class PlayerVisualState
@@ -57,6 +57,9 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     [SerializeField] PlayerInteractionHandler playerInteraction;
     [SerializeField] bool debug;
 
+    [Inject] ProgressionHandler progressionHandler;
+    [Inject] TransitionEffectHandler transitionEffectHandler;
+
     StateMachine stateMachine;
     StateMachine.State s_idle, s_jump, s_fall, s_walk, s_slowWalk, s_climb, s_climbIde, s_inventory, s_death, s_hit, s_longIdle, s_disabled;
     Dictionary<string, PlayerStateInfo> canInteractInStateMap;
@@ -77,6 +80,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     RuntimeProceduralMap.MirrorState currentMirrorLoc;
     private bool InFrontOfLadder { get => currentLadders.Count > 0; }
     private bool IsLocked { get => stateMachine.CurrentState == s_disabled; }
+
 
     private void Start()
     {
@@ -230,7 +234,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
 
     private void DeathEnter()
     {
-        TransitionEffectHandler.FadeOut(FadeType.Death);
+        transitionEffectHandler.FadeOut(FadeType.Death);
         rigidbody.simulated = false;
         lastDeathTimeStamp = Time.time;
         NotifyActivity();
@@ -275,7 +279,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     {
         rigidbody.simulated = true;
         NotifyActivity();
-        TransitionEffectHandler.FadeIn(FadeType.Nightmare);
+        transitionEffectHandler.FadeIn(FadeType.Nightmare);
         GameState.Instance.ChangeStateTo(GameState.State.Playing);
     }
 
@@ -305,7 +309,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     {
         var horizontal = Input.GetAxis("Horizontal");
 
-        rigidbody.position += horizontal * rightWalkVector * settings.slowMoveSpeed * Time.fixedDeltaTime * ProgressionHandler.Instance.SpeedMultiplyer;
+        rigidbody.position += horizontal * rightWalkVector * settings.slowMoveSpeed * Time.fixedDeltaTime * progressionHandler.SpeedMultiplyer;
         BaseMoveUpdate(horizontal);
     }
 
@@ -313,7 +317,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     {
         var horizontal = Input.GetAxis("Horizontal");
 
-        rigidbody.position += horizontal * rightWalkVector * settings.moveSpeed * Time.fixedDeltaTime * ProgressionHandler.Instance.SpeedMultiplyer;
+        rigidbody.position += horizontal * rightWalkVector * settings.moveSpeed * Time.fixedDeltaTime * progressionHandler.SpeedMultiplyer;
         BaseMoveUpdate(horizontal);
     }
 

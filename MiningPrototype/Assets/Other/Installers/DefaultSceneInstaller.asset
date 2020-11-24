@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f206c61bfbcf094e8d886e3e612ec88, type: 3}
+  m_Name: DefaultSceneInstaller
+  m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 8633471933228471848, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
+  progressionPrefab: {fileID: 2388821100420778845, guid: 8f9d573c8734bb14092a75f0f481e070, type: 3}
+  readableItemPrefab: {fileID: 1960365942269115461, guid: 809d08b81c4e06647907e110f888ead2, type: 3}
+  cameraPannerPrefab: {fileID: 3841827697160721108, guid: 34b68ab6d1c273b4790ef6b88022039c, type: 3}
+  cameraPrefab: {fileID: 5930427534588966326, guid: 0ef3d3d9ac15aad4b94aff8d1ece9908, type: 3}
+  itemPreviewPrefab: {fileID: 4548280680598382780, guid: 6cdf6c9abc202474ca94e8f0f5902032, type: 3}
+  pauseMenuPrefab: {fileID: 283427974786567142, guid: 5a03e4f99afb5f5478ba8441f863deb7, type: 3}
+  toolTipPrefab: {fileID: 2633605495259368110, guid: 13f2e62eb042f9548b1a79535aee5ef2, type: 3}
+  eventSystemPrefab: {fileID: 4355947821229198085, guid: cc2acd4956f2dde4b83fa6e03dfd37fe, type: 3}
+  inWorldCanvasPrefab: {fileID: 3019894843303896135, guid: 68766b238d735f249bc21c83b2547f29, type: 3}

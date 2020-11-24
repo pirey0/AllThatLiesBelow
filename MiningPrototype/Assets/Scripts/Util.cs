@@ -115,12 +115,12 @@ public static class Util
 
     public static Vector2 ScreenCenter { get => new Vector2(Screen.width / 2, Screen.height / 2); }
 
-    public static Vector3 MouseToWorld()
+    public static Vector3 MouseToWorld(Camera camera)
     {
-        if (CameraController.Instance == null)
+        if (camera == null)
             return Vector3.zero;
 
-        var ray = CameraController.Instance.Camera.ScreenPointToRay(Input.mousePosition);
+        var ray = camera.ScreenPointToRay(Input.mousePosition);
 
         Plane p = new Plane(Vector3.forward, Vector3.zero);
         if (p.Raycast(ray, out float distance))
@@ -130,12 +130,12 @@ public static class Util
         return Vector3.zero;
     }
 
-    public static RaycastHit2D[] RaycastFromMouse()
+    public static RaycastHit2D[] RaycastFromMouse(Camera camera)
     {
-        if (CameraController.Instance == null)
+        if (camera == null)
             return null;
 
-        Vector3 position = MouseToWorld();
+        Vector3 position = MouseToWorld(camera);
         return Physics2D.CircleCastAll(position, 0.2f, Vector2.zero);
     }
 

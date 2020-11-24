@@ -11,6 +11,7 @@ public class PickaxeAnimator : MonoBehaviour
     [SerializeField] int offsetToMouse = 2;
     [SerializeField] bool hideSwing;
 
+    [Zenject.Inject] CameraController cameraController;
     private void Start()
     {
         SetFrame(idleFrame);
@@ -66,7 +67,7 @@ public class PickaxeAnimator : MonoBehaviour
     private int GetFrameFromMouseAngle(float additionalAngle = 0)
     {
         Vector2 head = transform.position;
-        Vector2 target = Util.MouseToWorld();
+        Vector2 target = Util.MouseToWorld(cameraController.Camera);
 
         float angle = Mathf.Atan2((target.x - head.x) / 2, target.y - head.y) * Mathf.Rad2Deg; //range between -180 and 180 (top is 0)
         float angleGeneralized = ((((Mathf.Abs(angle) - 90) / 90f) + 1) * 2) - offsetToMouse; //maps it onto 0 to 4 for the full range on one side

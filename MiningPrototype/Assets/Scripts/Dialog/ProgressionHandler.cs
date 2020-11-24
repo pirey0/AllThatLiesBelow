@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
+public class ProgressionHandler : MonoBehaviour, ISavable
 {
     [ReadOnly] [SerializeField] string saveID = Util.GenerateNewSaveGUID();
 
@@ -24,7 +24,7 @@ public class ProgressionHandler : Singleton<ProgressionHandler>, ISavable
     private int day = 0;
     bool dailyPurchaseExaused;
 
-    public static bool showNewOrderLeftClickInfo = true, showNewOrderRightClickInfo = true;
+    public bool showNewOrderLeftClickInfo = true, showNewOrderRightClickInfo = true;
 
     //postbox and letters
     Postbox postbox;

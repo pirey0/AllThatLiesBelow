@@ -18,8 +18,10 @@ public class InventoryVisualizer : ScalingUIElementBase
     [SerializeField] bool updateContinously = true;
     [SerializeField] ImageSpriteAnimator animator;
     [SerializeField] SpriteAnimation closeAnimation;
-    SpriteRenderer spriteRendererToGetOrientatioFrom;
 
+    [Zenject.Inject] ReadableItemHandler readableItemHandler;
+    
+    SpriteRenderer spriteRendererToGetOrientatioFrom;
     Inventory inventory;
     List<InventorySlotVisualizer> slots = new List<InventorySlotVisualizer>();
 
@@ -118,7 +120,7 @@ public class InventoryVisualizer : ScalingUIElementBase
     {
         animator.Play(closeAnimation);
         float closeLength = closeAnimation.GetLength();
-        ReadableItemHandler.Instance?.Hide();
+        readableItemHandler.Hide();
         StopAllCoroutines();
         StartCoroutine(DestroyItemElements(closeLength));
         Invoke("Selfdestroy", closeLength);

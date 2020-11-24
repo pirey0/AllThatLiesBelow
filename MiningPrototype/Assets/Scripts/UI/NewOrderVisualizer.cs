@@ -5,21 +5,22 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class NewOrderVisualizer : ReadableItemVisualizer
 {
-    Dictionary<ItemType, int> orderedElementsWithAmounts = new Dictionary<ItemType, int>();
-    Dictionary<ItemType, int> cost = new Dictionary<ItemType, int>();
     [SerializeField] TMP_Text costText;
-
     [SerializeField] Button buyButton;
     [SerializeField] Sprite checkmark, x;
-
     [SerializeField] TMP_Text costElementPrefab;
     [SerializeField] Transform costGrid;
-
     [SerializeField] GameObject leftclick, rightclick;
 
+    [Inject] ProgressionHandler progressionHandler;
+    [Inject] ReadableItemHandler readableItemHandler;
+
+    Dictionary<ItemType, int> orderedElementsWithAmounts = new Dictionary<ItemType, int>();
+    Dictionary<ItemType, int> cost = new Dictionary<ItemType, int>();
     System.Action OnClose;
 
     private void Start()
@@ -37,9 +38,9 @@ public class NewOrderVisualizer : ReadableItemVisualizer
     public void UpdateAmount(ItemType itemType, int amount, bool increased)
     {
         if (increased)
-            ProgressionHandler.showNewOrderLeftClickInfo = false;
+            progressionHandler.showNewOrderLeftClickInfo = false;
         else
-            ProgressionHandler.showNewOrderRightClickInfo = false;
+            progressionHandler.showNewOrderRightClickInfo = false;
 
         UpdateTutorialDisplays();
 
@@ -143,8 +144,8 @@ public class NewOrderVisualizer : ReadableItemVisualizer
         foreach (KeyValuePair<ItemType, int> i in orderedElementsWithAmounts)
             itemAmountPairs.Add(new ItemAmountPair(i.Key, i.Value));
 
-        int readableId = ReadableItemHandler.AddNewReadable(itemAmountPairs);
-        ProgressionHandler.Instance.RegisterOrder(readableId, itemAmountPairs);
+        int readableId = readableItemHandler.AddNewReadable(itemAmountPairs);
+        progressionHandler.RegisterOrder(readableId, itemAmountPairs);
         InventoryManager.PlayerCollects(ItemType.NewOrder, readableId);
 
         foreach (var singlePrice in cost)
@@ -158,7 +159,7 @@ public class NewOrderVisualizer : ReadableItemVisualizer
 
     private void UpdateTutorialDisplays()
     {
-        leftclick.SetActive(ProgressionHandler.showNewOrderLeftClickInfo);
-        rightclick.SetActive(ProgressionHandler.showNewOrderRightClickInfo);
+        leftclick.SetActive(progressionHandler.showNewOrderLeftClickInfo);
+        rightclick.SetActive(progressionHandler.showNewOrderRightClickInfo);
     }
 }

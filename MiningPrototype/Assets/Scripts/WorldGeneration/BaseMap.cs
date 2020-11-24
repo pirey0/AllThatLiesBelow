@@ -131,7 +131,7 @@ public class BaseMap : StateListenerBehaviour, ISavable
             TileInfo info = GetTileInfo(t.Type);
 
             if (info.ItemToDrop != ItemType.None)
-                InventoryManager.PlayerCollects(info.ItemToDrop, UnityEngine.Random.Range(1, ProgressionHandler.Instance.ExtraDrop));
+                InventoryManager.PlayerCollects(info.ItemToDrop, 1);
         }
 
     }

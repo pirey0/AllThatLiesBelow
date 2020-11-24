@@ -15,6 +15,8 @@ public class ReadableItemVisualizer : MonoBehaviour
     [SerializeField] AnimationCurve textHeightoverTime;
     [SerializeField] Transform toScaleOnOpenAndClose;
 
+    [Zenject.Inject] ReadableItemHandler readableItemHandler;
+
     Coroutine close;
     [HideInInspector] public int id;
 
@@ -71,7 +73,7 @@ public class ReadableItemVisualizer : MonoBehaviour
             StopAllCoroutines();
             close = StartCoroutine(ScaleCoroutine(scaleUp: false));
             spriteAnimator.Play(letterCloseAnimation);
-            ReadableItemHandler.Instance.Hide();
+            readableItemHandler.Hide();
         }
     }
 }

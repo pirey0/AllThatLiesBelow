@@ -13,10 +13,11 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner, IInteractable
 {
     [Header("Inventory Owner")]
     [SerializeField] Inventory inventory;
-    [SerializeField] protected Canvas canvas;
     [SerializeField] InventoryVisualizer inventoryVisualizerPrefab;
     [SerializeField] AudioSource openSource;
     [SerializeField] bool inventoryVisualizerUpdates;
+
+    [Zenject.Inject] InWorldCanvas inWorld;
 
     InventoryVisualizer inventoryVisualizer;
     InventoryState state = InventoryState.Closed;
@@ -59,7 +60,7 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner, IInteractable
                     openSource.Play();
                 }
 
-                inventoryVisualizer = Instantiate(inventoryVisualizerPrefab, canvas.transform);
+                inventoryVisualizer = Instantiate(inventoryVisualizerPrefab, inWorld.Canvas.transform);
                 inventoryVisualizer.Init(transform, inventory);
                 inventoryVisualizer.SetFollowOnUpdate(inventoryVisualizerUpdates);
             }

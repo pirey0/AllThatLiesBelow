@@ -14,6 +14,8 @@ public class CustomCameraShakeSpawner : MonoBehaviour
     [SerializeField] bool useCustomLocation;
     [SerializeField] Vector3 customLocation;
 
+    [Zenject.Inject] CameraController cameraController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +32,7 @@ public class CustomCameraShakeSpawner : MonoBehaviour
     {
         Vector3 location = useCustomLocation ? customLocation : transform.position;
 
-        CameraController.Instance.Shake(location,curve,duration,range);
+        cameraController.Shake(location,curve,duration,range);
 
         if (loop)
             Invoke("SpawnUndelayed", duration);

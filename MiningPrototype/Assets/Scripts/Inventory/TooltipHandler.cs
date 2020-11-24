@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TooltipHandler : Singleton<TooltipHandler>
+public class TooltipHandler : MonoBehaviour
 {
     [SerializeField] TMPro.TMP_Text textUI, subTextUI;
     [SerializeField] Image box;
+
+    [Zenject.Inject] CameraController cameraController;
 
     Transform currentTarget;
 
     private void Update()
     {
-        transform.position = Util.MouseToWorld();
+        transform.position = Util.MouseToWorld(cameraController.Camera);
     }
 
     public void Display(Transform target, string text, string subText)

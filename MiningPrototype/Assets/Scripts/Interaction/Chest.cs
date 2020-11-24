@@ -8,12 +8,6 @@ public class Chest : InventoryOwner, IHoverable
     [SerializeField] Sprite chestOpen, chestClosed;
     [SerializeField] Material defaultMat, outlineMat;
 
-    protected override void Start()
-    {
-        base.Start();
-        canvas.worldCamera = CameraController.Instance.Camera;
-    }
-
     public override void OpenInventory()
     {
         base.OpenInventory();

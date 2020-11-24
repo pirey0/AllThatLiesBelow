@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ReadableItemHandler : Singleton<ReadableItemHandler>
+public class ReadableItemHandler : MonoBehaviour
 {
     [SerializeField] Sprite iconClosed, iconOpen;
     [SerializeField] ReadableItemVisualizer textDisplayPrefab;
@@ -85,7 +85,7 @@ public class ReadableItemHandler : Singleton<ReadableItemHandler>
         }
     }
 
-    public static int AddNewReadable(List<ItemAmountPair> itemAmountPairs)
+    public  int AddNewReadable(List<ItemAmountPair> itemAmountPairs)
     {
         string str = "New Order:\n";
 
@@ -94,14 +94,14 @@ public class ReadableItemHandler : Singleton<ReadableItemHandler>
             str += ItemsData.GetItemInfo(pair.type).DisplayName + " x " + pair.amount + "\n";
         }
 
-        Instance.readableItems.Add(new ReadableItem(str,ItemType.NewOrder));
-        return Instance.readableItems.Count - 1;
+        readableItems.Add(new ReadableItem(str,ItemType.NewOrder));
+        return readableItems.Count - 1;
     }
 
-    public static int AddNewReadable(string str)
+    public int AddNewReadable(string str)
     {
-        Instance.readableItems.Add(new ReadableItem(str));
-        return Instance.readableItems.Count - 1;
+        readableItems.Add(new ReadableItem(str));
+        return readableItems.Count - 1;
     }
 }
 

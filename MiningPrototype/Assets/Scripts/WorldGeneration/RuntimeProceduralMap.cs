@@ -15,9 +15,11 @@ public class RuntimeProceduralMap : RenderedMap
 
     [Header("RuntimeProceduralMap")]
     [SerializeField] Transform entitiesParent;
-
-
     [SerializeField] bool debug;
+
+    //Literally just for debug..
+    [Zenject.Inject] TooltipHandler tooltipHandler;
+    [Zenject.Inject] CameraController cameraController;
 
     ITileUpdateReceiver[,] receiverMap;
     List<Vector2Int> unstableTiles = new List<Vector2Int>();
@@ -27,7 +29,6 @@ public class RuntimeProceduralMap : RenderedMap
     public event System.Action<MirrorState> MirrorSideChanged;
 
     public static RuntimeProceduralMap Instance { get => instance; }
-
 
     protected virtual void Awake()
     {
@@ -79,7 +80,7 @@ public class RuntimeProceduralMap : RenderedMap
     {
         if (debug)
         {
-            TooltipHandler.Instance?.Display(transform, this[Util.MouseToWorld().ToGridPosition()].ToString(), "");
+            tooltipHandler?.Display(transform, this[Util.MouseToWorld(cameraController.Camera).ToGridPosition()].ToString(), "");
         }
     }
 

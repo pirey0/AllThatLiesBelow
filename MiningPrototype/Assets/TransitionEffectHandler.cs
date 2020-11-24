@@ -9,7 +9,7 @@ public enum FadeType {
 	Nightmare
 }
 
-public class TransitionEffectHandler : Singleton<TransitionEffectHandler>
+public class TransitionEffectHandler : MonoBehaviour
 {
 	[SerializeField] AudioSource audioSource;
 
@@ -40,37 +40,26 @@ public class TransitionEffectHandler : Singleton<TransitionEffectHandler>
 		Graphics.Blit(source, destination, mat);
 	}
 
-	public static void FadeOut(FadeType fadeType = FadeType.Circle)
+	public  void FadeOut(FadeType fadeType = FadeType.Circle)
 	{
-		if (Instance == null)
-		{
-			Debug.LogError("Add Transition Effect Handler to Camera");
-			return;
-		}
-
-		Instance.mat.SetTexture("_PatternTex", GetTextureByType(fadeType));
-		Instance.StartCoroutine(FadeRoutine(fadeIn:false, GetCurveByType(fadeType)));
+		mat.SetTexture("_PatternTex", GetTextureByType(fadeType));
+		StartCoroutine(FadeRoutine(fadeIn:false, GetCurveByType(fadeType)));
 	}
 
-	public static void FadeIn(FadeType fadeType = FadeType.Circle)
+	public void FadeIn(FadeType fadeType = FadeType.Circle)
 	{
-		if (Instance == null)
-		{
-			Debug.LogError("Add Transition Effect Handler to Camera");
-			return;
-		}
 
-		Instance.mat.SetTexture("_PatternTex", GetTextureByType(fadeType));
-		Instance.StartCoroutine(FadeRoutine(fadeIn: true, GetCurveByType(fadeType)));
+		mat.SetTexture("_PatternTex", GetTextureByType(fadeType));
+		StartCoroutine(FadeRoutine(fadeIn: true, GetCurveByType(fadeType)));
 
 		if (fadeType == FadeType.Nightmare)
 		{
-			Instance.audioSource.clip = Instance.nightmareWakeup;
-			Instance.audioSource.Play();
+			audioSource.clip = nightmareWakeup;
+			audioSource.Play();
 		}
 	}
 
-	public static IEnumerator FadeRoutine(bool fadeIn, AnimationCurve curve)
+	public IEnumerator FadeRoutine(bool fadeIn, AnimationCurve curve)
 	{
 
 		float time = fadeIn ? curve[curve.length - 1].time : curve[0].time;
@@ -81,39 +70,39 @@ public class TransitionEffectHandler : Singleton<TransitionEffectHandler>
 		while (fadeIn && time > endTime || !fadeIn && time < endTime)
 		{
 			time += Time.deltaTime * (fadeIn ? -1f : 1f);
-			Instance.mat.SetFloat("_Cutoff", curve.Evaluate(time));
+			mat.SetFloat("_Cutoff", curve.Evaluate(time));
 			//Debug.Log("fade update "+ curve.Evaluate(time));
 			yield return null;
 		}
 	}
 
-	public static AnimationCurve GetCurveByType(FadeType fadeType)
+	public AnimationCurve GetCurveByType(FadeType fadeType)
 	{
 		switch(fadeType)
 		{
 			case FadeType.Death:
-				return Instance.deathFadeCurve;
+				return deathFadeCurve;
 
 			case FadeType.Nightmare:
-				return Instance.nightmareFadeCurve;
+				return nightmareFadeCurve;
 
 			default:
-				return Instance.circleFadeCurve;
+				return circleFadeCurve;
 		}
 	}
 
-	public static Texture GetTextureByType(FadeType fadeType)
+	public  Texture GetTextureByType(FadeType fadeType)
 	{
 		switch (fadeType)
 		{
 			case FadeType.Death:
-				return Instance.deathFadeTexture;
+				return deathFadeTexture;
 
 			case FadeType.Nightmare:
-				return Instance.nightmareFadeTexture;
+				return nightmareFadeTexture;
 
 			default:
-				return Instance.circleFadeTexture;
+				return circleFadeTexture;
 		}
 	}
 

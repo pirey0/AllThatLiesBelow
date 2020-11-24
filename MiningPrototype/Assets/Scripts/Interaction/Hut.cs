@@ -10,6 +10,8 @@ public class Hut : MonoBehaviour
     [SerializeField] AudioSource doorAudio;
     [SerializeField] Transform cameraTarget;
 
+    [Zenject.Inject] CameraController cameraController;
+
     public delegate void HutStateChange(bool isOpen);
     public event HutStateChange OnHutStateChange;
 
@@ -59,9 +61,9 @@ public class Hut : MonoBehaviour
         doorAudio.Play();
 
         if (isOpen)
-            CameraController.Instance.TransitionToNewTarget(cameraTarget);
+            cameraController.TransitionToNewTarget(cameraTarget);
         else
-            CameraController.Instance.TransitionToDefault();
+            cameraController.TransitionToDefault();
     }
 
     public bool IsOpen()

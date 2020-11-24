@@ -9,6 +9,8 @@ public class Dynamite : MonoBehaviour
     [SerializeField] int explostionSize = 5;
     [SerializeField] GameObject explosionPrefab;
 
+    [Zenject.Inject] CameraController cameraController;
+
     private void Start ()
     {
         Invoke("Detonate",delay);
@@ -19,7 +21,7 @@ public class Dynamite : MonoBehaviour
     {
         Vector2Int position = Util.ToGridPosition(transform.position);
 
-        CameraController.Instance.Shake(position, shakeType: CameraShakeType.explosion, 1, explostionSize * 2 + 10);
+        cameraController.Shake(position, shakeType: CameraShakeType.explosion, 1, explostionSize * 2 + 10);
 
         for (int x = - explostionSize; x <= explostionSize; x++)
         {

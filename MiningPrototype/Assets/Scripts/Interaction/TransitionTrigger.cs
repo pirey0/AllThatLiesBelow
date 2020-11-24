@@ -6,6 +6,7 @@ public class TransitionTrigger : MonoBehaviour
 {
     [SerializeField] Transform target;
 
+    [Zenject.Inject] CameraController cameraController;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,7 +14,7 @@ public class TransitionTrigger : MonoBehaviour
         {
             if(target != null)
             {
-                CameraController.Instance.TransitionToNewTarget(target);
+                cameraController.TransitionToNewTarget(target);
             }
         }
     }

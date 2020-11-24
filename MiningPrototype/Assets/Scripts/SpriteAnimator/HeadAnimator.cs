@@ -19,6 +19,8 @@ public class HeadAnimator : MonoBehaviour
     [SerializeField] float correctionultiplier = 10f;
     float angleBefore = 0;
 
+    [Zenject.Inject] CameraController cameraController;
+
     private void Update()
     {
         flipX = TryFlipX();
@@ -51,7 +53,7 @@ public class HeadAnimator : MonoBehaviour
     private int GetFrameFromMouseAngle()
     {
         Vector2 head = transform.position;
-        Vector2 target = Util.MouseToWorld();
+        Vector2 target = Util.MouseToWorld(cameraController.Camera);
 
         float angle = Mathf.Atan2((target.x - head.x) / 2, target.y - head.y) * Mathf.Rad2Deg; //range between -180 and 180 (top is 0)
         float angleGeneralized = ((Mathf.Abs(angle) - 90) / 90f); //maps it onto -1 to 1 scale

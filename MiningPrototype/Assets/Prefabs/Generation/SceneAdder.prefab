@@ -43,7 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e03091118b552a49b49193efa4013d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisMap: {fileID: 0}
   addition:
   - XOffsetRange: {x: 0, y: 0}
     YOffset: 44

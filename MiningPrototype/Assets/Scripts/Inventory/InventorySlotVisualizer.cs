@@ -6,12 +6,19 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using Zenject;
 
 public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     [SerializeField] public Image icon;
     [SerializeField] public TMP_Text amountDisplay;
     [SerializeField] AnimationCurve scaleOnOpenAndCloseCurve;
+
+   
+    [Inject] ItemPlacingHandler itemPlacingHandler;
+    [Inject] ReadableItemHandler readableItemHandler;
+    [Inject] TooltipHandler tooltipHandler;
+    [Inject] CameraController cameraController;
 
     int amount;
     ItemType type;
@@ -54,9 +61,9 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         base.OnPointerDown(eventData);
         var info = ItemsData.GetItemInfo(type);
         if (info.AmountIsUniqueID && eventData.button == PointerEventData.InputButton.Right)
-            ReadableItemHandler.Instance?.Display(amount);
+            readableItemHandler.Display(amount);
         else
-            TooltipHandler.Instance?.Display(transform, info.DisplayName, info.DisplayTooltip);
+            tooltipHandler?.Display(transform, info.DisplayName, info.DisplayTooltip);
     }
 
     public override void OnPointerEnter(PointerEventData eventData)
@@ -69,7 +76,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
     {
         yield return new WaitForSeconds(0.66f);
         var info = ItemsData.GetItemInfo(type);
-        TooltipHandler.Instance?.Display(transform, info.DisplayName, info.DisplayTooltip);
+        tooltipHandler?.Display(transform, info.DisplayName, info.DisplayTooltip);
     }
 
     public override void OnPointerExit(PointerEventData eventData)
@@ -80,13 +87,13 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
             showTooltipRoutine = null;
         }
 
-        TooltipHandler.Instance?.StopDisplaying(transform);
+        tooltipHandler?.StopDisplaying(transform);
     }
 
     public override void OnPointerUp(PointerEventData eventData)
     {
         base.OnPointerUp(eventData);
-        TooltipHandler.Instance?.StopDisplaying(transform);
+        tooltipHandler?.StopDisplaying(transform);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -98,7 +105,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.position = Util.MouseToWorld();
+        rectTransform.position = Util.MouseToWorld(cameraController.Camera);
         UpdatePlacingPreview();
     }
 
@@ -109,9 +116,9 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         if (!inUI)
         {
             Debug.Log("Dropped outside UI");
-            ItemPlacingHandler.Instance?.TryPlace(type, rectTransform.position);
+            itemPlacingHandler.TryPlace(type, rectTransform.position);
         }
-        ItemPlacingHandler.Instance?.Hide();
+        itemPlacingHandler.Hide();
         inDrag = false;
         EnableVisuals();
         rectTransform.anchoredPosition = defaultAnchorPosition;
@@ -122,7 +129,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
     {
         while (inDrag)
         {
-            rectTransform.position = Util.MouseToWorld();
+            rectTransform.position = Util.MouseToWorld(cameraController.Camera);
             UpdatePlacingPreview();
             yield return null;
         }
@@ -138,17 +145,17 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         {
             if (VisualsEnabled)
             {
-                ItemPlacingHandler.Instance?.Show(new ItemAmountPair(type, amount));
+                itemPlacingHandler.Show(new ItemAmountPair(type, amount));
                 if (info.CanBePlaced)
                     DisableVisuals();
             }
-            ItemPlacingHandler.Instance?.UpdatePosition(rectTransform.position);
+            itemPlacingHandler.UpdatePosition(rectTransform.position);
         }
         else
         {
             if (!VisualsEnabled)
             {
-                ItemPlacingHandler.Instance?.Hide();
+                itemPlacingHandler.Hide();
                 EnableVisuals();
             }
         }

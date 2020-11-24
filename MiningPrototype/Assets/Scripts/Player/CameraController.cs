@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : Singleton<CameraController>
+public class CameraController : MonoBehaviour
 {
     [SerializeField] Transform target;
     [SerializeField] Vector3 generalOffset = new Vector3(0, 0, -10);
@@ -13,9 +13,13 @@ public class CameraController : Singleton<CameraController>
     Vector3 offsetToTarget;
     Transform defaultTarget;
 
+    [Zenject.Inject] CameraPanner cameraPanner;
+
     public Camera Camera { get; private set; }
+
     private void Start()
     {
+        target = cameraPanner.transform;
         defaultTarget = target;
         offsetToTarget = generalOffset;
         Camera = GetComponent<Camera>();
@@ -31,7 +35,7 @@ public class CameraController : Singleton<CameraController>
         target = newTarget;
     }
 
-    public void TransitionToDefault(bool constantSpeed= true, float time = 0)
+    public void TransitionToDefault(bool constantSpeed = true, float time = 0)
     {
         TransitionToNewTarget(defaultTarget, constantSpeed, time);
     }
@@ -70,7 +74,7 @@ public class CameraController : Singleton<CameraController>
     private void Update()
     {
         if (Input.GetMouseButtonUp(2))
-            Shake(Util.MouseToWorld());
+            Shake(Util.MouseToWorld(Camera));
     }
     public CameraShake Shake(Vector2 location, CameraShakeType shakeType = CameraShakeType.hill, float duration = 1f, float range = 10f)
     {
