@@ -52,7 +52,7 @@ public class SacrificePricesParser
         }
     }
 
-    public static string[] GetRewardsAvailableAtLevel(int level)
+    public static string[] GetRewardsAvailableAtLevel(int level, List<string> toAvoid)
     {
         List<string> viableRewards = new List<string>();
 
@@ -67,7 +67,10 @@ public class SacrificePricesParser
                 if (int.TryParse(smaxLev, out int maxLev))
                 {
                     if (level >= minLev && level <= maxLev)
-                        viableRewards.Add(reward);
+                    {
+                        if (!toAvoid.Contains(reward))
+                            viableRewards.Add(reward);
+                    }
                 }
                 else
                 {

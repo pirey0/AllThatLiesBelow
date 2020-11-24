@@ -65,7 +65,10 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
         switch (currentState)
         {
             case AltarState.Intro:
-                availableRewards = SacrificePricesParser.GetRewardsAvailableAtLevel(progressionHandler.SacrificeProgressionLevel);
+                availableRewards = SacrificePricesParser.GetRewardsAvailableAtLevel(progressionHandler.SacrificeProgressionLevel, progressionHandler.RewardsReceived);
+
+
+
                 ChangeStateTo(AltarState.RewardSelection);
                 break;
 

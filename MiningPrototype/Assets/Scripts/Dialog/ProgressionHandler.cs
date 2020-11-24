@@ -42,6 +42,7 @@ public class ProgressionHandler : MonoBehaviour, ISavable
     private bool hasWayOut = false;
     private bool isFree = false;
     private float timeScale = 1;
+    List<string> rewardsReceived = new List<string>();
 
     //sacriifce consequences
 
@@ -70,6 +71,8 @@ public class ProgressionHandler : MonoBehaviour, ISavable
     public bool InstableWorld { get => instableWorld; }
 
     public float TimeScale { get => timeScale; }
+
+    public List<string> RewardsReceived { get => rewardsReceived; }
 
     private void OnEnable()
     {
@@ -230,6 +233,8 @@ public class ProgressionHandler : MonoBehaviour, ISavable
 
         foreach (var aquired in aquiredList)
         {
+            if (!rewardsReceived.Contains(aquired.Item1))
+                rewardsReceived.Add(aquired.Item1);
             //Reward
             Debug.Log("Aquired: " + aquired.Item1 + " by paying with " + aquired.Item2.ToString());
             switch (aquired.Item1)
