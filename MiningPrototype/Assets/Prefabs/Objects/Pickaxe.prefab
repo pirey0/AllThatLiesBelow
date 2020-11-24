@@ -107,6 +107,15 @@ MonoBehaviour:
   - {fileID: -3189682528193580246, guid: c099f4890c297984490ff015018f9495, type: 3}
   - {fileID: -7303096387755746053, guid: c099f4890c297984490ff015018f9495, type: 3}
   - {fileID: 7585674902419984140, guid: c099f4890c297984490ff015018f9495, type: 3}
+  spritesImproved:
+  - {fileID: 5689932060248135952, guid: 6d46dc464abd7a84e9f017c36dbbe2f3, type: 3}
+  - {fileID: 3892259529190627399, guid: 6d46dc464abd7a84e9f017c36dbbe2f3, type: 3}
+  - {fileID: 3353534004565220883, guid: 6d46dc464abd7a84e9f017c36dbbe2f3, type: 3}
+  - {fileID: -1166502980159944170, guid: 6d46dc464abd7a84e9f017c36dbbe2f3, type: 3}
+  - {fileID: -2321040690675556877, guid: 6d46dc464abd7a84e9f017c36dbbe2f3, type: 3}
+  - {fileID: -695229955007597846, guid: 6d46dc464abd7a84e9f017c36dbbe2f3, type: 3}
+  - {fileID: 1532446199741056011, guid: 6d46dc464abd7a84e9f017c36dbbe2f3, type: 3}
+  - {fileID: -8046182359095189456, guid: 6d46dc464abd7a84e9f017c36dbbe2f3, type: 3}
   offsetOnSwing:
     serializedVersion: 2
     m_Curve:
