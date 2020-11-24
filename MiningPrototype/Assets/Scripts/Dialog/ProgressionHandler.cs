@@ -256,7 +256,7 @@ public class ProgressionHandler : MonoBehaviour, ISavable
 
                 case "AWayOut":
                     hasWayOut = true;
-                    //Remove bedrock
+                    RuntimeProceduralMap.Instance.ReplaceAll(TileType.BedStone, TileType.Stone);
                     break;
 
                 case "Freedom":
