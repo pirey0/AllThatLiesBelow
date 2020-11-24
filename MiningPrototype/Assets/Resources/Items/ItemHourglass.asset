@@ -23,3 +23,5 @@ MonoBehaviour:
   PickupPreviewPrefab: {fileID: 3423340983642490725, guid: 529f552c6c10e2d448dbe25f5b72bb03, type: 3}
   Prefab: {fileID: 8184181323763082, guid: 7f502d0c20e970f4eb45c74d7ab81d36, type: 3}
   AmountIsUniqueID: 0
+  AltarWords:
+  - your Time

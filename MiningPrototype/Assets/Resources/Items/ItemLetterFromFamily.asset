@@ -23,3 +23,5 @@ MonoBehaviour:
   PickupPreviewPrefab: {fileID: 0}
   Prefab: {fileID: 0}
   AmountIsUniqueID: 1
+  AltarWords:
+  - Letter
