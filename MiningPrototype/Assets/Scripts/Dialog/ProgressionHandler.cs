@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class ProgressionHandler : MonoBehaviour, ISavable
 {
@@ -16,6 +17,7 @@ public class ProgressionHandler : MonoBehaviour, ISavable
     [SerializeField] ItemAmountPair debugCostForReward;
     [SerializeField] GameObject youWonPrefab;
     [SerializeField] TMPro.TMP_FontAsset fontAsset, fontAsset2;
+    [SerializeField] PostProcessProfile noHappinessProfile;
 
     [Zenject.Inject] OverworldEffectHandler overworldEffectHandler;
     [Zenject.Inject] CameraController cameraController;
@@ -312,6 +314,8 @@ public class ProgressionHandler : MonoBehaviour, ISavable
                     break;
 
                 case ItemType.Ball:
+                    GameObject.FindObjectOfType<Bed>().SacrificedHappyness();
+                    cameraController.Camera.GetComponent<PostProcessVolume>().profile = noHappinessProfile;
                     //Happyness
                     break;
                 case ItemType.Globe:
