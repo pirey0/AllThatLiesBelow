@@ -196,7 +196,7 @@ public class RenderedMap : BaseMap
     {
     }
 
-    public void CalculateStabilityAll()
+    public override void CalculateStabilityAll()
     {
         Util.IterateXY(SizeX, SizeY, (x, y) => ResetStability(x, y));
 
@@ -224,7 +224,7 @@ public class RenderedMap : BaseMap
         }
     }
 
-    public void CalculateAllNeighboursBitmask()
+    public override void CalculateAllNeighboursBitmask()
     {
         Util.IterateXY(SizeX, SizeY, CalculateNeighboursBitmaskAt);
     }
