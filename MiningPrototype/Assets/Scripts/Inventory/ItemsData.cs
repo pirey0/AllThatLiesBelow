@@ -17,6 +17,9 @@ public enum ItemType
     NewOrder,
     Dynamite,
     Chest,
+    Hourglass,
+    Globe,
+    Ball,
 }
 
 
