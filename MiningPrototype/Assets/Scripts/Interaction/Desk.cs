@@ -9,7 +9,7 @@ public class Desk : MonoBehaviour, IInteractable
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Sprite deskEmpty;
     [SerializeField] Canvas optionsCanvas;
-    [SerializeField] GameObject option1, option2;
+    [SerializeField] GameObject[] options;
     [SerializeField] NewOrderVisualizer newOrderVisualizerPrefab;
     [SerializeField] AudioSource letterWritingSource, paperFold;
     [SerializeField] SpriteAnimator animator;
@@ -58,8 +58,9 @@ public class Desk : MonoBehaviour, IInteractable
         deskState = DeskState.Sitting;
         animator.Play(idleAnimation);
         optionsCanvas.gameObject.SetActive(true);
-        option1.SetActive(true);
-        option2.SetActive(true);
+
+        foreach (var option in options)
+            option.SetActive(true);
 
         playerToHide.Disable();
         InventoryManager.ForcePlayerInventoryClose();
@@ -101,8 +102,8 @@ public class Desk : MonoBehaviour, IInteractable
         letterWritingSource?.Play();
         animator.Play(writeAnimation);
 
-        option1.SetActive(false);
-        option2.SetActive(false);
+        foreach (var option in options)
+            option.SetActive(false);
     }
 
     public void WriteLetterToFamily()
@@ -116,8 +117,9 @@ public class Desk : MonoBehaviour, IInteractable
 
     public IEnumerator LetterWritingRoutine()
     {
-        option1.SetActive(false);
-        option2.SetActive(false);
+        foreach (var option in options)
+            option.SetActive(false);
+
         animator.Play(writeAnimation);
         letterWritingSource?.Play();
         yield return new WaitForSeconds(3);
