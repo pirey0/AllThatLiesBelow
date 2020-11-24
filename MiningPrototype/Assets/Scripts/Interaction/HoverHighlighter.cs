@@ -22,6 +22,9 @@ public class HoverHighlighter : MonoBehaviour, IHoverable
 
     public void HoverExit()
     {
+        if (this == null)
+            return;
+
         spriteRenderer.material = spriteDefault;
         spriteRenderer.color = Color.white;
     }

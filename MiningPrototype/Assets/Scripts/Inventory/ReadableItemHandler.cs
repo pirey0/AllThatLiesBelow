@@ -13,6 +13,9 @@ public class ReadableItemHandler : MonoBehaviour
     List<ReadableItem> readableItems = new List<ReadableItem>();
     List<int> readLettersIds = new List<int>();
 
+    [Zenject.Inject] Zenject.DiContainer diContainer;
+
+    public event System.Action HideEvent;
 
     public void Display(int id, InventorySlotVisualizer slotVisualizer)
     {
@@ -25,6 +28,7 @@ public class ReadableItemHandler : MonoBehaviour
                 current.Hide();
 
             current = Instantiate(textDisplayPrefab, canvas.transform);
+            diContainer.InjectGameObject(current.gameObject);
             current.id = id;
             ReadLetterSound.pitch = 1;
             ReadLetterSound.Play();
@@ -42,7 +46,7 @@ public class ReadableItemHandler : MonoBehaviour
             if (!readLettersIds.Contains(id))
             {
                 readLettersIds.Add(id);
-                slotVisualizer.Refresh();
+                slotVisualizer?.Refresh();
             }
 
             if (itemToDisplay == null)
@@ -69,6 +73,7 @@ public class ReadableItemHandler : MonoBehaviour
 
             ReadLetterSound.pitch = 0.66f;
             ReadLetterSound.Play();
+            HideEvent?.Invoke();
         }
     }
 

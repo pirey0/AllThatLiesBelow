@@ -15,7 +15,7 @@ public class ReadableItemVisualizer : MonoBehaviour
     [SerializeField] AnimationCurve textHeightoverTime;
     [SerializeField] Transform toScaleOnOpenAndClose;
 
-    [Zenject.Inject] ReadableItemHandler readableItemHandler;
+    [Zenject.Inject] protected ReadableItemHandler readableItemHandler;
 
     Coroutine close;
     [HideInInspector] public int id;

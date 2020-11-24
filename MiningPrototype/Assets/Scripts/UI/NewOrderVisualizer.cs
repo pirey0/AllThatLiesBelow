@@ -17,7 +17,6 @@ public class NewOrderVisualizer : ReadableItemVisualizer
     [SerializeField] GameObject leftclick, rightclick;
 
     [Inject] ProgressionHandler progressionHandler;
-    [Inject] ReadableItemHandler readableItemHandler;
 
     Dictionary<ItemType, int> orderedElementsWithAmounts = new Dictionary<ItemType, int>();
     Dictionary<ItemType, int> cost = new Dictionary<ItemType, int>();
