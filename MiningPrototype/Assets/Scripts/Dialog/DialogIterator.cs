@@ -114,7 +114,7 @@ public class DialogIterator
 
                     //Doing this here is quite dirty!
                     InventoryManager.ForcePlayerInventoryClose();
-                    progressionHandler.Aquired(topic);
+                    //progressionHandler.Aquired(topic);
                     return;
                 }
             }

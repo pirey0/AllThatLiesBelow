@@ -77,7 +77,6 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
                 break;
 
             case AltarState.PaymentAccepted:
-                progressionHandler.Aquired(selectedReward);
                 ChangeStateTo(AltarState.Off);
                 break;
         }
@@ -185,7 +184,16 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
     {
         Debug.Log("Received drop of " + pair.type);
         InventoryManager.PlayerTryPay(pair.type, pair.amount);
+
+        ItemAmountPair payment = ItemAmountPair.Nothing;
+        for (int i = 0; i < acceptedPayments.Length; i++)
+        {
+            if(acceptedPayments[i].type == pair.type)
+                payment = acceptedPayments[i];
+        }
+        
         ChangeStateTo(AltarState.PaymentAccepted);
+        progressionHandler.Aquired(selectedReward, payment);
     }
 
     public void HoverUpdate(ItemAmountPair pair)

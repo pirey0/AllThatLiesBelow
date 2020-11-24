@@ -16,7 +16,7 @@ public class ProgressionHandler : MonoBehaviour, ISavable
     [SerializeField] List<ItemAmountPair> startingItems;
 
     //sacrific
-    List<string> aquiredList = new List<string>();
+    List<(string,ItemAmountPair)> aquiredList = new List<(string, ItemAmountPair)>();
     Dictionary<int, List<ItemAmountPair>> ordersForNextDay = new Dictionary<int, List<ItemAmountPair>>();
     private float speedMultiplyer = 1;
     private float digSpeedMultiplyer = 1;
@@ -67,11 +67,14 @@ public class ProgressionHandler : MonoBehaviour, ISavable
         }
     }
 
-    public void Aquired(string topic)
+    public void Aquired(string topic, ItemAmountPair payment)
     {
         Debug.Log(topic + " unlocked in the morning!");
         dailySacrificeExaused = true;
-        aquiredList.Add(topic);
+        InventoryManager.PlayerTryPay(payment.type, payment.amount);
+
+        aquiredList.Add((topic, payment));
+
     }
 
     public void BeginFromStart()
@@ -190,8 +193,9 @@ public class ProgressionHandler : MonoBehaviour, ISavable
 
         foreach (var aquired in aquiredList)
         {
-            Debug.Log("Aquired: " + aquired);
-            switch (aquired)
+            //Reward
+            Debug.Log("Aquired: " + aquired.Item1 + " by paying with " + aquired.Item2.ToString());
+            switch (aquired.Item1)
             {
                 case "Wealth":
                     extraDrop += 1;
@@ -205,6 +209,12 @@ public class ProgressionHandler : MonoBehaviour, ISavable
                 default:
                     Debug.Log("Unimplemented aquired bonus: " + aquired);
                     break;
+
+            }
+
+            //consequence
+            switch (aquired.Item2.type)
+            {
 
             }
 
@@ -273,7 +283,7 @@ public enum LetterProgressionState
 [System.Serializable]
 public class ProgressionSaveData : SaveData
 {
-    public List<string> AquiredList = new List<string>();
+    public List<(string, ItemAmountPair)> AquiredList = new List<(string, ItemAmountPair)>();
     public Dictionary<int, List<ItemAmountPair>> OrdersForNextDay = new Dictionary<int, List<ItemAmountPair>>();
 
     public float SpeedMultiplyer = 1;
