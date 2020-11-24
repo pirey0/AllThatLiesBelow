@@ -21,6 +21,8 @@ public class RuntimeProceduralMap : RenderedMap
     [Zenject.Inject] TooltipHandler tooltipHandler;
     [Zenject.Inject] CameraController cameraController;
 
+    [Zenject.Inject] Zenject.DiContainer diContainer;
+
     ITileUpdateReceiver[,] receiverMap;
     List<Vector2Int> unstableTiles = new List<Vector2Int>();
     List<GameObject> unstableTilesEffects = new List<GameObject>();
@@ -154,6 +156,7 @@ public class RuntimeProceduralMap : RenderedMap
     public GameObject InstantiateEntity(GameObject prefab, Vector3 position)
     {
         var go = GameObject.Instantiate(prefab, entitiesParent);
+        diContainer.InjectGameObject(go);
         go.transform.localPosition = position;
 
         return go;
@@ -179,6 +182,7 @@ public class RuntimeProceduralMap : RenderedMap
 
             unstableTiles.Add(unstableTile);
             var go = Instantiate(MapSettings.CrumbleEffects, new Vector3(unstableTile.x + 0.5f, unstableTile.y), quaternion.identity, transform);
+            diContainer.InjectGameObject(go);
             go.GetComponent<CrumblingParticle>().SetDuration(timeLeftToCrumble);
 
             unstableTilesEffects.Add(go);
@@ -295,10 +299,12 @@ public class RuntimeProceduralMap : RenderedMap
 
     public void CollapseAt(int x, int y, bool updateVisuals)
     {
+        WrapXIfNecessary(ref x);
         Tile t = map[x, y];
         SetMapAt(x, y, Tile.Air, TileUpdateReason.Collapse, updateProperties: true, updateVisuals);
 
         var go = GameObject.Instantiate(GenerationSettings.PhysicalTilePrefab, new Vector3(x + 0.5f, y + 0.5f, 0), Quaternion.identity);
+        diContainer.InjectGameObject(go);
         go.GetComponent<PhysicalTile>().Setup(this, t, GetTileInfo(t.Type));
     }
 
