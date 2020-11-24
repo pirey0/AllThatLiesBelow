@@ -57,6 +57,7 @@ MonoBehaviour:
   - {fileID: 7140946631357844991}
   - {fileID: 7254747385798965398}
   - {fileID: 236910031844510580}
+  writeLetterOption: {fileID: 7140946631357844991}
   newOrderVisualizerPrefab: {fileID: 7116423004082669528, guid: d05b735a97b53ee44a97e55589860f56, type: 3}
   letterWritingSource: {fileID: 2973298936022870862}
   paperFold: {fileID: 3256933505718601938}

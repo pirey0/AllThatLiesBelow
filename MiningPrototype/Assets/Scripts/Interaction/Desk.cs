@@ -10,6 +10,7 @@ public class Desk : MonoBehaviour, IInteractable
     [SerializeField] Sprite deskEmpty;
     [SerializeField] Canvas optionsCanvas;
     [SerializeField] GameObject[] options;
+    [SerializeField] GameObject writeLetterOption;
     [SerializeField] NewOrderVisualizer newOrderVisualizerPrefab;
     [SerializeField] AudioSource letterWritingSource, paperFold;
     [SerializeField] SpriteAnimator animator;
@@ -20,6 +21,8 @@ public class Desk : MonoBehaviour, IInteractable
     [Zenject.Inject] Zenject.DiContainer diContainer;
 
     DeskState deskState;
+
+    private bool canSend = true;
 
     private enum DeskState
     {
@@ -63,6 +66,9 @@ public class Desk : MonoBehaviour, IInteractable
 
         foreach (var option in options)
             option.SetActive(true);
+
+        if (writeLetterOption != null)
+            writeLetterOption.SetActive(canSend);
 
         playerToHide.Disable();
         InventoryManager.ForcePlayerInventoryClose();
@@ -140,5 +146,11 @@ public class Desk : MonoBehaviour, IInteractable
         letterWritingSource.loop = false;
         letterWritingSource?.Stop();
         LeaveDesk();
+    }
+
+    [Button]
+    public void StopSending()
+    {
+        canSend = false;
     }
 }
