@@ -41,6 +41,9 @@ MonoBehaviour:
   overWorldHeight: 79
   timeToHidePickaxe: 5
   overworldTimeToHidePickaxe: 1
-  layerMask:
+  collisionMask:
     serializedVersion: 2
-    m_Bits: 257
+    m_Bits: 4353
+  interactionMask:
+    serializedVersion: 2
+    m_Bits: 769

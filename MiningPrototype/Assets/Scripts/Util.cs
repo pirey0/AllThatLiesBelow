@@ -135,9 +135,18 @@ public static class Util
         if (camera == null)
             return null;
 
-        Vector3 position = MouseToWorld(camera);
-        return Physics2D.CircleCastAll(position, 0.2f, Vector2.zero);
+        return RaycastFromMouse(camera, int.MaxValue);
     }
+
+    public static RaycastHit2D[] RaycastFromMouse(Camera camera, LayerMask mask)
+    {
+        if (camera == null)
+            return null;
+
+        Vector3 position = MouseToWorld(camera);
+        return Physics2D.CircleCastAll(position, 0.2f, Vector2.zero,1000, mask.value);
+    }
+
 
     public static Vector2Int AsV2Int(this Direction dir)
     {

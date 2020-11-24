@@ -41,6 +41,7 @@ public class PlayerSettings : ScriptableObject
     public float timeToHidePickaxe;
     public float overworldTimeToHidePickaxe;
 
-    public LayerMask layerMask;
+    public LayerMask collisionMask;
+    public LayerMask interactionMask;
 
 }

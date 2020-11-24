@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
+[System.Obsolete]
 public class DialogIterator
 {
-    [Inject] ProgressionHandler progressionHandler;
+    ProgressionHandler progressionHandler;
 
     IDialogSection current;
     DialogState state;
@@ -20,10 +21,11 @@ public class DialogIterator
 
     public event System.Action StateChanged;
 
-    public DialogIterator(IDialogSection startSection)
+    public DialogIterator(IDialogSection startSection, ProgressionHandler progressionHandler)
     {
         current = startSection;
         state = DialogState.Answer;
+        this.progressionHandler = progressionHandler;
     }
 
     public string GetCorrectedSentence()

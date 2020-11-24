@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[System.Obsolete]
 public interface IDialogSection
 {
     string OptionText { get; }
@@ -14,7 +14,7 @@ public interface IDialogSection
     string GetPayment();
 }
 
-
+[System.Obsolete]
 public enum DialogChoiceType
 {
     Null,
@@ -22,7 +22,7 @@ public enum DialogChoiceType
     Choice,
     Entry
 }
-
+[System.Obsolete]
 public enum DialogConsequence
 {
     Null,

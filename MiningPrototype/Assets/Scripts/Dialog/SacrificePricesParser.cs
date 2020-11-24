@@ -50,11 +50,12 @@ public class SacrificePricesParser
             var sminLev = table[1, y];
             var smaxLev = table[2, y];
 
-            if(int.TryParse(sminLev, out int minLev))
+            if (int.TryParse(sminLev, out int minLev))
             {
-                if(int.TryParse(smaxLev, out int maxLev))
+                if (int.TryParse(smaxLev, out int maxLev))
                 {
-                    viableRewards.Add(reward);
+                    if (level >= minLev && level <= maxLev)
+                        viableRewards.Add(reward);
                 }
                 else
                 {
@@ -72,9 +73,9 @@ public class SacrificePricesParser
 
     public static ItemAmountPair[] GetPaymentsFor(string reward)
     {
-        if (itemIndexMap.ContainsKey(reward))
+        if (rewardIndexMap.ContainsKey(reward))
         {
-            int y = itemIndexMap[reward];
+            int y = rewardIndexMap[reward];
             List<ItemAmountPair> l = new List<ItemAmountPair>();
 
             for (int i = 3; i < table.GetLength(0); i++)
@@ -89,13 +90,17 @@ public class SacrificePricesParser
                     }
                     else
                     {
-                        Debug.LogError("PriceTableError: could not parse: " + table[i,0] + " at "+i+"/0");
+                        Debug.LogError("PriceTableError: could not parse: " + table[i, 0] + " at " + i + "/0");
                     }
                 }
             }
 
             if (l.Count > 0)
                 return l.ToArray();
+        }
+        else
+        {
+            Debug.LogError("PriceTableError: No reward present named " + reward);
         }
 
         return null;

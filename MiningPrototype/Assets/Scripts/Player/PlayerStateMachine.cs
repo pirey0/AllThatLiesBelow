@@ -145,7 +145,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
 
     private void FixedUpdate()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(feet.position, settings.feetRadius, settings.layerMask.value);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(feet.position, settings.feetRadius, settings.collisionMask.value);
         isGrounded = false;
         foreach (var c in colliders)
         {

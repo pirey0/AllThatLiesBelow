@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Obsolete]
 public class DialogTester : MonoBehaviour
 {
     [SerializeField] string dialogName;
@@ -12,7 +13,7 @@ public class DialogTester : MonoBehaviour
 
     private void Awake()
     {
-        dialog = new DialogIterator(DialogParser.GetDialogFromName(dialogName));
+        //dialog = new DialogIterator(DialogParser.GetDialogFromName(dialogName));
     }
 
     private void OnGUI()
