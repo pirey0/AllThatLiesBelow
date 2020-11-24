@@ -9,6 +9,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] SceneReference mainMenu;
     [SerializeField] Image darkoverlay;
 
+    [Zenject.Inject] ProgressionHandler progressionHandler;
+
     bool isPaused;
 
     // Start is called before the first frame update
@@ -48,7 +50,7 @@ public class PauseMenu : MonoBehaviour
     {
         isPaused = false;
 
-        Time.timeScale = 1;
+        Time.timeScale = progressionHandler.TimeScale;
         darkoverlay.color = new Color(0, 0, 0, 0);
 
         foreach (Transform child in transform)
