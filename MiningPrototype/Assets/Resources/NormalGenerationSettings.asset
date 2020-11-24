@@ -264,6 +264,8 @@ MonoBehaviour:
     Prefab: {fileID: 8886592050164078683, guid: 94d8faed3d48d2a4b95add8b4bbc9945, type: 3}
   UnstableThreshhold: 40
   CollapseThreshhold: 30
+  instableWorldUnstableThreshhold: 80
+  instableWorldCollapseThreshhold: 50
   CrumbleEmitAmount: 5
   PhysicalTilePrefab: {fileID: 1505758800330834963, guid: b97c886a8f31d534dbde7b2320b4d3e3, type: 3}
   StabilityPropagationDistance: 5

@@ -40,6 +40,12 @@ public class ProgressionHandler : MonoBehaviour, ISavable
 
     //sacriifce consequences
 
+    private bool cannotSend;
+    private bool paidEverything;
+    private bool instableWorld;
+
+
+
     public bool showNewOrderLeftClickInfo = true, showNewOrderRightClickInfo = true;
 
     //postbox and letters
@@ -55,7 +61,8 @@ public class ProgressionHandler : MonoBehaviour, ISavable
     public bool DailySacrificeExpired { get => dailySacrificeExaused; }
     public int SacrificeProgressionLevel { get => sacrificeProgressionLevel; }
     public bool IsMidas { get => isMidas; }
-    
+
+    public bool InstableWorld { get => instableWorld; }
 
     private void OnEnable()
     {
@@ -277,14 +284,18 @@ public class ProgressionHandler : MonoBehaviour, ISavable
             {
                 case ItemType.Support:
                     //Increase instability
+                    instableWorld = true;
                     break;
 
                 case ItemType.LetterToFamily:
-                    //Cannot send 
+                    //Cannot send
+                    cannotSend = true;
+                    GameObject.FindObjectOfType<Desk>(true).StopSending();
                     break;
 
                 case ItemType.Family_Photo:
                     lastLetterID = -1;
+                    InventoryManager.PlayerCollects(ItemType.Family_Photo_Empty, 1);
                     break;
 
                 case ItemType.Hourglass:
