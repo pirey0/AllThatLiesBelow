@@ -1,12 +1,12 @@
-Output;MinLevel;MaxLevel;Copper;Gold;Diamond;Support;LetterToFamily;Family_Photo;Watch;LetterFromFamily;Ball;Globe
-Miningspeed;1;4;50;15;1;;;;;;;
-WalkingSpeed;1;4;30;10;1;;;;;;;
-Strength;1;4;10;5;1;;;;;;;
-JumpHeight;2;4;50;10;2;;;;;;;
-Instant Delivery;3;5;;70;5;5;;;;;;
-Spring;4;7;;;5;5;1;;;;;
-Midas Touch;5;7;;;;;1;1;1;;;
-Love;6;7;;;;;;1;1;1;;
-Victory;7;7;;;;;;;;1;1;
-A Way Out;8;10;;;;;;;;;;1
-Freedom;8;10;;;;;;;;;;1
+OutputName;DisplayText;MinLevel;MaxLevel;Copper;Gold;Diamond;Support;LetterToFamily;Family_Photo;Hourglass;LetterFromFamily;Ball;Globe
+MiningSpeed;;1;4;50;15;1;;;;;;;
+WalkingSpeed;;1;4;30;10;1;;;;;;;
+Strength;;1;4;10;5;1;;;;;;;
+JumpHeight;;2;4;50;10;2;;;;;;;
+InstantDelivery;;3;5;;70;5;5;;;;;;
+Spring;;4;7;;;5;5;1;;;;;
+Midas Touch;;5;7;;;;;1;1;1;;;
+Love;;6;7;;;;;;1;1;1;;
+Victory;;7;7;;;;;;;;1;1;
+A Way Out;;8;10;;;;;;;;;;1
+Freedom;;8;10;;;;;;;;;;1

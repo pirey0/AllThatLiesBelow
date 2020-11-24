@@ -40,6 +40,18 @@ public class SacrificePricesParser
         tracker.Stop();
     }
 
+    public static string GetDisplayNameOf(string reward)
+    {
+        if (rewardIndexMap.ContainsKey(reward))
+        {
+            return table[1, rewardIndexMap[reward]];
+        }
+        else
+        {
+            return "UNDEFINED";
+        }
+    }
+
     public static string[] GetRewardsAvailableAtLevel(int level)
     {
         List<string> viableRewards = new List<string>();
@@ -47,8 +59,8 @@ public class SacrificePricesParser
         for (int y = 1; y < table.GetLength(1); y++)
         {
             var reward = table[0, y];
-            var sminLev = table[1, y];
-            var smaxLev = table[2, y];
+            var sminLev = table[2, y];
+            var smaxLev = table[3, y];
 
             if (int.TryParse(sminLev, out int minLev))
             {
@@ -59,12 +71,12 @@ public class SacrificePricesParser
                 }
                 else
                 {
-                    Debug.LogError("PriceTableError: could not parse: " + smaxLev + " at 2/" + y);
+                    Debug.LogError("PriceTableError: could not parse: " + smaxLev + " at 3/" + y);
                 }
             }
             else
             {
-                Debug.LogError("PriceTableError: could not parse: " + sminLev + " at 1/" + y);
+                Debug.LogError("PriceTableError: could not parse: " + sminLev + " at 2/" + y);
             }
 
         }
@@ -78,7 +90,7 @@ public class SacrificePricesParser
             int y = rewardIndexMap[reward];
             List<ItemAmountPair> l = new List<ItemAmountPair>();
 
-            for (int i = 3; i < table.GetLength(0); i++)
+            for (int i = 4; i < table.GetLength(0); i++)
             {
                 string s = table[i, y];
 
