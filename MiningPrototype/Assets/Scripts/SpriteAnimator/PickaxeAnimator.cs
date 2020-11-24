@@ -7,9 +7,12 @@ public class PickaxeAnimator : MonoBehaviour
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] int idleFrame;
     [SerializeField] Sprite[] sprites;
+    [SerializeField] Sprite[] spritesImproved;
     [SerializeField] AnimationCurve offsetOnSwing;
     [SerializeField] int offsetToMouse = 2;
     [SerializeField] bool hideSwing;
+
+    [SerializeField] bool isImproved  = false;
 
     [Zenject.Inject] CameraController cameraController;
     private void Start()
@@ -60,7 +63,7 @@ public class PickaxeAnimator : MonoBehaviour
             int frameRemapped = (frameToSet) % framesMax;
 
             //Debug.Log("frame:" + frameRemapped);
-            spriteRenderer.sprite = sprites[frameRemapped];
+            spriteRenderer.sprite = isImproved?spritesImproved[frameRemapped]:sprites[frameRemapped];
         }
     }
 
@@ -73,5 +76,10 @@ public class PickaxeAnimator : MonoBehaviour
         float angleGeneralized = ((((Mathf.Abs(angle) - 90) / 90f) + 1) * 2) - offsetToMouse; //maps it onto 0 to 4 for the full range on one side
 
         return Mathf.RoundToInt(angleGeneralized + additionalAngle);
+    }
+
+    public void Upgrade()
+    {
+        isImproved = true;
     }
 }

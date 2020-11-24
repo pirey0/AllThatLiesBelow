@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,8 +12,10 @@ public class OverworldEffectHandler : StateListenerBehaviour
     [SerializeField] SpriteRenderer vignetteRenderer;
     [SerializeField] ParticleSystem particleSystem;
     [SerializeField] float amountOfParticles;
-    [SerializeField] AudioSource snowstormSounds, caveSounds;
+    [SerializeField] AudioSource snowstormSounds, caveSounds, springSounds;
     [SerializeField] float maxSnowStormVolume, maxCaveVolume;
+
+    [SerializeField] bool isSpring = false;
 
     float alphaCalculatedBasedOnHeightOfPlayer;
     float audioSourceVolumeMultiplierThroughHut = 1;
@@ -57,7 +60,7 @@ public class OverworldEffectHandler : StateListenerBehaviour
         if (particleSystem != null)
         {
             var emissionModule = particleSystem.emission;
-            emissionModule.rateOverTime = (1 - alphaCalculatedBasedOnHeightOfPlayer) * amountOfParticles;
+            emissionModule.rateOverTime = (1 - alphaCalculatedBasedOnHeightOfPlayer) * amountOfParticles * (isSpring?0f:1f);
         }
 
 
@@ -67,14 +70,27 @@ public class OverworldEffectHandler : StateListenerBehaviour
             vignetteRenderer.color = new Color(1, 1, 1, alphaCalculatedBasedOnHeightOfPlayer);
         }
 
-        //snowstorm
-        UpdateSnowstormVolume();
+        //sounds
+        UpdateSounds();
     }
 
-    private void UpdateSnowstormVolume()
+    private void UpdateSounds()
     {
-        if (snowstormSounds != null)
-            snowstormSounds.volume = (1 - alphaCalculatedBasedOnHeightOfPlayer) * audioSourceVolumeMultiplierThroughHut * maxSnowStormVolume;
+        if (isSpring)
+        {
+            if (springSounds != null)
+                springSounds.volume = (1 - alphaCalculatedBasedOnHeightOfPlayer) * audioSourceVolumeMultiplierThroughHut * maxSnowStormVolume;
+
+            if (snowstormSounds != null)
+                snowstormSounds.volume = 0;
+        } else
+        {
+            if(springSounds != null)
+                springSounds.volume = 0;
+
+            if (snowstormSounds != null)
+                snowstormSounds.volume = (1 - alphaCalculatedBasedOnHeightOfPlayer) * audioSourceVolumeMultiplierThroughHut * maxSnowStormVolume;
+        }
 
         if (caveSounds != null)
             caveSounds.volume = alphaCalculatedBasedOnHeightOfPlayer * maxCaveVolume;
@@ -83,6 +99,13 @@ public class OverworldEffectHandler : StateListenerBehaviour
     private void OnHutStateChange(bool isOpen)
     {
         audioSourceVolumeMultiplierThroughHut = (isOpen ? 0 : 1);
-        UpdateSnowstormVolume();
+        UpdateSounds();
+    }
+
+    [Button]
+    public void MakeSpring()
+    {
+        isSpring = true;
+        UpdateOverworldEffects();
     }
 }
