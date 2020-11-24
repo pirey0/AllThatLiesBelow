@@ -12,6 +12,10 @@ public class Bed : MonoBehaviour, IInteractable
     [SerializeField] Sprite empty, sleeping, wakeup, badDream;
     [SerializeField] Hut hut;
     [SerializeField] Image nightFadeToBlack;
+    [SerializeField] DialogElementVisualization wakeUpTextPrefab;
+    [SerializeField] RectTransform wakeUpTextParent;
+
+    [SerializeField] string wakeUpText;
 
     [Inject] ProgressionHandler progressionHandler;
     public void BeginInteracting(GameObject interactor)
@@ -75,6 +79,10 @@ public class Bed : MonoBehaviour, IInteractable
             yield return new WaitForSeconds(0.25f);
             progressionHandler.StartNextDay();
             spriteRenderer.sprite = wakeup;
+
+            DialogElementVisualization text = Instantiate(wakeUpTextPrefab, wakeUpTextParent);
+            text.Init(null,wakeUpText,7f);
+
             yield return new WaitForSeconds(1f);
 
             while (nightOpacity > 0f)
@@ -101,5 +109,10 @@ public class Bed : MonoBehaviour, IInteractable
        spriteRenderer.sprite = badDream;
        yield return new WaitForSeconds(5f);
        LeaveBed(playerToEnableAgain);
+    }
+
+    public void ChangeWakeUpText(string newWakeUpText)
+    {
+        wakeUpText = newWakeUpText;
     }
 }
