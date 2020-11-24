@@ -6,6 +6,7 @@ public class ItemPlacingHandler : MonoBehaviour
 {
     [Zenject.Inject] PlayerInteractionHandler player;
     [Zenject.Inject] CameraController cameraController;
+    [Zenject.Inject] Zenject.DiContainer diContainer;
 
     bool holdingPlacable;
     ItemAmountPair currentHeld;
@@ -39,7 +40,7 @@ public class ItemPlacingHandler : MonoBehaviour
                 player.SetHeldItem(setToPickaxe: false);
                 player.SetHeldItemSprite(info.PickupHoldSprite);
 
-                var go = Instantiate(info.PickupPreviewPrefab);
+                var go = diContainer.InstantiatePrefab(info.PickupPreviewPrefab);
                 previewTransform = go.transform;
                 preview = previewTransform.GetComponent<IItemPreview>();
             }
@@ -62,7 +63,7 @@ public class ItemPlacingHandler : MonoBehaviour
                 {
                     if (InventoryManager.PlayerTryPay(type, 1))
                     {
-                        var go = Instantiate(info.Prefab, preview.GetPlacePosition(tryplacePosition), Quaternion.identity);
+                        var go = diContainer.InstantiatePrefab(info.Prefab, preview.GetPlacePosition(tryplacePosition), Quaternion.identity, null);
                     }
                 }
             }

@@ -5,11 +5,11 @@ using UnityEngine;
 public class CameraPanner : MonoBehaviour
 {
     [SerializeField] AnimationCurve curve;
-    [SerializeField] PlayerInteractionHandler interactionHandler;
     [SerializeField] float overWorldOffset;
     [SerializeField] float transitionSpeed;
 
     [Zenject.Inject] PlayerStateMachine player;
+    [Zenject.Inject] PlayerInteractionHandler interactionHandler;
 
     float yOffset;
 
