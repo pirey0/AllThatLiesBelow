@@ -359,3 +359,5 @@ MonoBehaviour:
   displayTime: 5
   dieAtTheEnd: 1
   isInteractable: 0
+  autoStart: 0
+  useUnscaledTime: 0
