@@ -118,7 +118,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.33333334}
       border: {x: 0, y: 0, z: 0, w: 4}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -4, y: 2}
+        - {x: -4, y: -6}
+        - {x: 4, y: -6}
+        - {x: 4, y: 2}
       tessellationDetail: 0
       bones: []
       spriteID: a772aa1e50f440a00800000000000000
@@ -139,7 +143,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.33333334}
       border: {x: 0, y: 0, z: 0, w: 4}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -4, y: 2}
+        - {x: -4, y: -6}
+        - {x: 4, y: -6}
+        - {x: 4, y: 2}
       tessellationDetail: 0
       bones: []
       spriteID: c32f7b5b4d244d600800000000000000
@@ -157,10 +165,13 @@ TextureImporter:
         width: 8
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -3, y: -4}
+        - {x: 4, y: -4}
+        - {x: 4, y: 3}
       tessellationDetail: 0
       bones: []
       spriteID: 0b72fa53f60874610800000000000000
@@ -178,10 +189,13 @@ TextureImporter:
         width: 8
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -4, y: 3}
+        - {x: -4, y: -4}
+        - {x: 3, y: -4}
       tessellationDetail: 0
       bones: []
       spriteID: bbed8b8029335e1a0800000000000000
@@ -199,10 +213,15 @@ TextureImporter:
         width: 8
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -3, y: 4}
+        - {x: -4, y: 3}
+        - {x: -4, y: -4}
+        - {x: 4, y: -4}
+        - {x: 4, y: 4}
       tessellationDetail: 0
       bones: []
       spriteID: ff11a057c8eaea520800000000000000
@@ -220,10 +239,15 @@ TextureImporter:
         width: 8
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -4, y: 4}
+        - {x: -4, y: -4}
+        - {x: 4, y: -4}
+        - {x: 4, y: 3}
+        - {x: 3, y: 4}
       tessellationDetail: 0
       bones: []
       spriteID: 2221d3e85249bf260800000000000000
