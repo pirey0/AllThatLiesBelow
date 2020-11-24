@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class InventoryManager
 {
@@ -30,7 +31,16 @@ public class InventoryManager
                 Debug.LogError("No PlayerController found.");
             }
         }
+
+        UnityEngine.SceneManagement.SceneManager.activeSceneChanged += OnActiveSceneChanged;
+
         return instance;
+    }
+
+    private static void OnActiveSceneChanged(Scene arg0, Scene arg1)
+    {
+        UnityEngine.SceneManagement.SceneManager.activeSceneChanged -= OnActiveSceneChanged;
+        instance = null;
     }
 
     public static void NotifyInventoryOpen(IInventoryOwner owner)
