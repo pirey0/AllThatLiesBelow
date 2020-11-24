@@ -154,7 +154,7 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
         string str = Util.ChooseRandomString("What about ", "Give me ", "I want ");
         List<string> allreadyChoosen = new List<string>();
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < (Mathf.Min(5,paymentWords.Count)); i++)
         {
             string r = paymentWords[UnityEngine.Random.Range(0, paymentWords.Count)];
 
