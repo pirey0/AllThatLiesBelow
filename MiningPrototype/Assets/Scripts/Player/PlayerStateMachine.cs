@@ -300,7 +300,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
 
     private void JumpEnter()
     {
-        rigidbody.velocity = new Vector2(rigidbody.velocity.x, settings.jumpVelocity);
+        rigidbody.velocity = new Vector2(rigidbody.velocity.x, settings.jumpVelocity* progressionHandler.JumpMultiplyer);
         lastJumpTimeStamp = Time.time;
         jumpStart?.Play();
     }

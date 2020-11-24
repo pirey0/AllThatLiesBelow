@@ -16,8 +16,8 @@ public class ProgressionHandler : MonoBehaviour, ISavable
 
     [Zenject.Inject] OverworldEffectHandler overworldEffectHandler;
 
-    
-    List<(string,ItemAmountPair)> aquiredList = new List<(string, ItemAmountPair)>();
+
+    List<(string, ItemAmountPair)> aquiredList = new List<(string, ItemAmountPair)>();
     Dictionary<int, List<ItemAmountPair>> ordersForNextDay = new Dictionary<int, List<ItemAmountPair>>();
     private int day = 0;
     bool dailySacrificeExaused;
@@ -28,6 +28,7 @@ public class ProgressionHandler : MonoBehaviour, ISavable
     private float digSpeedMultiplyer = 1;
     private float strengthMultiplyer = 1;
     private float jumpMultiplyer = 1;
+    private bool instantDelivery = false;
     private bool isSpring = false;
     private bool isMidas = false;
     private bool hasLove = false;
@@ -47,8 +48,11 @@ public class ProgressionHandler : MonoBehaviour, ISavable
 
     public float SpeedMultiplyer { get => speedMultiplyer; }
     public float DigSpeedMultiplyer { get => digSpeedMultiplyer; }
-    public bool DailySacrificeExpired {  get => dailySacrificeExaused; }
+
+    public float JumpMultiplyer { get => jumpMultiplyer; }
+    public bool DailySacrificeExpired { get => dailySacrificeExaused; }
     public int SacrificeProgressionLevel { get => sacrificeProgressionLevel; }
+
 
     private void OnEnable()
     {
@@ -215,7 +219,7 @@ public class ProgressionHandler : MonoBehaviour, ISavable
             {
                 case "MiningSpeed":
                     digSpeedMultiplyer = rewardDigSpeedMultiplyer;
-                    GameObject.FindObjectOfType<PickaxeAnimator>()?.Upgrade();
+                    GameObject.FindObjectOfType<PickaxeAnimator>(includeInactive: true).Upgrade();
                     break;
                 case "WalkingSpeed":
                     speedMultiplyer = rewardASpeedMultiplyer;
@@ -225,6 +229,9 @@ public class ProgressionHandler : MonoBehaviour, ISavable
                     break;
                 case "JumpHeight":
                     jumpMultiplyer = rewardJumpMultiplyer;
+                    break;
+                case "InstantDelivery":
+                    instantDelivery = true;
                     break;
                 case "Spring":
                     isSpring = true;
@@ -300,7 +307,14 @@ public class ProgressionHandler : MonoBehaviour, ISavable
 
     public void RegisterOrder(int id, List<ItemAmountPair> itemAmountPairs)
     {
-        ordersForNextDay.Add(id, itemAmountPairs);
+        if (instantDelivery)
+        {
+            newOrderCrateSpawner.SpawnOrder(itemAmountPairs);
+        }
+        else
+        {
+            ordersForNextDay.Add(id, itemAmountPairs);
+        }
     }
 
     public float GetPriceOf(string reward, string resource)
