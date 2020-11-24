@@ -16,6 +16,7 @@ MonoBehaviour:
   DisplayName: Family Letter
   DisplayTooltip: A letter from my wife.
   DisplaySprite: {fileID: 21300000, guid: 0d6d1ee0315ae1f41997aaa1a79a51f1, type: 3}
+  DisplaySpriteRead: {fileID: 21300000, guid: 35c3a92e197d60443aa96dae19542c71, type: 3}
   Weight: 0
   CanBePlaced: 0
   PickupHoldSprite: {fileID: 0}

@@ -11,30 +11,10 @@ public class ReadableItemHandler : MonoBehaviour
     ReadableItemVisualizer current;
     [SerializeField] Canvas canvas;
     List<ReadableItem> readableItems = new List<ReadableItem>();
+    List<int> readLettersIds = new List<int>();
 
-    private void Start()
-    {
-        readableItems.Add(new ReadableItem("I can't write."));
-        readableItems.Add(new ReadableItem("Hello, I'm your wife and a like to write letters"));
-    }
 
-    public Sprite GetSpriteOfLetter(int letterId)
-    {
-        Sprite icon = iconClosed;
-
-        if (readableItems.Count - 1 >= letterId)
-        {
-            if (readableItems[letterId].itemType == ItemType.LetterFromFamily)
-                icon = readableItems[letterId].hasRead?iconOpen:iconClosed;
-            else
-                icon = ItemsData.GetItemInfo(readableItems[letterId].itemType).DisplaySprite;
-        }
-
-        return icon;
-
-    }
-
-    internal void Display(int id)
+    public void Display(int id, InventorySlotVisualizer slotVisualizer)
     {
         if (current != null && current.id == id)
             current.Hide();
@@ -58,9 +38,11 @@ public class ReadableItemHandler : MonoBehaviour
                 if (letterInfo != null)
                     itemToDisplay = new ReadableItem(letterInfo.Content);
             }
-            else
+          
+            if (!readLettersIds.Contains(id))
             {
-                itemToDisplay.hasRead = true;
+                readLettersIds.Add(id);
+                slotVisualizer.Refresh();
             }
 
             if (itemToDisplay == null)
@@ -74,6 +56,11 @@ public class ReadableItemHandler : MonoBehaviour
         }
     }
 
+    public bool HasRead(int id)
+    {
+        return readLettersIds.Contains(id);
+    }
+
     public void Hide()
     {
         if (current != null)
@@ -85,7 +72,7 @@ public class ReadableItemHandler : MonoBehaviour
         }
     }
 
-    public  int AddNewReadable(List<ItemAmountPair> itemAmountPairs)
+    public int AddNewReadable(List<ItemAmountPair> itemAmountPairs)
     {
         string str = "New Order:\n";
 
@@ -94,7 +81,7 @@ public class ReadableItemHandler : MonoBehaviour
             str += ItemsData.GetItemInfo(pair.type).DisplayName + " x " + pair.amount + "\n";
         }
 
-        readableItems.Add(new ReadableItem(str,ItemType.NewOrder));
+        readableItems.Add(new ReadableItem(str, ItemType.NewOrder));
         return readableItems.Count - 1;
     }
 
@@ -108,7 +95,6 @@ public class ReadableItemHandler : MonoBehaviour
 public class ReadableItem
 {
     public ItemType itemType;
-    public bool hasRead;
     public string text;
 
     public ReadableItem(string _text, ItemType _itemType = ItemType.LetterFromFamily)

@@ -10,6 +10,7 @@ public class ItemInfo : ScriptableObject
     public string DisplayName;
     public string DisplayTooltip;
     public Sprite DisplaySprite;
+    public Sprite DisplaySpriteRead;
 
     public int Weight;
 

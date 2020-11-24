@@ -14,7 +14,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
     [SerializeField] public TMP_Text amountDisplay;
     [SerializeField] AnimationCurve scaleOnOpenAndCloseCurve;
 
-   
+
     [Inject] ItemPlacingHandler itemPlacingHandler;
     [Inject] ReadableItemHandler readableItemHandler;
     [Inject] TooltipHandler tooltipHandler;
@@ -41,16 +41,33 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         amount = pair.amount;
         type = pair.type;
 
-        if (icon != null)
-            icon.sprite = ItemsData.GetSpriteByItemType(pair);
+        var info = ItemsData.GetItemInfo(type);
 
-        if (amountDisplay != null && !ItemsData.GetItemInfo(type).AmountIsUniqueID)
+        if (icon != null)
+        {
+            if (info.AmountIsUniqueID && readableItemHandler.HasRead(amount))
+            {
+                icon.sprite = info.DisplaySpriteRead;
+            }
+            else
+            {
+                icon.sprite = info.DisplaySprite;
+            }
+        }
+
+        if (amountDisplay != null && !info.AmountIsUniqueID)
         {
             amountDisplay.text = amount.ToString();
         }
 
         StartCoroutine(ScaleCoroutine(scaleUp: true));
     }
+
+    public void Refresh()
+    {
+        Display(new ItemAmountPair(type, amount));
+    }
+
     public void SetButtonToSlot(UnityAction action)
     {
         onClick.AddListener(action);
@@ -61,7 +78,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         base.OnPointerDown(eventData);
         var info = ItemsData.GetItemInfo(type);
         if (info.AmountIsUniqueID && eventData.button == PointerEventData.InputButton.Right)
-            readableItemHandler.Display(amount);
+            readableItemHandler.Display(amount,this);
         else
             tooltipHandler?.Display(transform, info.DisplayName, info.DisplayTooltip);
     }
@@ -111,7 +128,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        bool inUI = (rectTransform.position - rectTransform.parent.position ).magnitude < 2;
+        bool inUI = (rectTransform.position - rectTransform.parent.position).magnitude < 2;
 
         if (!inUI)
         {
@@ -140,7 +157,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         Vector2 distance = rectTransform.position - rectTransform.parent.position;
         Debug.DrawLine(rectTransform.position, rectTransform.parent.position);
         var info = ItemsData.GetItemInfo(type);
-        
+
         if (distance.magnitude > 2)
         {
             if (VisualsEnabled)
