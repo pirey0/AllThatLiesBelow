@@ -21,7 +21,8 @@ public enum TileType
     CollapsableEntityNotNeighbour,
     FloatingEntityNotNeighbour,
     Ignore,
-    Grass
+    Grass,
+    SolidVoid
 }
 
 [System.Serializable]

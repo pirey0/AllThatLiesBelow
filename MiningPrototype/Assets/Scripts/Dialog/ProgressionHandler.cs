@@ -13,8 +13,10 @@ public class ProgressionHandler : MonoBehaviour, ISavable
     [SerializeField] int startingLetterID = 100;
     [SerializeField] List<ItemAmountPair> startingItems;
     [SerializeField] string debugRewardToGet;
+    [SerializeField] ItemAmountPair debugCostForReward;
 
     [Zenject.Inject] OverworldEffectHandler overworldEffectHandler;
+    [Zenject.Inject] CameraController cameraController;
 
 
     List<(string, ItemAmountPair)> aquiredList = new List<(string, ItemAmountPair)>();
@@ -205,7 +207,7 @@ public class ProgressionHandler : MonoBehaviour, ISavable
     [Button]
     private void DebugAquire()
     {
-        Aquired(debugRewardToGet, ItemAmountPair.Nothing);
+        Aquired(debugRewardToGet, debugCostForReward);
     }
 
     private void UpdateSacrifices()
@@ -282,7 +284,7 @@ public class ProgressionHandler : MonoBehaviour, ISavable
                     break;
 
                 case ItemType.Family_Photo:
-                    //No mail;
+                    lastLetterID = -1;
                     break;
 
                 case ItemType.Hourglass:
@@ -298,6 +300,13 @@ public class ProgressionHandler : MonoBehaviour, ISavable
                     break;
                 case ItemType.Globe:
                     //Everything
+                    RuntimeProceduralMap.Instance.ReplaceAll(TileType.Stone, TileType.SolidVoid);
+                    RuntimeProceduralMap.Instance.ReplaceAll(TileType.Grass, TileType.SolidVoid);
+                    RuntimeProceduralMap.Instance.ReplaceAll(TileType.Diamond, TileType.SolidVoid);
+                    RuntimeProceduralMap.Instance.ReplaceAll(TileType.Copper, TileType.SolidVoid);
+                    RuntimeProceduralMap.Instance.ReplaceAll(TileType.Gold, TileType.SolidVoid);
+                    cameraController.Camera.backgroundColor = Color.white;
+
                     break;
             }
 
