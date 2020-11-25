@@ -11,7 +11,7 @@ public class GameState
 
     public State CurrentState { get => currentState; }
 
-    public bool Playing { get => currentState == State.Playing; }
+    public bool Playing { get => currentState == State.Playing || currentState == State.Respawning; }
 
     public void ChangeStateTo(State state)
     {
