@@ -22,3 +22,4 @@ MonoBehaviour:
   toolTipPrefab: {fileID: 2633605495259368110, guid: 13f2e62eb042f9548b1a79535aee5ef2, type: 3}
   eventSystemPrefab: {fileID: 4355947821229198085, guid: cc2acd4956f2dde4b83fa6e03dfd37fe, type: 3}
   inWorldCanvasPrefab: {fileID: 3019894843303896135, guid: 68766b238d735f249bc21c83b2547f29, type: 3}
+  debugModePrefab: {fileID: 2713967248471055398, guid: e5e1307b208ca2a49a439925ada45aeb, type: 3}

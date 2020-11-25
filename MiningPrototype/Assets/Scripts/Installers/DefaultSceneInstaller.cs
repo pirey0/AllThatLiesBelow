@@ -7,7 +7,7 @@ public class DefaultSceneInstaller : ScriptableObjectInstaller<DefaultSceneInsta
 {
     [SerializeField] GameObject playerPrefab, progressionPrefab, readableItemPrefab, cameraPannerPrefab, cameraPrefab, itemPreviewPrefab;
     [SerializeField] GameObject pauseMenuPrefab, toolTipPrefab, eventSystemPrefab, inWorldCanvasPrefab;
-
+    [SerializeField] GameObject debugModePrefab;
 
     public override void InstallBindings()
     {
@@ -24,5 +24,10 @@ public class DefaultSceneInstaller : ScriptableObjectInstaller<DefaultSceneInsta
         Container.Bind<InWorldCanvas>().FromComponentInNewPrefab(inWorldCanvasPrefab).AsSingle().NonLazy();
 
         Container.Bind(typeof(CameraController), typeof(TransitionEffectHandler)).FromComponentInNewPrefab(cameraPrefab).AsSingle().NonLazy();
+
+        if(DebugMode.DEBUG_POSSIBLE)
+        {
+            Container.Bind<DebugMode>().FromComponentInNewPrefab(debugModePrefab).AsSingle().NonLazy();
+        }
     }
 }

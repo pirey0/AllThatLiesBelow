@@ -75,11 +75,6 @@ public class SceneAdder : StateListenerBehaviour
         }
         loaded = true;
     }
-
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(Screen.width - 200, 10, 200, 30), gameState.CurrentState.ToString());
-    }
 }
 
 [System.Serializable]
@@ -89,5 +84,4 @@ public struct MapAddition
     public int YOffset;
     public bool FromTop;
     public SceneReference SceneToAdd;
-
 }
