@@ -48,7 +48,7 @@ public class PauseMenu : StateListenerBehaviour
     {
         isPaused = false;
 
-        if (GameState.Playing)
+        if (gameState.Playing)
         {
             Time.timeScale = progressionHandler.ProgressionTimeScale;
         }

@@ -80,6 +80,7 @@ public static class CSVHelper
     }
 }
 
+[Obsolete("Old Sacrifice System")]
 public class DialogParser
 {
     const string PATH = "DialogsData";
@@ -173,6 +174,7 @@ public class DialogParser
 
 }
 
+[System.Obsolete]
 public class SVGDialogEntry : IDialogSection
 {
     public Dictionary<string, string> content;

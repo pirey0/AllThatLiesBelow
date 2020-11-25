@@ -14,6 +14,7 @@ public class ReadableItemHandler : MonoBehaviour
     List<int> readLettersIds = new List<int>();
 
     [Zenject.Inject] Zenject.DiContainer diContainer;
+    [Zenject.Inject] LettersParser lettersParser;
 
     public event System.Action HideEvent;
 
@@ -38,7 +39,7 @@ public class ReadableItemHandler : MonoBehaviour
 
             if (itemToDisplay == null)
             {
-                var letterInfo = LettersParser.GetLetterWithID(id);
+                var letterInfo = lettersParser.GetLetterWithID(id);
                 if (letterInfo != null)
                     itemToDisplay = new ReadableItem(letterInfo.Content);
             }

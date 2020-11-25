@@ -11,13 +11,14 @@ public class SceneAdder : StateListenerBehaviour
 
     //Should be factory? https://github.com/modesttree/Zenject/blob/master/Documentation/Factories.md#custom-factories
     [Zenject.Inject] DiContainer diContainer;
-    
+    [Zenject.Inject] GameState gameState;
+
     bool loaded = false;
     MapAddition current;
 
     private void Start()
     {
-        GameState.Instance.ChangeStateTo(GameState.State.Entry);
+        gameState.ChangeStateTo(GameState.State.Entry);
     }
 
     protected override void OnStateChanged(GameState.State newState)
@@ -48,7 +49,7 @@ public class SceneAdder : StateListenerBehaviour
         }
 
         SceneManager.sceneLoaded -= OnSceneLoaded;
-        GameState.Instance.ChangeStateTo(GameState.State.PostLoadScenes);
+        gameState.ChangeStateTo(GameState.State.PostLoadScenes);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
@@ -77,7 +78,7 @@ public class SceneAdder : StateListenerBehaviour
 
     private void OnGUI()
     {
-        GUI.Label(new Rect(Screen.width - 200, 10, 200, 30), GameState.Instance.CurrentState.ToString());
+        GUI.Label(new Rect(Screen.width - 200, 10, 200, 30), gameState.CurrentState.ToString());
     }
 }
 

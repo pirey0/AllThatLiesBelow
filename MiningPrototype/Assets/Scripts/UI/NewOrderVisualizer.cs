@@ -17,6 +17,7 @@ public class NewOrderVisualizer : ReadableItemVisualizer
     [SerializeField] GameObject leftclick, rightclick;
 
     [Inject] ProgressionHandler progressionHandler;
+    [Inject] ShopPricesParser shopPricesParser;
 
     Dictionary<ItemType, int> orderedElementsWithAmounts = new Dictionary<ItemType, int>();
     Dictionary<ItemType, int> cost = new Dictionary<ItemType, int>();
@@ -64,7 +65,7 @@ public class NewOrderVisualizer : ReadableItemVisualizer
         //new cost fetching after implementation
         foreach (KeyValuePair<ItemType, int> item in orderedElementsWithAmounts)
         {
-            ItemAmountPair price = ShopPricesParser.GetPriceFor(item.Key, item.Value);
+            ItemAmountPair price = shopPricesParser.GetPriceFor(item.Key, item.Value);
 
             if (cost.ContainsKey(price.type))
                 cost[price.type] += price.amount;

@@ -21,6 +21,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
     [Zenject.Inject] OverworldEffectHandler overworldEffectHandler;
     [Zenject.Inject] CameraController cameraController;
+    [Zenject.Inject] LettersParser lettersParser;
 
     ProgressionSaveData data;
     Postbox postbox;
@@ -168,9 +169,9 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
         {
             case LetterProgressionState.RecievedDay:
                 if (data.wifeRecievedLetter)
-                    data.lastLetterID = LettersParser.GetLetterWithID(data.lastLetterID).AnswerId;
+                    data.lastLetterID = lettersParser.GetLetterWithID(data.lastLetterID).AnswerId;
                 else
-                    data.lastLetterID = LettersParser.GetLetterWithID(data.lastLetterID).IgnoreId;
+                    data.lastLetterID = lettersParser.GetLetterWithID(data.lastLetterID).IgnoreId;
 
                 if (data.lastLetterID > 0)
                     SetPostboxLetterToID(data.lastLetterID);

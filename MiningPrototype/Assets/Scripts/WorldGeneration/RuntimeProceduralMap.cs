@@ -17,9 +17,6 @@ public class RuntimeProceduralMap : RenderedMap
     [SerializeField] Transform entitiesParent;
     [SerializeField] bool debug;
 
-    [Zenject.Inject] TooltipHandler tooltipHandler;
-    [Zenject.Inject] CameraController cameraController;
-
     [Zenject.Inject] ProgressionHandler progressionHandler;
     [Zenject.Inject] Zenject.DiContainer diContainer;
 
@@ -81,14 +78,6 @@ public class RuntimeProceduralMap : RenderedMap
     protected override void OnStartAfterLoad()
     {
         StartCoroutine(UpdateUnstableTilesRoutine());
-    }
-
-    private void Update()
-    {
-        if (debug)
-        {
-            tooltipHandler?.Display(transform, this[Util.MouseToWorld(cameraController.Camera).ToGridPosition()].ToString(), "");
-        }
     }
 
     private IEnumerator UpdateUnstableTilesRoutine()

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rock : TilemapCarvingEntity, ITileMapElement
+public class Rock : TilemapCarvingEntity
 {
     [SerializeField] float width = 2;
     [SerializeField] float destructionSpeed;
@@ -13,8 +13,6 @@ public class Rock : TilemapCarvingEntity, ITileMapElement
     [SerializeField] float crumbleMinTime = 0.3f;
 
     float lastCrumbleStamp = -1000;
-
-    public BaseMap TileMap { get; private set; }
 
     protected void Start()
     {
@@ -114,9 +112,5 @@ public class Rock : TilemapCarvingEntity, ITileMapElement
         }
     }
 
-    public void Setup(BaseMap tileMap)
-    {
-        TileMap = tileMap;
-    }
 }
 

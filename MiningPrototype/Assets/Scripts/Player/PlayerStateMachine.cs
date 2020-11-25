@@ -142,7 +142,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
 
     private void FixedUpdate()
     {
-        if (!GameState.Playing)
+        if (!gameState.Playing)
             return;
 
         Collider2D[] colliders = Physics2D.OverlapCircleAll(feet.position, settings.feetRadius, settings.collisionMask.value);
@@ -238,7 +238,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         rigidbody.simulated = false;
         lastDeathTimeStamp = Time.time;
         NotifyActivity();
-        GameState.Instance.ChangeStateTo(GameState.State.Respawning);
+        gameState.ChangeStateTo(GameState.State.Respawning);
         PlayerDeath?.Invoke();
     }
 
@@ -280,7 +280,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         rigidbody.simulated = true;
         NotifyActivity();
         transitionEffectHandler.FadeIn(FadeType.Nightmare);
-        GameState.Instance.ChangeStateTo(GameState.State.Playing);
+        gameState.ChangeStateTo(GameState.State.Playing);
     }
 
     private bool HitFinished()

@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LettersParser : MonoBehaviour
+public class LettersParser
 {
     const string PATH = "LettersData";
 
-    static Dictionary<int, LetterInfo> lettersTable;
+    Dictionary<int, LetterInfo> lettersTable;
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    public static void ParseLetters()
+    public LettersParser()
     {
         DurationTracker tracker = new DurationTracker("LetterParser");
 
@@ -60,7 +59,7 @@ public class LettersParser : MonoBehaviour
         tracker.Stop();
     }
 
-    public static LetterInfo GetLetterWithID(int id)
+    public LetterInfo GetLetterWithID(int id)
     {
         if (lettersTable.ContainsKey(id))
         {

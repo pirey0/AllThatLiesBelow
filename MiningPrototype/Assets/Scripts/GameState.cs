@@ -5,22 +5,13 @@ using UnityEngine;
 
 public class GameState
 {
-    private static GameState instance;
-    public static GameState Instance { get => instance; }
-
     private State currentState = State.OutOfGame;
     private State oldState;
     public event System.Action<State> StateChanged;
 
     public State CurrentState { get => currentState; }
 
-    public static bool Playing { get => instance.CurrentState == State.Playing; }
-
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    public static void Setup()
-    {
-        instance = new GameState();
-    }
+    public bool Playing { get => currentState == State.Playing; }
 
     public void ChangeStateTo(State state)
     {

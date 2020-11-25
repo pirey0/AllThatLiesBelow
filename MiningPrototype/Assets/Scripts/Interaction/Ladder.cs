@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ladder : TilemapCarvingEntity, ITileMapElement
+public class Ladder : TilemapCarvingEntity
 {
     [SerializeField] Rigidbody2D rigidbody;
     [SerializeField] AudioSource fallSound;
     [SerializeField] GameObject topCollider, botCollider;
     [SerializeField] int layerUse, layerNormal;
-
-    public BaseMap TileMap { get; private set; }
 
     public void NotifyUse()
     {
@@ -65,10 +63,5 @@ public class Ladder : TilemapCarvingEntity, ITileMapElement
 
             rigidbody.isKinematic = true;
         Carve();
-    }
-
-    public void Setup(BaseMap tileMap)
-    {
-        TileMap = tileMap;
     }
 }

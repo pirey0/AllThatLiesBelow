@@ -7,13 +7,12 @@ public class SacrificePricesParser
 {
     const string PATH = "SacrificesData";
 
-    private static Dictionary<string, int> itemIndexMap;
-    private static Dictionary<string, int> rewardIndexMap;
-    private static string[,] table;
+    private Dictionary<string, int> itemIndexMap;
+    private Dictionary<string, int> rewardIndexMap;
+    private string[,] table;
 
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    public static void ParsePrices()
+    public SacrificePricesParser()
     {
         DurationTracker tracker = new DurationTracker("SacrificePricesParser");
 
@@ -40,7 +39,7 @@ public class SacrificePricesParser
         tracker.Stop();
     }
 
-    public static string GetDisplayNameOf(string reward)
+    public string GetDisplayNameOf(string reward)
     {
         if (rewardIndexMap.ContainsKey(reward))
         {
@@ -52,7 +51,7 @@ public class SacrificePricesParser
         }
     }
 
-    public static string[] GetRewardsAvailableAtLevel(int level, List<string> toAvoid)
+    public string[] GetRewardsAvailableAtLevel(int level, List<string> toAvoid)
     {
         List<string> viableRewards = new List<string>();
 
@@ -86,7 +85,7 @@ public class SacrificePricesParser
         return viableRewards.ToArray();
     }
 
-    public static ItemAmountPair[] GetPaymentsFor(string reward)
+    public ItemAmountPair[] GetPaymentsFor(string reward)
     {
         if (rewardIndexMap.ContainsKey(reward))
         {
@@ -120,6 +119,4 @@ public class SacrificePricesParser
 
         return null;
     }
-
-
 }

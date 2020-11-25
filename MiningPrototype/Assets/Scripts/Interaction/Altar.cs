@@ -37,6 +37,7 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
 
     [Inject] ProgressionHandler progressionHandler;
     [Inject] CameraController cameraController;
+    [Inject] SacrificePricesParser sacrificePricesParser;
 
     AltarState currentState = AltarState.Off;
     string[] availableRewards;
@@ -65,7 +66,7 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
         switch (currentState)
         {
             case AltarState.Intro:
-                availableRewards = SacrificePricesParser.GetRewardsAvailableAtLevel(progressionHandler.SacrificeProgressionLevel, progressionHandler.RewardsReceived);
+                availableRewards = sacrificePricesParser.GetRewardsAvailableAtLevel(progressionHandler.SacrificeProgressionLevel, progressionHandler.RewardsReceived);
 
 
 
@@ -74,7 +75,7 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
 
             case AltarState.RewardSelection:
                 selectedReward = availableRewards[index];
-                acceptedPayments = SacrificePricesParser.GetPaymentsFor(selectedReward);
+                acceptedPayments = sacrificePricesParser.GetPaymentsFor(selectedReward);
                 ChangeStateTo(AltarState.AskForPayment);
                 break;
 
@@ -119,7 +120,7 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
                 string[] rewardsContent = new string[availableRewards.Length];
                 
                 for (int i = 0; i < availableRewards.Length; i++)
-                    rewardsContent[i] = SacrificePricesParser.GetDisplayNameOf(availableRewards[i]);
+                    rewardsContent[i] = sacrificePricesParser.GetDisplayNameOf(availableRewards[i]);
 
                 visualizer.DisplayOptions(rewardsContent);
                 break;

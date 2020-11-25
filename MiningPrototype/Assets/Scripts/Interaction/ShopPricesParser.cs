@@ -7,10 +7,9 @@ public class ShopPricesParser
 {
     const string PATH = "ShopPricesData";
 
-    private static Dictionary<ItemType, ItemAmountPair> pricingTable;
+    private Dictionary<ItemType, ItemAmountPair> pricingTable;
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    public static void ParsePrices()
+    public ShopPricesParser()
     {
         DurationTracker tracker = new DurationTracker("ShopPricesParser");
 
@@ -63,7 +62,7 @@ public class ShopPricesParser
     /// <summary>
     /// Returns -1 if no price is given
     /// </summary>
-    public static ItemAmountPair GetPriceFor(ItemType type, int count)
+    public ItemAmountPair GetPriceFor(ItemType type, int count)
     {
         if (pricingTable.ContainsKey(type))
         {
