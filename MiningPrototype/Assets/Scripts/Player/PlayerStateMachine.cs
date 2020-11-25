@@ -100,19 +100,16 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         playerInteraction.PlayerActivity += NotifyActivity;
     }
 
-    protected override void OnStateChanged(GameState.State newState)
+    protected override void OnNewGame()
     {
-        switch (newState)
+        var start = LocationIndicator.Find(IndicatorType.PlayerStart);
+        if (start != null)
         {
-            case GameState.State.Ready:
-                var start = LocationIndicator.Find(IndicatorType.PlayerStart);
-                if (start != null)
-                {
-                    transform.position = start.transform.position;
-                }
-                break;
+            transform.position = start.transform.position;
         }
     }
+
+
 
     private void NotifyActivity()
     {
@@ -145,6 +142,9 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
 
     private void FixedUpdate()
     {
+        if (!GameState.Playing)
+            return;
+
         Collider2D[] colliders = Physics2D.OverlapCircleAll(feet.position, settings.feetRadius, settings.collisionMask.value);
         isGrounded = false;
         foreach (var c in colliders)

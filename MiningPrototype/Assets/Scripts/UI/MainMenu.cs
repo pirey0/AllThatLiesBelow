@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        SaveHandler.LoadedFromSaveFile = false;
+        SaveHandler.LoadFromSavefile = false;
     }
 
     public void MenueAction(string coroutineName)
@@ -29,7 +29,7 @@ public class MainMenu : MonoBehaviour
     {
         animator.SetTrigger("FadeOut");
         yield return new WaitForSeconds(0.5f);
-        SaveHandler.LoadedFromSaveFile = true;
+        SaveHandler.LoadFromSavefile = true;
         yield return Play();
     }
 

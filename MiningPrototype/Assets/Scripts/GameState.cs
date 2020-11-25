@@ -8,9 +8,13 @@ public class GameState
     private static GameState instance;
     public static GameState Instance { get => instance; }
 
-    private State currentState;
+    private State currentState = State.OutOfGame;
+    private State oldState;
     public event System.Action<State> StateChanged;
 
+    public State CurrentState { get => currentState; }
+
+    public static bool Playing { get => instance.CurrentState == State.Playing; }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     public static void Setup()
@@ -23,26 +27,64 @@ public class GameState
         if (currentState != state)
         {
             Debug.Log("Gamestate changed to " + state);
+            oldState = currentState;
             currentState = state;
             StateChanged?.Invoke(state);
             OnStateChanged();
         }
     }
 
+    public void ChangeToPrevious()
+    {
+        ChangeStateTo(oldState);
+    }
+
     private void OnStateChanged()
     {
-        if(currentState == State.Ready)
+        switch (currentState)
         {
-            ChangeStateTo(State.Playing);
+            case State.Entry:
+                if (SaveHandler.LoadFromSavefile)
+                    ChangeStateTo(State.PreLoadFromFile);
+                else
+                    ChangeStateTo(State.PreLoadScenes);
+                break;
+
+            case State.PreLoadFromFile:
+                SaveHandler.Load();
+                ChangeStateTo(State.PostLoadFromFile);
+                break;
+
+            case State.PostLoadFromFile:
+                ChangeStateTo(State.FullStart);
+                break;
+
+            case State.PostLoadScenes:
+                ChangeStateTo(State.NewGame);
+                break;
+
+            case State.NewGame:
+                ChangeStateTo(State.FullStart);
+                break;
+            case State.FullStart:
+                ChangeStateTo(State.Playing);
+                break;
         }
+
     }
 
     public enum State
     {
-        Loading,
-        Ready,
+        OutOfGame,
+        Entry,
+        PreLoadScenes,
+        PostLoadScenes,
+        NewGame,
+        PreLoadFromFile,
+        PostLoadFromFile,
+        FullStart,
         Playing,
-        Respawning
+        Respawning,
     }
 }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-public class SceneAdder : MonoBehaviour
+public class SceneAdder : StateListenerBehaviour
 {
     [SerializeField] List<MapAddition> addition;
 
@@ -17,19 +17,20 @@ public class SceneAdder : MonoBehaviour
 
     private void Start()
     {
-        if (addition.Count > 0)
-            StartCoroutine(LoadAdditive());
+        GameState.Instance.ChangeStateTo(GameState.State.Entry);
     }
 
-    private void OnValidate()
+    protected override void OnStateChanged(GameState.State newState)
     {
-        this.name = "SceneAdder";
+        if(newState == GameState.State.PreLoadScenes)
+        {
+            if (addition.Count > 0)
+                StartCoroutine(LoadAdditive());
+        }
     }
 
     private IEnumerator LoadAdditive()
     {
-        GameState.Instance.ChangeStateTo(GameState.State.Loading);
-
         int i = 0;
         SceneManager.sceneLoaded += OnSceneLoaded;
 
@@ -47,7 +48,7 @@ public class SceneAdder : MonoBehaviour
         }
 
         SceneManager.sceneLoaded -= OnSceneLoaded;
-        GameState.Instance.ChangeStateTo(GameState.State.Ready);
+        GameState.Instance.ChangeStateTo(GameState.State.PostLoadScenes);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
@@ -72,6 +73,11 @@ public class SceneAdder : MonoBehaviour
             }
         }
         loaded = true;
+    }
+
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(Screen.width - 200, 10, 200, 30), GameState.Instance.CurrentState.ToString());
     }
 }
 

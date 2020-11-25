@@ -13,7 +13,7 @@ public static class SaveHandler
 
     public static string FULL_SAVE_PATH = Application.persistentDataPath + SAVE_NAME;
 
-    public static bool LoadedFromSaveFile;
+    public static bool LoadFromSavefile;
 
     [Button]
     public static void Save()

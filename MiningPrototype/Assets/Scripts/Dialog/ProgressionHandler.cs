@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
-public class ProgressionHandler : MonoBehaviour, ISavable
+public class ProgressionHandler : StateListenerBehaviour, ISavable
 {
     [ReadOnly] [SerializeField] string saveID = Util.GenerateNewSaveGUID();
 
@@ -22,104 +22,67 @@ public class ProgressionHandler : MonoBehaviour, ISavable
     [Zenject.Inject] OverworldEffectHandler overworldEffectHandler;
     [Zenject.Inject] CameraController cameraController;
 
-
-    List<(string, ItemAmountPair)> aquiredList = new List<(string, ItemAmountPair)>();
-    Dictionary<int, List<ItemAmountPair>> ordersForNextDay = new Dictionary<int, List<ItemAmountPair>>();
-    private int day = 0;
-    bool dailySacrificeExaused;
-    int sacrificeProgressionLevel = 1;
-
-    //sacrifice rewards
-    private float speedMultiplyer = 1;
-    private float digSpeedMultiplyer = 1;
-    private float strengthMultiplyer = 1;
-    private float jumpMultiplyer = 1;
-    private bool instantDelivery = false;
-    private bool isSpring = false;
-    private bool isMidas = false;
-    private bool hasLove = false;
-    private bool hasWon = false;
-    private bool hasWayOut = false;
-    private bool isFree = false;
-    private float timeScale = 1;
-    List<string> rewardsReceived = new List<string>();
-
-    //sacriifce consequences
-
-    private bool cannotSend;
-    private bool paidEverything;
-    private bool instableWorld;
-
-
-
-    public bool showNewOrderLeftClickInfo = true, showNewOrderRightClickInfo = true;
-
-    //postbox and letters
+    ProgressionSaveData data;
     Postbox postbox;
-    int lastLetterID = -1;
-    bool wifeRecievedLetter = false;
-    LetterProgressionState letterProgressionState = LetterProgressionState.RecievedDay;
+    
+    public float SpeedMultiplyer { get => data.speedMultiplyer; }
+    public float DigSpeedMultiplyer { get => data.digSpeedMultiplyer; }
 
-    public float SpeedMultiplyer { get => speedMultiplyer; }
-    public float DigSpeedMultiplyer { get => digSpeedMultiplyer; }
+    public float JumpMultiplyer { get => data.jumpMultiplyer; }
+    public bool DailySacrificeExpired { get => data.dailySacrificeExaused; }
+    public int SacrificeProgressionLevel { get => data.sacrificeProgressionLevel; }
+    public bool IsMidas { get => data.isMidas; }
 
-    public float JumpMultiplyer { get => jumpMultiplyer; }
-    public bool DailySacrificeExpired { get => dailySacrificeExaused; }
-    public int SacrificeProgressionLevel { get => sacrificeProgressionLevel; }
-    public bool IsMidas { get => isMidas; }
+    public bool InstableWorld { get => data.instableWorld; }
 
-    public bool InstableWorld { get => instableWorld; }
+    public float ProgressionTimeScale { get => data.timeScale; }
 
-    public float TimeScale { get => timeScale; }
+    public List<string> RewardsReceived { get => data.rewardsReceived; }
 
-    public List<string> RewardsReceived { get => rewardsReceived; }
+    
 
-    private void OnEnable()
+
+
+    protected override void OnPostSceneLoad()
     {
-        GameState.Instance.StateChanged += OnStateChanged;
+        postbox = FindObjectOfType<Postbox>();
     }
 
-    private void OnDisable()
+    protected override void OnNewGame()
     {
-        GameState.Instance.StateChanged -= OnStateChanged;
+        data = new ProgressionSaveData();
+        data.lastLetterID = startingLetterID;
+        data.letterProgressionState = LetterProgressionState.RecievedDay;
+        if (postbox != null)
+            SetPostboxLetterToID(data.lastLetterID);
+
+        if (newOrderCrateSpawner != null)
+            newOrderCrateSpawner.SpawnOrder(startingItems);
     }
 
-    private void OnStateChanged(GameState.State state)
+    protected override void OnPostLoadFromFile()
     {
-        if (state == GameState.State.Ready)
-        {
-            postbox = FindObjectOfType<Postbox>();
-
-            if (SaveHandler.LoadedFromSaveFile)
-            {
-
-            }
-            else
-            {
-                BeginFromStart();
-            }
-        }
+        //reapply all effects that need to be reapplied
     }
 
     public void Aquired(string topic, ItemAmountPair payment)
     {
         Debug.Log(topic + " unlocked in the morning!");
-        dailySacrificeExaused = true;
+        data.dailySacrificeExaused = true;
         InventoryManager.PlayerTryPay(payment.type, payment.amount);
 
-        aquiredList.Add((topic, payment));
+        data.aquiredList.Add((topic, payment));
 
     }
-
-    public void BeginFromStart()
+    public bool NeedsTutorialFor(string s)
     {
-        lastLetterID = startingLetterID;
-        letterProgressionState = LetterProgressionState.RecievedDay;
-        if (postbox != null)
-            SetPostboxLetterToID(lastLetterID);
+        return !data.achievedTutorials.Contains(s);
+    }
 
-        if (newOrderCrateSpawner != null)
-            newOrderCrateSpawner.SpawnOrder(startingItems);
+    public void NotifyPassedTutorialFor(string s)
+    {
+        if (NeedsTutorialFor(s))
+            data.achievedTutorials.Add(s);
     }
 
     [Button]
@@ -128,14 +91,14 @@ public class ProgressionHandler : MonoBehaviour, ISavable
         UpdateSacrifices();
         UpdateLetters();
 
-        day++;
+        data.day++;
         SaveHandler.Save();
     }
 
     [Button]
     private void WifeRecievedLetter()
     {
-        wifeRecievedLetter = true;
+        data.wifeRecievedLetter = true;
     }
 
     private void UpdateLetters()
@@ -149,11 +112,11 @@ public class ProgressionHandler : MonoBehaviour, ISavable
             //orders
             if (storedItem.type == ItemType.NewOrder)
             {
-                if (ordersForNextDay.ContainsKey(storedItem.amount))
+                if (data.ordersForNextDay.ContainsKey(storedItem.amount))
                 {
-                    List<ItemAmountPair> order = ordersForNextDay[storedItem.amount];
+                    List<ItemAmountPair> order = data.ordersForNextDay[storedItem.amount];
                     newOrderCrateSpawner.SpawnOrder(order);
-                    ordersForNextDay.Remove(storedItem.amount);
+                    data.ordersForNextDay.Remove(storedItem.amount);
                 }
             }
 
@@ -169,49 +132,49 @@ public class ProgressionHandler : MonoBehaviour, ISavable
     private void StepLetterProgression(bool sentLetterToWife)
     {
         //When out of content
-        if (lastLetterID <= 0)
+        if (data.lastLetterID <= 0)
             return;
 
         //Update old state
-        switch (letterProgressionState)
+        switch (data.letterProgressionState)
         {
             case LetterProgressionState.RecievedDay:
                 if (sentLetterToWife)
                 {
-                    letterProgressionState = LetterProgressionState.WaitDay2;
-                    wifeRecievedLetter = true;
+                    data.letterProgressionState = LetterProgressionState.WaitDay2;
+                    data.wifeRecievedLetter = true;
                 }
                 else
                 {
-                    letterProgressionState = LetterProgressionState.WaitDay1;
+                    data.letterProgressionState = LetterProgressionState.WaitDay1;
                 }
 
                 break;
             case LetterProgressionState.WaitDay1:
                 if (sentLetterToWife)
-                    wifeRecievedLetter = true;
+                    data.wifeRecievedLetter = true;
 
-                letterProgressionState = LetterProgressionState.WaitDay2;
+                data.letterProgressionState = LetterProgressionState.WaitDay2;
                 break;
             case LetterProgressionState.WaitDay2:
                 if (sentLetterToWife)
-                    wifeRecievedLetter = true;
-                letterProgressionState = LetterProgressionState.RecievedDay;
+                    data.wifeRecievedLetter = true;
+                data.letterProgressionState = LetterProgressionState.RecievedDay;
                 break;
         }
 
         //Start new state
-        switch (letterProgressionState)
+        switch (data.letterProgressionState)
         {
             case LetterProgressionState.RecievedDay:
-                if (wifeRecievedLetter)
-                    lastLetterID = LettersParser.GetLetterWithID(lastLetterID).AnswerId;
+                if (data.wifeRecievedLetter)
+                    data.lastLetterID = LettersParser.GetLetterWithID(data.lastLetterID).AnswerId;
                 else
-                    lastLetterID = LettersParser.GetLetterWithID(lastLetterID).IgnoreId;
+                    data.lastLetterID = LettersParser.GetLetterWithID(data.lastLetterID).IgnoreId;
 
-                if (lastLetterID > 0)
-                    SetPostboxLetterToID(lastLetterID);
-                wifeRecievedLetter = false;
+                if (data.lastLetterID > 0)
+                    SetPostboxLetterToID(data.lastLetterID);
+                data.wifeRecievedLetter = false;
                 break;
         }
     }
@@ -229,60 +192,60 @@ public class ProgressionHandler : MonoBehaviour, ISavable
 
     private void UpdateSacrifices()
     {
-        dailySacrificeExaused = false;
+        data.dailySacrificeExaused = false;
 
-        foreach (var aquired in aquiredList)
+        foreach (var aquired in data.aquiredList)
         {
-            if (!rewardsReceived.Contains(aquired.Item1))
-                rewardsReceived.Add(aquired.Item1);
+            if (!data.rewardsReceived.Contains(aquired.Item1))
+                data.rewardsReceived.Add(aquired.Item1);
             //Reward
             Debug.Log("Aquired: " + aquired.Item1 + " by paying with " + aquired.Item2.ToString());
             switch (aquired.Item1)
             {
                 case "MiningSpeed":
-                    digSpeedMultiplyer = rewardDigSpeedMultiplyer;
+                    data.digSpeedMultiplyer = rewardDigSpeedMultiplyer;
                     GameObject.FindObjectOfType<PickaxeAnimator>(includeInactive: true).Upgrade();
                     break;
                 case "WalkingSpeed":
-                    speedMultiplyer = rewardASpeedMultiplyer;
+                    data.speedMultiplyer = rewardASpeedMultiplyer;
                     break;
                 case "Strength":
-                    strengthMultiplyer = rewardStrengthMultiplyer;
+                    data.strengthMultiplyer = rewardStrengthMultiplyer;
                     break;
                 case "JumpHeight":
-                    jumpMultiplyer = rewardJumpMultiplyer;
+                    data.jumpMultiplyer = rewardJumpMultiplyer;
                     break;
                 case "InstantDelivery":
-                    instantDelivery = true;
+                    data.instantDelivery = true;
                     break;
                 case "Spring":
-                    isSpring = true;
+                    data.isSpring = true;
                     overworldEffectHandler.MakeSpring();
                     RuntimeProceduralMap.Instance.ReplaceAll(TileType.Snow, TileType.Grass);
                     break;
                 case "MidasTouch":
-                    isMidas = true;
+                    data.isMidas = true;
                     //everything you touch turns to gold
                     break;
 
                 case "Love":
-                    hasLove = true;
+                    data.hasLove = true;
                     GameObject.FindObjectOfType<Bed>()?.ChangeWakeUpText("I Love you."); // Move to some text/Dialog system
                     break;
 
                 case "Victory":
-                    hasWon = true;
+                    data.hasWon = true;
                     Instantiate(youWonPrefab);
                     //Open victory screen
                     break;
 
                 case "AWayOut":
-                    hasWayOut = true;
+                    data.hasWayOut = true;
                     RuntimeProceduralMap.Instance.ReplaceAll(TileType.BedStone, TileType.Stone);
                     break;
 
                 case "Freedom":
-                    isFree = true;
+                    data.isFree = true;
                     //save game finished somewhere, or corrupt files sth like that
                     Application.Quit();
                     break;
@@ -297,23 +260,23 @@ public class ProgressionHandler : MonoBehaviour, ISavable
             {
                 case ItemType.Support:
                     //Increase instability
-                    instableWorld = true;
+                    data.instableWorld = true;
                     break;
 
                 case ItemType.LetterToFamily:
                     //Cannot send
-                    cannotSend = true;
+                    data.cannotSend = true;
                     GameObject.FindObjectOfType<Desk>(true).StopSending();
                     break;
 
                 case ItemType.Family_Photo:
-                    lastLetterID = -1;
+                    data.lastLetterID = -1;
                     InventoryManager.PlayerCollects(ItemType.Family_Photo_Empty, 1);
                     break;
 
                 case ItemType.Hourglass:
                     Time.timeScale = 0.9f;
-                    timeScale = 0.9f;
+                    data.timeScale = 0.9f;
                     //Your time?!
                     break;
 
@@ -340,20 +303,20 @@ public class ProgressionHandler : MonoBehaviour, ISavable
                     break;
             }
 
-            sacrificeProgressionLevel++;
+            data.sacrificeProgressionLevel++;
         }
-        aquiredList.Clear();
+        data.aquiredList.Clear();
     }
 
     public void RegisterOrder(int id, List<ItemAmountPair> itemAmountPairs)
     {
-        if (instantDelivery)
+        if (data.instantDelivery)
         {
             newOrderCrateSpawner.SpawnOrder(itemAmountPairs);
         }
         else
         {
-            ordersForNextDay.Add(id, itemAmountPairs);
+            data.ordersForNextDay.Add(id, itemAmountPairs);
         }
     }
 
@@ -366,26 +329,16 @@ public class ProgressionHandler : MonoBehaviour, ISavable
     {
         ProgressionSaveData saveData = new ProgressionSaveData();
         saveData.GUID = GetSaveID();
-        saveData.AquiredList = aquiredList;
-        saveData.OrdersForNextDay = ordersForNextDay;
-        saveData.SpeedMultiplyer = speedMultiplyer;
-        saveData.DigSpeedMultiplyer = digSpeedMultiplyer;
-        saveData.DailyPurchaseExaused = dailySacrificeExaused;
-        saveData.Day = day;
+        
 
         return saveData;
     }
 
-    public void Load(SaveData data)
+    public void Load(SaveData newData)
     {
-        if (data is ProgressionSaveData saveData)
+        if (newData is ProgressionSaveData saveData)
         {
-            aquiredList = saveData.AquiredList;
-            ordersForNextDay = saveData.OrdersForNextDay;
-            speedMultiplyer = saveData.SpeedMultiplyer;
-            digSpeedMultiplyer = saveData.DigSpeedMultiplyer;
-            dailySacrificeExaused = saveData.DailyPurchaseExaused;
-            day = saveData.Day;
+            this.data = saveData;
         }
         else
         {
@@ -410,11 +363,39 @@ public enum LetterProgressionState
 [System.Serializable]
 public class ProgressionSaveData : SaveData
 {
-    public List<(string, ItemAmountPair)> AquiredList = new List<(string, ItemAmountPair)>();
-    public Dictionary<int, List<ItemAmountPair>> OrdersForNextDay = new Dictionary<int, List<ItemAmountPair>>();
+    public int day = 0;
+    
+    //sacrifice
+    public bool dailySacrificeExaused;
+    public int sacrificeProgressionLevel = 1;
+    public List<(string, ItemAmountPair)> aquiredList = new List<(string, ItemAmountPair)>();
+    
+    //sacrifice rewards
+    public float speedMultiplyer = 1;
+    public float digSpeedMultiplyer = 1;
+    public float strengthMultiplyer = 1;
+    public float jumpMultiplyer = 1;
+    public bool instantDelivery = false;
+    public bool isSpring = false;
+    public bool isMidas = false;
+    public bool hasLove = false;
+    public bool hasWon = false;
+    public bool hasWayOut = false;
+    public bool isFree = false;
+    public float timeScale = 1;
+    public List<string> rewardsReceived = new List<string>();
 
-    public float SpeedMultiplyer = 1;
-    public float DigSpeedMultiplyer = 1;
-    public int Day;
-    public bool DailyPurchaseExaused;
+    //sacriifce consequences
+    public bool cannotSend;
+    public bool paidEverything;
+    public bool instableWorld;
+
+    //tutorial
+    public List<string> achievedTutorials = new List<string>();
+
+    //letters and daily
+    public Dictionary<int, List<ItemAmountPair>> ordersForNextDay = new Dictionary<int, List<ItemAmountPair>>();
+    public int lastLetterID = -1;
+    public bool wifeRecievedLetter = false;
+    public LetterProgressionState letterProgressionState = LetterProgressionState.RecievedDay;
 }

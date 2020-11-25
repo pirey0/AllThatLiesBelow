@@ -37,9 +37,9 @@ public class NewOrderVisualizer : ReadableItemVisualizer
     public void UpdateAmount(ItemType itemType, int amount, bool increased)
     {
         if (increased)
-            progressionHandler.showNewOrderLeftClickInfo = false;
+            progressionHandler.NotifyPassedTutorialFor("NewOrderLeftClick");
         else
-            progressionHandler.showNewOrderRightClickInfo = false;
+            progressionHandler.NotifyPassedTutorialFor("NewOrderRightClick");
 
         UpdateTutorialDisplays();
 
@@ -158,7 +158,7 @@ public class NewOrderVisualizer : ReadableItemVisualizer
 
     private void UpdateTutorialDisplays()
     {
-        leftclick.SetActive(progressionHandler.showNewOrderLeftClickInfo);
-        rightclick.SetActive(progressionHandler.showNewOrderRightClickInfo);
+        leftclick.SetActive(progressionHandler.NeedsTutorialFor("NewOrderLeftClick"));
+        rightclick.SetActive(progressionHandler.NeedsTutorialFor("NewOrderRightClick"));
     }
 }

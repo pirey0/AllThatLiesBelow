@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: Tile_4_Snow
   m_EditorClassIdentifier: 
   Type: 4
-  ItemToDrop: 1
+  ItemToDrop: 0
   damageMultiplyer: 1
   AirLike: 0
   Targetable: 1
+  TargetPriority: 0
   StabilityAffected: 1
   NotifiesInsteadOfCrumbling: 0
   CountsAsNeighbour: 1
+  MinableInOverworld: 0
   UseTilesFromOtherInfo: 0
   Tiles:
   - {fileID: 11400000, guid: a36febf07089986479169c7da38520bc, type: 2}

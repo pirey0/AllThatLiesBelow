@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenu : StateListenerBehaviour
 {
     [SerializeField] SceneReference mainMenu;
     [SerializeField] Image darkoverlay;
@@ -13,12 +13,10 @@ public class PauseMenu : MonoBehaviour
 
     bool isPaused;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         Unpause();
     }
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -38,7 +36,7 @@ public class PauseMenu : MonoBehaviour
         isPaused = true;
 
         Time.timeScale = 0f;
-        darkoverlay.color = new Color(0,0,0,0.66f);
+        darkoverlay.color = new Color(0, 0, 0, 0.66f);
 
         foreach (Transform child in transform)
         {
@@ -50,7 +48,15 @@ public class PauseMenu : MonoBehaviour
     {
         isPaused = false;
 
-        Time.timeScale = progressionHandler.TimeScale;
+        if (GameState.Playing)
+        {
+            Time.timeScale = progressionHandler.ProgressionTimeScale;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+
         darkoverlay.color = new Color(0, 0, 0, 0);
 
         foreach (Transform child in transform)

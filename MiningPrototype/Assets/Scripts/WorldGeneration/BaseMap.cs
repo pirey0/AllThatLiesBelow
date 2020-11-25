@@ -235,7 +235,7 @@ public class BaseMap : StateListenerBehaviour, ISavable
         return saveData;
     }
 
-    public void Load(SaveData data)
+    public virtual void Load(SaveData data)
     {
         if (data is BaseMapSaveData saveData)
         {

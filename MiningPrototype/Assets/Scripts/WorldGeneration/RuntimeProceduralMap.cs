@@ -47,8 +47,16 @@ public class RuntimeProceduralMap : RenderedMap
 
         Setup();
 
-        RunCompleteGeneration();
+        //This should be in load from OnNewGame but that would be after the imprinting from the SceneAdder....
+        if (!SaveHandler.LoadFromSavefile)
+            RunCompleteGeneration();
     }
+
+    protected override void OnPostLoadFromFile()
+    {
+        Setup();
+    }
+
     protected override void Setup()
     {
         base.Setup();
@@ -70,12 +78,9 @@ public class RuntimeProceduralMap : RenderedMap
         tilesToStabilityCheck = null;
     }
 
-    protected override void OnStateChanged(GameState.State newState)
+    protected override void OnStartAfterLoad()
     {
-        if (newState == GameState.State.Ready)
-        {
-            StartCoroutine(UpdateUnstableTilesRoutine());
-        }
+        StartCoroutine(UpdateUnstableTilesRoutine());
     }
 
     private void Update()

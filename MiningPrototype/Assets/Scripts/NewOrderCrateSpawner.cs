@@ -22,12 +22,10 @@ public class NewOrderCrateSpawner : StateListenerBehaviour
         crateInfos.Sort((x, y) => x.MaxCapacity - y.MaxCapacity);
     }
 
-    protected override void OnStateChanged(GameState.State newState)
+
+    protected override void OnPostSceneLoad()
     {
-        if (newState == GameState.State.Ready)
-        {
-            spawnLoc = LocationIndicator.Find(IndicatorType.OrderSpawn);
-        }
+        spawnLoc = LocationIndicator.Find(IndicatorType.OrderSpawn);
     }
 
 
