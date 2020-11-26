@@ -40,9 +40,6 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
     public List<string> RewardsReceived { get => data.rewardsReceived; }
 
-    
-
-
 
     protected override void OnPostSceneLoad()
     {
@@ -201,59 +198,61 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
                 data.rewardsReceived.Add(aquired.Item1);
             //Reward
             Debug.Log("Aquired: " + aquired.Item1 + " by paying with " + aquired.Item2.ToString());
-            switch (aquired.Item1)
+
+            if(Enum.TryParse(aquired.Item1, out AltarRewardType altarReward))
             {
-                case "MiningSpeed":
-                    data.digSpeedMultiplyer = rewardDigSpeedMultiplyer;
-                    GameObject.FindObjectOfType<PickaxeAnimator>(includeInactive: true).Upgrade();
-                    break;
-                case "WalkingSpeed":
-                    data.speedMultiplyer = rewardASpeedMultiplyer;
-                    break;
-                case "Strength":
-                    data.strengthMultiplyer = rewardStrengthMultiplyer;
-                    break;
-                case "JumpHeight":
-                    data.jumpMultiplyer = rewardJumpMultiplyer;
-                    break;
-                case "InstantDelivery":
-                    data.instantDelivery = true;
-                    break;
-                case "Spring":
-                    data.isSpring = true;
-                    overworldEffectHandler.MakeSpring();
-                    RuntimeProceduralMap.Instance.ReplaceAll(TileType.Snow, TileType.Grass);
-                    break;
-                case "MidasTouch":
-                    data.isMidas = true;
-                    //everything you touch turns to gold
-                    break;
-
-                case "Love":
-                    data.hasLove = true;
-                    GameObject.FindObjectOfType<Bed>()?.ChangeWakeUpText("I Love you."); // Move to some text/Dialog system
-                    break;
-
-                case "Victory":
-                    data.hasWon = true;
-                    Instantiate(youWonPrefab);
-                    //Open victory screen
-                    break;
-
-                case "AWayOut":
-                    data.hasWayOut = true;
-                    RuntimeProceduralMap.Instance.ReplaceAll(TileType.BedStone, TileType.Stone);
-                    break;
-
-                case "Freedom":
-                    data.isFree = true;
-                    //save game finished somewhere, or corrupt files sth like that
-                    Application.Quit();
-                    break;
-
-                default:
-                    Debug.Log("Unimplemented aquired bonus: " + aquired);
-                    break;
+                switch (altarReward)
+                {
+                    case AltarRewardType.MiningSpeed:
+                        data.digSpeedMultiplyer = rewardDigSpeedMultiplyer;
+                        GameObject.FindObjectOfType<PickaxeAnimator>(includeInactive: true).Upgrade();
+                        break;
+                    case  AltarRewardType.WalkingSpeed:
+                        data.speedMultiplyer = rewardASpeedMultiplyer;
+                        break;
+                    case AltarRewardType.Strength:
+                        data.strengthMultiplyer = rewardStrengthMultiplyer;
+                        break;
+                    case  AltarRewardType.JumpHeight:
+                        data.jumpMultiplyer = rewardJumpMultiplyer;
+                        break;
+                    case AltarRewardType.InstantDelivery:
+                        data.instantDelivery = true;
+                        break;
+                    case AltarRewardType.Spring:
+                        data.isSpring = true;
+                        overworldEffectHandler.MakeSpring();
+                        RuntimeProceduralMap.Instance.ReplaceAll(TileType.Snow, TileType.Grass);
+                        break;
+                    case  AltarRewardType.MidasTouch:
+                        data.isMidas = true;
+                        //everything you touch turns to gold
+                        break;
+                    case  AltarRewardType.Love:
+                        data.hasLove = true;
+                        GameObject.FindObjectOfType<Bed>()?.ChangeWakeUpText("I Love you."); // Move to some text/Dialog system
+                        break;
+                    case  AltarRewardType.Victory:
+                        data.hasWon = true;
+                        Instantiate(youWonPrefab);
+                        break;
+                    case  AltarRewardType.AWayOut:
+                        data.hasWayOut = true;
+                        RuntimeProceduralMap.Instance.ReplaceAll(TileType.BedStone, TileType.Stone);
+                        break;
+                    case AltarRewardType.Freedom:
+                        data.isFree = true;
+                        //save game finished somewhere, or corrupt files sth like that
+                        Application.Quit();
+                        break;
+                    default:
+                        Debug.Log("Unimplemented aquired bonus: " + aquired);
+                        break;
+                }
+            }
+            else
+            {
+                Debug.LogWarning("No altar reward named: " + aquired.Item1);
             }
 
             //consequence
@@ -307,6 +306,16 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
             data.sacrificeProgressionLevel++;
         }
         data.aquiredList.Clear();
+    }
+
+
+    /// <summary>
+    /// Cheat to set the progression level.
+    /// Used by Altar to decide viable Rewards.
+    /// </summary>
+    public void SetAltarProgressionLevel(int level)
+    {
+        data.sacrificeProgressionLevel = level;
     }
 
     public void RegisterOrder(int id, List<ItemAmountPair> itemAmountPairs)

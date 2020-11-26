@@ -3,6 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+public enum AltarRewardType
+{
+    None,
+    MiningSpeed,
+    WalkingSpeed,
+    Strength,
+    JumpHeight,
+    InstantDelivery,
+    Spring,
+    MidasTouch,
+    Love,
+    Victory,
+    AWayOut,
+    Freedom
+}
+
 public class SacrificePricesParser
 {
     const string PATH = "SacrificesData";
