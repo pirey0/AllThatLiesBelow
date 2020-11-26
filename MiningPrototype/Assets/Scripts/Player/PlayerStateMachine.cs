@@ -109,9 +109,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         }
     }
 
-
-
-    private void NotifyActivity()
+    public void NotifyActivity()
     {
         lastActivityTimeStamp = Time.time;
     }

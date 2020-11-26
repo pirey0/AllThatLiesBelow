@@ -150,6 +150,7 @@ MonoBehaviour:
     type: 15
     amount: 1
   destroyEffects: {fileID: 0}
+  playerTouchVelocity: 1
 --- !u!212 &5261585125100338138
 SpriteRenderer:
   m_ObjectHideFlags: 0
