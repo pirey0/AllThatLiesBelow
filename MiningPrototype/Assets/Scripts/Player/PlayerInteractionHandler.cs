@@ -100,6 +100,7 @@ public class PlayerInteractionHandler : InventoryOwner
 
                     if (!mouseInInventoryRange)
                     {
+                 
                         if (currentInteractable == null)
                         {
                             TryInteract();
@@ -342,8 +343,8 @@ public class PlayerInteractionHandler : InventoryOwner
     {
         if (currentInteractable != null)
         {
-            currentInteractable.EndInteracting(gameObject);
             currentInteractable.UnsubscribeToForceQuit(OnInteractableForceQuit);
+            currentInteractable.EndInteracting(gameObject);
             currentInteractable = null;
         }
     }

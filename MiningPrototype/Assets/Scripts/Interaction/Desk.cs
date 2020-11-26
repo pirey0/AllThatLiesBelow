@@ -21,8 +21,10 @@ public class Desk : MonoBehaviour, IInteractable
     [Zenject.Inject] Zenject.DiContainer diContainer;
 
     DeskState deskState;
-
     private bool canSend = true;
+
+    private event System.Action InterruptInteraction;
+
 
     private enum DeskState
     {
@@ -47,12 +49,12 @@ public class Desk : MonoBehaviour, IInteractable
 
     public void SubscribeToForceQuit(Action action)
     {
-        //
+        InterruptInteraction += action;
     }
 
     public void UnsubscribeToForceQuit(Action action)
     {
-        //
+        InterruptInteraction += action;
     }
 
     public void SitAtDesk(PlayerStateMachine playerToHide)
@@ -85,6 +87,7 @@ public class Desk : MonoBehaviour, IInteractable
         spriteRenderer.sprite = deskEmpty;
         optionsCanvas.gameObject.SetActive(false);
         seatedPlayer.Enable();
+        InterruptInteraction?.Invoke();
     }
 
     public void FillOutOrder ()

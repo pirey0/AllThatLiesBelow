@@ -54,6 +54,15 @@ public class ItemPlacingHandler : MonoBehaviour
 
     public void TryPlace(ItemType type, Vector3 tryplacePosition)
     {
+        if (currentReceiver != null)
+        {
+            if (currentReceiver.WouldTakeDrop(currentHeld))
+            {
+                currentReceiver.ReceiveDrop(currentHeld);
+                return;
+            }
+        }
+
         if (holdingPlacable)
         {
             if (preview != null)
@@ -68,16 +77,6 @@ public class ItemPlacingHandler : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            if(currentReceiver != null)
-            {
-                if (currentReceiver.WouldTakeDrop(currentHeld))
-                {
-                    currentReceiver.ReceiveDrop(currentHeld);
-                }
-            }
-        }
     }
 
     public void UpdatePosition(Vector3 position)
@@ -87,34 +86,33 @@ public class ItemPlacingHandler : MonoBehaviour
             if (preview != null)
                 preview.UpdatePreview(position);
         }
-        else
+
+        var hits = Util.RaycastFromMouse(cameraController.Camera);
+        IDropReceiver dropReceiver = null;
+        foreach (var hit in hits)
         {
-            var hits = Util.RaycastFromMouse(cameraController.Camera);
-            IDropReceiver dropReceiver = null;
-            foreach (var hit in hits)
+            if (hit.transform.TryGetComponent(out IDropReceiver receiver))
             {
-                if (hit.transform.TryGetComponent(out IDropReceiver receiver))
-                {
-                    dropReceiver = receiver;
-                    break;
-                }
-            }
-
-            if (dropReceiver != currentReceiver)
-            {
-                if (currentReceiver != null)
-                    currentReceiver.EndHover();
-
-                if (dropReceiver != null)
-                    dropReceiver.BeginHoverWith(currentHeld);
-                currentReceiver = dropReceiver;
-            }
-            else
-            {
-                if (currentReceiver != null)
-                    currentReceiver.HoverUpdate(currentHeld);
+                dropReceiver = receiver;
+                break;
             }
         }
+
+        if (dropReceiver != currentReceiver)
+        {
+            if (currentReceiver != null)
+                currentReceiver.EndHover();
+
+            if (dropReceiver != null)
+                dropReceiver.BeginHoverWith(currentHeld);
+            currentReceiver = dropReceiver;
+        }
+        else
+        {
+            if (currentReceiver != null)
+                currentReceiver.HoverUpdate(currentHeld);
+        }
+
     }
 
 }
