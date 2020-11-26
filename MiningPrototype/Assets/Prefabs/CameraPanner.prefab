@@ -43,7 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4b814297f1880459f3d3f97c26b5ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   curve:
     serializedVersion: 2
     m_Curve:
@@ -77,3 +76,5 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  overWorldOffset: 2
+  transitionSpeed: 2

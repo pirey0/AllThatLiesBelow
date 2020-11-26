@@ -17,14 +17,14 @@ public class Bed : MonoBehaviour, IInteractable
     [SerializeField] RectTransform wakeUpTextParent;
 
     [SerializeField] string wakeUpText;
-    string defaultWakeUpTest;
 
     [Zenject.Inject] TransitionEffectHandler transitionEffectHandler;
-
-    bool sacrificedHappyness = false;
-
     [Inject] ProgressionHandler progressionHandler;
 
+    string defaultWakeUpTest;
+    bool sacrificedHappyness = false;
+
+    private event System.Action ForceInterrupt;
 
     private void Start()
     {
@@ -47,12 +47,12 @@ public class Bed : MonoBehaviour, IInteractable
 
     public void SubscribeToForceQuit(Action action)
     {
-        //action += LeaveBed;
+        ForceInterrupt += action;
     }
 
     public void UnsubscribeToForceQuit(Action action)
     {
-        //action -= LeaveBed;
+        ForceInterrupt -= action;
     }
 
     private void EnterBed(PlayerStateMachine playerToHide)
@@ -65,6 +65,7 @@ public class Bed : MonoBehaviour, IInteractable
 
     private void LeaveBed(PlayerStateMachine playerToEnableAgain)
     {
+        ForceInterrupt?.Invoke();
         playerToEnableAgain.Enable();
         spriteRenderer.sprite = empty;
     }
