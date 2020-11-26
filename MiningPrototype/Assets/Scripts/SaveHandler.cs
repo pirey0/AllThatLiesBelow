@@ -15,7 +15,6 @@ public static class SaveHandler
 
     public static bool LoadFromSavefile;
 
-    [Button]
     public static void Save()
     {
         SaveDataCollection collection = new SaveDataCollection();
@@ -44,7 +43,14 @@ public static class SaveHandler
         return File.Exists(FULL_SAVE_PATH);
     }
 
-    [Button]
+    public static void DestroySaveFile()
+    {
+        if (SaveFileExists())
+        {
+            File.Delete(FULL_SAVE_PATH);
+        }
+    }
+
     public static void Load()
     {
         if (!SaveFileExists())
@@ -85,6 +91,7 @@ public static class SaveHandler
 
         Debug.Log("Loaded Successfully");
     }
+
 }
 
 [System.Serializable]

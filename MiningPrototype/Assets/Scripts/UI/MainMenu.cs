@@ -7,10 +7,16 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] Animator animator;
     [SerializeField] SceneReference playScene;
+    [SerializeField] UnityEngine.UI.Button loadButton;
 
     private void Start()
     {
         SaveHandler.LoadFromSavefile = false;
+
+        if (!SaveHandler.SaveFileExists())
+        {
+            loadButton.interactable = false;
+        }
     }
 
     public void MenueAction(string coroutineName)

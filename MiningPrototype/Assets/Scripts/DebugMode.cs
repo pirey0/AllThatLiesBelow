@@ -26,6 +26,7 @@ public class DebugMode : MonoBehaviour
         DebugLogConsole.AddCommandInstance("/sacrifice", "Sacrifice trade " + Util.EnumToString(typeof(AltarRewardType)) + " and " + Util.EnumToString(typeof(ItemType)), "Sacrifice", this);
         DebugLogConsole.AddCommandInstance("/sacrificeItem", "Sacrifice with no reward " + Util.EnumToString(typeof(ItemType)), "SacrificeItem", this);
         DebugLogConsole.AddCommandInstance("/sacrificeProgression", "Set the altar progression level. (Unlock different options 0-10)", "SetProgressionLevel", this);
+        DebugLogConsole.AddCommandInstance("/deleteSave", "Delete your save file", "DeleteSaveFile", this);
     }
 
     private void Update()
@@ -112,5 +113,10 @@ public class DebugMode : MonoBehaviour
     private void Sacrifice(AltarRewardType reward, ItemType item)
     {
         progressionHandler.Aquired(reward.ToString(), new ItemAmountPair(item, 9999));
+    }
+
+    private void DeleteSaveFile()
+    {
+        SaveHandler.DestroySaveFile();
     }
 }

@@ -1223,6 +1223,7 @@ MonoBehaviour:
   playScene:
     sceneAsset: {fileID: 102900000, guid: 53d0f6ca29d978d419924c4c54291a68, type: 3}
     scenePath: Assets/Scenes/PlayScene.unity
+  loadButton: {fileID: 929788203}
 --- !u!82 &636918758
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11614,7 +11615,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0, g: 0, b: 0, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
