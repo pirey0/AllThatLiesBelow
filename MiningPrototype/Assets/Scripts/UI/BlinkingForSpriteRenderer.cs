@@ -25,7 +25,6 @@ public class BlinkingForSpriteRenderer : MonoBehaviour
     {
         if (blinkingRoutine == null && spriteRenderer != null)
         {
-            Debug.LogWarning("Start Blinking");
             matBefore = spriteRenderer.material;
             colorBefore = spriteRenderer.color;
             spriteRenderer.material = blinkingMaterial;
@@ -44,8 +43,6 @@ public class BlinkingForSpriteRenderer : MonoBehaviour
         {
             yield return null;
             spriteRenderer.color = blinkColor * (((Mathf.Sin(t * blinkSpeed) + 1) / 2));
-
-            Debug.LogWarning("Update Blinking");
 
             t += Time.deltaTime;
         }
