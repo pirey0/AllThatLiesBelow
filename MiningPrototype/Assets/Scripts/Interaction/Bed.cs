@@ -76,6 +76,8 @@ public class Bed : MonoBehaviour, IInteractable
 
         if (nightFadeToBlack != null)
         {
+            nightFadeToBlack.enabled = true;
+
             float nightOpacity = 0f;
 
 
@@ -90,6 +92,7 @@ public class Bed : MonoBehaviour, IInteractable
             if (sacrificedHappyness) {
                 transitionEffectHandler.FadeIn(FadeType.Nightmare);
                 nightFadeToBlack.color = new Color(0, 0, 0, 0);
+                nightFadeToBlack.enabled = false;
             }
             else
                 wakeupSound?.Play();
