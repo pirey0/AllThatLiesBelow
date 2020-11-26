@@ -1,6 +1,7 @@
 ﻿
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEditor;
 using UnityEngine;
 
@@ -191,6 +192,26 @@ public static class Util
     public static string ChooseRandomString(params string[] stringArray)
     {
         return stringArray[Random.Range(0, stringArray.Length)];
+    }
+
+    public static string EnumToString(System.Type type)
+    {
+        if (type.IsEnum)
+        {
+            var values = System.Enum.GetNames(type);
+            StringBuilder sb = new StringBuilder();
+            sb.Append("(");
+            foreach (var item in values)
+            {
+                sb.Append(item + ", ");
+            }
+            sb.Append(")");
+            return sb.ToString();
+        }
+        else
+        {
+            return "NOT ENUM";
+        }
     }
 
 }
