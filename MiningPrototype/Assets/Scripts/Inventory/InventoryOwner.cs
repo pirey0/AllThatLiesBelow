@@ -18,6 +18,7 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner, IInteractable
     [SerializeField] bool inventoryVisualizerUpdates;
 
     [Zenject.Inject] InWorldCanvas inWorld;
+    [Zenject.Inject] InventoryVisualizer.Factory visualizerFactory;
 
     InventoryVisualizer inventoryVisualizer;
     InventoryState state = InventoryState.Closed;
@@ -60,7 +61,8 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner, IInteractable
                     openSource.Play();
                 }
 
-                inventoryVisualizer = Instantiate(inventoryVisualizerPrefab, inWorld.Canvas.transform);
+                inventoryVisualizer = visualizerFactory.Create(inventoryVisualizerPrefab.gameObject);
+                inventoryVisualizer.transform.SetParent(inWorld.Canvas.transform, worldPositionStays: false);
                 inventoryVisualizer.Init(transform, inventory);
                 inventoryVisualizer.SetFollowOnUpdate(inventoryVisualizerUpdates);
             }

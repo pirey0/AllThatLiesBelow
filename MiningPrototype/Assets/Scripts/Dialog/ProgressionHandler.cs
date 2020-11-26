@@ -22,6 +22,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     [Zenject.Inject] OverworldEffectHandler overworldEffectHandler;
     [Zenject.Inject] CameraController cameraController;
     [Zenject.Inject] LettersParser lettersParser;
+    [Zenject.Inject] RuntimeProceduralMap map;
 
     ProgressionSaveData data;
     Postbox postbox;
@@ -223,7 +224,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
                     case AltarRewardType.Spring:
                         data.isSpring = true;
                         overworldEffectHandler.MakeSpring();
-                        RuntimeProceduralMap.Instance.ReplaceAll(TileType.Snow, TileType.Grass);
+                        map.ReplaceAll(TileType.Snow, TileType.Grass);
                         break;
                     case  AltarRewardType.MidasTouch:
                         data.isMidas = true;
@@ -239,7 +240,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
                         break;
                     case  AltarRewardType.AWayOut:
                         data.hasWayOut = true;
-                        RuntimeProceduralMap.Instance.ReplaceAll(TileType.BedStone, TileType.Stone);
+                        map.ReplaceAll(TileType.BedStone, TileType.Stone);
                         break;
                     case AltarRewardType.Freedom:
                         data.isFree = true;
@@ -294,11 +295,11 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
                     break;
                 case ItemType.Globe:
                     //Everything
-                    RuntimeProceduralMap.Instance.ReplaceAll(TileType.Stone, TileType.SolidVoid);
-                    RuntimeProceduralMap.Instance.ReplaceAll(TileType.Grass, TileType.SolidVoid);
-                    RuntimeProceduralMap.Instance.ReplaceAll(TileType.Diamond, TileType.SolidVoid);
-                    RuntimeProceduralMap.Instance.ReplaceAll(TileType.Copper, TileType.SolidVoid);
-                    RuntimeProceduralMap.Instance.ReplaceAll(TileType.Gold, TileType.SolidVoid);
+                    map.ReplaceAll(TileType.Stone, TileType.SolidVoid);
+                    map.ReplaceAll(TileType.Grass, TileType.SolidVoid);
+                    map.ReplaceAll(TileType.Diamond, TileType.SolidVoid);
+                    map.ReplaceAll(TileType.Copper, TileType.SolidVoid);
+                    map.ReplaceAll(TileType.Gold, TileType.SolidVoid);
                     cameraController.Camera.backgroundColor = Color.white;
 
                     break;

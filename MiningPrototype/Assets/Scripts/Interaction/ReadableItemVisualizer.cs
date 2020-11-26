@@ -76,4 +76,9 @@ public class ReadableItemVisualizer : MonoBehaviour
             readableItemHandler.Hide();
         }
     }
+
+
+    public class Factory : Zenject.PlaceholderFactory<UnityEngine.Object, ReadableItemVisualizer>
+    {
+    }
 }

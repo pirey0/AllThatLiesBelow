@@ -6,6 +6,7 @@ using UnityEngine;
 public class MirrorWorldFollower : MonoBehaviour
 {
     const int MIRROR_AMOUNT = 20;
+
     protected virtual void OnEnable()
     {
         RuntimeProceduralMap.Instance.MirrorSideChanged += OnMirrorSideChanged;

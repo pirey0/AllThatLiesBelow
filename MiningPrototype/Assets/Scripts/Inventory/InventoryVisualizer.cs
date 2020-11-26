@@ -20,7 +20,8 @@ public class InventoryVisualizer : ScalingUIElementBase
     [SerializeField] SpriteAnimation closeAnimation;
 
     [Zenject.Inject] ReadableItemHandler readableItemHandler;
-    
+    [Zenject.Inject] InventorySlotVisualizer.Factory slotFactory;
+
     SpriteRenderer spriteRendererToGetOrientatioFrom;
     Inventory inventory;
     List<InventorySlotVisualizer> slots = new List<InventorySlotVisualizer>();
@@ -109,7 +110,8 @@ public class InventoryVisualizer : ScalingUIElementBase
 
         for (int i = 0; i < itemsToVisualize.Length; i++)
         {
-            InventorySlotVisualizer newSlot = Instantiate(inventorySlotPrefab, gridLayoutParent);
+            InventorySlotVisualizer newSlot = slotFactory.Create(inventorySlotPrefab);
+            newSlot.transform.SetParent(gridLayoutParent, worldPositionStays: false);
             newSlot.Display(itemsToVisualize[i]);
             slots.Add(newSlot);
             yield return new WaitForSeconds(0.1f);
@@ -141,4 +143,8 @@ public class InventoryVisualizer : ScalingUIElementBase
         Destroy(gameObject);
     }
 
+
+    public class Factory : Zenject.PlaceholderFactory<GameObject, InventoryVisualizer>
+    {
+    }
 }

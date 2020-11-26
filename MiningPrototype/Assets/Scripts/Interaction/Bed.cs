@@ -105,8 +105,6 @@ public class Bed : MonoBehaviour, IInteractable
             DialogElementVisualization text = Instantiate(wakeUpTextPrefab, wakeUpTextParent);
             text.Init(null,wakeUpText,7f);
 
-            
-
             if (!sacrificedHappyness)
             {
                 yield return new WaitForSeconds(1f);

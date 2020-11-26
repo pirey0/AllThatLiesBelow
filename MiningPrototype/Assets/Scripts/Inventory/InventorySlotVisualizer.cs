@@ -220,4 +220,8 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
             Destroy(gameObject);
     }
 
+
+    public class Factory : Zenject.PlaceholderFactory<UnityEngine.Object, InventorySlotVisualizer>
+    {
+    }
 }

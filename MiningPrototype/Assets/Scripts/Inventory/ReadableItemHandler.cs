@@ -13,8 +13,8 @@ public class ReadableItemHandler : MonoBehaviour
     List<ReadableItem> readableItems = new List<ReadableItem>();
     List<int> readLettersIds = new List<int>();
 
-    [Zenject.Inject] Zenject.DiContainer diContainer;
     [Zenject.Inject] LettersParser lettersParser;
+    [Zenject.Inject] ReadableItemVisualizer.Factory readableItemFactory;
 
     public event System.Action HideEvent;
 
@@ -28,12 +28,11 @@ public class ReadableItemHandler : MonoBehaviour
             if (current != null)
                 current.Hide();
 
-            current = Instantiate(textDisplayPrefab, canvas.transform);
-            diContainer.InjectGameObject(current.gameObject);
+            current = readableItemFactory.Create(textDisplayPrefab);
+            current.transform.SetParent(canvas.transform, worldPositionStays: false);
             current.id = id;
             ReadLetterSound.pitch = 1;
             ReadLetterSound.Play();
-
 
             ReadableItem itemToDisplay = (readableItems.Count - 1 < id) ? null : readableItems[id];
 
