@@ -19,8 +19,8 @@ public class DebugMode : MonoBehaviour
         open = false;
         debugObjects.ForEach((x) => x.SetActive(false));
 
-        DebugLogConsole.AddCommandInstance("/tp", "Can teleport to: Altar, Bed", "TeleportToAltar", this);
-        DebugLogConsole.AddCommandInstance("/give", "Give player items", "PlayerGets", this);
+        DebugLogConsole.AddCommandInstance("/tp", "Can teleport to:" + Util.EnumToString(typeof(TeleportDestination)), "TeleportToAltar", this);
+        DebugLogConsole.AddCommandInstance("/give", "Give player items " + Util.EnumToString(typeof(ItemType)), "PlayerGets", this);
         DebugLogConsole.AddCommandInstance("/kill", "Kill the player", "KillPlayer", this);
     }
 
