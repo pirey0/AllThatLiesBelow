@@ -122,6 +122,9 @@ public class PlayerInteractionHandler : InventoryOwner
                 gridDigTarget = null;
                 TryDisableMiningVisuals();
             }
+
+            if (currentInteractable != null)
+                PlayerActivity?.Invoke();
         }
         else
         {
