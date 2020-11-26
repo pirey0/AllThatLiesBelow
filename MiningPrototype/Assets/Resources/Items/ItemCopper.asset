@@ -25,7 +25,8 @@ MonoBehaviour:
   AmountIsUniqueID: 0
   AltarWords:
   - Ore
-  - Metall
-  - Bronce
-  - Resource
+  - Metal
+  - Bronze
+  - Bornite
   - Copper
+  - Malachite
