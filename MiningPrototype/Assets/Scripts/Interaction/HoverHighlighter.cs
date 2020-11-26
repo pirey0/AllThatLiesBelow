@@ -16,6 +16,7 @@ public class HoverHighlighter : MonoBehaviour, IHoverable
 
     public void HoverEnter()
     {
+        spriteDefault = spriteRenderer.material;
         spriteRenderer.material = spriteOuline;
         spriteRenderer.color = new Color(0.8f,0.8f,0.8f);
     }
