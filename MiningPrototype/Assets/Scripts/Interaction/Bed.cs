@@ -89,16 +89,16 @@ public class Bed : MonoBehaviour, IInteractable
                 yield return null;
             }
 
+            progressionHandler.StartNextDay();
+
             if (sacrificedHappyness) {
                 transitionEffectHandler.FadeIn(FadeType.Nightmare);
                 nightFadeToBlack.color = new Color(0, 0, 0, 0);
-                nightFadeToBlack.enabled = false;
             }
             else
                 wakeupSound?.Play();
 
             yield return new WaitForSeconds(0.25f);
-            progressionHandler.StartNextDay();
 
             spriteRenderer.sprite = sacrificedHappyness? badDream:wakeup;
 
