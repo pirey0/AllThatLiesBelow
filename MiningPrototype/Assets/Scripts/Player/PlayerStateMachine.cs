@@ -186,6 +186,11 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         s_longIdle.AddTransition(IsMoving, s_walk);
         s_longIdle.AddTransition(NotInProlongedIdle, s_idle);
 
+        s_walk.AddTransition(IsOverWeight, s_slowWalk);
+        s_slowWalk.AddTransition(IsNotOverWeight, s_walk);
+        s_walk.AddTransition(IsSlowWalking, s_slowWalk);
+        s_slowWalk.AddTransition(IsIdle, s_idle);
+
         s_idle.AddTransition(IsFalling, s_fall);
         s_fall.AddTransition(IsGrounded, s_idle);
         s_jump.AddTransition(IsGrounded, s_idle);
@@ -197,8 +202,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         s_idle.AddTransition(IsMoving, s_walk);
         s_inventory.AddTransition(IsMoving, s_walk);
         s_walk.AddTransition(IsIdle, s_idle);
-        s_walk.AddTransition(IsSlowWalking, s_slowWalk);
-        s_slowWalk.AddTransition(IsIdle, s_idle);
+
 
         s_idle.AddTransition(ShouldClimb, s_climb);
         s_walk.AddTransition(ShouldClimb, s_climb);
@@ -213,6 +217,16 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         s_jump.AddTransition(IsFalling, s_fall);
 
         s_hit.AddTransition(HitFinished, s_idle);
+    }
+
+    private bool IsNotOverWeight()
+    {
+        return !IsOverWeight();
+    }
+
+    private bool IsOverWeight()
+    {
+        return playerInteraction.Inventory.GetTotalWeight() >= settings.maxCarryWeight * progressionHandler.StrengthMultiplyer;
     }
 
     private void DisableExit()

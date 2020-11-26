@@ -28,6 +28,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     
     public float SpeedMultiplyer { get => data.speedMultiplyer; }
     public float DigSpeedMultiplyer { get => data.digSpeedMultiplyer; }
+    public float StrengthMultiplyer { get => data.strengthMultiplyer; }
 
     public float JumpMultiplyer { get => data.jumpMultiplyer; }
     public bool DailySacrificeExpired { get => data.dailySacrificeExaused; }

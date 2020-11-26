@@ -41,6 +41,7 @@ MonoBehaviour:
   overWorldHeight: 79
   timeToHidePickaxe: 5
   overworldTimeToHidePickaxe: 1
+  maxCarryWeight: 200
   collisionMask:
     serializedVersion: 2
     m_Bits: 4353
