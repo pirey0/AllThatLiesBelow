@@ -58,6 +58,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     [SerializeField] bool debug;
 
     [Inject] ProgressionHandler progressionHandler;
+    [Inject] RuntimeProceduralMap map;
     [Inject] TransitionEffectHandler transitionEffectHandler;
 
     StateMachine stateMachine;
@@ -215,6 +216,9 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         s_climbIde.AddTransition(IsMovingIdle, s_climb);
 
         s_jump.AddTransition(IsFalling, s_fall);
+        s_idle.AddTransition(IsFalling, s_fall);
+        s_walk.AddTransition(IsFalling, s_fall);
+        s_slowWalk.AddTransition(IsFalling, s_fall);
 
         s_hit.AddTransition(HitFinished, s_idle);
     }
@@ -361,11 +365,11 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         var pos = transform.position.ToGridPosition() + new Vector2Int(0, -1);
 
         Util.DebugDrawTile(pos);
-        var t = RuntimeProceduralMap.Instance[pos];
+        var t = map[pos];
 
         if(t.Type == TileType.Stone)
         {
-            RuntimeProceduralMap.Instance.SetMapAt(pos.x, pos.y, Tile.Make(TileType.Gold), TileUpdateReason.Place, updateProperties: true, updateVisuals: true);
+            map.SetMapAt(pos.x, pos.y, Tile.Make(TileType.Gold), TileUpdateReason.Place, updateProperties: true, updateVisuals: true);
         }
     }
 
@@ -378,28 +382,28 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     {
         if (rigidbody.position.x < 0)
         {
-            rigidbody.position = new Vector2(rigidbody.position.x + RuntimeProceduralMap.Instance.SizeX, rigidbody.position.y);
+            rigidbody.position = new Vector2(rigidbody.position.x + map.SizeX, rigidbody.position.y);
         }
-        else if (rigidbody.position.x > RuntimeProceduralMap.Instance.SizeX)
+        else if (rigidbody.position.x > map.SizeX)
         {
-            rigidbody.position = new Vector2(rigidbody.position.x - RuntimeProceduralMap.Instance.SizeX, rigidbody.position.y);
+            rigidbody.position = new Vector2(rigidbody.position.x - map.SizeX, rigidbody.position.y);
         }
 
         var oldMirrorLoc = currentMirrorLoc;
         currentMirrorLoc = GetMirrorLocation();
         if (currentMirrorLoc != oldMirrorLoc)
         {
-            RuntimeProceduralMap.Instance.NotifyMirrorWorldSideChange(currentMirrorLoc);
+            map.NotifyMirrorWorldSideChange(currentMirrorLoc);
         }
     }
 
     private RuntimeProceduralMap.MirrorState GetMirrorLocation()
     {
-        if (rigidbody.position.x < RuntimeProceduralMap.Instance.SizeX / 3)
+        if (rigidbody.position.x < map.SizeX / 3)
         {
             return RuntimeProceduralMap.MirrorState.Left;
         }
-        else if (rigidbody.position.x > RuntimeProceduralMap.Instance.SizeX * 2 / 3)
+        else if (rigidbody.position.x > map.SizeX * 2 / 3)
         {
             return RuntimeProceduralMap.MirrorState.Right;
         }

@@ -25,6 +25,7 @@ public class PlayerInteractionHandler : InventoryOwner
     [Inject] ProgressionHandler progressionHandler;
     [Inject] CameraController cameraController;
     [Inject] EventSystem eventSystem;
+    [Inject] RuntimeProceduralMap map;
 
     SpriteAnimator spriteAnimator;
     Camera camera;
@@ -209,8 +210,8 @@ public class PlayerInteractionHandler : InventoryOwner
 
     private bool UpdateDigTarget()
     {
-        gridDigTarget = MapHelper.GetMiningTarget(RuntimeProceduralMap.Instance, GetPositionInGrid(), GetClickCoordinate());
-        if (!RuntimeProceduralMap.Instance.CanTarget(gridDigTarget.Value.x, gridDigTarget.Value.y))
+        gridDigTarget = MapHelper.GetMiningTarget(map, GetPositionInGrid(), GetClickCoordinate());
+        if (!map.CanTarget(gridDigTarget.Value.x, gridDigTarget.Value.y))
         {
             gridDigTarget = null;
             return false;
@@ -271,15 +272,15 @@ public class PlayerInteractionHandler : InventoryOwner
     private void TryPlace()
     {
         Vector2Int clickPos = GetClickCoordinate();
-        if (MapHelper.HasLineOfSight(RuntimeProceduralMap.Instance, GetPositionInGrid(), clickPos, debugVisualize: true))
-            RuntimeProceduralMap.Instance.SetMapAt(clickPos.x, clickPos.y, Tile.Make(TileType.Stone), TileUpdateReason.Place);
+        if (MapHelper.HasLineOfSight(map, GetPositionInGrid(), clickPos, debugVisualize: true))
+            map.SetMapAt(clickPos.x, clickPos.y, Tile.Make(TileType.Stone), TileUpdateReason.Place);
     }
 
     private void TryDig()
     {
         if (gridDigTarget.HasValue)
         {
-            Tile t = RuntimeProceduralMap.Instance[gridDigTarget.Value];
+            Tile t = map[gridDigTarget.Value];
             var info = TilesData.GetTileInfo(t.Type);
 
             if (!player.InOverworld() || info.MinableInOverworld)
@@ -287,7 +288,7 @@ public class PlayerInteractionHandler : InventoryOwner
                 CloseInventory();
                 PlayerActivity?.Invoke();
 
-                bool broken = RuntimeProceduralMap.Instance.DamageAt(gridDigTarget.Value.x, gridDigTarget.Value.y, Time.deltaTime * settings.digSpeed * progressionHandler.DigSpeedMultiplyer, playerCaused: true);
+                bool broken = map.DamageAt(gridDigTarget.Value.x, gridDigTarget.Value.y, Time.deltaTime * settings.digSpeed * progressionHandler.DigSpeedMultiplyer, playerCaused: true);
 
                 if (broken)
                 {
@@ -326,7 +327,7 @@ public class PlayerInteractionHandler : InventoryOwner
 
     private void UpdateMiningParticlesPositions()
     {
-        miningParticles.transform.position = MapHelper.GetWorldLocationOfFreeFaceFromSource(RuntimeProceduralMap.Instance, gridDigTarget.Value, GetPositionInGrid());
+        miningParticles.transform.position = MapHelper.GetWorldLocationOfFreeFaceFromSource(map, gridDigTarget.Value, GetPositionInGrid());
         Debug.DrawLine((Vector3Int)GetPositionInGrid(), miningParticles.transform.position, Color.yellow, 0.1f);
     }
 
