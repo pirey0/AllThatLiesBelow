@@ -27,7 +27,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     [Zenject.Inject] InventoryManager inventoryManager;
 
     ProgressionSaveData data;
-    Postbox postbox;
+    Letterbox postbox;
     
     public float SpeedMultiplyer { get => data.speedMultiplyer; }
     public float DigSpeedMultiplyer { get => data.digSpeedMultiplyer; }
@@ -47,7 +47,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
     protected override void OnPostSceneLoad()
     {
-        postbox = FindObjectOfType<Postbox>();
+        postbox = FindObjectOfType<Letterbox>();
     }
 
     protected override void OnNewGame()
