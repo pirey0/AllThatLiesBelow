@@ -214,4 +214,22 @@ public static class Util
         }
     }
 
+    /// <summary>
+    /// Extensive search for T in all GameObjects
+    /// </summary>
+    public static T[] FindAllThatImplement<T>()
+    {
+        var objects = GameObject.FindObjectsOfType<GameObject>();
+        List<T> interfaces = new List<T>();
+
+        foreach (var obj in objects)
+        {
+            if (obj.TryGetComponent(out T t))
+            {
+                interfaces.Add(t);
+            }
+        }
+
+        return interfaces.ToArray();
+    }
 }
