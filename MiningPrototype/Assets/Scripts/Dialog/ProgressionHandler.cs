@@ -18,6 +18,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     [SerializeField] GameObject youWonPrefab;
     [SerializeField] TMPro.TMP_FontAsset fontAsset, fontAsset2;
     [SerializeField] PostProcessProfile noHappinessProfile;
+    [SerializeField] AudioSource instantDeliveryAudio;
 
     [Zenject.Inject] OverworldEffectHandler overworldEffectHandler;
     [Zenject.Inject] CameraController cameraController;
@@ -324,6 +325,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     {
         if (data.instantDelivery)
         {
+            instantDeliveryAudio.Play();
             newOrderCrateSpawner.SpawnOrder(itemAmountPairs);
         }
         else
