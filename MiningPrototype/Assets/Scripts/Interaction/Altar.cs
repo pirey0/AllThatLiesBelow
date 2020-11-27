@@ -160,20 +160,12 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
         }
 
         string str = Util.ChooseRandomString("What about ", "Give me ", "I want ");
-        List<string> allreadyChoosen = new List<string>();
 
-        for (int i = 0; i < (Mathf.Min(5,paymentWords.Count)); i++)
+        paymentWords = paymentWords.OrderBy(a => Guid.NewGuid()).ToList(); //random shuffle
+
+        for (int i = 0; i < (Mathf.Min(5, paymentWords.Count)); i++)
         {
-            string r = paymentWords[UnityEngine.Random.Range(0, paymentWords.Count)];
-
-            while (allreadyChoosen.Contains(r))
-            {
-                r = paymentWords[UnityEngine.Random.Range(0, paymentWords.Count)];
-            }
-
-            allreadyChoosen.Add(r);
-
-            str += r + " ";
+            str += paymentWords[i] + " ";
         }
 
         return str;

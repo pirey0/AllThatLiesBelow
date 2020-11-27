@@ -6,14 +6,14 @@ using NaughtyAttributes;
 public class Dynamite : MonoBehaviour
 {
     [SerializeField] float delay;
-    [SerializeField] int explostionSize = 5;
+    [SerializeField] int explostionSize = 5, destroyEntitySize;
     [SerializeField] GameObject explosionPrefab;
 
     [Zenject.Inject] CameraController cameraController;
 
-    private void Start ()
+    private void Start()
     {
-        Invoke("Detonate",delay);
+        Invoke("Detonate", delay);
     }
 
     [Button]
@@ -23,12 +23,25 @@ public class Dynamite : MonoBehaviour
 
         cameraController.Shake(position, shakeType: CameraShakeType.explosion, 1, explostionSize * 2 + 10);
 
-        for (int x = - explostionSize; x <= explostionSize; x++)
+        for (int x = -explostionSize; x <= explostionSize; x++)
         {
-            for (int y = - explostionSize; y <= explostionSize; y++)
+            for (int y = -explostionSize; y <= explostionSize; y++)
             {
-                if (Vector2Int.Distance(Vector2Int.zero,new Vector2Int(x,y)) <= explostionSize)
-                RuntimeProceduralMap.Instance.DamageAt(position.x + x, position.y + y, 100, playerCaused: true);
+                if (Vector2Int.Distance(Vector2Int.zero, new Vector2Int(x, y)) <= explostionSize)
+                    RuntimeProceduralMap.Instance.DamageAt(position.x + x, position.y + y, 100, playerCaused: true);
+            }
+        }
+
+        var cs = Physics2D.CircleCastAll(transform.position, destroyEntitySize, Vector2.zero);
+        foreach (var collider in cs)
+        {
+            if (collider.transform.TryGetComponent(out TilemapCarvingEntity entity))
+            {
+                entity.UncarveDestroy();
+            }
+            else if (collider.transform.TryGetComponent(out PlayerStateMachine player))
+            {
+                player.TakeDamage(DamageStrength.Strong);
             }
         }
 
