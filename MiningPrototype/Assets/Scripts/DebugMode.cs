@@ -7,7 +7,6 @@ using Zenject;
 public class DebugMode : MonoBehaviour
 {
     public const bool DEBUG_POSSIBLE = true;
-    static bool INIT = false;
 
     [SerializeField] List<GameObject> debugObjects;
 
@@ -21,20 +20,16 @@ public class DebugMode : MonoBehaviour
     {
         open = false;
         debugObjects.ForEach((x) => x.SetActive(false));
-     
-        if (!INIT)
-        {
-            DebugLogConsole.AddCommandInstance("/tp", "Teleport to " + Util.EnumToString(typeof(TeleportDestination)), "TeleportToAltar", this);
-            DebugLogConsole.AddCommandInstance("/give", "Give player items " + Util.EnumToString(typeof(ItemType)), "PlayerGets", this);
-            DebugLogConsole.AddCommandInstance("/kill", "Kill the player", "KillPlayer", this);
-            DebugLogConsole.AddCommandInstance("/reward", "Get a reward without suffering the consequences " + Util.EnumToString(typeof(AltarRewardType)), "Reward", this);
-            DebugLogConsole.AddCommandInstance("/sacrifice", "Sacrifice trade " + Util.EnumToString(typeof(AltarRewardType)) + " and " + Util.EnumToString(typeof(ItemType)), "Sacrifice", this);
-            DebugLogConsole.AddCommandInstance("/sacrificeItem", "Sacrifice with no reward " + Util.EnumToString(typeof(ItemType)), "SacrificeItem", this);
-            DebugLogConsole.AddCommandInstance("/sacrificeProgression", "Set the altar progression level. (Unlock different options 0-10)", "SetProgressionLevel", this);
-            DebugLogConsole.AddCommandInstance("/deleteSave", "Delete your save file", "DeleteSaveFile", this);
-            DebugLogConsole.AddCommandInstance("/time", "sets time scale", "SetTimeScale", this);
-            INIT = true;
-        }
+
+        DebugLogConsole.AddCommandInstance("/tp", "Teleport to " + Util.EnumToString(typeof(TeleportDestination)), "TeleportToAltar", this);
+        DebugLogConsole.AddCommandInstance("/give", "Give player items " + Util.EnumToString(typeof(ItemType)), "PlayerGets", this);
+        DebugLogConsole.AddCommandInstance("/kill", "Kill the player", "KillPlayer", this);
+        DebugLogConsole.AddCommandInstance("/reward", "Get a reward without suffering the consequences " + Util.EnumToString(typeof(AltarRewardType)), "Reward", this);
+        DebugLogConsole.AddCommandInstance("/sacrifice", "Sacrifice trade " + Util.EnumToString(typeof(AltarRewardType)) + " and " + Util.EnumToString(typeof(ItemType)), "Sacrifice", this);
+        DebugLogConsole.AddCommandInstance("/sacrificeItem", "Sacrifice with no reward " + Util.EnumToString(typeof(ItemType)), "SacrificeItem", this);
+        DebugLogConsole.AddCommandInstance("/sacrificeProgression", "Set the altar progression level. (Unlock different options 0-10)", "SetProgressionLevel", this);
+        DebugLogConsole.AddCommandInstance("/deleteSave", "Delete your save file", "DeleteSaveFile", this);
+        DebugLogConsole.AddCommandInstance("/time", "sets time scale", "SetTimeScale", this);
     }
 
     private void Update()
@@ -96,7 +91,7 @@ public class DebugMode : MonoBehaviour
         if (amount > 0)
             inventoryManager.PlayerCollects(itemType, amount);
     }
-    
+
     private void KillPlayer()
     {
         player?.TakeDamage(DamageStrength.Strong);
@@ -114,7 +109,7 @@ public class DebugMode : MonoBehaviour
         progressionHandler.StartNextDay();
     }
 
-    private void SacrificeItem( ItemType item)
+    private void SacrificeItem(ItemType item)
     {
         progressionHandler.Aquired(AltarRewardType.None.ToString(), new ItemAmountPair(item, 9999));
         progressionHandler.StartNextDay();
