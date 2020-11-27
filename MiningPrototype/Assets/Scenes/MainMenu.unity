@@ -1225,8 +1225,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 636918756}
   playScene:
-    sceneAsset: {fileID: 102900000, guid: 53d0f6ca29d978d419924c4c54291a68, type: 3}
-    scenePath: Assets/Scenes/PlayScene.unity
+    sceneAsset: {fileID: 0}
+    scenePath: 
   loadButton: {fileID: 929788203}
 --- !u!82 &636918758
 AudioSource:
