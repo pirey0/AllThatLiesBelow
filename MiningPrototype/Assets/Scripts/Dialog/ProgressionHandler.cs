@@ -362,6 +362,11 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     {
         return saveID;
     }
+
+    public int GetLoadPriority()
+    {
+        return 20;
+    }
 }
 
 public enum LetterProgressionState

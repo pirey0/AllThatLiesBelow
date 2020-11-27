@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ladder : TilemapCarvingEntity, INonPersistantSavable
+public class Ladder : TilemapCarvingEntity
 {
     [SerializeField] Rigidbody2D rigidbody;
     [SerializeField] AudioSource fallSound;
@@ -26,6 +26,7 @@ public class Ladder : TilemapCarvingEntity, INonPersistantSavable
     {
         Carve();
         rigidbody.isKinematic = true;
+        rigidbody.velocity = Vector2.zero;
     }
 
     public override void OnTileUpdated(int x, int y, TileUpdateReason reason)
@@ -63,19 +64,5 @@ public class Ladder : TilemapCarvingEntity, INonPersistantSavable
 
             rigidbody.isKinematic = true;
         Carve();
-    }
-
-    public SpawnableSaveData ToSaveData()
-    {
-        var data = new SpawnableSaveData();
-        data.SpawnableIDType = SpawnableIDType.Ladder;
-        data.Position = new SerializedVector3(transform.position);
-        data.Rotation = new SerializedVector3(transform.eulerAngles);
-
-        return data;
-    }
-
-    public void Load(SpawnableSaveData data)
-    {
     }
 }

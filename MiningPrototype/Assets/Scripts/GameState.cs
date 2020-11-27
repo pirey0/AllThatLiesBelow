@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameState
+public class GameState : MonoBehaviour
 {
     private State currentState = State.OutOfGame;
     private State oldState;
@@ -47,7 +47,7 @@ public class GameState
                 break;
 
             case State.PostLoadFromFile:
-                ChangeStateTo(State.FullStart);
+                ChangeStateNextFrameTo(State.FullStart);
                 break;
 
             case State.PostLoadScenes:
@@ -55,13 +55,23 @@ public class GameState
                 break;
 
             case State.NewGame:
-                ChangeStateTo(State.FullStart);
+                ChangeStateNextFrameTo(State.FullStart);
                 break;
             case State.FullStart:
                 ChangeStateTo(State.Playing);
                 break;
         }
+    }
 
+    public void ChangeStateNextFrameTo(State ns)
+    {
+        StartCoroutine(DelayedChangeState(ns));
+    }
+
+    private IEnumerator DelayedChangeState(State s)
+    {
+        yield return null;
+        ChangeStateTo(s);
     }
 
     public enum State

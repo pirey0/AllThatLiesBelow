@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6837a1855e5d0b4381e3b0b9819d8fd, type: 3}
   m_Name: DefaultProjectInstaller
   m_EditorClassIdentifier: 
+  gameStatePrefab: {fileID: 7686406743805718258, guid: 09f896c4580bede46830cc6661780fdf, type: 3}

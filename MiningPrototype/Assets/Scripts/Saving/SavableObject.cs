@@ -10,6 +10,8 @@ public interface ISavable
     void Load(SaveData data);
 
     string GetSaveID();
+
+    int GetLoadPriority();
 }
 
 public interface INonPersistantSavable
@@ -24,7 +26,10 @@ public enum SpawnableIDType
     None,
     Rock,
     Ladder,
-    Support
+    Support,
+    Hut,
+    Postbox,
+    Altar
 }
 
 
@@ -32,7 +37,6 @@ public enum SpawnableIDType
 public class SaveData
 {
     public string GUID;
-    
 }
 
 [System.Serializable]

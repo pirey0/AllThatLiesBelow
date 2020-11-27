@@ -15,6 +15,11 @@ public class NonPersistantSaveManager : MonoBehaviour, ISavable
         return saveID;
     }
 
+    public int GetLoadPriority()
+    {
+        return -5;
+    }
+
     public void Load(SaveData saveData)
     {
         Debug.Log("Loading NonPersistant");
@@ -23,6 +28,9 @@ public class NonPersistantSaveManager : MonoBehaviour, ISavable
         {
             foreach (var data in container)
             {
+                if (data.SpawnableIDType == SpawnableIDType.None)
+                    continue;
+
                 if((int)data.SpawnableIDType < spawnablePrefabs.Length)
                 {
                     var go = Instantiate(spawnablePrefabs[(int)data.SpawnableIDType]);

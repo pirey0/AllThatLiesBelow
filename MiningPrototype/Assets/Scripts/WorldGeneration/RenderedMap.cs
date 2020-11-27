@@ -9,9 +9,9 @@ public class RenderedMap : BaseMap
     [SerializeField] Tilemap tilemap;
     [SerializeField] Tilemap damageOverlayTilemap, oreTilemap;
 
-    protected virtual void Setup()
+    protected override void Setup()
     {
-
+        base.Setup();
         tilemap.GetComponent<ITileMapElement>()?.Setup(this);
         damageOverlayTilemap.GetComponent<ITileMapElement>()?.Setup(this);
         oreTilemap.GetComponent<ITileMapElement>()?.Setup(this);

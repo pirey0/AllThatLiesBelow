@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using System.Linq;
 
 public static class SaveHandler
 {
@@ -68,7 +69,7 @@ public static class SaveHandler
             return;
         }
 
-        var objects = Util.FindAllThatImplement<ISavable>();
+        var objects = Util.FindAllThatImplement<ISavable>().OrderBy((x)=> x.GetLoadPriority());
 
         foreach (var savable in objects)
         {
