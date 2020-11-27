@@ -11,6 +11,7 @@ public class Rock : TilemapCarvingEntity
     [SerializeField] AudioSource rockFalling;
     [SerializeField] AudioSource rockSmashing;
     [SerializeField] float crumbleMinTime = 0.3f;
+    [SerializeField] SpriteRenderer renderer;
 
     float lastCrumbleStamp = -1000;
 
@@ -47,6 +48,13 @@ public class Rock : TilemapCarvingEntity
         if (reason == TileUpdateReason.Destroy || reason == TileUpdateReason.Generation)
         {
             UncarveDestroy();
+        }
+        else
+        {
+            if (RuntimeProceduralMap.Instance[x, y].Visibility > 2)
+                renderer.enabled = false;
+            else
+                renderer.enabled = true;
         }
     }
 

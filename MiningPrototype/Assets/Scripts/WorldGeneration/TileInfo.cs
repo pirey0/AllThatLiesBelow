@@ -24,7 +24,9 @@ public class TileInfo : ScriptableObject
     public TileBase[] Tiles;
     public TileInfo TileSourceInfo;
 
+    public TileBase Visibility2Tile;
     public TileBase Overlay;
+
 
     public Sprite physicalTileSprite;
     public Sprite physicalTileOverlay;

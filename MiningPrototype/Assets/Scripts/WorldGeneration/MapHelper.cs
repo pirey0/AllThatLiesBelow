@@ -39,6 +39,8 @@ public static class MapHelper
         return ns.ToArray();
     }
 
+
+
     public static Vector2Int[] GetDirectNeighboursIndiciesOf(int x, int y)
     {
         return new Vector2Int[]
@@ -50,6 +52,31 @@ public static class MapHelper
         };
     }
 
+    public static Vector2Int[] GetCornerIndiciesOf(int x, int y)
+    {
+        return new Vector2Int[]
+        {
+            new Vector2Int(x+1,y+1),
+            new Vector2Int(x-1,y+1),
+            new Vector2Int(x+1,y-1),
+            new Vector2Int(x-1,y-1)
+        };
+    }
+
+    public static Vector2Int[] Get2ndDegreeDirectNeighboursIndiciesOf(int x, int y)
+    {
+        return new Vector2Int[]
+        {
+            new Vector2Int(x,y+2),
+            new Vector2Int(x-2,y),
+            new Vector2Int(x+2,y),
+            new Vector2Int(x,y-2),
+            new Vector2Int(x+1,y+1),
+            new Vector2Int(x+1,y-1),
+            new Vector2Int(x-1,y-1),
+            new Vector2Int(x-1,y+1)
+        };
+    }
 
     public static bool HasLineOfSight(RuntimeProceduralMap map, Vector2Int start, Vector2Int end, bool debugVisualize = false)
     {
