@@ -67,6 +67,7 @@ public class PauseMenu : StateListenerBehaviour
 
     public void ReturnToMainMenu()
     {
+        Unpause();
         SceneManager.LoadScene(mainMenu);
     }
 }
