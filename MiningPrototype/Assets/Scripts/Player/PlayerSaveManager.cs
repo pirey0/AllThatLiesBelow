@@ -13,6 +13,11 @@ public class PlayerSaveManager : MonoBehaviour, ISavable
         return saveID;
     }
 
+    public int GetLoadPriority()
+    {
+        return 10;
+    }
+
     public void Load(SaveData data)
     {
         if (data is PlayerSaveData saveData)

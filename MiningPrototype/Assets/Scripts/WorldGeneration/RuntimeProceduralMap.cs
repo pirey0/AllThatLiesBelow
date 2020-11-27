@@ -49,10 +49,6 @@ public class RuntimeProceduralMap : RenderedMap
             RunCompleteGeneration();
     }
 
-    protected override void OnPostLoadFromFile()
-    {
-        Setup();
-    }
 
     protected override void Setup()
     {
@@ -82,6 +78,7 @@ public class RuntimeProceduralMap : RenderedMap
 
     private IEnumerator UpdateUnstableTilesRoutine()
     {
+        Debug.Log("Starting UnstableTiles routine");
         tilesToStabilityCheck.Clear(); //clear on real start
 
         int i = 0;

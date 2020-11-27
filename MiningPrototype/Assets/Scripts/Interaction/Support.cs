@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Support : SupportBase, INonPersistantSavable
+public class Support : SupportBase
 {
     private void Start()
     {
-        AdaptHeightTo(CalculateHeight());
+        var height = CalculateHeight();
+        AdaptHeightTo(height);
+        Debug.Log("Support placed with height: " + height);
         Carve();
     }
 
@@ -26,17 +28,4 @@ public class Support : SupportBase, INonPersistantSavable
         //Support broke... What happens now?
     }
 
-    public SpawnableSaveData ToSaveData()
-    {
-        var data = new SpawnableSaveData();
-        data.SpawnableIDType = SpawnableIDType.Support;
-        data.Position = new SerializedVector3(transform.position);
-        data.Rotation = new SerializedVector3(transform.eulerAngles);
-
-        return data;
-    }
-
-    public void Load(SpawnableSaveData data)
-    {
-    }
 }

@@ -242,12 +242,18 @@ public class BaseMap : StateListenerBehaviour, ISavable
             map = saveData.Map;
             sizeX = map.GetLength(0);
             sizeY = map.GetLength(1);
+            Setup();
             UpdateAllVisuals();
         }
         else
         {
             Debug.LogError("Wrong SaveData received");
         }
+    }
+
+    protected virtual void Setup()
+    {
+
     }
 
     public void LoadFromAsset(TextAsset saveObject)
@@ -283,6 +289,11 @@ public class BaseMap : StateListenerBehaviour, ISavable
     public bool IsSetup()
     {
         return map != null;
+    }
+
+    public int GetLoadPriority()
+    {
+        return -10;
     }
 }
 

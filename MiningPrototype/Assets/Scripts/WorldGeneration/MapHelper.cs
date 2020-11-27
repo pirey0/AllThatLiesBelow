@@ -186,7 +186,7 @@ public static class MapHelper
         int count = 0;
         while (!map.IsOutOfBounds(coordinate.x, coordinate.y))
         {
-            if (map.IsAirAt(coordinate.x, coordinate.y))
+            if (map.IsAirAt(coordinate.x, coordinate.y) || map[coordinate].Type == TileType.CollapsableEntity || map[coordinate].Type == TileType.FloatingEntity)
             {
                 coordinate.y++;
                 count++;
