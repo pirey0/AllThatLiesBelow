@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 5
   explostionSize: 5
+  destroyEntitySize: 2
   explosionPrefab: {fileID: 4200292356520221087, guid: f8b941eac75a2eb409f77a775a20e09a, type: 3}
 --- !u!199 &4026373921871395103
 ParticleSystemRenderer:
