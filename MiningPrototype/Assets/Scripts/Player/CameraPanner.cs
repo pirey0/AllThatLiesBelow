@@ -31,7 +31,6 @@ public class CameraPanner : MonoBehaviour
 
     private void OnCameraRender(ScriptableRenderContext context, Camera camera)
     {
-        Debug.Log("OnCameraRender");
         UpdatePosition();
     }
 
