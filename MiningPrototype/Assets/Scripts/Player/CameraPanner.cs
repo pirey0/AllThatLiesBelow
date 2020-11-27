@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class CameraPanner : MonoBehaviour
 {
@@ -13,13 +14,24 @@ public class CameraPanner : MonoBehaviour
 
     float yOffset;
 
+    private void OnEnable()
+    {
+        RenderPipelineManager.beginCameraRendering += OnCameraRender;
+    }
+
+    private void OnDisable()
+    {
+        RenderPipelineManager.beginCameraRendering -= OnCameraRender;
+    }
+
     private void Update()
     {
         UpdatePosition();
     }
 
-    private void OnPreRender()
+    private void OnCameraRender(ScriptableRenderContext context, Camera camera)
     {
+        Debug.Log("OnCameraRender");
         UpdatePosition();
     }
 

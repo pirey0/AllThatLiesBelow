@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class CameraController : MonoBehaviour
 {
@@ -30,7 +31,17 @@ public class CameraController : MonoBehaviour
             Camera.enabled = false;
     }
 
-    private void OnPreRender()
+    private void OnEnable()
+    {
+        RenderPipelineManager.beginCameraRendering += OnCameraRender;
+    }
+
+    private void OnDisable()
+    {
+        RenderPipelineManager.beginCameraRendering -= OnCameraRender;
+    }
+
+    private void OnCameraRender(ScriptableRenderContext context, Camera camera)
     {
         transform.position = target.position + offsetToTarget + cameraShaker.GetShakeAmount();
     }
