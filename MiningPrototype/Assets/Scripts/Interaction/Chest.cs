@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chest : InventoryOwner, IHoverable
+public class Chest : InventoryOwner, IHoverable, IDropReceiver
 {
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Sprite chestOpen, chestClosed;
@@ -35,5 +35,31 @@ public class Chest : InventoryOwner, IHoverable
     public void HoverUpdate()
     {
         //
+    }
+
+    public bool WouldTakeDrop(ItemAmountPair pair)
+    {
+        return true;
+    }
+
+    public void BeginHoverWith(ItemAmountPair pair)
+    {
+        //
+    }
+
+    public void EndHover()
+    {
+        //
+    }
+
+    public void HoverUpdate(ItemAmountPair pair)
+    {
+        //
+    }
+
+    public void ReceiveDrop(ItemAmountPair pair, Inventory origin)
+    {
+        if (origin.Contains(pair) && origin.TryRemove(pair))
+            Inventory.Add(pair);
     }
 }

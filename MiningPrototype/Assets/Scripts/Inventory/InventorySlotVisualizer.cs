@@ -23,6 +23,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
     int amount;
     ItemType type;
+    Inventory origin;
     RectTransform rectTransform;
     Vector2 defaultAnchorPosition;
 
@@ -37,8 +38,9 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         rectTransform = GetComponent<RectTransform>();
     }
 
-    public void Display(ItemAmountPair pair)
+    public void Display(ItemAmountPair pair, Inventory origin)
     {
+        this.origin = origin;
         amount = pair.amount;
         type = pair.type;
 
@@ -66,7 +68,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
     public void Refresh()
     {
-        Display(new ItemAmountPair(type, amount));
+        Display(new ItemAmountPair(type, amount), origin);
     }
 
     public void SetButtonToSlot(UnityAction action)
@@ -164,7 +166,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         {
             if (VisualsEnabled)
             {
-                itemPlacingHandler.Show(new ItemAmountPair(type, amount));
+                itemPlacingHandler.Show(new ItemAmountPair(type, amount), origin);
                 if (info.CanBePlaced)
                     DisableVisuals();
             }

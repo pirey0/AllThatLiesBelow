@@ -8,7 +8,7 @@ using UnityEngine.Tilemaps;
 using UnityEngineInternal;
 using Zenject;
 
-public class PlayerInteractionHandler : InventoryOwner
+public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 {
     [SerializeField] PlayerSettings settings;
     [SerializeField] PlayerStateMachine player;
@@ -447,5 +447,31 @@ public class PlayerInteractionHandler : InventoryOwner
     {
         Gizmos.DrawWireSphere((Vector3Int)GetPositionInGrid(), settings.maxDigDistance);
         Gizmos.DrawWireSphere(GetPositionInGridV3(), settings.inventoryOpenDistance);
+    }
+
+    public bool WouldTakeDrop(ItemAmountPair pair)
+    {
+        return true;
+    }
+
+    public void BeginHoverWith(ItemAmountPair pair)
+    {
+        //
+    }
+
+    public void EndHover()
+    {
+        //
+    }
+
+    public void HoverUpdate(ItemAmountPair pair)
+    {
+        //
+    }
+
+    public void ReceiveDrop(ItemAmountPair pair, Inventory origin)
+    {
+        if (origin.Contains(pair) && origin.TryRemove(pair))
+            Inventory.Add(pair);
     }
 }

@@ -112,7 +112,7 @@ public class InventoryVisualizer : ScalingUIElementBase
         {
             InventorySlotVisualizer newSlot = slotFactory.Create(inventorySlotPrefab);
             newSlot.transform.SetParent(gridLayoutParent, worldPositionStays: false);
-            newSlot.Display(itemsToVisualize[i]);
+            newSlot.Display(itemsToVisualize[i], inventory);
             slots.Add(newSlot);
             yield return new WaitForSeconds(0.1f);
         }

@@ -20,6 +20,8 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner, IInteractable
     [Zenject.Inject] InWorldCanvas inWorld;
     [Zenject.Inject] InventoryVisualizer.Factory visualizerFactory;
 
+    private event System.Action ForceInterrupt;
+
     InventoryVisualizer inventoryVisualizer;
     InventoryState state = InventoryState.Closed;
     public Inventory Inventory { get => inventory; }
@@ -89,6 +91,7 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner, IInteractable
             }
         }
 
+        ForceInterrupt?.Invoke();
         InventoryManager.NotifyInventoryClosed(this);
     }
 
@@ -104,10 +107,12 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner, IInteractable
 
     public void SubscribeToForceQuit(Action action)
     {
+        ForceInterrupt += action;
     }
 
     public void UnsubscribeToForceQuit(Action action)
     {
+        ForceInterrupt -= action;
     }
 }
 

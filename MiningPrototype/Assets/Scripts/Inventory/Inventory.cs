@@ -73,7 +73,7 @@ public class Inventory
         if (info.AmountIsUniqueID)
         {
             int i = content.FindIndex(0,(x) => x == pair);
-            if(i>0 && i < content.Count)
+            if(i >= 0 && i < content.Count)
             {
                 content.RemoveAt(i);
                 InventoryChanged?.Invoke();

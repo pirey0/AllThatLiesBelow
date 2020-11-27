@@ -11,7 +11,7 @@ public interface IDropReceiver
     void BeginHoverWith(ItemAmountPair pair);
     void EndHover();
     void HoverUpdate(ItemAmountPair pair);
-    void ReceiveDrop(ItemAmountPair pair);
+    void ReceiveDrop(ItemAmountPair pair, Inventory origin);
 }
 
 public enum AltarState
@@ -214,7 +214,7 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
         spriteRenderer.color = Color.white;
     }
 
-    public void ReceiveDrop(ItemAmountPair pair)
+    public void ReceiveDrop(ItemAmountPair pair, Inventory inventoryPaidFrom)
     {
         spriteRenderer.color = Color.grey;
 
@@ -234,6 +234,7 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
 
                 ChangeStateTo(AltarState.PaymentAccepted);
                 progressionHandler.Aquired(selectedReward, payment);
+                inventoryPaidFrom.TryRemove(payment);
             }
             else
             {

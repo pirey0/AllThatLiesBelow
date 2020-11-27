@@ -32,6 +32,8 @@ public class Postbox : MonoBehaviour, IInteractable, IDropReceiver
     [SerializeField] NewOrderVisualizer newOrderPrefab;
     NewOrderVisualizer newOrder;
 
+    private event System.Action ForceInterrupt;
+
     PostboxStatus status;
 
     [Button]
@@ -55,6 +57,8 @@ public class Postbox : MonoBehaviour, IInteractable, IDropReceiver
     [Button]
     public void Close()
     {
+        ForceInterrupt?.Invoke();
+
         if (status != PostboxStatus.OPEN)
             return;
 
@@ -120,10 +124,12 @@ public class Postbox : MonoBehaviour, IInteractable, IDropReceiver
 
     public void SubscribeToForceQuit(Action action)
     {
+        ForceInterrupt += action;
     }
 
     public void UnsubscribeToForceQuit(Action action)
     {
+        ForceInterrupt -= action;
     }
 
     public bool WouldTakeDrop(ItemAmountPair pair)
@@ -150,13 +156,15 @@ public class Postbox : MonoBehaviour, IInteractable, IDropReceiver
         //
     }
 
-    public void ReceiveDrop(ItemAmountPair pair)
+    public void ReceiveDrop(ItemAmountPair pair, Inventory origin)
     {
-        if (InventoryManager.PlayerTryPay(pair.type, pair.amount))
+        Debug.LogWarning("receive drop");
+        if (origin.Contains(pair) && origin.TryRemove(pair))
         {
+            Debug.LogWarning("trade done");
             storedItem = pair;
             storeItemAudio?.Play();
-            SetBoxstatus(PostboxStatus.ACTIVEPLAYER);
+            EndInteracting(null);
         }
     }
 

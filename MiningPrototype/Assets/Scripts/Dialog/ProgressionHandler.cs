@@ -70,8 +70,6 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     {
         Debug.Log(topic + " unlocked in the morning!");
         data.dailySacrificeExaused = true;
-        InventoryManager.PlayerTryPay(payment.type, payment.amount);
-
         data.aquiredList.Add((topic, payment));
 
     }

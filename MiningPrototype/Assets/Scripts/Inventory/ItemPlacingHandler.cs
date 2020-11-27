@@ -11,6 +11,7 @@ public class ItemPlacingHandler : MonoBehaviour
 
     bool holdingPlacable;
     ItemAmountPair currentHeld;
+    Inventory currentOrigin;
 
     Transform previewTransform;
     IItemPreview preview;
@@ -29,9 +30,10 @@ public class ItemPlacingHandler : MonoBehaviour
             currentReceiver.EndHover();
     }
 
-    public void Show(ItemAmountPair pair)
+    public void Show(ItemAmountPair pair, Inventory origin)
     {
         currentHeld = pair;
+        currentOrigin = origin;
         var info = ItemsData.GetItemInfo(pair.type);
 
         if (info.CanBePlaced)
@@ -55,11 +57,11 @@ public class ItemPlacingHandler : MonoBehaviour
 
     public void TryPlace(ItemType type, Vector3 tryplacePosition)
     {
-        if (currentReceiver != null)
+        if (currentReceiver != null && currentOrigin != null)
         {
             if (currentReceiver.WouldTakeDrop(currentHeld))
             {
-                currentReceiver.ReceiveDrop(currentHeld);
+                currentReceiver.ReceiveDrop(currentHeld, currentOrigin);
                 return;
             }
         }
