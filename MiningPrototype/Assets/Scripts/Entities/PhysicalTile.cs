@@ -14,6 +14,8 @@ public class PhysicalTile : MineableObject, IEntity
     [SerializeField] SpriteRenderer renderer, overlayRenderer;
     [SerializeField] AudioSource hit;
 
+    [Zenject.Inject] InventoryManager inventoryManager;
+
     private RuntimeProceduralMap generator;
     Tile tile;
     TileInfo info;
@@ -43,7 +45,7 @@ public class PhysicalTile : MineableObject, IEntity
     protected override void Destroyed()
     {
         if (info.ItemToDrop != ItemType.None)
-            InventoryManager.PlayerCollects(info.ItemToDrop, contains.amount);
+            inventoryManager.PlayerCollects(info.ItemToDrop, contains.amount);
 
         Destroy(gameObject);
     }

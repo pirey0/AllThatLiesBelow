@@ -20,6 +20,8 @@ public class Bed : MonoBehaviour, IInteractable
 
     [Zenject.Inject] TransitionEffectHandler transitionEffectHandler;
     [Inject] ProgressionHandler progressionHandler;
+    [Inject] InventoryManager inventoryManager;
+
 
     string defaultWakeUpTest;
     bool sacrificedHappyness = false;
@@ -58,7 +60,7 @@ public class Bed : MonoBehaviour, IInteractable
     private void EnterBed(PlayerStateMachine playerToHide)
     {
         playerToHide.Disable();
-        InventoryManager.ForcePlayerInventoryClose();
+        inventoryManager.ForcePlayerInventoryClose();
         spriteRenderer.sprite = sleeping;
         StartCoroutine(SleepCoroutine(playerToHide));
     }
@@ -102,7 +104,7 @@ public class Bed : MonoBehaviour, IInteractable
 
             spriteRenderer.sprite = sacrificedHappyness? badDream:wakeup;
 
-            DialogElementVisualization text = Instantiate(wakeUpTextPrefab, wakeUpTextParent);
+            DialogElementVisualization text = Instantiate(wakeUpTextPrefab, wakeUpTextParent); //Safe no Injection needed
             text.Init(null,wakeUpText,7f);
 
             if (!sacrificedHappyness)

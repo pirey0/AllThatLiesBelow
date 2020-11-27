@@ -24,6 +24,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     [Zenject.Inject] CameraController cameraController;
     [Zenject.Inject] LettersParser lettersParser;
     [Zenject.Inject] RuntimeProceduralMap map;
+    [Zenject.Inject] InventoryManager inventoryManager;
 
     ProgressionSaveData data;
     Postbox postbox;
@@ -235,7 +236,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
                         break;
                     case  AltarRewardType.Victory:
                         data.hasWon = true;
-                        Instantiate(youWonPrefab);
+                        Instantiate(youWonPrefab); //safe no injection needed
                         break;
                     case  AltarRewardType.AWayOut:
                         data.hasWayOut = true;
@@ -272,7 +273,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
                 case ItemType.Family_Photo:
                     data.lastLetterID = -1;
-                    InventoryManager.PlayerCollects(ItemType.Family_Photo_Empty, 1);
+                    inventoryManager.PlayerCollects(ItemType.Family_Photo_Empty, 1);
                     break;
 
                 case ItemType.Hourglass:

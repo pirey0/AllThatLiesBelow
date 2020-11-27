@@ -11,15 +11,15 @@ public class InventoryCollectDisplayer : MonoBehaviour
     [SerializeField] AudioSource onCollectSound;
 
     [Zenject.Inject] CameraController cameraController;
-
+    [Zenject.Inject] InventoryManager inventoryManager;
     private void Start()
     {
-        InventoryManager.Instance.PlayerCollected += OnPlayerCollected;
+        inventoryManager.PlayerCollected += OnPlayerCollected;
     }
 
     private void OnDestroy()
     {
-        InventoryManager.Instance.PlayerCollected -= OnPlayerCollected;
+        inventoryManager.PlayerCollected -= OnPlayerCollected;
     }
 
     private void FixedUpdate()
@@ -31,7 +31,7 @@ public class InventoryCollectDisplayer : MonoBehaviour
     private void OnPlayerCollected(ItemAmountPair obj)
     {
         Vector3 position = Util.MouseToWorld(cameraController.Camera);
-        var go = Instantiate(prefab, position, Quaternion.identity, transform);
+        var go = Instantiate(prefab, position, Quaternion.identity, transform); //safe no injection needed
         go.SetItem(obj);
 
         if (onCollectSound != null)

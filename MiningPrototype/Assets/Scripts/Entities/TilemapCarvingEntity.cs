@@ -9,6 +9,8 @@ public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateRec
     [SerializeField] protected TileOffsetTypePair[] tilesToOccupy;
     [SerializeField] Vector3 carvingOffset;
 
+
+    [Zenject.Inject] InventoryManager inventoryManager;
     Vector2Int tilemapPos = new Vector2Int(-1, -1);
 
     public BaseMap TileMap {get; private set;}
@@ -42,7 +44,7 @@ public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateRec
 
         Destroy(gameObject);
         if (drop.IsValid())
-            InventoryManager.PlayerCollects(drop.type, drop.amount);
+            inventoryManager.PlayerCollects(drop.type, drop.amount);
     }
 
     protected void Carve()

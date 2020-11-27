@@ -68,8 +68,6 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner, IInteractable
                 inventoryVisualizer.Init(transform, inventory);
                 inventoryVisualizer.SetFollowOnUpdate(inventoryVisualizerUpdates);
             }
-
-            InventoryManager.NotifyInventoryOpen(this);
         }
     }
 
@@ -92,7 +90,6 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner, IInteractable
         }
 
         ForceInterrupt?.Invoke();
-        InventoryManager.NotifyInventoryClosed(this);
     }
 
     public void BeginInteracting(GameObject interactor)

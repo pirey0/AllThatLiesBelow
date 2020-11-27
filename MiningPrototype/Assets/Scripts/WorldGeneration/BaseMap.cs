@@ -122,17 +122,11 @@ public class BaseMap : StateListenerBehaviour, ISavable
         }
     }
 
-    private void BreakBlock(int x, int y, Tile t, bool playerCaused)
+    protected virtual void BreakBlock(int x, int y, Tile t, bool playerCaused)
     {
         SetMapAt(x, y, Tile.Air, TileUpdateReason.Destroy);
 
-        if (playerCaused)
-        {
-            TileInfo info = GetTileInfo(t.Type);
-
-            if (info.ItemToDrop != ItemType.None)
-                InventoryManager.PlayerCollects(info.ItemToDrop, 1);
-        }
+     
 
     }
 

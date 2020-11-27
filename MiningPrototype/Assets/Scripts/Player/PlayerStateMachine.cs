@@ -61,6 +61,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     [Inject] ProgressionHandler progressionHandler;
     [Inject] RuntimeProceduralMap map;
     [Inject] TransitionEffectHandler transitionEffectHandler;
+    [Inject] InventoryManager inventoryManager;
 
     StateMachine stateMachine;
     StateMachine.State s_idle, s_jump, s_fall, s_walk, s_slowWalk, s_climb, s_climbIde, s_inventory, s_death, s_hit, s_longIdle, s_disabled;
@@ -254,7 +255,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         transitionEffectHandler.FadeOut(FadeType.Death);
         rigidbody.simulated = false;
         lastDeathTimeStamp = Time.time;
-        InventoryManager.ForcePlayerInventoryClose();
+        inventoryManager.ForcePlayerInventoryClose();
         NotifyActivity();
         gameState.ChangeStateTo(GameState.State.Respawning);
         PlayerDeath?.Invoke();

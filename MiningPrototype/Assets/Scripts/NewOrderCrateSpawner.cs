@@ -10,6 +10,8 @@ public class NewOrderCrateSpawner : StateListenerBehaviour
     [SerializeField] List<ItemAmountPair> testOrder;
     [SerializeField] List<CrateInfo> crateInfos;
 
+    [Zenject.Inject] PrefabFactory prefabFactory;
+
     LocationIndicator spawnLoc;
 
     private void Start()
@@ -57,7 +59,7 @@ public class NewOrderCrateSpawner : StateListenerBehaviour
             }
             else
             {
-                Crate newCrate = Instantiate(cratePrefab, spawnLoc.transform.position + new Vector3(0, i*2), Quaternion.identity);
+                Crate newCrate = prefabFactory.Create(cratePrefab.gameObject, spawnLoc.transform.position + new Vector3(0, i*2), Quaternion.identity).GetComponent<Crate>();
                 newCrate.Pack(item);
             }
         }

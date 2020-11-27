@@ -9,9 +9,7 @@ public class SceneAdder : StateListenerBehaviour
 {
     [SerializeField] List<MapAddition> addition;
 
-    //Should be factory? https://github.com/modesttree/Zenject/blob/master/Documentation/Factories.md#custom-factories
     [Zenject.Inject] DiContainer diContainer;
-    [Zenject.Inject] GameState gameState;
 
     bool loaded = false;
     MapAddition current;
