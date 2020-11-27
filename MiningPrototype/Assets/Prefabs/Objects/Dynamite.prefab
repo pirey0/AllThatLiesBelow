@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd9a371b6b878204586739d0cd004da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 5
-  explostionSize: 5
+  delay: 7
+  explostionSize: 2
   destroyEntitySize: 2
   explosionPrefab: {fileID: 4200292356520221087, guid: f8b941eac75a2eb409f77a775a20e09a, type: 3}
 --- !u!199 &4026373921871395103

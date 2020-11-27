@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2388821100420778847}
   - component: {fileID: 2388821099892900699}
   - component: {fileID: 5016016371274373291}
+  - component: {fileID: 768168670457606508}
   m_Layer: 0
   m_Name: ProgressionHandler
   m_TagString: Untagged
@@ -46,10 +47,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveID: 74e74007-1ac0-4ff3-b5ee-b9d9ecf0658f
-  rewardASpeedMultiplyer: 2
-  rewardDigSpeedMultiplyer: 2
-  rewardStrengthMultiplyer: 2
-  rewardJumpMultiplyer: 2
   newOrderCrateSpawner: {fileID: 2388821099892900699}
   startingLetterID: 100
   startingItems:
@@ -61,10 +58,6 @@ MonoBehaviour:
   debugCostForReward:
     type: 0
     amount: 0
-  youWonPrefab: {fileID: 3551563762525882506, guid: dcdedf87d2aac1f4ea09f66f4e056541, type: 3}
-  fontAsset: {fileID: 11400000, guid: c91df58b5dfd95a4bb3a43645f87ae0e, type: 2}
-  fontAsset2: {fileID: 11400000, guid: d4b1999f5a6dee24da6dc56286d165ff, type: 2}
-  noHappinessProfile: {fileID: 11400000, guid: c5602808f57b4564ebda5c21715a117f, type: 2}
   instantDeliveryAudio: {fileID: 5016016371274373291}
 --- !u!114 &2388821099892900699
 MonoBehaviour:
@@ -189,3 +182,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &768168670457606508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2388821100420778845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e72f5d89ee28748a1bc1edec1e956c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rewardASpeedMultiplyer: 2
+  rewardDigSpeedMultiplyer: 2
+  rewardStrengthMultiplyer: 2
+  rewardJumpMultiplyer: 1.5
+  youWonPrefab: {fileID: 3551563762525882506, guid: dcdedf87d2aac1f4ea09f66f4e056541, type: 3}
+  fontAsset: {fileID: 11400000, guid: c91df58b5dfd95a4bb3a43645f87ae0e, type: 2}
+  fontAsset2: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  noHappinessProfile: {fileID: 11400000, guid: c5602808f57b4564ebda5c21715a117f, type: 2}

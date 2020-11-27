@@ -4,20 +4,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using System.Linq;
 
 public class ProgressionHandler : StateListenerBehaviour, ISavable
 {
     [ReadOnly] [SerializeField] string saveID = Util.GenerateNewSaveGUID();
 
-    [SerializeField] float rewardASpeedMultiplyer, rewardDigSpeedMultiplyer, rewardStrengthMultiplyer, rewardJumpMultiplyer;
     [SerializeField] NewOrderCrateSpawner newOrderCrateSpawner;
     [SerializeField] int startingLetterID = 100;
     [SerializeField] List<ItemAmountPair> startingItems;
     [SerializeField] string debugRewardToGet;
     [SerializeField] ItemAmountPair debugCostForReward;
-    [SerializeField] GameObject youWonPrefab;
-    [SerializeField] TMPro.TMP_FontAsset fontAsset, fontAsset2;
-    [SerializeField] PostProcessProfile noHappinessProfile;
     [SerializeField] AudioSource instantDeliveryAudio;
 
     [Zenject.Inject] OverworldEffectHandler overworldEffectHandler;
@@ -25,10 +22,11 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     [Zenject.Inject] LettersParser lettersParser;
     [Zenject.Inject] RuntimeProceduralMap map;
     [Zenject.Inject] InventoryManager inventoryManager;
+    [Zenject.Inject] SacrificeActions sacrificeActions;
 
     ProgressionSaveData data;
-    Letterbox postbox;
-    
+    Letterbox letterBox;
+
     public float SpeedMultiplyer { get => data.speedMultiplyer; }
     public float DigSpeedMultiplyer { get => data.digSpeedMultiplyer; }
     public float StrengthMultiplyer { get => data.strengthMultiplyer; }
@@ -42,12 +40,11 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
     public float ProgressionTimeScale { get => data.timeScale; }
 
-    public List<string> RewardsReceived { get => data.rewardsReceived; }
-
+    public List<string> RewardsReceived { get => data.rewardsReceived.Select((x)=> x.ToString()).ToList(); }
 
     protected override void OnPostSceneLoad()
     {
-        postbox = FindObjectOfType<Letterbox>();
+        letterBox = FindObjectOfType<Letterbox>();
     }
 
     protected override void OnNewGame()
@@ -55,7 +52,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
         data = new ProgressionSaveData();
         data.lastLetterID = startingLetterID;
         data.letterProgressionState = LetterProgressionState.RecievedDay;
-        if (postbox != null)
+        if (letterBox != null)
             SetPostboxLetterToID(data.lastLetterID);
 
         if (newOrderCrateSpawner != null)
@@ -64,7 +61,16 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
     protected override void OnPostLoadFromFile()
     {
-        //reapply all effects that need to be reapplied
+        //Reapply all effects on load
+        foreach (var item in data.rewardsReceived)
+        {
+            sacrificeActions.ApplyReward(item, data);
+        }
+
+        foreach (var item in data.itemSacrificed)
+        {
+            sacrificeActions.ApplyItemSacrificeConsequence(item, data);
+        }
     }
 
     public void Aquired(string topic, ItemAmountPair payment)
@@ -92,7 +98,6 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
         UpdateLetters();
 
         data.day++;
-        SaveHandler.Save();
     }
 
     [Button]
@@ -103,11 +108,11 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
     private void UpdateLetters()
     {
-        if (postbox != null)
+        if (letterBox != null)
         {
-            ItemAmountPair storedItem = postbox.GetStoredItem();
+            ItemAmountPair storedItem = letterBox.GetStoredItem();
             var info = ItemsData.GetItemInfo(storedItem.type);
-            postbox.SetStoredItem(ItemAmountPair.Nothing);
+            letterBox.SetStoredItem(ItemAmountPair.Nothing);
 
             //orders
             if (storedItem.type == ItemType.NewOrder)
@@ -181,7 +186,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
     private void SetPostboxLetterToID(int id)
     {
-        postbox.SetStoredItem(new ItemAmountPair(ItemType.LetterFromFamily, id));
+        letterBox.SetStoredItem(new ItemAmountPair(ItemType.LetterFromFamily, id));
     }
 
     [Button]
@@ -196,113 +201,26 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
         foreach (var aquired in data.aquiredList)
         {
-            if (!data.rewardsReceived.Contains(aquired.Item1))
-                data.rewardsReceived.Add(aquired.Item1);
-            //Reward
             Debug.Log("Aquired: " + aquired.Item1 + " by paying with " + aquired.Item2.ToString());
 
-            if(Enum.TryParse(aquired.Item1, out AltarRewardType altarReward))
+            if (Enum.TryParse(aquired.Item1, out AltarRewardType altarReward))
             {
-                switch (altarReward)
-                {
-                    case AltarRewardType.MiningSpeed:
-                        data.digSpeedMultiplyer = rewardDigSpeedMultiplyer;
-                        GameObject.FindObjectOfType<PickaxeAnimator>(includeInactive: true).Upgrade();
-                        break;
-                    case  AltarRewardType.WalkingSpeed:
-                        data.speedMultiplyer = rewardASpeedMultiplyer;
-                        break;
-                    case AltarRewardType.Strength:
-                        data.strengthMultiplyer = rewardStrengthMultiplyer;
-                        break;
-                    case  AltarRewardType.JumpHeight:
-                        data.jumpMultiplyer = rewardJumpMultiplyer;
-                        break;
-                    case AltarRewardType.InstantDelivery:
-                        data.instantDelivery = true;
-                        break;
-                    case AltarRewardType.Spring:
-                        data.isSpring = true;
-                        overworldEffectHandler.MakeSpring();
-                        map.ReplaceAll(TileType.Snow, TileType.Grass);
-                        break;
-                    case  AltarRewardType.MidasTouch:
-                        data.isMidas = true;
-                        //everything you touch turns to gold
-                        break;
-                    case  AltarRewardType.Love:
-                        data.hasLove = true;
-                        GameObject.FindObjectOfType<Bed>()?.ChangeWakeUpText("I Love you."); // Move to some text/Dialog system
-                        break;
-                    case  AltarRewardType.Victory:
-                        data.hasWon = true;
-                        Instantiate(youWonPrefab); //safe no injection needed
-                        break;
-                    case  AltarRewardType.AWayOut:
-                        data.hasWayOut = true;
-                        map.ReplaceAll(TileType.BedStone, TileType.Stone);
-                        break;
-                    case AltarRewardType.Freedom:
-                        data.isFree = true;
-                        //save game finished somewhere, or corrupt files sth like that
-                        Application.Quit();
-                        break;
-                    default:
-                        Debug.Log("Unimplemented aquired bonus: " + aquired);
-                        break;
-                }
+                if (!data.rewardsReceived.Contains(altarReward))
+                    data.rewardsReceived.Add(altarReward);
+
+                sacrificeActions.ApplyReward(altarReward, data);
             }
             else
             {
                 Debug.LogWarning("No altar reward named: " + aquired.Item1);
             }
 
-            //consequence
-            switch (aquired.Item2.type)
+            if (aquired.Item2.type != ItemType.None)
             {
-                case ItemType.Support:
-                    //Increase instability
-                    data.instableWorld = true;
-                    break;
+                if (data.itemSacrificed.Contains(aquired.Item2.type))
+                    data.itemSacrificed.Add(aquired.Item2.type);
 
-                case ItemType.LetterToFamily:
-                    //Cannot send
-                    data.cannotSend = true;
-                    GameObject.FindObjectOfType<Desk>(true).StopSending();
-                    break;
-
-                case ItemType.Family_Photo:
-                    data.lastLetterID = -1;
-                    inventoryManager.PlayerCollects(ItemType.Family_Photo_Empty, 1);
-                    break;
-
-                case ItemType.Hourglass:
-                    Time.timeScale = 0.9f;
-                    data.timeScale = 0.9f;
-                    //Your time?!
-                    break;
-
-                case ItemType.LetterFromFamily:
-                    //analfabetism
-                    fontAsset.material.SetFloat("_Sharpness", -1);
-                    fontAsset2.material.SetFloat("_Sharpness", -1);
-                    break;
-
-                case ItemType.Ball:
-                    GameObject.FindObjectOfType<Bed>().SacrificedHappyness();
-                    cameraController.Camera.GetComponent<PostProcessVolume>().profile = noHappinessProfile;
-                    //Happyness
-                    break;
-                case ItemType.Globe:
-                    //Everything
-                    map.ReplaceAll(TileType.Stone, TileType.SolidVoid);
-                    map.ReplaceAll(TileType.Grass, TileType.SolidVoid);
-                    map.ReplaceAll(TileType.Diamond, TileType.SolidVoid);
-                    map.ReplaceAll(TileType.Copper, TileType.SolidVoid);
-                    map.ReplaceAll(TileType.Gold, TileType.SolidVoid);
-                    cameraController.Camera.backgroundColor = Color.white;
-
-                    break;
+                sacrificeActions.ApplyItemSacrificeConsequence(aquired.Item2.type, data);
             }
 
             data.sacrificeProgressionLevel++;
@@ -340,11 +258,8 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
     public SaveData ToSaveData()
     {
-        ProgressionSaveData saveData = new ProgressionSaveData();
-        saveData.GUID = GetSaveID();
-        
-
-        return saveData;
+        data.GUID = GetSaveID();
+        return data;
     }
 
     public void Load(SaveData newData)
@@ -382,12 +297,12 @@ public enum LetterProgressionState
 public class ProgressionSaveData : SaveData
 {
     public int day = 0;
-    
+
     //sacrifice
     public bool dailySacrificeExaused;
     public int sacrificeProgressionLevel = 1;
     public List<(string, ItemAmountPair)> aquiredList = new List<(string, ItemAmountPair)>();
-    
+
     //sacrifice rewards
     public float speedMultiplyer = 1;
     public float digSpeedMultiplyer = 1;
@@ -401,7 +316,8 @@ public class ProgressionSaveData : SaveData
     public bool hasWayOut = false;
     public bool isFree = false;
     public float timeScale = 1;
-    public List<string> rewardsReceived = new List<string>();
+    public List<AltarRewardType> rewardsReceived = new List<AltarRewardType>();
+    public List<ItemType> itemSacrificed = new List<ItemType>();
 
     //sacriifce consequences
     public bool cannotSend;
