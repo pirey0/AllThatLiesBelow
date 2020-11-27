@@ -12,6 +12,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 {
     [SerializeField] public Image icon;
     [SerializeField] public TMP_Text amountDisplay;
+    [SerializeField] GameObject canDropOverlay;
     [SerializeField] AnimationCurve scaleOnOpenAndCloseCurve;
 
 
@@ -139,6 +140,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         inDrag = false;
         EnableVisuals();
         rectTransform.anchoredPosition = defaultAnchorPosition;
+        canDropOverlay.SetActive(false);
     }
 
     //to also update when not moving the mouse
@@ -167,6 +169,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
                     DisableVisuals();
             }
             itemPlacingHandler.UpdatePosition(rectTransform.position);
+            canDropOverlay.SetActive(itemPlacingHandler.IsAboveReceiver());
         }
         else
         {
@@ -175,6 +178,8 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
                 itemPlacingHandler.Hide();
                 EnableVisuals();
             }
+
+            canDropOverlay.SetActive(false);
         }
     }
 
