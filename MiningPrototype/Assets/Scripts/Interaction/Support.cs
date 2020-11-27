@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Support : SupportBase
+public class Support : SupportBase, INonPersistantSavable
 {
     private void Start()
     {
@@ -26,5 +26,17 @@ public class Support : SupportBase
         //Support broke... What happens now?
     }
 
+    public SpawnableSaveData ToSaveData()
+    {
+        var data = new SpawnableSaveData();
+        data.SpawnableIDType = SpawnableIDType.Support;
+        data.Position = new SerializedVector3(transform.position);
+        data.Rotation = new SerializedVector3(transform.eulerAngles);
 
+        return data;
+    }
+
+    public void Load(SpawnableSaveData data)
+    {
+    }
 }

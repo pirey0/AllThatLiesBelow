@@ -23,3 +23,4 @@ MonoBehaviour:
   eventSystemPrefab: {fileID: 4355947821229198085, guid: cc2acd4956f2dde4b83fa6e03dfd37fe, type: 3}
   inWorldCanvasPrefab: {fileID: 3019894843303896135, guid: 68766b238d735f249bc21c83b2547f29, type: 3}
   debugModePrefab: {fileID: 2713967248471055398, guid: e5e1307b208ca2a49a439925ada45aeb, type: 3}
+  nonPersistantSaveManager: {fileID: 3582284438814986634, guid: b6fe12852547eba49bfee5f4d0724d85, type: 3}

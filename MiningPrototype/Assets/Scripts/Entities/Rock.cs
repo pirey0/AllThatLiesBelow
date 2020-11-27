@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rock : TilemapCarvingEntity
+public class Rock : TilemapCarvingEntity, INonPersistantSavable
 {
     [SerializeField] float width = 2;
     [SerializeField] float destructionSpeed;
@@ -112,5 +112,19 @@ public class Rock : TilemapCarvingEntity
         }
     }
 
+    public SpawnableSaveData ToSaveData()
+    {
+        var data = new SpawnableSaveData();
+        data.SpawnableIDType = SpawnableIDType.Rock;
+        data.Position = new SerializedVector3(transform.position);
+        data.Rotation = new SerializedVector3(transform.eulerAngles);
+
+        return data;
+    }
+
+    public void Load(SpawnableSaveData data)
+    {
+
+    }
 }
 

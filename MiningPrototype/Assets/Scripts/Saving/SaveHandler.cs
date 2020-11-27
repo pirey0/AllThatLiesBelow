@@ -20,22 +20,19 @@ public static class SaveHandler
         SaveDataCollection collection = new SaveDataCollection();
         collection.Version = SAVEFILE_VERSION;
 
-        var objects = GameObject.FindObjectsOfType<GameObject>();
+        var objects = Util.FindAllThatImplement<ISavable>();
 
-        foreach (var obj in objects)
+        foreach (var savable in objects)
         {
-            if (obj.TryGetComponent(out ISavable savable))
-            {
                 collection.Add(savable.ToSaveData());
-            }
         }
 
         var stream = File.Open(FULL_SAVE_PATH, FileMode.OpenOrCreate);
 
         BinaryFormatter formatter = new BinaryFormatter();
         formatter.Serialize(stream, collection);
+        Debug.Log("Saved Sucessfully (" + (stream.Length*0.000001f) + " MB)");
         stream.Close();
-        Debug.Log("Saved Sucessfully");
     }
 
     public static bool SaveFileExists()
@@ -71,21 +68,18 @@ public static class SaveHandler
             return;
         }
 
-        var objects = GameObject.FindObjectsOfType<GameObject>();
+        var objects = Util.FindAllThatImplement<ISavable>();
 
-        foreach (var obj in objects)
+        foreach (var savable in objects)
         {
-            if (obj.TryGetComponent(out ISavable savable))
+            if (collection.ContainsKey(savable.GetSaveID()))
             {
-                if (collection.ContainsKey(savable.GetSaveID()))
-                {
-                    var data = collection[savable.GetSaveID()];
-                    savable.Load(data);
-                }
-                else
-                {
-                    Debug.LogError("No save data found for " + obj.name + " " + savable.GetSaveID());
-                }
+                var data = collection[savable.GetSaveID()];
+                savable.Load(data);
+            }
+            else
+            {
+                Debug.LogError("No save data found for " + savable.GetSaveID());
             }
         }
 

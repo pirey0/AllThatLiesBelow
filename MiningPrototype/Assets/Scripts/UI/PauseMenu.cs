@@ -13,10 +13,11 @@ public class PauseMenu : StateListenerBehaviour
 
     bool isPaused;
 
-    private void Awake()
+    protected override void OnStartAfterLoad()
     {
         Unpause();
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
