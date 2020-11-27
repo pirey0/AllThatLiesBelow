@@ -32,6 +32,7 @@ public class DebugMode : MonoBehaviour
             DebugLogConsole.AddCommandInstance("/sacrificeItem", "Sacrifice with no reward " + Util.EnumToString(typeof(ItemType)), "SacrificeItem", this);
             DebugLogConsole.AddCommandInstance("/sacrificeProgression", "Set the altar progression level. (Unlock different options 0-10)", "SetProgressionLevel", this);
             DebugLogConsole.AddCommandInstance("/deleteSave", "Delete your save file", "DeleteSaveFile", this);
+            DebugLogConsole.AddCommandInstance("/time", "sets time scale", "SetTimeScale", this);
             INIT = true;
         }
     }
@@ -128,5 +129,10 @@ public class DebugMode : MonoBehaviour
     private void DeleteSaveFile()
     {
         SaveHandler.DestroySaveFile();
+    }
+
+    private void SetTimeScale(float newTimeScale)
+    {
+        Time.timeScale = newTimeScale;
     }
 }
