@@ -333,7 +333,11 @@ MonoBehaviour:
   - sprite: {fileID: -1164896322992288394, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
     offset: {x: 0, y: 100, z: 0}
   - sprite: {fileID: 3339554163223783994, guid: bea1749c2a5f10742902c491aa0fcc1e, type: 3}
-    offset: {x: 0, y: 0.125, z: 0}
+    offset: {x: 0, y: 0.25, z: 0}
+  - sprite: {fileID: -7477988545709095788, guid: bea1749c2a5f10742902c491aa0fcc1e, type: 3}
+    offset: {x: 0, y: 0.375, z: 0}
+  - sprite: {fileID: -508740534161972420, guid: bea1749c2a5f10742902c491aa0fcc1e, type: 3}
+    offset: {x: 0, y: 0.25, z: 0}
 --- !u!1 &1264881361
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ public class HeadbobToLocaloffsetUpdater : MonoBehaviour
 {
     [SerializeField] SpriteAnimator toListenTo;
     [SerializeField] List<SpriteOffsetPair> sprites;
-    bool isBobbed = false;
+    [ShowNonSerializedField] bool isBobbed = false;
 
     Vector3 localPosition;
 
@@ -29,6 +30,8 @@ public class HeadbobToLocaloffsetUpdater : MonoBehaviour
 
     private void OnSpriteChange(Sprite newSprite)
     {
+        if (newSprite == null)
+            return;
 
         foreach (SpriteOffsetPair pair in sprites)
         {
@@ -47,7 +50,7 @@ public class HeadbobToLocaloffsetUpdater : MonoBehaviour
         if (bob != isBobbed)
             isBobbed = bob;
 
-        transform.localPosition = localPosition + ((isBobbed) ? offsetOnBob : Vector3.zero);
+        transform.localPosition = localPosition + offsetOnBob;
     }
 }
 
