@@ -287,7 +287,7 @@ public class BaseMap : StateListenerBehaviour, ISavable
         var t = loadedData.Map[x, y];
 
         if (t.Type != TileType.Ignore)
-            SetMapAt(x + xOffset, y + yOffset, t, TileUpdateReason.Generation, updateProperties: false, updateVisuals: false);
+            SetMapAt(x + xOffset, y + yOffset, t, TileUpdateReason.Generation, updateProperties: true, updateVisuals: false);
     }
 
     public bool IsSetup()
