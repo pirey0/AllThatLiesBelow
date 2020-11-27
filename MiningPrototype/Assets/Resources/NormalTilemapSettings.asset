@@ -25,4 +25,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 46330f0dc5b279c48837144879f14b29, type: 2}
   - {fileID: 11400000, guid: ee0c7ed288d70a14e8f20176e453128f, type: 2}
   - {fileID: 11400000, guid: d7c51f4b80084cf40b6edcc4a9b40106, type: 2}
+  VisibilityOverlayTiles:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: b2c2bac51eaeab04ebcb0b4157ec0f6c, type: 2}
+  - {fileID: 11400000, guid: 4a65875a5a138eb49b3ba558dc72dd0b, type: 2}
   CrumbleEffects: {fileID: 4718119467889540382, guid: 29b481f2814058a4fa2a97c2c2cdc4c8, type: 3}

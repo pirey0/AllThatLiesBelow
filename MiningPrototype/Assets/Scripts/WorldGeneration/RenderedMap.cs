@@ -8,6 +8,7 @@ public class RenderedMap : BaseMap
     [Header("RenderedMap")]
     [SerializeField] Tilemap tilemap;
     [SerializeField] Tilemap damageOverlayTilemap, oreTilemap;
+    [SerializeField] Tilemap visibilityTilemap;
 
     protected override void Setup()
     {
@@ -16,22 +17,24 @@ public class RenderedMap : BaseMap
         damageOverlayTilemap.GetComponent<ITileMapElement>()?.Setup(this);
         oreTilemap.GetComponent<ITileMapElement>()?.Setup(this);
     }
-    
+
     public override void UpdateAllVisuals()
     {
         tilemap.ClearAllTiles();
         damageOverlayTilemap.ClearAllTiles();
         oreTilemap.ClearAllTiles();
-        Util.IterateXY(SizeX, SizeY, UpdateVisualsAt);
+        visibilityTilemap.ClearAllTiles();
+        Util.IterateXY(SizeX, SizeY, SetVisualsAt);
     }
 
     protected override void UpdateVisualsAt(int x, int y)
     {
         SetVisualsAt(x, y);
         foreach (var nIndex in MapHelper.GetNeighboursIndiciesOf(x, y))
-        {
             SetVisualsAt(nIndex.x, nIndex.y);
-        }
+
+        foreach (var nIndex in MapHelper.Get2ndDegreeNeighboursIndiciesOf(x,y))
+            SetVisualsAt(nIndex.x, nIndex.y);
     }
 
     private void SetVisualsAt(int x, int y)
@@ -46,24 +49,32 @@ public class RenderedMap : BaseMap
         var tile = GetVisualTileFor(x, y);
         var destTile = GetVisualDestructableOverlayFor(x, y);
         var oreTile = GetVisualOverlayTileFor(x, y);
+        var visibilityTile = GetVisualVisibilityTileFor(x, y);
 
         tilemap.SetTile(new Vector3Int(x, y, 0), tile);
         damageOverlayTilemap.SetTile(new Vector3Int(x, y, 0), destTile);
         oreTilemap.SetTile(new Vector3Int(x, y, 0), oreTile);
+        visibilityTilemap.SetTile(new Vector3Int(x, y, 0), visibilityTile);
 
         if (x < Settings.MirroringAmount)
         {
             tilemap.SetTile(new Vector3Int(SizeX + x, y, 0), tile);
             damageOverlayTilemap.SetTile(new Vector3Int(SizeX + x, y, 0), destTile);
             oreTilemap.SetTile(new Vector3Int(SizeX + x, y, 0), oreTile);
+            visibilityTilemap.SetTile(new Vector3Int(SizeX + x, y, 0), visibilityTile);
         }
-
-        if (x > SizeX - Settings.MirroringAmount)
+        else if (x > SizeX - Settings.MirroringAmount)
         {
             tilemap.SetTile(new Vector3Int(x - SizeX, y, 0), tile);
             damageOverlayTilemap.SetTile(new Vector3Int(x - SizeX, y, 0), destTile);
             oreTilemap.SetTile(new Vector3Int(x - SizeX, y, 0), oreTile);
+            visibilityTilemap.SetTile(new Vector3Int(x -SizeX, y, 0), visibilityTile);
         }
+    }
+
+    private TileBase GetVisualVisibilityTileFor(int x, int y)
+    {
+        return Settings.VisibilityOverlayTiles[map[x, y].Visibility];
     }
 
     private TileBase GetVisualTileFor(int x, int y)
@@ -110,12 +121,45 @@ public class RenderedMap : BaseMap
         CalculateNeighboursBitmaskAt(x, y);
 
         foreach (var nIndex in MapHelper.GetNeighboursIndiciesOf(x, y))
-        {
             CalculateNeighboursBitmaskAt(nIndex.x, nIndex.y);
-        }
+
+        CalculateVisibilityAt(x, y);
+        foreach (var nIndex in MapHelper.GetNeighboursIndiciesOf(x, y))
+            CalculateVisibilityAt(nIndex.x, nIndex.y);
+
+        foreach (var nIndex in MapHelper.Get2ndDegreeNeighboursIndiciesOf(x, y))
+            CalculateVisibilityAt(nIndex.x, nIndex.y);
 
         PropagateStabilityUpdatesFrom(x, y);
     }
+
+    private void CalculateVisibilityAt(int x, int y)
+    {
+        if (IsOutOfBounds(x, y))
+            return;
+
+        Tile t = this[x, y];
+
+        if (IsAirAt(x, y))
+        {
+            t.Visibility = 0;
+        }
+        else
+        {
+            int min = 2;
+            foreach (var pos in MapHelper.GetNeighboursIndiciesOf(x, y))
+            {
+                var nVis = this[pos].Visibility;
+                if (nVis < min)
+                    min = nVis;
+            }
+            t.Visibility = min + 1;
+        }
+
+        this[x, y] = t;
+        Util.DebugDrawTile(new Vector2Int(x, y), t.Visibility==0? Color.white: t.Visibility==1? Color.white : t.Visibility ==2? Color.gray:Color.blue);
+    }
+
 
     private void CalculateNeighboursBitmaskAt(int x, int y)
     {
@@ -146,7 +190,7 @@ public class RenderedMap : BaseMap
     private void PropagateStabilityUpdatesFrom(int x, int y)
     {
         MarkToCheckForStability(x, y);
-        ResetStability(x, y);
+        ResetStabilityAt(x, y);
         DirectionalStabilityIterator(x, y, Direction.Up);
         DirectionalStabilityIterator(x, y, Direction.Right);
         DirectionalStabilityIterator(x, y, Direction.Down);
@@ -166,7 +210,7 @@ public class RenderedMap : BaseMap
         }
     }
 
-    private void ResetStability(int x, int y)
+    private void ResetStabilityAt(int x, int y)
     {
         var tile = GetTileAt(x, y);
         tile.ResetStability();
@@ -198,7 +242,7 @@ public class RenderedMap : BaseMap
 
     public override void CalculateStabilityAll()
     {
-        Util.IterateXY(SizeX, SizeY, (x, y) => ResetStability(x, y));
+        Util.IterateXY(SizeX, SizeY, (x, y) => ResetStabilityAt(x, y));
 
         Util.IterateXY(SizeX, SizeY, (x, y) => SetDirectionalStabilityAt(x, y, Direction.Down));
 
@@ -222,6 +266,23 @@ public class RenderedMap : BaseMap
                 SetDirectionalStabilityAt(x, y, Direction.Right);
             }
         }
+    }
+
+    public override void CalculateVisibilityAll()
+    {
+        Util.IterateXY(SizeX, SizeY, (x, y) => ResetVisibilityAt(x, y));
+        Util.IterateXY(SizeX, SizeY, (x, y) => CalculateVisibilityAt(x, y));
+        Util.IterateXY(SizeX, SizeY, (x, y) => CalculateVisibilityAt(x, y)); //two passes for two layers of visibility
+    }
+
+    private void ResetVisibilityAt(int x, int y)
+    {
+        var t = map[x, y];
+        if (IsNeighbourAt(x, y))
+            t.Visibility = 3;
+        else
+            t.Visibility = 0;
+        map[x, y] = t;
     }
 
     public override void CalculateAllNeighboursBitmask()

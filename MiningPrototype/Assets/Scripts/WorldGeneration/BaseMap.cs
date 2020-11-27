@@ -125,9 +125,6 @@ public class BaseMap : StateListenerBehaviour, ISavable
     protected virtual void BreakBlock(int x, int y, Tile t, bool playerCaused)
     {
         SetMapAt(x, y, Tile.Air, TileUpdateReason.Destroy);
-
-     
-
     }
 
     protected void SetMapRawAt(int x, int y, Tile tile)
@@ -167,6 +164,12 @@ public class BaseMap : StateListenerBehaviour, ISavable
 
     }
 
+    public virtual void CalculateVisibilityAll()
+    {
+
+    }
+
+
     protected virtual void UpdateVisualsAt(int x, int y)
     {
     }
@@ -174,6 +177,7 @@ public class BaseMap : StateListenerBehaviour, ISavable
     protected virtual void UpdatePropertiesAt(int x, int y, Tile newTile, Tile previousTile, TileUpdateReason reason)
     {
     }
+
 
     public virtual void CalculateAllNeighboursBitmask()
     {
@@ -183,9 +187,15 @@ public class BaseMap : StateListenerBehaviour, ISavable
     public void ReplaceAll(TileType target, TileType replacer)
     {
         Util.IterateXY(SizeX, sizeY, (x,y) => ReplaceAt(x,y,target, replacer));
+        RefreshAll();
+    }
 
+    public void RefreshAll()
+    {
+        Debug.Log("Map Refresh all");
         CalculateAllNeighboursBitmask();
         CalculateStabilityAll();
+        CalculateVisibilityAll();
         UpdateAllVisuals();
     }
 
@@ -277,7 +287,7 @@ public class BaseMap : StateListenerBehaviour, ISavable
         var t = loadedData.Map[x, y];
 
         if (t.Type != TileType.Ignore)
-            SetMapAt(x + xOffset, y + yOffset, t, TileUpdateReason.Generation, updateProperties: true, updateVisuals: true);
+            SetMapAt(x + xOffset, y + yOffset, t, TileUpdateReason.Generation, updateProperties: false, updateVisuals: false);
     }
 
     public bool IsSetup()

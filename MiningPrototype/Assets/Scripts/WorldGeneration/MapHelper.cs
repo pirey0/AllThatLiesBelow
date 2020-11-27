@@ -22,6 +22,22 @@ public static class MapHelper
             new Vector2Int(x+1,y-1)
         };
     }
+    public static Vector2Int[] Get2ndDegreeNeighboursIndiciesOf(int x, int y)
+    {
+        List<Vector2Int> ns = new List<Vector2Int>();
+        for (int i = -1; i <= 1; i++)
+        {
+            ns.Add(new Vector2Int(x + i, y + 2));
+            ns.Add(new Vector2Int(x + i, y + -2));
+            ns.Add(new Vector2Int(x + 2, y + i));
+            ns.Add(new Vector2Int(x + -2, y + i));
+        }
+        ns.Add(new Vector2Int(x + -2, y + 2));
+        ns.Add(new Vector2Int(x + -2, y + -2));
+        ns.Add(new Vector2Int(x + 2, y + 2));
+        ns.Add(new Vector2Int(x + 2, y + -2));
+        return ns.ToArray();
+    }
 
     public static Vector2Int[] GetDirectNeighboursIndiciesOf(int x, int y)
     {

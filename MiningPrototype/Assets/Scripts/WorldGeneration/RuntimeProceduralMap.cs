@@ -74,8 +74,10 @@ public class RuntimeProceduralMap : RenderedMap
 
     protected override void OnStartAfterLoad()
     {
+        RefreshAll();
         StartCoroutine(UpdateUnstableTilesRoutine());
     }
+
 
     private IEnumerator UpdateUnstableTilesRoutine()
     {
@@ -233,13 +235,7 @@ public class RuntimeProceduralMap : RenderedMap
 
         PopulateBorders();
 
-        CalculateAllNeighboursBitmask();
-
-        CalculateStabilityAll();
-
         PopulateSnow();
-
-        UpdateAllVisuals();
 
         tracker.Stop();
     }

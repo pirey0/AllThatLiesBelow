@@ -8,6 +8,7 @@ public class MapSettings : ScriptableObject
 {
     public int MirroringAmount;
     public TileBase[] DamageOverlayTiles;
+    public TileBase[] VisibilityOverlayTiles;
     public GameObject CrumbleEffects;
 
 }

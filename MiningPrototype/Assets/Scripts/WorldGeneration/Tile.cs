@@ -32,6 +32,8 @@ public struct Tile
     public byte NeighbourBitmask;
     public float Damage;
 
+    public int Visibility;
+
     //Up Right Down Left
     public int[] Stabilities;
 
@@ -45,6 +47,7 @@ public struct Tile
             t.Type = TileType.Air;
             t.NeighbourBitmask = 0;
             t.Damage = 0;
+            t.Visibility = 0;
             t.Stabilities = new int[4];
             return t;
         }
