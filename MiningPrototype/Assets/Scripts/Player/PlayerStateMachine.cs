@@ -62,7 +62,6 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     [Inject] RuntimeProceduralMap map;
     [Inject] TransitionEffectHandler transitionEffectHandler;
     [Inject] InventoryManager inventoryManager;
-
     StateMachine stateMachine;
     StateMachine.State s_idle, s_jump, s_fall, s_walk, s_slowWalk, s_climb, s_climbIde, s_inventory, s_death, s_hit, s_longIdle, s_disabled;
     Dictionary<string, PlayerStateInfo> canInteractInStateMap;
@@ -177,7 +176,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         s_climbIde = stateMachine.AddState("ClimbIdle", ClimbingEnter, ClimbingUpdate, ClimbingExit);
         s_inventory = stateMachine.AddState("Inventory", null, MoveUpdate);
         s_death = stateMachine.AddState("Death", DeathEnter, DeathUpdate, DeathExit);
-        s_hit = stateMachine.AddState("Hit", null);
+        s_hit = stateMachine.AddState("Hit", null, null, HitExit);
         s_longIdle = stateMachine.AddState("LongIdle", null, SlowMoveUpdate);
         s_disabled = stateMachine.AddState("Disabled", null, null, DisableExit);
         s_fall = stateMachine.AddState("Fall", null, MoveUpdate, FallExit);
@@ -223,6 +222,11 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         s_slowWalk.AddTransition(IsFalling, s_fall);
 
         s_hit.AddTransition(HitFinished, s_idle);
+    }
+
+    private void HitExit()
+    {
+        gameState.ReloadScene();
     }
 
     private bool IsNotOverWeight()
@@ -271,6 +275,10 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
 
     private void Respawn()
     {
+        gameState.ReloadScene();
+        return;
+
+        // no reload
         var bed = GameObject.FindObjectOfType<Bed>();
 
         if (bed != null)

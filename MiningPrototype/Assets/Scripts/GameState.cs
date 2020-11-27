@@ -68,6 +68,13 @@ public class GameState : MonoBehaviour
         StartCoroutine(DelayedChangeState(ns));
     }
 
+    public void ReloadScene()
+    {
+        ChangeStateTo(State.OutOfGame);
+        SaveHandler.LoadFromSavefile= SaveHandler.SaveFileExists();
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+    }
+
     private IEnumerator DelayedChangeState(State s)
     {
         yield return null;

@@ -61,11 +61,9 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
     protected override void OnPostLoadFromFile()
     {
-        Debug.Log("OnPostMalone");
         //Reapply all effects on load
         foreach (var item in data.rewardsReceived)
         {
-            Debug.Log("APPLIY REFEF");
             sacrificeActions.ApplyReward(item, data);
         }
 
@@ -100,7 +98,6 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
         UpdateLetters();
 
         data.day++;
-        SaveHandler.Save();
     }
 
     [Button]

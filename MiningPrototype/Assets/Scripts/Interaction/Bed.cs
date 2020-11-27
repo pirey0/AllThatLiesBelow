@@ -92,6 +92,7 @@ public class Bed : MonoBehaviour, IInteractable
             }
 
             progressionHandler.StartNextDay();
+            SaveHandler.Save();
 
             if (sacrificedHappyness) {
                 transitionEffectHandler.FadeIn(FadeType.Nightmare);
