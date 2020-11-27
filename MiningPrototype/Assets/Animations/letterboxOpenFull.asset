@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d05716d329922cf4abb0b6513364aece, type: 3}
+  m_Name: letterboxOpenFull
+  m_EditorClassIdentifier: 
+  loop: 1
+  speedMultiplyer: 1
+  frames:
+  - Sprite: {fileID: -4280998100289782029, guid: 6ef3ab651b57e014d8b3b4195bf119df, type: 3}
+    Duration: 0
+  fileToLoadFrom: {fileID: 8658765367736031446, guid: 6ef3ab651b57e014d8b3b4195bf119df, type: 3}
+  defaultTime: 0.25
+  loadFromLastToFirst: 0

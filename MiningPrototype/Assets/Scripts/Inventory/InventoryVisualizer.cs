@@ -24,7 +24,7 @@ public class InventoryVisualizer : ScalingUIElementBase
 
     SpriteRenderer spriteRendererToGetOrientatioFrom;
     Inventory inventory;
-    List<InventorySlotVisualizer> slots = new List<InventorySlotVisualizer>();
+    [SerializeField] List<InventorySlotVisualizer> slots = new List<InventorySlotVisualizer>();
 
     public void Init(Transform target, Inventory inventoryToVisualize)
     {
@@ -32,7 +32,7 @@ public class InventoryVisualizer : ScalingUIElementBase
         inventory = inventoryToVisualize;
         spriteRendererToGetOrientatioFrom = target.GetComponent<SpriteRenderer>();
 
-        RefreshInventoryDisplay();
+        CreateInventoryDisplay();
     }
 
     protected override void Update()
@@ -45,8 +45,76 @@ public class InventoryVisualizer : ScalingUIElementBase
         }
     }
 
+    public void UpdateInventoryDisplay(bool add, ItemAmountPair pair)
+    {
+        if (add)
+        {
+            if (!ItemsData.GetItemInfo(pair.type).AmountIsUniqueID)
+            {
+
+                foreach (InventorySlotVisualizer slot in slots)
+                {
+                    ItemAmountPair existingPair = slot.GetPair();
+                    if (existingPair.type == pair.type)
+                    {
+                        slot.Display(new ItemAmountPair(existingPair.type, existingPair.amount + pair.amount), inventory);
+                        return;
+                    }
+                }
+            }
+
+            ItemAmountPair[] itemAmountPairs = new ItemAmountPair[1];
+            itemAmountPairs[0] = pair;
+
+            StartCoroutine(SpawnItemElements(itemAmountPairs, skipOpenDelay: true));
+
+            RecalculateUISize(inventory.GetContent().Length);
+            RecalculateUIOrientation(spriteRendererToGetOrientatioFrom);
+
+            return;
+        }
+        else
+        {
+            if (ItemsData.GetItemInfo(pair.type).AmountIsUniqueID)
+            {
+                int i = slots.FindIndex(0, (x) => x.GetPair() == pair);
+                if (i >= 0 && i < slots.Count)
+                {
+                    InventorySlotVisualizer slot = slots[i];
+                    slots.RemoveAt(i);
+                    Destroy(slot.gameObject);
+
+                    RecalculateUISize(slots.Count);
+                    RecalculateUIOrientation(spriteRendererToGetOrientatioFrom);
+                }
+            }
+            else
+            {
+                foreach (InventorySlotVisualizer slot in slots)
+                {
+                    ItemAmountPair slotPair = slot.GetPair();
+                    if (slotPair.type == pair.type && slotPair.amount >= pair.amount)
+                    {
+                        if (slotPair.amount == pair.amount)
+                        {
+                            RecalculateUISize(slots.Count-1);
+                            RecalculateUIOrientation(spriteRendererToGetOrientatioFrom);
+                            Destroy(slot.gameObject);
+                            slots.Remove(slot);
+                        } else
+                        {
+                            slot.Display(new ItemAmountPair(pair.type, slotPair.amount - pair.amount), inventory);
+                        }
+
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
     [Button]
-    public void RefreshInventoryDisplay ()
+    public void CreateInventoryDisplay ()
     {
 
         foreach (Transform child in gridLayoutParent)
@@ -82,7 +150,6 @@ public class InventoryVisualizer : ScalingUIElementBase
 
             if (h > heightInSlots)
             {
-                Debug.Log("h: " + h + " => " + Mathf.CeilToInt(h));
                 height = Mathf.CeilToInt(h);
             }
         }
@@ -104,9 +171,10 @@ public class InventoryVisualizer : ScalingUIElementBase
             gridLayoutParent.localScale = flipX;
     }
 
-    private IEnumerator SpawnItemElements(ItemAmountPair[] itemsToVisualize)
+    private IEnumerator SpawnItemElements(ItemAmountPair[] itemsToVisualize, bool skipOpenDelay = false)
     {
-        yield return new WaitForSeconds(0.2f);
+        if (!skipOpenDelay)
+            yield return new WaitForSeconds(0.2f);
 
         for (int i = 0; i < itemsToVisualize.Length; i++)
         {

@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 using Zenject;
+using System.Text.RegularExpressions;
 
 public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
@@ -38,6 +39,12 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         rectTransform = GetComponent<RectTransform>();
     }
 
+    protected override void Start()
+    {
+        base.Start();
+        StartCoroutine(ScaleCoroutine(scaleUp: true));
+    }
+
     public void Display(ItemAmountPair pair, Inventory origin)
     {
         this.origin = origin;
@@ -62,8 +69,6 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         {
             amountDisplay.text = amount.ToString();
         }
-
-        StartCoroutine(ScaleCoroutine(scaleUp: true));
     }
 
     public void Refresh()
@@ -225,6 +230,11 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
         if (!scaleUp)
             Destroy(gameObject);
+    }
+
+    public ItemAmountPair GetPair()
+    {
+        return new ItemAmountPair(type,amount);
     }
 
 
