@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class PlayerVisualController : MonoBehaviour
@@ -11,6 +12,7 @@ public class PlayerVisualController : MonoBehaviour
     [SerializeField] PickaxeAnimator pickaxe;
     [SerializeField] GameObject pickaxeObject;
     [SerializeField] SpriteRenderer pickaxeRenderer;
+    [SerializeField] GameObject sweatParticles;
 
     [SerializeField] PlayerVisualState[] visualStates;
 
@@ -122,5 +124,11 @@ public class PlayerVisualController : MonoBehaviour
         {
             Debug.LogError("Undefined visuals state: " + visualStateMap);
         }
+
+        if (leavingState.Name == "SlowWalk")
+            sweatParticles.SetActive(false);
+
+        if (enteringState.Name == "SlowWalk")
+            sweatParticles.SetActive(true);
     }
 }
