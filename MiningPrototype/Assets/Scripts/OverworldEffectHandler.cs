@@ -10,7 +10,7 @@ public class OverworldEffectHandler : StateListenerBehaviour
     [SerializeField] float fadeThickness;
 
     [SerializeField] SpriteRenderer vignetteRenderer;
-    [SerializeField] ParticleSystem particleSystem;
+    [SerializeField] ParticleSystem snow, clouds;
     [SerializeField] float amountOfParticles;
     [SerializeField] AudioSource snowstormSounds, caveSounds, springSounds;
     [SerializeField] float maxSnowStormVolume, maxCaveVolume;
@@ -53,10 +53,17 @@ public class OverworldEffectHandler : StateListenerBehaviour
         alphaCalculatedBasedOnHeightOfPlayer = Mathf.Clamp((fadeHeight - height) / fadeThickness, 0, 1);
 
         //snow
-        if (particleSystem != null)
+        if (snow != null)
         {
-            var emissionModule = particleSystem.emission;
-            emissionModule.rateOverTime = (1 - alphaCalculatedBasedOnHeightOfPlayer) * amountOfParticles * (isSpring?0f:1f);
+            var snowEmission = snow.emission;
+            snowEmission.rateOverTime = (1 - alphaCalculatedBasedOnHeightOfPlayer) * amountOfParticles * (isSpring?0f:1f);
+        }
+
+        //clouds
+        if (clouds != null && isSpring)
+        {
+            var cloudEmission = clouds.emission;
+            cloudEmission.rateOverTime = 0.1f;
         }
 
 
