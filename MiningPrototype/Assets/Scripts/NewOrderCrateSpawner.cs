@@ -9,6 +9,9 @@ public class NewOrderCrateSpawner : StateListenerBehaviour
 {
     [SerializeField] List<ItemAmountPair> testOrder;
     [SerializeField] List<CrateInfo> crateInfos;
+    [SerializeField] GameObject cratePrefab;
+
+    [Zenject.Inject] PrefabFactory prefabFactory;
 
     LocationIndicator spawnLoc;
 
@@ -43,9 +46,9 @@ public class NewOrderCrateSpawner : StateListenerBehaviour
         for (int i = 0; i < order.Count; i++)
         {
             var item = order[i];
-            Crate cratePrefab = GetRandomCrateThatFits(item.GetTotalWeight());
+            CrateType crateType = GetRandomCrateThatFits(item.GetTotalWeight());
 
-            if (cratePrefab == null)
+            if (crateType < 0)
             {
                 var split = SplitToFit(item, crateInfos[crateInfos.Count - 1].MaxCapacity);
                 Debug.Log("Splitting");
@@ -57,7 +60,8 @@ public class NewOrderCrateSpawner : StateListenerBehaviour
             }
             else
             {
-                Crate newCrate = Instantiate(cratePrefab, spawnLoc.transform.position + new Vector3(0, i*2), Quaternion.identity);
+                Crate newCrate = prefabFactory.Create(cratePrefab, spawnLoc.transform.position + new Vector3(0, i*2), Quaternion.identity).GetComponent<Crate>();
+                newCrate.SetCrateType(crateType);
                 newCrate.Pack(item);
             }
         }
@@ -80,16 +84,16 @@ public class NewOrderCrateSpawner : StateListenerBehaviour
         return result;
     }
 
-    private Crate GetRandomCrateThatFits(int weight)
+    private CrateType GetRandomCrateThatFits(int weight)
     {
-        List<Crate> availableCrates = new List<Crate>();
+        List<CrateType> availableCrates = new List<CrateType>();
         int currentSize = -1;
 
         foreach (var info in crateInfos)
         {
             if (info.MaxCapacity >= weight && (info.MaxCapacity == currentSize || currentSize < 0))
             {
-                availableCrates.Add(info.CratePrefab);
+                availableCrates.Add(info.CrateType);
                 currentSize = info.MaxCapacity;
             }
         }
@@ -100,7 +104,7 @@ public class NewOrderCrateSpawner : StateListenerBehaviour
         }
         else
         {
-            return null;
+            return (CrateType)(-1);
         }
     }
 
@@ -110,6 +114,6 @@ public class NewOrderCrateSpawner : StateListenerBehaviour
 [System.Serializable]
 public struct CrateInfo
 {
-    public Crate CratePrefab;
+    public CrateType CrateType;
     public int MaxCapacity;
 }

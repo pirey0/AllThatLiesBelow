@@ -32,6 +32,8 @@ public class Postbox : MonoBehaviour, IInteractable, IDropReceiver
     [SerializeField] NewOrderVisualizer newOrderPrefab;
     NewOrderVisualizer newOrder;
 
+    [Zenject.Inject] InventoryManager inventoryManager;
+
     private event System.Action ForceInterrupt;
 
     PostboxStatus status;
@@ -48,7 +50,7 @@ public class Postbox : MonoBehaviour, IInteractable, IDropReceiver
         //add all stored items to player inventory
         if (!storedItem.IsNull() && storedItem.amount > 0)
         {
-            InventoryManager.PlayerCollects(storedItem.type, storedItem.amount);
+            inventoryManager.PlayerCollects(storedItem.type, storedItem.amount);
             storedItem = ItemAmountPair.Nothing;
         }
         SetBoxstatus(PostboxStatus.OPEN);

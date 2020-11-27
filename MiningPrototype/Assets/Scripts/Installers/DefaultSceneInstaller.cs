@@ -1,3 +1,4 @@
+using ModestTree;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
@@ -29,10 +30,50 @@ public class DefaultSceneInstaller : ScriptableObjectInstaller<DefaultSceneInsta
             Container.Bind<DebugMode>().FromComponentInNewPrefab(debugModePrefab).AsSingle().NonLazy();
         }
 
+        Container.Bind<InventoryManager>().AsSingle().NonLazy();
+
         //Factories
         Container.BindFactory<GameObject, InventoryVisualizer, InventoryVisualizer.Factory>().FromFactory<PrefabFactory<InventoryVisualizer>>();
         Container.BindFactory<UnityEngine.Object, InventorySlotVisualizer, InventorySlotVisualizer.Factory>().FromFactory<PrefabFactory<InventorySlotVisualizer>>();
         Container.BindFactory<UnityEngine.Object, ReadableItemVisualizer, ReadableItemVisualizer.Factory>().FromFactory<PrefabFactory<ReadableItemVisualizer>>();
-        
+
+        Container.BindFactory<GameObject,Transform, PrefabFactory>().FromFactory<NormalPrefabFactory>();
+    }
+}
+
+public class PrefabFactory : PlaceholderFactory<GameObject, Transform>
+{
+    public Transform Create(GameObject prefab, Vector3 position, Quaternion rotation, Transform parent = null)
+    {
+        var t = Create(prefab);
+        t.SetParent(parent, worldPositionStays: false);
+        t.position = position;
+        t.rotation = rotation;
+        return t;
+    }
+    public Transform Create(GameObject prefab, Transform parent)
+    {
+        var t = Create(prefab);
+        t.SetParent(parent, worldPositionStays: false);
+        return t;
+    }
+
+}
+
+public class NormalPrefabFactory : IFactory<GameObject, Transform>
+{
+    [Inject]
+    readonly DiContainer _container = null;
+
+    public DiContainer Container
+    {
+        get { return _container; }
+    }
+
+    public Transform Create(GameObject prefab)
+    {
+        Assert.That(prefab != null, "Null prefab given to factory create method");
+
+        return _container.InstantiatePrefab(prefab).transform;
     }
 }

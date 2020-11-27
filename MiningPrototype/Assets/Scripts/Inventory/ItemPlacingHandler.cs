@@ -8,6 +8,7 @@ public class ItemPlacingHandler : MonoBehaviour
     [Zenject.Inject] PlayerInteractionHandler player;
     [Zenject.Inject] CameraController cameraController;
     [Zenject.Inject] Zenject.DiContainer diContainer;
+    [Zenject.Inject] InventoryManager inventoryManager;
 
     bool holdingPlacable;
     ItemAmountPair currentHeld;
@@ -73,7 +74,7 @@ public class ItemPlacingHandler : MonoBehaviour
                 var info = ItemsData.GetItemInfo(type);
                 if (info.CanBePlaced && info.Prefab != null && preview.WouldPlaceSuccessfully())
                 {
-                    if (InventoryManager.PlayerTryPay(type, 1))
+                    if (inventoryManager.PlayerTryPay(type, 1))
                     {
                         var go = diContainer.InstantiatePrefab(info.Prefab, preview.GetPlacePosition(tryplacePosition), Quaternion.identity, null);
                     }

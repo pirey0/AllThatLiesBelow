@@ -19,6 +19,7 @@ public class Desk : MonoBehaviour, IInteractable
     PlayerStateMachine seatedPlayer;
 
     [Zenject.Inject] Zenject.DiContainer diContainer;
+    [Zenject.Inject] InventoryManager inventoryManager;
 
     DeskState deskState;
     private bool canSend = true;
@@ -73,7 +74,7 @@ public class Desk : MonoBehaviour, IInteractable
             writeLetterOption.SetActive(canSend);
 
         playerToHide.Disable();
-        InventoryManager.ForcePlayerInventoryClose();
+        inventoryManager.ForcePlayerInventoryClose();
         seatedPlayer.transform.position = transform.position;
     }
 
@@ -134,7 +135,7 @@ public class Desk : MonoBehaviour, IInteractable
         animator.Play(writeAnimation);
         letterWritingSource?.Play();
         yield return new WaitForSeconds(3);
-        InventoryManager.PlayerCollects(ItemType.LetterToFamily, 1);
+        inventoryManager.PlayerCollects(ItemType.LetterToFamily, 1);
         LeaveDesk();
     }
 

@@ -45,7 +45,7 @@ public class Dynamite : MonoBehaviour
             }
         }
 
-        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);//safe no injection needed
         Destroy(gameObject);
     }
 }

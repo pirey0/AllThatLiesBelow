@@ -18,6 +18,7 @@ public class NewOrderVisualizer : ReadableItemVisualizer
 
     [Inject] ProgressionHandler progressionHandler;
     [Inject] ShopPricesParser shopPricesParser;
+    [Inject] InventoryManager inventoryManager;
 
     Dictionary<ItemType, int> orderedElementsWithAmounts = new Dictionary<ItemType, int>();
     Dictionary<ItemType, int> cost = new Dictionary<ItemType, int>();
@@ -90,7 +91,7 @@ public class NewOrderVisualizer : ReadableItemVisualizer
         {
             if (costElement.Value > 0)
             {
-                TMP_Text costText = Instantiate(costElementPrefab, costGrid);
+                TMP_Text costText = Instantiate(costElementPrefab, costGrid); //safe no injection needed
                 Image costIcon = costText.GetComponentInChildren<Image>();
 
                 ItemInfo costInfo = ItemsData.GetItemInfo(costElement.Key);
@@ -117,7 +118,7 @@ public class NewOrderVisualizer : ReadableItemVisualizer
     {
         foreach (KeyValuePair<ItemType, int> i in costsToOrder)
         {
-            if (!InventoryManager.PlayerHas(i.Key, i.Value))
+            if (!inventoryManager.PlayerHas(i.Key, i.Value))
                 return SetCanBuy(false);
         }
 
@@ -146,11 +147,11 @@ public class NewOrderVisualizer : ReadableItemVisualizer
 
         int readableId = readableItemHandler.AddNewReadable(itemAmountPairs);
         progressionHandler.RegisterOrder(readableId, itemAmountPairs);
-        InventoryManager.PlayerCollects(ItemType.NewOrder, readableId);
+        inventoryManager.PlayerCollects(ItemType.NewOrder, readableId);
 
         foreach (var singlePrice in cost)
         {
-            InventoryManager.PlayerTryPay(singlePrice.Key, singlePrice.Value);
+            inventoryManager.PlayerTryPay(singlePrice.Key, singlePrice.Value);
         }
 
         OnClose?.Invoke();

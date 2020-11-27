@@ -40,6 +40,13 @@ MonoBehaviour:
     amount: 5
   destroyEffects: {fileID: 4888635124280202427, guid: c7333c0e8139a984db63c0ab6a7f05ac, type: 3}
   spriteRenderer: {fileID: 1248040165442377592}
+  crateType: 0
+  crateSprites:
+  - {fileID: 2958523863171369250, guid: b6aa7f742987cdd47b948d2b191619a6, type: 3}
+  - {fileID: -6586510187767786182, guid: b6aa7f742987cdd47b948d2b191619a6, type: 3}
+  - {fileID: -3013053334650348085, guid: b6aa7f742987cdd47b948d2b191619a6, type: 3}
+  - {fileID: -370123072403679878, guid: b6aa7f742987cdd47b948d2b191619a6, type: 3}
+  - {fileID: -7068887109631265336, guid: b6aa7f742987cdd47b948d2b191619a6, type: 3}
 --- !u!1001 &6266148904577691169
 PrefabInstance:
   m_ObjectHideFlags: 0

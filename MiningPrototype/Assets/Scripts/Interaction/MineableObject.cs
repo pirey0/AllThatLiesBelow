@@ -10,6 +10,9 @@ public class MineableObject : MirrorWorldFollower, IMinableNonGrid
     [SerializeField] protected ItemAmountPair contains;
     [SerializeField] GameObject destroyEffects;
 
+    [Zenject.Inject] InventoryManager inventoryManager;
+    
+
     float damage = 0;
 
     public virtual void Damage(float v)
@@ -25,10 +28,10 @@ public class MineableObject : MirrorWorldFollower, IMinableNonGrid
     protected virtual void Destroyed()
     {
         if (!contains.IsNull() && contains.amount > 0)
-            InventoryManager.PlayerCollects(contains.type, contains.amount);
+            inventoryManager.PlayerCollects(contains.type, contains.amount);
 
         if (destroyEffects != null)
-            Instantiate(destroyEffects, GetPosition(), Quaternion.identity);
+            Instantiate(destroyEffects, GetPosition(), Quaternion.identity); //Safe no injection
 
         Destroy(gameObject);
     }

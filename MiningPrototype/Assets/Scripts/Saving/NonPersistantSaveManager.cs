@@ -8,7 +8,7 @@ public class NonPersistantSaveManager : MonoBehaviour, ISavable
     [NaughtyAttributes.ReadOnly] [SerializeField] string saveID = Util.GenerateNewSaveGUID();
     [SerializeField] GameObject[] spawnablePrefabs;
 
-    [Zenject.Inject] Zenject.DiContainer diContainer;
+    [Zenject.Inject] PrefabFactory prefabFactory;
 
     public string GetSaveID()
     {
@@ -33,11 +33,10 @@ public class NonPersistantSaveManager : MonoBehaviour, ISavable
 
                 if((int)data.SpawnableIDType < spawnablePrefabs.Length)
                 {
-                    var go = Instantiate(spawnablePrefabs[(int)data.SpawnableIDType]);
-                    go.transform.position = data.Position.ToVector3();
-                    go.transform.eulerAngles = data.Rotation.ToVector3();
-                    diContainer.InjectGameObject(go);
-                    var savComp = go.GetComponent<INonPersistantSavable>();
+                    var t = prefabFactory.Create(spawnablePrefabs[(int)data.SpawnableIDType]);
+                    t.position = data.Position.ToVector3();
+                    t.eulerAngles = data.Rotation.ToVector3();
+                    var savComp = t.GetComponent<INonPersistantSavable>();
                     savComp.Load(data);
                 }
             }

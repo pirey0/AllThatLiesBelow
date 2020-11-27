@@ -18,7 +18,8 @@ public class RuntimeProceduralMap : RenderedMap
     [SerializeField] bool debug;
 
     [Zenject.Inject] ProgressionHandler progressionHandler;
-    [Zenject.Inject] Zenject.DiContainer diContainer;
+    [Zenject.Inject] InventoryManager inventoryManager;
+    [Zenject.Inject] PrefabFactory prefabFactory;
 
     ITileUpdateReceiver[,] receiverMap;
     List<Vector2Int> unstableTiles = new List<Vector2Int>();
@@ -148,14 +149,24 @@ public class RuntimeProceduralMap : RenderedMap
         }
     }
 
+    protected override void BreakBlock(int x, int y, Tile t, bool playerCaused)
+    {
+        base.BreakBlock(x, y, t, playerCaused);
+        if (playerCaused)
+        {
+            TileInfo info = GetTileInfo(t.Type);
+
+            if (info.ItemToDrop != ItemType.None)
+                inventoryManager.PlayerCollects(info.ItemToDrop, 1);
+        }
+    }
+
     public GameObject InstantiateEntity(GameObject prefab, Vector3 position)
     {
-        var go = GameObject.Instantiate(prefab, entitiesParent);
-        if (diContainer != null)
-            diContainer.InjectGameObject(go);
-        go.transform.localPosition = position;
+        var transform = prefabFactory.Create(prefab, entitiesParent);
+        transform.transform.localPosition = position;
 
-        return go;
+        return transform.gameObject;
     }
 
     public void NotifyMirrorWorldSideChange(MirrorState newState)
@@ -177,11 +188,10 @@ public class RuntimeProceduralMap : RenderedMap
         {
 
             unstableTiles.Add(unstableTile);
-            var go = Instantiate(MapSettings.CrumbleEffects, new Vector3(unstableTile.x + 0.5f, unstableTile.y), quaternion.identity, transform);
-            diContainer.InjectGameObject(go);
+            var go = prefabFactory.Create(MapSettings.CrumbleEffects, new Vector3(unstableTile.x + 0.5f, unstableTile.y), quaternion.identity, transform); //Safe
             go.GetComponent<CrumblingParticle>().SetDuration(timeLeftToCrumble);
 
-            unstableTilesEffects.Add(go);
+            unstableTilesEffects.Add(go.gameObject);
         }
 
     }
@@ -299,8 +309,7 @@ public class RuntimeProceduralMap : RenderedMap
         Tile t = map[x, y];
         SetMapAt(x, y, Tile.Air, TileUpdateReason.Collapse, updateProperties: true, updateVisuals);
 
-        var go = GameObject.Instantiate(GenerationSettings.PhysicalTilePrefab, new Vector3(x + 0.5f, y + 0.5f, 0), Quaternion.identity);
-        diContainer.InjectGameObject(go);
+        var go = prefabFactory.Create(GenerationSettings.PhysicalTilePrefab, new Vector3(x + 0.5f, y + 0.5f, 0), Quaternion.identity);
         go.GetComponent<PhysicalTile>().Setup(this, t, GetTileInfo(t.Type));
     }
 

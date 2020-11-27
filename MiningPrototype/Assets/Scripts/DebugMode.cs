@@ -14,6 +14,7 @@ public class DebugMode : MonoBehaviour
     [Inject] PlayerStateMachine player;
     [Inject] PlayerInteractionHandler playerInteraction;
     [Inject] ProgressionHandler progressionHandler;
+    [Inject] InventoryManager inventoryManager;
 
     bool open;
     private void Awake()
@@ -93,7 +94,7 @@ public class DebugMode : MonoBehaviour
     private void PlayerGets(ItemType itemType, int amount)
     {
         if (amount > 0)
-            InventoryManager.PlayerCollects(itemType, amount);
+            inventoryManager.PlayerCollects(itemType, amount);
     }
     
     private void KillPlayer()
