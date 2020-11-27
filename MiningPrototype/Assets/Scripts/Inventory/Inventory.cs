@@ -11,7 +11,7 @@ public class Inventory
     [SerializeField] List<ItemAmountPair> content = new List<ItemAmountPair>();
 
     [field: NonSerialized]
-    public event System.Action InventoryChanged;
+    public event System.Action<bool, ItemAmountPair> InventoryChanged;
 
     public ItemAmountPair this[int index]
     {
@@ -37,13 +37,16 @@ public class Inventory
                 if (item.type == type)
                 {
                     content[i] = new ItemAmountPair(item.type, item.amount + amount);
+                    InventoryChanged?.Invoke(true, new ItemAmountPair(type,amount));
                     return;
                 }
             }
         }
 
-        content.Add(new ItemAmountPair(type, amount));
-        InventoryChanged?.Invoke();
+        ItemAmountPair pair = new ItemAmountPair(type, amount);
+
+        content.Add(pair);
+        InventoryChanged?.Invoke(true, pair);
     }
 
     public void Add(ItemAmountPair pair)
@@ -76,7 +79,7 @@ public class Inventory
             if(i >= 0 && i < content.Count)
             {
                 content.RemoveAt(i);
-                InventoryChanged?.Invoke();
+                InventoryChanged?.Invoke(false,pair);
                 return true;
             }
         }
@@ -91,14 +94,14 @@ public class Inventory
                     var newPair = new ItemAmountPair(pair.type, content[id].amount - pair.amount);
                     content[id] = newPair;
 
-                    InventoryChanged?.Invoke();
+                    InventoryChanged?.Invoke(false, pair);
                     return true;
                 }
                 else if (content[id].amount == pair.amount)
                 {
                     content.RemoveAt(id);
 
-                    InventoryChanged?.Invoke();
+                    InventoryChanged?.Invoke(false, pair);
                     return true;
                 }
             }
@@ -122,7 +125,7 @@ public class Inventory
         if (c.IsNull())
         {
             content.RemoveAt(index);
-            InventoryChanged?.Invoke();
+            InventoryChanged?.Invoke(false, c);
             return c;
         }
 

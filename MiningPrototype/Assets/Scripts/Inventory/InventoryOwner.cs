@@ -44,10 +44,10 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner, IInteractable
         inventory.InventoryChanged += OnInventoryChanged;
     }
 
-    private void OnInventoryChanged()
+    private void OnInventoryChanged(bool add, ItemAmountPair pair)
     {
         if (state == InventoryState.Open && inventoryVisualizer != null)
-            inventoryVisualizer.RefreshInventoryDisplay();
+            inventoryVisualizer.UpdateInventoryDisplay(add, pair);
     }
 
     public virtual void OpenInventory()
