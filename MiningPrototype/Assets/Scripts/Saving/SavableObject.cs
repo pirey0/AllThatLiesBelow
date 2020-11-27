@@ -29,7 +29,10 @@ public enum SpawnableIDType
     Support,
     Hut,
     Postbox,
-    Altar
+    Altar,
+    Crate,
+    Ball,
+    Chest
 }
 
 
