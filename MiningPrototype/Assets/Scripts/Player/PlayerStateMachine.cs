@@ -253,6 +253,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         transitionEffectHandler.FadeOut(FadeType.Death);
         rigidbody.simulated = false;
         lastDeathTimeStamp = Time.time;
+        InventoryManager.ForcePlayerInventoryClose();
         NotifyActivity();
         gameState.ChangeStateTo(GameState.State.Respawning);
         PlayerDeath?.Invoke();
