@@ -25,7 +25,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     [Zenject.Inject] SacrificeActions sacrificeActions;
 
     ProgressionSaveData data;
-    Postbox postbox;
+    Letterbox letterBox;
 
     public float SpeedMultiplyer { get => data.speedMultiplyer; }
     public float DigSpeedMultiplyer { get => data.digSpeedMultiplyer; }
@@ -44,7 +44,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
     protected override void OnPostSceneLoad()
     {
-        postbox = FindObjectOfType<Postbox>();
+        letterBox = FindObjectOfType<Letterbox>();
     }
 
     protected override void OnNewGame()
@@ -52,7 +52,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
         data = new ProgressionSaveData();
         data.lastLetterID = startingLetterID;
         data.letterProgressionState = LetterProgressionState.RecievedDay;
-        if (postbox != null)
+        if (letterBox != null)
             SetPostboxLetterToID(data.lastLetterID);
 
         if (newOrderCrateSpawner != null)
@@ -111,11 +111,11 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
     private void UpdateLetters()
     {
-        if (postbox != null)
+        if (letterBox != null)
         {
-            ItemAmountPair storedItem = postbox.GetStoredItem();
+            ItemAmountPair storedItem = letterBox.GetStoredItem();
             var info = ItemsData.GetItemInfo(storedItem.type);
-            postbox.SetStoredItem(ItemAmountPair.Nothing);
+            letterBox.SetStoredItem(ItemAmountPair.Nothing);
 
             //orders
             if (storedItem.type == ItemType.NewOrder)
@@ -189,7 +189,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
     private void SetPostboxLetterToID(int id)
     {
-        postbox.SetStoredItem(new ItemAmountPair(ItemType.LetterFromFamily, id));
+        letterBox.SetStoredItem(new ItemAmountPair(ItemType.LetterFromFamily, id));
     }
 
     [Button]
