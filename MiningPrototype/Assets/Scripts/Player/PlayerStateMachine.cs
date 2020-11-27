@@ -51,6 +51,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     [SerializeField] PlayerSettings settings;
     [SerializeField] Transform feet;
     [SerializeField] AudioSource walking, jumpStart, jumpLand;
+    [SerializeField] ParticleSystem midasParticles;
     [SerializeField] bool slowWalkMode;
     [SerializeField] PlayerStateInfo[] statesCanInteract;
 
@@ -371,6 +372,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         if(t.Type == TileType.Stone)
         {
             map.SetMapAt(pos.x, pos.y, Tile.Make(TileType.Gold), TileUpdateReason.Place, updateProperties: true, updateVisuals: true);
+            midasParticles.Emit(8);
         }
     }
 
