@@ -22,7 +22,7 @@ public class DebugMode : MonoBehaviour
         DebugLogConsole.AddCommandInstance("/tp", "Teleport to " + Util.EnumToString(typeof(TeleportDestination)), "TeleportToAltar", this);
         DebugLogConsole.AddCommandInstance("/give", "Give player items " + Util.EnumToString(typeof(ItemType)), "PlayerGets", this);
         DebugLogConsole.AddCommandInstance("/kill", "Kill the player", "KillPlayer", this);
-        DebugLogConsole.AddCommandInstance("/reward", "Get a reward without suffering the consequences " + Util.EnumToString(typeof(AltarRewardType)), "SacrificeItem", this);
+        DebugLogConsole.AddCommandInstance("/reward", "Get a reward without suffering the consequences " + Util.EnumToString(typeof(AltarRewardType)), "Reward", this);
         DebugLogConsole.AddCommandInstance("/sacrifice", "Sacrifice trade " + Util.EnumToString(typeof(AltarRewardType)) + " and " + Util.EnumToString(typeof(ItemType)), "Sacrifice", this);
         DebugLogConsole.AddCommandInstance("/sacrificeItem", "Sacrifice with no reward " + Util.EnumToString(typeof(ItemType)), "SacrificeItem", this);
         DebugLogConsole.AddCommandInstance("/sacrificeProgression", "Set the altar progression level. (Unlock different options 0-10)", "SetProgressionLevel", this);
