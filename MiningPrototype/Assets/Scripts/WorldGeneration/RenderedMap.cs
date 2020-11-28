@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class RenderedMap : BaseMap
 {
     [Header("RenderedMap")]
-    [SerializeField] Tilemap tilemap;
+    [SerializeField] Tilemap tilemap, tilemapShifted;
     [SerializeField] Tilemap damageOverlayTilemap, oreTilemap;
     [SerializeField] bool debugRendering;
 
@@ -21,6 +21,7 @@ public class RenderedMap : BaseMap
     public override void UpdateAllVisuals()
     {
         tilemap.ClearAllTiles();
+        tilemapShifted.ClearAllTiles();
         damageOverlayTilemap.ClearAllTiles();
         oreTilemap.ClearAllTiles();
         Util.IterateXY(SizeX, SizeY, SetVisualsAt);
@@ -50,6 +51,7 @@ public class RenderedMap : BaseMap
         var oreTile = GetVisualOverlayTileFor(x, y);
 
         tilemap.SetTile(new Vector3Int(x, y, 0), tile);
+        tilemapShifted?.SetTile(new Vector3Int(x, y, 0), tile);
         damageOverlayTilemap.SetTile(new Vector3Int(x, y, 0), destTile);
         oreTilemap.SetTile(new Vector3Int(x, y, 0), oreTile);
 
