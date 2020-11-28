@@ -1,6 +1,7 @@
 ﻿
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
@@ -71,6 +72,35 @@ public static class Util
             default:
                 return Vector2Int.up;
         }
+    }
+
+    public static Vector2Int RandomDirectionWeighted(int horizontal, int vertical)
+    {
+        int rnd = Random.Range(0, 2);
+
+        int dirIndex = RandomFromProportionalGroups(new int[] { horizontal, vertical });
+
+        if (dirIndex == 0 && rnd == 0)
+            return Vector2Int.right;
+        else if (dirIndex == 0 && rnd != 0)
+            return Vector2Int.left;
+        else if (dirIndex == 1 && rnd == 0)
+            return Vector2Int.down;
+        else
+            return Vector2Int.up;
+    }
+
+    public static int RandomFromProportionalGroups(int[] groups)
+    {
+        var rnd = Random.Range(0, groups.Sum());
+        int counter = 0;
+        for (int i = 0; i < groups.Length; i++)
+        {
+            counter += groups[i];
+            if (counter > rnd)
+                return i;
+        }
+        throw new System.Exception("Impossibility reached");
     }
 
     public static Vector2Int ToGridPosition(this Vector3 vector)
@@ -145,7 +175,7 @@ public static class Util
             return null;
 
         Vector3 position = MouseToWorld(camera);
-        return Physics2D.CircleCastAll(position, 0.2f, Vector2.zero,1000, mask.value);
+        return Physics2D.CircleCastAll(position, 0.2f, Vector2.zero, 1000, mask.value);
     }
 
 
@@ -178,7 +208,7 @@ public static class Util
 
     public static int RandomInV2(Vector2Int vector2Int)
     {
-        return Random.Range(vector2Int.x, vector2Int.y+1);
+        return Random.Range(vector2Int.x, vector2Int.y + 1);
     }
     public static string MakePathRelative(string p)
     {
