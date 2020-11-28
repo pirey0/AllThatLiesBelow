@@ -73,7 +73,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4c70edfe5247fd34b8a2806b1369a08f, type: 2}
   - {fileID: 11400000, guid: 4c70edfe5247fd34b8a2806b1369a08f, type: 2}
   TileSourceInfo: {fileID: 0}
-  Visibility2Tile: {fileID: 11400000, guid: 4c70edfe5247fd34b8a2806b1369a08f, type: 2}
+  Visibility2Tile: {fileID: 0}
   Overlay: {fileID: 0}
   physicalTileSprite: {fileID: 0}
   physicalTileOverlay: {fileID: 0}

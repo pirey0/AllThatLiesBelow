@@ -12,7 +12,7 @@ public enum LetterboxStatus
     ACTIVEPLAYER
 }
 
-public class Letterbox : MonoBehaviour, IInteractable, IDropReceiver
+public class Letterbox : MonoBehaviour, IInteractable
 {
     [SerializeField] SpriteAnimator spriteAnimator;
     [SerializeField] SpriteAnimation closed, open, active, activePlayer, openFull;
@@ -132,40 +132,6 @@ public class Letterbox : MonoBehaviour, IInteractable, IDropReceiver
     public void UnsubscribeToForceQuit(Action action)
     {
         ForceInterrupt -= action;
-    }
-
-    public bool WouldTakeDrop(ItemAmountPair pair)
-    {
-        return (storedItem.IsNull());
-    }
-
-    public void BeginHoverWith(ItemAmountPair pair)
-    {
-        SetLetterboxStatus(LetterboxStatus.OPEN);
-        letterboxIsFull.SetActive(!IsEmpty());
-    }
-
-    public void EndHover()
-    {
-        if (IsEmpty())
-            SetLetterboxStatus(LetterboxStatus.CLOSED);
-
-        letterboxIsFull.SetActive(false);
-    }
-
-    public void HoverUpdate(ItemAmountPair pair)
-    {
-        //
-    }
-
-    public void ReceiveDrop(ItemAmountPair pair, Inventory origin)
-    {
-        if (origin.Contains(pair) && origin.TryRemove(pair))
-        {
-            storedItem = pair;
-            storeItemAudio?.Play();
-            EndInteracting(null);
-        }
     }
 
     public bool IsEmpty()

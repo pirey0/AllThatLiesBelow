@@ -26,6 +26,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
     ProgressionSaveData data;
     Letterbox letterBox;
+    Postbox postbox;
 
     public float SpeedMultiplyer { get => data.speedMultiplyer; }
     public float DigSpeedMultiplyer { get => data.digSpeedMultiplyer; }
@@ -45,6 +46,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     protected override void OnPostSceneLoad()
     {
         letterBox = FindObjectOfType<Letterbox>();
+        postbox = FindObjectOfType<Postbox>();
     }
 
     protected override void OnNewGame()
@@ -108,29 +110,30 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
     private void UpdateLetters()
     {
-        if (letterBox != null)
+        if (postbox != null)
         {
-            ItemAmountPair storedItem = letterBox.GetStoredItem();
-            var info = ItemsData.GetItemInfo(storedItem.type);
-            letterBox.SetStoredItem(ItemAmountPair.Nothing);
-
-            //orders
-            if (storedItem.type == ItemType.NewOrder)
+            while (!postbox.IsEmpty())
             {
-                if (data.ordersForNextDay.ContainsKey(storedItem.amount))
+                ItemAmountPair storedItem = postbox.FetchItem();
+                var info = ItemsData.GetItemInfo(storedItem.type);
+
+                //orders
+                if (storedItem.type == ItemType.NewOrder)
                 {
-                    List<ItemAmountPair> order = data.ordersForNextDay[storedItem.amount];
-                    newOrderCrateSpawner.SpawnOrder(order);
-                    data.ordersForNextDay.Remove(storedItem.amount);
+                    if (data.ordersForNextDay.ContainsKey(storedItem.amount))
+                    {
+                        List<ItemAmountPair> order = data.ordersForNextDay[storedItem.amount];
+                        newOrderCrateSpawner.SpawnOrder(order);
+                        data.ordersForNextDay.Remove(storedItem.amount);
+                    }
                 }
+
+                StepLetterProgression(storedItem.type == ItemType.LetterToFamily);
             }
-
-            StepLetterProgression(storedItem.type == ItemType.LetterToFamily);
-
         }
         else
         {
-            Debug.LogError("please reference the postbox in the progression handler");
+            Debug.LogError("No Postbox found!");
         }
     }
 
