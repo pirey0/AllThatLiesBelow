@@ -23,7 +23,8 @@ public enum TileType
     Ignore,
     Grass,
     SolidVoid,
-    Platform
+    Platform,
+    FillingStone
 }
 
 [System.Serializable]

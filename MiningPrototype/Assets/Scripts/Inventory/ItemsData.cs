@@ -23,7 +23,8 @@ public enum ItemType
     Family_Photo_Empty,
     Torch,
     Platform,
-    Lost_Soul
+    Lost_Soul,
+    FillingStone
 }
 
 

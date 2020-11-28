@@ -38,7 +38,4 @@ public class GenerationSettings : ScriptableObject
     public GameObject PhysicalTilePrefab;
 
     public int StabilityPropagationDistance = 5;
-
-    public int VeinHorizontality = 5;
-    public int VeinVerticality = 1;
 }

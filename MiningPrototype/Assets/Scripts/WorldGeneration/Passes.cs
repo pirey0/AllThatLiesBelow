@@ -8,6 +8,7 @@ public class OrePass
     public TileType TileType;
     public Vector2Int OreVeinSize;
     public AnimationCurve Probability;
+    public Vector2Int DirectionProportions;
 }
 
 

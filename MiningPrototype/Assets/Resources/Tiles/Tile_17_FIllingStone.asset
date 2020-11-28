@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c44c8a584f6c2194fa5a252688113e23, type: 3}
+  m_Name: Tile_17_FIllingStone
+  m_EditorClassIdentifier: 
+  Type: 17
+  ItemToDrop: 20
+  damageMultiplyer: 1
+  AirLike: 0
+  Targetable: 1
+  TargetPriority: 1
+  StabilityAffected: 1
+  NotifiesInsteadOfCrumbling: 0
+  CountsAsNeighbour: 1
+  MinableInOverworld: 1
+  UseTilesFromOtherInfo: 0
+  Tiles:
+  - {fileID: 11400000, guid: 113cff870e20f2a4e887c1d5e8062b3e, type: 2}
+  - {fileID: 11400000, guid: 3bfcce6b262e9d04298b89162bdb680e, type: 2}
+  - {fileID: 11400000, guid: c58a5cd4279d8e64ebe63e13c0e97e13, type: 2}
+  - {fileID: 11400000, guid: b51a89368c6964242bc1a98bb7d6aa65, type: 2}
+  - {fileID: 11400000, guid: bbb3f93eda093d0449fad6a4bcd682a8, type: 2}
+  - {fileID: 11400000, guid: 71304d551cad317408e89a93cee37030, type: 2}
+  - {fileID: 11400000, guid: 59793325ba49c6e41b5c25c488d5eb10, type: 2}
+  - {fileID: 11400000, guid: 2dea3fe961a88c14489c3061941586fb, type: 2}
+  - {fileID: 11400000, guid: 43b9b547515f10040b650b6a0edf5196, type: 2}
+  - {fileID: 11400000, guid: 173fb574df8a54943a58846e4866befd, type: 2}
+  - {fileID: 11400000, guid: e805ddf121510db4f8b02d8d73eb4042, type: 2}
+  - {fileID: 11400000, guid: 750b9366219bca74aa44ddeb203002b0, type: 2}
+  - {fileID: 11400000, guid: 8e3b138c0a9defc40a2f5f70823609a7, type: 2}
+  - {fileID: 11400000, guid: 28e90614ef96edd4d8549f115caf9605, type: 2}
+  - {fileID: 11400000, guid: 4bac31bb498a74d468eaa2dacab15c8a, type: 2}
+  - {fileID: 11400000, guid: 0c8379e889523a648a551f25d70b4e41, type: 2}
+  - {fileID: 11400000, guid: e52a2adaf3d19644d9e8e9c8608c922c, type: 2}
+  - {fileID: 11400000, guid: ee04c92a0b880ae4e949ea0dc9066bdb, type: 2}
+  - {fileID: 11400000, guid: 570774406bc12a34d824099403ab1079, type: 2}
+  - {fileID: 11400000, guid: 80d0ec6daeb103d4ea81238b569691c9, type: 2}
+  - {fileID: 11400000, guid: 9ff782ec69e79024dbcd09a0a208bf9d, type: 2}
+  - {fileID: 11400000, guid: d38cce09031229943b0b9412c4b6bcb4, type: 2}
+  - {fileID: 11400000, guid: 0905b0983e873034cb85d90d788f9414, type: 2}
+  - {fileID: 11400000, guid: 60d7d1b03ac74b64c961d12dd98aca34, type: 2}
+  - {fileID: 11400000, guid: a208dcf9c54cbc143b407367c77c3ab3, type: 2}
+  - {fileID: 11400000, guid: 2608edaccefb73f448e0f8c3213cbb31, type: 2}
+  - {fileID: 11400000, guid: 77083b733ad553f47ba0bdcbb1e6f265, type: 2}
+  - {fileID: 11400000, guid: 9cc415f3b01a5874d9bbcb3a8d0c702a, type: 2}
+  - {fileID: 11400000, guid: a24b03e1bcd469f4e80083ad18e3e335, type: 2}
+  - {fileID: 11400000, guid: 69064a4111450d140bf0721a2565c95f, type: 2}
+  - {fileID: 11400000, guid: c791b18471b8f8c4abeac0e5da11f7a3, type: 2}
+  - {fileID: 11400000, guid: 25df63c10cec1c74f8e21abecb985d53, type: 2}
+  - {fileID: 11400000, guid: e6f4cbc5b66a6d6478910655c9abe1e3, type: 2}
+  - {fileID: 11400000, guid: b1c1f723176a3d847afd985315adbd60, type: 2}
+  - {fileID: 11400000, guid: b0ab6aa256ce73647a5733d2c762df76, type: 2}
+  - {fileID: 11400000, guid: db8c5205c29b72145a16627c7803c7fa, type: 2}
+  - {fileID: 11400000, guid: 03c3c3c5c3aa8af419d7f5937b0e270a, type: 2}
+  - {fileID: 11400000, guid: c4ee5404d34118d4dbd77485f32f630d, type: 2}
+  - {fileID: 11400000, guid: e2e4400b24ff01f49bb198d60f6d8e90, type: 2}
+  - {fileID: 11400000, guid: 38f5f3bd7d3a6aa4db8912746093c8b1, type: 2}
+  - {fileID: 11400000, guid: 45d5facc34e462b468dc324d7c472b8e, type: 2}
+  - {fileID: 11400000, guid: 7d0b2d2a15d3e3049a5c6cf37e1297a4, type: 2}
+  - {fileID: 11400000, guid: 0df83e386d8f06c47b3449d9d38d13c6, type: 2}
+  - {fileID: 11400000, guid: 9f1192b71445daf4aa773dbe0990caaf, type: 2}
+  - {fileID: 11400000, guid: 201b1674a825eb8478751e1c6d4aaab2, type: 2}
+  - {fileID: 11400000, guid: 9c8c5621959659d4a89fc0971103b214, type: 2}
+  - {fileID: 11400000, guid: cdc2d96d86dd0c54a8912ca399b1d5d3, type: 2}
+  - {fileID: 11400000, guid: 7be08f5d3f06f654793c3a9045b19f47, type: 2}
+  TileSourceInfo: {fileID: 0}
+  Visibility2Tile: {fileID: 11400000, guid: 4c25da00da8f3f14d9b97e28ee5cb0a7, type: 2}
+  Overlay: {fileID: 0}
+  physicalTileSprite: {fileID: 8724308943522155073, guid: 7c7b8753eb0e3e6418a7dc6d095274ee, type: 3}
+  physicalTileOverlay: {fileID: 0}

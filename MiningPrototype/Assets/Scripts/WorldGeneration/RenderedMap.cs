@@ -8,7 +8,7 @@ public class RenderedMap : BaseMap
     [Header("RenderedMap")]
     [SerializeField] Tilemap tilemap;
     [SerializeField] Tilemap damageOverlayTilemap, oreTilemap;
-    [SerializeField] bool showOverlayWhenNotVisible;
+    [SerializeField] bool debugRendering;
 
     protected override void Setup()
     {
@@ -89,7 +89,7 @@ public class RenderedMap : BaseMap
             tileInfo = tileInfo.TileSourceInfo;
         }
 
-        if (tileInfo.Tiles.Length >= 48)
+        if (tileInfo.Tiles.Length == 48)
         {
             int tileIndex = Util.BITMASK_TO_TILEINDEX[tile.NeighbourBitmask];
             tileVis = tileInfo.Tiles[tileIndex];
@@ -103,6 +103,9 @@ public class RenderedMap : BaseMap
         {
             tileVis = tileInfo.Visibility2Tile;
         }
+
+        if (debugRendering && tileInfo.Tiles.Length == 48)
+            tileVis = tileInfo.Tiles[47];
 
         return tileVis;
     }
@@ -118,7 +121,7 @@ public class RenderedMap : BaseMap
         var t = map[x, y];
         var info = GetTileInfo(t.Type);
 
-        if (t.Visibility > 2 && !showOverlayWhenNotVisible)
+        if (t.Visibility > 2 && !debugRendering)
             return null;
 
         return info.Overlay;

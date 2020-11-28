@@ -389,20 +389,20 @@ public class RuntimeProceduralMap : RenderedMap
         {
             for (int y = 0; y < SizeY; y++)
             {
-                Util.IterateX((int)(SizeX * pass.Probability.Evaluate((float)y / SizeY) * 0.01f), (x) => TryPlaceVein(pass.TileType, Util.RandomInVector(pass.OreVeinSize), y));
+                Util.IterateX((int)(SizeX * pass.Probability.Evaluate((float)y / SizeY) * 0.01f), (x) => TryPlaceVein(pass.TileType, Util.RandomInVector(pass.OreVeinSize), y, pass));
             }
         }
     }
 
-    private void TryPlaceVein(TileType type, int amount, int y)
+    private void TryPlaceVein(TileType type, int amount, int y, OrePass orePass)
     {
 
         int x = UnityEngine.Random.Range(0, SizeX);
 
-        GrowVeinAt(x, y, type, amount);
+        GrowVeinAt(x, y, type, amount, orePass);
     }
 
-    private void GrowVeinAt(int startX, int startY, TileType tile, int amount)
+    private void GrowVeinAt(int startX, int startY, TileType tile, int amount, OrePass orePass)
     {
         int x = startX;
         int y = startY;
@@ -421,7 +421,7 @@ public class RuntimeProceduralMap : RenderedMap
                 }
                 else
                 {
-                    var dir = Util.RandomDirectionWeighted(GenerationSettings.VeinHorizontality,GenerationSettings.VeinVerticality);
+                    var dir = Util.RandomDirectionWeighted(orePass.DirectionProportions.x,orePass.DirectionProportions.y);
                     x += dir.x;
                     y += dir.y;
                 }
