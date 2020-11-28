@@ -27,9 +27,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     [Inject] EventSystem eventSystem;
     [Inject] RuntimeProceduralMap map;
 
-    SpriteAnimator spriteAnimator;
-    Camera camera;
-    SpriteRenderer spriteRenderer;
+    PlayerVisualController visualController;
     Vector2Int? gridDigTarget;
     IInteractable currentInteractable;
     IMinableNonGrid nonGridDigTarget;
@@ -45,8 +43,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     protected override void Start()
     {
         base.Start();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteAnimator = GetComponent<SpriteAnimator>();
+        visualController = GetComponent<PlayerVisualController>();
         player.PlayerDeath += OnDeath;
     }
 
@@ -287,6 +284,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
             {
                 CloseInventory();
                 PlayerActivity?.Invoke();
+                visualController.ForceUpdate();
 
                 bool broken = map.DamageAt(gridDigTarget.Value.x, gridDigTarget.Value.y, Time.deltaTime * settings.digSpeed * progressionHandler.DigSpeedMultiplyer, playerCaused: true);
 
@@ -312,6 +310,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         {
             if (nonGridDigTarget != null)
             {
+                visualController.ForceUpdate();
                 nonGridDigTarget.Damage(Time.deltaTime * settings.digSpeed);
                 miningParticles.transform.position = nonGridDigTarget.GetPosition();
                 TryEnableMiningVisuals();
