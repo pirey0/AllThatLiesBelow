@@ -149,6 +149,7 @@ public class RenderedMap : BaseMap
         }
 
         PropagateStabilityUpdatesFrom(x, y);
+        PropagateDiscoveryFrom(x, y);
     }
 
     private void CalculateVisibilityAt(int x, int y)

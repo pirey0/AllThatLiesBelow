@@ -14,6 +14,8 @@ public class DebugMode : MonoBehaviour
     [Inject] PlayerInteractionHandler playerInteraction;
     [Inject] ProgressionHandler progressionHandler;
     [Inject] InventoryManager inventoryManager;
+    [Inject] TooltipHandler tooltipHandler;
+    [Inject] CameraController cameraController;
 
     bool open;
     private void Awake()
@@ -40,12 +42,19 @@ public class DebugMode : MonoBehaviour
             {
                 open = false;
                 debugObjects.ForEach((x) => x.SetActive(false));
+                tooltipHandler.StopDisplaying(transform);
             }
             else
             {
                 open = true;
                 debugObjects.ForEach((x) => x.SetActive(true));
             }
+        }
+
+        if (open)
+        {
+            var p = Util.MouseToWorld(cameraController.Camera).ToGridPosition();
+            tooltipHandler.Display(transform, p.ToString(), RuntimeProceduralMap.Instance[p].ToString());
         }
     }
 

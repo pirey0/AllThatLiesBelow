@@ -186,7 +186,7 @@ public class BaseMap : StateListenerBehaviour, ISavable
 
     public void ReplaceAll(TileType target, TileType replacer)
     {
-        Util.IterateXY(SizeX, sizeY, (x,y) => ReplaceAt(x,y,target, replacer));
+        Util.IterateXY(SizeX, sizeY, (x, y) => ReplaceAt(x, y, target, replacer));
         RefreshAll();
     }
 
@@ -196,8 +196,45 @@ public class BaseMap : StateListenerBehaviour, ISavable
         CalculateAllNeighboursBitmask();
         CalculateStabilityAll();
         CalculateVisibilityAll();
+        CalculateDiscoveredAll();
         UpdateAllVisuals();
     }
+
+    protected virtual void CalculateDiscoveredAll()
+    {
+        Util.IterateXY(SizeX, SizeY, (x, y) => { Tile t = this[x, y]; t.Discovered = false; this[x, y] = t; });
+        PropagateDiscoveryFrom(0, SizeY - 1);
+    }
+
+    protected virtual void PropagateDiscoveryFrom(int x, int y)
+    {
+        Stack<Vector2Int> stack = new Stack<Vector2Int>();
+        stack.Push(new Vector2Int(x,y));
+        int max = 100000;
+        while (stack.Count > 0 && max-- > 0)
+        {
+            Vector2Int v2 = stack.Pop();
+            Tile t = this[v2];
+
+            if (t.Discovered || IsOutOfBounds(v2.x, v2.y))
+                continue;
+
+            t.Discovered = true;
+            this[v2.x, v2.y] = t;
+
+            if (IsAirAt(v2.x, v2.y))
+            {
+                foreach (var n in MapHelper.GetDirectNeighboursIndiciesOf(v2.x, v2.y))
+                {
+                    stack.Push(n);
+                }
+            }
+        }
+
+        if (max <= 0)
+            Debug.LogError("Oveflow");
+    }
+
 
     private void ReplaceAt(int x, int y, TileType target, TileType replacer)
     {
