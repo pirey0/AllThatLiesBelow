@@ -18,6 +18,7 @@ public class Rock : TilemapCarvingEntity
     {
         Carve();
         rigidbody.isKinematic = true;
+        renderer.sortingOrder = UnityEngine.Random.Range(0, 100);
     }
 
 
@@ -83,7 +84,7 @@ public class Rock : TilemapCarvingEntity
     {
         float speed = collision.relativeVelocity.magnitude;
 
-        if (!rockSmashing.isPlaying && speed >= 7)
+        if (!rockSmashing.isPlaying && speed >= 7 && transform.position.y > collision.transform.position.y)
             rockSmashing.Play();
 
         if (collision.collider.TryGetComponent(out IEntity entity))

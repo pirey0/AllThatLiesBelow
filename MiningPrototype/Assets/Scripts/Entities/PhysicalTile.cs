@@ -13,6 +13,7 @@ public class PhysicalTile : MineableObject, IEntity
 {
     [SerializeField] SpriteRenderer renderer, overlayRenderer;
     [SerializeField] AudioSource hit;
+    [SerializeField] float RequiredSpeedForStrongHit;
 
     [Zenject.Inject] InventoryManager inventoryManager;
 
@@ -55,9 +56,22 @@ public class PhysicalTile : MineableObject, IEntity
     {
         if (collision.transform.TryGetComponent(out IEntity entity))
         {
-            entity.TakeDamage(DamageStrength.Weak);
-            hit?.Play();
-            //TakeDamage(DamageStrength.Strong); <- Would kill
+            if (transform.position.y > collision.transform.position.y)
+            {
+                Debug.Log("Physical Tile hit with speed: " + collision.relativeVelocity.y);
+                if (collision.relativeVelocity.y > RequiredSpeedForStrongHit)
+                {
+                    Debug.Log("Strong Bonk!");
+                    entity.TakeDamage(DamageStrength.Strong);
+                }
+                else
+                {
+                    Debug.Log("Weak Bonk!");
+                    entity.TakeDamage(DamageStrength.Weak);
+                }
+
+                hit?.Play();
+            }
         }
         else if (collision.transform.TryGetComponent(out ITileMapElement element))
         {
@@ -65,7 +79,7 @@ public class PhysicalTile : MineableObject, IEntity
 
             if (generator.IsBlockAt(position.x, position.y))
                 position.y += 1;
-            
+
             generator.SetMapAt(position.x, position.y, tile, TileUpdateReason.Place);
             Util.DebugDrawTile(position);
             Destroy(gameObject);
