@@ -8,6 +8,7 @@ public class RenderedMap : BaseMap
     [Header("RenderedMap")]
     [SerializeField] Tilemap tilemap;
     [SerializeField] Tilemap damageOverlayTilemap, oreTilemap;
+    [SerializeField] bool showOverlayWhenNotVisible;
 
     protected override void Setup()
     {
@@ -117,7 +118,7 @@ public class RenderedMap : BaseMap
         var t = map[x, y];
         var info = GetTileInfo(t.Type);
 
-        if (t.Visibility > 2)
+        if (t.Visibility > 2 && !showOverlayWhenNotVisible)
             return null;
 
         return info.Overlay;

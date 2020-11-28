@@ -421,7 +421,7 @@ public class RuntimeProceduralMap : RenderedMap
                 }
                 else
                 {
-                    var dir = Util.RandomDirection();
+                    var dir = Util.RandomDirectionWeighted(GenerationSettings.VeinHorizontality,GenerationSettings.VeinVerticality);
                     x += dir.x;
                     y += dir.y;
                 }
