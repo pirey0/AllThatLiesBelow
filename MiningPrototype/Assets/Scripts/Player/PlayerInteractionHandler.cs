@@ -16,7 +16,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     [SerializeField] GameObject pickaxe;
     [SerializeField] Transform mouseHighlight;
 
-    [SerializeField] AudioSource breakBlock, startMining;
+    [SerializeField] AudioSource breakBlock, breakFilling, startMining;
     [SerializeField] PickaxeAnimator pickaxeAnimator;
 
     [SerializeField] ParticleSystem miningParticles;
@@ -299,8 +299,17 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
                 {
                     miningParticles.transform.position = (Vector3Int)gridDigTarget + new Vector3(0.5f, 0.5f);
                     miningParticles.Emit(settings.miningBreakParticlesCount);
-                    breakBlock.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
-                    breakBlock.Play();
+
+                    if (info.Type == TileType.FillingStone)
+                    {
+                        breakFilling.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+                        breakFilling.Play();
+                    } else
+                    {
+                        breakBlock.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+                        breakBlock.Play();
+                    }
+                    
                     TryDisableMiningVisuals();
                 }
                 else
