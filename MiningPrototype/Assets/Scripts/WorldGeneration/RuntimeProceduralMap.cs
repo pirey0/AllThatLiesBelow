@@ -173,10 +173,14 @@ public class RuntimeProceduralMap : RenderedMap
 
     public GameObject InstantiateEntity(GameObject prefab, Vector3 position)
     {
-        var transform = prefabFactory.Create(prefab, entitiesParent);
-        transform.transform.localPosition = position;
-
-        return transform.gameObject;
+        if (prefabFactory != null)
+        {
+            var transform = prefabFactory.Create(prefab, entitiesParent);
+            transform.transform.localPosition = position;
+            transform.GetComponent<ITileMapElement>()?.Setup(this);
+            return transform.gameObject;
+        }
+        return null;
     }
 
     public void NotifyMirrorWorldSideChange(MirrorState newState)
@@ -297,7 +301,7 @@ public class RuntimeProceduralMap : RenderedMap
 
             Vector3 pos = new Vector3(x + pass.Size.x * 0.5f, y + pass.Size.y * 0.5f);
             var go = InstantiateEntity(pass.Prefab, pos);
-            go.GetComponent<ITileMapElement>().Setup(this);
+           
         }
     }
 
@@ -421,7 +425,7 @@ public class RuntimeProceduralMap : RenderedMap
                 }
                 else
                 {
-                    var dir = Util.RandomDirectionWeighted(orePass.DirectionProportions.x,orePass.DirectionProportions.y);
+                    var dir = Util.RandomDirectionWeighted(orePass.DirectionProportions.x, orePass.DirectionProportions.y);
                     x += dir.x;
                     y += dir.y;
                 }
