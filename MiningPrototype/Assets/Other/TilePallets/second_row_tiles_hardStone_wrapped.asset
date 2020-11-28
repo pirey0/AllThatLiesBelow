@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67055c289440e43409e019f318e3a5ed, type: 3}
+  m_Name: second_row_tiles_hardStone_wrapped
+  m_EditorClassIdentifier: 
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Transform:
+    e00: 1
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 1
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 1
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
+  m_InstancedGameObject: {fileID: 0}
+  m_Flags: 1
+  m_ColliderType: 1
+  m_Sprites:
+  - {fileID: -4112939632629467956, guid: 2c145b51d5e5efd448531668be77c77a, type: 3}
+  - {fileID: -2939822522751240960, guid: 2c145b51d5e5efd448531668be77c77a, type: 3}
+  - {fileID: -4094224270361181727, guid: 2c145b51d5e5efd448531668be77c77a, type: 3}
+  - {fileID: 3623183590458040127, guid: 2c145b51d5e5efd448531668be77c77a, type: 3}
+  - {fileID: -2447122962112610658, guid: 2c145b51d5e5efd448531668be77c77a, type: 3}
+  - {fileID: -8793218141665902950, guid: 2c145b51d5e5efd448531668be77c77a, type: 3}
+  - {fileID: 3754599013985913407, guid: 2c145b51d5e5efd448531668be77c77a, type: 3}
+  - {fileID: 3807763366563132941, guid: 2c145b51d5e5efd448531668be77c77a, type: 3}
+  - {fileID: -5336313059915506057, guid: 2c145b51d5e5efd448531668be77c77a, type: 3}
+  - {fileID: -6259785326787042615, guid: 2c145b51d5e5efd448531668be77c77a, type: 3}
+  - {fileID: 8881341957332796166, guid: 2c145b51d5e5efd448531668be77c77a, type: 3}
+  - {fileID: -6135041795802058026, guid: 2c145b51d5e5efd448531668be77c77a, type: 3}
