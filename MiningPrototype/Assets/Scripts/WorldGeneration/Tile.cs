@@ -22,7 +22,8 @@ public enum TileType
     FloatingEntityNotNeighbour,
     Ignore,
     Grass,
-    SolidVoid
+    SolidVoid,
+    Platform
 }
 
 [System.Serializable]

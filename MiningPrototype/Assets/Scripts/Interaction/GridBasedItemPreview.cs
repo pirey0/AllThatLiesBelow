@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DynamitePreview : MonoBehaviour, IItemPreview
+public class GridBasedItemPreview : MonoBehaviour, IItemPreview
 {
+    [SerializeField] Vector3 offset;
     [SerializeField] SpriteRenderer spriteRenderer;
     bool couldPlace;
 
     public Vector3 GetPlacePosition(Vector3 pointPosition)
     {
-        return pointPosition.ToGridPosition().AsV3() + new Vector3(0.5f, 0);
+        return pointPosition.ToGridPosition().AsV3() + offset;
     }
     
     public void UpdatePreview(Vector3 position)
     {
         var gridPos = position.ToGridPosition();
-        transform.position = gridPos.AsV3() + new Vector3(0.5f, 0);
+        transform.position = gridPos.AsV3() + offset;
     
         if (RuntimeProceduralMap.Instance.IsAirAt(gridPos.x, gridPos.y))
         {

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Rock : TilemapCarvingEntity
 {
-    [SerializeField] float width = 2;
     [SerializeField] float destructionSpeed;
     [SerializeField] Rigidbody2D rigidbody;
     [SerializeField] AudioSource rockFalling;
