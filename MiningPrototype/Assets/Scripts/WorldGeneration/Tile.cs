@@ -35,6 +35,7 @@ public struct Tile
     public float Damage;
 
     public int Visibility;
+    public bool Discovered;
 
     //Up Right Down Left
     public int[] Stabilities;
@@ -50,6 +51,7 @@ public struct Tile
             t.NeighbourBitmask = 0;
             t.Damage = 0;
             t.Visibility = 0;
+            t.Discovered = false;
             t.Stabilities = new int[4];
             return t;
         }
@@ -89,7 +91,7 @@ public struct Tile
 
     public override string ToString()
     {
-        return Type.ToString() + " [N: " + NeighbourBitmask + " D:" + Damage.ToString("n1") + " S: " +Stability + " (" +  string.Join(", " , Stabilities) + ")]"; 
+        return Type.ToString() + " [N: " + NeighbourBitmask + " D:" + Damage.ToString("n1") + " S: " +Stability + " (" +  string.Join(", " , Stabilities) + ") Dis: " + Discovered + "]" ; 
     }
 }
 

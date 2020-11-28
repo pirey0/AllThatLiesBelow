@@ -15,7 +15,6 @@ public class RuntimeProceduralMap : RenderedMap
 
     [Header("RuntimeProceduralMap")]
     [SerializeField] Transform entitiesParent;
-    [SerializeField] bool debug;
 
     [Zenject.Inject] ProgressionHandler progressionHandler;
     [Zenject.Inject] InventoryManager inventoryManager;
