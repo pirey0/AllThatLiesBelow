@@ -55,7 +55,10 @@ public class SceneAdder : StateListenerBehaviour
         if (loadMode != LoadSceneMode.Additive)
             return;
 
-        Vector2Int offset = new Vector2Int(Util.RandomInV2(current.XOffsetRange), current.FromTop ? RuntimeProceduralMap.Instance.SizeY - current.YOffset : current.YOffset);
+        int x = Mathf.FloorToInt(RuntimeProceduralMap.Instance.SizeX * Util.RandomInV2(current.XOffsetRange));
+        int y = Mathf.FloorToInt(RuntimeProceduralMap.Instance.SizeY * current.YOffset);
+
+        Vector2Int offset = new Vector2Int(x,y);
         Debug.Log("Loaded: " + scene.name + " " + scene.rootCount + " at " + offset);
 
         foreach (var obj in scene.GetRootGameObjects())
@@ -78,8 +81,7 @@ public class SceneAdder : StateListenerBehaviour
 [System.Serializable]
 public struct MapAddition
 {
-    public Vector2Int XOffsetRange;
-    public int YOffset;
-    public bool FromTop;
+    public Vector2 XOffsetRange;
+    public float YOffset;
     public SceneReference SceneToAdd;
 }

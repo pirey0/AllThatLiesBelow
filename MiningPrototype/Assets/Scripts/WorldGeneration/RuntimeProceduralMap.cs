@@ -357,7 +357,7 @@ public class RuntimeProceduralMap : RenderedMap
 
     private void PopulateSnowAt(int x, int y)
     {
-        if (y < GenerationSettings.SnowStartHeight)
+        if (y < GenerationSettings.SnowStartHeight * SizeY)
             return;
 
         var t = GetTileAt(x, y);

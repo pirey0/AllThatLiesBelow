@@ -210,6 +210,12 @@ public static class Util
     {
         return Random.Range(vector2Int.x, vector2Int.y + 1);
     }
+
+    public static float RandomInV2(Vector2 vector2)
+    {
+        return Random.Range(vector2.x, vector2.y);
+    }
+
     public static string MakePathRelative(string p)
     {
         if (p.StartsWith(Application.dataPath))
