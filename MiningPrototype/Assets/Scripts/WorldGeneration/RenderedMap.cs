@@ -103,7 +103,11 @@ public class RenderedMap : BaseMap
 
         if (tile.Visibility == 2)
         {
-            tileVis = tileInfo.Visibility2Tile;
+            var tv = GetTileInfo(tile.Type).Visibility2Tile;
+            if (tv == null) //tile has no own secondary
+                tileVis = tileInfo.Visibility2Tile;
+            else
+                tileVis = tv;
         }
 
         if (debugRendering && tileInfo.Tiles.Length == 48)
@@ -121,12 +125,12 @@ public class RenderedMap : BaseMap
     private TileBase GetVisualOverlayTileFor(int x, int y)
     {
         var t = map[x, y];
-        var info = GetTileInfo(t.Type);
+        var tileInfo = GetTileInfo(t.Type);
 
-        if (t.Visibility > 2 && !debugRendering)
+        if (t.Visibility > 1 && !debugRendering)
             return null;
 
-        return info.Overlay;
+        return tileInfo.Overlay;
     }
 
     protected override void UpdatePropertiesAt(int x, int y, Tile newTile, Tile previousTile, TileUpdateReason reason)

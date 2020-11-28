@@ -21,9 +21,11 @@ MonoBehaviour:
   StabilityAffected: 1
   NotifiesInsteadOfCrumbling: 0
   CountsAsNeighbour: 1
+  MinableInOverworld: 0
   UseTilesFromOtherInfo: 1
   Tiles: []
   TileSourceInfo: {fileID: 11400000, guid: b3eaa7d6a02e5524d9b3ee029c880b69, type: 2}
-  Overlay: {fileID: 11400000, guid: 7e1e97604cdbd3a4bbc6131bc89e93f2, type: 2}
+  Visibility2Tile: {fileID: 11400000, guid: d63102e78a94b1f4bbb7e3578ba28bc5, type: 2}
+  Overlay: {fileID: 11400000, guid: cd59e4c19b5d17d4f8004c4b81f0e162, type: 2}
   physicalTileSprite: {fileID: 0}
   physicalTileOverlay: {fileID: 21300000, guid: ac62153ce12f28d4cbcaf15cbac811c4, type: 3}
