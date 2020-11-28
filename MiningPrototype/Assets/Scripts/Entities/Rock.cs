@@ -46,7 +46,7 @@ public class Rock : TilemapCarvingEntity
 
     public override void OnTileChanged(int x, int y, TileUpdateReason reason)
     {
-        if (reason == TileUpdateReason.Destroy || reason == TileUpdateReason.Generation)
+        if (reason == TileUpdateReason.Destroy || reason == TileUpdateReason.Generation || reason == TileUpdateReason.MapLoad)
         {
             UncarveDestroy();
         }
@@ -54,6 +54,9 @@ public class Rock : TilemapCarvingEntity
 
     public override void OnTileUpdated(int x, int y, TileUpdateReason reason)
     {
+        if (this == null)
+            return;
+
         Tile t = RuntimeProceduralMap.Instance[x, y];
         if (t.Visibility > 2)
             renderer.enabled = false;
