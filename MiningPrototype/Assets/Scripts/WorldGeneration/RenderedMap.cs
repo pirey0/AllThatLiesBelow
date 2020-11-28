@@ -31,7 +31,7 @@ public class RenderedMap : BaseMap
         foreach (var nIndex in MapHelper.GetNeighboursIndiciesOf(x, y))
             SetVisualsAt(nIndex.x, nIndex.y);
 
-        foreach (var nIndex in MapHelper.Get2ndDegreeNeighboursIndiciesOf(x,y))
+        foreach (var nIndex in MapHelper.Get2ndDegreeNeighboursIndiciesOf(x, y))
             SetVisualsAt(nIndex.x, nIndex.y);
     }
 
@@ -79,7 +79,6 @@ public class RenderedMap : BaseMap
             return null;
 
 
-        int tileIndex = Util.BITMASK_TO_TILEINDEX[tile.NeighbourBitmask];
 
         TileInfo tileInfo = GetTileInfo(tile.Type);
         TileBase tileVis = null;
@@ -91,10 +90,15 @@ public class RenderedMap : BaseMap
 
         if (tileInfo.Tiles.Length >= 48)
         {
+            int tileIndex = Util.BITMASK_TO_TILEINDEX[tile.NeighbourBitmask];
             tileVis = tileInfo.Tiles[tileIndex];
         }
+        else if (tileInfo.Tiles.Length == 1)
+        {
+            tileVis = tileInfo.Tiles[0];
+        }
 
-        if(tile.Visibility == 2)
+        if (tile.Visibility == 2)
         {
             tileVis = tileInfo.Visibility2Tile;
         }
@@ -112,7 +116,7 @@ public class RenderedMap : BaseMap
     {
         var t = map[x, y];
         var info = GetTileInfo(t.Type);
-        
+
         if (t.Visibility > 2)
             return null;
 

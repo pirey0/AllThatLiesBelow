@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b4e36afc74fff4f82cd40fcf05b7bc, type: 3}
+  m_Name: ItemPlatform
+  m_EditorClassIdentifier: 
+  ItemType: 18
+  DisplayName: Platform
+  DisplayTooltip: 
+  DisplaySprite: {fileID: -8835149551459108778, guid: f132973b45bf13c4bbb7007ca5dee632, type: 3}
+  DisplaySpriteRead: {fileID: 0}
+  Weight: 1
+  CanBePlaced: 1
+  PickupHoldSprite: {fileID: -8835149551459108778, guid: f132973b45bf13c4bbb7007ca5dee632, type: 3}
+  PickupPreviewPrefab: {fileID: 1854387351486894348, guid: aee2c6183ab00b341a8d45bf2d4f4f0a, type: 3}
+  Prefab: {fileID: 4462701010782190340, guid: 48d65d1fcb8fdfe489d6e0d29867a1ba, type: 3}
+  AmountIsUniqueID: 0
+  AltarWords: []

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 901228395799964702}
   - component: {fileID: 6534798903408220075}
   m_Layer: 0
-  m_Name: TorchPreview
+  m_Name: PlatformPreview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,10 +69,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 254087233
-  m_SortingLayer: 1
-  m_SortingOrder: 901
-  m_Sprite: {fileID: 21300000, guid: 5ea19e3e2298144489aa3723b991dc55, type: 3}
+  m_SortingLayerID: 2049621373
+  m_SortingLayer: 9
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -8835149551459108778, guid: f132973b45bf13c4bbb7007ca5dee632, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,5 +95,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1639eaefcb3c3eb449a5794796262f0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0.5, y: 0, z: 0}
+  offset: {x: 0.5, y: 0.5, z: 0}
   spriteRenderer: {fileID: 901228395799964702}
