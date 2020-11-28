@@ -21052,6 +21052,9 @@ MonoBehaviour:
   - StateName: Disabled
     CanInteract: 0
     CanInventory: 0
+  - StateName: FallDeath
+    CanInteract: 0
+    CanInventory: 0
   playerInteraction: {fileID: 497824006148765930}
   debug: 0
 --- !u!114 &497824006148765930
@@ -21175,6 +21178,12 @@ MonoBehaviour:
     BodyAnimation: {fileID: 11400000, guid: 297bdfe3faf178542aadae04167b9770, type: 2}
     HeadState: 0
     HandsState: 0
+    CarryItemState: 0
+    PickaxeState: 0
+  - StateName: FallDeath
+    BodyAnimation: {fileID: 11400000, guid: 1b193639a62a4c44e93d536c688a6967, type: 2}
+    HeadState: 0
+    HandsState: 1
     CarryItemState: 0
     PickaxeState: 0
 --- !u!114 &651199607118553818
