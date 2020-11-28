@@ -373,6 +373,10 @@ PrefabInstance:
       propertyPath: map
       value: 
       objectReference: {fileID: 156819226}
+    - target: {fileID: 1699840937, guid: d9d6bf033f5c85c4d91d4238a6b83738, type: 3}
+      propertyPath: sceneAdder
+      value: 
+      objectReference: {fileID: 3510606057618483732}
     - target: {fileID: 1599654982309637612, guid: d9d6bf033f5c85c4d91d4238a6b83738, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -474,17 +478,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[0].SceneToAdd.sceneAsset
-      value: 
-      objectReference: {fileID: 102900000, guid: ff72c84b8404c72448a5f4f2347572d0, type: 3}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[0].SceneToAdd.scenePath
-      value: Assets/Scenes/OverworldScene.unity
-      objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648147, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: m_Name
       value: SceneAdder
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+--- !u!114 &3510606057618483732 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+  m_PrefabInstance: {fileID: 3510606057618483731}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e03091118b552a49b49193efa4013d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

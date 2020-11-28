@@ -49,6 +49,14 @@ public class RuntimeProceduralMap : RenderedMap
             RunCompleteGeneration();
     }
 
+    [Button]
+    public void Test()
+    {
+        var res = FindUndiscoveredAreaOfSize(50, 70, 10, 10, 40);
+
+
+    }
+
 
     protected override void Setup()
     {
@@ -300,7 +308,7 @@ public class RuntimeProceduralMap : RenderedMap
 
             Vector3 pos = new Vector3(x + pass.Size.x * 0.5f, y + pass.Size.y * 0.5f);
             var go = InstantiateEntity(pass.Prefab, pos);
-           
+
         }
     }
 

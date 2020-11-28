@@ -21,6 +21,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     [Zenject.Inject] RuntimeProceduralMap map;
     [Zenject.Inject] InventoryManager inventoryManager;
     [Zenject.Inject] SacrificeActions sacrificeActions;
+    [Zenject.Inject] SceneAdder sceneAdder;
 
     ProgressionSaveData data;
     Letterbox letterBox;
@@ -39,7 +40,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
     public float ProgressionTimeScale { get => data.timeScale; }
 
-    public List<string> RewardsReceived { get => data.rewardsReceived.Select((x)=> x.ToString()).ToList(); }
+    public List<string> RewardsReceived { get => data.rewardsReceived.Select((x) => x.ToString()).ToList(); }
 
     protected override void OnPostSceneLoad()
     {
@@ -192,7 +193,6 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
     private void UpdateSacrifices()
     {
-        data.dailySacrificeExaused = false;
 
         foreach (var aquired in data.aquiredList)
         {
@@ -221,6 +221,25 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
             data.sacrificeProgressionLevel++;
         }
         data.aquiredList.Clear();
+
+        if (data.dailySacrificeExaused)
+        {
+            var altar = FindObjectOfType<Altar>();
+            if (altar != null)
+            {
+                Vector2Int pos = altar.transform.position.ToGridPosition();
+
+                var newPos = map.FindUndiscoveredAreaOfSize(pos.x, pos.y, 20, 20, 100);
+                if (newPos.HasValue)
+                {
+                    Destroy(altar.gameObject);
+                    sceneAdder.LoadAltarAt(newPos.Value);
+                }
+            }
+
+            data.dailySacrificeExaused = false;
+        }
+
     }
 
 

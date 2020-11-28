@@ -59,3 +59,6 @@ MonoBehaviour:
     SceneToAdd:
       sceneAsset: {fileID: 102900000, guid: 772c6d38dd969d24bb2ad158970d99e5, type: 3}
       scenePath: Assets/Scenes/ClockScene.unity
+  altarScene:
+    sceneAsset: {fileID: 102900000, guid: eefebb5b71de47e4e9da29653337e8d9, type: 3}
+    scenePath: Assets/Scenes/AltarScene.unity
