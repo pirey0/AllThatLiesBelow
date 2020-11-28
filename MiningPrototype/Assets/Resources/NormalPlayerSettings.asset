@@ -42,6 +42,7 @@ MonoBehaviour:
   timeToHidePickaxe: 5
   overworldTimeToHidePickaxe: 1
   maxCarryWeight: 200
+  fallSpeedThatKills: 20
   collisionMask:
     serializedVersion: 2
     m_Bits: 4353

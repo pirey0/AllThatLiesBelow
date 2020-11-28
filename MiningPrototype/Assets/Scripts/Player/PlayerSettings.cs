@@ -42,8 +42,8 @@ public class PlayerSettings : ScriptableObject
     public float overworldTimeToHidePickaxe;
 
     public int maxCarryWeight;
+    public float fallSpeedThatKills;
 
     public LayerMask collisionMask;
     public LayerMask interactionMask;
-
 }

@@ -63,7 +63,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     [Inject] TransitionEffectHandler transitionEffectHandler;
     [Inject] InventoryManager inventoryManager;
     StateMachine stateMachine;
-    StateMachine.State s_idle, s_jump, s_fall, s_walk, s_slowWalk, s_climb, s_climbIde, s_inventory, s_death, s_hit, s_longIdle, s_disabled;
+    StateMachine.State s_idle, s_jump, s_fall, s_walk, s_slowWalk, s_climb, s_climbIde, s_inventory, s_death, s_hit, s_longIdle, s_disabled, s_fallDeath;
     Dictionary<string, PlayerStateInfo> canInteractInStateMap;
     public event System.Action PlayerDeath;
 
@@ -176,6 +176,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         s_climbIde = stateMachine.AddState("ClimbIdle", ClimbingEnter, ClimbingUpdate, ClimbingExit);
         s_inventory = stateMachine.AddState("Inventory", null, MoveUpdate);
         s_death = stateMachine.AddState("Death", DeathEnter, DeathUpdate, DeathExit);
+        s_fallDeath = stateMachine.AddState("FallDeath", DeathEnter, DeathUpdate, DeathExit);
         s_hit = stateMachine.AddState("Hit", null);
         s_longIdle = stateMachine.AddState("LongIdle", null, SlowMoveUpdate);
         s_disabled = stateMachine.AddState("Disabled", null, null, DisableExit);
@@ -637,6 +638,16 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     private void OnCollisionEnter2D(Collision2D collision)
     {
         UpdateWalkVector(collision);
+
+        if(collision.transform.position.y< transform.position.y)
+        {
+            Debug.Log(collision.relativeVelocity.y);
+            if (collision.relativeVelocity.y > settings.fallSpeedThatKills)
+            {
+                Debug.Log("Killed from fall Damage with a speed of: " + collision.relativeVelocity.y);
+                stateMachine.ForceTransitionTo(s_fallDeath);
+            }
+        }
     }
 
     private void UpdateWalkVector(Collision2D collision)
