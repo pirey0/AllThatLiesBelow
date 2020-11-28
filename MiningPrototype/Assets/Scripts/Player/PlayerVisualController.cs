@@ -20,6 +20,7 @@ public class PlayerVisualController : MonoBehaviour
 
     PlayerStateMachine player;
     StateMachine stateMachine;
+    StateMachine.State prevOldState, prevNewState;
 
     private void Start()
     {
@@ -44,8 +45,16 @@ public class PlayerVisualController : MonoBehaviour
 
     }
 
+    public void ForceUpdate()
+    {
+        VisualUpdate(prevOldState, prevNewState);
+    }
+
     private void VisualUpdate(StateMachine.State leavingState, StateMachine.State enteringState)
     {
+        prevOldState = leavingState;
+        prevNewState = enteringState;
+
         if (visualStateMap.ContainsKey(enteringState.Name))
         {
             var visState = visualStateMap[enteringState.Name];

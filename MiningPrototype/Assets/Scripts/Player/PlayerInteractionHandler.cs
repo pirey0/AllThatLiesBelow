@@ -27,9 +27,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     [Inject] EventSystem eventSystem;
     [Inject] RuntimeProceduralMap map;
 
-    SpriteAnimator spriteAnimator;
-    Camera camera;
-    SpriteRenderer spriteRenderer;
+    PlayerVisualController visualController;
     Vector2Int? gridDigTarget;
     IInteractable currentInteractable;
     IMinableNonGrid nonGridDigTarget;
@@ -45,8 +43,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     protected override void Start()
     {
         base.Start();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteAnimator = GetComponent<SpriteAnimator>();
+        visualController = GetComponent<PlayerVisualController>();
         player.PlayerDeath += OnDeath;
     }
 
@@ -101,7 +98,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
                     if (!mouseInInventoryRange)
                     {
-                 
+
                         if (currentInteractable == null)
                         {
                             TryInteract();
@@ -213,6 +210,13 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         gridDigTarget = MapHelper.GetMiningTarget(map, GetPositionInGrid(), GetClickCoordinate());
         if (!map.CanTarget(gridDigTarget.Value.x, gridDigTarget.Value.y))
         {
+            var secondary = GetSecondaryClickCoordinate();
+            if(map.CanTarget(secondary.x, secondary.y))
+            {
+                gridDigTarget = secondary;
+                return true;
+            }
+
             gridDigTarget = null;
             return false;
         }
@@ -287,6 +291,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
             {
                 CloseInventory();
                 PlayerActivity?.Invoke();
+                visualController.ForceUpdate();
 
                 bool broken = map.DamageAt(gridDigTarget.Value.x, gridDigTarget.Value.y, Time.deltaTime * settings.digSpeed * progressionHandler.DigSpeedMultiplyer, playerCaused: true);
 
@@ -312,6 +317,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         {
             if (nonGridDigTarget != null)
             {
+                visualController.ForceUpdate();
                 nonGridDigTarget.Damage(Time.deltaTime * settings.digSpeed);
                 miningParticles.transform.position = nonGridDigTarget.GetPosition();
                 TryEnableMiningVisuals();
@@ -399,8 +405,17 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     private Vector2Int GetClickCoordinate()
     {
         Vector3 clickPos = GetClickPositionV3();
-        return new Vector2Int((int)clickPos.x, (int)clickPos.y);
+        return clickPos.ToGridPosition();
     }
+
+    private Vector2Int GetSecondaryClickCoordinate()
+    {
+        Vector3 clickPos = GetClickPositionV3();
+        float y = clickPos.y % 1;
+        return clickPos.ToGridPosition() + new Vector2Int(0, y > 0.5f ? 1 : -1);
+    }
+
+
 
     private Vector3 GetClickPositionV3()
     {
