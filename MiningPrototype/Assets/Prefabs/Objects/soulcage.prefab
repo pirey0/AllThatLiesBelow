@@ -4933,7 +4933,7 @@ MonoBehaviour:
   overlayAnimator: {fileID: 0}
   damageMultiplier: 1
   contains:
-    type: 18
+    type: 19
     amount: 1
   destroyEffects: {fileID: 832428661842439038, guid: 7fd794c26582e9b46bce477e4f130008, type: 3}
 --- !u!58 &3189700084323350035
