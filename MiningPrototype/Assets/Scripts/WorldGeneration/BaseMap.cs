@@ -125,6 +125,8 @@ public class BaseMap : StateListenerBehaviour, ISavable
     protected virtual void BreakBlock(int x, int y, Tile t, bool playerCaused)
     {
         SetMapAt(x, y, Tile.Air, TileUpdateReason.Destroy);
+        if (playerCaused)
+            PropagateDiscoveryFrom(x, y);
     }
 
     protected void SetMapRawAt(int x, int y, Tile tile)
@@ -209,7 +211,7 @@ public class BaseMap : StateListenerBehaviour, ISavable
     protected virtual void PropagateDiscoveryFrom(int x, int y)
     {
         Stack<Vector2Int> stack = new Stack<Vector2Int>();
-        stack.Push(new Vector2Int(x,y));
+        stack.Push(new Vector2Int(x, y));
         int max = 100000;
         while (stack.Count > 0 && max-- > 0)
         {
@@ -233,6 +235,54 @@ public class BaseMap : StateListenerBehaviour, ISavable
 
         if (max <= 0)
             Debug.LogError("Oveflow");
+    }
+
+    public Vector2Int? FindUndiscoveredAreaOfSize(int startX, int startY, int width, int height, int maxRange)
+    {
+        int x = startX;
+        int y = startY - height;
+
+        while (y > startY - maxRange && y >= 0)
+        {
+            if (IsAreaUndiscovered(x, y, width, height, out Vector2Int location))
+            {
+                return new Vector2Int(x, y);
+            }
+            else
+            {
+                x = location.x + 1;
+                if (x > startX + maxRange || x + width >= sizeX)
+                {
+                    x = startX - maxRange;
+                    y -= 1;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private bool IsAreaUndiscovered(int px, int py, int width, int height, out Vector2Int loc)
+    {
+        loc = Vector2Int.zero;
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                if (IsOutOfBounds(px + x, py + y))
+                    return false;
+
+                Util.DebugDrawTile(new Vector2Int(px + x, py + y), Color.yellow, 20);
+                if (this[px + x, py + y].Discovered)
+                {
+                    loc = new Vector2Int(px + x, py + y);
+
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
 

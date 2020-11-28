@@ -1,4 +1,5 @@
 ﻿using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,10 @@ using Zenject;
 public class SceneAdder : StateListenerBehaviour
 {
     [SerializeField] List<MapAddition> addition;
+    [SerializeField] SceneReference altarScene;
 
     [Zenject.Inject] DiContainer diContainer;
+
 
     bool loaded = false;
     MapAddition current;
@@ -21,33 +24,34 @@ public class SceneAdder : StateListenerBehaviour
 
     protected override void OnStateChanged(GameState.State newState)
     {
-        if(newState == GameState.State.PreLoadScenes)
+        if (newState == GameState.State.PreLoadScenes)
         {
             if (addition.Count > 0)
-                StartCoroutine(LoadAdditive());
+                StartCoroutine(LoadAdditive(addition, transitionState: true));
         }
     }
 
-    private IEnumerator LoadAdditive()
+    private IEnumerator LoadAdditive(List<MapAddition> maps, bool transitionState)
     {
         int i = 0;
         SceneManager.sceneLoaded += OnSceneLoaded;
 
-        while (i < addition.Count)
+        while (i < maps.Count)
         {
-            current = addition[i];
-            
+            current = maps[i];
+
             SceneManager.LoadScene(current.SceneToAdd, LoadSceneMode.Additive);
             loaded = false;
 
-            while (!loaded) 
+            while (!loaded)
                 yield return null;
-            
+
             i++;
         }
 
         SceneManager.sceneLoaded -= OnSceneLoaded;
-        gameState.ChangeStateTo(GameState.State.PostLoadScenes);
+        if (transitionState)
+            gameState.ChangeStateTo(GameState.State.PostLoadScenes);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
@@ -58,7 +62,7 @@ public class SceneAdder : StateListenerBehaviour
         int x = Mathf.FloorToInt(RuntimeProceduralMap.Instance.SizeX * Util.RandomInV2(current.XOffsetRange));
         int y = Mathf.FloorToInt(RuntimeProceduralMap.Instance.SizeY * current.YOffset);
 
-        Vector2Int offset = new Vector2Int(x,y);
+        Vector2Int offset = new Vector2Int(x, y);
         Debug.Log("Loaded: " + scene.name + " " + scene.rootCount + " at " + offset);
 
         foreach (var obj in scene.GetRootGameObjects())
@@ -75,6 +79,16 @@ public class SceneAdder : StateListenerBehaviour
             }
         }
         loaded = true;
+    }
+
+    public void LoadAltarAt(Vector2Int value)
+    {
+        Debug.Log("Loading altar at " + value);
+        MapAddition addition;
+        addition.XOffsetRange = new Vector2((float) value.x / RuntimeProceduralMap.Instance.SizeX, (float)value.x / RuntimeProceduralMap.Instance.SizeX);
+        addition.YOffset = (float)value.y / RuntimeProceduralMap.Instance.SizeY;
+        addition.SceneToAdd = altarScene;
+        StartCoroutine(LoadAdditive(new List<MapAddition>() { addition }, transitionState: false));
     }
 }
 
