@@ -322,7 +322,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
 
     private void JumpEnter()
     {
-        rigidbody.velocity = new Vector2(rigidbody.velocity.x, settings.jumpVelocity* progressionHandler.JumpMultiplyer);
+        rigidbody.velocity = new Vector2(rigidbody.velocity.x, settings.jumpVelocity * progressionHandler.JumpMultiplyer);
         lastJumpTimeStamp = Time.time;
         jumpStart?.Play();
     }
@@ -331,22 +331,40 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     {
         var horizontal = Input.GetAxis("Horizontal");
 
-        rigidbody.position += horizontal * rightWalkVector * settings.slowMoveSpeed * Time.fixedDeltaTime * progressionHandler.SpeedMultiplyer;
-        BaseMoveUpdate(horizontal);
+        var movement = horizontal * rightWalkVector * settings.slowMoveSpeed * Time.fixedDeltaTime * progressionHandler.SpeedMultiplyer;
+        BaseMoveUpdate(horizontal, movement);
     }
 
     private void MoveUpdate()
     {
         var horizontal = Input.GetAxis("Horizontal");
 
-        rigidbody.position += horizontal * rightWalkVector * settings.moveSpeed * Time.fixedDeltaTime * progressionHandler.SpeedMultiplyer;
-        BaseMoveUpdate(horizontal);
+        var movement = horizontal * rightWalkVector * settings.moveSpeed * Time.fixedDeltaTime * progressionHandler.SpeedMultiplyer;
+        BaseMoveUpdate(horizontal, movement);
     }
 
-    private void BaseMoveUpdate(float horizontal)
+    private void BaseMoveUpdate(float horizontal, Vector2 movement)
     {
-        rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
+        Vector2 p1 = transform.position + new Vector3(0, 1f);
+        Vector2 p2 = transform.position + new Vector3(0, 1.6f);
+        Vector2 dir = horizontal > 0 ? rightWalkVector : -rightWalkVector;
+        List<RaycastHit2D> hits = new List<RaycastHit2D>();
+        hits.AddRange(Physics2D.RaycastAll(p1, dir, 0.7f, settings.collisionMask));
+        hits.AddRange(Physics2D.RaycastAll(p2, dir, 0.7f, settings.collisionMask));
+        Debug.DrawLine(p1, p1 + dir * 0.7f, Color.red, Time.deltaTime);
+        Debug.DrawLine(p2, p2 + dir * 0.7f, Color.red, Time.deltaTime);
 
+        foreach (var hit in hits)
+        {
+            if (!hit.collider.isTrigger)
+            {
+                movement = Vector3.zero;
+                horizontal = 0;
+            }
+        }
+
+        rigidbody.position += movement;
+        rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
         horizontalSpeed = horizontal * rightWalkVector.x;
 
         if (IsMoving())
@@ -363,7 +381,6 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         {
             MidasUpdate();
         }
-
     }
 
     private void MidasUpdate()
@@ -373,7 +390,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         Util.DebugDrawTile(pos);
         var t = map[pos];
 
-        if(t.Type == TileType.Stone)
+        if (t.Type == TileType.Stone)
         {
             map.SetMapAt(pos.x, pos.y, Tile.Make(TileType.Gold), TileUpdateReason.Place, updateProperties: true, updateVisuals: true);
             midasParticles.Emit(8);
@@ -470,7 +487,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         bool ca = !InFrontOfLadder;
         bool cb = (IsGrounded() && IsBelowTopLadder());
 
-        return ca || cb ;
+        return ca || cb;
     }
 
     private bool IsBelowTopLadder()
