@@ -185,67 +185,67 @@ MonoBehaviour:
       m_RotationOrder: 4
     DirectionProportions: {x: 15, y: 1}
   - TileType: 2
-    OreVeinSize: {x: 7, y: 10}
+    OreVeinSize: {x: 5, y: 7}
     Probability:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.0029865718
-        value: 2.0039556
-        inSlope: 0.0075588855
-        outSlope: 0.0075588855
-        tangentMode: 34
+        time: 0.005279205
+        value: 1.0225563
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.45440853
-        value: 2.0073678
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        time: 0.50741947
+        value: 2.0115697
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.8016026
-        value: 0.003396809
-        inSlope: -34.9396
-        outSlope: -34.9396
-        tangentMode: 0
+        time: 0.6771895
+        value: 0.010790158
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
         weightedMode: 0
         inWeight: 0.029301368
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
         value: 0
-        inSlope: -0.39378583
-        outSlope: -0.39378583
-        tangentMode: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
         weightedMode: 0
         inWeight: 0.19412796
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    DirectionProportions: {x: 5, y: 1}
+    DirectionProportions: {x: 6, y: 1}
   - TileType: 3
-    OreVeinSize: {x: 5, y: 8}
+    OreVeinSize: {x: 3, y: 6}
     Probability:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.0029865718
-        value: 2.0039556
-        inSlope: -0.020461103
-        outSlope: -0.020461103
+        time: -0.00606189
+        value: 1.0245779
+        inSlope: 0.09220727
+        outSlope: 0.09220727
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.260001
-        value: 1.9986968
+        time: 0.2349003
+        value: 1.0467963
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -253,14 +253,14 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.66206574
-        value: 0.50119555
-        inSlope: -10.33803
-        outSlope: 0
+        time: 0.48790193
+        value: 1.0285393
+        inSlope: -0.2629163
+        outSlope: -9.237681
         tangentMode: 1
         weightedMode: 0
-        inWeight: 0.030264113
-        outWeight: 0.33333334
+        inWeight: 0.27448788
+        outWeight: 0.055691388
       - serializedVersion: 3
         time: 1
         value: 0
@@ -273,7 +273,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    DirectionProportions: {x: 5, y: 1}
+    DirectionProportions: {x: 4, y: 1}
   - TileType: 5
     OreVeinSize: {x: 2, y: 4}
     Probability:
