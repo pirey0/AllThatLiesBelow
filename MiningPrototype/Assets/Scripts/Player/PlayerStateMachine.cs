@@ -641,7 +641,6 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
 
         if(collision.transform.position.y< transform.position.y)
         {
-            Debug.Log(collision.relativeVelocity.y);
             if (collision.relativeVelocity.y > settings.fallSpeedThatKills)
             {
                 Debug.Log("Killed from fall Damage with a speed of: " + collision.relativeVelocity.y);

@@ -57,8 +57,17 @@ public class Rock : TilemapCarvingEntity
         if (this == null)
             return;
 
-        Tile t = RuntimeProceduralMap.Instance[x, y];
-        if (t.Visibility > 2)
+        int minVis =3;
+        var tilemapPos = (transform.position + carvingOffset).ToGridPosition();
+        foreach (var item in tilesToOccupy)
+        {
+            Vector2Int pos = tilemapPos + item.Offset;
+            Tile t = RuntimeProceduralMap.Instance[pos];
+            if (t.Visibility < minVis)
+                minVis = t.Visibility;
+        }
+
+        if (minVis > 1)
             renderer.enabled = false;
         else
             renderer.enabled = true;

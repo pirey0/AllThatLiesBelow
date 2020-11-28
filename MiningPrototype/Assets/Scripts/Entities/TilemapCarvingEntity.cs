@@ -7,7 +7,7 @@ public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateRec
 {
     [SerializeField] ItemAmountPair drop;
     [SerializeField] protected TileOffsetTypePair[] tilesToOccupy;
-    [SerializeField] Vector3 carvingOffset;
+    [SerializeField] protected Vector3 carvingOffset;
 
 
     [Zenject.Inject] InventoryManager inventoryManager;
