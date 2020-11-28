@@ -157,6 +157,7 @@ MonoBehaviour:
   renderer: {fileID: 1505758800330834957}
   overlayRenderer: {fileID: 8445093048323941638}
   hit: {fileID: 1409926833936099124}
+  RequiredSpeedForStrongHit: 10
 --- !u!82 &6570287908250345048
 AudioSource:
   m_ObjectHideFlags: 0

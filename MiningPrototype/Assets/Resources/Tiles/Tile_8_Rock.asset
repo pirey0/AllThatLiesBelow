@@ -22,9 +22,10 @@ MonoBehaviour:
   NotifiesInsteadOfCrumbling: 1
   CountsAsNeighbour: 1
   MinableInOverworld: 0
-  UseTilesFromOtherInfo: 0
+  UseTilesFromOtherInfo: 1
   Tiles: []
-  TileSourceInfo: {fileID: 0}
-  Overlay: {fileID: 11400000, guid: 3b876048af5f9574d8707b242073a12d, type: 2}
+  TileSourceInfo: {fileID: 11400000, guid: b3eaa7d6a02e5524d9b3ee029c880b69, type: 2}
+  Visibility2Tile: {fileID: 0}
+  Overlay: {fileID: 0}
   physicalTileSprite: {fileID: 0}
   physicalTileOverlay: {fileID: 0}
