@@ -21,6 +21,7 @@ public enum ItemType
     Globe,
     Ball,
     Family_Photo_Empty,
+    Torch,
 }
 
 
