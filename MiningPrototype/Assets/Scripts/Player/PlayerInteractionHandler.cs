@@ -98,7 +98,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
                     if (!mouseInInventoryRange)
                     {
-                 
+
                         if (currentInteractable == null)
                         {
                             TryInteract();
@@ -210,6 +210,13 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         gridDigTarget = MapHelper.GetMiningTarget(map, GetPositionInGrid(), GetClickCoordinate());
         if (!map.CanTarget(gridDigTarget.Value.x, gridDigTarget.Value.y))
         {
+            var secondary = GetSecondaryClickCoordinate();
+            if(map.CanTarget(secondary.x, secondary.y))
+            {
+                gridDigTarget = secondary;
+                return true;
+            }
+
             gridDigTarget = null;
             return false;
         }
@@ -398,8 +405,17 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     private Vector2Int GetClickCoordinate()
     {
         Vector3 clickPos = GetClickPositionV3();
-        return new Vector2Int((int)clickPos.x, (int)clickPos.y);
+        return clickPos.ToGridPosition();
     }
+
+    private Vector2Int GetSecondaryClickCoordinate()
+    {
+        Vector3 clickPos = GetClickPositionV3();
+        float y = clickPos.y % 1;
+        return clickPos.ToGridPosition() + new Vector2Int(0, y > 0.5f ? 1 : -1);
+    }
+
+
 
     private Vector3 GetClickPositionV3()
     {
