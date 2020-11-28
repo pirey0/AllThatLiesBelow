@@ -16,7 +16,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     [SerializeField] GameObject pickaxe;
     [SerializeField] Transform mouseHighlight;
 
-    [SerializeField] AudioSource breakBlock, breakFilling, startMining;
+    [SerializeField] AudioSource breakBlock, breakFilling, startMining, cantMine;
     [SerializeField] PickaxeAnimator pickaxeAnimator;
 
     [SerializeField] ParticleSystem miningParticles;
@@ -317,7 +317,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
                     UpdateMiningParticlesPositions();
                 }
 
-                TryEnableMiningVisuals();
+                TryEnableMiningVisuals(info.damageMultiplyer);
                 player.NotifyPickaxeUse();
                 player.SetFaceDirection(gridDigTarget.Value.x - transform.position.x > 0);
             }
@@ -354,6 +354,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
             var emission = miningParticles.emission;
             emission.rateOverTimeMultiplier = 0;
             startMining.Stop();
+            cantMine.Stop();
             pickaxeAnimator.Stop();
         }
     }
@@ -385,15 +386,24 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         }
     }
 
-    private void TryEnableMiningVisuals()
+    private void TryEnableMiningVisuals(float targetDamageMultiplier = 1)
     {
         if (!inMining)
         {
-            var emission = miningParticles.emission;
-            emission.rateOverTimeMultiplier = settings.miningParticlesRateOverTime;
             inMining = true;
-            startMining.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
-            startMining.Play();
+
+            if (targetDamageMultiplier == 0)
+            {
+                cantMine.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+                cantMine.Play();
+            }
+            else
+            {
+                var emission = miningParticles.emission;
+                emission.rateOverTimeMultiplier = settings.miningParticlesRateOverTime;
+                startMining.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+                startMining.Play();
+            }
             pickaxeAnimator.Play();
         }
     }
