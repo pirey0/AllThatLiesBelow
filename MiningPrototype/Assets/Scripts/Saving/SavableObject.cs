@@ -32,7 +32,9 @@ public enum SpawnableIDType
     Altar,
     Crate,
     Ball,
-    Chest
+    Chest,
+    Torch,
+    OverworldLight
 }
 
 

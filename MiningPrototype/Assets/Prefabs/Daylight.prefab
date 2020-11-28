@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4778926280309448161}
   - component: {fileID: 4778926280309448160}
+  - component: {fileID: 5459514121501803425}
   m_Layer: 0
   m_Name: Daylight
   m_TagString: Untagged
@@ -72,3 +73,16 @@ MonoBehaviour:
   - {x: 120, y: -2, z: 0}
   - {x: 120, y: 21, z: 0}
   - {x: -20, y: 21, z: 0}
+--- !u!114 &5459514121501803425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4778926280309448163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b881ed04caf12745a91f5af9c91ac07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 11

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1141111351790219298}
   - component: {fileID: 6960902463814232369}
   - component: {fileID: 3527921221676472756}
+  - component: {fileID: 6611982005453786851}
   - component: {fileID: -3262708027305396760}
   m_Layer: 0
   m_Name: Torch
@@ -4944,6 +4945,19 @@ MonoBehaviour:
     type: 17
     amount: 1
   destroyEffects: {fileID: 4888635124280202427, guid: c7333c0e8139a984db63c0ab6a7f05ac, type: 3}
+--- !u!114 &6611982005453786851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5173125646740089078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b881ed04caf12745a91f5af9c91ac07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 10
 --- !u!61 &-3262708027305396760
 BoxCollider2D:
   m_ObjectHideFlags: 0
