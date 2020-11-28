@@ -18,7 +18,7 @@ public class MineableObject : MirrorWorldFollower, IMinableNonGrid
     public virtual void Damage(float v)
     {
         float d = v * (damageMultiplier / 10f);
-        overlayAnimator.ActiveUpdate(d);
+        overlayAnimator?.ActiveUpdate(d);
         damage += d;
 
         if (damage >= 1)

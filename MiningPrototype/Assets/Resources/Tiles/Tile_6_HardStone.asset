@@ -17,9 +17,11 @@ MonoBehaviour:
   damageMultiplyer: 0
   AirLike: 0
   Targetable: 1
+  TargetPriority: 0
   StabilityAffected: 1
   NotifiesInsteadOfCrumbling: 0
   CountsAsNeighbour: 1
+  MinableInOverworld: 0
   UseTilesFromOtherInfo: 0
   Tiles:
   - {fileID: 11400000, guid: 4c70edfe5247fd34b8a2806b1369a08f, type: 2}
@@ -71,6 +73,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4c70edfe5247fd34b8a2806b1369a08f, type: 2}
   - {fileID: 11400000, guid: 4c70edfe5247fd34b8a2806b1369a08f, type: 2}
   TileSourceInfo: {fileID: 0}
+  Visibility2Tile: {fileID: 11400000, guid: 4c70edfe5247fd34b8a2806b1369a08f, type: 2}
   Overlay: {fileID: 0}
   physicalTileSprite: {fileID: 0}
   physicalTileOverlay: {fileID: 0}

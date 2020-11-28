@@ -53,27 +53,19 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
---- !u!50 &3617977427120275901
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!114 &2777483074702360842
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8917149696465416293}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 5
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b881ed04caf12745a91f5af9c91ac07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
 --- !u!114 &5765536578830546654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,25 +95,12 @@ MonoBehaviour:
   - Offset: {x: 0, y: 5}
     Type: 12
   carvingOffset: {x: 0, y: 0.4, z: 0}
-  rigidbody: {fileID: 3617977427120275901}
+  rigidbody: {fileID: 0}
   fallSound: {fileID: 0}
   topCollider: {fileID: 8908647255607273920}
   botCollider: {fileID: 1770849090289237843}
   layerUse: 10
   layerNormal: 0
---- !u!114 &2777483074702360842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8917149696465416293}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b881ed04caf12745a91f5af9c91ac07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 2
 --- !u!1 &8908647255607273920
 GameObject:
   m_ObjectHideFlags: 0
