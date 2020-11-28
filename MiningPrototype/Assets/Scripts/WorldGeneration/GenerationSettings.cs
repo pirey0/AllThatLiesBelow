@@ -23,7 +23,7 @@ public class GenerationSettings : ScriptableObject
     public int AutomataSteps;
 
     public AnimationCurve HeightMultiplyer;
-    public int SnowStartHeight;
+    public float SnowStartHeight;
 
     public OrePass[] OrePasses;
     public RockPass[] RockPasses;

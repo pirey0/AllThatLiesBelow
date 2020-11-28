@@ -13,8 +13,6 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     [SerializeField] NewOrderCrateSpawner newOrderCrateSpawner;
     [SerializeField] int startingLetterID = 100;
     [SerializeField] List<ItemAmountPair> startingItems;
-    [SerializeField] string debugRewardToGet;
-    [SerializeField] ItemAmountPair debugCostForReward;
     [SerializeField] AudioSource instantDeliveryAudio;
 
     [Zenject.Inject] OverworldEffectHandler overworldEffectHandler;
@@ -190,12 +188,6 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     private void SetPostboxLetterToID(int id)
     {
         letterBox.SetStoredItem(new ItemAmountPair(ItemType.LetterFromFamily, id));
-    }
-
-    [Button]
-    private void DebugAquire()
-    {
-        Aquired(debugRewardToGet, debugCostForReward);
     }
 
     private void UpdateSacrifices()

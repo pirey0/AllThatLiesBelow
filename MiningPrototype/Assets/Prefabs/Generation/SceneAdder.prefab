@@ -45,20 +45,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   addition:
   - XOffsetRange: {x: 0, y: 0}
-    YOffset: 44
-    FromTop: 1
+    YOffset: 0.56
     SceneToAdd:
       sceneAsset: {fileID: 102900000, guid: ff72c84b8404c72448a5f4f2347572d0, type: 3}
       scenePath: Assets/Scenes/OverworldScene.unity
-  - XOffsetRange: {x: 30, y: 50}
-    YOffset: 55
-    FromTop: 1
+  - XOffsetRange: {x: 0.2, y: 0.6}
+    YOffset: 0.45
     SceneToAdd:
       sceneAsset: {fileID: 102900000, guid: eefebb5b71de47e4e9da29653337e8d9, type: 3}
       scenePath: Assets/Scenes/AltarScene.unity
-  - XOffsetRange: {x: 10, y: 80}
-    YOffset: 70
-    FromTop: 1
+  - XOffsetRange: {x: 0.1, y: 0.8}
+    YOffset: 0.3
     SceneToAdd:
       sceneAsset: {fileID: 102900000, guid: 772c6d38dd969d24bb2ad158970d99e5, type: 3}
       scenePath: Assets/Scenes/ClockScene.unity
