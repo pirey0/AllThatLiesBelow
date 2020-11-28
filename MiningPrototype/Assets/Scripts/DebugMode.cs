@@ -77,6 +77,9 @@ public class DebugMode : MonoBehaviour
             case TeleportDestination.Bed:
                 target = FindObjectOfType<Bed>()?.transform;
                 break;
+            case TeleportDestination.Mine:
+                target = FindObjectOfType<Torch>()?.transform;
+                break;
         }
 
         if (target == null)
@@ -92,7 +95,8 @@ public class DebugMode : MonoBehaviour
     public enum TeleportDestination
     {
         Bed,
-        Altar
+        Altar,
+        Mine
     }
 
     private void PlayerGets(ItemType itemType, int amount)
