@@ -31,8 +31,11 @@ public class Ladder : TilemapCarvingEntity
     protected void Start()
     {
         Carve();
-        rigidbody.isKinematic = true;
-        rigidbody.velocity = Vector2.zero;
+        if (rigidbody != null)
+        {
+            rigidbody.isKinematic = true;
+            rigidbody.velocity = Vector2.zero;
+        }
     }
 
     public override void OnTileUpdated(int x, int y, TileUpdateReason reason)
