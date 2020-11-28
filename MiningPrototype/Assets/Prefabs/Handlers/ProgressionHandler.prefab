@@ -52,8 +52,8 @@ MonoBehaviour:
   startingItems:
   - type: 6
     amount: 5
-  - type: 7
-    amount: 5
+  - type: 17
+    amount: 10
   debugRewardToGet: Spring
   debugCostForReward:
     type: 0
