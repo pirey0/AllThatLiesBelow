@@ -21055,6 +21055,12 @@ MonoBehaviour:
   - StateName: FallDeath
     CanInteract: 0
     CanInventory: 0
+  - StateName: CrouchWalk
+    CanInteract: 1
+    CanInventory: 1
+  - StateName: CrouchIdle
+    CanInteract: 1
+    CanInventory: 1
   playerInteraction: {fileID: 497824006148765930}
   debug: 0
 --- !u!114 &497824006148765930
@@ -21186,6 +21192,18 @@ MonoBehaviour:
     HandsState: 1
     CarryItemState: 0
     PickaxeState: 0
+  - StateName: CrouchWalk
+    BodyAnimation: {fileID: 11400000, guid: b5764dcb76abf2149990aeb6f4bbc6a9, type: 2}
+    HeadState: 1
+    HandsState: 1
+    CarryItemState: 1
+    PickaxeState: 2
+  - StateName: CrouchIdle
+    BodyAnimation: {fileID: 11400000, guid: f96127dfcdd0a4148895696185784c63, type: 2}
+    HeadState: 1
+    HandsState: 1
+    CarryItemState: 1
+    PickaxeState: 2
 --- !u!114 &651199607118553818
 MonoBehaviour:
   m_ObjectHideFlags: 0

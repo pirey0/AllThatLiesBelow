@@ -63,7 +63,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
     [Inject] TransitionEffectHandler transitionEffectHandler;
     [Inject] InventoryManager inventoryManager;
     StateMachine stateMachine;
-    StateMachine.State s_idle, s_jump, s_fall, s_walk, s_slowWalk, s_climb, s_climbIde, s_inventory, s_death, s_hit, s_longIdle, s_disabled, s_fallDeath;
+    StateMachine.State s_idle,s_crouchIdle, s_jump, s_fall, s_walk, s_slowWalk, s_crouchWalk, s_climb, s_climbIde, s_inventory, s_death, s_hit, s_longIdle, s_disabled, s_fallDeath;
     Dictionary<string, PlayerStateInfo> canInteractInStateMap;
     public event System.Action PlayerDeath;
 
@@ -169,9 +169,11 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         stateMachine = new StateMachine("PlayerStateMachine");
 
         s_idle = stateMachine.AddState("Idle", IdleEnter, MoveUpdate);
+        s_crouchIdle = stateMachine.AddState("CrouchIdle", IdleEnter, MoveUpdate);
         s_jump = stateMachine.AddState("Jump", JumpEnter, MoveUpdate);
         s_walk = stateMachine.AddState("Walk", null, MoveUpdate, WalkExit);
         s_slowWalk = stateMachine.AddState("SlowWalk", null, SlowMoveUpdate, WalkExit);
+        s_crouchWalk = stateMachine.AddState("CrouchWalk", null, SlowMoveUpdate, WalkExit);
         s_climb = stateMachine.AddState("Climb", ClimbingEnter, ClimbingUpdate, ClimbingExit);
         s_climbIde = stateMachine.AddState("ClimbIdle", ClimbingEnter, ClimbingUpdate, ClimbingExit);
         s_inventory = stateMachine.AddState("Inventory", null, MoveUpdate);
@@ -190,9 +192,17 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         s_longIdle.AddTransition(NotInProlongedIdle, s_idle);
 
         s_walk.AddTransition(IsOverWeight, s_slowWalk);
-        s_slowWalk.AddTransition(IsNotOverWeight, s_walk);
         s_walk.AddTransition(IsSlowWalking, s_slowWalk);
+        s_slowWalk.AddTransition(IsNotOverWeight, s_walk);
         s_slowWalk.AddTransition(IsIdle, s_idle);
+
+        s_walk.AddTransition(ShouldCrouch, s_crouchWalk);
+        s_crouchWalk.AddTransition(ShouldNotCrouch, s_walk);
+        s_crouchWalk.AddTransition(IsIdle, s_crouchIdle);
+
+        s_idle.AddTransition(ShouldCrouch, s_idle);
+        s_crouchIdle.AddTransition(ShouldNotCrouch, s_idle);
+        s_crouchIdle.AddTransition(IsMoving, s_crouchWalk);
 
         s_idle.AddTransition(IsFalling, s_fall);
         s_fall.AddTransition(IsGrounded, s_idle);
@@ -221,8 +231,22 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         s_idle.AddTransition(IsFalling, s_fall);
         s_walk.AddTransition(IsFalling, s_fall);
         s_slowWalk.AddTransition(IsFalling, s_fall);
+        s_crouchWalk.AddTransition(IsFalling, s_fall);
 
         s_hit.AddTransition(HitFinished, s_idle);
+    }
+
+    private bool ShouldCrouch()
+    {
+        var pos = transform.position.ToGridPosition() + new Vector2Int(0, 3);
+        Util.DebugDrawTile(pos, Color.red, Time.deltaTime);
+
+        return map.IsNeighbourAt(pos.x, pos.y);
+    }
+
+    private bool ShouldNotCrouch()
+    {
+        return !ShouldCrouch();
     }
 
     private bool IsNotOverWeight()
