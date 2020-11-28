@@ -22,7 +22,8 @@ public enum ItemType
     Ball,
     Family_Photo_Empty,
     Torch,
-    Platform
+    Platform,
+    Lost_Soul
 }
 
 

@@ -28,7 +28,9 @@ public class MineableObject : MirrorWorldFollower, IMinableNonGrid
     protected virtual void Destroyed()
     {
         if (!contains.IsNull() && contains.amount > 0)
+        {
             inventoryManager.PlayerCollects(contains.type, contains.amount);
+        }
 
         if (destroyEffects != null)
             Instantiate(destroyEffects, GetPosition(), Quaternion.identity); //Safe no injection
