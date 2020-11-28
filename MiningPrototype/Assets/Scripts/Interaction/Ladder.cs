@@ -11,14 +11,20 @@ public class Ladder : TilemapCarvingEntity
 
     public void NotifyUse()
     {
-        botCollider.layer = layerUse;
-        topCollider.layer = layerUse;
+        if (botCollider != null && topCollider != null)
+        {
+            botCollider.layer = layerUse;
+            topCollider.layer = layerUse;
+        }
     }
 
     public void NotifyLeave()
     {
-        botCollider.layer = layerNormal;
-        topCollider.layer = layerNormal;
+        if (botCollider != null && topCollider != null)
+        {
+            botCollider.layer = layerNormal;
+            topCollider.layer = layerNormal;
+        }
     }
 
 
@@ -44,9 +50,12 @@ public class Ladder : TilemapCarvingEntity
             return;
 
         UnCarvePrevious();
-        rigidbody.isKinematic = false;
-        rigidbody.WakeUp();
-        StartCoroutine(FallingRoutine());
+        if (rigidbody != null)
+        {
+            rigidbody.isKinematic = false;
+            rigidbody.WakeUp();
+            StartCoroutine(FallingRoutine());
+        }
     }
 
     private IEnumerator FallingRoutine()
@@ -62,6 +71,7 @@ public class Ladder : TilemapCarvingEntity
         if (fallSound != null)
              fallSound?.Stop();
 
+        if (rigidbody != null)
             rigidbody.isKinematic = true;
         Carve();
     }
