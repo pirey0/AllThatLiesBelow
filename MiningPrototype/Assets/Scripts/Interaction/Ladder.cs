@@ -35,7 +35,7 @@ public class Ladder : TilemapCarvingEntity
         rigidbody.velocity = Vector2.zero;
     }
 
-    public override void OnTileUpdated(int x, int y, TileUpdateReason reason)
+    public override void OnTileChanged(int x, int y, TileUpdateReason reason)
     {
         if (this == null || reason != TileUpdateReason.Destroy)
             return;

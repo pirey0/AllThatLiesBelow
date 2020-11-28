@@ -13,7 +13,7 @@ public class Support : SupportBase
     }
 
 
-    public override void OnTileUpdated(int x, int y, TileUpdateReason reason)
+    public override void OnTileChanged(int x, int y, TileUpdateReason reason)
     {
         if(this != null && reason == TileUpdateReason.Destroy)
         {

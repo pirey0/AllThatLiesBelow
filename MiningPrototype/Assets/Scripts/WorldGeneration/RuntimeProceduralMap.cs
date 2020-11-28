@@ -77,7 +77,15 @@ public class RuntimeProceduralMap : RenderedMap
         RefreshAll();
         StartCoroutine(UpdateUnstableTilesRoutine());
     }
-
+    public override void RefreshAll()
+    {
+        base.RefreshAll();
+        NotifyRecieversAll(TileUpdateReason.VisualUpdate);
+    }
+    private void NotifyRecieversAll(TileUpdateReason reason)
+    {
+        Util.IterateXY(SizeX, SizeY, (x, y) => NotifyRecieversOfUpdates(x, y, reason));
+    }
 
     private IEnumerator UpdateUnstableTilesRoutine()
     {
@@ -313,10 +321,32 @@ public class RuntimeProceduralMap : RenderedMap
     {
         base.UpdatePropertiesAt(x, y, newTile, previousTile, reason);
 
-        if (previousTile.Type != newTile.Type)
+        if ((reason & TileUpdateReason.DoNotUpdateReceivers) != TileUpdateReason.None)
+            return;
+
+        NotifyRecieversOfUpdates(x, y, reason);
+
+        foreach (var n in MapHelper.GetNeighboursIndiciesOf(x, y))
+            NotifyRecieversOfUpdates(n.x, n.y, TileUpdateReason.VisualUpdate);
+
+        foreach (var n in MapHelper.Get2ndDegreeNeighboursIndiciesOf(x, y))
+            NotifyRecieversOfUpdates(n.x, n.y, TileUpdateReason.VisualUpdate);
+    }
+
+    private void NotifyRecieversOfUpdates(int x, int y, TileUpdateReason reason)
+    {
+        WrapXIfNecessary(ref x);
+        if (IsOutOfBounds(x, y))
+            return;
+
+        if ((reason & TileUpdateReason.VisualUpdate) == TileUpdateReason.None)
+        {
+            receiverMap[x, y]?.OnTileChanged(x, y, reason);
+            receiverMap[x, y] = null;
+        }
+        else
         {
             receiverMap[x, y]?.OnTileUpdated(x, y, reason);
-            receiverMap[x, y] = null;
         }
     }
 

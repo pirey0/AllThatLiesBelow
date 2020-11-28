@@ -15,11 +15,15 @@ public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateRec
 
     public BaseMap TileMap {get; private set;}
 
-    public virtual void OnTileUpdated(int x, int y, TileUpdateReason reason)
+    public virtual void OnTileChanged(int x, int y, TileUpdateReason reason)
     {
     }
 
     public virtual void OnTileCrumbleNotified(int x, int y)
+    {
+    }
+
+    public virtual void OnTileUpdated(int x, int y, TileUpdateReason reason)
     {
     }
 
@@ -92,6 +96,8 @@ public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateRec
     {
         TileMap = tileMap;
     }
+
+
 }
 
 [System.Serializable]

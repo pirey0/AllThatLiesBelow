@@ -127,11 +127,16 @@ public class RenderedMap : BaseMap
             CalculateNeighboursBitmaskAt(nIndex.x, nIndex.y);
 
         CalculateVisibilityAt(x, y);
+
         foreach (var nIndex in MapHelper.GetNeighboursIndiciesOf(x, y))
+        {
             CalculateVisibilityAt(nIndex.x, nIndex.y);
+        }
 
         foreach (var nIndex in MapHelper.Get2ndDegreeNeighboursIndiciesOf(x, y))
+        {
             CalculateVisibilityAt(nIndex.x, nIndex.y);
+        }
 
         PropagateStabilityUpdatesFrom(x, y);
     }

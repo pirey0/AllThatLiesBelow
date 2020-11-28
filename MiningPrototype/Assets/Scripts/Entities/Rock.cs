@@ -43,21 +43,23 @@ public class Rock : TilemapCarvingEntity
 
     }
 
-    public override void OnTileUpdated(int x, int y, TileUpdateReason reason)
+
+    public override void OnTileChanged(int x, int y, TileUpdateReason reason)
     {
         if (reason == TileUpdateReason.Destroy || reason == TileUpdateReason.Generation)
         {
             UncarveDestroy();
         }
-        else
-        {
-            if (RuntimeProceduralMap.Instance[x, y].Visibility > 2)
-                renderer.enabled = false;
-            else
-                renderer.enabled = true;
-        }
     }
 
+    public override void OnTileUpdated(int x, int y, TileUpdateReason reason)
+    {
+        Tile t = RuntimeProceduralMap.Instance[x, y];
+        if (t.Visibility > 2)
+            renderer.enabled = false;
+        else
+            renderer.enabled = true;
+    }
 
     private IEnumerator FallingRoutine()
     {

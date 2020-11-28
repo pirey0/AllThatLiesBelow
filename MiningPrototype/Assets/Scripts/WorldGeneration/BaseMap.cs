@@ -190,7 +190,7 @@ public class BaseMap : StateListenerBehaviour, ISavable
         RefreshAll();
     }
 
-    public void RefreshAll()
+    public virtual void RefreshAll()
     {
         Debug.Log("Map Refresh all");
         CalculateAllNeighboursBitmask();
@@ -287,7 +287,7 @@ public class BaseMap : StateListenerBehaviour, ISavable
         var t = loadedData.Map[x, y];
 
         if (t.Type != TileType.Ignore)
-            SetMapAt(x + xOffset, y + yOffset, t, TileUpdateReason.Generation, updateProperties: true, updateVisuals: false);
+            SetMapAt(x + xOffset, y + yOffset, t, TileUpdateReason.MapLoad, updateProperties: true, updateVisuals: false);
     }
 
     public bool IsSetup()

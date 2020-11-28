@@ -100,17 +100,22 @@ public enum Direction
 public interface ITileUpdateReceiver
 {
     void OnTileCrumbleNotified(int x, int y);
+    void OnTileChanged(int x, int y, TileUpdateReason reason);
     void OnTileUpdated(int x, int y, TileUpdateReason reason);
     GameObject gameObject { get; }
 }
 
+[Flags]
 public enum TileUpdateReason
 {
-    VisualUpdate,
-    Destroy,
-    Collapse,
-    Uncarve,
-    Carve,
-    Place,
-    Generation
+    None =0,
+    VisualUpdate=1,
+    Destroy=2,
+    Collapse=4,
+    Uncarve=8,
+    Carve=16,
+    Place=32,
+    Generation=64,
+    MapLoad= 128,
+    DoNotUpdateReceivers = Generation | Carve
 }
