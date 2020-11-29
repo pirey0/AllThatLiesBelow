@@ -115,7 +115,6 @@ GameObject:
   - component: {fileID: 6648267811130666485}
   - component: {fileID: 4507488944223494356}
   - component: {fileID: 400300936509253282}
-  - component: {fileID: 6496289443480600798}
   m_Layer: 0
   m_Name: Letterbox
   m_TagString: Untagged
@@ -217,24 +216,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteAnimator: {fileID: 5224793908363139977}
-  closed: {fileID: 11400000, guid: e5726a3afa103f544a1fefb06639b13a, type: 2}
+  closedEmpty: {fileID: 11400000, guid: e5726a3afa103f544a1fefb06639b13a, type: 2}
+  closedFull: {fileID: 11400000, guid: a38b41a9bc8db50458536371c12813c4, type: 2}
   open: {fileID: 11400000, guid: a6950b60883fa3a44919954ab0bfbcd8, type: 2}
-  active: {fileID: 11400000, guid: a38b41a9bc8db50458536371c12813c4, type: 2}
-  activePlayer: {fileID: 11400000, guid: a38b41a9bc8db50458536371c12813c4, type: 2}
-  openFull: {fileID: 11400000, guid: 77a9bbea6eb21d14683fc2a1698c4c31, type: 2}
-  letterboxIsFull: {fileID: 8185578589798581420}
   openCloseAudio: {fileID: 1265463392}
   storeItemAudio: {fileID: 6648267811130666485}
-  storedItem:
-    type: 3
-    amount: 1
-  storedMessage: My heart is heavy with loss. I cannot see a way through. How can
-    I go on knowing that I have lost you? But I swear I hear your voice Whisper through
-    the breeze saying that you love me through the rustle of the leaves.
-  canvas: {fileID: 0}
-  messagePrefab: {fileID: 2481684509624394811, guid: 792491b9185146b439b16abe13758f74, type: 3}
-  orderCanvas: {fileID: 880563242}
-  newOrderPrefab: {fileID: 1662500853003709545, guid: d05b735a97b53ee44a97e55589860f56, type: 3}
 --- !u!82 &1265463392
 AudioSource:
   m_ObjectHideFlags: 0
@@ -482,19 +468,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
   blinkingMaterial: {fileID: 2100000, guid: 318afa5e83f92d9449e26fda7da9b754, type: 2}
---- !u!114 &6496289443480600798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6357320653061133600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b881ed04caf12745a91f5af9c91ac07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 5
 --- !u!1 &8185578589798581420
 GameObject:
   m_ObjectHideFlags: 0

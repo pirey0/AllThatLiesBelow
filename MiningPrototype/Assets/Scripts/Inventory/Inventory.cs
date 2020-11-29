@@ -69,6 +69,25 @@ public class Inventory
         return false;
     }
 
+    public ItemAmountPair Pop()
+    {
+        if (IsEmpty())
+        {
+            return ItemAmountPair.Nothing;
+        }
+        else
+        {
+            var el = content[0];
+            content.RemoveAt(0);
+            return el;
+        }
+    }
+
+    public bool IsEmpty()
+    {
+        return content.Count == 0;
+    }
+
     public bool TryRemove(ItemAmountPair pair)
     {
         var info = ItemsData.GetItemInfo(pair.type);

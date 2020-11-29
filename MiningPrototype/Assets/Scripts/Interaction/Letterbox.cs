@@ -6,53 +6,40 @@ using UnityEngine;
 
 public enum LetterboxStatus
 {
-    CLOSED,
-    OPEN,
-    ACTIVE,
-    ACTIVEPLAYER
+    ClosedEmpty,
+    ClosedFull,
+    OPEN
 }
 
-public class Letterbox : MonoBehaviour, IInteractable
+public class LetterBox : StateListenerBehaviour, IInteractable, INonPersistantSavable
 {
     [SerializeField] SpriteAnimator spriteAnimator;
-    [SerializeField] SpriteAnimation closed, open, active, activePlayer, openFull;
-
-    [SerializeField] GameObject letterboxIsFull;
-
+    [SerializeField] SpriteAnimation closedEmpty, closedFull, open;
     [SerializeField] AudioSource openCloseAudio, storeItemAudio;
-
-    [SerializeField] ItemAmountPair storedItem;
-    [SerializeField] string storedMessage;
-
-    [SerializeField] Canvas canvas;
-    [SerializeField] ReadableItemVisualizer messagePrefab;
-    ReadableItemVisualizer displayedMessage;
-
-    [SerializeField] Canvas orderCanvas;
-    [SerializeField] NewOrderVisualizer newOrderPrefab;
-    NewOrderVisualizer newOrder;
 
     [Zenject.Inject] InventoryManager inventoryManager;
 
-    private event System.Action ForceInterrupt;
-
+    Inventory inventory = new Inventory();
     LetterboxStatus status;
 
-    [Button]
-    public void Activate()
+    private event System.Action ForceInterrupt;
+
+    protected override void OnStartAfterLoad()
     {
-        SetLetterboxStatus(LetterboxStatus.ACTIVE);
+        SetLetterboxStatus(status);
     }
 
     [Button]
     public void Open()
     {
         //add all stored items to player inventory
-        if (!storedItem.IsNull() && storedItem.amount > 0)
+        var element = inventory.Pop();
+        while (element != ItemAmountPair.Nothing)
         {
-            inventoryManager.PlayerCollects(storedItem.type, storedItem.amount);
-            storedItem = ItemAmountPair.Nothing;
+            inventoryManager.PlayerCollects(element.type, element.amount);
+            element = inventory.Pop();
         }
+
         SetLetterboxStatus(LetterboxStatus.OPEN);
     }
 
@@ -65,9 +52,9 @@ public class Letterbox : MonoBehaviour, IInteractable
             return;
 
         if (IsEmpty())
-            SetLetterboxStatus(LetterboxStatus.CLOSED);
+            SetLetterboxStatus(LetterboxStatus.ClosedEmpty);
         else
-            SetLetterboxStatus(LetterboxStatus.ACTIVEPLAYER);
+            SetLetterboxStatus(LetterboxStatus.ClosedFull);
     }
 
     public void BeginInteracting(GameObject interactor)
@@ -83,45 +70,36 @@ public class Letterbox : MonoBehaviour, IInteractable
 
     private void SetLetterboxStatus(LetterboxStatus newStatus)
     {
-        if (newStatus != status)
+        Debug.Log("Switching to: " + newStatus);
+        switch (newStatus)
         {
-            switch (newStatus)
-            {
-                case LetterboxStatus.ACTIVE:
-                    spriteAnimator.Play(active);
-                    break;
+            case LetterboxStatus.ClosedFull:
+                spriteAnimator.Play(closedFull);
+                break;
 
-                case LetterboxStatus.ACTIVEPLAYER:
-                    spriteAnimator.Play(activePlayer);
-                    break;
+            case LetterboxStatus.OPEN:
+                spriteAnimator.Play(open);
+                break;
 
-                case LetterboxStatus.OPEN:
-                    spriteAnimator.Play(IsEmpty() ? open : openFull);
-                    break;
-
-                case LetterboxStatus.CLOSED:
-                    spriteAnimator.Play(closed);
-                    break;
-            }
-
-            openCloseAudio.Play();
-
-            status = newStatus;
+            case LetterboxStatus.ClosedEmpty:
+                spriteAnimator.Play(closedEmpty);
+                break;
         }
+
+        openCloseAudio.Play();
+
+        status = newStatus;
     }
 
-    public ItemAmountPair GetStoredItem()
-    {
-        return storedItem;
-    }
 
-    public void SetStoredItem(ItemAmountPair itemAmountPair)
+    public void AddStoredItem(ItemAmountPair itemAmountPair)
     {
-        storedItem = itemAmountPair;
+        inventory.Add(itemAmountPair);
+
         if (IsEmpty())
-            SetLetterboxStatus(LetterboxStatus.CLOSED);
+            SetLetterboxStatus(LetterboxStatus.ClosedEmpty);
         else
-            SetLetterboxStatus(LetterboxStatus.ACTIVE);
+            SetLetterboxStatus(LetterboxStatus.ClosedFull);
     }
 
     public void SubscribeToForceQuit(Action action)
@@ -136,6 +114,33 @@ public class Letterbox : MonoBehaviour, IInteractable
 
     public bool IsEmpty()
     {
-        return storedItem.IsNull();
+        return inventory.IsEmpty();
+    }
+
+    public SpawnableSaveData ToSaveData()
+    {
+        var data = new LetterBoxSaveData();
+        data.SpawnableIDType = SpawnableIDType.LetterBox;
+        data.Position = new SerializedVector3(transform.position);
+        data.Rotation = new SerializedVector3(transform.eulerAngles);
+        data.Inventory = inventory;
+        data.Status = status;
+        return data;
+    }
+
+    public void Load(SpawnableSaveData dataOr)
+    {
+        if (dataOr is LetterBoxSaveData data)
+        {
+            inventory = data.Inventory;
+            status = data.Status;
+        }
+    }
+
+    [System.Serializable]
+    public class LetterBoxSaveData : SpawnableSaveData
+    {
+        public LetterboxStatus Status;
+        public Inventory Inventory;
     }
 }

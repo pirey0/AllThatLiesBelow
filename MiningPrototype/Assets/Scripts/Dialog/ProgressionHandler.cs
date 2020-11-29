@@ -24,7 +24,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     [Zenject.Inject] SceneAdder sceneAdder;
 
     ProgressionSaveData data;
-    Letterbox letterBox;
+    LetterBox letterBox;
     DropBox postbox;
 
     public float SpeedMultiplyer { get => data.speedMultiplyer; }
@@ -44,7 +44,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
     protected override void OnPostSceneLoad()
     {
-        letterBox = FindObjectOfType<Letterbox>();
+        letterBox = FindObjectOfType<LetterBox>();
         postbox = FindObjectOfType<DropBox>();
     }
 
@@ -111,6 +111,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     {
         if (postbox != null)
         {
+            bool sentToWife = false;
             while (!postbox.IsEmpty())
             {
                 ItemAmountPair storedItem = postbox.FetchItem();
@@ -127,8 +128,13 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
                     }
                 }
 
-                StepLetterProgression(storedItem.type == ItemType.LetterToFamily);
+                if (storedItem.type == ItemType.LetterToFamily)
+                {
+                    sentToWife = true;
+                }
             }
+
+            StepLetterProgression(sentToWife);
         }
         else
         {
@@ -188,7 +194,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
     private void SetPostboxLetterToID(int id)
     {
-        letterBox.SetStoredItem(new ItemAmountPair(ItemType.LetterFromFamily, id));
+        letterBox.AddStoredItem(new ItemAmountPair(ItemType.LetterFromFamily, id));
     }
 
     private void UpdateSacrifices()

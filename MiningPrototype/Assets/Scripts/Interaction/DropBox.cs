@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class DropBox : HoverHighlighter, IDropReceiver
+public class DropBox : HoverHighlighter, IDropReceiver, INonPersistantSavable
 {
     [SerializeField] ItemType[] sendable;
     [SerializeField] AudioSource storeItemAudio;
 
-    [SerializeField] Queue<ItemAmountPair> storedItems = new Queue<ItemAmountPair>();
+    [SerializeField] Inventory inventory = new Inventory();
     public void BeginHoverWith(ItemAmountPair pair)
     {
         //
@@ -28,11 +28,9 @@ public class DropBox : HoverHighlighter, IDropReceiver
     {
         if (WouldTakeDrop(pair) && origin.Contains(pair) && origin.TryRemove(pair))
         {
-     
-            storedItems.Enqueue(pair);
+            inventory.Add(pair);
             storeItemAudio?.Play();
         }
-
     }
 
     public bool WouldTakeDrop(ItemAmountPair pair)
@@ -42,11 +40,35 @@ public class DropBox : HoverHighlighter, IDropReceiver
 
     public ItemAmountPair FetchItem()
     {
-        return storedItems.Dequeue();
+        return inventory.Pop();
     }
 
     public bool IsEmpty()
     {
-        return storedItems.Count == 0;
+        return inventory.IsEmpty();
+    }
+
+    public SpawnableSaveData ToSaveData()
+    {
+        var data = new DropBoxSaveData();
+        data.SpawnableIDType = SpawnableIDType.DropBox;
+        data.Position = new SerializedVector3(transform.position);
+        data.Rotation = new SerializedVector3(transform.eulerAngles);
+        data.Inventory = inventory;
+        return data;
+    }
+
+    public void Load(SpawnableSaveData dataOr)
+    {
+        if(dataOr is DropBoxSaveData data)
+        {
+            inventory = data.Inventory;
+        }
+    }
+
+    [System.Serializable]
+    public class DropBoxSaveData : SpawnableSaveData
+    {
+        public Inventory Inventory;
     }
 }
