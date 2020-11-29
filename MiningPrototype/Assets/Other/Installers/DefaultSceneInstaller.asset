@@ -24,3 +24,4 @@ MonoBehaviour:
   inWorldCanvasPrefab: {fileID: 3019894843303896135, guid: 68766b238d735f249bc21c83b2547f29, type: 3}
   debugModePrefab: {fileID: 2713967248471055398, guid: e5e1307b208ca2a49a439925ada45aeb, type: 3}
   nonPersistantSaveManager: {fileID: 3582284438814986634, guid: b6fe12852547eba49bfee5f4d0724d85, type: 3}
+  inventoryManager: {fileID: 3635523950605926608, guid: 921941577f09f5d45a0c4ae50fde44ac, type: 3}

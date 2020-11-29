@@ -28,13 +28,14 @@ public enum SpawnableIDType
     Ladder,
     Support,
     Hut,
-    Postbox,
+    LetterBox,
     Altar,
     Crate,
     Ball,
     Chest,
     Torch,
-    OverworldLight
+    OverworldLight,
+    DropBox
 }
 
 

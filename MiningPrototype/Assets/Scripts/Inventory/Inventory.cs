@@ -72,7 +72,6 @@ public class Inventory
     public bool TryRemove(ItemAmountPair pair)
     {
         var info = ItemsData.GetItemInfo(pair.type);
-
         if (info.AmountIsUniqueID)
         {
             int i = content.FindIndex(0,(x) => x == pair);
@@ -86,7 +85,6 @@ public class Inventory
         else
         {
             int id = GetStackIdFor(pair.type);
-
             if (id >= 0)
             {
                 if (content[id].amount > pair.amount)

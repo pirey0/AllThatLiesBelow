@@ -25,7 +25,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
     ProgressionSaveData data;
     Letterbox letterBox;
-    Postbox postbox;
+    DropBox postbox;
 
     public float SpeedMultiplyer { get => data.speedMultiplyer; }
     public float DigSpeedMultiplyer { get => data.digSpeedMultiplyer; }
@@ -45,7 +45,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     protected override void OnPostSceneLoad()
     {
         letterBox = FindObjectOfType<Letterbox>();
-        postbox = FindObjectOfType<Postbox>();
+        postbox = FindObjectOfType<DropBox>();
     }
 
     protected override void OnNewGame()

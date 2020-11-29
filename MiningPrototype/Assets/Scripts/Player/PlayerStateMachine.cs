@@ -381,7 +381,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
 
         foreach (var hit in hits)
         {
-            if (!hit.collider.isTrigger)
+            if (!hit.collider.isTrigger && hit.transform.TryGetComponent<ITileMapElement>(out ITileMapElement el)) //allow walking into ball/crates etc
             {
                 movement = Vector3.zero;
                 horizontal = 0;

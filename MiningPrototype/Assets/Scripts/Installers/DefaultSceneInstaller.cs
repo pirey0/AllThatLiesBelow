@@ -8,7 +8,7 @@ public class DefaultSceneInstaller : ScriptableObjectInstaller<DefaultSceneInsta
 {
     [SerializeField] GameObject playerPrefab, progressionPrefab, readableItemPrefab, cameraPannerPrefab, cameraPrefab, itemPreviewPrefab;
     [SerializeField] GameObject pauseMenuPrefab, toolTipPrefab, eventSystemPrefab, inWorldCanvasPrefab;
-    [SerializeField] GameObject debugModePrefab, nonPersistantSaveManager;
+    [SerializeField] GameObject debugModePrefab, nonPersistantSaveManager, inventoryManager;
     
     public override void InstallBindings()
     {
@@ -24,13 +24,12 @@ public class DefaultSceneInstaller : ScriptableObjectInstaller<DefaultSceneInsta
         Container.Bind<NonPersistantSaveManager>().FromComponentInNewPrefab(nonPersistantSaveManager).AsSingle().NonLazy();
 
         Container.Bind(typeof(CameraController), typeof(TransitionEffectHandler)).FromComponentInNewPrefab(cameraPrefab).AsSingle().NonLazy();
+        Container.Bind<InventoryManager>().FromComponentInNewPrefab(inventoryManager).AsSingle().NonLazy();
 
         if (DebugMode.DEBUG_POSSIBLE)
         {
             Container.Bind<DebugMode>().FromComponentInNewPrefab(debugModePrefab).AsSingle().NonLazy();
         }
-
-        Container.Bind<InventoryManager>().AsSingle().NonLazy();
 
         //Factories
         Container.BindFactory<GameObject, InventoryVisualizer, InventoryVisualizer.Factory>().FromFactory<PrefabFactory<InventoryVisualizer>>();
