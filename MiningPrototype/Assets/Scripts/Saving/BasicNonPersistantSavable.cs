@@ -13,7 +13,13 @@ public class BasicNonPersistantSavable : MonoBehaviour, INonPersistantSavable
     {
         var data = new SpawnableSaveData();
         data.SpawnableIDType = type;
-        data.Position = new SerializedVector3(transform.position);
+
+        //Wrap position in case Mirror Follower is in mirrored position
+        var pos = transform.position;
+        int sizeX = RuntimeProceduralMap.Instance.SizeX;
+        pos.x = (pos.x+sizeX) % sizeX;
+
+        data.Position = new SerializedVector3(pos);
         data.Rotation = new SerializedVector3(transform.eulerAngles);
         return data;
     }

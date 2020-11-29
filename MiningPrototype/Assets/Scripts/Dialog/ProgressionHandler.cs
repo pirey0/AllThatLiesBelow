@@ -72,6 +72,9 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
         {
             sacrificeActions.ApplyItemSacrificeConsequence(item, data);
         }
+
+        letterBox = FindObjectOfType<LetterBox>();
+        postbox = FindObjectOfType<DropBox>();
     }
 
     public void Aquired(string topic, ItemAmountPair payment)
