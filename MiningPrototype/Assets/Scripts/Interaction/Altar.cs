@@ -142,6 +142,10 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
                 visualizer.DisplaySentence(SuggestPossiblePaymentMethods());
                 break;
 
+            case AltarState.Off:
+                NotifyForcedEnd?.Invoke();
+                break;
+
         }
 
         currentState = newState;
