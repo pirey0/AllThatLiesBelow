@@ -200,7 +200,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
         s_crouchWalk.AddTransition(ShouldNotCrouch, s_walk);
         s_crouchWalk.AddTransition(IsIdle, s_crouchIdle);
 
-        s_idle.AddTransition(ShouldCrouch, s_idle);
+        s_idle.AddTransition(ShouldCrouch, s_crouchIdle);
         s_crouchIdle.AddTransition(ShouldNotCrouch, s_idle);
         s_crouchIdle.AddTransition(IsMoving, s_crouchWalk);
 

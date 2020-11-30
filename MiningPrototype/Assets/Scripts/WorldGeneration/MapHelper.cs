@@ -155,7 +155,6 @@ public static class MapHelper
 
     public static Vector2Int GetMiningTarget(RuntimeProceduralMap map, Vector2Int current, Vector2Int end)
     {
-        Vector2Int? lastTargetable = null;
         while (current != end)
         {
             var t = map[current];
@@ -165,21 +164,12 @@ public static class MapHelper
             {
                 return current;
             }
-            else if (info.Targetable)
-            {
-                lastTargetable = current;
-            }
 
             current += StepTowards(current, end);
         }
 
         var endT = map[end];
-        var endInfo = TilesData.GetTileInfo(endT.Type);
-
-        if (endInfo.TargetPriority)
-            return end;
-        else
-            return lastTargetable.HasValue ? lastTargetable.Value : end;
+        return end;
     }
     public static Color StabilityToColor(float stability)
     {

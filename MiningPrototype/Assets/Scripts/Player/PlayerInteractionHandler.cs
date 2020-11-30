@@ -40,9 +40,8 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
     public event System.Action PlayerActivity;
 
-    protected override void Start()
+    protected void Start()
     {
-        base.Start();
         visualController = GetComponent<PlayerVisualController>();
         player.PlayerDeath += OnDeath;
     }
