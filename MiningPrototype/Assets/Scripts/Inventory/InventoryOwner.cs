@@ -9,7 +9,7 @@ public interface IInventoryOwner
     Inventory Inventory { get; }
 }
 
-public class InventoryOwner : MonoBehaviour, IInventoryOwner, IInteractable
+public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteractable
 {
     [Header("Inventory Owner")]
     [SerializeField] Inventory inventory;
@@ -39,7 +39,7 @@ public class InventoryOwner : MonoBehaviour, IInventoryOwner, IInteractable
         return inventory;
     }
 
-    protected virtual void Start()
+    protected override void OnStartAfterLoad()
     {
         inventory.InventoryChanged += OnInventoryChanged;
     }
