@@ -210,6 +210,9 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
 
     public void EndHover()
     {
+        if (this == null)
+            return;
+
         spriteRenderer.material = spriteDefault;
         spriteRenderer.color = Color.white;
     }

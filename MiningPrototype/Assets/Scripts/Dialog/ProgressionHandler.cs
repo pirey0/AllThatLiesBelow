@@ -126,7 +126,15 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
                     if (data.ordersForNextDay.ContainsKey(storedItem.amount))
                     {
                         List<ItemAmountPair> order = data.ordersForNextDay[storedItem.amount];
-                        newOrderCrateSpawner.SpawnOrder(order);
+                        if (order == null || order.Count == 0)
+                        {
+                            Debug.LogError("There is an order ID with no elements: " + storedItem.amount);
+                        }
+                        else
+                        {
+                            newOrderCrateSpawner.SpawnOrder(order);
+                        }
+
                         data.ordersForNextDay.Remove(storedItem.amount);
                     }
                 }
