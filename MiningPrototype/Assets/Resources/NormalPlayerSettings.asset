@@ -19,7 +19,7 @@ MonoBehaviour:
   timeToLongIdle: 10
   hitDuration: 1
   respawnCooldown: 5
-  jumpCooldown: 0.85
+  jumpCooldown: 0.25
   timeAfterGroundedToJump: 0.1
   feetRadius: 0.4
   maxDigDistance: 5
