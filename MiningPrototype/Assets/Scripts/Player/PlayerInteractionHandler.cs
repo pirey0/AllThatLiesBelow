@@ -206,7 +206,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
     private bool UpdateDigTarget()
     {
-        gridDigTarget = MapHelper.GetMiningTarget(map, GetPositionInGrid(), GetClickCoordinate());
+        gridDigTarget = MapHelper.GetMiningTarget(map, GetPositionInGridV3(), GetClickCoordinate());
         if (!map.CanTarget(gridDigTarget.Value.x, gridDigTarget.Value.y))
         {
             var secondary = GetSecondaryClickCoordinate();
@@ -413,11 +413,11 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     }
 
     /// <summary>
-    /// Just +1 in Y compared to transform.position
+    /// Just +1.4f in Y compared to transform.position
     /// </summary>
     public Vector3 GetPositionInGridV3()
     {
-        return new Vector3(transform.position.x, transform.position.y + 1); //+1 to be at center of player
+        return new Vector3(transform.position.x, transform.position.y + 1.4f); //+1 to be at center of player
     }
 
     private Vector2Int GetClickCoordinate()

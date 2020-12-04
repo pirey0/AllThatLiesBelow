@@ -80,54 +80,34 @@ public static class MapHelper
 
     public static bool HasLineOfSight(RuntimeProceduralMap map, Vector2Int start, Vector2Int end, bool debugVisualize = false)
     {
-        Vector2Int current = start;
+        Vector3 current = start.AsV3();
 
-        while (current != end)
+        while (current.ToGridPosition() != end)
         {
-            bool blocked = map.IsBlockAt(current.x, current.y);
+            Vector2Int cV2 = current.ToGridPosition();
+
+            bool blocked = map.IsBlockAt(cV2.x, cV2.y);
 
             if (blocked)
             {
                 if (debugVisualize)
-                    Debug.DrawLine((Vector3Int)current, (Vector3Int)end, Color.red, 1);
+                    Debug.DrawLine(current, (Vector3Int)end, Color.red, 1);
                 return false;
             }
 
-            Vector2Int offset = StepTowards(current, end);
+            Vector3 offset = StepTowards(current, end.AsV3() + new Vector3(0.5f,0.5f));
             if (debugVisualize)
-                Debug.DrawLine((Vector3Int)current, (Vector3Int)(current + offset), Color.yellow, 1f);
+                Debug.DrawLine(current, (current + offset), Color.yellow, 1f);
             current += offset;
         }
 
         return true;
     }
 
-    public static Vector2Int StepTowards(Vector2Int current, Vector2Int end)
-    {
-        Vector2Int delta = end - current;
-        Vector2Int offset;
-        if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
-            offset = new Vector2Int((int)Mathf.Sign(delta.x), 0);
-        else if (Mathf.Abs(delta.x) < Mathf.Abs(delta.y))
-            offset = new Vector2Int(0, (int)Mathf.Sign(delta.y));
-        else
-            offset = new Vector2Int((int)Mathf.Sign(delta.x), (int)Mathf.Sign(delta.y));
-
-        return offset;
-    }
-
     public static Vector3 StepTowards(Vector3 current, Vector3 end)
     {
         Vector3 delta = end - current;
-        Vector3 offset;
-        if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
-            offset = new Vector3((int)Mathf.Sign(delta.x), 0);
-        else if (Mathf.Abs(delta.x) < Mathf.Abs(delta.y))
-            offset = new Vector3(0, (int)Mathf.Sign(delta.y));
-        else
-            offset = new Vector3((int)Mathf.Sign(delta.x), (int)Mathf.Sign(delta.y));
-
-        return offset;
+        return delta.normalized;
     }
 
     public static Vector3 GetWorldLocationOfFreeFaceFromSource(RuntimeProceduralMap map, Vector2Int target, Vector2Int source)
@@ -153,19 +133,21 @@ public static class MapHelper
 
     }
 
-    public static Vector2Int GetMiningTarget(RuntimeProceduralMap map, Vector2Int current, Vector2Int end)
+    public static Vector2Int GetMiningTarget(RuntimeProceduralMap map, Vector3 current, Vector2Int end)
     {
-        while (current != end)
+
+        int counter = 10;
+        while (current.ToGridPosition() != end && counter-->0)
         {
-            var t = map[current];
+            var t = map[current.ToGridPosition()];
             var info = TilesData.GetTileInfo(t.Type);
 
             if (info.TargetPriority)
             {
-                return current;
+                return current.ToGridPosition();
             }
 
-            current += StepTowards(current, end);
+            current += StepTowards(current, end.AsV3() + new Vector3(0.5f, 0.5f));
         }
 
         var endT = map[end];
