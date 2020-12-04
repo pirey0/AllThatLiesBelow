@@ -166,10 +166,10 @@ public class RuntimeProceduralMap : RenderedMap
         }
     }
 
-    protected override void BreakBlock(int x, int y, Tile t, bool playerCaused)
+    protected override void BreakBlock(int x, int y, Tile t, DamageType damageType)
     {
-        base.BreakBlock(x, y, t, playerCaused);
-        if (playerCaused)
+        base.BreakBlock(x, y, t, damageType);
+        if (damageType == DamageType.Mining)
         {
             TileInfo info = GetTileInfo(t.Type);
 

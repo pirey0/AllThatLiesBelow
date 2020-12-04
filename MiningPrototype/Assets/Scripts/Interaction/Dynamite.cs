@@ -28,7 +28,7 @@ public class Dynamite : MonoBehaviour
             for (int y = -explostionSize; y <= explostionSize; y++)
             {
                 if (Vector2Int.Distance(Vector2Int.zero, new Vector2Int(x, y)) <= explostionSize)
-                    RuntimeProceduralMap.Instance.DamageAt(position.x + x, position.y + y, 100, playerCaused: false);
+                    RuntimeProceduralMap.Instance.DamageAt(position.x + x, position.y + y, 100, BaseMap.DamageType.Explosion);
             }
         }
 

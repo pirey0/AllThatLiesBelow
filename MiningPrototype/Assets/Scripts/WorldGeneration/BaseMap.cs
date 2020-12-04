@@ -96,7 +96,7 @@ public class BaseMap : StateListenerBehaviour, ISavable
         }
     }
 
-    public bool DamageAt(int x, int y, float amount, bool playerCaused)
+    public bool DamageAt(int x, int y, float amount, DamageType damageType)
     {
         WrapXIfNecessary(ref x);
         if (IsOutOfBounds(x, y))
@@ -107,11 +107,19 @@ public class BaseMap : StateListenerBehaviour, ISavable
         Tile t = GetTileAt(x, y);
         TileInfo info = GetTileInfo(t.Type);
 
-        t.TakeDamage(amount * info.damageMultiplyer);
+        if (damageType == DamageType.Mining)
+        {
+            t.TakeDamage(amount * info.damageMultiplyer);
+        }
+        else if (damageType == DamageType.Explosion && info.damagedByExplosion)
+        {
+            t.TakeDamage(amount);
+        }
+
 
         if (t.Damage > 10)
         {
-            BreakBlock(x, y, t, playerCaused);
+            BreakBlock(x, y, t, damageType);
 
             return true;
         }
@@ -122,10 +130,12 @@ public class BaseMap : StateListenerBehaviour, ISavable
         }
     }
 
-    protected virtual void BreakBlock(int x, int y, Tile t, bool playerCaused)
+    public enum DamageType { Mining, Explosion, Crush }
+
+    protected virtual void BreakBlock(int x, int y, Tile t, DamageType damageType)
     {
         SetMapAt(x, y, Tile.Air, TileUpdateReason.Destroy);
-        if (playerCaused)
+        if (damageType == DamageType.Mining)
             PropagateDiscoveryFrom(x, y);
     }
 

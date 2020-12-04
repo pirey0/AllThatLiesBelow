@@ -129,7 +129,7 @@ public class Rock : TilemapCarvingEntity
             bool block = map.IsBlockAt(pos.x, pos.y);
             if (block)
             {
-                map.DamageAt(pos.x, pos.y, 100, playerCaused: false);
+                map.DamageAt(pos.x, pos.y, 100, BaseMap.DamageType.Crush);
             }
         }
     }

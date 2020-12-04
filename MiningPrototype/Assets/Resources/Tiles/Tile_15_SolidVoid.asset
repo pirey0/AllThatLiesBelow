@@ -15,6 +15,7 @@ MonoBehaviour:
   Type: 15
   ItemToDrop: 5
   damageMultiplyer: 10
+  damagedByExplosion: 1
   AirLike: 0
   Targetable: 1
   TargetPriority: 1
@@ -73,6 +74,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c5a7fefc573ffc14c93ebf765b4c5280, type: 2}
   - {fileID: 11400000, guid: c5bfc981235ed4d43a3d30943eff99f9, type: 2}
   TileSourceInfo: {fileID: 0}
+  Visibility2Tile: {fileID: 0}
   Overlay: {fileID: 0}
   physicalTileSprite: {fileID: -822709934700081756, guid: 09a7a550899f7c6489c71dd8bf11d033, type: 3}
   physicalTileOverlay: {fileID: 0}

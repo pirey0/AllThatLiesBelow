@@ -15,8 +15,6 @@ public class PhysicalTile : MineableObject, IEntity
     [SerializeField] AudioSource hit;
     [SerializeField] float RequiredSpeedForStrongHit;
 
-    [Zenject.Inject] InventoryManager inventoryManager;
-
     private RuntimeProceduralMap generator;
     Tile tile;
     TileInfo info;

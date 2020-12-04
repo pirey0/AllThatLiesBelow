@@ -15,9 +15,10 @@ MonoBehaviour:
   Type: 6
   ItemToDrop: 0
   damageMultiplyer: 0
+  damagedByExplosion: 1
   AirLike: 0
   Targetable: 1
-  TargetPriority: 0
+  TargetPriority: 1
   StabilityAffected: 0
   NotifiesInsteadOfCrumbling: 0
   CountsAsNeighbour: 1

@@ -15,6 +15,7 @@ MonoBehaviour:
   Type: 2
   ItemToDrop: 3
   damageMultiplyer: 1
+  damagedByExplosion: 1
   AirLike: 0
   Targetable: 1
   TargetPriority: 1

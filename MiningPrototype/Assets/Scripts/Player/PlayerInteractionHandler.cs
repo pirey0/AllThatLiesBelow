@@ -292,7 +292,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
                 PlayerActivity?.Invoke();
                 visualController.ForceUpdate();
 
-                bool broken = map.DamageAt(gridDigTarget.Value.x, gridDigTarget.Value.y, Time.deltaTime * settings.digSpeed * progressionHandler.DigSpeedMultiplyer, playerCaused: true);
+                bool broken = map.DamageAt(gridDigTarget.Value.x, gridDigTarget.Value.y, Time.deltaTime * settings.digSpeed * progressionHandler.DigSpeedMultiplyer, BaseMap.DamageType.Mining);
 
                 if (broken)
                 {

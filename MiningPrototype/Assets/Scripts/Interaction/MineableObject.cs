@@ -10,7 +10,7 @@ public class MineableObject : MirrorWorldFollower, IMinableNonGrid
     [SerializeField] protected ItemAmountPair contains;
     [SerializeField] GameObject destroyEffects;
 
-    [Zenject.Inject] InventoryManager inventoryManager;
+    [Zenject.Inject] protected InventoryManager inventoryManager;
     
 
     float damage = 0;
