@@ -195,6 +195,8 @@ public class RenderedMap : BaseMap
 
     private void CalculateNeighboursBitmaskAt(int x, int y)
     {
+        WrapXIfNecessary(ref x);
+
         if (IsOutOfBounds(x, y))
             return;
 

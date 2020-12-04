@@ -79,6 +79,7 @@ public class BaseMap : StateListenerBehaviour, ISavable
 
     public bool IsNeighbourAt(int x, int y)
     {
+        WrapXIfNecessary(ref x);
         return GetTileInfo(this[x, y].Type).CountsAsNeighbour;
     }
 
@@ -111,7 +112,7 @@ public class BaseMap : StateListenerBehaviour, ISavable
         {
             t.TakeDamage(amount * info.damageMultiplyer);
         }
-        else if (damageType == DamageType.Explosion && info.damagedByExplosion)
+        else if ((damageType == DamageType.Explosion ||damageType == DamageType.Crush) && info.damagedByExplosion)
         {
             t.TakeDamage(amount);
         }
