@@ -50,7 +50,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
 {
     [SerializeField] PlayerSettings settings;
     [SerializeField] Transform feet;
-    [SerializeField] AudioSource walking, jumpStart, jumpLand;
+    [SerializeField] AudioSource walking, jumpStart, jumpLand, fallDeath;
     [SerializeField] ParticleSystem midasParticles;
     [SerializeField] bool slowWalkMode;
     [SerializeField] PlayerStateInfo[] statesCanInteract;
@@ -276,6 +276,7 @@ public class PlayerStateMachine : StateListenerBehaviour, IStateMachineUser, IEn
 
     private void DeathEnter()
     {
+        fallDeath?.Play();
         transitionEffectHandler.FadeOut(FadeType.Death);
         rigidbody.simulated = false;
         lastDeathTimeStamp = Time.time;
