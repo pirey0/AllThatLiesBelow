@@ -28,7 +28,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     [Inject] RuntimeProceduralMap map;
 
     PlayerVisualController visualController;
-    Vector2Int? gridDigTarget;
+    Vector2Int? gridDigTarget, previousGridDigTarget;
     IInteractable currentInteractable;
     IMinableNonGrid nonGridDigTarget;
     IHoverable hover;
@@ -206,6 +206,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
     private bool UpdateDigTarget()
     {
+        previousGridDigTarget = gridDigTarget;
         gridDigTarget = MapHelper.GetMiningTarget(map, GetPositionInGridV3(), GetClickCoordinate());
         if (!map.CanTarget(gridDigTarget.Value.x, gridDigTarget.Value.y))
         {
@@ -315,6 +316,9 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
                 {
                     UpdateMiningParticlesPositions();
                 }
+
+                if (gridDigTarget != previousGridDigTarget)
+                    TryDisableMiningVisuals();
 
                 TryEnableMiningVisuals(info.damageMultiplyer);
                 player.NotifyPickaxeUse();
