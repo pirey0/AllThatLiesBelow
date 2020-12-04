@@ -31,7 +31,6 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
     Coroutine updateRoutine;
     Coroutine showTooltipRoutine;
     bool inDrag;
-
     private bool VisualsEnabled { get => icon.enabled; }
 
     protected override void Awake()
@@ -86,7 +85,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         base.OnPointerDown(eventData);
         var info = ItemsData.GetItemInfo(type);
         if (info.AmountIsUniqueID && eventData.button == PointerEventData.InputButton.Right)
-            readableItemHandler.Display(amount,this);
+            readableItemHandler.Display(amount, this);
         else
             tooltipHandler?.Display(transform, info.DisplayName, info.DisplayTooltip);
     }
@@ -125,7 +124,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
     {
         defaultAnchorPosition = rectTransform.anchoredPosition;
         inDrag = true;
-        StartCoroutine(UpdatePosition());
+        StartCoroutine(UpdateInDrag());
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -136,7 +135,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        bool inUI = (rectTransform.position - rectTransform.parent.position).magnitude < 2;
+        bool inUI = GetDistance() < 2;
 
         if (!inUI)
         {
@@ -151,23 +150,40 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
     }
 
     //to also update when not moving the mouse
-    private IEnumerator UpdatePosition()
+    private IEnumerator UpdateInDrag()
     {
         while (inDrag)
         {
             rectTransform.position = Util.MouseToWorld(cameraController.Camera);
             UpdatePlacingPreview();
+
+            if (Input.GetMouseButtonDown(1)) //On right click while dragging <- dirty
+            {
+                if (amount > 1 && GetDistance() > 2)
+                {
+                    itemPlacingHandler.TryPlace(type, rectTransform.position); //try place single item
+                }
+                else
+                {
+                    OnEndDrag(null); //dirty ++
+                }
+            }
+
             yield return null;
         }
     }
 
+    private float GetDistance()
+    {
+        return (rectTransform.position - rectTransform.parent.position).magnitude;
+    }
+
     private void UpdatePlacingPreview()
     {
-        Vector2 distance = rectTransform.position - rectTransform.parent.position;
-        Debug.DrawLine(rectTransform.position, rectTransform.parent.position);
+        float distance = GetDistance();
         var info = ItemsData.GetItemInfo(type);
 
-        if (distance.magnitude > 2)
+        if (distance > 2)
         {
             if (VisualsEnabled)
             {
@@ -234,7 +250,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
     public ItemAmountPair GetPair()
     {
-        return new ItemAmountPair(type,amount);
+        return new ItemAmountPair(type, amount);
     }
 
 
