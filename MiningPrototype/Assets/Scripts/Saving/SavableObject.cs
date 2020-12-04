@@ -35,7 +35,9 @@ public enum SpawnableIDType
     Chest,
     Torch,
     OverworldLight,
-    DropBox
+    DropBox,
+    Skeleton,
+    Hourglass
 }
 
 
