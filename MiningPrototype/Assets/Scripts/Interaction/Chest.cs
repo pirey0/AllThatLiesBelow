@@ -1,30 +1,41 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chest : InventoryOwner, IHoverable, IDropReceiver, INonPersistantSavable
+public class Chest : FallingTilemapCarvingEntity, IHoverable, IDropReceiver, INonPersistantSavable
 {
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Sprite chestOpen, chestClosed;
     [SerializeField] Material defaultMat, outlineMat;
+    [SerializeField] InventoryOwner inventoryOwner;
 
-    public override void OpenInventory()
+    protected override void Start()
     {
-        base.OpenInventory();
-        spriteRenderer.sprite = chestOpen;
+        base.Start();
+        inventoryOwner.StateChanged += OnStateChanged;
+        Carve();
     }
 
-    public override void CloseInventory()
+    private void OnStateChanged(InventoryState obj)
     {
-        base.CloseInventory();
-        spriteRenderer.sprite = chestClosed;
+        switch (obj)
+        {
+            case InventoryState.Open:
+                spriteRenderer.sprite = chestOpen;
+                break;
+
+            case InventoryState.Closed:
+                spriteRenderer.sprite = chestClosed;
+                break;
+        }
     }
 
     public void HoverEnter()
     {
         spriteRenderer.material = outlineMat;
         spriteRenderer.color = new Color(0.8f, 0.8f, 0.8f);
-}
+    }
 
     public void HoverExit()
     {
@@ -60,7 +71,7 @@ public class Chest : InventoryOwner, IHoverable, IDropReceiver, INonPersistantSa
     public void ReceiveDrop(ItemAmountPair pair, Inventory origin)
     {
         if (origin.Contains(pair) && origin.TryRemove(pair))
-            Inventory.Add(pair);
+            inventoryOwner.Inventory.Add(pair);
     }
 
     public SpawnableSaveData ToSaveData()
@@ -69,7 +80,7 @@ public class Chest : InventoryOwner, IHoverable, IDropReceiver, INonPersistantSa
         data.SpawnableIDType = SpawnableIDType.Chest;
         data.Position = new SerializedVector3(transform.position);
         data.Rotation = new SerializedVector3(transform.eulerAngles);
-        data.Inventory = Inventory;
+        data.Inventory = inventoryOwner.Inventory;
         return data;
     }
 
@@ -79,8 +90,17 @@ public class Chest : InventoryOwner, IHoverable, IDropReceiver, INonPersistantSa
         {
             transform.position = data.Position.ToVector3();
             transform.eulerAngles = data.Rotation.ToVector3();
-            SetInventory(data.Inventory);
+            inventoryOwner.SetInventory(data.Inventory);
         }
+    }
+
+    public override void OnTileChanged(int x, int y, TileUpdateReason reason)
+    {
+        if (this == null || reason != TileUpdateReason.Destroy)
+            return;
+
+        UncarveDestroy();
+        Debug.Log("Destroying chest " + reason);
     }
 
     [System.Serializable]

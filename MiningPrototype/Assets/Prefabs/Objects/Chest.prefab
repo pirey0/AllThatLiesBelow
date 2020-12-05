@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 8202015808849809422}
   - component: {fileID: 8202015808849809421}
   - component: {fileID: 8202015808849809420}
+  - component: {fileID: 2407299111015795952}
   - component: {fileID: 8202015808849809411}
-  m_Layer: 0
+  - component: {fileID: 7396027554805798268}
+  m_Layer: 13
   m_Name: Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 2049621373
-  m_SortingLayer: 9
+  m_SortingLayerID: -912485165
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 5045073161074915229, guid: eb18a1feb1c0b324da6e2b9e4d525a9f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -95,7 +97,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.625}
@@ -123,18 +125,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 829f141ee69dbfb42a8208fab1da0baa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory:
-    content:
-    - type: 3
-      amount: 1
-  inventoryVisualizerPrefab: {fileID: 8727063801762088802, guid: c396613fa9613cb4d8d82148ef5649a7, type: 3}
-  openSource: {fileID: 8202015808849809411}
-  inventoryVisualizerUpdates: 0
+  drop:
+    type: 12
+    amount: 1
+  tilesToOccupy:
+  - Offset: {x: 0, y: 0}
+    Type: 11
+  carvingOffset: {x: 0, y: 0.5, z: 0}
+  rigidbody: {fileID: 7396027554805798268}
+  fallSound: {fileID: 0}
   spriteRenderer: {fileID: 8202015808849809422}
   chestOpen: {fileID: -6834524911116659543, guid: eb18a1feb1c0b324da6e2b9e4d525a9f, type: 3}
   chestClosed: {fileID: 5045073161074915229, guid: eb18a1feb1c0b324da6e2b9e4d525a9f, type: 3}
   defaultMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   outlineMat: {fileID: 2100000, guid: 1fd08d97b3eb5c44cb2ebd251450f370, type: 2}
+  inventoryOwner: {fileID: 2407299111015795952}
+--- !u!114 &2407299111015795952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8202015808849809410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c783d16e49e341341999246ac89ecb55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory:
+    content: []
+  inventoryVisualizerPrefab: {fileID: 8727063801762088802, guid: c396613fa9613cb4d8d82148ef5649a7, type: 3}
+  openSource: {fileID: 8202015808849809411}
+  inventoryVisualizerUpdates: 0
 --- !u!82 &8202015808849809411
 AudioSource:
   m_ObjectHideFlags: 0
@@ -231,3 +253,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!50 &7396027554805798268
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8202015808849809410}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

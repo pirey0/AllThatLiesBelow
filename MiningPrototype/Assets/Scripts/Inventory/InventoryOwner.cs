@@ -21,13 +21,14 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
     [Zenject.Inject] InventoryVisualizer.Factory visualizerFactory;
 
     private event System.Action ForceInterrupt;
+    public event System.Action<InventoryState> StateChanged;
 
     InventoryVisualizer inventoryVisualizer;
     InventoryState state = InventoryState.Closed;
     public Inventory Inventory { get => inventory; }
     public InventoryState InventoryDisplayState { get => state; }
 
-    public virtual bool IsFlipped { get => false;}
+    public virtual bool IsFlipped { get => false; }
 
     public void SetInventory(Inventory newInventory)
     {
@@ -68,6 +69,7 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
                 inventoryVisualizer.Init(transform, inventory);
                 inventoryVisualizer.SetFollowOnUpdate(inventoryVisualizerUpdates);
             }
+            StateChanged?.Invoke(state);
         }
     }
 
@@ -87,9 +89,10 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
                 inventoryVisualizer.Close();
                 inventoryVisualizer = null;
             }
-        }
 
-        ForceInterrupt?.Invoke();
+            StateChanged?.Invoke(state);
+            ForceInterrupt?.Invoke();
+        }
     }
 
     public void BeginInteracting(GameObject interactor)

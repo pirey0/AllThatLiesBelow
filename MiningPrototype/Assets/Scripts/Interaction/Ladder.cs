@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ladder : TilemapCarvingEntity
+public class Ladder : FallingTilemapCarvingEntity
 {
-    [SerializeField] Rigidbody2D rigidbody;
-    [SerializeField] AudioSource fallSound;
     [SerializeField] GameObject topCollider, botCollider;
     [SerializeField] int layerUse, layerNormal;
 
@@ -27,15 +25,10 @@ public class Ladder : TilemapCarvingEntity
         }
     }
 
-
-    protected void Start()
+    protected override void Start()
     {
+        base.Start();
         Carve();
-        if (rigidbody != null)
-        {
-            rigidbody.isKinematic = true;
-            rigidbody.velocity = Vector2.zero;
-        }
     }
 
     public override void OnTileChanged(int x, int y, TileUpdateReason reason)
@@ -45,37 +38,5 @@ public class Ladder : TilemapCarvingEntity
 
         UncarveDestroy();
         Debug.Log("Destroying ladder " + reason);
-    }
-
-    public override void OnTileCrumbleNotified(int x, int y)
-    {
-        if (this == null)
-            return;
-
-        UnCarvePrevious();
-        if (rigidbody != null)
-        {
-            rigidbody.isKinematic = false;
-            rigidbody.WakeUp();
-            StartCoroutine(FallingRoutine());
-        }
-    }
-
-    private IEnumerator FallingRoutine()
-    {
-        if (fallSound != null)
-            fallSound.Play();
-
-        while (!rigidbody.IsSleeping())
-        {
-            yield return null;
-        }
-
-        if (fallSound != null)
-             fallSound?.Stop();
-
-        if (rigidbody != null)
-            rigidbody.isKinematic = true;
-        Carve();
     }
 }

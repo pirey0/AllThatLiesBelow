@@ -3,21 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rock : TilemapCarvingEntity
+public class Rock : FallingTilemapCarvingEntity
 {
     [SerializeField] float destructionSpeed;
-    [SerializeField] Rigidbody2D rigidbody;
-    [SerializeField] AudioSource rockFalling;
     [SerializeField] AudioSource rockSmashing;
     [SerializeField] float crumbleMinTime = 0.3f;
     [SerializeField] SpriteRenderer renderer;
 
     float lastCrumbleStamp = -1000;
 
-    protected void Start()
+    protected override void Start()
     {
+        base.Start();
         Carve();
-        rigidbody.isKinematic = true;
         renderer.sortingOrder = UnityEngine.Random.Range(0, 100);
     }
 
@@ -36,11 +34,8 @@ public class Rock : TilemapCarvingEntity
         }
 
         lastCrumbleStamp = Time.time;
-        UnCarvePrevious();
-        rigidbody.isKinematic = false;
-        rigidbody.WakeUp();
-        StartCoroutine(FallingRoutine());
 
+        base.OnTileCrumbleNotified(x, y);
     }
 
 
@@ -72,22 +67,6 @@ public class Rock : TilemapCarvingEntity
         else
             renderer.enabled = true;
     }
-
-    private IEnumerator FallingRoutine()
-    {
-        rockFalling?.Play();
-
-        while (!rigidbody.IsSleeping())
-        {
-            yield return null;
-        }
-
-        rockFalling?.Stop();
-
-        rigidbody.isKinematic = true;
-        Carve();
-    }
-
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

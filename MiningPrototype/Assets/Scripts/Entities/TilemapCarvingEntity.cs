@@ -96,8 +96,6 @@ public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateRec
     {
         TileMap = tileMap;
     }
-
-
 }
 
 [System.Serializable]
