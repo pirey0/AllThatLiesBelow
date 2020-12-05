@@ -6,16 +6,14 @@ using UnityEngine.Tilemaps;
 public class RenderedMap : BaseMap
 {
     [Header("RenderedMap")]
-    [SerializeField] Tilemap tilemap, tilemapShifted;
-    [SerializeField] Tilemap damageOverlayTilemap, oreTilemap;
+    [SerializeField] Tilemap tilemap;
+    [SerializeField] Tilemap tilemapShifted, oreTilemap, damageOverlayTilemap, damageOverlayBehind;
     [SerializeField] bool debugRendering;
 
     protected override void Setup()
     {
         base.Setup();
         tilemap.GetComponent<ITileMapElement>()?.Setup(this);
-        damageOverlayTilemap.GetComponent<ITileMapElement>()?.Setup(this);
-        oreTilemap.GetComponent<ITileMapElement>()?.Setup(this);
     }
 
     public override void UpdateAllVisuals()
@@ -23,6 +21,7 @@ public class RenderedMap : BaseMap
         tilemap.ClearAllTiles();
         tilemapShifted.ClearAllTiles();
         damageOverlayTilemap.ClearAllTiles();
+        damageOverlayBehind.ClearAllTiles();
         oreTilemap.ClearAllTiles();
         Util.IterateXY(SizeX, SizeY, SetVisualsAt);
     }
@@ -42,32 +41,38 @@ public class RenderedMap : BaseMap
         WrapXIfNecessary(ref x);
 
         if (IsOutOfBounds(x, y))
-        {
             return;
-        }
 
         var tile = GetVisualTileFor(x, y);
         var destTile = GetVisualDestructableOverlayFor(x, y);
         var oreTile = GetVisualOverlayTileFor(x, y);
+        var info = GetTileInfo(map[x, y].Type);
 
-        tilemap.SetTile(new Vector3Int(x, y, 0), tile);
-        tilemapShifted?.SetTile(new Vector3Int(x, y, 0), tile);
-        damageOverlayTilemap.SetTile(new Vector3Int(x, y, 0), destTile);
-        oreTilemap.SetTile(new Vector3Int(x, y, 0), oreTile);
+        SetTilemapsAt(x, y, tile, destTile, oreTile, info.damageIsInBackground);
 
         if (x < Settings.MirroringAmount)
-        {
-            tilemap.SetTile(new Vector3Int(SizeX + x, y, 0), tile);
-            damageOverlayTilemap.SetTile(new Vector3Int(SizeX + x, y, 0), destTile);
-            oreTilemap.SetTile(new Vector3Int(SizeX + x, y, 0), oreTile);
-        }
+            SetTilemapsAt(SizeX + x, y, tile, destTile, oreTile, info.damageIsInBackground);
         else if (x > SizeX - Settings.MirroringAmount)
+            SetTilemapsAt(x - SizeX, y, tile, destTile, oreTile, info.damageIsInBackground);
+    }
+
+    private void SetTilemapsAt(int x, int y, TileBase tile, TileBase damage, TileBase ore, bool behind)
+    {
+        tilemap.SetTile(new Vector3Int(x, y, 0), tile);
+        tilemapShifted?.SetTile(new Vector3Int(x, y, 0), tile);
+        oreTilemap.SetTile(new Vector3Int(x, y, 0), ore);
+        if (behind)
         {
-            tilemap.SetTile(new Vector3Int(x - SizeX, y, 0), tile);
-            damageOverlayTilemap.SetTile(new Vector3Int(x - SizeX, y, 0), destTile);
-            oreTilemap.SetTile(new Vector3Int(x - SizeX, y, 0), oreTile);
+            damageOverlayTilemap.SetTile(new Vector3Int(x, y, 0), null);
+            damageOverlayBehind.SetTile(new Vector3Int(x, y, 0), damage);
+        }
+        else
+        {
+            damageOverlayTilemap.SetTile(new Vector3Int(x, y, 0), damage);
+            damageOverlayBehind.SetTile(new Vector3Int(x, y, 0), null);
         }
     }
+
 
     private TileBase GetVisualVisibilityTileFor(int x, int y)
     {
