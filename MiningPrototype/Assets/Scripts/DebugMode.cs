@@ -16,12 +16,18 @@ public class DebugMode : MonoBehaviour
     [Inject] InventoryManager inventoryManager;
     [Inject] TooltipHandler tooltipHandler;
     [Inject] CameraController cameraController;
+    [Inject] RuntimeProceduralMap map;
 
+    Texture2D debugTex;
     bool open;
+    bool showMap;
+
     private void Awake()
     {
         open = false;
         debugObjects.ForEach((x) => x.SetActive(false));
+        debugTex = new Texture2D(map.SizeX, map.SizeY);
+        debugTex.filterMode = FilterMode.Point;
 
         DebugLogConsole.AddCommandInstance("/tp", "Teleport to " + Util.EnumToString(typeof(TeleportDestination)), "TeleportToAltar", this);
         DebugLogConsole.AddCommandInstance("/give", "Give player items " + Util.EnumToString(typeof(ItemType)), "PlayerGets", this);
@@ -32,6 +38,7 @@ public class DebugMode : MonoBehaviour
         DebugLogConsole.AddCommandInstance("/sacrificeProgression", "Set the altar progression level. (Unlock different options 0-10)", "SetProgressionLevel", this);
         DebugLogConsole.AddCommandInstance("/deleteSave", "Delete your save file", "DeleteSaveFile", this);
         DebugLogConsole.AddCommandInstance("/time", "sets time scale", "SetTimeScale", this);
+        DebugLogConsole.AddCommandInstance("/showMap", "Visualizes the Map", "ShowMap", this);
     }
 
     private void Update()
@@ -64,6 +71,33 @@ public class DebugMode : MonoBehaviour
         {
             GUI.Label(new Rect(Screen.width - 100, 10, 100, 30), "F8: Debug Mode");
         }
+        else if (open && showMap)
+        {
+            //Updating texture OnGUI
+            Vector2Int pos = player.transform.position.ToGridPosition();
+            for (int y = 0; y < debugTex.height; y++)
+            {
+                for (int x = 0; x < debugTex.width; x++)
+                {
+                    if (x == pos.x && y == pos.y)
+                    {
+                        debugTex.SetPixel(x, y, Color.red);
+                    }
+                    else
+                    {
+                        debugTex.SetPixel(x, y, MapHelper.TileToColor(map[x, y].Type));
+                    }
+                }
+            }
+
+            debugTex.Apply();
+            GUI.DrawTexture(new Rect(Screen.width - debugTex.width * 3, 0, debugTex.width * 3, debugTex.height * 3), debugTex);
+        }
+    }
+
+    private void ShowMap()
+    {
+        showMap = !showMap;
     }
 
     private void TeleportToAltar(TeleportDestination destination)

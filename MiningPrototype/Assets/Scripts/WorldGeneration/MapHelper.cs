@@ -162,6 +162,45 @@ public static class MapHelper
             return Color.black;
     }
 
+    public static Color TileToColor(TileType t)
+    {
+        switch (t)
+        {
+            case TileType.Air:
+                return Color.white;
+
+            case TileType.Copper:
+                return new Color(1, 0.5f, 0); //Orange
+
+            case TileType.Gold:
+                return new Color(1, 1, 0); //yellow
+
+            case TileType.Diamond:
+                return Color.cyan;
+
+            case TileType.HardStone:
+                return Color.gray;
+            
+            case TileType.Rock:
+                return Color.gray;
+
+            case TileType.FillingStone:
+                return new Color(0.1f,0.1f,0.1f);
+
+
+            case TileType.CollapsableEntity:
+            case TileType.CollapsableEntityNotNeighbour:
+            case TileType.FloatingEntity:
+            case TileType.FloatingEntityNotNeighbour:
+                return Color.blue;
+
+            default:
+                return Color.black;
+        }
+
+
+    }
+
     public static bool OnEdgeOfMap(RuntimeProceduralMap map, Vector2Int position)
     {
         if (position.x == 0 || position.y == 0 || position.x == map.SizeX - 1 || position.y == map.SizeY - 1)
