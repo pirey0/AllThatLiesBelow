@@ -19,14 +19,13 @@ public class BaseMap : StateListenerBehaviour, ISavable
     [SerializeField] MapSettings mapSettings;
     [SerializeField] GenerationSettings generationSettings;
 
-    protected Tile[,] map;
+    private Tile[,] map;
 
     public int SizeX { get => sizeX; }
     public int SizeY { get => sizeY; }
     public GenerationSettings GenerationSettings { get => generationSettings; }
     public MapSettings MapSettings { get => mapSettings; }
     public MapSettings Settings { get => mapSettings; }
-
 
 
     /// <summary>
@@ -42,6 +41,11 @@ public class BaseMap : StateListenerBehaviour, ISavable
     {
         get => GetTileAt(v.x, v.y);
         set => SetMapRawAt(v.x, v.y, value);
+    }
+
+    public bool MapIsNull()
+    {
+        return map == null;
     }
 
     protected virtual void OnDestroy()
@@ -152,8 +156,8 @@ public class BaseMap : StateListenerBehaviour, ISavable
         if (IsOutOfBounds(x, y))
             return;
 
-        var prev = map[x, y];
-        map[x, y] = value;
+        var prev = this[x, y];
+        this[x, y] = value;
 
         if (updateProperties)
         {

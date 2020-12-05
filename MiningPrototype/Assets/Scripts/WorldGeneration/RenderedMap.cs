@@ -46,7 +46,7 @@ public class RenderedMap : BaseMap
         var tile = GetVisualTileFor(x, y);
         var destTile = GetVisualDestructableOverlayFor(x, y);
         var oreTile = GetVisualOverlayTileFor(x, y);
-        var info = GetTileInfo(map[x, y].Type);
+        var info = GetTileInfo(this[x, y].Type);
 
         SetTilemapsAt(x, y, tile, destTile, oreTile, info.damageIsInBackground);
 
@@ -76,12 +76,12 @@ public class RenderedMap : BaseMap
 
     private TileBase GetVisualVisibilityTileFor(int x, int y)
     {
-        return Settings.VisibilityOverlayTiles[map[x, y].Visibility];
+        return Settings.VisibilityOverlayTiles[this[x, y].Visibility];
     }
 
     private TileBase GetVisualTileFor(int x, int y)
     {
-        Tile tile = map[x, y];
+        Tile tile = this[x, y];
 
         if (IsOutOfBounds(x, y) || IsAirAt(x, y))
             return null;
@@ -123,13 +123,13 @@ public class RenderedMap : BaseMap
 
     private TileBase GetVisualDestructableOverlayFor(int x, int y)
     {
-        var t = map[x, y];
+        var t = this[x, y];
         return Settings.DamageOverlayTiles[Mathf.FloorToInt(t.Damage)];
     }
 
     private TileBase GetVisualOverlayTileFor(int x, int y)
     {
-        var t = map[x, y];
+        var t = this[x, y];
         var tileInfo = GetTileInfo(t.Type);
 
         if (t.Visibility > 1 && !debugRendering)
@@ -316,12 +316,12 @@ public class RenderedMap : BaseMap
 
     private void ResetVisibilityAt(int x, int y)
     {
-        var t = map[x, y];
+        var t = this[x, y];
         if (IsNeighbourAt(x, y))
             t.Visibility = 3;
         else
             t.Visibility = 0;
-        map[x, y] = t;
+        this[x, y] = t;
     }
 
     public override void CalculateAllNeighboursBitmask()

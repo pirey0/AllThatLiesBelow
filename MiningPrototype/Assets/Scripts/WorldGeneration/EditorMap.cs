@@ -15,7 +15,7 @@ public class EditorMap : RenderedMap
 
     public bool IsEditorReady()
     {
-        return map != null;
+        return !MapIsNull();
     }
 
     public void InitializeBlankOfSize(int newX, int newY)

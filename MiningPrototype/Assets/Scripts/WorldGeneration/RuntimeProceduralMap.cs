@@ -321,7 +321,7 @@ public class RuntimeProceduralMap : RenderedMap
     public void CollapseAt(int x, int y, bool updateVisuals)
     {
         WrapXIfNecessary(ref x);
-        Tile t = map[x, y];
+        Tile t = this[x, y];
         SetMapAt(x, y, Tile.Air, TileUpdateReason.Collapse, updateProperties: true, updateVisuals);
 
         var go = prefabFactory.Create(GenerationSettings.PhysicalTilePrefab, new Vector3(x + 0.5f, y + 0.5f, 0), Quaternion.identity);
@@ -457,7 +457,7 @@ public class RuntimeProceduralMap : RenderedMap
         if (occupied)
             t.Type = TileType.Stone;
 
-        map[x, y] = t;
+        this[x, y] = t;
     }
 
     //https://gamedevelopment.tutsplus.com/tutorials/generate-random-cave-levels-using-cellular-automata--gamedev-9664
@@ -504,6 +504,6 @@ public class RuntimeProceduralMap : RenderedMap
     {
         int nbs = GetAliveNeightboursCountFor(x, y);
 
-        map[x, y] = IsBlockAt(x, y) ? (nbs > GenerationSettings.DeathLimit ? Tile.Make(TileType.Stone) : Tile.Air) : (nbs > GenerationSettings.BirthLimit ? Tile.Make(TileType.Stone) : Tile.Air);
+        this[x, y] = IsBlockAt(x, y) ? (nbs > GenerationSettings.DeathLimit ? Tile.Make(TileType.Stone) : Tile.Air) : (nbs > GenerationSettings.BirthLimit ? Tile.Make(TileType.Stone) : Tile.Air);
     }
 }
