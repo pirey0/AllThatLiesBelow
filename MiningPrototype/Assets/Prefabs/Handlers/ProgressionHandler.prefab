@@ -52,12 +52,6 @@ MonoBehaviour:
   startingItems:
   - type: 6
     amount: 5
-  - type: 17
-    amount: 10
-  debugRewardToGet: Spring
-  debugCostForReward:
-    type: 0
-    amount: 0
   instantDeliveryAudio: {fileID: 5016016371274373291}
 --- !u!114 &2388821099892900699
 MonoBehaviour:

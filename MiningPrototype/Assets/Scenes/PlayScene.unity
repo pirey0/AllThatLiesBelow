@@ -478,6 +478,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[1].YOffset
+      value: 0.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[0].YOffset
+      value: 0.56
+      objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648147, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: m_Name
       value: SceneAdder
