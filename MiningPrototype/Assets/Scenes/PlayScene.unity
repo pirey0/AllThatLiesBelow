@@ -242,6 +242,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 115993272797162819, guid: 4aaa7bf81b4a5c34099006b07a549854, type: 3}
+      propertyPath: m_Size.x
+      value: 250
+      objectReference: {fileID: 0}
     - target: {fileID: 115993272797162940, guid: 4aaa7bf81b4a5c34099006b07a549854, type: 3}
       propertyPath: m_Name
       value: RockBackground

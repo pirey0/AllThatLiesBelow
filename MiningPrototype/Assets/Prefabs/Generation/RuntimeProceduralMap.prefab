@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveID: 41d50015-c133-49af-b92a-208671ee1322
-  sizeX: 100
+  sizeX: 200
   sizeY: 100
   mapSettings: {fileID: 11400000, guid: cb933fe4e5151f14d8a9ed1be88a0e33, type: 2}
   generationSettings: {fileID: 11400000, guid: 9ada1e3054219d644a18b003c8174420, type: 2}
@@ -56,7 +56,6 @@ MonoBehaviour:
   oreTilemap: {fileID: 7788511329457626868}
   debugRendering: 0
   entitiesParent: {fileID: 4487784778877613469}
-  debug: 0
 --- !u!1 &3933181939200121959
 GameObject:
   m_ObjectHideFlags: 0
