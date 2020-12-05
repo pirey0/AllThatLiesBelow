@@ -13,6 +13,7 @@ public class PhysicalTile : MineableObject, IEntity
 {
     [SerializeField] SpriteRenderer renderer, overlayRenderer;
     [SerializeField] AudioSource hit;
+    [SerializeField] GameObject onLandEffects;
     [SerializeField] float RequiredSpeedForStrongHit;
 
     private RuntimeProceduralMap generator;
@@ -79,7 +80,9 @@ public class PhysicalTile : MineableObject, IEntity
                 position.y += 1;
 
             generator.SetMapAt(position.x, position.y, tile, TileUpdateReason.Place);
+
             Util.DebugDrawTile(position);
+            Instantiate(onLandEffects);
             Destroy(gameObject);
         }
     }
