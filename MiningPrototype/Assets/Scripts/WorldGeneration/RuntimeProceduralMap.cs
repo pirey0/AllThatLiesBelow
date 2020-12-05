@@ -19,6 +19,7 @@ public class RuntimeProceduralMap : RenderedMap
     [Zenject.Inject] ProgressionHandler progressionHandler;
     [Zenject.Inject] InventoryManager inventoryManager;
     [Zenject.Inject] PrefabFactory prefabFactory;
+    [Zenject.Inject] SaveHandler saveHandler;
 
     ITileUpdateReceiver[,] receiverMap;
     List<Vector2Int> unstableTiles = new List<Vector2Int>();
@@ -45,7 +46,7 @@ public class RuntimeProceduralMap : RenderedMap
         Setup();
 
         //This should be in load from OnNewGame but that would be after the imprinting from the SceneAdder....
-        if (!SaveHandler.LoadFromSavefile)
+        if (!saveHandler.LoadFromSavefile)
             RunCompleteGeneration();
     }
 

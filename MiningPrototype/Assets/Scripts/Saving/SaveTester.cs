@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class SaveTester : MonoBehaviour
 {
+    [Zenject.Inject] SaveHandler saveHandler;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F4))
@@ -16,13 +18,13 @@ public class SaveTester : MonoBehaviour
     [Button(null, EButtonEnableMode.Playmode)]
     public void Save()
     {
-        SaveHandler.Save();
+        saveHandler.Save();
     }
 
     [Button(null, EButtonEnableMode.Playmode)]
     public void Load()
     {
-        SaveHandler.LoadFromSavefile = true;
+        saveHandler.LoadFromSavefile = true;
         //Reload self
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }

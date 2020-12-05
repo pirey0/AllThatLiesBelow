@@ -25,6 +25,7 @@ public class BaseMap : StateListenerBehaviour, ISavable
     public int SizeY { get => sizeY; }
     public GenerationSettings GenerationSettings { get => generationSettings; }
     public MapSettings MapSettings { get => mapSettings; }
+
     public MapSettings Settings { get => mapSettings; }
 
 

@@ -6,17 +6,16 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using System.Linq;
 
-public static class SaveHandler
+public class SaveHandler
 {
-
     public const string SAVE_NAME = "SaveFile.data";
     public const string SAVEFILE_VERSION = "0.1 Testing";
 
     public static string FULL_SAVE_PATH = Application.persistentDataPath + SAVE_NAME;
 
-    public static bool LoadFromSavefile;
+    public bool LoadFromSavefile;
 
-    public static void Save()
+    public void Save()
     {
         SaveDataCollection collection = new SaveDataCollection();
         collection.Version = SAVEFILE_VERSION;
@@ -36,12 +35,12 @@ public static class SaveHandler
         stream.Close();
     }
 
-    public static bool SaveFileExists()
+    public bool SaveFileExists()
     {
         return File.Exists(FULL_SAVE_PATH);
     }
 
-    public static void DestroySaveFile()
+    public void DestroySaveFile()
     {
         if (SaveFileExists())
         {
@@ -49,7 +48,7 @@ public static class SaveHandler
         }
     }
 
-    public static void Load()
+    public void Load()
     {
         if (!SaveFileExists())
         {

@@ -12,5 +12,6 @@ public class DefaultProjectInstaller : ScriptableObjectInstaller<DefaultProjectI
         Container.Bind<LettersParser>().AsSingle().NonLazy();
         Container.Bind<SacrificePricesParser>().AsSingle().NonLazy();
         Container.Bind<ShopPricesParser>().AsSingle().NonLazy();
+        Container.Bind<SaveHandler>().AsSingle().NonLazy();
     }
 }

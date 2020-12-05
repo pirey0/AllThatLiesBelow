@@ -21,7 +21,7 @@ public class Bed : MonoBehaviour, IInteractable
     [Zenject.Inject] TransitionEffectHandler transitionEffectHandler;
     [Inject] ProgressionHandler progressionHandler;
     [Inject] InventoryManager inventoryManager;
-
+    [Inject] SaveHandler saveHandler;
 
     string defaultWakeUpTest;
     bool sacrificedHappyness = false;
@@ -93,7 +93,7 @@ public class Bed : MonoBehaviour, IInteractable
 
             progressionHandler.StartNextDay();
             playerToEnableAgain.Enable();
-            SaveHandler.Save();
+            saveHandler.Save();
             playerToEnableAgain.Disable();
 
             if (sacrificedHappyness) {

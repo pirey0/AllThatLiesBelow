@@ -9,6 +9,8 @@ public class GameState : MonoBehaviour
     private State oldState;
     public event System.Action<State> StateChanged;
 
+    [Zenject.Inject] SaveHandler saveHandler;
+
     public State CurrentState { get => currentState; }
 
     public bool Playing { get => currentState == State.Playing || currentState == State.Respawning; }
@@ -35,14 +37,14 @@ public class GameState : MonoBehaviour
         switch (currentState)
         {
             case State.Entry:
-                if (SaveHandler.LoadFromSavefile)
+                if (saveHandler.LoadFromSavefile)
                     ChangeStateTo(State.PreLoadFromFile);
                 else
                     ChangeStateTo(State.PreLoadScenes);
                 break;
 
             case State.PreLoadFromFile:
-                SaveHandler.Load();
+                saveHandler.Load();
                 ChangeStateTo(State.PostLoadFromFile);
                 break;
 
@@ -71,7 +73,7 @@ public class GameState : MonoBehaviour
     public void ReloadScene()
     {
         ChangeStateTo(State.OutOfGame);
-        SaveHandler.LoadFromSavefile= SaveHandler.SaveFileExists();
+        saveHandler.LoadFromSavefile = saveHandler.SaveFileExists();
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
 
