@@ -17,10 +17,6 @@ public class SceneAdder : StateListenerBehaviour
     bool loaded = false;
     MapAddition current;
 
-    private void Start()
-    {
-        gameState.ChangeStateTo(GameState.State.Entry);
-    }
 
     protected override void OnStateChanged(GameState.State newState)
     {

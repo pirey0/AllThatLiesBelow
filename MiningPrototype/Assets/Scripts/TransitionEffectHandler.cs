@@ -21,10 +21,6 @@ public class TransitionEffectHandler : MonoBehaviour
 	[SerializeField] bool testFadeOut;
 	[SerializeField] FadeType testFadeType;
 
-	private void Start()
-	{
-		FadeIn();
-	}
 
 	[Button]
 	public void FadeTest()
@@ -57,6 +53,11 @@ public class TransitionEffectHandler : MonoBehaviour
 			audioSource.clip = nightmareWakeup;
 			audioSource.Play();
 		}
+	}
+
+	public void SetToBlack()
+    {
+		mat.SetFloat("_Cutoff", 1);
 	}
 
 	public IEnumerator FadeRoutine(bool fadeIn, AnimationCurve curve)
