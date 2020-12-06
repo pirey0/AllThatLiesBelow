@@ -24,6 +24,26 @@ public class SaveHandler : MonoBehaviour
 
     public void Save()
     {
+        BaseSave(GetFullSavePath());
+    }
+
+    public void Editor_SaveAs()
+    {
+        #if UNITY_EDITOR
+
+        string path = UnityEditor.EditorUtility.SaveFilePanel("Save As...", "", "SaveFile", "data");
+
+        if (!string.IsNullOrEmpty(path))
+        {
+            BaseSave(path);
+            UnityEditor.AssetDatabase.Refresh();
+        }
+
+        #endif
+    }
+
+    private void BaseSave(string path)
+    {
         SaveDataCollection collection = new SaveDataCollection();
         collection.Version = SAVEFILE_VERSION;
 
@@ -33,14 +53,14 @@ public class SaveHandler : MonoBehaviour
         var objects = Util.FindAllThatImplement<ISavable>();
         foreach (var savable in objects)
         {
-                collection.Add(savable.ToSaveData());
+            collection.Add(savable.ToSaveData());
         }
 
-        var stream = File.Open(GetFullSavePath(), FileMode.OpenOrCreate);
+        var stream = File.Open(path, FileMode.OpenOrCreate);
 
         BinaryFormatter formatter = new BinaryFormatter();
         formatter.Serialize(stream, collection);
-        Debug.Log("Saved Sucessfully (" + (stream.Length*0.000001f) + " MB)");
+        Debug.Log("Saved Sucessfully (" + (stream.Length * 0.000001f) + " MB)");
         stream.Close();
     }
 
@@ -64,9 +84,13 @@ public class SaveHandler : MonoBehaviour
             Debug.LogError("No Savefile found.");
             return;
         }
+        BaseLoad(GetFullSavePath());
+        Debug.Log("Loaded Successfully");
+    }
 
-        var stream = File.Open(GetFullSavePath(), FileMode.Open);
-
+    private void BaseLoad(string path)
+    {
+        var stream = File.Open(path, FileMode.Open);
         BinaryFormatter formatter = new BinaryFormatter();
         SaveDataCollection collection = (SaveDataCollection)formatter.Deserialize(stream);
         stream.Close();
@@ -77,7 +101,7 @@ public class SaveHandler : MonoBehaviour
             return;
         }
 
-        var objects = Util.FindAllThatImplement<ISavable>().OrderBy((x)=> x.GetLoadPriority());
+        var objects = Util.FindAllThatImplement<ISavable>().OrderBy((x) => x.GetLoadPriority());
 
         foreach (var savable in objects)
         {
@@ -96,8 +120,6 @@ public class SaveHandler : MonoBehaviour
         var npsm = new NonPersistantSaveManager(); //Non persistant stuff
         npsm.SetSpawnables(spawnablePrefabs, prefabFactory);
         npsm.Load(collection[npsm.GetSaveID()]);
-
-        Debug.Log("Loaded Successfully");
     }
 }
 
