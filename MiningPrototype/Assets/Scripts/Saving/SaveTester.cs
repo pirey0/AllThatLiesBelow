@@ -24,7 +24,7 @@ public class SaveTester : MonoBehaviour
     [Button(null, EButtonEnableMode.Playmode)]
     public void Load()
     {
-        saveHandler.LoadFromSavefile = true;
+        SaveHandler.LoadFromSavefile = true;
         //Reload self
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }

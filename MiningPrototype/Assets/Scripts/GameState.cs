@@ -37,7 +37,7 @@ public class GameState : MonoBehaviour
         switch (currentState)
         {
             case State.Entry:
-                if (saveHandler.LoadFromSavefile)
+                if (SaveHandler.LoadFromSavefile)
                     ChangeStateTo(State.PreLoadFromFile);
                 else
                     ChangeStateTo(State.PreLoadScenes);
@@ -73,7 +73,7 @@ public class GameState : MonoBehaviour
     public void ReloadScene()
     {
         ChangeStateTo(State.OutOfGame);
-        saveHandler.LoadFromSavefile = saveHandler.SaveFileExists();
+        SaveHandler.LoadFromSavefile = SaveHandler.SaveFileExists();
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
 

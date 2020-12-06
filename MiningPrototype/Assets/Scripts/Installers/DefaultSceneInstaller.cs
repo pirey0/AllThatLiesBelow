@@ -8,7 +8,7 @@ public class DefaultSceneInstaller : ScriptableObjectInstaller<DefaultSceneInsta
 {
     [SerializeField] GameObject playerPrefab, progressionPrefab, readableItemPrefab, cameraPannerPrefab, cameraPrefab, itemPreviewPrefab;
     [SerializeField] GameObject pauseMenuPrefab, toolTipPrefab, eventSystemPrefab, inWorldCanvasPrefab;
-    [SerializeField] GameObject debugModePrefab, nonPersistantSaveManager, inventoryManager;
+    [SerializeField] GameObject debugModePrefab, inventoryManagerPrefab, saveHandlerPrefab, gameStatePrefab;
     
     public override void InstallBindings()
     {
@@ -21,10 +21,10 @@ public class DefaultSceneInstaller : ScriptableObjectInstaller<DefaultSceneInsta
         Container.Bind<TooltipHandler>().FromComponentInNewPrefab(toolTipPrefab).AsSingle().NonLazy();
         Container.Bind<EventSystem>().FromComponentInNewPrefab(eventSystemPrefab).AsSingle().NonLazy();
         Container.Bind<InWorldCanvas>().FromComponentInNewPrefab(inWorldCanvasPrefab).AsSingle().NonLazy();
-        Container.Bind<NonPersistantSaveManager>().FromComponentInNewPrefab(nonPersistantSaveManager).AsSingle().NonLazy();
-
         Container.Bind(typeof(CameraController), typeof(TransitionEffectHandler)).FromComponentInNewPrefab(cameraPrefab).AsSingle().NonLazy();
-        Container.Bind<InventoryManager>().FromComponentInNewPrefab(inventoryManager).AsSingle().NonLazy();
+        Container.Bind<InventoryManager>().FromComponentInNewPrefab(inventoryManagerPrefab).AsSingle().NonLazy();
+        Container.Bind<SaveHandler>().FromComponentInNewPrefab(saveHandlerPrefab).AsSingle().NonLazy();
+        Container.Bind<GameState>().FromComponentInNewPrefab(gameStatePrefab).AsSingle().NonLazy();
 
         if (DebugMode.DEBUG_POSSIBLE)
         {
@@ -35,8 +35,7 @@ public class DefaultSceneInstaller : ScriptableObjectInstaller<DefaultSceneInsta
         Container.BindFactory<GameObject, InventoryVisualizer, InventoryVisualizer.Factory>().FromFactory<PrefabFactory<InventoryVisualizer>>();
         Container.BindFactory<UnityEngine.Object, InventorySlotVisualizer, InventorySlotVisualizer.Factory>().FromFactory<PrefabFactory<InventorySlotVisualizer>>();
         Container.BindFactory<UnityEngine.Object, ReadableItemVisualizer, ReadableItemVisualizer.Factory>().FromFactory<PrefabFactory<ReadableItemVisualizer>>();
-
-        Container.BindFactory<GameObject,Transform, PrefabFactory>().FromFactory<NormalPrefabFactory>();
+        Container.BindFactory<GameObject, Transform, PrefabFactory>().FromFactory<NormalPrefabFactory>();
     }
 }
 

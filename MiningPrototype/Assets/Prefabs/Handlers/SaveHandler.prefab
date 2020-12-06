@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3582284438814986634
+--- !u!1 &8506050290013699022
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3582284438814986632}
-  - component: {fileID: 3582284438814986635}
+  - component: {fileID: 8506050290013699016}
+  - component: {fileID: 8506050290013699023}
   m_Layer: 0
-  m_Name: NonPersistantSaveManager
+  m_Name: SaveHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3582284438814986632
+--- !u!4 &8506050290013699016
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3582284438814986634}
+  m_GameObject: {fileID: 8506050290013699022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,19 +31,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3582284438814986635
+--- !u!114 &8506050290013699023
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3582284438814986634}
+  m_GameObject: {fileID: 8506050290013699022}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c54bbba15646ff54c9bbb51f2e6548a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 394513b730ec5c74a83d611c15b93a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveID: 29dda9eb-e11f-45d6-8880-8cfd1721cfa2
   spawnablePrefabs:
   - {fileID: 0}
   - {fileID: 8886592050164078683, guid: 94d8faed3d48d2a4b95add8b4bbc9945, type: 3}
@@ -60,3 +59,4 @@ MonoBehaviour:
   - {fileID: 3149144613148003269, guid: b6781e8738fb82f4793e8b0af71134be, type: 3}
   - {fileID: 7411851746530757951, guid: 2d276a21d9582594ebe483f80f61ea60, type: 3}
   - {fileID: 8184181323763082, guid: 7f502d0c20e970f4eb45c74d7ab81d36, type: 3}
+  LoadFromSavefile: 0

@@ -3,16 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NonPersistantSaveManager : MonoBehaviour, ISavable
+public class NonPersistantSaveManager : ISavable
 {
-    [NaughtyAttributes.ReadOnly] [SerializeField] string saveID = Util.GenerateNewSaveGUID();
     [SerializeField] GameObject[] spawnablePrefabs;
 
-    [Zenject.Inject] PrefabFactory prefabFactory;
+    PrefabFactory prefabFactory;
+
+    public void SetSpawnables(GameObject[] spawnables, PrefabFactory factory)
+    {
+        spawnablePrefabs = spawnables;
+        this.prefabFactory = factory;
+    }
 
     public string GetSaveID()
     {
-        return saveID;
+        return "Non Persistant_Save_Manager";
     }
 
     public int GetLoadPriority()
@@ -51,7 +56,7 @@ public class NonPersistantSaveManager : MonoBehaviour, ISavable
 
         var objs = Util.FindAllThatImplement<INonPersistantSavable>();
         SpawnableSaveDataContainer container = new SpawnableSaveDataContainer();
-        container.GUID = saveID;
+        container.GUID = GetSaveID();
 
         foreach (var s in objs)
         {

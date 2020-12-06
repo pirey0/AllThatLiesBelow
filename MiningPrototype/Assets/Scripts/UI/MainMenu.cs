@@ -9,13 +9,11 @@ public class MainMenu : MonoBehaviour
     [SerializeField] SceneReference playScene;
     [SerializeField] UnityEngine.UI.Button loadButton;
 
-    [Zenject.Inject] SaveHandler saveHandler;
-
     private void Start()
     {
-        saveHandler.LoadFromSavefile = false;
+        SaveHandler.LoadFromSavefile = false;
 
-        if (!saveHandler.SaveFileExists())
+        if (!SaveHandler.SaveFileExists())
         {
             loadButton.interactable = false;
         }
@@ -37,7 +35,7 @@ public class MainMenu : MonoBehaviour
     {
         animator.SetTrigger("FadeOut");
         yield return new WaitForSeconds(0.5f);
-        saveHandler.LoadFromSavefile = true;
+        SaveHandler.LoadFromSavefile = true;
         yield return Play();
     }
 

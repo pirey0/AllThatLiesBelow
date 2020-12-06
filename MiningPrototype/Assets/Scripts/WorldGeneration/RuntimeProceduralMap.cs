@@ -46,7 +46,7 @@ public class RuntimeProceduralMap : RenderedMap
         Setup();
 
         //This should be in load from OnNewGame but that would be after the imprinting from the SceneAdder....
-        if (!saveHandler.LoadFromSavefile)
+        if (!SaveHandler.LoadFromSavefile)
             RunCompleteGeneration();
     }
 

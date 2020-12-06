@@ -6,28 +6,37 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using System.Linq;
 
-public class SaveHandler
+public class SaveHandler : MonoBehaviour
 {
     public const string SAVE_NAME = "SaveFile.data";
     public const string SAVEFILE_VERSION = "0.1 Testing";
 
-    public static string FULL_SAVE_PATH = Application.persistentDataPath + SAVE_NAME;
+    public static bool LoadFromSavefile;
 
-    public bool LoadFromSavefile;
+    [SerializeField] GameObject[] spawnablePrefabs;
+    [Zenject.Inject] PrefabFactory prefabFactory;
+
+
+    private static string GetFullSavePath()
+    {
+        return Application.persistentDataPath + SAVE_NAME;
+    }
 
     public void Save()
     {
         SaveDataCollection collection = new SaveDataCollection();
         collection.Version = SAVEFILE_VERSION;
 
-        var objects = Util.FindAllThatImplement<ISavable>();
+        var npsm = new NonPersistantSaveManager(); //Non persistant stuff
+        collection.Add(npsm.ToSaveData());
 
+        var objects = Util.FindAllThatImplement<ISavable>();
         foreach (var savable in objects)
         {
                 collection.Add(savable.ToSaveData());
         }
 
-        var stream = File.Open(FULL_SAVE_PATH, FileMode.OpenOrCreate);
+        var stream = File.Open(GetFullSavePath(), FileMode.OpenOrCreate);
 
         BinaryFormatter formatter = new BinaryFormatter();
         formatter.Serialize(stream, collection);
@@ -35,16 +44,16 @@ public class SaveHandler
         stream.Close();
     }
 
-    public bool SaveFileExists()
+    public static bool SaveFileExists()
     {
-        return File.Exists(FULL_SAVE_PATH);
+        return File.Exists(GetFullSavePath());
     }
 
-    public void DestroySaveFile()
+    public static void DestroySaveFile()
     {
         if (SaveFileExists())
         {
-            File.Delete(FULL_SAVE_PATH);
+            File.Delete(GetFullSavePath());
         }
     }
 
@@ -56,7 +65,7 @@ public class SaveHandler
             return;
         }
 
-        var stream = File.Open(FULL_SAVE_PATH, FileMode.Open);
+        var stream = File.Open(GetFullSavePath(), FileMode.Open);
 
         BinaryFormatter formatter = new BinaryFormatter();
         SaveDataCollection collection = (SaveDataCollection)formatter.Deserialize(stream);
@@ -83,9 +92,13 @@ public class SaveHandler
             }
         }
 
+        //Load non persistant
+        var npsm = new NonPersistantSaveManager(); //Non persistant stuff
+        npsm.SetSpawnables(spawnablePrefabs, prefabFactory);
+        npsm.Load(collection[npsm.GetSaveID()]);
+
         Debug.Log("Loaded Successfully");
     }
-
 }
 
 [System.Serializable]

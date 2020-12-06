@@ -17,7 +17,6 @@ public class DebugMode : MonoBehaviour
     [Inject] TooltipHandler tooltipHandler;
     [Inject] CameraController cameraController;
     [Inject] RuntimeProceduralMap map;
-    [Inject] SaveHandler saveHandler;
 
     Texture2D debugTex;
     bool open;
@@ -171,7 +170,7 @@ public class DebugMode : MonoBehaviour
 
     private void DeleteSaveFile()
     {
-        saveHandler.DestroySaveFile();
+        SaveHandler.DestroySaveFile();
     }
 
     private void SetTimeScale(float newTimeScale)
