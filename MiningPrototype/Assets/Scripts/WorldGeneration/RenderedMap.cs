@@ -19,9 +19,10 @@ public class RenderedMap : BaseMap
     public override void UpdateAllVisuals()
     {
         tilemap.ClearAllTiles();
-        tilemapShifted.ClearAllTiles();
+        tilemapShifted?.ClearAllTiles();
         damageOverlayTilemap.ClearAllTiles();
         damageOverlayBehind.ClearAllTiles();
+
         oreTilemap.ClearAllTiles();
         Util.IterateXY(SizeX, SizeY, SetVisualsAt);
     }
