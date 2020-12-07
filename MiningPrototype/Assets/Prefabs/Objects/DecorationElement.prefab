@@ -99,6 +99,6 @@ MonoBehaviour:
   sprites:
   - {fileID: 21300000, guid: abdbca4807853fa419d5bb4e6ec4a31e, type: 3}
   - {fileID: 21300000, guid: ab3044a81c28ae542a3e9e69cc7c65ea, type: 3}
-  - {fileID: 21300000, guid: af17f91b4376d6a41a793c056c02dadc, type: 3}
-  - {fileID: -9080332612451657214, guid: 27ed9f344ce6e5d41b7beb8e512950e5, type: 3}
-  sprite: {fileID: -9080332612451657214, guid: 27ed9f344ce6e5d41b7beb8e512950e5, type: 3}
+  - {fileID: 21300000, guid: 72c055d1a489b1a409f871699d389017, type: 3}
+  - {fileID: 21300000, guid: c586a590244e293428a26eff29a9b7d0, type: 3}
+  sprite: {fileID: 21300000, guid: c586a590244e293428a26eff29a9b7d0, type: 3}

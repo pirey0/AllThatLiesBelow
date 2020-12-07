@@ -488,7 +488,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: addition.Array.size
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: addition.Array.data[7].XOffsetRange.x
@@ -520,7 +520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: addition.Array.data[8].YOffset
-      value: 0.3
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: addition.Array.data[8].SceneToAdd.sceneAsset
@@ -528,7 +528,27 @@ PrefabInstance:
       objectReference: {fileID: 102900000, guid: 9e301d9533d39fd4b8dc363e647141c7, type: 3}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: addition.Array.data[8].SceneToAdd.scenePath
-      value: Assets/Scenes/BrothersScene.unity
+      value: Assets/Scenes/Underground/BrothersScene.unity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[9].XOffsetRange.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[9].XOffsetRange.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[9].YOffset
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[9].SceneToAdd.sceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: 93bc12fb56d931146a0db9f8b839ad52, type: 3}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[9].SceneToAdd.scenePath
+      value: Assets/Scenes/Underground/SteleScene.unity
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648147, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: m_Name
