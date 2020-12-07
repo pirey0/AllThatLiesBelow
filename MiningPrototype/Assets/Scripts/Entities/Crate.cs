@@ -59,8 +59,6 @@ public class Crate : MineableObject, INonPersistantSavable
     {
         if(dataOr is CrateSaveData data)
         {
-            transform.position = data.Position.ToVector3();
-            transform.eulerAngles = data.Rotation.ToVector3();
             crateType = data.Type;
             contains = data.Content;
             SetupCrate();
