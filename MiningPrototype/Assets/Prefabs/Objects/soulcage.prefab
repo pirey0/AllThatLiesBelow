@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4606202573006319190}
   - component: {fileID: 4246958984643604288}
   - component: {fileID: 3189700084323350035}
+  - component: {fileID: 1209809471613304412}
   m_Layer: 0
   m_Name: Soulcage
   m_TagString: Untagged
@@ -4952,3 +4953,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.5625}
   serializedVersion: 2
   m_Radius: 0.5625
+--- !u!114 &1209809471613304412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7528545809126221420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b881ed04caf12745a91f5af9c91ac07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 15

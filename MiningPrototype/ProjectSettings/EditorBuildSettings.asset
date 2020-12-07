@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Underground/DeliveryFactoryScene.unity
     guid: 426e7d4a39ab8fc4486ac83b2f817c8f
+  - enabled: 1
+    path: Assets/Scenes/Underground/EchoChamber1Scene.unity
+    guid: b20be539635cb864eac354c3ad86fd88
   m_configObjects: {}
