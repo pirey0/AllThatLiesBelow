@@ -74,6 +74,11 @@ MonoBehaviour:
     SceneToAdd:
       sceneAsset: {fileID: 102900000, guid: 00e9f3717c7effb438c0796c2d48c8ed, type: 3}
       scenePath: Assets/Scenes/Underground/Goldvein1Scene.unity
+  - XOffsetRange: {x: 0.1, y: 0.8}
+    YOffset: 0.1
+    SceneToAdd:
+      sceneAsset: {fileID: 102900000, guid: 426e7d4a39ab8fc4486ac83b2f817c8f, type: 3}
+      scenePath: Assets/Scenes/Underground/DeliveryFactoryScene.unity
   altarScene:
     sceneAsset: {fileID: 102900000, guid: eefebb5b71de47e4e9da29653337e8d9, type: 3}
     scenePath: Assets/Scenes/AltarScene.unity
