@@ -58,7 +58,22 @@ MonoBehaviour:
     YOffset: 0.3
     SceneToAdd:
       sceneAsset: {fileID: 102900000, guid: 772c6d38dd969d24bb2ad158970d99e5, type: 3}
-      scenePath: Assets/Scenes/ClockScene.unity
+      scenePath: Assets/Scenes/Underground/ClockScene.unity
+  - XOffsetRange: {x: 0.1, y: 0.8}
+    YOffset: 0.45
+    SceneToAdd:
+      sceneAsset: {fileID: 102900000, guid: 00e9f3717c7effb438c0796c2d48c8ed, type: 3}
+      scenePath: Assets/Scenes/Underground/Goldvein1Scene.unity
+  - XOffsetRange: {x: 0.1, y: 0.8}
+    YOffset: 0.48
+    SceneToAdd:
+      sceneAsset: {fileID: 102900000, guid: 41e6991a7f0177041ace2aa78404a662, type: 3}
+      scenePath: Assets/Scenes/Underground/Goldvein2Scene.unity
+  - XOffsetRange: {x: 0.1, y: 0.8}
+    YOffset: 0.42
+    SceneToAdd:
+      sceneAsset: {fileID: 102900000, guid: 00e9f3717c7effb438c0796c2d48c8ed, type: 3}
+      scenePath: Assets/Scenes/Underground/Goldvein1Scene.unity
   altarScene:
     sceneAsset: {fileID: 102900000, guid: eefebb5b71de47e4e9da29653337e8d9, type: 3}
     scenePath: Assets/Scenes/AltarScene.unity
