@@ -59,4 +59,5 @@ MonoBehaviour:
   - {fileID: 3149144613148003269, guid: b6781e8738fb82f4793e8b0af71134be, type: 3}
   - {fileID: 7411851746530757951, guid: 2d276a21d9582594ebe483f80f61ea60, type: 3}
   - {fileID: 8184181323763082, guid: 7f502d0c20e970f4eb45c74d7ab81d36, type: 3}
-  LoadFromSavefile: 0
+  - {fileID: 7528545809126221420, guid: bc91289c7769ffd49a18a3f710058395, type: 3}
+  - {fileID: 9200197488614311949, guid: 1b05cbf681d411f41be797da5106344f, type: 3}
