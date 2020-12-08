@@ -60,8 +60,7 @@ public class RenderedMap : BaseMap
     private void SetTilemapsAt(int x, int y, TileBase tile, TileBase damage, TileBase ore, TileInfo info)
     {
         tilemap.SetTile(new Vector3Int(x, y, 0), tile);
-        if (info.DrawsToShifted)
-            tilemapShifted?.SetTile(new Vector3Int(x, y, 0), tile);
+        tilemapShifted?.SetTile(new Vector3Int(x, y, 0), info.DrawsToShifted ? tile : null);
         oreTilemap.SetTile(new Vector3Int(x, y, 0), ore);
         if (info.DamageIsInBackground)
         {
