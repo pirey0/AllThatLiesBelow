@@ -246,9 +246,17 @@ PrefabInstance:
       propertyPath: m_Size.x
       value: 250
       objectReference: {fileID: 0}
+    - target: {fileID: 115993272797162819, guid: 4aaa7bf81b4a5c34099006b07a549854, type: 3}
+      propertyPath: m_Size.y
+      value: 280
+      objectReference: {fileID: 0}
     - target: {fileID: 115993272797162940, guid: 4aaa7bf81b4a5c34099006b07a549854, type: 3}
       propertyPath: m_Name
       value: RockBackground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1488277335682564202, guid: 4aaa7bf81b4a5c34099006b07a549854, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 279.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4aaa7bf81b4a5c34099006b07a549854, type: 3}
@@ -500,7 +508,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: addition.Array.data[7].YOffset
-      value: 0.2
+      value: 0.61
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: addition.Array.data[7].SceneToAdd.sceneAsset
@@ -520,7 +528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: addition.Array.data[8].YOffset
-      value: 0.35
+      value: 0.69
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: addition.Array.data[8].SceneToAdd.sceneAsset
@@ -540,7 +548,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: addition.Array.data[9].YOffset
-      value: 0.3
+      value: 0.67
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: addition.Array.data[9].SceneToAdd.sceneAsset
@@ -549,6 +557,50 @@ PrefabInstance:
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: addition.Array.data[9].SceneToAdd.scenePath
       value: Assets/Scenes/Underground/SteleScene.unity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: width
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: height
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[0].YOffset
+      value: 0.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[0].XOffsetRange.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[0].XOffsetRange.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[1].YOffset
+      value: 0.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[3].YOffset
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[4].YOffset
+      value: 0.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[5].YOffset
+      value: 0.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[6].YOffset
+      value: 0.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[2].YOffset
+      value: 0.57
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648147, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: m_Name
