@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryVisualizer : ScalingUIElementBase
+public class InventoryVisualizer : ScalingUIElementBase, IDropReceiver
 {
     [SerializeField] int widthInSlots, heightInSlots;
 
@@ -211,6 +211,31 @@ public class InventoryVisualizer : ScalingUIElementBase
         Destroy(gameObject);
     }
 
+    public bool WouldTakeDrop(ItemAmountPair pair)
+    {
+        return true;
+    }
+
+    public void BeginHoverWith(ItemAmountPair pair)
+    {
+        //
+    }
+
+    public void EndHover()
+    {
+        //
+    }
+
+    public void HoverUpdate(ItemAmountPair pair)
+    {
+        //
+    }
+
+    public void ReceiveDrop(ItemAmountPair pair, Inventory origin)
+    {
+        if (origin.Contains(pair) && origin.TryRemove(pair))
+            inventory.Add(pair);
+    }
 
     public class Factory : Zenject.PlaceholderFactory<GameObject, InventoryVisualizer>
     {

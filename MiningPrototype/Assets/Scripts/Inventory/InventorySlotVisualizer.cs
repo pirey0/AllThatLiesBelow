@@ -9,7 +9,7 @@ using TMPro;
 using Zenject;
 using System.Text.RegularExpressions;
 
-public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropReceiver
 {
     [SerializeField] public Image icon;
     [SerializeField] public TMP_Text amountDisplay;
@@ -26,6 +26,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
     ItemType type;
     Inventory origin;
     RectTransform rectTransform;
+    Transform parent;
     Vector2 defaultAnchorPosition;
 
     Coroutine updateRoutine;
@@ -123,6 +124,9 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
     public void OnBeginDrag(PointerEventData eventData)
     {
         defaultAnchorPosition = rectTransform.anchoredPosition;
+        targetGraphic.raycastTarget = false;
+        parent = rectTransform.parent;
+        rectTransform.parent = parent.parent.parent.parent;
         inDrag = true;
         StartCoroutine(UpdateInDrag());
     }
@@ -147,6 +151,8 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         EnableVisuals();
         rectTransform.anchoredPosition = defaultAnchorPosition;
         canDropOverlay.SetActive(false);
+        rectTransform.parent = parent;
+        targetGraphic.raycastTarget = true;
     }
 
     //to also update when not moving the mouse
@@ -155,6 +161,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         while (inDrag)
         {
             rectTransform.position = Util.MouseToWorld(cameraController.Camera);
+            
             UpdatePlacingPreview();
 
             if (Input.GetMouseButtonDown(1)) //On right click while dragging <- dirty
@@ -175,7 +182,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
     private float GetDistance()
     {
-        return (rectTransform.position - rectTransform.parent.position).magnitude;
+        return (rectTransform.position - parent.position).magnitude;
     }
 
     private void UpdatePlacingPreview()
@@ -253,6 +260,31 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         return new ItemAmountPair(type, amount);
     }
 
+    public bool WouldTakeDrop(ItemAmountPair pair)
+    {
+        return true;
+    }
+
+    public void BeginHoverWith(ItemAmountPair pair)
+    {
+        //
+    }
+
+    public void EndHover()
+    {
+        //
+    }
+
+    public void HoverUpdate(ItemAmountPair pair)
+    {
+        //
+    }
+
+    public void ReceiveDrop(ItemAmountPair pair, Inventory origin)
+    {
+        if (origin.Contains(pair) && origin.TryRemove(pair))
+            this.origin.Add(pair);
+    }
 
     public class Factory : Zenject.PlaceholderFactory<UnityEngine.Object, InventorySlotVisualizer>
     {
