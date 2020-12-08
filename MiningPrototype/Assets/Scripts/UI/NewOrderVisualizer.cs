@@ -104,7 +104,7 @@ public class NewOrderVisualizer : ReadableItemVisualizer
 
 
         //update text and checkbox
-        string text = "check this box to buy.";
+        string text = "check this box to finish the order, put it in the postbox to order.";
 
         if (!CheckIfCanBuy(cost))
             text = "- too expensive -";
