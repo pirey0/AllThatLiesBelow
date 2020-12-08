@@ -49,20 +49,21 @@ public class RenderedMap : BaseMap
         var oreTile = GetVisualOverlayTileFor(x, y);
         var info = GetTileInfo(this[x, y].Type);
 
-        SetTilemapsAt(x, y, tile, destTile, oreTile, info.damageIsInBackground);
+        SetTilemapsAt(x, y, tile, destTile, oreTile, info);
 
         if (x < Settings.MirroringAmount)
-            SetTilemapsAt(SizeX + x, y, tile, destTile, oreTile, info.damageIsInBackground);
+            SetTilemapsAt(SizeX + x, y, tile, destTile, oreTile, info);
         else if (x > SizeX - Settings.MirroringAmount)
-            SetTilemapsAt(x - SizeX, y, tile, destTile, oreTile, info.damageIsInBackground);
+            SetTilemapsAt(x - SizeX, y, tile, destTile, oreTile, info);
     }
 
-    private void SetTilemapsAt(int x, int y, TileBase tile, TileBase damage, TileBase ore, bool behind)
+    private void SetTilemapsAt(int x, int y, TileBase tile, TileBase damage, TileBase ore, TileInfo info)
     {
         tilemap.SetTile(new Vector3Int(x, y, 0), tile);
-        tilemapShifted?.SetTile(new Vector3Int(x, y, 0), tile);
+        if (info.DrawsToShifted)
+            tilemapShifted?.SetTile(new Vector3Int(x, y, 0), tile);
         oreTilemap.SetTile(new Vector3Int(x, y, 0), ore);
-        if (behind)
+        if (info.DamageIsInBackground)
         {
             damageOverlayTilemap.SetTile(new Vector3Int(x, y, 0), null);
             damageOverlayBehind.SetTile(new Vector3Int(x, y, 0), damage);

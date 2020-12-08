@@ -19,7 +19,9 @@ public class TileInfo : ScriptableObject
     public bool NotifiesInsteadOfCrumbling = false;
     public bool CountsAsNeighbour = true;
     public bool MinableInOverworld = false;
-    public bool damageIsInBackground;
+    public bool DamageIsInBackground;
+    public bool DrawsToShifted;
+
 
     [Header("Visuals")]
     public bool UseTilesFromOtherInfo;

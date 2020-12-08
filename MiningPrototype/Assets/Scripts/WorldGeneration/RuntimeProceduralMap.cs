@@ -50,15 +50,6 @@ public class RuntimeProceduralMap : RenderedMap
             RunCompleteGeneration();
     }
 
-    [Button]
-    public void Test()
-    {
-        var res = FindUndiscoveredAreaOfSize(50, 70, 10, 10, 40);
-
-
-    }
-
-
     protected override void Setup()
     {
         base.Setup();

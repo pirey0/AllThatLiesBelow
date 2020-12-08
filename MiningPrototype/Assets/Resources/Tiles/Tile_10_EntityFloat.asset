@@ -23,7 +23,8 @@ MonoBehaviour:
   NotifiesInsteadOfCrumbling: 1
   CountsAsNeighbour: 1
   MinableInOverworld: 1
-  damageIsInBackground: 1
+  DamageIsInBackground: 1
+  DrawsToShifted: 0
   UseTilesFromOtherInfo: 0
   Tiles: []
   TileSourceInfo: {fileID: 0}
