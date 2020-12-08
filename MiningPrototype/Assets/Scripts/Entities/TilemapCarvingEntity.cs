@@ -13,7 +13,7 @@ public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateRec
     [Zenject.Inject] InventoryManager inventoryManager;
     Vector2Int tilemapPos = new Vector2Int(-1, -1);
 
-    public BaseMap TileMap {get; private set;}
+    public BaseMap TileMap { get; private set; }
 
     public virtual void OnTileChanged(int x, int y, TileUpdateReason reason)
     {
@@ -44,11 +44,13 @@ public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateRec
 
     public void UncarveDestroy()
     {
-        UnCarvePrevious();
-
-        Destroy(gameObject);
-        if (drop.IsValid())
-            inventoryManager.PlayerCollects(drop.type, drop.amount);
+        if (this != null)
+        {
+            UnCarvePrevious();
+            Destroy(gameObject);
+            if (drop.IsValid())
+                inventoryManager.PlayerCollects(drop.type, drop.amount);
+        }
     }
 
     protected void Carve()

@@ -31,6 +31,7 @@ public class SceneAdder : StateListenerBehaviour
     {
         int i = 0;
         SceneManager.sceneLoaded += OnSceneLoaded;
+        Time.timeScale = 0;
 
         while (i < maps.Count)
         {
@@ -46,6 +47,7 @@ public class SceneAdder : StateListenerBehaviour
         }
 
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        Time.timeScale = 1;
         if (transitionState)
             gameState.ChangeStateTo(GameState.State.PostLoadScenes);
     }
