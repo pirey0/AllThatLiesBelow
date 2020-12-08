@@ -34,9 +34,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
 
     private bool InFrontOfLadder { get => currentLadders.Count > 0; }
     private bool IsLocked { get => stateMachine.CurrentState == s_disabled; }
-
     protected string CurrentStateName { get => stateMachine.CurrentState.Name; }
-
 
     protected virtual void Start()
     {
@@ -46,6 +44,9 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         SetupStateMachine();
         stateMachine.Start();
     }
+
+    protected abstract float GetVerticalInput();
+    protected abstract float GetHorizontalInput();
 
     public void NotifyActivity()
     {
@@ -277,7 +278,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
 
     private void SlowMoveUpdate()
     {
-        var horizontal = Input.GetAxis("Horizontal");
+        var horizontal = GetHorizontalInput();
 
         var movement = horizontal * rightWalkVector * settings.slowMoveSpeed * Time.fixedDeltaTime * GetSpeedMultiplyer();
         BaseMoveUpdate(horizontal, movement);
@@ -290,7 +291,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
 
     private void MoveUpdate()
     {
-        var horizontal = Input.GetAxis("Horizontal");
+        var horizontal = GetHorizontalInput();
 
         var movement = horizontal * rightWalkVector * settings.moveSpeed * Time.fixedDeltaTime * GetSpeedMultiplyer();
         BaseMoveUpdate(horizontal, movement);
@@ -358,8 +359,8 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         if (currentLadders == null)
             return;
 
-        var horizontal = Input.GetAxis("Horizontal");
-        var vertical = Input.GetAxis("Vertical");
+        var horizontal = GetHorizontalInput();
+        var vertical = GetVerticalInput();
 
         Vector2 climbVelocity = new Vector2(horizontal * settings.climbPanSpeed, vertical * settings.climbSpeed);
         rigidbody.velocity = climbVelocity;
@@ -372,7 +373,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
 
     private bool ShouldClimb()
     {
-        var vertical = Input.GetAxis("Vertical");
+        var vertical = GetVerticalInput();
         bool up = vertical > 0;
 
         bool rightDirection = !(up ^ IsBelowTopLadder());
@@ -427,7 +428,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
 
     private bool ShouldJump()
     {
-        var vertical = Input.GetAxis("Vertical");
+        var vertical = GetVerticalInput();
 
         if (CanJump() && vertical > 0)
         {

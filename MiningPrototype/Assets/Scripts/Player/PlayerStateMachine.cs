@@ -14,6 +14,10 @@ public class PlayerStateMachine : BasePlayerStateMachine
     [SerializeField] PlayerStateInfo[] statesCanInteract;
     [SerializeField] PlayerInteractionHandler playerInteraction;
     [SerializeField] ParticleSystem midasParticles;
+    [SerializeField] bool inCinematicMode;
+    [SerializeField] float cinematicHorizontal;
+    [SerializeField] float cinematicVertical;
+
 
     [Inject] ProgressionHandler progressionHandler;
     [Inject] RuntimeProceduralMap map;
@@ -23,6 +27,15 @@ public class PlayerStateMachine : BasePlayerStateMachine
     Dictionary<string, PlayerStateInfo> canInteractInStateMap;
     RuntimeProceduralMap.MirrorState currentMirrorLoc;
 
+    protected override float GetHorizontalInput()
+    {
+        return inCinematicMode ? cinematicHorizontal : Input.GetAxis("Horizontal");
+    }
+
+    protected override float GetVerticalInput()
+    {
+        return inCinematicMode ? cinematicVertical : Input.GetAxis("Vertical");
+    }
 
     protected override void Start()
     {
@@ -73,7 +86,7 @@ public class PlayerStateMachine : BasePlayerStateMachine
     protected override void BaseMoveUpdate(float horizontal, Vector2 movement)
     {
         base.BaseMoveUpdate(horizontal, movement);
-      
+
         UpdateWorldMirroring();
 
         if (progressionHandler.IsMidas)
@@ -131,7 +144,7 @@ public class PlayerStateMachine : BasePlayerStateMachine
         }
     }
 
-  
+
     public bool CanInteract()
     {
         if (canInteractInStateMap.ContainsKey(CurrentStateName))
