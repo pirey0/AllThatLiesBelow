@@ -23,8 +23,7 @@ MonoBehaviour:
   NotifiesInsteadOfCrumbling: 0
   CountsAsNeighbour: 1
   MinableInOverworld: 0
-  DamageIsInBackground: 0
-  DrawsToShifted: 1
+  damageIsInBackground: 0
   UseTilesFromOtherInfo: 0
   Tiles:
   - {fileID: 11400000, guid: 4c70edfe5247fd34b8a2806b1369a08f, type: 2}
@@ -76,7 +75,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4c70edfe5247fd34b8a2806b1369a08f, type: 2}
   - {fileID: 11400000, guid: 4c70edfe5247fd34b8a2806b1369a08f, type: 2}
   TileSourceInfo: {fileID: 0}
-  Visibility2Tile: {fileID: 0}
+  Visibility2Tile: {fileID: 11400000, guid: 98b91924bf178094dae02075944f79e2, type: 2}
   Overlay: {fileID: 0}
   physicalTileSprite: {fileID: 0}
   physicalTileOverlay: {fileID: 0}

@@ -37,7 +37,9 @@ public enum SpawnableIDType
     OverworldLight,
     DropBox,
     Skeleton,
-    Hourglass
+    Hourglass,
+    Echo,
+    Decoration
 }
 
 

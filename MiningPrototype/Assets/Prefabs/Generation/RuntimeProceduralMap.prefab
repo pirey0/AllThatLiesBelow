@@ -52,8 +52,8 @@ MonoBehaviour:
   generationSettings: {fileID: 11400000, guid: 9ada1e3054219d644a18b003c8174420, type: 2}
   tilemap: {fileID: 7788511328844883173}
   tilemapShifted: {fileID: 6121548151241824753}
-  damageOverlayTilemap: {fileID: 7788511327972709305}
   oreTilemap: {fileID: 7788511329457626868}
+  damageOverlayTilemap: {fileID: 7788511327972709305}
   damageOverlayBehind: {fileID: 7741898377245514116}
   debugRendering: 0
   entitiesParent: {fileID: 4487784778877613469}
@@ -113,7 +113,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5822598522300115210}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7788511328263691926}
@@ -231,7 +231,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7478938779125609126}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7788511328263691926}
