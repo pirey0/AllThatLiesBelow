@@ -5,15 +5,13 @@ using UnityEngine;
 
 public class StateListenerBehaviour : MonoBehaviour
 {
-    [Zenject.Inject] protected GameState gameState;
+    protected GameState gameState;
 
-
-    protected virtual void OnEnable()
+    [Zenject.Inject]
+    private void InjectGameState(GameState gameState)
     {
-        if (gameState != null)
-            gameState.StateChanged += OnStateChangedInternal;
-        else
-            Debug.LogWarning(name + ": GameState is null.");
+        this.gameState = gameState;
+        gameState.StateChanged += OnStateChangedInternal;
     }
 
     protected virtual void OnDisable()

@@ -40,12 +40,6 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
         return inventory;
     }
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        Debug.Log(name + "OnEnable");
-    }
-
     protected override void OnStartAfterLoad()
     {
         Debug.Log(name + ": OnStartAfterLoad");
