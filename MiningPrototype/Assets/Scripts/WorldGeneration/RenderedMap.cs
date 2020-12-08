@@ -266,11 +266,18 @@ public class RenderedMap : BaseMap
         var tile = GetTileAt(x, y);
 
         if (direction == Direction.Down)
+        {
             tile.SetStability(direction, IsBlockAt(x, y - 1) ? 100 : 0);
+        }
         else
         {
             Vector2Int offset = direction.AsV2Int();
-            tile.SetStability(direction, Mathf.Min(25, this[x + offset.x, y + offset.y].Stability / 4));
+            var info = GetTileInfo(this[x + offset.x, y + offset.y].Type);
+
+            if (info.AffectsStability)
+                tile.SetStability(direction, Mathf.Min(25, this[x + offset.x, y + offset.y].Stability / 4));
+            else
+                tile.SetStability(direction, 0);
         }
 
         this[x, y] = tile;

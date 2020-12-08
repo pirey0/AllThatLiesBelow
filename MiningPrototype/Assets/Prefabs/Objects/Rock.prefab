@@ -67,9 +67,9 @@ MonoBehaviour:
     amount: 0
   tilesToOccupy:
   - Offset: {x: 0, y: 0}
-    Type: 8
+    Type: 18
   - Offset: {x: -1, y: 0}
-    Type: 8
+    Type: 18
   - Offset: {x: -1, y: -1}
     Type: 8
   - Offset: {x: 0, y: -1}
