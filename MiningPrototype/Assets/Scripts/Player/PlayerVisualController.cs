@@ -18,7 +18,7 @@ public class PlayerVisualController : MonoBehaviour
 
     Dictionary<string, PlayerVisualState> visualStateMap;
 
-    PlayerStateMachine player;
+    BasePlayerStateMachine player;
     StateMachine stateMachine;
     StateMachine.State prevOldState, prevNewState;
 
@@ -31,7 +31,7 @@ public class PlayerVisualController : MonoBehaviour
             visualStateMap.Add(item.StateName, item);
         }
 
-        var smUser = GetComponent<PlayerStateMachine>();
+        var smUser = GetComponent<BasePlayerStateMachine>();
         if (smUser != null)
         {
             stateMachine = smUser.GetStateMachine();

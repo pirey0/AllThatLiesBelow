@@ -63,7 +63,7 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.7945874
+      time: 0.9408895
       value: -0.0056152344
       inSlope: 0.12664686
       outSlope: 0.12664686
@@ -72,7 +72,7 @@ MonoBehaviour:
       inWeight: 0.8341356
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.795
+      time: 0.94098943
       value: 100000
       inSlope: 0
       outSlope: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  SnowStartHeight: 0.75
+  SnowStartHeight: 0.93
   OrePasses:
   - TileType: 17
     OreVeinSize: {x: 15, y: 20}

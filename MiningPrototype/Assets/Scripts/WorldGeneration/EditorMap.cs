@@ -25,6 +25,13 @@ public class EditorMap : RenderedMap
         UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
     }
 
+    public void EditorMapResize(int newX, int newY)
+    {
+        ResizeMap(newX, newY);
+        UpdateAllVisuals();
+        UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
+    }
+
     public void SaveAs()
     {
         saveAsset = null;

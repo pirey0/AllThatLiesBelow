@@ -66,6 +66,19 @@ public class BaseMap : StateListenerBehaviour, ISavable
         Util.IterateXY(newX, newY, (x, y) => map[x, y] = Tile.Air);
     }
 
+    protected void ResizeMap(int newX, int newY)
+    {
+        var oldMap = map;
+        int oldSizeX = sizeX;
+        int oldSizeY = sizeY;
+
+        map = new Tile[newX, newY];
+        sizeX = newX;
+        sizeY = newY;
+
+        Util.IterateXY(newX, newY, (x, y) => map[x, y] = (x < oldSizeX && y < oldSizeY) ? oldMap[x, y] : Tile.Air);
+    }
+
     public bool IsAirAt(int x, int y)
     {
         return GetTileInfo(this[x, y].Type).AirLike;
@@ -117,7 +130,7 @@ public class BaseMap : StateListenerBehaviour, ISavable
         {
             t.TakeDamage(amount * info.damageMultiplyer);
         }
-        else if ((damageType == DamageType.Explosion ||damageType == DamageType.Crush) && info.damagedByExplosion)
+        else if ((damageType == DamageType.Explosion || damageType == DamageType.Crush) && info.damagedByExplosion)
         {
             t.TakeDamage(amount);
         }

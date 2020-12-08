@@ -63,7 +63,11 @@ public class MapToolWindow : EditorWindow
 
         EditorGUILayout.ObjectField(currentEditorMap, typeof(EditorMap), allowSceneObjects: true);
         if (GUILayout.Button("QuickSelect in Scene"))
+        {
             currentEditorMap = GameObject.FindObjectOfType<EditorMap>();
+            currentSizeX = currentEditorMap.SizeX;
+            currentSizeY = currentEditorMap.SizeY;
+        }
 
         if (currentEditorMap == null)
             return;
@@ -75,26 +79,26 @@ public class MapToolWindow : EditorWindow
 
         EditorGUILayout.Space();
 
-       
+
         EditorGUILayout.Space();
 
         if (currentEditorMap.IsEditorReady())
         {
             EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button("Save"))
-                    currentEditorMap.Save();
+                currentEditorMap.Save();
 
             if (GUILayout.Button("Save As"))
                 currentEditorMap.SaveAs();
 
-                EditorGUILayout.EndHorizontal();
+            EditorGUILayout.EndHorizontal();
         }
         else
         {
             GUILayout.Label("Nothing to Save");
         }
 
-       
+
 
         if (GUILayout.Button("Load Previous"))
         {
@@ -103,9 +107,10 @@ public class MapToolWindow : EditorWindow
 
         if (GUILayout.Button("Load From"))
         {
-            string path = EditorUtility.OpenFilePanelWithFilters("Pick Map", "Assets/Others/Maps/", new string[] {"Map", "bytes"});
+            string path = EditorUtility.OpenFilePanelWithFilters("Pick Map", "Assets/Others/Maps/", new string[] { "Map", "bytes" });
             var asset = AssetDatabase.LoadAssetAtPath<TextAsset>(Util.MakePathRelative(path));
             currentEditorMap.Load(asset);
+
         }
 
         EditorGUILayout.BeginHorizontal();
@@ -113,6 +118,12 @@ public class MapToolWindow : EditorWindow
         {
             currentEditorMap.InitializeBlankOfSize(currentSizeX, currentSizeY);
         }
+
+        if (GUILayout.Button("Resize To"))
+        {
+            currentEditorMap.EditorMapResize(currentSizeX, currentSizeY);
+        }
+
         currentSizeX = EditorGUILayout.IntField(currentSizeX);
         currentSizeY = EditorGUILayout.IntField(currentSizeY);
 

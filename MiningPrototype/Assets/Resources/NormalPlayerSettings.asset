@@ -38,7 +38,7 @@ MonoBehaviour:
   climbPanSpeed: 2
   climbIdleThreshold: 0.2
   idleThreshold: 0.2
-  overWorldHeight: 79
+  overWorldHeight: 280
   timeToHidePickaxe: 5
   overworldTimeToHidePickaxe: 1
   maxCarryWeight: 2147483647

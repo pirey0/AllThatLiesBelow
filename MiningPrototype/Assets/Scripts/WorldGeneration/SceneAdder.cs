@@ -10,6 +10,7 @@ public class SceneAdder : StateListenerBehaviour
 {
     [SerializeField] List<MapAddition> addition;
     [SerializeField] SceneReference altarScene;
+    [SerializeField] int width, height;
 
     [Zenject.Inject] DiContainer diContainer;
 
@@ -31,6 +32,7 @@ public class SceneAdder : StateListenerBehaviour
     {
         int i = 0;
         SceneManager.sceneLoaded += OnSceneLoaded;
+        Time.timeScale = 0;
 
         while (i < maps.Count)
         {
@@ -46,6 +48,7 @@ public class SceneAdder : StateListenerBehaviour
         }
 
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        Time.timeScale = 1;
         if (transitionState)
             gameState.ChangeStateTo(GameState.State.PostLoadScenes);
     }
@@ -94,9 +97,9 @@ public class SceneAdder : StateListenerBehaviour
     {
         foreach (var a in addition)
         {
-            float xOffsetDif = (a.XOffsetRange.y - a.XOffsetRange.x) * 200; //hardcoded size
-            float x = xOffsetDif * 0.5f + a.XOffsetRange.x*200 + a.Size.x * 0.5f;
-            float y = a.YOffset*100 + a.Size.y * 0.5f;
+            float xOffsetDif = (a.XOffsetRange.y - a.XOffsetRange.x) * width; 
+            float x = xOffsetDif * 0.5f + a.XOffsetRange.x* width + a.Size.x * 0.5f;
+            float y = a.YOffset*height + a.Size.y * 0.5f;
             float sizeX = xOffsetDif + a.Size.x;
             float sizeY = a.Size.y;
 
