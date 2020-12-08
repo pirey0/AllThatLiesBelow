@@ -60,16 +60,14 @@ public class ItemPlacingHandler : MonoBehaviour
         }
     }
 
-    public void TryPlace(ItemType type, Vector3 tryplacePosition)
+    public void TryPlace(ItemType type, Vector3 tryplacePosition, int amount = -1)
     {
-        Debug.Log("tried receive "+ currentReceiver +  " . " + currentOrigin);
         if (currentReceiver != null && currentOrigin != null)
         {
-            Debug.Log(currentReceiver + " tried receive" + currentHeld.type + " from " + currentOrigin);
-            if (currentReceiver.WouldTakeDrop(currentHeld))
+            ItemAmountPair pair = amount > 0 ? new ItemAmountPair(currentHeld.type, amount) : currentHeld;
+            if (currentReceiver.WouldTakeDrop(pair))
             {
-                Debug.Log(currentReceiver + " received" + currentHeld.type + " from " + currentOrigin);
-                currentReceiver.ReceiveDrop(currentHeld, currentOrigin);
+                currentReceiver.ReceiveDrop(pair, currentOrigin);
                 return;
             }
         }

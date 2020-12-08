@@ -168,7 +168,9 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
             {
                 if (amount > 1 && GetDistance() > 2)
                 {
-                    itemPlacingHandler.TryPlace(type, rectTransform.position); //try place single item
+                    //drop half when pressing shift and 1 when not
+                    int a = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) ? (amount / 2) : 1;
+                    itemPlacingHandler.TryPlace(type, rectTransform.position, amount:a); //try place single item
                 }
                 else
                 {
