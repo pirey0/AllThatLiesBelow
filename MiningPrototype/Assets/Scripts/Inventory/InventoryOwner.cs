@@ -32,7 +32,9 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
 
     public void SetInventory(Inventory newInventory)
     {
+        inventory.InventoryChanged -= OnInventoryChanged;
         inventory = newInventory;
+        inventory.InventoryChanged += OnInventoryChanged;
     }
 
     public Inventory GetInventory()
@@ -40,9 +42,8 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
         return inventory;
     }
 
-    protected override void OnStartAfterLoad()
+    protected virtual void Start()
     {
-        Debug.Log(name + ": OnStartAfterLoad");
         inventory.InventoryChanged += OnInventoryChanged;
     }
 
@@ -72,6 +73,14 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
                 inventoryVisualizer.SetFollowOnUpdate(inventoryVisualizerUpdates);
             }
             StateChanged?.Invoke(state);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if(inventoryVisualizer != null)
+        {
+            Destroy(inventoryVisualizer.gameObject);
         }
     }
 

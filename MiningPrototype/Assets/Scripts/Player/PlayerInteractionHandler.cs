@@ -40,8 +40,9 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
     public event System.Action PlayerActivity;
 
-    protected void Start()
+    protected override void Start()
     {
+        base.Start();
         visualController = GetComponent<PlayerVisualController>();
         player.PlayerDeath += OnDeath;
     }
@@ -74,7 +75,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         }
 
         //Stop interacting when too far away
-        if (currentInteractable != null && Vector3.Distance(transform.position, currentInteractable.gameObject.transform.position) > settings.maxInteractableDistance)
+        if (CurrentInteractableIsValid() && Vector3.Distance(transform.position, currentInteractable.gameObject.transform.position) > settings.maxInteractableDistance)
         {
             TryStopInteracting();
         }
@@ -98,7 +99,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
                     if (!mouseInInventoryRange)
                     {
 
-                        if (currentInteractable == null)
+                        if (!CurrentInteractableIsValid())
                         {
                             TryInteract();
                         }
@@ -120,7 +121,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
                 TryDisableMiningVisuals();
             }
 
-            if (currentInteractable != null)
+            if (!CurrentInteractableIsValid())
                 PlayerActivity?.Invoke();
         }
         else
@@ -129,6 +130,11 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         }
 
         UpdateDigHighlight();
+    }
+
+    private bool CurrentInteractableIsValid()
+    {
+        return currentInteractable != null && !currentInteractable.Equals(null);
     }
 
     private void UpdateHover(bool hasDigTarget)
@@ -364,7 +370,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
     private void TryStopInteracting()
     {
-        if (currentInteractable != null)
+        if (CurrentInteractableIsValid())
         {
             currentInteractable.UnsubscribeToForceQuit(OnInteractableForceQuit);
             currentInteractable.EndInteracting(gameObject);
