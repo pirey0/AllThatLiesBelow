@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ItemPlacingHandler : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class ItemPlacingHandler : MonoBehaviour
     [Zenject.Inject] CameraController cameraController;
     [Zenject.Inject] Zenject.DiContainer diContainer;
     [Zenject.Inject] InventoryManager inventoryManager;
+    [Zenject.Inject] EventSystem eventSystem;
 
     [SerializeField] AudioSource placingSound;
 
@@ -60,10 +62,13 @@ public class ItemPlacingHandler : MonoBehaviour
 
     public void TryPlace(ItemType type, Vector3 tryplacePosition)
     {
+        Debug.Log("tried receive "+ currentReceiver +  " . " + currentOrigin);
         if (currentReceiver != null && currentOrigin != null)
         {
+            Debug.Log(currentReceiver + " tried receive" + currentHeld.type + " from " + currentOrigin);
             if (currentReceiver.WouldTakeDrop(currentHeld))
             {
+                Debug.Log(currentReceiver + " received" + currentHeld.type + " from " + currentOrigin);
                 currentReceiver.ReceiveDrop(currentHeld, currentOrigin);
                 return;
             }
@@ -105,6 +110,21 @@ public class ItemPlacingHandler : MonoBehaviour
                 break;
             }
         }
+
+        if (dropReceiver == null)
+        {
+            PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+            eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+
+            foreach (RaycastResult item in results)
+            {
+                if (dropReceiver == null)
+                    dropReceiver = item.gameObject.GetComponentInParent<IDropReceiver>();
+            }
+        }
+        
 
         if (dropReceiver != currentReceiver)
         {
