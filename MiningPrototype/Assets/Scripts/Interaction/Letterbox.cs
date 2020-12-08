@@ -11,35 +11,26 @@ public enum LetterboxStatus
     OPEN
 }
 
-public class LetterBox : StateListenerBehaviour, IInteractable, INonPersistantSavable
+public class LetterBox : InventoryOwner, INonPersistantSavable
 {
     [SerializeField] SpriteAnimator spriteAnimator;
     [SerializeField] SpriteAnimation closedEmpty, closedFull, open;
     [SerializeField] AudioSource openCloseAudio, storeItemAudio;
 
     [Zenject.Inject] InventoryManager inventoryManager;
-
-    Inventory inventory = new Inventory();
     LetterboxStatus status;
 
     private event System.Action ForceInterrupt;
 
     protected override void OnStartAfterLoad()
     {
+        base.OnStartAfterLoad();
         SetLetterboxStatus(status);
     }
 
     [Button]
     public void Open()
     {
-        //add all stored items to player inventory
-        var element = inventory.Pop();
-        while (element != ItemAmountPair.Nothing)
-        {
-            inventoryManager.PlayerCollects(element.type, element.amount);
-            element = inventory.Pop();
-        }
-
         SetLetterboxStatus(LetterboxStatus.OPEN);
     }
 
@@ -57,16 +48,18 @@ public class LetterBox : StateListenerBehaviour, IInteractable, INonPersistantSa
             SetLetterboxStatus(LetterboxStatus.ClosedFull);
     }
 
-    public void BeginInteracting(GameObject interactor)
+    public override void BeginInteracting(GameObject interactor)
     {
+        base.BeginInteracting(interactor);
         Open();
     }
 
-    public void EndInteracting(GameObject interactor)
+    public override void EndInteracting(GameObject interactor)
     {
-        Debug.Log("Postbox end interacting.");
+        base.EndInteracting(interactor);
         Close();
     }
+
 
     private void SetLetterboxStatus(LetterboxStatus newStatus)
     {
@@ -94,7 +87,7 @@ public class LetterBox : StateListenerBehaviour, IInteractable, INonPersistantSa
 
     public void AddStoredItem(ItemAmountPair itemAmountPair)
     {
-        inventory.Add(itemAmountPair);
+        Inventory.Add(itemAmountPair);
 
         if (IsEmpty())
             SetLetterboxStatus(LetterboxStatus.ClosedEmpty);
@@ -102,19 +95,10 @@ public class LetterBox : StateListenerBehaviour, IInteractable, INonPersistantSa
             SetLetterboxStatus(LetterboxStatus.ClosedFull);
     }
 
-    public void SubscribeToForceQuit(Action action)
-    {
-        ForceInterrupt += action;
-    }
-
-    public void UnsubscribeToForceQuit(Action action)
-    {
-        ForceInterrupt -= action;
-    }
-
+  
     public bool IsEmpty()
     {
-        return inventory.IsEmpty();
+        return Inventory.IsEmpty();
     }
 
     public SpawnableSaveData ToSaveData()
@@ -123,7 +107,7 @@ public class LetterBox : StateListenerBehaviour, IInteractable, INonPersistantSa
         data.SpawnableIDType = SpawnableIDType.LetterBox;
         data.Position = new SerializedVector3(transform.position);
         data.Rotation = new SerializedVector3(transform.eulerAngles);
-        data.Inventory = inventory;
+        data.Inventory = Inventory;
         data.Status = status;
         return data;
     }
@@ -132,7 +116,7 @@ public class LetterBox : StateListenerBehaviour, IInteractable, INonPersistantSa
     {
         if (dataOr is LetterBoxSaveData data)
         {
-            inventory = data.Inventory;
+            SetInventory(data.Inventory);
             status = data.Status;
         }
     }

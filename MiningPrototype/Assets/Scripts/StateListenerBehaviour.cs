@@ -7,10 +7,13 @@ public class StateListenerBehaviour : MonoBehaviour
 {
     [Zenject.Inject] protected GameState gameState;
 
+
     protected virtual void OnEnable()
     {
         if (gameState != null)
             gameState.StateChanged += OnStateChangedInternal;
+        else
+            Debug.LogWarning(name + ": GameState is null.");
     }
 
     protected virtual void OnDisable()

@@ -40,13 +40,21 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
         return inventory;
     }
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        Debug.Log(name + "OnEnable");
+    }
+
     protected override void OnStartAfterLoad()
     {
+        Debug.Log(name + ": OnStartAfterLoad");
         inventory.InventoryChanged += OnInventoryChanged;
     }
 
     private void OnInventoryChanged(bool add, ItemAmountPair pair)
     {
+        Debug.Log(name + ": Inventory Changed");
         if (state == InventoryState.Open && inventoryVisualizer != null)
             inventoryVisualizer.UpdateInventoryDisplay(add, pair);
     }
@@ -95,12 +103,12 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
         }
     }
 
-    public void BeginInteracting(GameObject interactor)
+    public virtual void BeginInteracting(GameObject interactor)
     {
         OpenInventory();
     }
 
-    public void EndInteracting(GameObject interactor)
+    public virtual void EndInteracting(GameObject interactor)
     {
         CloseInventory();
     }
