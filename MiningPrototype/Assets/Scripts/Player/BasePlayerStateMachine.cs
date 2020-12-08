@@ -78,8 +78,6 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
 
     private void FixedUpdate()
     {
-        if (!gameState.Playing)
-            return;
 
         Collider2D[] colliders = Physics2D.OverlapCircleAll(feet.position, settings.feetRadius, settings.collisionMask.value);
         isGrounded = false;
