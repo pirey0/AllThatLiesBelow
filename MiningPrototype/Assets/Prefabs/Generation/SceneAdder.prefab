@@ -46,39 +46,64 @@ MonoBehaviour:
   addition:
   - XOffsetRange: {x: 0.33, y: 0.33}
     YOffset: 0.56
+    Size: {x: 100, y: 40}
     SceneToAdd:
       sceneAsset: {fileID: 102900000, guid: ff72c84b8404c72448a5f4f2347572d0, type: 3}
       scenePath: Assets/Scenes/OverworldScene.unity
   - XOffsetRange: {x: 0.2, y: 0.6}
     YOffset: 0.52
+    Size: {x: 10, y: 10}
     SceneToAdd:
       sceneAsset: {fileID: 102900000, guid: eefebb5b71de47e4e9da29653337e8d9, type: 3}
       scenePath: Assets/Scenes/AltarScene.unity
   - XOffsetRange: {x: 0.1, y: 0.8}
     YOffset: 0.3
+    Size: {x: 5, y: 5}
     SceneToAdd:
       sceneAsset: {fileID: 102900000, guid: 772c6d38dd969d24bb2ad158970d99e5, type: 3}
       scenePath: Assets/Scenes/Underground/ClockScene.unity
   - XOffsetRange: {x: 0.1, y: 0.8}
     YOffset: 0.45
+    Size: {x: 5, y: 5}
     SceneToAdd:
       sceneAsset: {fileID: 102900000, guid: 00e9f3717c7effb438c0796c2d48c8ed, type: 3}
       scenePath: Assets/Scenes/Underground/Goldvein1Scene.unity
   - XOffsetRange: {x: 0.1, y: 0.8}
     YOffset: 0.48
+    Size: {x: 5, y: 5}
     SceneToAdd:
       sceneAsset: {fileID: 102900000, guid: 41e6991a7f0177041ace2aa78404a662, type: 3}
       scenePath: Assets/Scenes/Underground/Goldvein2Scene.unity
   - XOffsetRange: {x: 0.1, y: 0.8}
     YOffset: 0.42
+    Size: {x: 5, y: 5}
     SceneToAdd:
       sceneAsset: {fileID: 102900000, guid: 00e9f3717c7effb438c0796c2d48c8ed, type: 3}
       scenePath: Assets/Scenes/Underground/Goldvein1Scene.unity
   - XOffsetRange: {x: 0.1, y: 0.8}
     YOffset: 0.1
+    Size: {x: 5, y: 5}
     SceneToAdd:
       sceneAsset: {fileID: 102900000, guid: 426e7d4a39ab8fc4486ac83b2f817c8f, type: 3}
       scenePath: Assets/Scenes/Underground/DeliveryFactoryScene.unity
+  - XOffsetRange: {x: 0.1, y: 0.8}
+    YOffset: 0.2
+    Size: {x: 5, y: 5}
+    SceneToAdd:
+      sceneAsset: {fileID: 102900000, guid: b20be539635cb864eac354c3ad86fd88, type: 3}
+      scenePath: Assets/Scenes/Underground/EchoChamber1Scene.unity
+  - XOffsetRange: {x: 0.1, y: 0.8}
+    YOffset: 0.35
+    Size: {x: 5, y: 5}
+    SceneToAdd:
+      sceneAsset: {fileID: 102900000, guid: 9e301d9533d39fd4b8dc363e647141c7, type: 3}
+      scenePath: Assets/Scenes/Underground/BrothersScene.unity
+  - XOffsetRange: {x: 0.1, y: 0.8}
+    YOffset: 0.3
+    Size: {x: 5, y: 5}
+    SceneToAdd:
+      sceneAsset: {fileID: 102900000, guid: 93bc12fb56d931146a0db9f8b839ad52, type: 3}
+      scenePath: Assets/Scenes/Underground/SteleScene.unity
   altarScene:
     sceneAsset: {fileID: 102900000, guid: eefebb5b71de47e4e9da29653337e8d9, type: 3}
     scenePath: Assets/Scenes/AltarScene.unity

@@ -21270,8 +21270,8 @@ MonoBehaviour:
     CanInteract: 0
     CanInventory: 0
   - StateName: LongIdle
-    CanInteract: 0
-    CanInventory: 0
+    CanInteract: 1
+    CanInventory: 1
   - StateName: Fall
     CanInteract: 1
     CanInventory: 1

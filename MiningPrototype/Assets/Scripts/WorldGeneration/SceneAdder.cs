@@ -84,7 +84,24 @@ public class SceneAdder : StateListenerBehaviour
         addition.XOffsetRange = new Vector2((float) value.x / RuntimeProceduralMap.Instance.SizeX, (float)value.x / RuntimeProceduralMap.Instance.SizeX);
         addition.YOffset = (float)value.y / RuntimeProceduralMap.Instance.SizeY;
         addition.SceneToAdd = altarScene;
+        addition.Size = Vector2.zero;
+
         StartCoroutine(LoadAdditive(new List<MapAddition>() { addition }, transitionState: false));
+    }
+
+
+    void OnDrawGizmosSelected()
+    {
+        foreach (var a in addition)
+        {
+            float xOffsetDif = (a.XOffsetRange.y - a.XOffsetRange.x) * 200; //hardcoded size
+            float x = xOffsetDif * 0.5f + a.XOffsetRange.x*200 + a.Size.x * 0.5f;
+            float y = a.YOffset*100 + a.Size.y * 0.5f;
+            float sizeX = xOffsetDif + a.Size.x;
+            float sizeY = a.Size.y;
+
+            Gizmos.DrawWireCube(new Vector3(x, y, 0), new Vector3(sizeX, sizeY));
+        }
     }
 }
 
@@ -93,5 +110,6 @@ public struct MapAddition
 {
     public Vector2 XOffsetRange;
     public float YOffset;
+    public Vector2 Size;
     public SceneReference SceneToAdd;
 }
