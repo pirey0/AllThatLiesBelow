@@ -10,6 +10,8 @@ public class ItemPlacingHandler : MonoBehaviour
     [Zenject.Inject] Zenject.DiContainer diContainer;
     [Zenject.Inject] InventoryManager inventoryManager;
 
+    [SerializeField] AudioSource placingSound;
+
     bool holdingPlacable;
     ItemAmountPair currentHeld;
     Inventory currentOrigin;
@@ -76,6 +78,8 @@ public class ItemPlacingHandler : MonoBehaviour
                 {
                     if (inventoryManager.PlayerTryPay(type, 1))
                     {
+                        placingSound?.Play();
+                        cameraController.Shake(preview.GetPlacePosition(tryplacePosition),CameraShakeType.hill,0.1f,10f);
                         var go = diContainer.InstantiatePrefab(info.Prefab, preview.GetPlacePosition(tryplacePosition), Quaternion.identity, null);
                     }
                 }
