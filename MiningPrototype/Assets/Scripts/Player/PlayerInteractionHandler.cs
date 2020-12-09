@@ -171,7 +171,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
             hover.HoverUpdate();
     }
 
-    private void ToggleInventory()
+    public void ToggleInventory()
     {
         if (InventoryDisplayState == InventoryState.Closed)
             OpenInventory();

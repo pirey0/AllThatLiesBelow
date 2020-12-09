@@ -3,10 +3,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryVisualizer : ScalingUIElementBase, IDropReceiver
 {
-    [SerializeField] int widthInSlots, heightInSlots;
+    [SerializeField] int widthInSlots, heightInSlots, playerInvMaxHeight = 5;
 
     [SerializeField] RectTransform boxTransform;
     [SerializeField] Vector2 basePadding;
@@ -15,6 +16,7 @@ public class InventoryVisualizer : ScalingUIElementBase, IDropReceiver
     [SerializeField] InventorySlotVisualizer inventorySlotPrefab;
     [SerializeField] Transform gridBox;
     [SerializeField] Transform gridLayoutParent;
+    [SerializeField] GridLayoutGroup grid;
     [SerializeField] bool updateContinously = true;
     [SerializeField] ImageSpriteAnimator animator;
     [SerializeField] SpriteAnimation closeAnimation;
@@ -26,11 +28,17 @@ public class InventoryVisualizer : ScalingUIElementBase, IDropReceiver
     Inventory inventory;
     [SerializeField] List<InventorySlotVisualizer> slots = new List<InventorySlotVisualizer>();
 
-    public void Init(Transform target, Inventory inventoryToVisualize)
+    bool useCustomPlayerInventory;
+
+    public void Init(Transform target, Inventory inventoryToVisualize, bool isPlayerInventory = false)
     {
-        transformToFollow = target;
+        useCustomPlayerInventory = isPlayerInventory;
+        transformToFollow = isPlayerInventory ? FindObjectOfType<PlayerInventoryOpener>().transform : target;
         inventory = inventoryToVisualize;
         spriteRendererToGetOrientatioFrom = target.GetComponent<SpriteRenderer>();
+
+        if (isPlayerInventory)
+            grid.startAxis = GridLayoutGroup.Axis.Vertical;
 
         CreateInventoryDisplay();
     }
@@ -134,23 +142,34 @@ public class InventoryVisualizer : ScalingUIElementBase, IDropReceiver
         int width = widthInSlots;
         int height = heightInSlots;
 
-        //inventory smaller than one row
-        if (sizeCurrent <= widthInSlots)
+        if (useCustomPlayerInventory)
         {
-            width = Mathf.Max(1,sizeCurrent);
-            height = 1;
-        } else if (sizeCurrent <= 6)
-        {
-            width = 3;
-            height = 2;
-        } 
+            height = Mathf.Min(sizeCurrent, playerInvMaxHeight);
+            width =  Mathf.CeilToInt((float)sizeCurrent / (float)playerInvMaxHeight);
+
+            followOffset = new Vector2(width * additonalSpacePerSlotNeeded.x * -0.5f, followOffset.y);
+        }
         else
         {
-            float h = (float)sizeCurrent / width;
-
-            if (h > heightInSlots)
+            //inventory smaller than one row
+            if (sizeCurrent <= widthInSlots)
             {
-                height = Mathf.CeilToInt(h);
+                width = Mathf.Max(1, sizeCurrent);
+                height = 1;
+            }
+            else if (sizeCurrent <= 6)
+            {
+                width = 3;
+                height = 2;
+            }
+            else
+            {
+                float h = (float)sizeCurrent / width;
+
+                if (h > heightInSlots)
+                {
+                    height = Mathf.CeilToInt(h);
+                }
             }
         }
 

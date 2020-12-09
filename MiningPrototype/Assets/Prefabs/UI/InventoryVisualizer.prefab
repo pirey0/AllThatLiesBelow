@@ -199,18 +199,21 @@ MonoBehaviour:
   openTimeMultiplier: 3
   updateFollow: 0
   transformToFollow: {fileID: 0}
-  followOffset: {x: -1.25, y: 2}
+  followOffset: {x: -1, y: 1}
   widthInSlots: 4
   heightInSlots: 2
+  playerInvMaxHeight: 5
   boxTransform: {fileID: 8727063801738303664}
   basePadding: {x: 2, y: 2}
   additonalSpacePerSlotNeeded: {x: 2, y: 2}
   inventorySlotPrefab: {fileID: 2541443755640501489, guid: 8e5e1b66aa6c0994b9f4a49b79d80a04, type: 3}
   gridBox: {fileID: 8727063801738303664}
   gridLayoutParent: {fileID: 7116935718377473132}
+  grid: {fileID: 1744120773294816107}
   updateContinously: 1
   animator: {fileID: 7444784132658660086}
   closeAnimation: {fileID: 11400000, guid: 81b4b76f95b55b64e952d4fa2e1c55f1, type: 2}
+  slots: []
 --- !u!114 &7444784132658660086
 MonoBehaviour:
   m_ObjectHideFlags: 0

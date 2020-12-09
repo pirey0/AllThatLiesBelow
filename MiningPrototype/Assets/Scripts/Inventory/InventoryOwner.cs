@@ -16,6 +16,7 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
     [SerializeField] InventoryVisualizer inventoryVisualizerPrefab;
     [SerializeField] AudioSource openSource;
     [SerializeField] bool inventoryVisualizerUpdates;
+    [SerializeField] bool isPlayerInventory;
 
     [Zenject.Inject] InWorldCanvas inWorld;
     [Zenject.Inject] InventoryVisualizer.Factory visualizerFactory;
@@ -69,7 +70,7 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
 
                 inventoryVisualizer = visualizerFactory.Create(inventoryVisualizerPrefab.gameObject);
                 inventoryVisualizer.transform.SetParent(inWorld.Canvas.transform, worldPositionStays: false);
-                inventoryVisualizer.Init(transform, inventory);
+                inventoryVisualizer.Init(transform, inventory, isPlayerInventory);
                 inventoryVisualizer.SetFollowOnUpdate(inventoryVisualizerUpdates);
             }
             StateChanged?.Invoke(state);

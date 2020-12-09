@@ -21239,8 +21239,8 @@ MonoBehaviour:
   jumpStart: {fileID: 6058378898912939930}
   jumpLand: {fileID: 4176785031348637688}
   fallDeath: {fileID: 7104222620361692125}
-  midasParticles: {fileID: 8338589520567405923}
   slowWalkMode: 0
+  debug: 0
   statesCanInteract:
   - StateName: Idle
     CanInteract: 1
@@ -21288,7 +21288,10 @@ MonoBehaviour:
     CanInteract: 1
     CanInventory: 1
   playerInteraction: {fileID: 497824006148765930}
-  debug: 0
+  midasParticles: {fileID: 8338589520567405923}
+  inCinematicMode: 0
+  cinematicHorizontal: 0
+  cinematicVertical: 0
 --- !u!114 &497824006148765930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21308,6 +21311,7 @@ MonoBehaviour:
   inventoryVisualizerPrefab: {fileID: 8727063801762088802, guid: c396613fa9613cb4d8d82148ef5649a7, type: 3}
   openSource: {fileID: 1456414342}
   inventoryVisualizerUpdates: 1
+  isPlayerInventory: 1
   settings: {fileID: 11400000, guid: e0b2ba0468d7ff1498765ca6c35bf0e8, type: 2}
   player: {fileID: 5704201079326970389}
   pickaxe: {fileID: 4724523066374434780}
