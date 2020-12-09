@@ -9,6 +9,13 @@ using UnityEngine;
 public class Inventory
 {
     [SerializeField] List<ItemAmountPair> content = new List<ItemAmountPair>();
+    public int Count
+    {
+        get
+        {
+            return content.Count;
+        }
+    }
 
     [field: NonSerialized]
     public event System.Action<bool, ItemAmountPair> InventoryChanged;

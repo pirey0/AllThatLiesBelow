@@ -6,15 +6,15 @@ using UnityEngine;
 
 public enum LetterboxStatus
 {
-    ClosedEmpty,
-    ClosedFull,
-    OPEN
+    Closed,
+    Open
 }
 
 public class LetterBox : InventoryOwner, INonPersistantSavable
 {
     [SerializeField] SpriteAnimator spriteAnimator;
     [SerializeField] SpriteAnimation closedEmpty, closedFull, open;
+    [SerializeField] SpriteAnimation[] overflow;
     [SerializeField] AudioSource openCloseAudio, storeItemAudio;
 
     [Zenject.Inject] InventoryManager inventoryManager;
@@ -31,7 +31,7 @@ public class LetterBox : InventoryOwner, INonPersistantSavable
     [Button]
     public void Open()
     {
-        SetLetterboxStatus(LetterboxStatus.OPEN);
+        SetLetterboxStatus(LetterboxStatus.Open);
     }
 
     [Button]
@@ -39,13 +39,10 @@ public class LetterBox : InventoryOwner, INonPersistantSavable
     {
         ForceInterrupt?.Invoke();
 
-        if (status != LetterboxStatus.OPEN)
+        if (status != LetterboxStatus.Open)
             return;
 
-        if (IsEmpty())
-            SetLetterboxStatus(LetterboxStatus.ClosedEmpty);
-        else
-            SetLetterboxStatus(LetterboxStatus.ClosedFull);
+       SetLetterboxStatus(LetterboxStatus.Closed);
     }
 
     public override void BeginInteracting(GameObject interactor)
@@ -66,16 +63,12 @@ public class LetterBox : InventoryOwner, INonPersistantSavable
         Debug.Log("Switching to: " + newStatus);
         switch (newStatus)
         {
-            case LetterboxStatus.ClosedFull:
-                spriteAnimator.Play(closedFull);
+            case LetterboxStatus.Closed:
+                spriteAnimator.Play(GetAnimationFromAmount(Inventory.Count));
                 break;
 
-            case LetterboxStatus.OPEN:
+            case LetterboxStatus.Open:
                 spriteAnimator.Play(open);
-                break;
-
-            case LetterboxStatus.ClosedEmpty:
-                spriteAnimator.Play(closedEmpty);
                 break;
         }
 
@@ -84,15 +77,21 @@ public class LetterBox : InventoryOwner, INonPersistantSavable
         status = newStatus;
     }
 
+    private SpriteAnimation GetAnimationFromAmount(int count)
+    {
+        if (count == 0)
+            return closedEmpty;
+        else if (count > 1 && overflow != null && overflow.Length > 0)
+            return overflow[Mathf.Min(count - 2, overflow.Length - 1)];
+        else
+            return closedFull;
+    }
 
     public void AddStoredItem(ItemAmountPair itemAmountPair)
     {
         Inventory.Add(itemAmountPair);
 
-        if (IsEmpty())
-            SetLetterboxStatus(LetterboxStatus.ClosedEmpty);
-        else
-            SetLetterboxStatus(LetterboxStatus.ClosedFull);
+        SetLetterboxStatus(LetterboxStatus.Closed);
     }
 
   
