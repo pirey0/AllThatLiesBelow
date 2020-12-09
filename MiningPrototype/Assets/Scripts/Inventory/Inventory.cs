@@ -11,10 +11,7 @@ public class Inventory
     [SerializeField] List<ItemAmountPair> content = new List<ItemAmountPair>();
     public int Count
     {
-        get
-        {
-            return content.Count;
-        }
+        get => content.Count;
     }
 
     [field: NonSerialized]

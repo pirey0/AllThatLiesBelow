@@ -6,6 +6,7 @@ public class MainMenuPlayerStateMachine : BasePlayerStateMachine
 {
     [SerializeField] float moveX;
     [SerializeField] float moveY;
+    Vector3 position;
     protected override float GetHorizontalInput()
     {
         return moveX;
@@ -14,5 +15,14 @@ public class MainMenuPlayerStateMachine : BasePlayerStateMachine
     protected override float GetVerticalInput()
     {
         return moveY;
+    }
+
+    //hold the player in place to prevent him from falling down
+    private void Update()
+    {
+        if (position != Vector3.zero)
+            transform.position = position;
+
+        position = transform.position;
     }
 }
