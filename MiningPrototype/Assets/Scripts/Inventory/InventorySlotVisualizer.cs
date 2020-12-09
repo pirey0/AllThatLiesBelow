@@ -126,7 +126,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         defaultAnchorPosition = rectTransform.anchoredPosition;
         targetGraphic.raycastTarget = false;
         parent = rectTransform.parent;
-        rectTransform.parent = parent.parent.parent.parent;
+        rectTransform.SetParent(parent.parent.parent.parent, worldPositionStays: false); //<- My eyes bleed. -Luca
         inDrag = true;
         StartCoroutine(UpdateInDrag());
     }
@@ -151,7 +151,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         EnableVisuals();
         rectTransform.anchoredPosition = defaultAnchorPosition;
         canDropOverlay.SetActive(false);
-        rectTransform.parent = parent;
+        rectTransform.SetParent(parent, worldPositionStays: false);
         targetGraphic.raycastTarget = true;
     }
 
