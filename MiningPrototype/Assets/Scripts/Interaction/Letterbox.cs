@@ -10,7 +10,7 @@ public enum LetterboxStatus
     Open
 }
 
-public class LetterBox : InventoryOwner, INonPersistantSavable
+public class Letterbox : InventoryOwner, INonPersistantSavable
 {
     [SerializeField] SpriteAnimator spriteAnimator;
     [SerializeField] SpriteAnimation closedEmpty, closedFull, open;
@@ -99,6 +99,7 @@ public class LetterBox : InventoryOwner, INonPersistantSavable
     {
         return Inventory.IsEmpty();
     }
+
 
     public SpawnableSaveData ToSaveData()
     {

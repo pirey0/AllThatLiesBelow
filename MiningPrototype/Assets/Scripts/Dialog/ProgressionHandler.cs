@@ -24,7 +24,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     [Zenject.Inject] SceneAdder sceneAdder;
 
     ProgressionSaveData data;
-    LetterBox letterBox;
+    Letterbox letterBox;
     DropBox postbox;
 
     public float SpeedMultiplyer { get => data.speedMultiplyer; }
@@ -44,7 +44,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
     protected override void OnPostSceneLoad()
     {
-        letterBox = FindObjectOfType<LetterBox>();
+        letterBox = FindObjectOfType<Letterbox>();
         postbox = FindObjectOfType<DropBox>();
     }
 
@@ -73,7 +73,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
             sacrificeActions.ApplyItemSacrificeConsequence(item, data);
         }
 
-        letterBox = FindObjectOfType<LetterBox>();
+        letterBox = FindObjectOfType<Letterbox>();
         postbox = FindObjectOfType<DropBox>();
     }
 
