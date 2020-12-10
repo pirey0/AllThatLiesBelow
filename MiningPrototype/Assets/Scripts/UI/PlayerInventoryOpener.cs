@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering;
 using System;
+using UnityEngine.EventSystems;
 
 public class PlayerInventoryOpener : Button
 {
@@ -56,7 +57,7 @@ public class PlayerInventoryOpener : Button
         (targetGraphic as Image).sprite = PlayerInteractionHandler.InventoryDisplayState == InventoryState.Open ? open : closed;
     }
 
-    public void ToggleInventory()
+    public override void OnPointerDown(PointerEventData eventData)
     {
         PlayerInteractionHandler.ToggleInventory();
     }
