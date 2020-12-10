@@ -10,29 +10,8 @@ public class PlayerInventoryOpener : Button
 {
     [SerializeField] Sprite closed, open;
 
-    Camera main;
-    Camera Main
-    {
-        get
-        {
-            if (main == null)
-                main = Camera.main;
-
-            return main;
-        }
-    }
-
-    PlayerInteractionHandler playerInteractionHandler;
-    PlayerInteractionHandler PlayerInteractionHandler
-    {
-        get
-        {
-            if (playerInteractionHandler == null)
-                playerInteractionHandler = FindObjectOfType<PlayerInteractionHandler>();
-
-            return playerInteractionHandler;
-        }
-    }
+    [Zenject.Inject] PlayerInteractionHandler playerInteractionHandler;
+    [Zenject.Inject] CameraController cameraController;
 
     protected override void OnEnable()
     {
@@ -48,26 +27,27 @@ public class PlayerInventoryOpener : Button
 
     private void OnCameraRender(ScriptableRenderContext context, Camera camera)
     {
+        if (!Application.isPlaying)
+            return;
+
         UpdatePosition();
         UpdateSprite();
     }
 
     private void UpdateSprite()
     {
-        (targetGraphic as Image).sprite = PlayerInteractionHandler.InventoryDisplayState == InventoryState.Open ? open : closed;
+        (targetGraphic as Image).sprite = playerInteractionHandler.InventoryDisplayState == InventoryState.Open ? open : closed;
     }
 
     public override void OnPointerDown(PointerEventData eventData)
     {
-        PlayerInteractionHandler.ToggleInventory();
+        playerInteractionHandler.ToggleInventory();
     }
 
     public void UpdatePosition()
     {
-        if (Main == null)
-            return;
 
-        Vector3 worldPoint = Main.ScreenToWorldPoint(new Vector3(Screen.width - Screen.height / 10, Screen.height - Screen.height / 10, -10));
+        Vector3 worldPoint = cameraController.Camera.ScreenToWorldPoint(new Vector3(Screen.width - Screen.height / 10, Screen.height - Screen.height / 10, -10));
         transform.position = new Vector3(worldPoint.x, worldPoint.y);
     }
 }
