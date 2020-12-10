@@ -82,7 +82,9 @@ public class Letterbox : InventoryOwner, INonPersistantSavable
         if (count == 0)
             return closedEmpty;
         else if (count > 1 && overflow != null && overflow.Length > 0)
+        {
             return overflow[Mathf.Min(count - 2, overflow.Length - 1)];
+        }
         else
             return closedFull;
     }

@@ -220,10 +220,16 @@ MonoBehaviour:
   inventoryVisualizerPrefab: {fileID: 8727063801762088802, guid: c396613fa9613cb4d8d82148ef5649a7, type: 3}
   openSource: {fileID: 0}
   inventoryVisualizerUpdates: 0
+  isPlayerInventory: 0
   spriteAnimator: {fileID: 5224793908363139977}
   closedEmpty: {fileID: 11400000, guid: e5726a3afa103f544a1fefb06639b13a, type: 2}
   closedFull: {fileID: 11400000, guid: a38b41a9bc8db50458536371c12813c4, type: 2}
   open: {fileID: 11400000, guid: a6950b60883fa3a44919954ab0bfbcd8, type: 2}
+  overflow:
+  - {fileID: 11400000, guid: da0be7607495e5b4b80c91b94bb4987c, type: 2}
+  - {fileID: 11400000, guid: 1875d3166a9d9394784d356128b4a128, type: 2}
+  - {fileID: 11400000, guid: 9a883749da3a0db439f41f4dc31e93ff, type: 2}
+  - {fileID: 11400000, guid: d81f4b730ffa57b43a944954058b01cb, type: 2}
   openCloseAudio: {fileID: 1265463392}
   storeItemAudio: {fileID: 6648267811130666485}
 --- !u!82 &1265463392
