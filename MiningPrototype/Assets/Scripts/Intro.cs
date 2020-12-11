@@ -8,6 +8,10 @@ public class Intro : MonoBehaviour
     [SerializeField] DialogElementVisualization textPrefab;
     [SerializeField] Canvas textCanvas;
     [SerializeField] RectTransform textSpawnPosition;
+    [SerializeField] CameraController cameraController;
+    [SerializeField] Transform playerBefore;
+    [SerializeField] Transform playerPrefab;
+    [SerializeField] float replacePlayerDelay;
 
     private void Start()
     {
@@ -15,6 +19,8 @@ public class Intro : MonoBehaviour
         {
             StartCoroutine(DisplayTextDelayed(element));
         }
+
+        Invoke("ReplacePlayer", replacePlayerDelay);
     }
 
     IEnumerator DisplayTextDelayed(IntroTextElement element)
@@ -22,6 +28,14 @@ public class Intro : MonoBehaviour
         yield return new WaitForSeconds(element.time);
         DialogElementVisualization text = Instantiate(textPrefab, textSpawnPosition.position, Quaternion.identity, textCanvas.transform);
         text.Init(null,element.text,element.duration);
+    }
+
+    private void ReplacePlayer ()
+    {
+        //Transform player = Instantiate(playerPrefab);
+        //player.transform.position = playerBefore.position;
+        //cameraController.FollowNewTarget(player);
+        //Destroy(playerBefore.gameObject);
     }
 }
 

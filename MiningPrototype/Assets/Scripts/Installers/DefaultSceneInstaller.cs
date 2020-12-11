@@ -15,6 +15,7 @@ public class DefaultSceneInstaller : ScriptableObjectInstaller<DefaultSceneInsta
         Container.Bind(typeof(PlayerStateMachine), typeof(PlayerInteractionHandler), typeof(OverworldEffectHandler)).FromComponentInNewPrefab(playerPrefab).AsSingle().NonLazy();
         Container.Bind(typeof(ProgressionHandler), typeof(SacrificeActions)).FromComponentInNewPrefab(progressionPrefab).AsSingle().NonLazy();
         Container.Bind<ReadableItemHandler>().FromComponentInNewPrefab(readableItemPrefab).AsSingle().NonLazy();
+        Container.Bind<PlayerInventoryOpener>().FromComponentInNewPrefab(playerInventoryOpenerUIPrefab).AsSingle().NonLazy();
         Container.Bind<CameraPanner>().FromComponentInNewPrefab(cameraPannerPrefab).AsSingle().NonLazy();
         Container.Bind<ItemPlacingHandler>().FromComponentInNewPrefab(itemPreviewPrefab).AsSingle().NonLazy();
         Container.Bind<PauseMenu>().FromComponentInNewPrefab(pauseMenuPrefab).AsSingle().NonLazy();
@@ -26,7 +27,7 @@ public class DefaultSceneInstaller : ScriptableObjectInstaller<DefaultSceneInsta
         Container.Bind<InventoryManager>().FromComponentInNewPrefab(inventoryManagerPrefab).AsSingle().NonLazy();
         Container.Bind<SaveHandler>().FromComponentInNewPrefab(saveHandlerPrefab).AsSingle().NonLazy();
         Container.Bind<GameState>().FromComponentInNewPrefab(gameStatePrefab).AsSingle().NonLazy();
-        Container.Bind<PlayerInventoryOpener>().FromComponentInNewPrefab(playerInventoryOpenerUIPrefab).AsSingle().NonLazy();
+        
 
         if (DebugMode.DEBUG_POSSIBLE)
         {

@@ -20,9 +20,9 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
+        if (cameraPanner != null)
+            target = cameraPanner.transform;
 
-
-        target = cameraPanner.transform;
         defaultTarget = target;
         offsetToTarget = generalOffset;
 
