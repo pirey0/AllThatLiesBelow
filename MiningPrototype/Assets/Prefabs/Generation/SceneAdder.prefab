@@ -53,7 +53,7 @@ MonoBehaviour:
       scenePath: Assets/Scenes/OverworldScene.unity
   - XOffsetRange: {x: 0.2, y: 0.5}
     YOffset: 0.82
-    Size: {x: 10, y: 10}
+    Size: {x: 20, y: 20}
     gizmoColor: {r: 1, g: 0, b: 1, a: 1}
     SceneToAdd:
       sceneAsset: {fileID: 102900000, guid: eefebb5b71de47e4e9da29653337e8d9, type: 3}
@@ -156,8 +156,46 @@ MonoBehaviour:
     SceneToAdd:
       sceneAsset: {fileID: 102900000, guid: 00e9f3717c7effb438c0796c2d48c8ed, type: 3}
       scenePath: Assets/Scenes/Underground/Ores/Goldvein1Scene.unity
+  - XOffsetRange: {x: 0.05, y: 0.86}
+    YOffset: 0.575
+    Size: {x: 6, y: 8}
+    gizmoColor: {r: 0.5057874, g: 1, b: 0, a: 1}
+    SceneToAdd:
+      sceneAsset: {fileID: 102900000, guid: b0f448df61752f34787d97fd5ecdef0c, type: 3}
+      scenePath: Assets/Scenes/Underground/JungleCave1.unity
+  - XOffsetRange: {x: 0.23, y: 0.86}
+    YOffset: 0.53
+    Size: {x: 10, y: 20}
+    gizmoColor: {r: 0.5057874, g: 1, b: 0, a: 1}
+    SceneToAdd:
+      sceneAsset: {fileID: 102900000, guid: bcdbca4e6c409ab42979391890b0f58f, type: 3}
+      scenePath: Assets/Scenes/Underground/JungleCave2.unity
+  - XOffsetRange: {x: 0.08, y: 0.56}
+    YOffset: 0.77
+    Size: {x: 20, y: 20}
+    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+    SceneToAdd:
+      sceneAsset: {fileID: 102900000, guid: eefebb5b71de47e4e9da29653337e8d9, type: 3}
+      scenePath: Assets/Scenes/AltarScene.unity
+  - XOffsetRange: {x: 0.08, y: 0.56}
+    YOffset: 0.62
+    Size: {x: 20, y: 20}
+    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+    SceneToAdd:
+      sceneAsset: {fileID: 102900000, guid: eefebb5b71de47e4e9da29653337e8d9, type: 3}
+      scenePath: Assets/Scenes/AltarScene.unity
+  - XOffsetRange: {x: 0.08, y: 0.56}
+    YOffset: 0.7
+    Size: {x: 20, y: 20}
+    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+    SceneToAdd:
+      sceneAsset: {fileID: 102900000, guid: eefebb5b71de47e4e9da29653337e8d9, type: 3}
+      scenePath: Assets/Scenes/AltarScene.unity
   altarScene:
     sceneAsset: {fileID: 102900000, guid: eefebb5b71de47e4e9da29653337e8d9, type: 3}
     scenePath: Assets/Scenes/AltarScene.unity
+  altarFillingScene:
+    sceneAsset: {fileID: 102900000, guid: 21b291899881f394d8f460d85d2882bd, type: 3}
+    scenePath: Assets/Scenes/AltarFillingScene.unity
   width: 200
   height: 300

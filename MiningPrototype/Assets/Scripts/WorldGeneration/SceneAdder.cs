@@ -10,7 +10,7 @@ using Zenject;
 public class SceneAdder : StateListenerBehaviour
 {
     [SerializeField] List<MapAddition> addition;
-    [SerializeField] SceneReference altarScene;
+    [SerializeField] SceneReference altarScene, altarFillingScene;
     [SerializeField] int width, height;
 
     [Zenject.Inject] DiContainer diContainer;
@@ -83,14 +83,24 @@ public class SceneAdder : StateListenerBehaviour
 
     public void LoadAltarAt(Vector2Int value)
     {
-        Debug.Log("Loading altar at " + value);
-        MapAddition altarAddition = new MapAddition();
-        altarAddition.XOffsetRange = new Vector2((float) value.x / RuntimeProceduralMap.Instance.SizeX, (float)value.x / RuntimeProceduralMap.Instance.SizeX);
-        altarAddition.YOffset = (float)value.y / RuntimeProceduralMap.Instance.SizeY;
-        altarAddition.SceneToAdd = altarScene;
-        altarAddition.Size = Vector2.zero;
+        LoadSingleAt(altarScene, value);
+    }
 
-        StartCoroutine(LoadAdditive(new List<MapAddition>() { altarAddition }, transitionState: false));
+    public void LoadAltarFillingAt(Vector2Int value)
+    {
+        LoadSingleAt(altarFillingScene, value);
+    }
+
+    private void LoadSingleAt(SceneReference scene, Vector2Int value)
+    {
+        MapAddition addition = new MapAddition();
+        addition.XOffsetRange = new Vector2((float)value.x / RuntimeProceduralMap.Instance.SizeX, (float)value.x / RuntimeProceduralMap.Instance.SizeX);
+        addition.YOffset = (float)value.y / RuntimeProceduralMap.Instance.SizeY;
+        addition.SceneToAdd = altarScene;
+        addition.Size = Vector2.zero;
+        Debug.Log("Loading " + addition.Name + " at " + value);
+
+        StartCoroutine(LoadAdditive(new List<MapAddition>() { addition }, transitionState: false));
     }
 
 

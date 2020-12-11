@@ -244,14 +244,13 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
             var altar = FindObjectOfType<Altar>();
             if (altar != null)
             {
+                Debug.Log("Deleting old altar");
                 Vector2Int pos = altar.transform.position.ToGridPosition();
+                pos.x -= 10;
+                pos.y -= 3;
 
-                var newPos = map.FindUndiscoveredAreaOfSize(pos.x, pos.y, 20, 20, 100);
-                if (newPos.HasValue)
-                {
-                    Destroy(altar.gameObject);
-                    sceneAdder.LoadAltarAt(newPos.Value);
-                }
+                Destroy(altar);
+                Util.IterateXY(20, (x, y) => map.SetMapAt(pos.x + x, pos.y + y, Tile.Make(TileType.Stone), TileUpdateReason.Generation));
             }
 
             data.dailySacrificeExaused = false;
