@@ -128,6 +128,12 @@ public class MapToolWindow : EditorWindow
         currentSizeY = EditorGUILayout.IntField(currentSizeY);
 
         EditorGUILayout.EndHorizontal();
+
+
+        if(GUILayout.Button("Save Scene As"))
+        {
+            SaveHandler.Editor_SaveAs();
+        }
     }
 
     private void DisplayTileTypeOptions()

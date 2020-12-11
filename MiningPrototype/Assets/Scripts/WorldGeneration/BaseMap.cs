@@ -12,8 +12,6 @@ using UnityEngine.Tilemaps;
 public class BaseMap : StateListenerBehaviour, ISavable
 {
     [Header("BaseMap")]
-    [ReadOnly]
-    [SerializeField] string saveID = Util.GenerateNewSaveGUID();
 
     [SerializeField] int sizeX, sizeY;
     [SerializeField] MapSettings mapSettings;
@@ -387,7 +385,7 @@ public class BaseMap : StateListenerBehaviour, ISavable
 
     public virtual string GetSaveID()
     {
-        return saveID;
+        return "BaseMap";
     }
 
     //Outdated from SO Time

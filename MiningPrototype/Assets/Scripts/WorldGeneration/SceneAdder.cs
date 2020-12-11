@@ -10,15 +10,26 @@ using Zenject;
 public class SceneAdder : StateListenerBehaviour
 {
     [SerializeField] List<MapAddition> addition;
+    [SerializeField] List<TextAsset> additionBytes;
+    
     [SerializeField] SceneReference altarScene, altarFillingScene;
     [SerializeField] int width, height;
 
     [Zenject.Inject] DiContainer diContainer;
-
+    [Zenject.Inject] SaveHandler saveHandler;
 
     bool loaded = false;
     MapAddition current;
 
+
+    [Button]
+    private void Add()
+    {
+        foreach (var s in additionBytes)
+        {
+            saveHandler.LoadAdditive(s, new Vector3(400, 400));
+        }
+    }
 
     protected override void OnStateChanged(GameState.State newState)
     {

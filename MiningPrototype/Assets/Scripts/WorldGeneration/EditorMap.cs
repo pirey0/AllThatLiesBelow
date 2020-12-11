@@ -11,6 +11,12 @@ public class EditorMap : RenderedMap
     [SerializeField] TextAsset saveAsset;
 
     public UnityEngine.TextAsset SaveAsset { get => saveAsset; }
+
+    public override string GetSaveID()
+    {
+        return "EditorMap";
+    }
+
 #if UNITY_EDITOR
 
     public bool IsEditorReady()
