@@ -41,4 +41,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Underground/Ores/Coppervein1Scene.unity
     guid: 340183052dd8e5940aace2f1d6b09b50
+  - enabled: 1
+    path: Assets/Scenes/Underground/JungleCave1.unity
+    guid: b0f448df61752f34787d97fd5ecdef0c
   m_configObjects: {}

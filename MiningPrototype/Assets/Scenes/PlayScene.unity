@@ -498,6 +498,54 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.size
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[16].XOffsetRange.x
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[16].XOffsetRange.y
+      value: 0.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[16].YOffset
+      value: 0.575
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[16].Size.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[16].Size.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[16].gizmoColor.r
+      value: 0.5057874
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[16].gizmoColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[16].gizmoColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[16].SceneToAdd.sceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: b0f448df61752f34787d97fd5ecdef0c, type: 3}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[16].SceneToAdd.scenePath
+      value: Assets/Scenes/Underground/JungleCave1.unity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[16].gizmoColor.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648147, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: m_Name
       value: SceneAdder
