@@ -27,11 +27,12 @@ public class SaveHandler : MonoBehaviour
         BaseSave(GetFullSavePath());
     }
 
-    public void Editor_SaveAs()
+    public static void Editor_SaveAs(string path)
     {
         #if UNITY_EDITOR
 
-        string path = UnityEditor.EditorUtility.SaveFilePanel("Save As...", "", "SaveFile", "data");
+        if (string.IsNullOrEmpty(path))
+            path = UnityEditor.EditorUtility.SaveFilePanel("Save As...", "", "SavedScene", "bytes");
 
         if (!string.IsNullOrEmpty(path))
         {
@@ -42,7 +43,7 @@ public class SaveHandler : MonoBehaviour
         #endif
     }
 
-    private void BaseSave(string path)
+    private static void BaseSave(string path)
     {
         SaveDataCollection collection = new SaveDataCollection();
         collection.Version = SAVEFILE_VERSION;
@@ -84,41 +85,99 @@ public class SaveHandler : MonoBehaviour
             Debug.LogError("No Savefile found.");
             return;
         }
-        BaseLoad(GetFullSavePath());
-        Debug.Log("Loaded Successfully");
-    }
 
-    private void BaseLoad(string path)
-    {
-        var stream = File.Open(path, FileMode.Open);
+        var stream = File.Open(GetFullSavePath(), FileMode.Open);
         BinaryFormatter formatter = new BinaryFormatter();
         SaveDataCollection collection = (SaveDataCollection)formatter.Deserialize(stream);
         stream.Close();
 
+        BaseLoad(collection, Vector3.zero, additiveMode: false);
+        Debug.Log("Loaded Successfully");
+    }
+
+    public void LoadAdditive(TextAsset saveAsset, Vector3 offset)
+    {
+        DurationTracker tracker = new DurationTracker("Map Loading " + saveAsset.name);
+        if (saveAsset != null)
+        {
+            using (var memStream = new MemoryStream())
+            {
+                var collection = LoadToCollection(saveAsset);
+                BaseLoad(collection, offset, additiveMode: true);
+            }
+        }
+        else
+        {
+            Debug.LogError("No asset to load from.");
+        }
+        tracker.Stop();
+    }
+
+    public static BaseMapSaveData LoadMapOnlyFrom(TextAsset saveAsset)
+    {
+        var collection = LoadToCollection(saveAsset);
+
+        if (collection.ContainsKey("EditorMap"))
+        {
+            return (BaseMapSaveData)collection["EditorMap"];
+        }
+        else
+        {
+            Debug.LogError("No EditorMap in save.");
+            return null;
+        }
+    }
+
+    private static SaveDataCollection LoadToCollection(TextAsset saveAsset)
+    {
+        using (var memStream = new MemoryStream())
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            memStream.Write(saveAsset.bytes, 0, saveAsset.bytes.Length);
+            memStream.Seek(0, SeekOrigin.Begin);
+
+            return (SaveDataCollection)formatter.Deserialize(memStream);
+        }
+    }
+
+    private void BaseLoad(SaveDataCollection collection, Vector3 offset, bool additiveMode)
+    {
         if (collection.Version != SAVEFILE_VERSION)
         {
             Debug.LogError("Save File is deprecated: Version: " + SAVEFILE_VERSION + " Savefile Version: " + collection.Version);
             return;
         }
 
-        var objects = Util.FindAllThatImplement<ISavable>().OrderBy((x) => x.GetLoadPriority());
-
-        foreach (var savable in objects)
+        if (additiveMode)
         {
-            if (collection.ContainsKey(savable.GetSaveID()))
+            if (collection.ContainsKey("EditorMap"))
             {
-                var data = collection[savable.GetSaveID()];
-                savable.Load(data);
+                var data = collection["EditorMap"];
+                RuntimeProceduralMap.Instance.AdditiveLoadAt((BaseMapSaveData)data, Mathf.FloorToInt(offset.x), Mathf.FloorToInt(offset.y));
             }
-            else
+        }
+        else
+        {
+            var objects = Util.FindAllThatImplement<ISavable>().OrderBy((x) => x.GetLoadPriority());
+
+            foreach (var savable in objects)
             {
-                Debug.LogError("No save data found for " + savable.GetSaveID());
+                if (collection.ContainsKey(savable.GetSaveID()))
+                {
+                    var data = collection[savable.GetSaveID()];
+                    savable.Load(data);
+                }
+                else
+                {
+                    Debug.LogError("No save data found for " + savable.GetSaveID());
+                }
             }
         }
 
         //Load non persistant
         var npsm = new NonPersistantSaveManager(); //Non persistant stuff
         npsm.SetSpawnables(spawnablePrefabs, prefabFactory);
+        npsm.SetOffset(offset);
         npsm.Load(collection[npsm.GetSaveID()]);
     }
 }

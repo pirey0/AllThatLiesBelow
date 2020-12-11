@@ -28,10 +28,4 @@ public class SaveTester : MonoBehaviour
         //Reload self
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
-
-    [Button(null, EButtonEnableMode.Playmode)]
-    public void SaveAs()
-    {
-        saveHandler.Editor_SaveAs();
-    }
 }

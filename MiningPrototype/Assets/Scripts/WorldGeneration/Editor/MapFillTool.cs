@@ -21,7 +21,6 @@ public class MapFillTool : EditorTool
             text = "Map Fill Tool",
             tooltip = "Used to fill areas of the Map"
         };
-
     }
 
     public override GUIContent toolbarIcon

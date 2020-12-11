@@ -80,7 +80,7 @@ public class PlayerStateMachine : BasePlayerStateMachine
 
     protected override float GetSpeedMultiplyer()
     {
-        if (progressionHandler == null)
+        if (gameState.CurrentState != GameState.State.Playing)
             return 0;
 
         return progressionHandler.SpeedMultiplyer;
@@ -92,7 +92,7 @@ public class PlayerStateMachine : BasePlayerStateMachine
 
         UpdateWorldMirroring();
 
-        if (progressionHandler.IsMidas)
+        if (gameState.CurrentState == GameState.State.Playing && progressionHandler.IsMidas)
         {
             MidasUpdate();
         }

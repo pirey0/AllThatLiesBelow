@@ -14,6 +14,9 @@ public class RuntimeProceduralMap : RenderedMap
     private static RuntimeProceduralMap instance;
 
     [Header("RuntimeProceduralMap")]
+    [ReadOnly]
+    [SerializeField] string saveID = Util.GenerateNewSaveGUID();
+
     [SerializeField] Transform entitiesParent;
 
     [Zenject.Inject] ProgressionHandler progressionHandler;
@@ -497,5 +500,10 @@ public class RuntimeProceduralMap : RenderedMap
         int nbs = GetAliveNeightboursCountFor(x, y);
 
         this[x, y] = IsBlockAt(x, y) ? (nbs > GenerationSettings.DeathLimit ? Tile.Make(TileType.Stone) : Tile.Air) : (nbs > GenerationSettings.BirthLimit ? Tile.Make(TileType.Stone) : Tile.Air);
+    }
+
+    public override string GetSaveID()
+    {
+        return saveID;
     }
 }

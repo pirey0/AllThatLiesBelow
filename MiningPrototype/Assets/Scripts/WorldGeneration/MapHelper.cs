@@ -260,6 +260,7 @@ public static class MapHelper
         return count;
     }
 
+    //Belongs to old Save System
     public static BaseMapSaveData LoadMapSaveDataFromTextAsset(TextAsset asset)
     {
         using (var memStream = new MemoryStream())

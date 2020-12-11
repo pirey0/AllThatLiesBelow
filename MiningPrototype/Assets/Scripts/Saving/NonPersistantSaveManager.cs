@@ -8,11 +8,17 @@ public class NonPersistantSaveManager : ISavable
     [SerializeField] GameObject[] spawnablePrefabs;
 
     PrefabFactory prefabFactory;
+    Vector3 offset;
 
     public void SetSpawnables(GameObject[] spawnables, PrefabFactory factory)
     {
         spawnablePrefabs = spawnables;
         this.prefabFactory = factory;
+    }
+
+    public void SetOffset(Vector3 v)
+    {
+        offset = v;
     }
 
     public string GetSaveID()
@@ -39,7 +45,7 @@ public class NonPersistantSaveManager : ISavable
                 if((int)data.SpawnableIDType < spawnablePrefabs.Length)
                 {
                     var t = prefabFactory.Create(spawnablePrefabs[(int)data.SpawnableIDType]);
-                    t.position = data.Position.ToVector3();
+                    t.position = data.Position.ToVector3() + offset;
                     t.eulerAngles = data.Rotation.ToVector3();
                     var savComp = t.GetComponent<INonPersistantSavable>();
                     savComp.Load(data);

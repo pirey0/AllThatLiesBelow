@@ -86,7 +86,7 @@ public class MapToolWindow : EditorWindow
         {
             EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button("Save"))
-                currentEditorMap.Save();
+                currentEditorMap.SaveRecent();
 
             if (GUILayout.Button("Save As"))
                 currentEditorMap.SaveAs();
@@ -102,16 +102,29 @@ public class MapToolWindow : EditorWindow
 
         if (GUILayout.Button("Load Previous"))
         {
-            currentEditorMap.Load();
+            currentEditorMap.LoadRecent();
         }
 
         if (GUILayout.Button("Load From"))
         {
-            string path = EditorUtility.OpenFilePanelWithFilters("Pick Map", "Assets/Others/Maps/", new string[] { "Map", "bytes" });
+            string path = EditorUtility.OpenFilePanelWithFilters("Pick Map", "Assets/Others/Maps/", new string[] { "SavedScene", "bytes" });
             var asset = AssetDatabase.LoadAssetAtPath<TextAsset>(Util.MakePathRelative(path));
-            currentEditorMap.Load(asset);
+            currentEditorMap.LoadFrom(asset);
 
         }
+
+        if (GUILayout.Button("Load From OLD"))
+        {
+            string path = EditorUtility.OpenFilePanelWithFilters("Pick Map", "Assets/Others/Maps/", new string[] { "Map", "bytes" });
+            var asset = AssetDatabase.LoadAssetAtPath<TextAsset>(Util.MakePathRelative(path));
+            currentEditorMap.LoadFromOldMapFile(asset);
+        }
+
+        if (GUILayout.Button("Save As OLD"))
+        {
+            currentEditorMap.SaveAsOld();
+        }
+
 
         EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Initialize To Size"))
@@ -128,6 +141,7 @@ public class MapToolWindow : EditorWindow
         currentSizeY = EditorGUILayout.IntField(currentSizeY);
 
         EditorGUILayout.EndHorizontal();
+
     }
 
     private void DisplayTileTypeOptions()
