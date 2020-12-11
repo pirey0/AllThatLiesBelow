@@ -14,21 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 16
   ItemToDrop: 0
-  damageMultiplyer: 10
+  damageMultiplyer: 1
   damagedByExplosion: 1
   AirLike: 0
   Targetable: 1
   TargetPriority: 0
   StabilityAffected: 0
-  StabilityEffectMultiplyer: 1
+  StabilityEffectMultiplyer: 8
   NotifiesInsteadOfCrumbling: 0
-  CountsAsNeighbour: 0
+  CountsAsNeighbour: 1
   MinableInOverworld: 1
   DamageIsInBackground: 1
   DrawsToShifted: 0
   UseTilesFromOtherInfo: 0
   Tiles:
-  - {fileID: 11400000, guid: 7ba1fc88d38d06043ad575eb9a2a38e7, type: 2}
+  - {fileID: 0}
   TileSourceInfo: {fileID: 0}
   Visibility2Tile: {fileID: 0}
   Overlay: {fileID: 0}

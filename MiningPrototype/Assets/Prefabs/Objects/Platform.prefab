@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5000783938460949120}
   - component: {fileID: 5000783938460949121}
-  - component: {fileID: 5439748382685539989}
   - component: {fileID: 1372404357346660466}
   - component: {fileID: 5000783938460949123}
+  - component: {fileID: 2369803932061110844}
   m_Layer: 0
   m_Name: Platform
   m_TagString: Untagged
@@ -86,32 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!61 &5439748382685539989
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5000783938460949122}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.125}
-  m_SpriteTilingProperty:
-    border: {x: 1.625, y: 1.625, z: 1.375, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 6, y: 2}
-    newSize: {x: 3, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 1
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2, y: 3}
-  m_EdgeRadius: 0
 --- !u!114 &1372404357346660466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,7 +117,31 @@ MonoBehaviour:
   tilesToOccupy: []
   carvingOffset: {x: 0, y: 0, z: 0}
   renderer: {fileID: 5000783938460949121}
-  maxWidth: 0
+  minWidth: 3
+  maxWidth: 7
+  edgeCollider: {fileID: 2369803932061110844}
+--- !u!68 &2369803932061110844
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5000783938460949122}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.49999976, y: 0}
+  - {x: 2.5000002, y: 0}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &6308069366600123329
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class PlatformBase : TilemapCarvingEntity
 {
     [SerializeField] protected SpriteRenderer renderer;
-    [SerializeField] protected int maxWidth;
+    [SerializeField] protected int minWidth, maxWidth;
 
     public virtual void AdaptPlacementTo((Direction, int) placementAtr)
     {
@@ -15,7 +15,7 @@ public abstract class PlatformBase : TilemapCarvingEntity
         for (int i = 0; i < tilesToOccupy.Length; i++)
         {
             Vector2Int offset = i * placementAtr.Item1.AsV2Int();
-            TileType type = (i == 0 || i == tilesToOccupy.Length - 1) ? TileType.CollapsableEntityNotNeighbour : TileType.FloatingEntityNotNeighbour;
+            TileType type = (i == 0 || i == tilesToOccupy.Length - 1) ? TileType.CollapsableEntityNotNeighbour : TileType.Platform;
 
             tilesToOccupy[i] = new TileOffsetTypePair(offset.x, offset.y, type);
         }
@@ -26,10 +26,11 @@ public abstract class PlatformBase : TilemapCarvingEntity
         int wL = MapHelper.AirTileCount(RuntimeProceduralMap.Instance, transform.position.ToGridPosition(), Direction.Left);
         int wR = MapHelper.AirTileCount(RuntimeProceduralMap.Instance, transform.position.ToGridPosition(), Direction.Right);
 
-        if (wL > wR)
-            return (Direction.Left, wL);
-        else
-            return (Direction.Right, wR);
+        Direction dir = wL > wR ? Direction.Left : Direction.Right;
+        int size = Mathf.Max(wL, wR);
+
+
+        return (dir, size);
     }
 
 }

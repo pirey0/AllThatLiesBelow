@@ -101,4 +101,5 @@ MonoBehaviour:
   tilesToOccupy: []
   carvingOffset: {x: 0, y: 0, z: 0}
   renderer: {fileID: 4863552724862687383}
-  maxWidth: 0
+  minWidth: 3
+  maxWidth: 7

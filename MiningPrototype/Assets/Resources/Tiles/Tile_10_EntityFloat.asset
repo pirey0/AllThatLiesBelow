@@ -20,6 +20,7 @@ MonoBehaviour:
   Targetable: 1
   TargetPriority: 0
   StabilityAffected: 0
+  StabilityEffectMultiplyer: 1
   NotifiesInsteadOfCrumbling: 1
   CountsAsNeighbour: 1
   MinableInOverworld: 1

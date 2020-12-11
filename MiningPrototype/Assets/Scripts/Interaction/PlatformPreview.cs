@@ -22,9 +22,11 @@ public class PlatformPreview : PlatformBase, IItemPreview
         bool tL = RuntimeProceduralMap.Instance.IsNeighbourAt(gridPos.x+1, gridPos.y);
         bool tR = RuntimeProceduralMap.Instance.IsNeighbourAt(gridPos.x-1, gridPos.y);
 
-        if (tS && (tL || tR))
+        var p = CalculatePlacement();
+
+        if (tS && (tL || tR) && p.Item2>=minWidth && p.Item2<=maxWidth)
         {
-            AdaptPlacementTo(CalculatePlacement());
+            AdaptPlacementTo(p);
             renderer.color = Color.green;
             couldPlace = true;
         }

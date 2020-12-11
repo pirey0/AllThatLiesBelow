@@ -270,7 +270,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
         if (gridDigTarget == null)
         {
-            if (nonGridDigTarget == null)
+            if (nonGridDigTarget == null ||nonGridDigTarget.Equals(null))
                 mouseHighlight.position = new Vector3(-1000, -1000);
             else
                 mouseHighlight.position = new Vector3(nonGridDigTarget.GetPosition().x, nonGridDigTarget.GetPosition().y, 0);

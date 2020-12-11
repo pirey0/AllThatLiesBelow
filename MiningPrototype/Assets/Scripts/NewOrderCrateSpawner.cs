@@ -55,12 +55,15 @@ public class NewOrderCrateSpawner : StateListenerBehaviour
 
                 foreach (var s in split)
                 {
-                    order.Insert(i+1,s);
+                    order.Insert(i + 1, s);
                 }
             }
             else
             {
-                Crate newCrate = prefabFactory.Create(cratePrefab, spawnLoc.transform.position + new Vector3(0, i*2), Quaternion.identity).GetComponent<Crate>();
+                Debug.Log(prefabFactory);
+                Vector3 position = spawnLoc.transform.position + new Vector3(0, i * 2);
+
+                Crate newCrate = prefabFactory.Create(cratePrefab, position, Quaternion.identity).GetComponent<Crate>();
                 newCrate.SetCrateType(crateType);
                 newCrate.Pack(item);
             }

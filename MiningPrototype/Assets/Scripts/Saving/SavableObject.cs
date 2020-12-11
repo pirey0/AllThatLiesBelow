@@ -42,7 +42,8 @@ public enum SpawnableIDType
     Decoration,
     Platform,
     Mushroom,
-    Vine
+    Vine,
+    LocationIndicator
 }
 
 [System.Serializable]
