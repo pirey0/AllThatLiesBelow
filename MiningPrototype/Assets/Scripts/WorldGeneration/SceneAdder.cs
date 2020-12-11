@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -107,6 +108,7 @@ public class SceneAdder : StateListenerBehaviour
 
             Gizmos.DrawWireCube(new Vector3(x, y, 0), new Vector3(sizeX, 0.5f));
             Gizmos.DrawWireCube(new Vector3(x - a.Size.x * 0.5f, y, 0), new Vector3(a.Size.x, sizeY));
+            Handles.Label(new Vector3(x - a.Size.x,y),a.Name);
         }
 
         Gizmos.color = Color.white;
@@ -121,4 +123,42 @@ public struct MapAddition
     public Vector2 Size;
     public Color gizmoColor;
     public SceneReference SceneToAdd;
+
+    string name;
+    public string Name
+    {
+        get
+        {
+            if (name == "")
+                name = FilterNameFromPath();
+
+            return name;
+        }
+
+    }
+    private string FilterNameFromPath()
+    {
+        string path = SceneToAdd.ScenePath;
+        List<char> chars = new List<char>();
+
+        bool read = false;
+        for (int i = path.Length -1; i >= 0; i--)
+        {
+            Char c = path[i];
+            if (c == '.')
+                read = true;
+            else if (c == '/')
+                break;
+            else if (read)
+            {
+                chars.Add(c);
+                if (Char.IsUpper(c))
+                    chars.Add(' ');
+            }
+
+        }
+        char[] array = chars.ToArray();
+        Array.Reverse(array);
+        return new string(array);
+    }
 }
