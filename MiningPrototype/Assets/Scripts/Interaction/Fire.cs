@@ -76,7 +76,11 @@ public class Fire : MonoBehaviour, IDropReceiver
 
     public bool WouldTakeDrop(ItemAmountPair pair)
     {
-        return true;
+        bool takes = false;
+        var info = ItemsData.GetItemInfo(pair.type);
+        if (info != null)
+            takes = info.IsBurnable;
+        return takes;
     }
 
     public void BeginHoverWith(ItemAmountPair pair)

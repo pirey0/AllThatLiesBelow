@@ -23,6 +23,7 @@ MonoBehaviour:
   PickupPreviewPrefab: {fileID: 611046128466533726, guid: 212c360369fb25047a983fc4f1c53f7f, type: 3}
   Prefab: {fileID: 3192028408770254701, guid: 417a7ed6d47789a4ca37dcd00b8acdf8, type: 3}
   AmountIsUniqueID: 0
+  IsBurnable: 1
   AltarWords:
   - World
   - Everything

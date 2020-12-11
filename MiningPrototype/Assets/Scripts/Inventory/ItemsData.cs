@@ -24,7 +24,8 @@ public enum ItemType
     Torch,
     Platform,
     Lost_Soul,
-    FillingStone
+    FillingStone,
+    Log
 }
 
 

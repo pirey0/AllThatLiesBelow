@@ -23,6 +23,7 @@ MonoBehaviour:
   PickupPreviewPrefab: {fileID: 1854387351486894348, guid: dfc72d35b22213644a0e94a8c7cd6090, type: 3}
   Prefab: {fileID: 5173125646740089078, guid: c14593fa1334ee9488f1c182b98cbe2a, type: 3}
   AmountIsUniqueID: 0
+  IsBurnable: 1
   AltarWords:
   - Light
   - Fire

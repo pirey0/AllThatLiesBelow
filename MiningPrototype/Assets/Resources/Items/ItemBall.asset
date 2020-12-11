@@ -23,6 +23,7 @@ MonoBehaviour:
   PickupPreviewPrefab: {fileID: 7034269985221345376, guid: dd27c9a122d9d06478e71d887d6a17e6, type: 3}
   Prefab: {fileID: 5261585125100338133, guid: a3c0865da354b2b439e8f8c59709a24c, type: 3}
   AmountIsUniqueID: 0
+  IsBurnable: 1
   AltarWords:
   - Fun
   - Happyness
