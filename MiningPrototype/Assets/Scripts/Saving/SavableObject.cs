@@ -40,7 +40,8 @@ public enum SpawnableIDType
     Hourglass,
     Echo,
     Decoration,
-    Mushroom
+    Mushroom,
+    Vine
 }
 
 

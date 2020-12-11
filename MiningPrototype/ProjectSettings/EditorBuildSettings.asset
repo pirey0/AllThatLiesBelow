@@ -44,4 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Underground/JungleCave1.unity
     guid: b0f448df61752f34787d97fd5ecdef0c
+  - enabled: 1
+    path: Assets/Scenes/Underground/JungleCave2.unity
+    guid: bcdbca4e6c409ab42979391890b0f58f
   m_configObjects: {}
