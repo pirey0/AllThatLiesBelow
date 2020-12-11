@@ -42,6 +42,8 @@ public class SceneAdder : StateListenerBehaviour
             if (current.LoadFileInstadOfScene)
             {
                 saveHandler.LoadAdditive(current.SavedSceneFile, current.CollapseOffset().AsV3());
+                Debug.Log("Loaded Scene " + current.SavedSceneFile.name);
+                loaded = true;
             }
             else
             {
@@ -54,7 +56,7 @@ public class SceneAdder : StateListenerBehaviour
 
             i++;
         }
-
+        Debug.Log("Scene Adder finished.");
         SceneManager.sceneLoaded -= OnSceneLoaded;
         Time.timeScale = 1;
         if (transitionState)
