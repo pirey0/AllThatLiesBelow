@@ -10,9 +10,7 @@ using Zenject;
 public class SceneAdder : StateListenerBehaviour
 {
     [SerializeField] List<MapAddition> addition;
-    [SerializeField] List<TextAsset> additionBytes;
-    
-    [SerializeField] SceneReference altarScene, altarFillingScene;
+
     [SerializeField] int width, height;
 
     [Zenject.Inject] DiContainer diContainer;
@@ -21,15 +19,6 @@ public class SceneAdder : StateListenerBehaviour
     bool loaded = false;
     MapAddition current;
 
-
-    [Button]
-    private void Add()
-    {
-        foreach (var s in additionBytes)
-        {
-            saveHandler.LoadAdditive(s, new Vector3(400, 400));
-        }
-    }
 
     protected override void OnStateChanged(GameState.State newState)
     {
@@ -50,8 +39,15 @@ public class SceneAdder : StateListenerBehaviour
         {
             current = maps[i];
 
-            SceneManager.LoadScene(current.SceneToAdd, LoadSceneMode.Additive);
-            loaded = false;
+            if (current.LoadFileInstadOfScene)
+            {
+                saveHandler.LoadAdditive(current.SavedSceneFile, current.CollapseOffset().AsV3());
+            }
+            else
+            {
+                SceneManager.LoadScene(current.SceneToAdd, LoadSceneMode.Additive);
+                loaded = false;
+            }
 
             while (!loaded)
                 yield return null;
@@ -70,10 +66,7 @@ public class SceneAdder : StateListenerBehaviour
         if (loadMode != LoadSceneMode.Additive)
             return;
 
-        int x = Mathf.FloorToInt(RuntimeProceduralMap.Instance.SizeX * Util.RandomInV2(current.XOffsetRange));
-        int y = Mathf.FloorToInt(RuntimeProceduralMap.Instance.SizeY * current.YOffset);
-
-        Vector2Int offset = new Vector2Int(x, y);
+        Vector2Int offset = current.CollapseOffset();
         Debug.Log("Loaded: " + scene.name + " " + scene.rootCount + " at " + offset);
 
         foreach (var obj in scene.GetRootGameObjects())
@@ -92,22 +85,13 @@ public class SceneAdder : StateListenerBehaviour
         loaded = true;
     }
 
-    public void LoadAltarAt(Vector2Int value)
-    {
-        LoadSingleAt(altarScene, value);
-    }
-
-    public void LoadAltarFillingAt(Vector2Int value)
-    {
-        LoadSingleAt(altarFillingScene, value);
-    }
 
     private void LoadSingleAt(SceneReference scene, Vector2Int value)
     {
         MapAddition addition = new MapAddition();
         addition.XOffsetRange = new Vector2((float)value.x / RuntimeProceduralMap.Instance.SizeX, (float)value.x / RuntimeProceduralMap.Instance.SizeX);
         addition.YOffset = (float)value.y / RuntimeProceduralMap.Instance.SizeY;
-        addition.SceneToAdd = altarScene;
+        addition.SceneToAdd = scene;
         addition.Size = Vector2.zero;
         Debug.Log("Loading " + addition.Name + " at " + value);
 
@@ -119,9 +103,9 @@ public class SceneAdder : StateListenerBehaviour
     {
         foreach (var a in addition)
         {
-            float xOffsetDif = (a.XOffsetRange.y - a.XOffsetRange.x) * width; 
-            float x = xOffsetDif * 0.5f + a.XOffsetRange.x* width + a.Size.x * 0.5f;
-            float y = a.YOffset*height + a.Size.y * 0.5f;
+            float xOffsetDif = (a.XOffsetRange.y - a.XOffsetRange.x) * width;
+            float x = xOffsetDif * 0.5f + a.XOffsetRange.x * width + a.Size.x * 0.5f;
+            float y = a.YOffset * height + a.Size.y * 0.5f;
             float sizeX = xOffsetDif + a.Size.x;
             float sizeY = a.Size.y;
 
@@ -129,7 +113,7 @@ public class SceneAdder : StateListenerBehaviour
 
             Gizmos.DrawWireCube(new Vector3(x, y, 0), new Vector3(sizeX, 0.5f));
             Gizmos.DrawWireCube(new Vector3(x - a.Size.x * 0.5f, y, 0), new Vector3(a.Size.x, sizeY));
-            Handles.Label(new Vector3(x - a.Size.x,y),a.Name);
+            Handles.Label(new Vector3(x - a.Size.x, y), a.Name);
         }
 
         Gizmos.color = Color.white;
@@ -143,6 +127,8 @@ public struct MapAddition
     public float YOffset;
     public Vector2 Size;
     public Color gizmoColor;
+    public bool LoadFileInstadOfScene;
+    public TextAsset SavedSceneFile;
     public SceneReference SceneToAdd;
     public string Name
     {
@@ -154,7 +140,7 @@ public struct MapAddition
         List<char> chars = new List<char>();
 
         bool read = false;
-        for (int i = path.Length -1; i >= 0; i--)
+        for (int i = path.Length - 1; i >= 0; i--)
         {
             Char c = path[i];
             if (c == '.')
@@ -172,5 +158,12 @@ public struct MapAddition
         char[] array = chars.ToArray();
         Array.Reverse(array);
         return new string(array);
+    }
+
+    public Vector2Int CollapseOffset()
+    {
+        int x = Mathf.FloorToInt(RuntimeProceduralMap.Instance.SizeX * Util.RandomInV2(XOffsetRange));
+        int y = Mathf.FloorToInt(RuntimeProceduralMap.Instance.SizeY * YOffset);
+        return new Vector2Int(x, y);
     }
 }
