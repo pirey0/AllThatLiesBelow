@@ -13,7 +13,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 {
     [SerializeField] public Image icon;
     [SerializeField] public TMP_Text amountDisplay;
-    [SerializeField] GameObject canDropOverlay;
+    [SerializeField] GameObject canDropOverlay, canNotDropOverlay;
     [SerializeField] AnimationCurve scaleOnOpenAndCloseCurve;
 
 
@@ -151,6 +151,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         EnableVisuals();
         rectTransform.anchoredPosition = defaultAnchorPosition;
         canDropOverlay.SetActive(false);
+        canNotDropOverlay.SetActive(false);
         rectTransform.SetParent(parent, worldPositionStays: false);
         targetGraphic.raycastTarget = true;
     }
@@ -194,14 +195,29 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
         if (distance > 2)
         {
-            if (VisualsEnabled)
+            if (itemPlacingHandler.IsAboveReceiver())
             {
-                itemPlacingHandler.Show(new ItemAmountPair(type, amount), origin);
-                if (info.CanBePlaced)
-                    DisableVisuals();
+                EnableVisuals();
+                itemPlacingHandler.Hide();
+                bool canDrop = itemPlacingHandler.WouldBeReceived();
+                canDropOverlay.SetActive(canDrop);
+                canNotDropOverlay.SetActive(!canDrop);
             }
+            else
+            {
+                if (VisualsEnabled)
+                {
+                    itemPlacingHandler.Show(new ItemAmountPair(type, amount), origin);
+                    if (info.CanBePlaced)
+                        DisableVisuals();
+
+                    canDropOverlay.SetActive(false);
+                    canNotDropOverlay.SetActive(false);
+                }
+            }
+
             itemPlacingHandler.UpdatePosition(rectTransform.position);
-            canDropOverlay.SetActive(itemPlacingHandler.IsAboveReceiver());
+            
         }
         else
         {
@@ -212,6 +228,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
             }
 
             canDropOverlay.SetActive(false);
+            canNotDropOverlay.SetActive(false);
         }
     }
 
@@ -264,7 +281,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
     public bool WouldTakeDrop(ItemAmountPair pair)
     {
-        return true;
+        return origin.allowStoreing;
     }
 
     public void BeginHoverWith(ItemAmountPair pair)

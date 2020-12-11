@@ -141,8 +141,13 @@ public class ItemPlacingHandler : MonoBehaviour
 
     }
 
-    public bool IsAboveReceiver()
+    public bool WouldBeReceived()
     {
         return currentReceiver != null && currentReceiver.WouldTakeDrop(currentHeld);
+    }
+
+    public bool IsAboveReceiver()
+    {
+        return currentReceiver != null;
     }
 }

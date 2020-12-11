@@ -232,7 +232,7 @@ public class InventoryVisualizer : ScalingUIElementBase, IDropReceiver
 
     public bool WouldTakeDrop(ItemAmountPair pair)
     {
-        return true;
+        return inventory.allowStoreing;
     }
 
     public void BeginHoverWith(ItemAmountPair pair)

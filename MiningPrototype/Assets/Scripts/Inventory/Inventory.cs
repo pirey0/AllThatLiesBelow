@@ -8,6 +8,7 @@ using UnityEngine;
 [System.Serializable]
 public class Inventory
 {
+    [SerializeField] public bool allowStoreing = true;
     [SerializeField] List<ItemAmountPair> content = new List<ItemAmountPair>();
     public int Count
     {
