@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,7 +17,6 @@ public class SceneAdder : StateListenerBehaviour
     [Zenject.Inject] DiContainer diContainer;
     [Zenject.Inject] SaveHandler saveHandler;
 
-    bool loaded = false;
     MapAddition current;
 
 
@@ -32,73 +32,25 @@ public class SceneAdder : StateListenerBehaviour
     private IEnumerator LoadAdditive(List<MapAddition> maps, bool transitionState)
     {
         int i = 0;
-        SceneManager.sceneLoaded += OnSceneLoaded;
         Time.timeScale = 0;
 
         while (i < maps.Count)
         {
             current = maps[i];
 
-            if (current.LoadFileInstadOfScene)
-            {
-                saveHandler.LoadAdditive(current.SavedSceneFile, current.CollapseOffset().AsV3());
-                Debug.Log("Loaded Scene " + current.SavedSceneFile.name);
-                loaded = true;
-            }
-            else
-            {
-                SceneManager.LoadScene(current.SceneToAdd, LoadSceneMode.Additive);
-                loaded = false;
-            }
+            saveHandler.LoadAdditive(current.SavedSceneFile, current.CollapseOffset().AsV3());
+            Debug.Log("Loaded Scene " + current.SavedSceneFile.name);
 
-            while (!loaded)
-                yield return null;
+            yield return null;
 
             i++;
         }
         Debug.Log("Scene Adder finished.");
-        SceneManager.sceneLoaded -= OnSceneLoaded;
         Time.timeScale = 1;
         if (transitionState)
             gameState.ChangeStateTo(GameState.State.PostLoadScenes);
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
-    {
-        if (loadMode != LoadSceneMode.Additive)
-            return;
-
-        Vector2Int offset = current.CollapseOffset();
-        Debug.Log("Loaded: " + scene.name + " " + scene.rootCount + " at " + offset);
-
-        foreach (var obj in scene.GetRootGameObjects())
-        {
-            if (obj.TryGetComponent(out EditorMap map))
-            {
-                RuntimeProceduralMap.Instance.LoadFromMap(map.SaveAsset, offset.x, offset.y);
-                DestroyImmediate(obj);
-            }
-            else
-            {
-                obj.transform.position += offset.AsV3();
-                diContainer.InjectGameObject(obj);
-            }
-        }
-        loaded = true;
-    }
-
-
-    private void LoadSingleAt(SceneReference scene, Vector2Int value)
-    {
-        MapAddition addition = new MapAddition();
-        addition.XOffsetRange = new Vector2((float)value.x / RuntimeProceduralMap.Instance.SizeX, (float)value.x / RuntimeProceduralMap.Instance.SizeX);
-        addition.YOffset = (float)value.y / RuntimeProceduralMap.Instance.SizeY;
-        addition.SceneToAdd = scene;
-        addition.Size = Vector2.zero;
-        Debug.Log("Loading " + addition.Name + " at " + value);
-
-        StartCoroutine(LoadAdditive(new List<MapAddition>() { addition }, transitionState: false));
-    }
 
 
     void OnDrawGizmosSelected()
@@ -129,37 +81,10 @@ public struct MapAddition
     public float YOffset;
     public Vector2 Size;
     public Color gizmoColor;
-    public bool LoadFileInstadOfScene;
     public TextAsset SavedSceneFile;
-    public SceneReference SceneToAdd;
     public string Name
     {
-        get => FilterNameFromPath();
-    }
-    private string FilterNameFromPath()
-    {
-        string path = SceneToAdd.ScenePath;
-        List<char> chars = new List<char>();
-
-        bool read = false;
-        for (int i = path.Length - 1; i >= 0; i--)
-        {
-            Char c = path[i];
-            if (c == '.')
-                read = true;
-            else if (c == '/')
-                break;
-            else if (read)
-            {
-                chars.Add(c);
-                if (Char.IsUpper(c))
-                    chars.Add(' ');
-            }
-
-        }
-        char[] array = chars.ToArray();
-        Array.Reverse(array);
-        return new string(array);
+        get => SavedSceneFile.name;
     }
 
     public Vector2Int CollapseOffset()

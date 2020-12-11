@@ -14,37 +14,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/OverworldScene.unity
     guid: ff72c84b8404c72448a5f4f2347572d0
-  - enabled: 1
-    path: Assets/Scenes/AltarScene.unity
-    guid: eefebb5b71de47e4e9da29653337e8d9
-  - enabled: 1
-    path: Assets/Scenes/Underground/ClockScene.unity
-    guid: 772c6d38dd969d24bb2ad158970d99e5
-  - enabled: 1
-    path: Assets/Scenes/Underground/Ores/Goldvein1Scene.unity
-    guid: 00e9f3717c7effb438c0796c2d48c8ed
-  - enabled: 1
-    path: Assets/Scenes/Underground/Ores/Goldvein2Scene.unity
-    guid: 41e6991a7f0177041ace2aa78404a662
-  - enabled: 1
-    path: Assets/Scenes/Underground/DeliveryFactoryScene.unity
-    guid: 426e7d4a39ab8fc4486ac83b2f817c8f
-  - enabled: 1
-    path: Assets/Scenes/Underground/EchoChamber1Scene.unity
-    guid: b20be539635cb864eac354c3ad86fd88
-  - enabled: 1
-    path: Assets/Scenes/Underground/BrothersScene.unity
-    guid: 9e301d9533d39fd4b8dc363e647141c7
-  - enabled: 1
-    path: Assets/Scenes/Underground/SteleScene.unity
-    guid: 93bc12fb56d931146a0db9f8b839ad52
-  - enabled: 1
-    path: Assets/Scenes/Underground/Ores/Coppervein1Scene.unity
-    guid: 340183052dd8e5940aace2f1d6b09b50
-  - enabled: 1
-    path: Assets/Scenes/Underground/JungleCave1.unity
-    guid: b0f448df61752f34787d97fd5ecdef0c
-  - enabled: 1
-    path: Assets/Scenes/Underground/JungleCave2.unity
-    guid: bcdbca4e6c409ab42979391890b0f58f
   m_configObjects: {}
