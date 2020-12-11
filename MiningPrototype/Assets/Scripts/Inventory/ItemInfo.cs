@@ -23,6 +23,9 @@ public class ItemInfo : ScriptableObject
     [Header("ReadableItem")]
     public bool AmountIsUniqueID;
 
+    [Header("nurnable")]
+    public bool IsBurnable;
+
     [Header("Altar Words used")]
     public string[] AltarWords;
 }

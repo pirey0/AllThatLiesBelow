@@ -23,6 +23,7 @@ MonoBehaviour:
   PickupPreviewPrefab: {fileID: 1115335740200871788, guid: 32445d5137f8cc747a86084b8ae1b191, type: 3}
   Prefab: {fileID: 8232163616218621378, guid: d0a87999e60a38c4e820a504275eea21, type: 3}
   AmountIsUniqueID: 0
+  IsBurnable: 1
   AltarWords:
   - Support
   - Stable
