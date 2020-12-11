@@ -274,10 +274,8 @@ public class RenderedMap : BaseMap
             Vector2Int offset = direction.AsV2Int();
             var info = GetTileInfo(this[x + offset.x, y + offset.y].Type);
 
-            if (info.AffectsStability)
-                tile.SetStability(direction, Mathf.Min(25, this[x + offset.x, y + offset.y].Stability / 4));
-            else
-                tile.SetStability(direction, 0);
+            int effect = Mathf.FloorToInt(this[x + offset.x, y + offset.y].Stability * info.StabilityEffectMultiplyer * 0.25f);
+            tile.SetStability(direction, Mathf.Min(25, effect));
         }
 
         this[x, y] = tile;

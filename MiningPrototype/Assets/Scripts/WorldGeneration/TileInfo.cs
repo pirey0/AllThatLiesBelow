@@ -16,7 +16,7 @@ public class TileInfo : ScriptableObject
     public bool TargetPriority = false;
 
     public bool StabilityAffected = true;
-    public bool AffectsStability = true;
+    public float StabilityEffectMultiplyer = 1;
     public bool NotifiesInsteadOfCrumbling = false;
     public bool CountsAsNeighbour = true;
     public bool MinableInOverworld = false;
