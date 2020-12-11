@@ -189,7 +189,7 @@ PrefabInstance:
     - target: {fileID: 1415300387616119055, guid: 727b670fb9141a747a58b83b562147ad, type: 3}
       propertyPath: saveAsset
       value: 
-      objectReference: {fileID: 4900000, guid: 0e25ffd856f29934abf181b40ced571e, type: 3}
+      objectReference: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
     - target: {fileID: 2624383397502677215, guid: 727b670fb9141a747a58b83b562147ad, type: 3}
       propertyPath: m_ChunkCullingBounds.y
       value: 0

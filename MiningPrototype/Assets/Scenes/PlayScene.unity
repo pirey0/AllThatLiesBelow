@@ -612,233 +612,173 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.size
-      value: 21
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[16].XOffsetRange.x
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[16].XOffsetRange.y
-      value: 0.86
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[16].YOffset
-      value: 0.575
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[16].Size.x
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[16].Size.y
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[16].gizmoColor.r
-      value: 0.5057874
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[16].gizmoColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[16].gizmoColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[16].SceneToAdd.sceneAsset
+      propertyPath: addition.Array.data[0].SavedSceneFile
       value: 
-      objectReference: {fileID: 102900000, guid: b0f448df61752f34787d97fd5ecdef0c, type: 3}
+      objectReference: {fileID: 4900000, guid: 0c2e33c16589d3f43943304b9113d6b9, type: 3}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[16].SceneToAdd.scenePath
-      value: Assets/Scenes/Underground/JungleCave1.unity
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[16].gizmoColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[17].XOffsetRange.x
-      value: 0.23
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[17].XOffsetRange.y
-      value: 0.86
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[17].YOffset
-      value: 0.53
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[17].Size.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[17].Size.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[17].gizmoColor.r
-      value: 0.5057874
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[17].gizmoColor.g
+      propertyPath: addition.Array.data[0].LoadFileInstadOfScene
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[17].gizmoColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[17].SceneToAdd.sceneAsset
+      propertyPath: addition.Array.data[18].SavedSceneFile
       value: 
-      objectReference: {fileID: 102900000, guid: bcdbca4e6c409ab42979391890b0f58f, type: 3}
+      objectReference: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[17].SceneToAdd.scenePath
-      value: Assets/Scenes/Underground/JungleCave2.unity
-      objectReference: {fileID: 0}
+      propertyPath: addition.Array.data[19].SavedSceneFile
+      value: 
+      objectReference: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[18].XOffsetRange.x
-      value: 0.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[18].XOffsetRange.y
-      value: 0.56
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[18].YOffset
-      value: 0.77
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[18].Size.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[18].Size.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[18].gizmoColor.r
-      value: 0.8352942
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[18].gizmoColor.g
-      value: 0.16470589
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[18].gizmoColor.a
+      propertyPath: addition.Array.data[18].LoadFileInstadOfScene
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[18].SceneToAdd.sceneAsset
-      value: 
-      objectReference: {fileID: 102900000, guid: eefebb5b71de47e4e9da29653337e8d9, type: 3}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[18].SceneToAdd.scenePath
-      value: Assets/Scenes/AltarScene.unity
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[18].gizmoColor.b
-      value: 0.8352942
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[1].Size.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[1].Size.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[19].XOffsetRange.x
-      value: 0.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[19].XOffsetRange.y
-      value: 0.56
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[19].YOffset
-      value: 0.62
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[19].Size.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[19].Size.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[19].gizmoColor.r
-      value: 0.8352942
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[19].gizmoColor.g
-      value: 0.16470589
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[19].gizmoColor.b
-      value: 0.8352942
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[19].gizmoColor.a
+      propertyPath: addition.Array.data[19].LoadFileInstadOfScene
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[19].SceneToAdd.sceneAsset
+      propertyPath: addition.Array.data[20].SavedSceneFile
       value: 
-      objectReference: {fileID: 102900000, guid: eefebb5b71de47e4e9da29653337e8d9, type: 3}
+      objectReference: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[19].SceneToAdd.scenePath
-      value: Assets/Scenes/AltarScene.unity
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[20].XOffsetRange.x
-      value: 0.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[20].XOffsetRange.y
-      value: 0.56
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[20].YOffset
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[20].Size.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[20].Size.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[20].gizmoColor.r
-      value: 0.8352942
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[20].gizmoColor.g
-      value: 0.16470589
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[20].gizmoColor.b
-      value: 0.8352942
-      objectReference: {fileID: 0}
-    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[20].gizmoColor.a
+      propertyPath: addition.Array.data[20].LoadFileInstadOfScene
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[20].SceneToAdd.sceneAsset
+      propertyPath: addition.Array.data[1].SavedSceneFile
       value: 
-      objectReference: {fileID: 102900000, guid: eefebb5b71de47e4e9da29653337e8d9, type: 3}
+      objectReference: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
-      propertyPath: addition.Array.data[20].SceneToAdd.scenePath
-      value: Assets/Scenes/AltarScene.unity
+      propertyPath: addition.Array.data[1].LoadFileInstadOfScene
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[2].SavedSceneFile
+      value: 
+      objectReference: {fileID: 4900000, guid: 19506d20d12857141b4c0ad2e820c60c, type: 3}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[2].LoadFileInstadOfScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[3].SavedSceneFile
+      value: 
+      objectReference: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[3].LoadFileInstadOfScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[4].SavedSceneFile
+      value: 
+      objectReference: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[5].SavedSceneFile
+      value: 
+      objectReference: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[5].LoadFileInstadOfScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[4].LoadFileInstadOfScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[6].LoadFileInstadOfScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[6].SavedSceneFile
+      value: 
+      objectReference: {fileID: 4900000, guid: 0f938ad3d096c7043918364dd21d9af8, type: 3}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[7].SavedSceneFile
+      value: 
+      objectReference: {fileID: 4900000, guid: f63f1894a800bd743ad69aff7ea9bc3e, type: 3}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[7].LoadFileInstadOfScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[8].SavedSceneFile
+      value: 
+      objectReference: {fileID: 4900000, guid: 0aeff879f496464419494aa01542a7bf, type: 3}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[8].LoadFileInstadOfScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[13].SavedSceneFile
+      value: 
+      objectReference: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[13].LoadFileInstadOfScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[15].SavedSceneFile
+      value: 
+      objectReference: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[14].SavedSceneFile
+      value: 
+      objectReference: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[14].LoadFileInstadOfScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[15].LoadFileInstadOfScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[9].LoadFileInstadOfScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[9].SavedSceneFile
+      value: 
+      objectReference: {fileID: 4900000, guid: b2017e39947da5e4cb8a0a2b994f657f, type: 3}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[10].SavedSceneFile
+      value: 
+      objectReference: {fileID: 4900000, guid: b1d86e7bc7cc20047b56dca5863bdff4, type: 3}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[10].LoadFileInstadOfScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[11].SavedSceneFile
+      value: 
+      objectReference: {fileID: 4900000, guid: b1d86e7bc7cc20047b56dca5863bdff4, type: 3}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[11].LoadFileInstadOfScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[12].SavedSceneFile
+      value: 
+      objectReference: {fileID: 4900000, guid: b1d86e7bc7cc20047b56dca5863bdff4, type: 3}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[12].LoadFileInstadOfScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[16].SavedSceneFile
+      value: 
+      objectReference: {fileID: 4900000, guid: 39743173ed49bac45b23cdcb570aec76, type: 3}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[16].LoadFileInstadOfScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[17].LoadFileInstadOfScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[17].SavedSceneFile
+      value: 
+      objectReference: {fileID: 4900000, guid: 384e070d285f1b64ab50c1903455e0df, type: 3}
     - target: {fileID: 3510606058087648147, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: m_Name
       value: SceneAdder
