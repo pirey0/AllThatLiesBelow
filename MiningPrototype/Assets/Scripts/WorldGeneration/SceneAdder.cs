@@ -104,7 +104,9 @@ public class SceneAdder : StateListenerBehaviour
             float sizeY = a.Size.y;
 
             Gizmos.color = a.gizmoColor;
-            Gizmos.DrawWireCube(new Vector3(x, y, 0), new Vector3(sizeX, sizeY));
+
+            Gizmos.DrawWireCube(new Vector3(x, y, 0), new Vector3(sizeX, 0.5f));
+            Gizmos.DrawWireCube(new Vector3(x - a.Size.x * 0.5f, y, 0), new Vector3(a.Size.x, sizeY));
         }
 
         Gizmos.color = Color.white;
