@@ -40,10 +40,10 @@ public enum SpawnableIDType
     Hourglass,
     Echo,
     Decoration,
+    Platform,
     Mushroom,
     Vine
 }
-
 
 [System.Serializable]
 public class SaveData
