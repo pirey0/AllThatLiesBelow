@@ -80,6 +80,9 @@ public class PlayerStateMachine : BasePlayerStateMachine
 
     protected override float GetSpeedMultiplyer()
     {
+        if (progressionHandler == null)
+            return 0;
+
         return progressionHandler.SpeedMultiplyer;
     }
 
