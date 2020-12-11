@@ -15,6 +15,7 @@ public class InventoryVisualizer : ScalingUIElementBase, IDropReceiver
 
     [SerializeField] InventorySlotVisualizer inventorySlotPrefab;
     [SerializeField] Transform gridBox;
+    [SerializeField] Image gridBoxImage;
     [SerializeField] Transform gridLayoutParent;
     [SerializeField] GridLayoutGroup grid;
     [SerializeField] bool updateContinously = true;
@@ -33,12 +34,17 @@ public class InventoryVisualizer : ScalingUIElementBase, IDropReceiver
     public void Init(Transform target, Inventory inventoryToVisualize, bool isPlayerInventory = false)
     {
         useCustomPlayerInventory = isPlayerInventory;
+        //updateContinously = !isPlayerInventory;
         transformToFollow = isPlayerInventory ? FindObjectOfType<PlayerInventoryOpener>().transform : target;
+
         inventory = inventoryToVisualize;
         spriteRendererToGetOrientatioFrom = target.GetComponent<SpriteRenderer>();
 
         if (isPlayerInventory)
+        {
             grid.startAxis = GridLayoutGroup.Axis.Vertical;
+            gridBoxImage.pixelsPerUnitMultiplier = 1;
+        }
 
         CreateInventoryDisplay();
     }
@@ -147,7 +153,7 @@ public class InventoryVisualizer : ScalingUIElementBase, IDropReceiver
             height = Mathf.Min(sizeCurrent, playerInvMaxHeight);
             width =  Mathf.CeilToInt((float)sizeCurrent / (float)playerInvMaxHeight);
 
-            followOffset = new Vector2(width * additonalSpacePerSlotNeeded.x * -0.5f, followOffset.y);
+            followOffset = new Vector2(width * additonalSpacePerSlotNeeded.x * -75f, 50f);
         }
         else
         {

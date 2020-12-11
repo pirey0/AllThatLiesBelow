@@ -20,6 +20,7 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
 
     [Zenject.Inject] InWorldCanvas inWorld;
     [Zenject.Inject] InventoryVisualizer.Factory visualizerFactory;
+    [Zenject.Inject] PlayerInventoryOpener playerInventoryOpener;
 
     private event System.Action ForceInterrupt;
     public event System.Action<InventoryState> StateChanged;
@@ -69,7 +70,10 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
                 }
 
                 inventoryVisualizer = visualizerFactory.Create(inventoryVisualizerPrefab.gameObject);
-                inventoryVisualizer.transform.SetParent(inWorld.Canvas.transform, worldPositionStays: false);
+                if (isPlayerInventory)
+                    inventoryVisualizer.transform.SetParent(playerInventoryOpener.Canvas.transform, worldPositionStays: false);
+                else
+                    inventoryVisualizer.transform.SetParent(inWorld.Canvas.transform, worldPositionStays: false);
                 inventoryVisualizer.Init(transform, inventory, isPlayerInventory);
                 inventoryVisualizer.SetFollowOnUpdate(inventoryVisualizerUpdates);
             }

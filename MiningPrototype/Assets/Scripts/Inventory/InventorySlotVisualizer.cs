@@ -21,12 +21,13 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
     [Inject] ReadableItemHandler readableItemHandler;
     [Inject] TooltipHandler tooltipHandler;
     [Inject] CameraController cameraController;
+    [Inject] InWorldCanvas inWorldCanvas;
 
     int amount;
     ItemType type;
     Inventory origin;
     RectTransform rectTransform;
-    Transform parent;
+    Transform parentRegular;
     Vector2 defaultAnchorPosition;
 
     Coroutine updateRoutine;
@@ -125,8 +126,8 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
     {
         defaultAnchorPosition = rectTransform.anchoredPosition;
         targetGraphic.raycastTarget = false;
-        parent = rectTransform.parent;
-        rectTransform.SetParent(parent.parent.parent.parent, worldPositionStays: false); //<- My eyes bleed. -Luca
+        parentRegular = rectTransform.parent;
+        rectTransform.SetParent(inWorldCanvas.transform, worldPositionStays: false); //hope your eyes are okay now.
         inDrag = true;
         StartCoroutine(UpdateInDrag());
     }
@@ -152,7 +153,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         rectTransform.anchoredPosition = defaultAnchorPosition;
         canDropOverlay.SetActive(false);
         canNotDropOverlay.SetActive(false);
-        rectTransform.SetParent(parent, worldPositionStays: false);
+        rectTransform.SetParent(parentRegular, worldPositionStays: false);
         targetGraphic.raycastTarget = true;
     }
 
@@ -185,7 +186,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
     private float GetDistance()
     {
-        return (rectTransform.position - parent.position).magnitude;
+        return (rectTransform.position - parentRegular.position).magnitude;
     }
 
     private void UpdatePlacingPreview()

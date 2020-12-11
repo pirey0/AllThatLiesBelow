@@ -208,6 +208,7 @@ MonoBehaviour:
   additonalSpacePerSlotNeeded: {x: 2, y: 2}
   inventorySlotPrefab: {fileID: 2541443755640501489, guid: 8e5e1b66aa6c0994b9f4a49b79d80a04, type: 3}
   gridBox: {fileID: 8727063801738303664}
+  gridBoxImage: {fileID: 8727063801738303677}
   gridLayoutParent: {fileID: 7116935718377473132}
   grid: {fileID: 1744120773294816107}
   updateContinously: 1

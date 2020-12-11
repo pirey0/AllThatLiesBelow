@@ -103,6 +103,7 @@ MonoBehaviour:
   sendable: 090000000a000000
   storeItemAudio: {fileID: 8426892092378465835}
   inventory:
+    allowStoreing: 1
     content: []
 --- !u!82 &8426892092378465835
 AudioSource:

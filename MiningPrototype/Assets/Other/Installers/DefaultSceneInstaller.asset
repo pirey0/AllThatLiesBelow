@@ -18,6 +18,7 @@ MonoBehaviour:
   cameraPannerPrefab: {fileID: 3841827697160721108, guid: 34b68ab6d1c273b4790ef6b88022039c, type: 3}
   cameraPrefab: {fileID: 5930427534588966326, guid: 0ef3d3d9ac15aad4b94aff8d1ece9908, type: 3}
   itemPreviewPrefab: {fileID: 4548280680598382780, guid: 6cdf6c9abc202474ca94e8f0f5902032, type: 3}
+  playerInventoryOpenerUIPrefab: {fileID: 9033796290081382768, guid: 18f2515e63c35c54c8e0a496370cc28a, type: 3}
   pauseMenuPrefab: {fileID: 283427974786567142, guid: 5a03e4f99afb5f5478ba8441f863deb7, type: 3}
   toolTipPrefab: {fileID: 2633605495259368110, guid: 13f2e62eb042f9548b1a79535aee5ef2, type: 3}
   eventSystemPrefab: {fileID: 4355947821229198085, guid: cc2acd4956f2dde4b83fa6e03dfd37fe, type: 3}

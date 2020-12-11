@@ -21305,6 +21305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory:
+    allowStoreing: 1
     content:
     - type: 4
       amount: 1
