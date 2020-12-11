@@ -31,11 +31,6 @@ public class TransitionEffectHandler : MonoBehaviour
 			FadeIn(testFadeType);
 	}
 
-	void OnRenderImage(RenderTexture source, RenderTexture destination)
-	{
-		Graphics.Blit(source, destination, mat);
-	}
-
 	public  void FadeOut(FadeType fadeType = FadeType.Circle)
 	{
 		mat.SetTexture("_PatternTex", GetTextureByType(fadeType));

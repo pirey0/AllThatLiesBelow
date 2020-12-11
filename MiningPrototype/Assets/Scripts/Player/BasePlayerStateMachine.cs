@@ -43,6 +43,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
 
         SetupStateMachine();
         stateMachine.Start();
+        Debug.Log("State Machine Setup");
     }
 
     protected abstract float GetVerticalInput();

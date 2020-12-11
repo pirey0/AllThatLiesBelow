@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: CameraTransition
   m_Shader: {fileID: 4800000, guid: d7edbf0b2e7d27b4eaff1e23099949d4, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: _USECOLOR_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -33,7 +33,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Cutoff: 1
-    - _UseColor: 0
+    - _UseColor: 1
     m_Colors:
-    - _Color: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
