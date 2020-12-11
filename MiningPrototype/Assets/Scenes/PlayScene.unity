@@ -273,7 +273,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 589325803474934636, guid: c4b3c62dd26f04b4b8fe68da9bd7447c, type: 3}
       propertyPath: debugRendering
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2173153710873331550, guid: c4b3c62dd26f04b4b8fe68da9bd7447c, type: 3}
       propertyPath: m_Name
@@ -500,7 +500,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: addition.Array.size
-      value: 10
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: addition.Array.data[7].XOffsetRange.x
@@ -528,7 +528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: addition.Array.data[8].XOffsetRange.y
-      value: 0.8
+      value: 0.77
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: addition.Array.data[8].YOffset
@@ -588,7 +588,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: addition.Array.data[3].YOffset
-      value: 0.75
+      value: 0.77
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: addition.Array.data[4].YOffset
@@ -789,6 +789,142 @@ PrefabInstance:
     - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: addition.Array.data[9].gizmoColor.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[8].Size.x
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[9].Size.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[9].Size.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[10].XOffsetRange.x
+      value: 0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[10].XOffsetRange.y
+      value: 0.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[10].YOffset
+      value: 0.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[10].Size.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[10].Size.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[10].gizmoColor.g
+      value: 0.2457259
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[10].gizmoColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[10].gizmoColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[10].SceneToAdd.sceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: 340183052dd8e5940aace2f1d6b09b50, type: 3}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[10].SceneToAdd.scenePath
+      value: Assets/Scenes/Underground/Ores/Coppervein1Scene.unity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[10].gizmoColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[11].XOffsetRange.x
+      value: 0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[11].XOffsetRange.y
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[11].YOffset
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[11].Size.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[11].Size.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[11].gizmoColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[11].gizmoColor.g
+      value: 0.2457259
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[11].gizmoColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[11].SceneToAdd.sceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: 340183052dd8e5940aace2f1d6b09b50, type: 3}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[11].SceneToAdd.scenePath
+      value: Assets/Scenes/Underground/Ores/Coppervein1Scene.unity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[12].XOffsetRange.x
+      value: 0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[12].XOffsetRange.y
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[12].YOffset
+      value: 0.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[12].Size.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[12].Size.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[12].gizmoColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[12].gizmoColor.g
+      value: 0.2457259
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[12].gizmoColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[12].SceneToAdd.sceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: 340183052dd8e5940aace2f1d6b09b50, type: 3}
+    - target: {fileID: 3510606058087648146, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
+      propertyPath: addition.Array.data[12].SceneToAdd.scenePath
+      value: Assets/Scenes/Underground/Ores/Coppervein1Scene.unity
       objectReference: {fileID: 0}
     - target: {fileID: 3510606058087648147, guid: bb89d5ba721441243a2da5e93615f1eb, type: 3}
       propertyPath: m_Name

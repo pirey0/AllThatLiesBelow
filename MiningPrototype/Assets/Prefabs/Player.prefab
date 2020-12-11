@@ -5183,7 +5183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ae3b33064b4fcb4ba3c35b475399d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeHeight: 85
+  fadeHeight: 285
   fadeThickness: 2
   vignetteRenderer: {fileID: 0}
   snow: {fileID: 1264881364}
