@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class MainMenuPlayerStateMachine : BasePlayerStateMachine
 {
+    [Header("MainMenu Player")]
     [SerializeField] float moveX;
     [SerializeField] float moveY;
-    [SerializeField] bool inPlace;
-    Vector3 position;
+
+    [SerializeField] float mapWidth;
+
     protected override float GetHorizontalInput()
     {
         return moveX;
@@ -18,15 +20,17 @@ public class MainMenuPlayerStateMachine : BasePlayerStateMachine
         return moveY;
     }
 
-    //hold the player in place to prevent him from falling down
-    private void Update()
+    protected override void BaseMoveUpdate(float horizontal, Vector2 movement)
     {
-        if (inPlace)
-        {
-            if (position != Vector3.zero)
-                transform.position = position;
+        base.BaseMoveUpdate(horizontal, movement);
 
-            position = transform.position;
+        if (rigidbody.position.x < 0)
+        {
+            rigidbody.position = new Vector2(rigidbody.position.x + mapWidth, rigidbody.position.y);
+        }
+        else if (rigidbody.position.x > mapWidth)
+        {
+            rigidbody.position = new Vector2(rigidbody.position.x - mapWidth, rigidbody.position.y);
         }
     }
 }

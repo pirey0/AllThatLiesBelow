@@ -18,10 +18,11 @@ MonoBehaviour:
   jumpStart: {fileID: 2331669131421531763}
   jumpLand: {fileID: 5602061090021604881}
   fallDeath: {fileID: 0}
-  slowWalkMode: 0
+  slowWalkMode: 1
   debug: 0
-  moveX: 0
+  moveX: 0.5
   moveY: 0
+  mapWidth: 50
 --- !u!1001 &1850182730024481163
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29,9 +30,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1281847262, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165143014864439578, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6399576891781329887, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8633471933228471848, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
       propertyPath: m_Name
-      value: MainMenuPlayer
+      value: MainMenuPlayer Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8633471933228471852, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -39,7 +52,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8633471933228471852, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 84.4
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 8633471933228471852, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -75,6 +88,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8633471933228471852, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025539967259614005, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
