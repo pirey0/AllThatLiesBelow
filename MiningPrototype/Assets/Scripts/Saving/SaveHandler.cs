@@ -27,10 +27,12 @@ public class SaveHandler : MonoBehaviour
         BaseSave(GetFullSavePath());
     }
 
-    public static void Editor_SaveAs()
+    public static void Editor_SaveAs(string path)
     {
-#if UNITY_EDITOR
-        string path = UnityEditor.EditorUtility.SaveFilePanel("Save As...", "", "SavedScene", "bytes");
+        #if UNITY_EDITOR
+
+        if (string.IsNullOrEmpty(path))
+            path = UnityEditor.EditorUtility.SaveFilePanel("Save As...", "", "SavedScene", "bytes");
 
         if (!string.IsNullOrEmpty(path))
         {
@@ -38,7 +40,7 @@ public class SaveHandler : MonoBehaviour
             UnityEditor.AssetDatabase.Refresh();
         }
 
-#endif
+        #endif
     }
 
     private static void BaseSave(string path)
@@ -100,11 +102,7 @@ public class SaveHandler : MonoBehaviour
         {
             using (var memStream = new MemoryStream())
             {
-                BinaryFormatter formatter = new BinaryFormatter();
-                memStream.Write(saveAsset.bytes, 0, saveAsset.bytes.Length);
-                memStream.Seek(0, SeekOrigin.Begin);
-
-                var collection = (SaveDataCollection)formatter.Deserialize(memStream);
+                var collection = LoadToCollection(saveAsset);
                 BaseLoad(collection, offset, additiveMode: true);
             }
         }
@@ -113,6 +111,33 @@ public class SaveHandler : MonoBehaviour
             Debug.LogError("No asset to load from.");
         }
         tracker.Stop();
+    }
+
+    public static BaseMapSaveData LoadMapOnlyFrom(TextAsset saveAsset)
+    {
+        var collection = LoadToCollection(saveAsset);
+
+        if (collection.ContainsKey("EditorMap"))
+        {
+            return (BaseMapSaveData)collection["EditorMap"];
+        }
+        else
+        {
+            Debug.LogError("No EditorMap in save.");
+            return null;
+        }
+    }
+
+    private static SaveDataCollection LoadToCollection(TextAsset saveAsset)
+    {
+        using (var memStream = new MemoryStream())
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            memStream.Write(saveAsset.bytes, 0, saveAsset.bytes.Length);
+            memStream.Seek(0, SeekOrigin.Begin);
+
+            return (SaveDataCollection)formatter.Deserialize(memStream);
+        }
     }
 
     private void BaseLoad(SaveDataCollection collection, Vector3 offset, bool additiveMode)

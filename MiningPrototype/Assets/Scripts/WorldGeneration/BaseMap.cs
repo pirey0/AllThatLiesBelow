@@ -374,15 +374,6 @@ public class BaseMap : StateListenerBehaviour, ISavable
 
     }
 
-    public void LoadFromAsset(TextAsset saveObject)
-    {
-        var saveData = MapHelper.LoadMapSaveDataFromTextAsset(saveObject);
-        if (saveData != null)
-        {
-            Load(saveData);
-        }
-    }
-
     public virtual string GetSaveID()
     {
         return "BaseMap";

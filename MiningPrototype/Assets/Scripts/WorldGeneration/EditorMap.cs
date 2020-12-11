@@ -41,11 +41,11 @@ public class EditorMap : RenderedMap
     public void SaveAs()
     {
         saveAsset = null;
-        Save();
+        SaveRecent();
         //revert if save failed
     }
 
-    public void Save()
+    public void SaveRecent()
     {
         if (!IsEditorReady())
         {
@@ -56,7 +56,7 @@ public class EditorMap : RenderedMap
 
         if (saveAsset == null)
         {
-            path = UnityEditor.EditorUtility.SaveFilePanel("Map", "Assets/Other/Maps", "NewMap", "bytes");
+            path = UnityEditor.EditorUtility.SaveFilePanel("Map", "Assets/Other/Maps", "NewSavedScene", "bytes");
         }
         else
         {
@@ -66,11 +66,10 @@ public class EditorMap : RenderedMap
         if (path != null)
         {
             DurationTracker tracker = new DurationTracker("Map saving");
-            BinaryFormatter formatter = new BinaryFormatter();
 
-            var stream = File.Open(path, FileMode.OpenOrCreate);
-            formatter.Serialize(stream, ToSaveData());
-            stream.Close();
+            //SAVE 
+            SaveHandler.Editor_SaveAs(path);
+
             UnityEditor.AssetDatabase.Refresh();
             path = Util.MakePathRelative(path);
             saveAsset = UnityEditor.AssetDatabase.LoadAssetAtPath<TextAsset>(path);
@@ -81,12 +80,14 @@ public class EditorMap : RenderedMap
         }
     }
 
-    public void Load()
+    public void LoadRecent()
     {
         DurationTracker tracker = new DurationTracker("Map Loading");
         if (saveAsset != null)
         {
-            LoadFromAsset(saveAsset);
+            var data = SaveHandler.LoadMapOnlyFrom(saveAsset);
+            Load(data);
+
             UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
         }
         else
@@ -94,12 +95,36 @@ public class EditorMap : RenderedMap
         tracker.Stop();
     }
 
-    public void Load(TextAsset asset)
+    public void LoadFrom(TextAsset asset)
     {
         saveAsset = asset;
         UnityEditor.Undo.RecordObject(this, "SaveAsset changed");
         UnityEditor.PrefabUtility.RecordPrefabInstancePropertyModifications(this);
-        Load();
+        LoadRecent();
+    }
+
+    public void LoadFromOldMapFile(TextAsset asset)
+    {
+        if (saveAsset != null)
+        {
+            var saveData = MapHelper.LoadMapSaveDataFromTextAsset(asset);
+            if (saveData != null)
+            {
+                Load(saveData);
+            }
+            UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
+        }
+    }
+
+    public void SaveAsOld()
+    {
+        string path = UnityEditor.EditorUtility.SaveFilePanel("Map", "Assets/Other/Maps", "NewSavedScene", "bytes");
+        DurationTracker tracker = new DurationTracker("Map saving OLD");
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        var stream = File.Open(path, FileMode.OpenOrCreate);
+        formatter.Serialize(stream, ToSaveData());
+        stream.Close();
     }
 #endif
 }
