@@ -15,14 +15,21 @@ MonoBehaviour:
   Type: 0
   ItemToDrop: 0
   damageMultiplyer: 0
+  damagedByExplosion: 0
   AirLike: 1
   Targetable: 0
+  TargetPriority: 0
   StabilityAffected: 0
+  StabilityEffectMultiplyer: 0
   NotifiesInsteadOfCrumbling: 0
   CountsAsNeighbour: 0
+  MinableInOverworld: 0
+  DamageIsInBackground: 0
+  DrawsToShifted: 0
   UseTilesFromOtherInfo: 0
   Tiles: []
   TileSourceInfo: {fileID: 0}
+  Visibility2Tile: {fileID: 0}
   Overlay: {fileID: 0}
   physicalTileSprite: {fileID: 21300000, guid: a1a842a2a375daf46852252416bba0d4, type: 3}
   physicalTileOverlay: {fileID: 0}

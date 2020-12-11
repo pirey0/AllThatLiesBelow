@@ -20,6 +20,8 @@ Shader "Effects/TransitionShaderWithTexture"
 	{
 		// No culling or depth
 		Cull Off ZWrite Off ZTest Always
+		Tags{ "Queue" = "Transparent" "RenderType" = "Transparent" }
+		Blend SrcAlpha OneMinusSrcAlpha
 
 		Pass
 		{
@@ -76,8 +78,7 @@ Shader "Effects/TransitionShaderWithTexture"
 					// _Use color is not enabled, use the _TranTex
 					return tex2D(_TranTex, i.uv);
 				}
-				// return the original texture aka don't do anything
-				return tex2D(_MainTex, i.uv);
+				return fixed4(0, 0, 0, 0);
 			}
 			ENDCG
 		}
