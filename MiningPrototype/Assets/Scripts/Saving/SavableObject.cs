@@ -41,7 +41,8 @@ public enum SpawnableIDType
     Echo,
     Decoration,
     Platform,
-    Mushroom
+    Mushroom,
+    Vine
 }
 
 [System.Serializable]
