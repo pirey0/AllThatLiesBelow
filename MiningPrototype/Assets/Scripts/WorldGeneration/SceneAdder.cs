@@ -83,13 +83,13 @@ public class SceneAdder : StateListenerBehaviour
     public void LoadAltarAt(Vector2Int value)
     {
         Debug.Log("Loading altar at " + value);
-        MapAddition addition;
-        addition.XOffsetRange = new Vector2((float) value.x / RuntimeProceduralMap.Instance.SizeX, (float)value.x / RuntimeProceduralMap.Instance.SizeX);
-        addition.YOffset = (float)value.y / RuntimeProceduralMap.Instance.SizeY;
-        addition.SceneToAdd = altarScene;
-        addition.Size = Vector2.zero;
+        MapAddition altarAddition = new MapAddition();
+        altarAddition.XOffsetRange = new Vector2((float) value.x / RuntimeProceduralMap.Instance.SizeX, (float)value.x / RuntimeProceduralMap.Instance.SizeX);
+        altarAddition.YOffset = (float)value.y / RuntimeProceduralMap.Instance.SizeY;
+        altarAddition.SceneToAdd = altarScene;
+        altarAddition.Size = Vector2.zero;
 
-        StartCoroutine(LoadAdditive(new List<MapAddition>() { addition }, transitionState: false));
+        StartCoroutine(LoadAdditive(new List<MapAddition>() { altarAddition }, transitionState: false));
     }
 
 
@@ -103,8 +103,11 @@ public class SceneAdder : StateListenerBehaviour
             float sizeX = xOffsetDif + a.Size.x;
             float sizeY = a.Size.y;
 
+            Gizmos.color = a.gizmoColor;
             Gizmos.DrawWireCube(new Vector3(x, y, 0), new Vector3(sizeX, sizeY));
         }
+
+        Gizmos.color = Color.white;
     }
 }
 
@@ -114,5 +117,6 @@ public struct MapAddition
     public Vector2 XOffsetRange;
     public float YOffset;
     public Vector2 Size;
+    public Color gizmoColor;
     public SceneReference SceneToAdd;
 }
