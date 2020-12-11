@@ -15,7 +15,7 @@ public abstract class PlatformBase : TilemapCarvingEntity
         for (int i = 0; i < tilesToOccupy.Length; i++)
         {
             Vector2Int offset = i * placementAtr.Item1.AsV2Int();
-            TileType type = (i == 0 || i == tilesToOccupy.Length - 1) ? TileType.CollapsableEntityNotNeighbour : TileType.FloatingEntityNotNeighbour;
+            TileType type = (i == 0 || i == tilesToOccupy.Length - 1) ? TileType.CollapsableEntityNotNeighbour : TileType.Platform;
 
             tilesToOccupy[i] = new TileOffsetTypePair(offset.x, offset.y, type);
         }

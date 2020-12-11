@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Platform : PlatformBase
 {
+    [SerializeField] EdgeCollider2D edgeCollider;
+
+
     private void Start()
     {
         var placmentAttr = CalculatePlacement();
@@ -25,5 +28,21 @@ public class Platform : PlatformBase
     {
         UncarveDestroy();
         //Platform broke... What happens now?
+    }
+
+
+    public override void AdaptPlacementTo((Direction, int) placementAtr)
+    {
+        base.AdaptPlacementTo(placementAtr);
+
+        if (placementAtr.Item1 == Direction.Right)
+        {
+            edgeCollider.SetPoints(new List<Vector2>() { new Vector2(-0.5f, 0), new Vector2(placementAtr.Item2 - 0.5f, 0) });
+        }
+        else
+        {
+            edgeCollider.SetPoints(new List<Vector2>() { new Vector2(-placementAtr.Item2 + 0.5f, 0), new Vector2(+0.5f, 0) });
+        }
+
     }
 }
