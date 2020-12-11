@@ -39,7 +39,8 @@ public enum SpawnableIDType
     Skeleton,
     Hourglass,
     Echo,
-    Decoration
+    Decoration,
+    Mushroom
 }
 
 
