@@ -123,18 +123,9 @@ public struct MapAddition
     public Vector2 Size;
     public Color gizmoColor;
     public SceneReference SceneToAdd;
-
-    string name;
     public string Name
     {
-        get
-        {
-            if (name == "")
-                name = FilterNameFromPath();
-
-            return name;
-        }
-
+        get => FilterNameFromPath();
     }
     private string FilterNameFromPath()
     {
