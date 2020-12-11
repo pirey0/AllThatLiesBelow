@@ -89,7 +89,7 @@ public class SaveHandler : MonoBehaviour
         SaveDataCollection collection = (SaveDataCollection)formatter.Deserialize(stream);
         stream.Close();
 
-        BaseLoad(collection, Vector3.zero);
+        BaseLoad(collection, Vector3.zero, additiveMode: false);
         Debug.Log("Loaded Successfully");
     }
 
@@ -105,7 +105,7 @@ public class SaveHandler : MonoBehaviour
                 memStream.Seek(0, SeekOrigin.Begin);
 
                 var collection = (SaveDataCollection)formatter.Deserialize(memStream);
-                BaseLoad(collection, offset);
+                BaseLoad(collection, offset, additiveMode: true);
             }
         }
         else
@@ -115,7 +115,7 @@ public class SaveHandler : MonoBehaviour
         tracker.Stop();
     }
 
-    private void BaseLoad(SaveDataCollection collection, Vector3 offset)
+    private void BaseLoad(SaveDataCollection collection, Vector3 offset, bool additiveMode)
     {
         if (collection.Version != SAVEFILE_VERSION)
         {
@@ -123,18 +123,29 @@ public class SaveHandler : MonoBehaviour
             return;
         }
 
-        var objects = Util.FindAllThatImplement<ISavable>().OrderBy((x) => x.GetLoadPriority());
-
-        foreach (var savable in objects)
+        if (additiveMode)
         {
-            if (collection.ContainsKey(savable.GetSaveID()))
+            if (collection.ContainsKey("EditorMap"))
             {
-                var data = collection[savable.GetSaveID()];
-                savable.Load(data);
+                var data = collection["EditorMap"];
+                RuntimeProceduralMap.Instance.AdditiveLoadAt((BaseMapSaveData)data, Mathf.FloorToInt(offset.x), Mathf.FloorToInt(offset.y));
             }
-            else
+        }
+        else
+        {
+            var objects = Util.FindAllThatImplement<ISavable>().OrderBy((x) => x.GetLoadPriority());
+
+            foreach (var savable in objects)
             {
-                Debug.LogError("No save data found for " + savable.GetSaveID());
+                if (collection.ContainsKey(savable.GetSaveID()))
+                {
+                    var data = collection[savable.GetSaveID()];
+                    savable.Load(data);
+                }
+                else
+                {
+                    Debug.LogError("No save data found for " + savable.GetSaveID());
+                }
             }
         }
 

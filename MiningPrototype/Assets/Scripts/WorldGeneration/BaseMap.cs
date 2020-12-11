@@ -388,15 +388,20 @@ public class BaseMap : StateListenerBehaviour, ISavable
         return "BaseMap";
     }
 
-    //Outdated from SO Time
+    public void AdditiveLoadAt(BaseMapSaveData saveData, int xOffset, int yOffset)
+    {
+        Util.IterateXY(saveData.SizeX, saveData.SizeY, (x, y) => AdditiveLoadAt(saveData, x, y, xOffset, yOffset));
+    }
+
+    //Outdated from Additive Scene Loading time
     public void LoadFromMap(TextAsset assetToLoad, int xOffset, int yOffset)
     {
         var data = MapHelper.LoadMapSaveDataFromTextAsset(assetToLoad);
 
-        Util.IterateXY(data.SizeX, data.SizeY, (x, y) => LoadFromMapAt(data, x, y, xOffset, yOffset));
+        Util.IterateXY(data.SizeX, data.SizeY, (x, y) => AdditiveLoadAt(data, x, y, xOffset, yOffset));
     }
 
-    private void LoadFromMapAt(BaseMapSaveData loadedData, int x, int y, int xOffset, int yOffset)
+    private void AdditiveLoadAt(BaseMapSaveData loadedData, int x, int y, int xOffset, int yOffset)
     {
         var t = loadedData.Map[x, y];
 

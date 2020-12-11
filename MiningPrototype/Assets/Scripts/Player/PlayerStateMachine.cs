@@ -92,7 +92,7 @@ public class PlayerStateMachine : BasePlayerStateMachine
 
         UpdateWorldMirroring();
 
-        if (progressionHandler.IsMidas)
+        if (gameState.CurrentState == GameState.State.Playing && progressionHandler.IsMidas)
         {
             MidasUpdate();
         }
