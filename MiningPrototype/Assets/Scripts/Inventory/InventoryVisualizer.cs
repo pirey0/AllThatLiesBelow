@@ -153,7 +153,7 @@ public class InventoryVisualizer : ScalingUIElementBase, IDropReceiver
             height = Mathf.Min(sizeCurrent, playerInvMaxHeight);
             width =  Mathf.CeilToInt((float)sizeCurrent / (float)playerInvMaxHeight);
 
-            followOffset = new Vector2(width * additonalSpacePerSlotNeeded.x * -75f, 50f);
+            followOffset = new Vector2(width * additonalSpacePerSlotNeeded.x * -0.5f, 1f);
         }
         else
         {

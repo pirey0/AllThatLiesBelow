@@ -14,6 +14,10 @@ public class PlayerInventoryOpener : Button
     [Zenject.Inject] PlayerInteractionHandler playerInteractionHandler;
     [Zenject.Inject] CameraController cameraController;
 
+    protected override void Start()
+    {
+        Canvas.worldCamera = cameraController.Camera;
+    }
 
     //protected override void OnEnable()
     //{
