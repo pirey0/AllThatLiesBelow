@@ -97,8 +97,6 @@ public class RuntimeProceduralMap : RenderedMap
         int i = 0;
         while (true)
         {
-            int collapseThreshold = progressionHandler.InstableWorld ? GenerationSettings.instableWorldCollapseThreshhold : GenerationSettings.CollapseThreshhold;
-            int unstableThreshhold = progressionHandler.InstableWorld ? GenerationSettings.instableWorldUnstableThreshhold : GenerationSettings.UnstableThreshhold;
             int speed = progressionHandler.InstableWorld ? 3 : 1;
 
             //loop through tiles to check
@@ -109,7 +107,7 @@ public class RuntimeProceduralMap : RenderedMap
                 var info = GetTileInfo(tile.Type);
                 if (info.StabilityAffected)
                 {
-                    if (tile.Stability <= unstableThreshhold)
+                    if (tile.Stability <= GetUnstableThreshhold(tile.Type))
                     {
                         float timeLeft = tile.Stability - GenerationSettings.CollapseThreshhold; // to adapt to unstable world
                         AddUnstableTile(loc, timeLeft);
@@ -133,7 +131,7 @@ public class RuntimeProceduralMap : RenderedMap
             int x = unstableTiles[i].x;
             int y = unstableTiles[i].y;
 
-            if (t.Stability <= collapseThreshold)
+            if (t.Stability <= GetCollapseThreshhold(t.Type))
             {
                 RemoveUnstableTileAt(i);
                 var info = GetTileInfo(t.Type);
@@ -147,7 +145,7 @@ public class RuntimeProceduralMap : RenderedMap
                         CollapseAt(x, y, updateVisuals: true);
                 }
             }
-            else if (t.Stability <= unstableThreshhold)
+            else if (t.Stability <= GetUnstableThreshhold(t.Type))
             {
                 t.ReduceStabilityBy(speed);
 
@@ -159,6 +157,22 @@ public class RuntimeProceduralMap : RenderedMap
                 RemoveUnstableTileAt(i);
             }
         }
+    }
+
+    private float GetUnstableThreshhold(TileType t)
+    {
+        int coll = progressionHandler.InstableWorld ? GenerationSettings.instableWorldUnstableThreshhold : GenerationSettings.UnstableThreshhold;
+        var info = GetTileInfo(t);
+
+        return coll * info.CrumbleThreshholdMultiplyer;
+    }
+
+    private float GetCollapseThreshhold(TileType t)
+    {
+        float coll = progressionHandler.InstableWorld ? GenerationSettings.instableWorldCollapseThreshhold : GenerationSettings.CollapseThreshhold;
+        var info = GetTileInfo(t);
+
+        return coll * info.CrumbleThreshholdMultiplyer;
     }
 
     protected override void BreakBlock(int x, int y, Tile t, DamageType damageType)

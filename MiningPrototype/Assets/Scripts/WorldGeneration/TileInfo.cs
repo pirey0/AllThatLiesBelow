@@ -16,6 +16,7 @@ public class TileInfo : ScriptableObject
     public bool TargetPriority = false;
 
     public bool StabilityAffected = true;
+    public float CrumbleThreshholdMultiplyer = 1;
     public float StabilityEffectMultiplyer = 1;
     public bool NotifiesInsteadOfCrumbling = false;
     public bool CountsAsNeighbour = true;
