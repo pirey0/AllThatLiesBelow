@@ -84,17 +84,16 @@ MonoBehaviour:
   - text: it's so cold out here...
     duration: 5
   - text: but i need to get rich...
-    duration: 5
+    duration: 4
   - text: i'm freezing...
-    duration: 5
+    duration: 4
   - text: i'll be so rich...
-    duration: 5
+    duration: 4
   textPrefab: {fileID: 6443336625351124170, guid: a6c94ff23772b9247aedef0a985bd4dd, type: 3}
   textCanvas: {fileID: 7989577735873601336}
   textSpawnPosition: {fileID: 5516158713194663585}
-  horizontalSpeed: 0.5
-  delayBeforeTorchRequest: 20
-  gatingInCave: {fileID: 5516158714071630693}
+  horizontalSpeed: 1
+  delayBeforeTorchRequest: 2
   skipIntroInEditor: 0
 --- !u!1 &5516158714071630714
 GameObject:

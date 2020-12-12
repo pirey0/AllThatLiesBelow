@@ -11,7 +11,6 @@ public class Intro : StateListenerBehaviour
     [SerializeField] RectTransform textSpawnPosition;
     [SerializeField] float horizontalSpeed;
     [SerializeField] float delayBeforeTorchRequest;
-    [SerializeField] EdgeCollider2D gatingInCave;
     [SerializeField] bool skipIntroInEditor;
 
     [Zenject.Inject] PlayerStateMachine player;
@@ -37,6 +36,7 @@ public class Intro : StateListenerBehaviour
     IEnumerator IntroCoroutine()
     {
         inventoryManager.PlayerCollects(ItemType.Torch, 1);
+        inventoryManager.PlayerCollects(ItemType.Ladder, 1);
         placedTorch = false;
         effectHandler.SetNight();
         effectHandler.SetSnowAmount(3);
@@ -44,7 +44,6 @@ public class Intro : StateListenerBehaviour
         player.InCinematicMode = true;
         player.CinematicSlowWalk = true;
         player.CinematicHorizontal = horizontalSpeed;
-        gatingInCave.enabled = false;
         cameraPanner.EnterCinematicMode();
 
         for (int i = 0; i < texts.Count; i++)
@@ -65,7 +64,6 @@ public class Intro : StateListenerBehaviour
         effectHandler.SetSnowAmount(1);
         player.InCinematicMode = false;
         player.CinematicSlowWalk = false;
-        gatingInCave.enabled = true;
         placingHandler.Placed += OnIntroPlaced;
         cameraPanner.ExitCinematicMode();
 
@@ -73,18 +71,9 @@ public class Intro : StateListenerBehaviour
             yield return null;
 
         placingHandler.Placed -= OnIntroPlaced;
-        player.InCinematicMode = true;
-        player.CinematicHorizontal = horizontalSpeed;
-        gatingInCave.enabled = false;
-
         yield return new WaitForSeconds(5);
-        player.CinematicVertical = 1;
-        yield return new WaitForSeconds(3f);
-        player.CinematicVertical = 0;
-        player.CinematicSlowWalk = true;
-        yield return new WaitForSeconds(5f);
-        player.InCinematicMode = false;
-        player.CinematicSlowWalk = false;
+        torchText = Instantiate(textPrefab, textSpawnPosition.position, Quaternion.identity, textCanvas.transform);
+        torchText.Init(null, "I can use a ladder to get out of here.", 5);
     }
 
     private void OnIntroPlaced(ItemType obj)

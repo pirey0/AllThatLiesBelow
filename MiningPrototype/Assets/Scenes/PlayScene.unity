@@ -655,14 +655,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5516158713962272695, guid: 1646733caa5337b4f9b0105e9ff63d98, type: 3}
-      propertyPath: horizontalSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5516158713962272695, guid: 1646733caa5337b4f9b0105e9ff63d98, type: 3}
-      propertyPath: delayBeforeTorchRequest
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 5516158713962272714, guid: 1646733caa5337b4f9b0105e9ff63d98, type: 3}
       propertyPath: m_Name
       value: Intro
