@@ -22,9 +22,9 @@ public class Letterbox : InventoryOwner, INonPersistantSavable
 
     private event System.Action ForceInterrupt;
 
-    protected override void OnStartAfterLoad()
+    protected override void OnRealStart()
     {
-        base.OnStartAfterLoad();
+        base.OnRealStart();
         SetLetterboxStatus(status);
     }
 

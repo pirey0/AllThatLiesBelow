@@ -26,7 +26,7 @@ public enum AltarState
     PaymentRefused
 }
 
-public class Altar : MonoBehaviour, IInteractable, IDropReceiver
+public class Altar : StateListenerBehaviour, IInteractable, IDropReceiver
 {
     [SerializeField] Transform cameraTarget;
     [SerializeField] AltarDialogVisualizer visualizer;
@@ -35,6 +35,7 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Material spriteDefault, spriteOuline;
     [SerializeField] [NaughtyAttributes.ReadOnly] int altarID;
+    [SerializeField] AudioSource voicesAudio;
 
     [Inject] ProgressionHandler progressionHandler;
     [Inject] CameraController cameraController;
@@ -49,6 +50,12 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
     private event System.Action NotifyForcedEnd;
 
     private bool InInteraction { get => currentState != AltarState.Off; }
+
+    protected override void OnRealStart()
+    {
+        GetComponent<AudioSource>().Play();
+        voicesAudio.Play();
+    }
 
     public void BeginInteracting(GameObject interactor)
     {

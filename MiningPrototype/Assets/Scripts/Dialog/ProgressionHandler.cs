@@ -49,7 +49,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
         postbox = FindObjectOfType<DropBox>();
     }
 
-    protected override void OnStartAfterLoad()
+    protected override void OnRealStart()
     {
         var altarsArr = GameObject.FindObjectsOfType<Altar>();
         altars = new List<Altar>(altarsArr);

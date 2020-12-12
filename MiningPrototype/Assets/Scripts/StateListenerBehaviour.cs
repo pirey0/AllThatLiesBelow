@@ -30,7 +30,7 @@ public class StateListenerBehaviour : MonoBehaviour
                 break;
 
             case GameState.State.FullStart:
-                OnStartAfterLoad();
+                OnRealStart();
                 break;
 
             case GameState.State.PostLoadScenes:
@@ -64,7 +64,7 @@ public class StateListenerBehaviour : MonoBehaviour
     {
     }
 
-    protected virtual void OnStartAfterLoad()
+    protected virtual void OnRealStart()
     {
     }
 

@@ -13,7 +13,7 @@ public class PauseMenu : StateListenerBehaviour
 
     bool isPaused;
 
-    protected override void OnStartAfterLoad()
+    protected override void OnRealStart()
     {
         Unpause();
     }
