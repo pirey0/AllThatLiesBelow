@@ -10,7 +10,7 @@ public enum LetterboxStatus
     Open
 }
 
-public class Letterbox : InventoryOwner, INonPersistantSavable
+public class Letterbox : InventoryOwner, INonPersistantSavable, IDropReceiver
 {
     [SerializeField] SpriteAnimator spriteAnimator;
     [SerializeField] SpriteAnimation closedEmpty, closedFull, open;
@@ -121,6 +121,31 @@ public class Letterbox : InventoryOwner, INonPersistantSavable
             SetInventory(data.Inventory);
             status = data.Status;
         }
+    }
+
+    public bool WouldTakeDrop(ItemAmountPair pair)
+    {
+         return false;
+    }
+
+    public void BeginHoverWith(ItemAmountPair pair)
+    {
+        //
+    }
+
+    public void EndHover()
+    {
+        //
+    }
+
+    public void HoverUpdate(ItemAmountPair pair)
+    {
+        //
+    }
+
+    public void ReceiveDrop(ItemAmountPair pair, Inventory origin)
+    {
+        //
     }
 
     [System.Serializable]
