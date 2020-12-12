@@ -79,7 +79,7 @@ public class ItemPlacingHandler : MonoBehaviour
                 var info = ItemsData.GetItemInfo(type);
                 if (info.CanBePlaced && info.Prefab != null && preview.WouldPlaceSuccessfully())
                 {
-                    if (inventoryManager.PlayerTryPay(type, 1))
+                    if (currentOrigin.TryRemove(new ItemAmountPair(type, 1)))
                     {
                         placingSound?.Play();
                         cameraController.Shake(preview.GetPlacePosition(tryplacePosition),CameraShakeType.hill,0.1f,10f);
