@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Security;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class AltarDialogVisualizer : MonoBehaviour
 {
@@ -14,12 +15,12 @@ public class AltarDialogVisualizer : MonoBehaviour
     [SerializeField] DialogElementVisualization dialogOptionPrefab, dialogCommentPrefab;
     DialogElementVisualization[] dialogOptions = new DialogElementVisualization[3];
 
-    [SerializeField] SpriteRenderer ray1, ray2;
+    [SerializeField] Light2D ray1, ray2;
     [SerializeField] GameObject particleSystem;
     [SerializeField] AnimationCurve opcacityVariance;
     [SerializeField] float opacityAdaptationSpeed = 4;
     float lightOpacityMultiplier = 0;
-    float lightOpacityMultiplierTarget = 0;
+    float lightOpacityMultiplierTarget = 0.25f;
 
     [SerializeField] AudioSource voicesAudio;
     [SerializeField] float voicesVolumeDecayMultiplier = 1f;
@@ -34,13 +35,12 @@ public class AltarDialogVisualizer : MonoBehaviour
     private void Update()
     {
         if (lightOpacityMultiplierTarget > lightOpacityMultiplier)
-            lightOpacityMultiplier =  Mathf.Clamp(lightOpacityMultiplier + Time.deltaTime * opacityAdaptationSpeed, 0,1);
+            lightOpacityMultiplier =  Mathf.Clamp(lightOpacityMultiplier + Time.deltaTime * opacityAdaptationSpeed, 0.25f,1);
         else if (lightOpacityMultiplierTarget < lightOpacityMultiplier)
-            lightOpacityMultiplier = Mathf.Clamp(lightOpacityMultiplier - Time.deltaTime * opacityAdaptationSpeed, 0, 1);
+            lightOpacityMultiplier = Mathf.Clamp(lightOpacityMultiplier - Time.deltaTime * opacityAdaptationSpeed, 0.25f, 1);
 
-        Color c = new Color(1,1,1, opcacityVariance.Evaluate(Time.time) * lightOpacityMultiplier);
-        ray1.color = c;
-        ray2.color = c;
+        ray1.intensity = opcacityVariance.Evaluate(Time.time) * lightOpacityMultiplier;
+        ray2.intensity = opcacityVariance.Evaluate(Time.time) * lightOpacityMultiplier * 0.5f;
 
         voicesVolumeTarget = Mathf.Clamp(voicesVolumeTarget - Time.deltaTime * voicesVolumeDecayMultiplier,0,1);
         voicesVolumeCurrent = Mathf.MoveTowards(voicesVolumeCurrent, voicesVolumeTarget, Time.deltaTime * voicesVolumeAdaptMultiplier);
@@ -59,7 +59,7 @@ public class AltarDialogVisualizer : MonoBehaviour
     {
         StopAllCoroutines();
 
-        lightOpacityMultiplierTarget = 0;
+        lightOpacityMultiplierTarget = 0.25f;
         particleSystem.SetActive(false);
 
         foreach (Transform child in transform)
