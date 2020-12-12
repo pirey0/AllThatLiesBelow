@@ -145,6 +145,8 @@ public class InventoryVisualizer : ScalingUIElementBase, IDropReceiver
 
     private void RecalculateUISize (int sizeCurrent)
     {
+        sizeCurrent = Mathf.Max(1, sizeCurrent);
+
         int width = widthInSlots;
         int height = heightInSlots;
 
