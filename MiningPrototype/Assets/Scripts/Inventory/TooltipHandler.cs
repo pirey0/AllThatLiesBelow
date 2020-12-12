@@ -14,20 +14,12 @@ public class TooltipHandler : MonoBehaviour
 
     Transform currentTarget;
 
-    private void OnEnable()
-    {
-        RenderPipelineManager.beginCameraRendering += OnCamRender;
-    }
 
-    private void OnCamRender(ScriptableRenderContext arg1, Camera arg2)
+    void LateUpdate() 
     {
         transform.position = Util.MouseToWorld(cameraController.Camera);
     }
 
-    private void OnDisable()
-    {
-        RenderPipelineManager.beginCameraRendering -= OnCamRender;
-    }
 
     public void Display(Transform target, string text, string subText)
     {

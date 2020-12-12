@@ -14,25 +14,12 @@ public class CameraPanner : MonoBehaviour
 
     float yOffset;
 
-    private void OnEnable()
-    {
-        RenderPipelineManager.beginCameraRendering += OnCameraRender;
-    }
-
-    private void OnDisable()
-    {
-        RenderPipelineManager.beginCameraRendering -= OnCameraRender;
-    }
-
-    private void Update()
+    private void LateUpdate()
     {
         UpdatePosition();
     }
 
-    private void OnCameraRender(ScriptableRenderContext context, Camera camera)
-    {
-        UpdatePosition();
-    }
+
 
     public void UpdatePosition()
     {
