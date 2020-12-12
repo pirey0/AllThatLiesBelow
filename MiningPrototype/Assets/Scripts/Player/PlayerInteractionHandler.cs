@@ -89,7 +89,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
                 if (Input.GetMouseButton(0))
                 {
-                    if (eventSystem.currentSelectedGameObject == null)
+                    if (eventSystem.currentSelectedGameObject == null && player.CanDig)
                         TryDig();
                 }
                 else if (Input.GetMouseButtonDown(1))
