@@ -9,7 +9,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
 
     [SerializeField] PlayerSettings settings;
     [SerializeField] Transform feet;
-    [SerializeField] AudioSource walking, jumpStart, jumpLand, fallDeath;
+    [SerializeField] AudioSource walking, walkingSlow, jumpStart, jumpLand, fallDeath;
 
     [SerializeField] protected bool slowWalkMode;
     [SerializeField] bool debug;
@@ -466,16 +466,28 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
     {
         if (on)
         {
-            if (!walking.isPlaying)
+            if (slowWalkMode)
             {
-                walking.Play();
+                if (!walkingSlow.isPlaying)
+                    walkingSlow.Play();
+            }
+            else
+            {
+                if (!walking.isPlaying)
+                    walking.Play();
             }
         }
         else
         {
-            if (walking.isPlaying)
+            if (slowWalkMode)
             {
-                walking.Pause();
+                if (walkingSlow.isPlaying)
+                    walkingSlow.Pause();
+            }
+            else
+            {
+                if (walking.isPlaying)
+                    walking.Pause();
             }
         }
     }
