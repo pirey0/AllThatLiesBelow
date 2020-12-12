@@ -178,6 +178,11 @@ public struct ItemAmountPair
         amount = itemAmount;
     }
 
+    public override string ToString()
+    {
+        return amount + " " + type.ToString();
+    }
+
     public bool IsNull()
     {
         return amount <= 0 || type == ItemType.None;
