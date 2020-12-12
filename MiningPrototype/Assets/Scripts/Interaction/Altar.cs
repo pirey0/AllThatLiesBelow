@@ -44,6 +44,7 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
     string[] availableRewards;
     string selectedReward;
     ItemAmountPair[] acceptedPayments;
+    bool discovered;
 
     private event System.Action NotifyForcedEnd;
 
@@ -299,6 +300,16 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
 
         return false;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!discovered && collision.TryGetComponent<BasePlayerStateMachine>(out var psm))
+        {
+            discovered = true;
+            progressionHandler.NotifyAtarDiscovery(altarID);
+        }
+    }
+
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()

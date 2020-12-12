@@ -5396,6 +5396,7 @@ GameObject:
   - component: {fileID: 8662552487730252634}
   - component: {fileID: 393558426851280072}
   - component: {fileID: 7976854011842829104}
+  - component: {fileID: 118588399297401695}
   m_Layer: 0
   m_Name: Altar
   m_TagString: Untagged
@@ -5443,6 +5444,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 6814695091287791489}
   spriteDefault: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   spriteOuline: {fileID: 2100000, guid: 1fd08d97b3eb5c44cb2ebd251450f370, type: 2}
+  altarID: 0
 --- !u!114 &8199703395424646328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5744,6 +5746,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 6
+--- !u!58 &118588399297401695
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6814695091287791494}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1.9852942}
+  serializedVersion: 2
+  m_Radius: 5
 --- !u!1 &7216267869949320864
 GameObject:
   m_ObjectHideFlags: 0

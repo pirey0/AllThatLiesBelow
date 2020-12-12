@@ -53,7 +53,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     {
         var altarsArr = GameObject.FindObjectsOfType<Altar>();
         altars = new List<Altar>(altarsArr);
-        altars.Sort((x,y) => (int) (y.transform.position.y - x.transform.position.y));
+        altars.Sort((x, y) => (int)(x.transform.position.y - y.transform.position.y));
 
         for (int i = 0; i < altars.Count; i++)
         {
@@ -88,6 +88,20 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
         letterBox = FindObjectOfType<Letterbox>();
         postbox = FindObjectOfType<DropBox>();
+    }
+
+    public void NotifyAtarDiscovery(int id)
+    {
+        Debug.Log("Discovered Altar: " + id);
+        if (data.lastFoundAltarID >= 0)
+        {
+            RemoveAltar(data.lastFoundAltarID);
+
+            if (data.lastFoundAltarID < id)
+                id -= 1; //as we remaped the list, the altar needs to go down by 1 if above the other
+        }
+
+        data.lastFoundAltarID = id;
     }
 
     public void Aquired(string topic, ItemAmountPair payment, int altarID)
@@ -254,26 +268,31 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
         if (data.sacrificedAtID >= 0)
         {
-            var altar = altars[data.sacrificedAtID];
-            if (altar != null)
-            {
-                Debug.Log("Deleting old altar");
-                Vector2Int pos = altar.transform.position.ToGridPosition();
-                pos.x -= 10;
-                pos.y -= 3;
-
-                Destroy(altar);
-                Util.IterateXY(20, (x, y) => map.SetMapAt(pos.x + x, pos.y + y, Tile.Make(TileType.Stone), TileUpdateReason.Generation));
-
-                //remap altars list and altarID to properly handle loading and data.sacrificeAtID;
-                altars.RemoveAt(data.sacrificedAtID);
-                for (int i = data.sacrificedAtID; i < altars.Count; i++)
-                {
-                    altars[i].SetAltarID(i);
-                }
-            }
-
+            RemoveAltar(data.sacrificedAtID);
             data.sacrificedAtID = -1; //reset sacrifice id, allowing new sacrifices
+            data.lastFoundAltarID = -1;
+        }
+    }
+
+    private void RemoveAltar(int id)
+    {
+        var altar = altars[id];
+        if (altar != null)
+        {
+            Debug.Log("Deleting old altar");
+            Vector2Int pos = altar.transform.position.ToGridPosition();
+            pos.x -= 10;
+            pos.y -= 3;
+
+            Destroy(altar);
+            Util.IterateXY(20, (x, y) => map.SetMapAt(pos.x + x, pos.y + y, Tile.Make(TileType.Stone), TileUpdateReason.Generation));
+
+            //remap altars list and altarID to properly handle loading and data.sacrificeAtID;
+            altars.RemoveAt(id);
+            for (int i = id; i < altars.Count; i++)
+            {
+                altars[i].SetAltarID(i);
+            }
         }
     }
 
@@ -348,6 +367,7 @@ public class ProgressionSaveData : SaveData
 
     //sacrifice
     public int sacrificedAtID = -1;
+    public int lastFoundAltarID = -1;
     public int sacrificeProgressionLevel = 1;
     public List<(string, ItemAmountPair)> aquiredList = new List<(string, ItemAmountPair)>();
 
