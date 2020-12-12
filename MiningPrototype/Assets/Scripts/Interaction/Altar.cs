@@ -125,7 +125,7 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
 
             case AltarState.RewardSelection:
                 string[] rewardsContent = new string[availableRewards.Length];
-                
+
                 for (int i = 0; i < availableRewards.Length; i++)
                     rewardsContent[i] = sacrificePricesParser.GetDisplayNameOf(availableRewards[i]);
 
@@ -195,9 +195,9 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
     public bool WouldTakeDrop(ItemAmountPair pair)
     {
 
-        if(currentState == AltarState.AwaitPayment || currentState == AltarState.AskForPayment)
+        if (currentState == AltarState.AwaitPayment || currentState == AltarState.AskForPayment)
         {
-            if(acceptedPayments == null ||acceptedPayments.Length == 0)
+            if (acceptedPayments == null || acceptedPayments.Length == 0)
             {
                 Debug.LogError("No accepted payments for " + selectedReward);
                 return false;
@@ -254,7 +254,8 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
             {
                 ChangeStateTo(AltarState.PaymentInsufficient);
             }
-        } else
+        }
+        else
         {
             ChangeStateTo(AltarState.PaymentRefused);
         }
@@ -303,10 +304,14 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!discovered && collision.TryGetComponent<BasePlayerStateMachine>(out var psm))
+        if (collision.TryGetComponent<PlayerInteractionHandler>(out var pi))
         {
-            discovered = true;
-            progressionHandler.NotifyAtarDiscovery(altarID);
+            if (!discovered)
+            {
+                discovered = true;
+                progressionHandler.NotifyAtarDiscovery(altarID);
+            }
+            pi.ForceInteractionWith(this);
         }
     }
 
