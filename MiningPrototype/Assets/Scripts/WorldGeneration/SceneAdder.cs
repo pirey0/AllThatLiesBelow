@@ -17,7 +17,10 @@ public class SceneAdder : StateListenerBehaviour
     [Zenject.Inject] SaveHandler saveHandler;
 
     MapAddition current;
+    int loadingIndex = 0;
 
+    public int LoadingTotal { get => addition.Count; }
+    public int LoadingCurrent { get => loadingIndex; }
 
     protected override void OnStateChanged(GameState.State newState)
     {
@@ -30,19 +33,19 @@ public class SceneAdder : StateListenerBehaviour
 
     private IEnumerator LoadAdditive(List<MapAddition> maps, bool transitionState)
     {
-        int i = 0;
+        loadingIndex = 0;
         Time.timeScale = 0;
 
-        while (i < maps.Count)
+        while (loadingIndex < maps.Count)
         {
-            current = maps[i];
+            current = maps[loadingIndex];
 
             saveHandler.LoadAdditive(current.SavedSceneFile, current.CollapseOffset().AsV3());
             Debug.Log("Loaded Scene " + current.SavedSceneFile.name);
 
             yield return null;
 
-            i++;
+            loadingIndex++;
         }
         Debug.Log("Scene Adder finished.");
         Time.timeScale = 1;
