@@ -152,19 +152,19 @@ public class DebugMode : MonoBehaviour
 
     private void Reward(AltarRewardType reward)
     {
-        progressionHandler.Aquired(reward.ToString(), ItemAmountPair.Nothing);
+        progressionHandler.Aquired(reward.ToString(), ItemAmountPair.Nothing, -1);
         progressionHandler.StartNextDay();
     }
 
     private void SacrificeItem(ItemType item)
     {
-        progressionHandler.Aquired(AltarRewardType.None.ToString(), new ItemAmountPair(item, 9999));
+        progressionHandler.Aquired(AltarRewardType.None.ToString(), new ItemAmountPair(item, 9999),-1);
         progressionHandler.StartNextDay();
     }
 
     private void Sacrifice(AltarRewardType reward, ItemType item)
     {
-        progressionHandler.Aquired(reward.ToString(), new ItemAmountPair(item, 9999));
+        progressionHandler.Aquired(reward.ToString(), new ItemAmountPair(item, 9999), -1);
         progressionHandler.StartNextDay();
     }
 

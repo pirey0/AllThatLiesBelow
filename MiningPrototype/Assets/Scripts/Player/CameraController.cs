@@ -31,17 +31,7 @@ public class CameraController : MonoBehaviour
             Camera.enabled = false;
     }
 
-    private void OnEnable()
-    {
-        RenderPipelineManager.beginCameraRendering += OnCameraRender;
-    }
-
-    private void OnDisable()
-    {
-        RenderPipelineManager.beginCameraRendering -= OnCameraRender;
-    }
-
-    private void OnCameraRender(ScriptableRenderContext context, Camera camera)
+    private void LateUpdate()
     {
         transform.position = target.position + offsetToTarget + cameraShaker.GetShakeAmount();
     }

@@ -74,7 +74,7 @@ public class RuntimeProceduralMap : RenderedMap
         tilesToStabilityCheck = null;
     }
 
-    protected override void OnStartAfterLoad()
+    protected override void OnRealStart()
     {
         RefreshAll();
         StartCoroutine(UpdateUnstableTilesRoutine());

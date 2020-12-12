@@ -13,7 +13,7 @@ public class SceneStartHandler : StateListenerBehaviour
         transitionEffectHandler.SetToBlack();
     }
 
-    protected override void OnStartAfterLoad()
+    protected override void OnRealStart()
     {
         transitionEffectHandler.FadeIn(FadeType.Circle);
     }

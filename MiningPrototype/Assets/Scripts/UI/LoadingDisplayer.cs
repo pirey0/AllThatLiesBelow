@@ -13,7 +13,7 @@ public class LoadingDisplayer : StateListenerBehaviour
         image.transform.Rotate(0, 0, Time.unscaledDeltaTime * rotSpeed);
     }
 
-    protected override void OnStartAfterLoad()
+    protected override void OnRealStart()
     {
         Destroy(gameObject);
     }

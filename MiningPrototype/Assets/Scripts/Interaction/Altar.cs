@@ -26,7 +26,7 @@ public enum AltarState
     PaymentRefused
 }
 
-public class Altar : MonoBehaviour, IInteractable, IDropReceiver
+public class Altar : StateListenerBehaviour, IInteractable, IDropReceiver
 {
     [SerializeField] Transform cameraTarget;
     [SerializeField] AltarDialogVisualizer visualizer;
@@ -34,6 +34,8 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
 
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Material spriteDefault, spriteOuline;
+    [SerializeField] [NaughtyAttributes.ReadOnly] int altarID;
+    [SerializeField] AudioSource voicesAudio;
 
     [Inject] ProgressionHandler progressionHandler;
     [Inject] CameraController cameraController;
@@ -43,10 +45,17 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
     string[] availableRewards;
     string selectedReward;
     ItemAmountPair[] acceptedPayments;
+    bool discovered;
 
     private event System.Action NotifyForcedEnd;
 
     private bool InInteraction { get => currentState != AltarState.Off; }
+
+    protected override void OnRealStart()
+    {
+        GetComponent<AudioSource>().Play();
+        voicesAudio.Play();
+    }
 
     public void BeginInteracting(GameObject interactor)
     {
@@ -56,6 +65,11 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
             ChangeStateTo(AltarState.PaymentAccepted);
         else
             ChangeStateTo(AltarState.Intro);
+    }
+
+    public void SetAltarID(int newId)
+    {
+        altarID = newId;
     }
 
     private void OnProgressed(int index)
@@ -118,7 +132,7 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
 
             case AltarState.RewardSelection:
                 string[] rewardsContent = new string[availableRewards.Length];
-                
+
                 for (int i = 0; i < availableRewards.Length; i++)
                     rewardsContent[i] = sacrificePricesParser.GetDisplayNameOf(availableRewards[i]);
 
@@ -188,9 +202,9 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
     public bool WouldTakeDrop(ItemAmountPair pair)
     {
 
-        if(currentState == AltarState.AwaitPayment || currentState == AltarState.AskForPayment)
+        if (currentState == AltarState.AwaitPayment || currentState == AltarState.AskForPayment)
         {
-            if(acceptedPayments == null ||acceptedPayments.Length == 0)
+            if (acceptedPayments == null || acceptedPayments.Length == 0)
             {
                 Debug.LogError("No accepted payments for " + selectedReward);
                 return false;
@@ -240,14 +254,15 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
                 }
 
                 ChangeStateTo(AltarState.PaymentAccepted);
-                progressionHandler.Aquired(selectedReward, payment);
+                progressionHandler.Aquired(selectedReward, payment, altarID);
                 inventoryPaidFrom.TryRemove(payment);
             }
             else
             {
                 ChangeStateTo(AltarState.PaymentInsufficient);
             }
-        } else
+        }
+        else
         {
             ChangeStateTo(AltarState.PaymentRefused);
         }
@@ -293,4 +308,25 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
 
         return false;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent<PlayerInteractionHandler>(out var pi))
+        {
+            if (!discovered)
+            {
+                discovered = true;
+                progressionHandler.NotifyAtarDiscovery(altarID);
+            }
+            pi.ForceInteractionWith(this);
+        }
+    }
+
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        UnityEditor.Handles.Label(transform.position, altarID.ToString());
+    }
+#endif
 }

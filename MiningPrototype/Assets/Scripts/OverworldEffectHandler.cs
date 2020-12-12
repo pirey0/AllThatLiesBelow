@@ -22,7 +22,7 @@ public class OverworldEffectHandler : StateListenerBehaviour
     Hut hut;
 
 
-    protected override void OnStartAfterLoad()
+    protected override void OnRealStart()
     {
         hut = FindObjectOfType<Hut>();
         if (hut != null)

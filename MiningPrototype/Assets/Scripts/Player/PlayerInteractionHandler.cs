@@ -194,15 +194,24 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
             {
                 if (hover != null)
                     hover.HoverExit();
-
-                Debug.Log("Started interacting with: " + hit.transform.name);
-                currentInteractable = interactable;
-                currentInteractable.SubscribeToForceQuit(OnInteractableForceQuit);
-                currentInteractable.BeginInteracting(gameObject);
-                Debug.DrawLine(GetPositionInGridV3(), hit.point, Color.green, 1f);
+                StartInteractionWith(interactable);
                 break;
             }
         }
+    }
+
+    private void StartInteractionWith(IInteractable interactable)
+    {
+        Debug.Log("Started interacting with: " + interactable.gameObject.name);
+        currentInteractable = interactable;
+        currentInteractable.SubscribeToForceQuit(OnInteractableForceQuit);
+        currentInteractable.BeginInteracting(gameObject);
+    }
+
+    public void ForceInteractionWith(IInteractable interactable)
+    {
+        TryStopInteracting();
+        StartInteractionWith(interactable);
     }
 
     private void OnInteractableForceQuit()

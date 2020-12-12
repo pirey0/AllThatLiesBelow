@@ -4991,7 +4991,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2da4e1b615d4ac9468bb2f718d12e2d0, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -5391,11 +5391,9 @@ GameObject:
   - component: {fileID: 2737784650533084980}
   - component: {fileID: -8800675860980122855}
   - component: {fileID: 1549756614959163788}
-  - component: {fileID: 1401196874}
-  - component: {fileID: 8662552487730252634}
-  - component: {fileID: 393558426851280072}
   - component: {fileID: 7976854011842829104}
-  - component: {fileID: 2581486309343201070}
+  - component: {fileID: 118588399297401695}
+  - component: {fileID: 6667937627407932554}
   m_Layer: 0
   m_Name: Altar
   m_TagString: Untagged
@@ -5443,6 +5441,8 @@ MonoBehaviour:
   spriteRenderer: {fileID: 6814695091287791489}
   spriteDefault: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   spriteOuline: {fileID: 2100000, guid: 1fd08d97b3eb5c44cb2ebd251450f370, type: 2}
+  altarID: 0
+  voicesAudio: {fileID: 1463294387}
 --- !u!212 &6814695091287791489
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5546,7 +5546,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 33251739e03cf384095c4cc22097497e, type: 2}
   m_audioClip: {fileID: 8300000, guid: 6958250455ce17d47b55afb3d4775a6d, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
@@ -5658,64 +5658,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!61 &1401196874
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6814695091287791494}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.044937134, y: 0.9375}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.4925373, y: 0.05882353}
-    oldSize: {x: 6.375, y: 4.5}
-    newSize: {x: 8.375, y: 2.125}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 7.4338017, y: 2.125}
-  m_EdgeRadius: 0
---- !u!58 &8662552487730252634
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6814695091287791494}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -1.99, y: 4.51}
-  serializedVersion: 2
-  m_Radius: 0.75
---- !u!58 &393558426851280072
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6814695091287791494}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 2.23, y: 3.79}
-  serializedVersion: 2
-  m_Radius: 0.75
 --- !u!114 &7976854011842829104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5729,7 +5671,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 6
---- !u!114 &2581486309343201070
+--- !u!58 &118588399297401695
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6814695091287791494}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1.9852942}
+  serializedVersion: 2
+  m_Radius: 4
+--- !u!114 &6667937627407932554
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
