@@ -8,7 +8,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] SceneReference playScene;
     [SerializeField] UnityEngine.UI.Button loadButton;
-
+    [SerializeField] Transform transform;
+    [SerializeField] float cameraSpeed, cameraDuration;
     private void Start()
     {
         SaveHandler.LoadFromSavefile = false;
@@ -17,11 +18,21 @@ public class MainMenu : MonoBehaviour
         {
             loadButton.interactable = false;
         }
+        StartCoroutine(CameraMovement());
     }
 
     public void MenueAction(string coroutineName)
     {
         StartCoroutine(coroutineName);
+    }
+
+    private IEnumerator CameraMovement()
+    {
+        for (float i = 0; i < cameraDuration; i += Time.deltaTime)
+        {
+            transform.position += new Vector3(0, cameraSpeed * Time.deltaTime, 0);
+            yield return null;
+        }
     }
 
     private IEnumerator Play()
