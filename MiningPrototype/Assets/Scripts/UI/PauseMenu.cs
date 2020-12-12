@@ -11,8 +11,6 @@ public class PauseMenu : StateListenerBehaviour
 
     [Zenject.Inject] ProgressionHandler progressionHandler;
 
-    bool isPaused;
-
     protected override void OnRealStart()
     {
         Unpause();
@@ -26,16 +24,19 @@ public class PauseMenu : StateListenerBehaviour
 
     public void TogglePause()
     {
-        if (isPaused)
+
+        if ( gameState.CurrentState == GameState.State.Paused)
+        {
             Unpause();
-        else
+        }
+        else if(gameState.CurrentState == GameState.State.Playing)
+        {
             Pause();
+        }
     }
 
     public void Pause()
     {
-        isPaused = true;
-
         Time.timeScale = 0f;
         darkoverlay.color = new Color(0, 0, 0, 0.66f);
 
@@ -43,12 +44,12 @@ public class PauseMenu : StateListenerBehaviour
         {
             child.gameObject.SetActive(true);
         }
+
+        gameState.ChangeStateTo(GameState.State.Paused);
     }
 
     public void Unpause()
     {
-        isPaused = false;
-
         if (gameState.Playing)
         {
             Time.timeScale = progressionHandler.ProgressionTimeScale;
@@ -64,6 +65,8 @@ public class PauseMenu : StateListenerBehaviour
         {
             child.gameObject.SetActive(false);
         }
+
+        gameState.ChangeStateTo(GameState.State.Playing);
     }
 
     public void ReturnToMainMenu()

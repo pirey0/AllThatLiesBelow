@@ -95,6 +95,7 @@ public class GameState : MonoBehaviour
         FullStart,
         Playing,
         Respawning,
+        Paused
     }
 }
 

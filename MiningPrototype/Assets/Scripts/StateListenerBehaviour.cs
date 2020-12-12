@@ -40,11 +40,18 @@ public class StateListenerBehaviour : MonoBehaviour
             case GameState.State.PostLoadFromFile:
                 OnPostLoadFromFile();
                 break;
+
+            case GameState.State.Paused:
+                OnPaused();
+                break;
         }
 
         OnStateChanged(newState);
     }
 
+    protected virtual void OnPaused()
+    {
+    }
 
     protected virtual void OnStateChanged(GameState.State newState)
     {
@@ -58,7 +65,6 @@ public class StateListenerBehaviour : MonoBehaviour
     {
 
     }
-
 
     protected virtual void OnPostSceneLoad()
     {
