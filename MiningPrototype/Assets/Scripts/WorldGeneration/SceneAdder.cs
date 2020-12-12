@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -52,7 +51,7 @@ public class SceneAdder : StateListenerBehaviour
     }
 
 
-
+#if UNITY_EDITOR
     void OnDrawGizmosSelected()
     {
         foreach (var a in addition)
@@ -67,11 +66,11 @@ public class SceneAdder : StateListenerBehaviour
 
             Gizmos.DrawWireCube(new Vector3(x, y, 0), new Vector3(sizeX, 0.5f));
             Gizmos.DrawWireCube(new Vector3(x - a.Size.x * 0.5f, y, 0), new Vector3(a.Size.x, sizeY));
-            Handles.Label(new Vector3(x - a.Size.x, y), a.Name);
+            UnityEditor.Handles.Label(new Vector3(x - a.Size.x, y), a.Name);
         }
-
         Gizmos.color = Color.white;
     }
+#endif
 }
 
 [System.Serializable]

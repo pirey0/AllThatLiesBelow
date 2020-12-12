@@ -26,13 +26,14 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     ProgressionSaveData data;
     Letterbox letterBox;
     DropBox postbox;
+    List<Altar> altars;
 
     public float SpeedMultiplyer { get => data.speedMultiplyer; }
     public float DigSpeedMultiplyer { get => data.digSpeedMultiplyer; }
     public float StrengthMultiplyer { get => data.strengthMultiplyer; }
 
     public float JumpMultiplyer { get => data.jumpMultiplyer; }
-    public bool DailySacrificeExpired { get => data.dailySacrificeExaused; }
+    public bool DailySacrificeExpired { get => data.sacrificedAtID >= 0; }
     public int SacrificeProgressionLevel { get => data.sacrificeProgressionLevel; }
     public bool IsMidas { get => data.isMidas; }
 
@@ -46,6 +47,18 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     {
         letterBox = FindObjectOfType<Letterbox>();
         postbox = FindObjectOfType<DropBox>();
+    }
+
+    protected override void OnStartAfterLoad()
+    {
+        var altarsArr = GameObject.FindObjectsOfType<Altar>();
+        altars = new List<Altar>(altarsArr);
+        altars.Sort((x,y) => (int) (y.transform.position.y - x.transform.position.y));
+
+        for (int i = 0; i < altars.Count; i++)
+        {
+            altars[i].SetAltarID(i);
+        }
     }
 
     protected override void OnNewGame()
@@ -77,10 +90,10 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
         postbox = FindObjectOfType<DropBox>();
     }
 
-    public void Aquired(string topic, ItemAmountPair payment)
+    public void Aquired(string topic, ItemAmountPair payment, int altarID)
     {
         Debug.Log(topic + " unlocked in the morning!");
-        data.dailySacrificeExaused = true;
+        data.sacrificedAtID = altarID;
         data.aquiredList.Add((topic, payment));
 
     }
@@ -239,9 +252,9 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
         }
         data.aquiredList.Clear();
 
-        if (data.dailySacrificeExaused)
+        if (data.sacrificedAtID >= 0)
         {
-            var altar = FindObjectOfType<Altar>();
+            var altar = altars[data.sacrificedAtID];
             if (altar != null)
             {
                 Debug.Log("Deleting old altar");
@@ -251,13 +264,18 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
                 Destroy(altar);
                 Util.IterateXY(20, (x, y) => map.SetMapAt(pos.x + x, pos.y + y, Tile.Make(TileType.Stone), TileUpdateReason.Generation));
+
+                //remap altars list and altarID to properly handle loading and data.sacrificeAtID;
+                altars.RemoveAt(data.sacrificedAtID);
+                for (int i = data.sacrificedAtID; i < altars.Count; i++)
+                {
+                    altars[i].SetAltarID(i);
+                }
             }
 
-            data.dailySacrificeExaused = false;
+            data.sacrificedAtID = -1; //reset sacrifice id, allowing new sacrifices
         }
-
     }
-
 
     /// <summary>
     /// Cheat to set the progression level.
@@ -329,7 +347,7 @@ public class ProgressionSaveData : SaveData
     public int day = 0;
 
     //sacrifice
-    public bool dailySacrificeExaused;
+    public int sacrificedAtID = -1;
     public int sacrificeProgressionLevel = 1;
     public List<(string, ItemAmountPair)> aquiredList = new List<(string, ItemAmountPair)>();
 

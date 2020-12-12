@@ -34,6 +34,7 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
 
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Material spriteDefault, spriteOuline;
+    [SerializeField] [NaughtyAttributes.ReadOnly] int altarID;
 
     [Inject] ProgressionHandler progressionHandler;
     [Inject] CameraController cameraController;
@@ -56,6 +57,11 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
             ChangeStateTo(AltarState.PaymentAccepted);
         else
             ChangeStateTo(AltarState.Intro);
+    }
+
+    public void SetAltarID(int newId)
+    {
+        altarID = newId;
     }
 
     private void OnProgressed(int index)
@@ -240,7 +246,7 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
                 }
 
                 ChangeStateTo(AltarState.PaymentAccepted);
-                progressionHandler.Aquired(selectedReward, payment);
+                progressionHandler.Aquired(selectedReward, payment, altarID);
                 inventoryPaidFrom.TryRemove(payment);
             }
             else
@@ -293,4 +299,11 @@ public class Altar : MonoBehaviour, IInteractable, IDropReceiver
 
         return false;
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        UnityEditor.Handles.Label(transform.position, altarID.ToString());
+    }
+#endif
 }
