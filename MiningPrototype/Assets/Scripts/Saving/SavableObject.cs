@@ -44,7 +44,8 @@ public enum SpawnableIDType
     Mushroom,
     Vine,
     LocationIndicator,
-    WoodenBlocking
+    WoodenBlocking,
+    Note
 }
 
 [System.Serializable]

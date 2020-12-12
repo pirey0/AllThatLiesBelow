@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b7300ef8eddd9c4489f79872e72934c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Hi, I am a Note! I will destroy myself when you close me.
+  text: 
 --- !u!114 &2856063689042086971
 MonoBehaviour:
   m_ObjectHideFlags: 0
