@@ -484,6 +484,11 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         }
     }
 
+    protected override void OnPaused()
+    {
+        SetMovingSound(false);
+    }
+
     private void TryPlay(AudioSource aus)
     {
         if (!aus.isPlaying)
