@@ -157,6 +157,9 @@ public class PlayerStateMachine : BasePlayerStateMachine
 
     public bool CanInteract()
     {
+        if (inCinematicMode)
+            return false;
+
         if (canInteractInStateMap.ContainsKey(CurrentStateName))
             return canInteractInStateMap[CurrentStateName].CanInteract;
         else
@@ -168,6 +171,9 @@ public class PlayerStateMachine : BasePlayerStateMachine
 
     public bool CanUseInventory()
     {
+        if (inCinematicMode)
+            return false;
+
         if (canInteractInStateMap.ContainsKey(CurrentStateName))
             return canInteractInStateMap[CurrentStateName].CanInventory;
         else

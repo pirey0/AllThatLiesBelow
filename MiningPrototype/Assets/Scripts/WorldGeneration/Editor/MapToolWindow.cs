@@ -86,10 +86,16 @@ public class MapToolWindow : EditorWindow
         {
             EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button("Save"))
+            {
                 currentEditorMap.SaveRecent();
+                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+            }
 
             if (GUILayout.Button("Save As"))
+            {
                 currentEditorMap.SaveAs();
+                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+            }
 
             EditorGUILayout.EndHorizontal();
         }
