@@ -20,6 +20,7 @@ public class Intro : StateListenerBehaviour
     [Zenject.Inject] CameraPanner cameraPanner;
 
     bool placedTorch;
+    bool placedLadder;
 
     protected override void OnNewGame()
     {
@@ -70,10 +71,16 @@ public class Intro : StateListenerBehaviour
         while (!placedTorch)
             yield return null;
 
-        placingHandler.Placed -= OnIntroPlaced;
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
         torchText = Instantiate(textPrefab, textSpawnPosition.position, Quaternion.identity, textCanvas.transform);
         torchText.Init(null, "I can use a ladder to get out of here.", 5);
+
+        while (!placedLadder)
+            yield return null;
+        placingHandler.Placed -= OnIntroPlaced;
+
+        torchText = Instantiate(textPrefab, textSpawnPosition.position, Quaternion.identity, textCanvas.transform);
+        torchText.Init(null, "It's not far now...", 5);
     }
 
     private void OnIntroPlaced(ItemType obj)
@@ -81,6 +88,11 @@ public class Intro : StateListenerBehaviour
         if (obj == ItemType.Torch)
         {
             placedTorch = true;
+        }
+
+        if(obj == ItemType.Ladder)
+        {
+            placedLadder = true;
         }
     }
 }
