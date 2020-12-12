@@ -12,7 +12,6 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
     [SerializeField] AudioSource walking, jumpStart, jumpLand, fallDeath;
 
     [SerializeField] bool slowWalkMode;
-
     [SerializeField] bool debug;
 
     StateMachine stateMachine;
@@ -28,6 +27,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
     float lastMineTimeStamp;
 
     private bool isGrounded;
+    private Vector2 oldVelocity;
     Vector2 rightWalkVector = Vector3.right;
     protected Rigidbody2D rigidbody;
     float horizontalSpeed;
@@ -97,6 +97,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         }
 
         stateMachine.Update();
+        oldVelocity = rigidbody.velocity;
     }
 
     private void SetupStateMachine()
@@ -265,7 +266,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
 
     private void JumpEnter()
     {
-        rigidbody.velocity = new Vector2(rigidbody.velocity.x, settings.jumpVelocity *GetJumpMultiplyer());
+        rigidbody.velocity = new Vector2(rigidbody.velocity.x, settings.jumpVelocity * GetJumpMultiplyer());
         lastJumpTimeStamp = Time.time;
         jumpStart?.Play();
     }
@@ -536,13 +537,10 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
     {
         UpdateWalkVector(collision);
 
-        if (collision.transform.position.y < transform.position.y)
+        if (-oldVelocity.y > settings.fallSpeedThatKills)
         {
-            if (collision.relativeVelocity.y > settings.fallSpeedThatKills)
-            {
-                Debug.Log("Killed from fall Damage with a speed of: " + collision.relativeVelocity.y);
-                stateMachine.ForceTransitionTo(s_fallDeath);
-            }
+            Debug.Log("Killed from fall Damage with a speed of: " + -oldVelocity.y);
+            stateMachine.ForceTransitionTo(s_fallDeath);
         }
     }
 
