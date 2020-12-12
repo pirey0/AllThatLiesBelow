@@ -29,7 +29,7 @@ public class SaveHandler : MonoBehaviour
 
     public static void Editor_SaveAs(string path)
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
 
         if (string.IsNullOrEmpty(path))
             path = UnityEditor.EditorUtility.SaveFilePanel("Save As...", "", "SavedScene", "bytes");
@@ -40,7 +40,7 @@ public class SaveHandler : MonoBehaviour
             UnityEditor.AssetDatabase.Refresh();
         }
 
-        #endif
+#endif
     }
 
     private static void BaseSave(string path)
@@ -135,8 +135,16 @@ public class SaveHandler : MonoBehaviour
             BinaryFormatter formatter = new BinaryFormatter();
             memStream.Write(saveAsset.bytes, 0, saveAsset.bytes.Length);
             memStream.Seek(0, SeekOrigin.Begin);
-
-            return (SaveDataCollection)formatter.Deserialize(memStream);
+            try
+            {
+                var data = (SaveDataCollection)formatter.Deserialize(memStream);
+                return data;
+            }
+            catch (System.Runtime.Serialization.SerializationException e)
+            {
+                Debug.LogError("Failed to deserialize " + saveAsset.name);
+                return null;
+            }
         }
     }
 

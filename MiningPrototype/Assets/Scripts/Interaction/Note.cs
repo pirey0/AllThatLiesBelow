@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Note : MirrorWorldFollower, IInteractable
+public class Note : MirrorWorldFollower, IInteractable, INonPersistantSavable
 {
-    [TextArea(5,10)]
+    [TextArea(5, 10)]
     [SerializeField] string text;
 
     [Zenject.Inject] ReadableItemHandler readableItemHandler;
@@ -15,7 +15,8 @@ public class Note : MirrorWorldFollower, IInteractable
 
     private void Start()
     {
-        id = readableItemHandler.AddNewReadable(text);
+        if (!string.IsNullOrEmpty(text))
+            id = readableItemHandler.AddNewReadable(text);
     }
 
     public void BeginInteracting(GameObject interactor)
@@ -44,5 +45,30 @@ public class Note : MirrorWorldFollower, IInteractable
     public void UnsubscribeToForceQuit(Action action)
     {
         forceQuit -= action;
+    }
+
+    public SpawnableSaveData ToSaveData()
+    {
+        NoteSaveData data = new NoteSaveData();
+        data.Text = text;
+        data.Position = new SerializedVector3(transform.position);
+        data.Rotation = new SerializedVector3(transform.eulerAngles);
+        data.SpawnableIDType = SpawnableIDType.Note;
+        return data;
+    }
+
+    public void Load(SpawnableSaveData data)
+    {
+        if(data is NoteSaveData sdata)
+        {
+            text = sdata.Text;
+            id = readableItemHandler.AddNewReadable(text);
+        }
+    }
+
+    [System.Serializable]
+    public class NoteSaveData: SpawnableSaveData
+    {
+        public string Text;
     }
 }
