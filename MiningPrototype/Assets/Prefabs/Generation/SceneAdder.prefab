@@ -134,18 +134,63 @@ MonoBehaviour:
     Size: {x: 10, y: 20}
     gizmoColor: {r: 0.5057874, g: 1, b: 0, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 384e070d285f1b64ab50c1903455e0df, type: 3}
-  - XOffsetRange: {x: 0.08, y: 0.56}
+  - XOffsetRange: {x: 0.08, y: 0.23}
     YOffset: 0.77
     Size: {x: 20, y: 20}
     gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  - XOffsetRange: {x: 0.08, y: 0.56}
+  - XOffsetRange: {x: 0.39, y: 0.56}
+    YOffset: 0.77
+    Size: {x: 20, y: 20}
+    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+    SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
+  - XOffsetRange: {x: 0.05, y: 0.26}
+    YOffset: 0.63
+    Size: {x: 20, y: 20}
+    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+    SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
+  - XOffsetRange: {x: 0.05, y: 0.71}
+    YOffset: 0.7
+    Size: {x: 20, y: 20}
+    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+    SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
+  - XOffsetRange: {x: 0.39, y: 0.68}
+    YOffset: 0.64
+    Size: {x: 20, y: 20}
+    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+    SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
+  - XOffsetRange: {x: 0.63, y: 0.86}
     YOffset: 0.62
     Size: {x: 20, y: 20}
     gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  - XOffsetRange: {x: 0.08, y: 0.56}
-    YOffset: 0.7
+  - XOffsetRange: {x: 0.06, y: 0.56}
+    YOffset: 0.58
+    Size: {x: 20, y: 20}
+    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+    SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
+  - XOffsetRange: {x: 0.09, y: 0.28}
+    YOffset: 0.52
+    Size: {x: 20, y: 20}
+    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+    SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
+  - XOffsetRange: {x: 0.57, y: 0.82}
+    YOffset: 0.52
+    Size: {x: 20, y: 20}
+    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+    SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
+  - XOffsetRange: {x: 0.57, y: 0.82}
+    YOffset: 0.73
+    Size: {x: 20, y: 20}
+    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+    SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
+  - XOffsetRange: {x: 0.17, y: 0.4}
+    YOffset: 0.46
+    Size: {x: 20, y: 20}
+    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+    SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
+  - XOffsetRange: {x: 0.54, y: 0.73}
+    YOffset: 0.44
     Size: {x: 20, y: 20}
     gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
