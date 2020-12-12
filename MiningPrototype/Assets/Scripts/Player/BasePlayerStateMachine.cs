@@ -468,28 +468,32 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         {
             if (slowWalkMode)
             {
-                if (!walkingSlow.isPlaying)
-                    walkingSlow.Play();
+                TryPlay(walkingSlow);
+                TryPause(walking);
             }
             else
             {
-                if (!walking.isPlaying)
-                    walking.Play();
+                TryPlay(walking);
+                TryPause(walkingSlow);
             }
         }
         else
         {
-            if (slowWalkMode)
-            {
-                if (walkingSlow.isPlaying)
-                    walkingSlow.Pause();
-            }
-            else
-            {
-                if (walking.isPlaying)
-                    walking.Pause();
-            }
+            walkingSlow.Pause();
+            walking.Pause();
         }
+    }
+
+    private void TryPlay(AudioSource aus)
+    {
+        if (!aus.isPlaying)
+            aus.Play();
+    }
+
+    private void TryPause(AudioSource aus)
+    {
+        if (aus.isPlaying)
+            aus.Pause();
     }
 
     private void OnCollisionExit2D(Collision2D collision)
