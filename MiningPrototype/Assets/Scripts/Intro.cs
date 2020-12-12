@@ -39,6 +39,7 @@ public class Intro : StateListenerBehaviour
         placedTorch = false;
         effectHandler.SetNight();
         effectHandler.SetSnowAmount(3);
+        player.CanDig = false;
         player.InCinematicMode = true;
         player.CinematicSlowWalk = true;
         player.CinematicHorizontal = horizontalSpeed;
