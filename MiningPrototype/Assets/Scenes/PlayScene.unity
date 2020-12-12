@@ -242,25 +242,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 115993272797162819, guid: 4aaa7bf81b4a5c34099006b07a549854, type: 3}
-      propertyPath: m_Size.x
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 115993272797162819, guid: 4aaa7bf81b4a5c34099006b07a549854, type: 3}
-      propertyPath: m_Size.y
-      value: 280
-      objectReference: {fileID: 0}
     - target: {fileID: 115993272797162940, guid: 4aaa7bf81b4a5c34099006b07a549854, type: 3}
       propertyPath: m_Name
       value: RockBackground
-      objectReference: {fileID: 0}
-    - target: {fileID: 1488277335682564202, guid: 4aaa7bf81b4a5c34099006b07a549854, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 279.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1488277335682564202, guid: 4aaa7bf81b4a5c34099006b07a549854, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 90.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4aaa7bf81b4a5c34099006b07a549854, type: 3}

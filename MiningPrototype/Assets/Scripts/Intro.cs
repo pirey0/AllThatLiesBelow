@@ -18,6 +18,7 @@ public class Intro : StateListenerBehaviour
     [Zenject.Inject] OverworldEffectHandler effectHandler;
     [Zenject.Inject] ItemPlacingHandler placingHandler;
     [Zenject.Inject] InventoryManager inventoryManager;
+    [Zenject.Inject] CameraPanner cameraPanner;
 
     bool placedTorch;
 
@@ -44,6 +45,7 @@ public class Intro : StateListenerBehaviour
         player.CinematicSlowWalk = true;
         player.CinematicHorizontal = horizontalSpeed;
         gatingInCave.enabled = false;
+        cameraPanner.EnterCinematicMode();
 
         for (int i = 0; i < texts.Count; i++)
         {
@@ -65,6 +67,7 @@ public class Intro : StateListenerBehaviour
         player.CinematicSlowWalk = false;
         gatingInCave.enabled = true;
         placingHandler.Placed += OnIntroPlaced;
+        cameraPanner.ExitCinematicMode();
 
         while (!placedTorch)
             yield return null;
