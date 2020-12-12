@@ -5387,7 +5387,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6814695091287791488}
   - component: {fileID: 21532903457594183}
-  - component: {fileID: 8199703395424646328}
   - component: {fileID: 6814695091287791489}
   - component: {fileID: 2737784650533084980}
   - component: {fileID: -8800675860980122855}
@@ -5396,6 +5395,7 @@ GameObject:
   - component: {fileID: 8662552487730252634}
   - component: {fileID: 393558426851280072}
   - component: {fileID: 7976854011842829104}
+  - component: {fileID: 2581486309343201070}
   m_Layer: 0
   m_Name: Altar
   m_TagString: Untagged
@@ -5442,21 +5442,6 @@ MonoBehaviour:
   testDialog: 
   spriteRenderer: {fileID: 6814695091287791489}
   spriteDefault: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  spriteOuline: {fileID: 2100000, guid: 1fd08d97b3eb5c44cb2ebd251450f370, type: 2}
---- !u!114 &8199703395424646328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6814695091287791494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df01105a907093e48993808b5c3fecd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 6814695091287791489}
-  spriteDefault: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   spriteOuline: {fileID: 2100000, guid: 1fd08d97b3eb5c44cb2ebd251450f370, type: 2}
 --- !u!212 &6814695091287791489
 SpriteRenderer:
@@ -5744,6 +5729,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 6
+--- !u!114 &2581486309343201070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6814695091287791494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df01105a907093e48993808b5c3fecd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: -6465566751694194690, guid: 9712f50582e773f48b3349bf1474009a, type: 3}
 --- !u!1 &7216267869949320864
 GameObject:
   m_ObjectHideFlags: 0

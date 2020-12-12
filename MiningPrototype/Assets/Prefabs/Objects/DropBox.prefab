@@ -97,9 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76080611653b95340b5a89f50a372a4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 2278384375153596689}
-  spriteDefault: {fileID: 2100000, guid: 2a2127f6c829dd548b5940b9ddee915d, type: 2}
-  spriteOuline: {fileID: 2100000, guid: 1fd08d97b3eb5c44cb2ebd251450f370, type: 2}
+  shader: {fileID: -6465566751694194690, guid: 9712f50582e773f48b3349bf1474009a, type: 3}
   sendable: 090000000a000000
   storeItemAudio: {fileID: 8426892092378465835}
   inventory:
