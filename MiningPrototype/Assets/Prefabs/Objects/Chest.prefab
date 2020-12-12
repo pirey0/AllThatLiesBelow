@@ -157,6 +157,7 @@ MonoBehaviour:
     content: []
   inventoryVisualizerPrefab: {fileID: 8727063801762088802, guid: c396613fa9613cb4d8d82148ef5649a7, type: 3}
   openSource: {fileID: 8202015808849809411}
+  receiveSource: {fileID: 8202015808849809411}
   inventoryVisualizerUpdates: 0
   isPlayerInventory: 0
 --- !u!82 &8202015808849809411
