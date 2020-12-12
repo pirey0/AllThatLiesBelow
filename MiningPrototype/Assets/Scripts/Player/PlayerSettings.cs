@@ -37,7 +37,6 @@ public class PlayerSettings : ScriptableObject
     public float climbIdleThreshold;
     public float idleThreshold;
 
-    public float overWorldHeight;
     public float timeToHidePickaxe;
     public float overworldTimeToHidePickaxe;
 

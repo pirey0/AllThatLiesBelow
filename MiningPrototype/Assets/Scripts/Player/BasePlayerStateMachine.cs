@@ -467,7 +467,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
 
     public bool InOverworld()
     {
-        return transform.position.y >= settings.overWorldHeight;
+        return transform.position.y >= Constants.OVERWORLD_START_Y;
     }
 
     private bool InClimbState()
