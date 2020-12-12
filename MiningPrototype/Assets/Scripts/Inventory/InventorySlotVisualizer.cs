@@ -94,6 +94,8 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
+        base.OnPointerEnter(eventData);
+
         if (showTooltipRoutine == null)
             showTooltipRoutine = StartCoroutine(TooltipCounterRoutine());
     }
@@ -107,6 +109,8 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
     public override void OnPointerExit(PointerEventData eventData)
     {
+        base.OnPointerExit(eventData);
+
         if (showTooltipRoutine != null)
         {
             StopCoroutine(showTooltipRoutine);
