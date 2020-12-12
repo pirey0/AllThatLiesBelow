@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 using System;
 using UnityEngine.EventSystems;
 
-public class PlayerInventoryOpener : Button
+public class PlayerInventoryOpener : Button, IDropReceiver
 {
     [SerializeField] Sprite closed, open;
     [SerializeField] public Canvas Canvas;
@@ -48,6 +48,31 @@ public class PlayerInventoryOpener : Button
     public override void OnPointerDown(PointerEventData eventData)
     {
         playerInteractionHandler.ToggleInventory();
+    }
+
+    public bool WouldTakeDrop(ItemAmountPair pair)
+    {
+        return playerInteractionHandler.WouldTakeDrop(pair);
+    }
+
+    public void BeginHoverWith(ItemAmountPair pair)
+    {
+        //
+    }
+
+    public void EndHover()
+    {
+        //
+    }
+
+    public void HoverUpdate(ItemAmountPair pair)
+    {
+        //
+    }
+
+    public void ReceiveDrop(ItemAmountPair pair, Inventory origin)
+    {
+        playerInteractionHandler.ReceiveDrop(pair, origin);
     }
 
     //public void UpdatePosition()
