@@ -28,3 +28,4 @@ MonoBehaviour:
   saveHandlerPrefab: {fileID: 8506050290013699022, guid: f30c95abd5a8ece49a62c184775eff1c, type: 3}
   gameStatePrefab: {fileID: 7686406743805718258, guid: 09f896c4580bede46830cc6661780fdf, type: 3}
   transitionEffectHandlerPrefab: {fileID: 443711060070812944, guid: e7ebbd7b13a82584bb4d79535af9baf7, type: 3}
+  overworldEffectsHandlerPrefab: {fileID: 7662845370832059530, guid: ef921a78cf8e6994ca562a5addf559d6, type: 3}

@@ -27,6 +27,13 @@ public class PlayerStateMachine : BasePlayerStateMachine
     Dictionary<string, PlayerStateInfo> canInteractInStateMap;
     RuntimeProceduralMap.MirrorState currentMirrorLoc;
 
+    public float CinematicHorizontal { get => cinematicHorizontal; set => cinematicHorizontal = value; }
+    public float CinematicVertical { get => cinematicVertical; set => cinematicVertical = value; }
+
+    public bool InCinematicMode { get => inCinematicMode; set => inCinematicMode = value; }
+
+    public bool CinematicSlowWalk { get => slowWalkMode; set => slowWalkMode = value; }
+
     protected override float GetHorizontalInput()
     {
         return inCinematicMode ? cinematicHorizontal : Input.GetAxis("Horizontal");

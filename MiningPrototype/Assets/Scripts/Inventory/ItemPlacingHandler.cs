@@ -23,6 +23,8 @@ public class ItemPlacingHandler : MonoBehaviour
 
     IDropReceiver currentReceiver;
 
+    public event System.Action<ItemType> Placed;
+
     public void Hide()
     {
         player.SetHeldItem(setToPickaxe: true);
@@ -84,6 +86,7 @@ public class ItemPlacingHandler : MonoBehaviour
                         placingSound?.Play();
                         cameraController.Shake(preview.GetPlacePosition(tryplacePosition),CameraShakeType.hill,0.1f,10f);
                         var go = diContainer.InstantiatePrefab(info.Prefab, preview.GetPlacePosition(tryplacePosition), Quaternion.identity, null);
+                        Placed?.Invoke(type);
                     }
                 }
             }

@@ -22,6 +22,7 @@ public class Bed : MonoBehaviour, IInteractable
     [Inject] ProgressionHandler progressionHandler;
     [Inject] InventoryManager inventoryManager;
     [Inject] SaveHandler saveHandler;
+    [Inject] OverworldEffectHandler effectHandler;
 
     string defaultWakeUpTest;
     bool sacrificedHappyness = false;
@@ -92,6 +93,7 @@ public class Bed : MonoBehaviour, IInteractable
             }
 
             progressionHandler.StartNextDay();
+            effectHandler.SetDay();
             playerToEnableAgain.Enable();
             saveHandler.Save();
             playerToEnableAgain.Disable();

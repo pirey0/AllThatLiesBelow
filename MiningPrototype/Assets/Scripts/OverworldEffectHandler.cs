@@ -3,24 +3,30 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OverworldEffectHandler : StateListenerBehaviour
 {
+
+    [SerializeField] Vector3 offset;
     [SerializeField] float fadeHeight;
     [SerializeField] float fadeThickness;
 
-    [SerializeField] SpriteRenderer vignetteRenderer;
+    [SerializeField] SpriteRenderer nightSky;
     [SerializeField] ParticleSystem snow, clouds;
     [SerializeField] float amountOfParticles;
     [SerializeField] AudioSource snowstormSounds, caveSounds, springSounds;
     [SerializeField] float maxSnowStormVolume, maxCaveVolume;
+    [SerializeField] bool isNight;
 
     [SerializeField] bool isSpring = false;
 
+    [Zenject.Inject] PlayerStateMachine player;
+
+    float snowMultiplyer;
     float alphaCalculatedBasedOnHeightOfPlayer;
     float audioSourceVolumeMultiplierThroughHut = 1;
     Hut hut;
-
 
     protected override void OnRealStart()
     {
@@ -28,6 +34,7 @@ public class OverworldEffectHandler : StateListenerBehaviour
         if (hut != null)
             hut.OnHutStateChange += OnHutStateChange;
 
+        transform.position = player.transform.position + offset;
         UpdateOverworldEffects();
     }
 
@@ -41,9 +48,29 @@ public class OverworldEffectHandler : StateListenerBehaviour
 
     private void FixedUpdate()
     {
+        transform.position = player.transform.position + offset;
+
         if (transform.position.y < fadeHeight - fadeThickness || transform.position.y > fadeHeight + fadeThickness)
             return;
 
+        UpdateOverworldEffects();
+    }
+
+    public void SetNight()
+    {
+        isNight = true;
+        UpdateOverworldEffects();
+    }
+
+    public void SetDay()
+    {
+        isNight = false;
+        UpdateOverworldEffects();
+    }
+
+    public void SetSnowAmount(float amount)
+    {
+        snowMultiplyer = amount;
         UpdateOverworldEffects();
     }
 
@@ -56,7 +83,7 @@ public class OverworldEffectHandler : StateListenerBehaviour
         if (snow != null)
         {
             var snowEmission = snow.emission;
-            snowEmission.rateOverTime = (1 - alphaCalculatedBasedOnHeightOfPlayer) * amountOfParticles * (isSpring?0f:1f);
+            snowEmission.rateOverTime = (1 - alphaCalculatedBasedOnHeightOfPlayer) * amountOfParticles * snowMultiplyer * (isSpring?0f:1f);
         }
 
         //clouds
@@ -66,15 +93,11 @@ public class OverworldEffectHandler : StateListenerBehaviour
             cloudEmission.rateOverTime = 0.1f;
         }
 
-
-        //vignette
-        if (vignetteRenderer != null)
-        {
-            vignetteRenderer.color = new Color(1, 1, 1, alphaCalculatedBasedOnHeightOfPlayer);
-        }
-
         //sounds
         UpdateSounds();
+
+        //NightSky
+        nightSky.gameObject.SetActive(isNight);
     }
 
     private void UpdateSounds()

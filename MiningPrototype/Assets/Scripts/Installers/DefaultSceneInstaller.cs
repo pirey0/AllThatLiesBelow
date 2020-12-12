@@ -8,11 +8,11 @@ public class DefaultSceneInstaller : ScriptableObjectInstaller<DefaultSceneInsta
 {
     [SerializeField] GameObject playerPrefab, progressionPrefab, readableItemPrefab, cameraPannerPrefab, cameraPrefab, itemPreviewPrefab, playerInventoryOpenerUIPrefab;
     [SerializeField] GameObject pauseMenuPrefab, toolTipPrefab, eventSystemPrefab, inWorldCanvasPrefab;
-    [SerializeField] GameObject debugModePrefab, inventoryManagerPrefab, saveHandlerPrefab, gameStatePrefab, transitionEffectHandlerPrefab;
+    [SerializeField] GameObject debugModePrefab, inventoryManagerPrefab, saveHandlerPrefab, gameStatePrefab, transitionEffectHandlerPrefab, overworldEffectsHandlerPrefab;
     
     public override void InstallBindings()
     {
-        Container.Bind(typeof(PlayerStateMachine), typeof(PlayerInteractionHandler), typeof(OverworldEffectHandler)).FromComponentInNewPrefab(playerPrefab).AsSingle().NonLazy();
+        Container.Bind(typeof(PlayerStateMachine), typeof(PlayerInteractionHandler)).FromComponentInNewPrefab(playerPrefab).AsSingle().NonLazy();
         Container.Bind(typeof(ProgressionHandler), typeof(SacrificeActions)).FromComponentInNewPrefab(progressionPrefab).AsSingle().NonLazy();
         Container.Bind<ReadableItemHandler>().FromComponentInNewPrefab(readableItemPrefab).AsSingle().NonLazy();
         Container.Bind<PlayerInventoryOpener>().FromComponentInNewPrefab(playerInventoryOpenerUIPrefab).AsSingle().NonLazy();
@@ -27,6 +27,7 @@ public class DefaultSceneInstaller : ScriptableObjectInstaller<DefaultSceneInsta
         Container.Bind<InventoryManager>().FromComponentInNewPrefab(inventoryManagerPrefab).AsSingle().NonLazy();
         Container.Bind<SaveHandler>().FromComponentInNewPrefab(saveHandlerPrefab).AsSingle().NonLazy();
         Container.Bind<GameState>().FromComponentInNewPrefab(gameStatePrefab).AsSingle().NonLazy();
+        Container.Bind<OverworldEffectHandler>().FromComponentInNewPrefab(overworldEffectsHandlerPrefab).AsSingle().NonLazy();
         
 
         if (DebugMode.DEBUG_POSSIBLE)

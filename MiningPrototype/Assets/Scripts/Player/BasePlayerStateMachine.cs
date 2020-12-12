@@ -11,7 +11,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
     [SerializeField] Transform feet;
     [SerializeField] AudioSource walking, jumpStart, jumpLand, fallDeath;
 
-    [SerializeField] bool slowWalkMode;
+    [SerializeField] protected bool slowWalkMode;
     [SerializeField] bool debug;
 
     StateMachine stateMachine;
@@ -216,30 +216,6 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
     private void Respawn()
     {
         gameState.ReloadScene();
-        return;
-
-        // no reload
-        var bed = GameObject.FindObjectOfType<Bed>();
-
-        if (bed != null)
-        {
-            transform.position = bed.transform.position;
-            FindObjectOfType<CameraPanner>().UpdatePosition();
-            stateMachine.ForceTransitionTo(s_idle);
-            bed.BeginInteracting(gameObject);
-            bed.WakeUpFromNightmare(gameObject);
-            Debug.Log("Respawning at bed: " + bed.name);
-        }
-        else
-        {
-            Debug.LogError("No bed found to respawn");
-            var pStart = GameObject.FindObjectOfType<LocationIndicator>();
-            if (pStart != null)
-            {
-                transform.position = pStart.transform.position;
-                stateMachine.ForceTransitionTo(s_longIdle);
-            }
-        }
     }
 
     protected virtual void DeathExit()

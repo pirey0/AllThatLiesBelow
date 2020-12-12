@@ -140,7 +140,7 @@ public class SaveHandler : MonoBehaviour
                 var data = (SaveDataCollection)formatter.Deserialize(memStream);
                 return data;
             }
-            catch (System.Runtime.Serialization.SerializationException e)
+            catch (System.Runtime.Serialization.SerializationException)
             {
                 Debug.LogError("Failed to deserialize " + saveAsset.name);
                 return null;
