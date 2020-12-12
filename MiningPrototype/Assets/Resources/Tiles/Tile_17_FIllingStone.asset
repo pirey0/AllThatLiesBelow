@@ -20,9 +20,13 @@ MonoBehaviour:
   Targetable: 1
   TargetPriority: 1
   StabilityAffected: 1
+  CrumbleThreshholdMultiplyer: 1.5
+  StabilityEffectMultiplyer: 1
   NotifiesInsteadOfCrumbling: 0
   CountsAsNeighbour: 1
   MinableInOverworld: 1
+  DamageIsInBackground: 0
+  DrawsToShifted: 0
   UseTilesFromOtherInfo: 0
   Tiles:
   - {fileID: 11400000, guid: 113cff870e20f2a4e887c1d5e8062b3e, type: 2}
