@@ -70,8 +70,8 @@ MonoBehaviour:
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
   - {x: -20, y: -2, z: 0}
-  - {x: 120, y: -2, z: 0}
-  - {x: 120, y: 21, z: 0}
+  - {x: 220, y: -2, z: 0}
+  - {x: 220, y: 21, z: 0}
   - {x: -20, y: 21, z: 0}
 --- !u!114 &5459514121501803425
 MonoBehaviour:

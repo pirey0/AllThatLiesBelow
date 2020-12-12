@@ -25,20 +25,20 @@ MonoBehaviour:
     customBlendFactors:
       multiplicative: 0
       additive: 0
-  - name: Blend Style 1
+  - name: Additive
     maskTextureChannel: 0
     renderTextureScale: 1
-    blendMode: 1
+    blendMode: 0
     customBlendFactors:
-      multiplicative: 0
-      additive: 0
-  - name: Blend Style 2
+      multiplicative: 0.5
+      additive: 0.5
+  - name: SlightAdd
     maskTextureChannel: 0
     renderTextureScale: 1
-    blendMode: 1
+    blendMode: 99
     customBlendFactors:
-      multiplicative: 0
-      additive: 0
+      multiplicative: 0.65
+      additive: 0.25
   - name: Blend Style 3
     maskTextureChannel: 0
     renderTextureScale: 1
