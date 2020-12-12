@@ -281,11 +281,11 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
         {
             Debug.Log("Deleting old altar");
             Vector2Int pos = altar.transform.position.ToGridPosition();
-            pos.x -= 10;
-            pos.y -= 3;
+            pos.x -= 5;
+            pos.y -= 2;
 
             Destroy(altar);
-            Util.IterateXY(20, (x, y) => map.SetMapAt(pos.x + x, pos.y + y, Tile.Make(TileType.Stone), TileUpdateReason.Generation));
+            Util.IterateXY(10, (x, y) => map.SetMapAt(pos.x + x, pos.y + y, Tile.Make(TileType.Stone), TileUpdateReason.Generation));
 
             //remap altars list and altarID to properly handle loading and data.sacrificeAtID;
             altars.RemoveAt(id);
