@@ -14,7 +14,7 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
     [Header("Inventory Owner")]
     [SerializeField] Inventory inventory;
     [SerializeField] InventoryVisualizer inventoryVisualizerPrefab;
-    [SerializeField] AudioSource openSource;
+    [SerializeField] AudioSource openSource, receiveSource;
     [SerializeField] bool inventoryVisualizerUpdates;
     [SerializeField] bool isPlayerInventory;
 
@@ -54,6 +54,9 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
         Debug.Log(name + ": Inventory Changed");
         if (state == InventoryState.Open && inventoryVisualizer != null)
             inventoryVisualizer.UpdateInventoryDisplay(add, pair);
+
+        if (add && receiveSource != null)
+            receiveSource.Play();
     }
 
     public virtual void OpenInventory()
