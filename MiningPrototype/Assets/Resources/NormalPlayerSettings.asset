@@ -21,7 +21,7 @@ MonoBehaviour:
   respawnCooldown: 5
   jumpCooldown: 0.25
   timeAfterGroundedToJump: 0.1
-  feetRadius: 0.4
+  feetRadius: 0.2
   maxDigDistance: 5
   digSpeed: 10
   an_Walk: {fileID: 11400000, guid: a277db9a3fae53741b035a9c4fb2951b, type: 2}
@@ -38,7 +38,6 @@ MonoBehaviour:
   climbPanSpeed: 2
   climbIdleThreshold: 0.2
   idleThreshold: 0.2
-  overWorldHeight: 280
   timeToHidePickaxe: 5
   overworldTimeToHidePickaxe: 1
   maxCarryWeight: 2147483647
