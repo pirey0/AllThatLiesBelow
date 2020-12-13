@@ -7,7 +7,7 @@ using Zenject;
 public class DefaultSceneInstaller : ScriptableObjectInstaller<DefaultSceneInstaller>
 {
     [SerializeField] GameObject playerPrefab, progressionPrefab, readableItemPrefab, cameraPannerPrefab, cameraPrefab, itemPreviewPrefab, playerInventoryOpenerUIPrefab;
-    [SerializeField] GameObject pauseMenuPrefab, toolTipPrefab, eventSystemPrefab, inWorldCanvasPrefab;
+    [SerializeField] GameObject pauseMenuPrefab, toolTipPrefab, eventSystemPrefab, inWorldCanvasPrefab, playerStatementsPrefab;
     [SerializeField] GameObject debugModePrefab, inventoryManagerPrefab, saveHandlerPrefab, gameStatePrefab, transitionEffectHandlerPrefab, overworldEffectsHandlerPrefab;
     
     public override void InstallBindings()
@@ -28,7 +28,7 @@ public class DefaultSceneInstaller : ScriptableObjectInstaller<DefaultSceneInsta
         Container.Bind<SaveHandler>().FromComponentInNewPrefab(saveHandlerPrefab).AsSingle().NonLazy();
         Container.Bind<GameState>().FromComponentInNewPrefab(gameStatePrefab).AsSingle().NonLazy();
         Container.Bind<OverworldEffectHandler>().FromComponentInNewPrefab(overworldEffectsHandlerPrefab).AsSingle().NonLazy();
-        
+        Container.Bind<PlayerStatementsHandler>().FromComponentInNewPrefab(playerStatementsPrefab).AsSingle().NonLazy();
 
         if (DebugMode.DEBUG_POSSIBLE)
         {

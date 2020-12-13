@@ -13,8 +13,6 @@ public class Bed : MonoBehaviour, IInteractable
     [SerializeField] Sprite empty, sleeping, wakeup, badDream;
     [SerializeField] Hut hut;
     [SerializeField] Image nightFadeToBlack;
-    [SerializeField] DialogElementVisualization wakeUpTextPrefab;
-    [SerializeField] RectTransform wakeUpTextParent;
 
     [SerializeField] string wakeUpText;
 
@@ -23,6 +21,7 @@ public class Bed : MonoBehaviour, IInteractable
     [Inject] InventoryManager inventoryManager;
     [Inject] SaveHandler saveHandler;
     [Inject] OverworldEffectHandler effectHandler;
+    [Inject] PlayerStatementsHandler playerStatements;
 
     string defaultWakeUpTest;
     bool sacrificedHappyness = false;
@@ -110,8 +109,7 @@ public class Bed : MonoBehaviour, IInteractable
 
             spriteRenderer.sprite = sacrificedHappyness? badDream:wakeup;
 
-            DialogElementVisualization text = Instantiate(wakeUpTextPrefab, wakeUpTextParent); //Safe no Injection needed
-            text.Init(null,wakeUpText,7f);
+            playerStatements.Say(wakeUpText,7f);
 
             if (!sacrificedHappyness)
             {

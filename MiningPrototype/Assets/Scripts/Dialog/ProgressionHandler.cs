@@ -28,6 +28,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     DropBox postbox;
     List<Altar> altars;
 
+    public int CurrentDay { get => data.day; }
     public float SpeedMultiplyer { get => data.speedMultiplyer; }
     public float DigSpeedMultiplyer { get => data.digSpeedMultiplyer; }
     public float StrengthMultiplyer { get => data.strengthMultiplyer; }

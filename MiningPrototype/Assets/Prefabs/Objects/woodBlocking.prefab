@@ -107,11 +107,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6083393409335566838}
   - component: {fileID: 2468477921333862588}
-  - component: {fileID: 8418320782892143835}
+  - component: {fileID: 3216925134662325709}
   - component: {fileID: 8188231926321218821}
   - component: {fileID: 2719924371247432394}
   m_Layer: 0
-  m_Name: woodenBlocking
+  m_Name: woodBlocking
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,7 +183,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8418320782892143835
+--- !u!114 &3216925134662325709
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -192,7 +192,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8356777212537755540}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9200139c1e629b4cacc782cfd4d7389, type: 3}
+  m_Script: {fileID: 11500000, guid: bc008ac9f2cd102458a7a7abaef703ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   overlayAnimator: {fileID: 1955792349929523899}
@@ -201,6 +201,7 @@ MonoBehaviour:
     type: 21
     amount: 4
   destroyEffects: {fileID: 4888635124280202427, guid: c7333c0e8139a984db63c0ab6a7f05ac, type: 3}
+  statement: I'm so tired, I should come back in the morning
 --- !u!114 &8188231926321218821
 MonoBehaviour:
   m_ObjectHideFlags: 0
