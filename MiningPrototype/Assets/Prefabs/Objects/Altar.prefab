@@ -5146,8 +5146,8 @@ MonoBehaviour:
   m_ShapePath:
   - {x: -5.5537643, y: 0.7097168, z: 0}
   - {x: 3.3516388, y: 0.4816246, z: 0}
-  - {x: 1.0026016, y: 16.544052, z: 0}
-  - {x: -2.9691086, y: 16.533028, z: 0}
+  - {x: 1.351893, y: 6.8135796, z: 0}
+  - {x: -3.51798, y: 6.8762503, z: 0}
 --- !u!1 &1147990462923261337
 GameObject:
   m_ObjectHideFlags: 0
@@ -5218,8 +5218,8 @@ MonoBehaviour:
   m_ShapePath:
   - {x: -1.3740387, y: 1.432663, z: 0}
   - {x: 1.8174667, y: 1.4055405, z: 0}
-  - {x: 1.0026016, y: 16.544052, z: 0}
-  - {x: -0.6242218, y: 16.533028, z: 0}
+  - {x: 1.2647877, y: 6.8472843, z: 0}
+  - {x: -0.72049713, y: 6.8934555, z: 0}
 --- !u!1 &1829960912542290287
 GameObject:
   m_ObjectHideFlags: 0
@@ -5393,7 +5393,6 @@ GameObject:
   - component: {fileID: 1549756614959163788}
   - component: {fileID: 7976854011842829104}
   - component: {fileID: 118588399297401695}
-  - component: {fileID: 6667937627407932554}
   m_Layer: 0
   m_Name: Altar
   m_TagString: Untagged
@@ -5687,19 +5686,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 1.9852942}
   serializedVersion: 2
   m_Radius: 4
---- !u!114 &6667937627407932554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6814695091287791494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df01105a907093e48993808b5c3fecd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shader: {fileID: -6465566751694194690, guid: 9712f50582e773f48b3349bf1474009a, type: 3}
 --- !u!1 &7216267869949320864
 GameObject:
   m_ObjectHideFlags: 0

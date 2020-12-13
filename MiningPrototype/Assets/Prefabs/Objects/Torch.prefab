@@ -4945,7 +4945,7 @@ MonoBehaviour:
     type: 17
     amount: 1
   destroyEffects: {fileID: 4888635124280202427, guid: c7333c0e8139a984db63c0ab6a7f05ac, type: 3}
-  z: 0.9
+  z: 0.5
   innerRadiusOverY:
     serializedVersion: 2
     m_Curve:
