@@ -27,12 +27,15 @@ public class OverworldEffectHandler : StateListenerBehaviour
     float alphaCalculatedBasedOnHeightOfPlayer;
     float audioSourceVolumeMultiplierThroughHut = 1;
     Hut hut;
+    Daylight daylight;
 
     protected override void OnRealStart()
     {
         hut = FindObjectOfType<Hut>();
         if (hut != null)
             hut.OnHutStateChange += OnHutStateChange;
+
+        daylight = FindObjectOfType<Daylight>();
 
         transform.position = player.transform.position + offset;
         UpdateOverworldEffects();
@@ -98,6 +101,7 @@ public class OverworldEffectHandler : StateListenerBehaviour
 
         //NightSky
         nightSky.gameObject.SetActive(isNight);
+        daylight?.SetIntensity(isNight ? Daylight.Lightmode.Night : Daylight.Lightmode.Day);
     }
 
     private void UpdateSounds()

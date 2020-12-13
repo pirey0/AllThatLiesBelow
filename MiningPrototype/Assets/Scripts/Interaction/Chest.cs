@@ -88,8 +88,6 @@ public class Chest : FallingTilemapCarvingEntity, IHoverable, IDropReceiver, INo
     {
         if(dataOr is ChestSaveData data)
         {
-            transform.position = data.Position.ToVector3();
-            transform.eulerAngles = data.Rotation.ToVector3();
             inventoryOwner.SetInventory(data.Inventory);
         }
     }
