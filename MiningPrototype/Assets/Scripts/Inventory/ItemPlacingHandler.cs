@@ -83,8 +83,7 @@ public class ItemPlacingHandler : MonoBehaviour
                 {
                     if (currentOrigin.TryRemove(new ItemAmountPair(type, 1)))
                     {
-                        placingSound?.Play();
-                        cameraController.Shake(preview.GetPlacePosition(tryplacePosition),CameraShakeType.hill,0.1f,10f);
+                        PlayEffectsFor(type, tryplacePosition);
                         var go = diContainer.InstantiatePrefab(info.Prefab, preview.GetPlacePosition(tryplacePosition), Quaternion.identity, null);
                         Placed?.Invoke(type);
                     }
@@ -92,6 +91,22 @@ public class ItemPlacingHandler : MonoBehaviour
             }
         }
     }
+
+
+    public void PlayEffectsFor(ItemType type, Vector3 position)
+    {
+        switch (type)
+        {
+            case ItemType.Torch:
+                break;
+
+            default:
+                placingSound?.Play();
+                cameraController.Shake(preview.GetPlacePosition(position), CameraShakeType.hill, 0.1f, 10f);
+                break;
+        }
+    }
+
 
     public void UpdatePosition(Vector3 position)
     {
@@ -125,7 +140,7 @@ public class ItemPlacingHandler : MonoBehaviour
                     dropReceiver = item.gameObject.GetComponentInParent<IDropReceiver>();
             }
         }
-        
+
 
         if (dropReceiver != currentReceiver)
         {

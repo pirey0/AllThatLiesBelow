@@ -11533,7 +11533,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1347807280}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -150.5, y: -25, z: 0}
+  m_LocalPosition: {x: -150.5, y: -25, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 651353525}
@@ -18122,8 +18122,6 @@ MonoBehaviour:
   badDream: {fileID: -3701871119570471886, guid: de8e2dca06e05c9499a8494f5f3fc615, type: 3}
   hut: {fileID: 9196140733936070507}
   nightFadeToBlack: {fileID: 1265940254218353640}
-  wakeUpTextPrefab: {fileID: 6443336625351124170, guid: a6c94ff23772b9247aedef0a985bd4dd, type: 3}
-  wakeUpTextParent: {fileID: 515095303579125958}
   wakeUpText: You wake up feeling well rested.
 --- !u!114 &304485021027826192
 MonoBehaviour:

@@ -6747,11 +6747,11 @@ MonoBehaviour:
     CarryItemState: 2
     PickaxeState: 0
   - StateName: Inventory
-    BodyAnimation: {fileID: 11400000, guid: 896fb86e033db8243bbed2e1d93c6fc2, type: 2}
-    HeadState: 0
+    BodyAnimation: {fileID: 11400000, guid: 032cff1f8108c1743afb6adbae6af0c4, type: 2}
+    HeadState: 1
     HandsState: 1
     CarryItemState: 1
-    PickaxeState: 1
+    PickaxeState: 2
   - StateName: Death
     BodyAnimation: {fileID: 11400000, guid: 3a8d0745eb0ffe6458c0773bd89b913c, type: 2}
     HeadState: 0

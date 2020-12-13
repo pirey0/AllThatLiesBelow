@@ -38,6 +38,9 @@ public class OverworldEffectHandler : StateListenerBehaviour
         daylight = FindObjectOfType<Daylight>();
 
         transform.position = cam.transform.position + offset;
+        caveSounds.Play();
+        snowstormSounds.Play();
+        springSounds.Play();
         UpdateOverworldEffects();
     }
 
@@ -79,6 +82,7 @@ public class OverworldEffectHandler : StateListenerBehaviour
 
     private void UpdateOverworldEffects()
     {
+
         float height = transform.position.y;
         alphaCalculatedBasedOnHeightOfPlayer = Mathf.Clamp((fadeHeight - height) / fadeThickness, 0, 1);
 
