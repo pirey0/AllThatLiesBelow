@@ -59,17 +59,25 @@ public class CameraShaker : MonoBehaviour
                 float shakeIntensity = shakes[i].GetIntensity(transform.position);
 
                 if (shakeIntensity < 0)
+                {
                     shakes.RemoveAt(i);
-                else
-                    intensity += shakeIntensity;
+                }
+                else if (shakeIntensity > intensity)
+                {
+                    intensity = shakeIntensity;
+                }
             }
 
             if (intensity > 0)
             {
-
                 intensity *= 10 * Time.deltaTime;
                 shakeAmount = Vector2.MoveTowards(shakeAmount, new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)), intensity);
             }
+            else
+            {
+                shakeAmount = Vector2.zero;
+            }
+
             yield return null;
         }
     }
