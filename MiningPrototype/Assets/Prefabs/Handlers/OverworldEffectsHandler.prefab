@@ -14569,7 +14569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ae3b33064b4fcb4ba3c35b475399d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: 8, z: 0}
+  offset: {x: 0, y: 8, z: 10}
   fadeHeight: 285
   fadeThickness: 2
   nightSky: {fileID: 7662845369816245615}
