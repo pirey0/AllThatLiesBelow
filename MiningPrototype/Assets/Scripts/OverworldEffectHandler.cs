@@ -13,7 +13,7 @@ public class OverworldEffectHandler : StateListenerBehaviour
     [SerializeField] float fadeThickness;
 
     [SerializeField] SpriteRenderer nightSky;
-    [SerializeField] ParticleSystem snow, clouds;
+    [SerializeField] ParticleSystem snow, snowRight, snowLeft, clouds;
     [SerializeField] float amountOfParticles;
     [SerializeField] AudioSource snowstormSounds, caveSounds, springSounds;
     [SerializeField] float maxSnowStormVolume, maxCaveVolume;
@@ -85,8 +85,14 @@ public class OverworldEffectHandler : StateListenerBehaviour
         //snow
         if (snow != null)
         {
+            float rate = (1 - alphaCalculatedBasedOnHeightOfPlayer) * amountOfParticles * snowMultiplyer * (isSpring ? 0f : 1f);
             var snowEmission = snow.emission;
-            snowEmission.rateOverTime = (1 - alphaCalculatedBasedOnHeightOfPlayer) * amountOfParticles * snowMultiplyer * (isSpring ? 0f : 1f);
+            snowEmission.rateOverTime = rate;
+            snowEmission = snowRight.emission;
+            snowEmission.rateOverTime = rate;
+            snowEmission = snowLeft.emission;
+            snowEmission.rateOverTime = rate;
+            //3 emitters just for worldmirroring :c
         }
 
         //clouds

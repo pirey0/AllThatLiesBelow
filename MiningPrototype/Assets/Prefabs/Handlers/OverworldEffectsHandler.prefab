@@ -14574,6 +14574,8 @@ MonoBehaviour:
   fadeThickness: 2
   nightSky: {fileID: 7662845369816245615}
   snow: {fileID: 6157672733236823859}
+  snowRight: {fileID: 980119282361188535}
+  snowLeft: {fileID: 7500118368573604000}
   clouds: {fileID: 7662845370504363679}
   amountOfParticles: 100
   snowstormSounds: {fileID: 7662845370832059535}
