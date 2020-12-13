@@ -235,18 +235,19 @@ public static class MapHelper
         return true;
     }
 
-    public static int AirTileCountAbove(RuntimeProceduralMap map, Vector2Int coordinate)
+    public static int AirTileCountAbove(RuntimeProceduralMap map, Vector2Int coordinate, bool entitiesAsAir)
     {
-        return AirTileCount(map, coordinate, Direction.Up);
+        return AirTileCount(map, coordinate, Direction.Up, entitiesAsAir);
     }
 
-    public static int AirTileCount(BaseMap map, Vector2Int coordinate, Direction direction)
+    public static int AirTileCount(BaseMap map, Vector2Int coordinate, Direction direction, bool entitiesAsAir)
     {
         int count = 0;
 
         while (!map.IsOutOfBounds(coordinate.x, coordinate.y))
         {
-            if (map.IsAirAt(coordinate.x, coordinate.y) )//|| map[coordinate].Type == TileType.CollapsableEntity || map[coordinate].Type == TileType.FloatingEntity)
+            bool airEntity = (entitiesAsAir && (map[coordinate].Type == TileType.CollapsableEntity || map[coordinate].Type == TileType.FloatingEntity));
+            if (map.IsAirAt(coordinate.x, coordinate.y) || airEntity)
             {
                 coordinate += direction.AsV2Int();
                 count++;
