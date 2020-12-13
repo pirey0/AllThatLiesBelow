@@ -17,13 +17,14 @@ public class ItemInfo : ScriptableObject
     [Header("PlacableObject")]
     public bool CanBePlaced;
     public Sprite PickupHoldSprite;
+    public Vector2 PickupHoldOffset;
     public GameObject PickupPreviewPrefab;
     public GameObject Prefab;
 
     [Header("ReadableItem")]
     public bool AmountIsUniqueID;
 
-    [Header("nurnable")]
+    [Header("Burnable")]
     public bool IsBurnable;
 
     [Header("Altar Words used")]

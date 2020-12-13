@@ -48,7 +48,7 @@ public class ItemPlacingHandler : MonoBehaviour
             if (info.PickupPreviewPrefab != null)
             {
                 player.SetHeldItem(setToPickaxe: false);
-                player.SetHeldItemSprite(info.PickupHoldSprite);
+                player.SetHeldItemSprite(info);
 
                 var go = diContainer.InstantiatePrefab(info.PickupPreviewPrefab);
                 previewTransform = go.transform;

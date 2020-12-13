@@ -20,7 +20,9 @@ MonoBehaviour:
   Weight: 1
   CanBePlaced: 1
   PickupHoldSprite: {fileID: 8724308943522155073, guid: 7c7b8753eb0e3e6418a7dc6d095274ee, type: 3}
+  PickupHoldOffset: {x: 0, y: 1}
   PickupPreviewPrefab: {fileID: 1854387351486894348, guid: 3b92e998ec5d8b14eaad124eb56d62fa, type: 3}
   Prefab: {fileID: 8197557817492272551, guid: 370ed7f2df9c18b4a8f97abbc72879ad, type: 3}
   AmountIsUniqueID: 0
+  IsBurnable: 0
   AltarWords: []

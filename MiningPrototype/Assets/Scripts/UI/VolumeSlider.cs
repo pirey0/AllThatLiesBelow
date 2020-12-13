@@ -6,20 +6,30 @@ using UnityEngine.UI;
 
 public class VolumeSlider : MonoBehaviour
 {
+    const string VOLUME_KEY = "MasterVolume";
     [SerializeField] AudioMixer mixer;
     [SerializeField] Slider slider;
 
     private void Start()
     {
-        if (mixer.GetFloat("MasterVolume", out float vol))
+        if (PlayerPrefs.HasKey(VOLUME_KEY))
         {
-            slider.value = DBTo01(vol);
+            float val = PlayerPrefs.GetFloat(VOLUME_KEY);
+            slider.value = val;
+            mixer.SetFloat(VOLUME_KEY, SliderToDB(val));
+        }
+        else
+        {
+            slider.value = 1;
+            mixer.SetFloat(VOLUME_KEY, SliderToDB(1));
+            PlayerPrefs.SetFloat(VOLUME_KEY, 1);
         }
     }
 
     public void SetVolume(float s01)
     {
-        mixer.SetFloat("MasterVolume", SliderToDB(s01));
+        mixer.SetFloat(VOLUME_KEY, SliderToDB(s01));
+        PlayerPrefs.SetFloat(VOLUME_KEY, s01);
     }
 
     // See https://sound.stackexchange.com/questions/38722/convert-db-value-to-linear-scale

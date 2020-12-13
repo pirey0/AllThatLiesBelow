@@ -16,9 +16,13 @@ MonoBehaviour:
   DisplayName: Dynamite
   DisplayTooltip: Can be used to boom
   DisplaySprite: {fileID: 21300000, guid: c7e59290fc9293b40aa81c41491ba40e, type: 3}
+  DisplaySpriteRead: {fileID: 0}
   Weight: 20
   CanBePlaced: 1
   PickupHoldSprite: {fileID: 21300000, guid: c7e59290fc9293b40aa81c41491ba40e, type: 3}
+  PickupHoldOffset: {x: 0, y: 1}
   PickupPreviewPrefab: {fileID: 6187845789253255711, guid: 5e4f4f6365139664ebc39b42229671b7, type: 3}
   Prefab: {fileID: 4133852667664774813, guid: 3fb795502c0d6b84ea3014fe94a5b415, type: 3}
   AmountIsUniqueID: 0
+  IsBurnable: 0
+  AltarWords: []

@@ -489,9 +489,10 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
             heldItemPreview.sprite = null;
     }
 
-    public void SetHeldItemSprite(Sprite sprite)
+    public void SetHeldItemSprite(ItemInfo item)
     {
-        heldItemPreview.sprite = sprite;
+        heldItemPreview.sprite = item.PickupHoldSprite;
+        heldItemPreview.transform.localPosition = item.PickupHoldOffset;
     }
 
 
