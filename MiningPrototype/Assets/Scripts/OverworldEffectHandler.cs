@@ -23,7 +23,7 @@ public class OverworldEffectHandler : StateListenerBehaviour
 
     [Zenject.Inject] PlayerStateMachine player;
 
-    float snowMultiplyer;
+    float snowMultiplyer = 1;
     float alphaCalculatedBasedOnHeightOfPlayer;
     float audioSourceVolumeMultiplierThroughHut = 1;
     Hut hut;
@@ -86,7 +86,7 @@ public class OverworldEffectHandler : StateListenerBehaviour
         if (snow != null)
         {
             var snowEmission = snow.emission;
-            snowEmission.rateOverTime = (1 - alphaCalculatedBasedOnHeightOfPlayer) * amountOfParticles * snowMultiplyer * (isSpring?0f:1f);
+            snowEmission.rateOverTime = (1 - alphaCalculatedBasedOnHeightOfPlayer) * amountOfParticles * snowMultiplyer * (isSpring ? 0f : 1f);
         }
 
         //clouds
@@ -113,9 +113,10 @@ public class OverworldEffectHandler : StateListenerBehaviour
 
             if (snowstormSounds != null)
                 snowstormSounds.volume = 0;
-        } else
+        }
+        else
         {
-            if(springSounds != null)
+            if (springSounds != null)
                 springSounds.volume = 0;
 
             if (snowstormSounds != null)
