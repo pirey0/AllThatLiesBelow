@@ -21,7 +21,7 @@ public class OverworldEffectHandler : StateListenerBehaviour
 
     [SerializeField] bool isSpring = false;
 
-    [Zenject.Inject] PlayerStateMachine player;
+    [Zenject.Inject] CameraController cam;
 
     float snowMultiplyer = 1;
     float alphaCalculatedBasedOnHeightOfPlayer;
@@ -37,7 +37,7 @@ public class OverworldEffectHandler : StateListenerBehaviour
 
         daylight = FindObjectOfType<Daylight>();
 
-        transform.position = player.transform.position + offset;
+        transform.position = cam.transform.position + offset;
         UpdateOverworldEffects();
     }
 
@@ -51,7 +51,7 @@ public class OverworldEffectHandler : StateListenerBehaviour
 
     private void FixedUpdate()
     {
-        transform.position = player.transform.position + offset;
+        transform.position = cam.transform.position + offset;
 
         if (transform.position.y < fadeHeight - fadeThickness || transform.position.y > fadeHeight + fadeThickness)
             return;
