@@ -54,7 +54,7 @@ public class HoverHighlighter : MonoBehaviour, IHoverable
         }
     }
 
-    private void Start()
+    private void OnEnable()
     {
         parentRenderer = GetComponent<SpriteRenderer>();
     }
