@@ -399,7 +399,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
             if (hit.transform.TryGetComponent(out IInteractable interactable))
             {
-                if (interactable == currentInteractable && !itemPlacingHandler.IsDraggingItem)
+                if (interactable == currentInteractable)
                 {
                     TryStopInteracting();
                 }

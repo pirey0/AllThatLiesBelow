@@ -20,7 +20,7 @@ public class ItemPlacingHandler : MonoBehaviour
 
     public bool IsDraggingItem
     {
-        get => (currentHeld != null);
+        get => (currentHeld != null && currentHeld.type != ItemType.None);
     }
 
     Transform previewTransform;
