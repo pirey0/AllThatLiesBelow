@@ -246,7 +246,8 @@ public static class MapHelper
 
         while (!map.IsOutOfBounds(coordinate.x, coordinate.y))
         {
-            bool airEntity = (entitiesAsAir && (map[coordinate].Type == TileType.CollapsableEntity || map[coordinate].Type == TileType.FloatingEntity));
+            var t = map[coordinate].Type;
+            bool airEntity = (entitiesAsAir && (t == TileType.CollapsableEntity || t == TileType.FloatingEntity ||t == TileType.CollapsableEntityNotNeighbour ||t== TileType.FloatingEntityNotNeighbour));
             if (map.IsAirAt(coordinate.x, coordinate.y) || airEntity)
             {
                 coordinate += direction.AsV2Int();
