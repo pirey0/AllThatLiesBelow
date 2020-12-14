@@ -18,6 +18,11 @@ public class ItemPlacingHandler : MonoBehaviour
     ItemAmountPair currentHeld;
     Inventory currentOrigin;
 
+    public bool IsDraggingItem
+    {
+        get => (currentHeld != null);
+    }
+
     Transform previewTransform;
     IItemPreview preview;
 

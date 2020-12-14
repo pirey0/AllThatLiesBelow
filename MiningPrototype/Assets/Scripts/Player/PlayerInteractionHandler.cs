@@ -26,6 +26,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     [Inject] CameraController cameraController;
     [Inject] EventSystem eventSystem;
     [Inject] RuntimeProceduralMap map;
+    [Inject] ItemPlacingHandler itemPlacingHandler;
 
     PlayerVisualController visualController;
     Vector2Int? gridDigTarget, previousGridDigTarget;
@@ -89,7 +90,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
                 if (Input.GetMouseButton(0))
                 {
-                    if (eventSystem.currentSelectedGameObject == null && player.CanDig)
+                    if (eventSystem.currentSelectedGameObject == null && player.CanDig && !itemPlacingHandler.IsDraggingItem)
                         TryDig();
                 }
                 else if (Input.GetMouseButtonDown(1))
@@ -398,8 +399,10 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
             if (hit.transform.TryGetComponent(out IInteractable interactable))
             {
-                if (interactable == currentInteractable)
+                if (interactable == currentInteractable && !itemPlacingHandler.IsDraggingItem)
+                {
                     TryStopInteracting();
+                }
             }
         }
     }
