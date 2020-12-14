@@ -3,11 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chest : FallingTilemapCarvingEntity, IHoverable, IDropReceiver, INonPersistantSavable
+public class Chest : FallingTilemapCarvingEntity, IDropReceiver, INonPersistantSavable
 {
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Sprite chestOpen, chestClosed;
-    [SerializeField] Material defaultMat, outlineMat;
     [SerializeField] InventoryOwner inventoryOwner;
 
     protected override void Start()
@@ -29,18 +28,6 @@ public class Chest : FallingTilemapCarvingEntity, IHoverable, IDropReceiver, INo
                 spriteRenderer.sprite = chestClosed;
                 break;
         }
-    }
-
-    public void HoverEnter()
-    {
-        spriteRenderer.material = outlineMat;
-        spriteRenderer.color = new Color(0.8f, 0.8f, 0.8f);
-    }
-
-    public void HoverExit()
-    {
-        spriteRenderer.material = defaultMat;
-        spriteRenderer.color = Color.white;
     }
 
     public void HoverUpdate()

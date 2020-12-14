@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2407299111015795952}
   - component: {fileID: 8202015808849809411}
   - component: {fileID: 7396027554805798268}
+  - component: {fileID: 9137924796561074552}
   m_Layer: 13
   m_Name: Chest
   m_TagString: Untagged
@@ -137,8 +138,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 8202015808849809422}
   chestOpen: {fileID: -6834524911116659543, guid: eb18a1feb1c0b324da6e2b9e4d525a9f, type: 3}
   chestClosed: {fileID: 5045073161074915229, guid: eb18a1feb1c0b324da6e2b9e4d525a9f, type: 3}
-  defaultMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  outlineMat: {fileID: 2100000, guid: 1fd08d97b3eb5c44cb2ebd251450f370, type: 2}
   inventoryOwner: {fileID: 2407299111015795952}
 --- !u!114 &2407299111015795952
 MonoBehaviour:
@@ -277,3 +276,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &9137924796561074552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8202015808849809410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df01105a907093e48993808b5c3fecd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: -6465566751694194690, guid: 9712f50582e773f48b3349bf1474009a, type: 3}
