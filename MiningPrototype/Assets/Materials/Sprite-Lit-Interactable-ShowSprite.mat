@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sprite-Lit-Interactable
+  m_Name: Sprite-Lit-Interactable-ShowSprite
   m_Shader: {fileID: -6465566751694194690, guid: 9712f50582e773f48b3349bf1474009a, type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 4
@@ -38,11 +38,11 @@ Material:
     m_Floats:
     - Boolean_8FA6EF77: 0
     - _EnableExternalAlpha: 0
-    - _ShowSprite: 0
+    - _ShowSprite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 0}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OverlayColor: {r: 0, g: 0, b: 0, a: 0.1960784}
+    - _OverlayColor: {r: 1, g: 1, b: 1, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

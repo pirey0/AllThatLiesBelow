@@ -16,6 +16,7 @@ public class Intro : StateListenerBehaviour
     [Zenject.Inject] OverworldEffectHandler effectHandler;
     [Zenject.Inject] ItemPlacingHandler placingHandler;
     [Zenject.Inject] InventoryManager inventoryManager;
+    [Zenject.Inject] PlayerInventoryOpener playerInventoryOpener;
     [Zenject.Inject] CameraPanner cameraPanner;
     [Zenject.Inject] PlayerStatementsHandler playerStatements;
 
@@ -36,6 +37,7 @@ public class Intro : StateListenerBehaviour
 
     IEnumerator IntroCoroutine()
     {
+        playerInventoryOpener.Hide();
         inventoryManager.PlayerCollects(ItemType.Torch, 1);
         inventoryManager.PlayerCollects(ItemType.Ladder, 1);
         placedTorch = false;
@@ -67,8 +69,13 @@ public class Intro : StateListenerBehaviour
         placingHandler.Placed += OnIntroPlaced;
         cameraPanner.ExitCinematicMode();
 
+        playerInventoryOpener.StartBlinking();
+        playerInventoryOpener.Show();
+
         while (!placedTorch)
             yield return null;
+
+        introLight.intensity = 0.8f;
 
         yield return new WaitForSeconds(1);
         playerStatements.Say("I can use a ladder to get out of here.", 5);
@@ -77,7 +84,6 @@ public class Intro : StateListenerBehaviour
             yield return null;
         placingHandler.Placed -= OnIntroPlaced;
 
-        introLight.intensity = 0.8f;
         playerStatements.Say("It's not far now...", 5);
         player.CanDig = true;
     }
