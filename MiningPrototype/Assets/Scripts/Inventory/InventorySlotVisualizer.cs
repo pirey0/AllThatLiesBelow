@@ -132,6 +132,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         targetGraphic.raycastTarget = false;
         parentRegular = rectTransform.parent;
         rectTransform.SetParent(inWorldCanvas.transform, worldPositionStays: false); //hope your eyes are okay now.
+        rectTransform.localScale = Vector3.one * 0.75f;
         inDrag = true;
         StartCoroutine(UpdateInDrag());
     }
@@ -155,6 +156,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         inDrag = false;
         EnableVisuals();
         rectTransform.anchoredPosition = defaultAnchorPosition;
+        rectTransform.localScale = Vector3.one;
         canDropOverlay.SetActive(false);
         canNotDropOverlay.SetActive(false);
         rectTransform.SetParent(parentRegular, worldPositionStays: false);
