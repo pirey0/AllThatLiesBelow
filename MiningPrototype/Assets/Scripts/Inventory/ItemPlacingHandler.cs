@@ -20,7 +20,10 @@ public class ItemPlacingHandler : MonoBehaviour
 
     public bool IsDraggingItem
     {
-        get => (currentHeld != null && currentHeld.type != ItemType.None);
+        get
+        {
+            return !(currentHeld == null || currentHeld.type == ItemType.None);
+        }
     }
 
     Transform previewTransform;
@@ -33,6 +36,7 @@ public class ItemPlacingHandler : MonoBehaviour
     public void Hide()
     {
         player.SetHeldItem(setToPickaxe: true);
+        currentHeld = new ItemAmountPair();
 
         if (previewTransform != null)
             Destroy(previewTransform.gameObject);
