@@ -41,6 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Snow
+    uniqueID: 2119514055
+    locked: 0
   - name: Background
     uniqueID: 254087233
     locked: 0
@@ -52,9 +55,6 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3081657953
-    locked: 0
-  - name: Snow
-    uniqueID: 2119514055
     locked: 0
   - name: Support
     uniqueID: 3730815779
