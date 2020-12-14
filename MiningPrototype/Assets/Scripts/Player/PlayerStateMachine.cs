@@ -44,7 +44,13 @@ public class PlayerStateMachine : BasePlayerStateMachine
 
     protected override float GetVerticalInput()
     {
-        return inCinematicMode ? cinematicVertical : Input.GetAxis("Vertical");
+        if (inCinematicMode)
+            return cinematicVertical;
+
+        if (Input.GetKey(KeyCode.Space))
+            return 1;
+
+        return Input.GetAxis("Vertical");
     }
 
     protected override void Start()
