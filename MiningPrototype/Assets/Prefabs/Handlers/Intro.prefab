@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 897526908127373036}
   - component: {fileID: 5516158713962272695}
+  - component: {fileID: 7846751759372128578}
   m_Layer: 0
   m_Name: Intro
   m_TagString: Untagged
@@ -55,3 +56,62 @@ MonoBehaviour:
   horizontalSpeed: 1
   delayBeforeTorchRequest: 2
   skipIntroInEditor: 0
+  introLight: {fileID: 7846751759372128578}
+--- !u!114 &7846751759372128578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5516158713962272714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LightType: 1
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 0.75008726, g: 0.5981132, b: 1, a: 1}
+  m_Intensity: 0.8
+  m_LightVolumeOpacity: 0
+  m_ApplyToSortingLayers: 4110250fd3949cc9615eaeb7c737557e4968fe8b23bb5fde7dbd2a7a49423cb5
+  m_LightCookieSprite: {fileID: 0}
+  m_UseNormalMap: 0
+  m_LightOrder: -1
+  m_AlphaBlendOnOverlap: 1
+  m_ShadowIntensity: 1
+  m_ShadowVolumeIntensity: 0
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_PointLightDistance: 3
+  m_PointLightQuality: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 3
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -20, y: 280, z: 0}
+  - {x: -3, y: 280, z: 0}
+  - {x: 8, y: 277, z: 0}
+  - {x: 19, y: 277, z: 0}
+  - {x: 20, y: 278, z: 0}
+  - {x: 35, y: 278, z: 0}
+  - {x: 36, y: 279, z: 0}
+  - {x: 60, y: 279, z: 0}
+  - {x: 75, y: 286, z: 0}
+  - {x: 83, y: 284, z: 0}
+  - {x: 83, y: 280, z: 0}
+  - {x: 103, y: 280, z: 0}
+  - {x: 105, y: 279, z: 0}
+  - {x: 114, y: 279, z: 0}
+  - {x: 121, y: 280, z: 0}
+  - {x: 197, y: 280, z: 0}
+  - {x: 208, y: 277, z: 0}
+  - {x: 219, y: 277, z: 0}
+  - {x: 220, y: 278, z: 0}
+  - {x: 220, y: 320, z: 0}
+  - {x: -20, y: 320, z: 0}

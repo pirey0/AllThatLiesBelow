@@ -18,7 +18,8 @@ public class Daylight : StateListenerBehaviour, INonPersistantSavable
     public void SetIntensity (Lightmode mode)
     {
         currentMode = mode;
-        light.intensity = modeIntensities[(int)mode];
+        //light.intensity = modeIntensities[(int)mode];
+        light.enabled = (mode == Lightmode.Day);
     }
 
     public SpawnableSaveData ToSaveData()
