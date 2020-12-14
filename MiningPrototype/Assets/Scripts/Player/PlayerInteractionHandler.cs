@@ -60,7 +60,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         if (player.CanUseInventory())
         {
 
-            if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.I))
+            if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.E))
             {
                 ToggleInventory();
             }
@@ -227,7 +227,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         if (!map.CanTarget(gridDigTarget.Value.x, gridDigTarget.Value.y))
         {
             var secondary = GetSecondaryClickCoordinate();
-            if(map.CanTarget(secondary.x, secondary.y))
+            if (map.CanTarget(secondary.x, secondary.y))
             {
                 gridDigTarget = secondary;
                 return true;
@@ -280,7 +280,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
         if (gridDigTarget == null)
         {
-            if (nonGridDigTarget == null ||nonGridDigTarget.Equals(null))
+            if (nonGridDigTarget == null || nonGridDigTarget.Equals(null))
                 mouseHighlight.position = new Vector3(-1000, -1000);
             else
                 mouseHighlight.position = new Vector3(nonGridDigTarget.GetPosition().x, nonGridDigTarget.GetPosition().y, 0);
@@ -320,12 +320,13 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
                     {
                         breakFilling.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
                         breakFilling.Play();
-                    } else
+                    }
+                    else
                     {
                         breakBlock.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
                         breakBlock.Play();
                     }
-                    
+
                     TryDisableMiningVisuals();
                 }
                 else
@@ -334,7 +335,11 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
                 }
 
                 if (gridDigTarget != previousGridDigTarget)
-                    TryDisableMiningVisuals();
+                {
+                    //If block is switched and is not the same
+                    if (gridDigTarget == null || previousGridDigTarget == null || map[gridDigTarget.Value].Type != map[previousGridDigTarget.Value].Type)
+                        TryDisableMiningVisuals();
+                }
 
                 TryEnableMiningVisuals(info.damageMultiplyer);
                 player.NotifyPickaxeUse();

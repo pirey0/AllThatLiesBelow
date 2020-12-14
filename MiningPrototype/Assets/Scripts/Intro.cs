@@ -32,7 +32,13 @@ public class Intro : StateListenerBehaviour
         }
 
         if (!Application.isEditor || !skipIntroInEditor)
+        {
             StartCoroutine(IntroCoroutine());
+        }
+        else
+        {
+            player.CanDig = true;
+        }
     }
 
     IEnumerator IntroCoroutine()
