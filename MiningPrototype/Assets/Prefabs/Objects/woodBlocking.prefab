@@ -201,7 +201,7 @@ MonoBehaviour:
     type: 21
     amount: 4
   destroyEffects: {fileID: 4888635124280202427, guid: c7333c0e8139a984db63c0ab6a7f05ac, type: 3}
-  statement: I'm so tired, I should come back in the morning
+  statement: I should keep going, I can come back tomorrow
 --- !u!114 &8188231926321218821
 MonoBehaviour:
   m_ObjectHideFlags: 0
