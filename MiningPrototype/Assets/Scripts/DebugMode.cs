@@ -21,6 +21,7 @@ public class DebugMode : MonoBehaviour
     Texture2D debugTex;
     bool open;
     bool showMap;
+    bool showMapAdditiveLayer;
 
     private void Awake()
     {
@@ -39,6 +40,7 @@ public class DebugMode : MonoBehaviour
         DebugLogConsole.AddCommandInstance("/deleteSave", "Delete your save file", "DeleteSaveFile", this);
         DebugLogConsole.AddCommandInstance("/time", "sets time scale", "SetTimeScale", this);
         DebugLogConsole.AddCommandInstance("/showMap", "Visualizes the Map", "ShowMap", this);
+        DebugLogConsole.AddCommandInstance("/showAdditiveMap", "Visualizes the Map", "ShowAdditiveMap", this);
     }
 
     private void Update()
@@ -85,7 +87,12 @@ public class DebugMode : MonoBehaviour
                     }
                     else
                     {
-                        debugTex.SetPixel(x, y, MapHelper.TileToColor(map[x, y].Type));
+                        Color c = Color.black;
+                        if (showMapAdditiveLayer)
+                            c = map.IsAdditivelyCoveredAt(x, y) ? Color.red : Color.black;
+                        else
+                            c = MapHelper.TileToColor(map[x, y].Type);
+                        debugTex.SetPixel(x, y, c);
                     }
                 }
             }
@@ -98,6 +105,13 @@ public class DebugMode : MonoBehaviour
     private void ShowMap()
     {
         showMap = !showMap;
+        showMapAdditiveLayer = false;
+    }
+
+    private void ShowAdditiveMap()
+    {
+        showMap = !showMap;
+        showMapAdditiveLayer = true;
     }
 
     private void TeleportToAltar(TeleportDestination destination)
@@ -158,7 +172,7 @@ public class DebugMode : MonoBehaviour
 
     private void SacrificeItem(ItemType item)
     {
-        progressionHandler.Aquired(AltarRewardType.None.ToString(), new ItemAmountPair(item, 9999),-1);
+        progressionHandler.Aquired(AltarRewardType.None.ToString(), new ItemAmountPair(item, 9999), -1);
         progressionHandler.StartNextDay();
     }
 

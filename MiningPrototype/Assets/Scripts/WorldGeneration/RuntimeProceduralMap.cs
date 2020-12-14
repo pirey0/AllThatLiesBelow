@@ -297,7 +297,7 @@ public class RuntimeProceduralMap : RenderedMap
         {
             if (IsAdditivelyCoveredAt(l.x, l.y))
             {
-                o = true;
+                return true;
             }
         }
         return o;
@@ -564,7 +564,9 @@ public class RuntimeProceduralMap : RenderedMap
         base.AdditiveLoadAt(loadedData, x, y, xOffset, yOffset);
         var t = loadedData.Map[x, y];
 
-        if (t.Type != TileType.Ignore)
-            additiveCoveredMap[x, y] = true;
+        if (t.Type != TileType.Ignore && !IsOutOfBounds(x + xOffset, y + yOffset))
+        {
+            additiveCoveredMap[x + xOffset, y + yOffset] = true;
+        }
     }
 }

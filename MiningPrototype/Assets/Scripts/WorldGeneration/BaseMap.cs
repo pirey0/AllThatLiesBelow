@@ -13,7 +13,8 @@ public class BaseMap : StateListenerBehaviour, ISavable
 {
     [Header("BaseMap")]
 
-    [SerializeField] int sizeX, sizeY;
+    [SerializeField] int sizeX;
+    [SerializeField] int sizeY;
     [SerializeField] MapSettings mapSettings;
     [SerializeField] GenerationSettings generationSettings;
 

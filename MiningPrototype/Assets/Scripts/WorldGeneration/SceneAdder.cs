@@ -43,7 +43,7 @@ public class SceneAdder : StateListenerBehaviour
 
                 if (!RuntimeProceduralMap.Instance.IsAdditivelyCoveredAtAny(locations))
                 {
-                    saveHandler.LoadAdditive(current.SavedSceneFile, current.CollapseOffset().AsV3());
+                    saveHandler.LoadAdditive(current.SavedSceneFile, botLeftCorner.AsV3());
                     Debug.Log("Loaded Scene " + current.SavedSceneFile.name);
                     break;
                 }
