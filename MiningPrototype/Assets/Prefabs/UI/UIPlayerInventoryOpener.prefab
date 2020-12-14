@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 54f1be71a5e18c348ad03d249fc3dce9, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
+    m_HighlightedColor: {r: 0.88235295, g: 0.88235295, b: 0.88235295, a: 1}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -122,6 +122,7 @@ MonoBehaviour:
   closed: {fileID: -1822500818794555094, guid: 5126d5f4bb7363f46869c8167f7b7bee, type: 3}
   open: {fileID: 6222795565976050242, guid: 5126d5f4bb7363f46869c8167f7b7bee, type: 3}
   Canvas: {fileID: 124138024101803718}
+  bagMaterial: {fileID: 0}
 --- !u!1 &9033796290081382768
 GameObject:
   m_ObjectHideFlags: 0

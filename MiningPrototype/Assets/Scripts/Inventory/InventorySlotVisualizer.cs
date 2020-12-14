@@ -172,7 +172,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
             if (Input.GetMouseButtonDown(1)) //On right click while dragging <- dirty
             {
-                if (amount > 1 && GetDistance() > 2)
+                if (amount > 0 && GetDistance() > 2)
                 {
                     //drop half when pressing shift and 1 when not
                     int a = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) ? (amount / 2) : 1;
