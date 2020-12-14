@@ -33,7 +33,7 @@ public class Altar : StateListenerBehaviour, IInteractable, IDropReceiver
     [SerializeField] string testDialog;
 
     [SerializeField] SpriteRenderer spriteRenderer;
-    [SerializeField] Material spriteDefault, spriteOuline;
+    [SerializeField] Sprite[] sprites;
     [SerializeField] [NaughtyAttributes.ReadOnly] int altarID;
     [SerializeField] AudioSource voicesAudio;
 
@@ -70,6 +70,8 @@ public class Altar : StateListenerBehaviour, IInteractable, IDropReceiver
     public void SetAltarID(int newId)
     {
         altarID = newId;
+        if (sprites != null && sprites.Length > 0)
+            spriteRenderer.sprite = sprites[Mathf.Min((newId/3)*2, sprites.Length - 1)];
     }
 
     private void OnProgressed(int index)
@@ -222,8 +224,8 @@ public class Altar : StateListenerBehaviour, IInteractable, IDropReceiver
         if (!WouldTakeDrop(pair))
             return;
 
-        spriteRenderer.material = spriteOuline;
-        spriteRenderer.color = new Color(0.8f, 0.8f, 0.8f);
+        //spriteRenderer.material = spriteOuline;
+        //spriteRenderer.color = new Color(0.8f, 0.8f, 0.8f);
     }
 
     public void EndHover()
@@ -231,8 +233,8 @@ public class Altar : StateListenerBehaviour, IInteractable, IDropReceiver
         if (this == null)
             return;
 
-        spriteRenderer.material = spriteDefault;
-        spriteRenderer.color = Color.white;
+        //spriteRenderer.material = spriteDefault;
+        //spriteRenderer.color = Color.white;
     }
 
     public void ReceiveDrop(ItemAmountPair pair, Inventory inventoryPaidFrom)
