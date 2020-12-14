@@ -42,7 +42,7 @@ public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateRec
         return (transform.position + carvingOffset).ToGridPosition() != tilemapPos;
     }
 
-    public void UncarveDestroy()
+    public virtual void UncarveDestroy()
     {
         if (this != null)
         {

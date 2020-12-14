@@ -8,6 +8,7 @@ public class Chest : FallingTilemapCarvingEntity, IDropReceiver, INonPersistantS
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Sprite chestOpen, chestClosed;
     [SerializeField] InventoryOwner inventoryOwner;
+    [Zenject.Inject] InventoryManager inventoryManager;
 
     protected override void Start()
     {
@@ -28,6 +29,12 @@ public class Chest : FallingTilemapCarvingEntity, IDropReceiver, INonPersistantS
                 spriteRenderer.sprite = chestClosed;
                 break;
         }
+    }
+
+    public override void UncarveDestroy()
+    {
+        inventoryManager.PlayerCollects(inventoryOwner.Inventory.GetContent());
+        base.UncarveDestroy();
     }
 
     public void HoverUpdate()

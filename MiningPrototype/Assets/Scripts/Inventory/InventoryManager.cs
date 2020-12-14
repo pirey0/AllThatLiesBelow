@@ -17,6 +17,13 @@ public class InventoryManager : MonoBehaviour
         PlayerCollected?.Invoke(new ItemAmountPair(itemType, amount));
     }
 
+    public void PlayerCollects(ItemAmountPair[] itemAmountPair)
+    {
+        foreach (ItemAmountPair pair in itemAmountPair)
+        {
+            PlayerCollects(pair.type, pair.amount);
+        }
+    }
     public bool PlayerTryPay(ItemType itemType, int amount)
     {
         Debug.Log("Player try pay: " + itemType + " " + amount);
@@ -27,6 +34,8 @@ public class InventoryManager : MonoBehaviour
     {
         return player.Inventory.Contains(new ItemAmountPair(type, amount));
     }
+
+
 
     public void ForcePlayerInventoryClose()
     {
