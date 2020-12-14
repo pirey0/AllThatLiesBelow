@@ -19,11 +19,11 @@ public abstract class SupportBase : TilemapCarvingEntity
 
         for (int i = 1; i < height; i++)
         {
-            tilesToOccupy[i] = new TileOffsetTypePair(0, i, TileType.FloatingEntity);
+            tilesToOccupy[i] = new TileOffsetTypePair(0, i, TileType.FloatingEntityNotNeighbour);
         }
 
-        tilesToOccupy[height ] = new  TileOffsetTypePair(-1, height-1, TileType.FloatingEntity);
-        tilesToOccupy[height +1] = new TileOffsetTypePair(1, height-1, TileType.FloatingEntity);
+        tilesToOccupy[height ] = new  TileOffsetTypePair(-1, height-1, TileType.FloatingEntityNotNeighbour);
+        tilesToOccupy[height +1] = new TileOffsetTypePair(1, height-1, TileType.FloatingEntityNotNeighbour);
     }
 
     public int CalculateHeight()
