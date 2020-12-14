@@ -1,5 +1,5 @@
 OutputName;DisplayText;MinLevel;MaxLevel;Copper;Gold;Diamond;Support;LetterToFamily;Family_Photo;Hourglass;LetterFromFamily;Ball;Globe
-MiningSpeed;I want to mine faster!;1;4;50;15;1;;;;;;;
+MiningSpeed;I want to mine faster!;1;4;30;10;1;;;;;;;
 WalkingSpeed;I want to move quickly!;1;4;30;10;1;;;;;;;
 Strength;I want to be strong!;1;4;10;5;1;;;;;;;
 JumpHeight;I want to jump higher!;2;4;50;10;2;;;;;;;
