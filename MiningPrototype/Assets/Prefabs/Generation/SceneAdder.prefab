@@ -51,7 +51,7 @@ MonoBehaviour:
     SavedSceneFile: {fileID: 4900000, guid: 0c2e33c16589d3f43943304b9113d6b9, type: 3}
   - XOffsetRange: {x: 0.2, y: 0.5}
     YOffset: 0.82
-    Size: {x: 20, y: 20}
+    Size: {x: 10, y: 10}
     gizmoColor: {r: 1, g: 0, b: 1, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
   - XOffsetRange: {x: 0.1, y: 0.8}
@@ -74,23 +74,23 @@ MonoBehaviour:
     Size: {x: 30, y: 5}
     gizmoColor: {r: 1, g: 0.8352942, b: 0, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
-  - XOffsetRange: {x: 0.1, y: 0.8}
-    YOffset: 0.51
+  - XOffsetRange: {x: 0.1, y: 0.38}
+    YOffset: 0.5
     Size: {x: 8, y: 8}
     gizmoColor: {r: 0, g: 0.62788606, b: 1, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 0f938ad3d096c7043918364dd21d9af8, type: 3}
-  - XOffsetRange: {x: 0.1, y: 0.8}
+  - XOffsetRange: {x: 0.1, y: 0.41}
     YOffset: 0.61
     Size: {x: 5, y: 5}
     gizmoColor: {r: 1, g: 0, b: 0.34990263, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: f63f1894a800bd743ad69aff7ea9bc3e, type: 3}
   - XOffsetRange: {x: 0.1, y: 0.77}
-    YOffset: 0.69
+    YOffset: 0.78
     Size: {x: 36, y: 5}
     gizmoColor: {r: 0, g: 1, b: 0.4758966, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 0aeff879f496464419494aa01542a7bf, type: 3}
   - XOffsetRange: {x: 0.1, y: 0.8}
-    YOffset: 0.73
+    YOffset: 0.76
     Size: {x: 6, y: 8}
     gizmoColor: {r: 0, g: 1, b: 0.47450984, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: b2017e39947da5e4cb8a0a2b994f657f, type: 3}
@@ -120,7 +120,7 @@ MonoBehaviour:
     gizmoColor: {r: 1, g: 0.8352942, b: 0, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
   - XOffsetRange: {x: 0.14, y: 0.65}
-    YOffset: 0.575
+    YOffset: 0.56
     Size: {x: 30, y: 4}
     gizmoColor: {r: 1, g: 0.8352942, b: 0, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
@@ -129,70 +129,90 @@ MonoBehaviour:
     Size: {x: 6, y: 8}
     gizmoColor: {r: 0.5057874, g: 1, b: 0, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 39743173ed49bac45b23cdcb570aec76, type: 3}
-  - XOffsetRange: {x: 0.23, y: 0.86}
-    YOffset: 0.53
+  - XOffsetRange: {x: 0.45, y: 0.77}
+    YOffset: 0.59
     Size: {x: 10, y: 20}
     gizmoColor: {r: 0.5057874, g: 1, b: 0, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 384e070d285f1b64ab50c1903455e0df, type: 3}
-  - XOffsetRange: {x: 0.08, y: 0.23}
+  - XOffsetRange: {x: 0.08, y: 0.16}
     YOffset: 0.77
-    Size: {x: 20, y: 20}
+    Size: {x: 10, y: 10}
     gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
   - XOffsetRange: {x: 0.39, y: 0.56}
     YOffset: 0.77
-    Size: {x: 20, y: 20}
+    Size: {x: 10, y: 10}
     gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
   - XOffsetRange: {x: 0.05, y: 0.26}
     YOffset: 0.63
-    Size: {x: 20, y: 20}
+    Size: {x: 10, y: 10}
     gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  - XOffsetRange: {x: 0.05, y: 0.71}
+  - XOffsetRange: {x: 0.05, y: 0.31}
     YOffset: 0.7
-    Size: {x: 20, y: 20}
+    Size: {x: 10, y: 10}
     gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
   - XOffsetRange: {x: 0.39, y: 0.68}
     YOffset: 0.64
-    Size: {x: 20, y: 20}
+    Size: {x: 10, y: 10}
     gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
   - XOffsetRange: {x: 0.63, y: 0.86}
     YOffset: 0.62
-    Size: {x: 20, y: 20}
+    Size: {x: 10, y: 10}
     gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  - XOffsetRange: {x: 0.06, y: 0.56}
+  - XOffsetRange: {x: 0.19, y: 0.56}
     YOffset: 0.58
-    Size: {x: 20, y: 20}
+    Size: {x: 10, y: 10}
     gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  - XOffsetRange: {x: 0.09, y: 0.28}
+  - XOffsetRange: {x: 0.24, y: 0.46}
     YOffset: 0.52
-    Size: {x: 20, y: 20}
+    Size: {x: 10, y: 10}
     gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
   - XOffsetRange: {x: 0.57, y: 0.82}
     YOffset: 0.52
-    Size: {x: 20, y: 20}
+    Size: {x: 10, y: 10}
     gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
   - XOffsetRange: {x: 0.57, y: 0.82}
     YOffset: 0.73
-    Size: {x: 20, y: 20}
+    Size: {x: 10, y: 10}
     gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
   - XOffsetRange: {x: 0.17, y: 0.4}
     YOffset: 0.46
-    Size: {x: 20, y: 20}
+    Size: {x: 10, y: 10}
     gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
   - XOffsetRange: {x: 0.54, y: 0.73}
     YOffset: 0.44
-    Size: {x: 20, y: 20}
+    Size: {x: 10, y: 10}
     gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
     SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
+  - XOffsetRange: {x: 0.32, y: 0.55}
+    YOffset: 0.51
+    Size: {x: 30, y: 10}
+    gizmoColor: {r: 0.50609493, g: 1, b: 0, a: 1}
+    SavedSceneFile: {fileID: 4900000, guid: 45819bb1cec7bff439ef4a8fd3086ede, type: 3}
+  - XOffsetRange: {x: 0.08, y: 0.37}
+    YOffset: 0.73
+    Size: {x: 10, y: 10}
+    gizmoColor: {r: 0, g: 1, b: 0.4876957, a: 1}
+    SavedSceneFile: {fileID: 4900000, guid: 20b77891fd797464588175a4eeb3eb46, type: 3}
+  - XOffsetRange: {x: 0.08, y: 0.12}
+    YOffset: 0.52
+    Size: {x: 20, y: 32}
+    gizmoColor: {r: 0, g: 1, b: 0.4876957, a: 1}
+    SavedSceneFile: {fileID: 4900000, guid: 77428717a38c9d1479feb450d295b82c, type: 3}
+  - XOffsetRange: {x: 0.44, y: 0.57}
+    YOffset: 0.7
+    Size: {x: 16, y: 20}
+    gizmoColor: {r: 0, g: 0.7807312, b: 1, a: 1}
+    SavedSceneFile: {fileID: 4900000, guid: 9dbf398781cb2934898cde0e7ec0c4a2, type: 3}
   width: 200
   height: 300
