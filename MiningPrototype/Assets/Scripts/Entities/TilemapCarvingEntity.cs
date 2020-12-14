@@ -10,7 +10,7 @@ public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateRec
     [SerializeField] protected Vector3 carvingOffset;
 
 
-    [Zenject.Inject] InventoryManager inventoryManager;
+    [Zenject.Inject] protected InventoryManager inventoryManager;
     Vector2Int tilemapPos = new Vector2Int(-1, -1);
 
     public BaseMap TileMap { get; private set; }

@@ -23,7 +23,9 @@ public class RuntimeProceduralMap : RenderedMap
     [Zenject.Inject] InventoryManager inventoryManager;
     [Zenject.Inject] PrefabFactory prefabFactory;
     [Zenject.Inject] SaveHandler saveHandler;
+    [Zenject.Inject] SceneAdder sceneAdder;
 
+    bool[,] additiveCoveredMap;
     ITileUpdateReceiver[,] receiverMap;
     List<Vector2Int> unstableTiles = new List<Vector2Int>();
     List<GameObject> unstableTilesEffects = new List<GameObject>();
@@ -47,10 +49,14 @@ public class RuntimeProceduralMap : RenderedMap
         }
 
         Setup();
+    }
 
-        //This should be in load from OnNewGame but that would be after the imprinting from the SceneAdder....
-        if (!SaveHandler.LoadFromSavefile)
-            RunCompleteGeneration();
+    protected override void OnStateChanged(GameState.State newState)
+    {
+        if (newState == GameState.State.PreLoadScenes)
+        {
+            StartCoroutine(RunCompleteGeneration());
+        }
     }
 
     protected override void Setup()
@@ -249,15 +255,19 @@ public class RuntimeProceduralMap : RenderedMap
     }
 
 
-    public void RunCompleteGeneration()
+    private IEnumerator RunCompleteGeneration()
     {
         DurationTracker tracker = new DurationTracker("Complete generation");
-
+        Time.timeScale = 0;
         Populate();
 
         Util.IterateX(GenerationSettings.AutomataSteps, (x) => RunAutomataStep());
 
         PopulateOres();
+
+        additiveCoveredMap = new bool[SizeX, SizeY];
+
+        yield return sceneAdder.LoadAll();
 
         PupulateRocks();
 
@@ -266,6 +276,31 @@ public class RuntimeProceduralMap : RenderedMap
         PopulateSnow();
 
         tracker.Stop();
+        Time.timeScale = 1;
+        gameState.ChangeStateTo(GameState.State.PostLoadScenes);
+    }
+
+    public bool IsAdditivelyCoveredAt(int x, int y)
+    {
+        if (additiveCoveredMap == null || IsOutOfBounds(x, y))
+        {
+            return false;
+        }
+
+        return additiveCoveredMap[x, y];
+    }
+
+    public bool IsAdditivelyCoveredAtAny(List<Vector2Int> locations)
+    {
+        bool o = false;
+        foreach (var l in locations)
+        {
+            if (IsAdditivelyCoveredAt(l.x, l.y))
+            {
+                o = true;
+            }
+        }
+        return o;
     }
 
     private void PopulateBorders()
@@ -307,19 +342,22 @@ public class RuntimeProceduralMap : RenderedMap
             }
         }
 
-
         if (MapHelper.IsAllBlockAt(this, spawnCheckLocations.ToArray()))
         {
-            foreach (var loc in locations)
+            if (!IsAdditivelyCoveredAtAny(locations))
             {
-                SetMapAt(loc.x, loc.y, Tile.Air, TileUpdateReason.Generation, updateProperties: false, updateVisuals: false);
+                foreach (var loc in locations)
+                {
+                    SetMapAt(loc.x, loc.y, Tile.Air, TileUpdateReason.Generation, updateProperties: false, updateVisuals: false);
+                }
+
+                Vector3 pos = new Vector3(x + pass.Size.x * 0.5f, y + pass.Size.y * 0.5f);
+                var go = InstantiateEntity(pass.Prefab, pos);
             }
-
-            Vector3 pos = new Vector3(x + pass.Size.x * 0.5f, y + pass.Size.y * 0.5f);
-            var go = InstantiateEntity(pass.Prefab, pos);
-
         }
     }
+
+
 
 
     private bool ShouldCollapseAt(int x, int y)
@@ -519,5 +557,14 @@ public class RuntimeProceduralMap : RenderedMap
     public override string GetSaveID()
     {
         return saveID;
+    }
+
+    protected override void AdditiveLoadAt(BaseMapSaveData loadedData, int x, int y, int xOffset, int yOffset)
+    {
+        base.AdditiveLoadAt(loadedData, x, y, xOffset, yOffset);
+        var t = loadedData.Map[x, y];
+
+        if (t.Type != TileType.Ignore)
+            additiveCoveredMap[x, y] = true;
     }
 }

@@ -161,7 +161,7 @@ public class SaveHandler : MonoBehaviour
             if (collection.ContainsKey("EditorMap"))
             {
                 var data = collection["EditorMap"];
-                RuntimeProceduralMap.Instance.AdditiveLoadAt((BaseMapSaveData)data, Mathf.FloorToInt(offset.x), Mathf.FloorToInt(offset.y));
+                RuntimeProceduralMap.Instance.AdditiveLoad((BaseMapSaveData)data, Mathf.FloorToInt(offset.x), Mathf.FloorToInt(offset.y));
             }
         }
         else

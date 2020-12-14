@@ -22,37 +22,43 @@ public class SceneAdder : StateListenerBehaviour
     public int LoadingTotal { get => addition.Count; }
     public int LoadingCurrent { get => loadingIndex; }
 
-    protected override void OnStateChanged(GameState.State newState)
+    public IEnumerator LoadAll()
     {
-        if (newState == GameState.State.PreLoadScenes)
-        {
-            if (addition.Count > 0)
-                StartCoroutine(LoadAdditive(addition, transitionState: true));
-        }
+        return LoadAdditive(addition);
     }
 
-    private IEnumerator LoadAdditive(List<MapAddition> maps, bool transitionState)
+    private IEnumerator LoadAdditive(List<MapAddition> maps)
     {
         loadingIndex = 0;
-        Time.timeScale = 0;
 
+        int maxTries = 100;
         while (loadingIndex < maps.Count)
         {
             current = maps[loadingIndex];
+            while (maxTries-- > 0)
+            {
+                Vector2Int botLeftCorner = current.CollapseOffset();
+                List<Vector2Int> locations = new List<Vector2Int>();
+                Util.IterateXY((int)current.Size.x, (int)current.Size.y, (x, y) => locations.Add(botLeftCorner + new Vector2Int(x, y)));
 
-            saveHandler.LoadAdditive(current.SavedSceneFile, current.CollapseOffset().AsV3());
-            Debug.Log("Loaded Scene " + current.SavedSceneFile.name);
+                if (!RuntimeProceduralMap.Instance.IsAdditivelyCoveredAtAny(locations))
+                {
+                    saveHandler.LoadAdditive(current.SavedSceneFile, current.CollapseOffset().AsV3());
+                    Debug.Log("Loaded Scene " + current.SavedSceneFile.name);
+                    break;
+                }
+            }
+            if (maxTries == 0)
+            {
+                Debug.LogError("No space found for " + current.Name);
+            }
 
             yield return null;
-
             loadingIndex++;
         }
         Debug.Log("Scene Adder finished.");
-        Time.timeScale = 1;
-        if (transitionState)
-            gameState.ChangeStateTo(GameState.State.PostLoadScenes);
-    }
 
+    }
 
 #if UNITY_EDITOR
     void OnDrawGizmosSelected()

@@ -8,7 +8,6 @@ public class Chest : FallingTilemapCarvingEntity, IDropReceiver, INonPersistantS
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Sprite chestOpen, chestClosed;
     [SerializeField] InventoryOwner inventoryOwner;
-    [Zenject.Inject] InventoryManager inventoryManager;
 
     protected override void Start()
     {
