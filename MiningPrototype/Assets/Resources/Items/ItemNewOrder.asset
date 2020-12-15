@@ -16,10 +16,11 @@ MonoBehaviour:
   DisplayName: New Order
   DisplayTooltip: A list of things I need to put into the postbox to order them.
   DisplaySprite: {fileID: 21300000, guid: 85880727b886d7443a5163a381e671c6, type: 3}
-  DisplaySpriteRead: {fileID: 0}
+  DisplaySpriteRead: {fileID: 21300000, guid: 85880727b886d7443a5163a381e671c6, type: 3}
   Weight: 0
   CanBePlaced: 0
   PickupHoldSprite: {fileID: 0}
+  PickupHoldOffset: {x: 0, y: 0}
   PickupPreviewPrefab: {fileID: 0}
   Prefab: {fileID: 0}
   AmountIsUniqueID: 1
