@@ -28,7 +28,8 @@ public class NewOrderCrateSpawner : StateListenerBehaviour
 
     protected override void OnRealStart()
     {
-        spawnLoc = LocationIndicator.Find(IndicatorType.OrderSpawn);
+        if (spawnLoc == null)
+            spawnLoc = LocationIndicator.Find(IndicatorType.OrderSpawn);
     }
 
 
@@ -40,6 +41,9 @@ public class NewOrderCrateSpawner : StateListenerBehaviour
 
     public void SpawnOrder(List<ItemAmountPair> orderSource)
     {
+        if(spawnLoc == null)
+            spawnLoc = LocationIndicator.Find(IndicatorType.OrderSpawn);
+
         var order = new List<ItemAmountPair>(orderSource);
         order.Sort((x, y) => y.GetTotalWeight() - x.GetTotalWeight());
 
