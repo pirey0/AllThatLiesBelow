@@ -20,7 +20,8 @@ MonoBehaviour:
   Targetable: 1
   TargetPriority: 1
   StabilityAffected: 0
-  StabilityEffectMultiplyer: 0.1
+  CrumbleThreshholdMultiplyer: 1
+  StabilityEffectMultiplyer: 0.3
   NotifiesInsteadOfCrumbling: 1
   CountsAsNeighbour: 1
   MinableInOverworld: 0
