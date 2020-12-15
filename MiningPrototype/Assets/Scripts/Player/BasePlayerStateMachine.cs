@@ -104,7 +104,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
     {
         stateMachine = new StateMachine("PlayerStateMachine");
 
-        s_idle = stateMachine.AddState("Idle", IdleEnter, MoveUpdate);
+        s_idle = stateMachine.AddState("Idle", IdleEnter, IdleUpdate);
         s_crouchIdle = stateMachine.AddState("CrouchIdle", IdleEnter, MoveUpdate);
         s_jump = stateMachine.AddState("Jump", JumpEnter, MoveUpdate);
         s_walk = stateMachine.AddState("Walk", null, MoveUpdate, WalkExit);
@@ -263,6 +263,13 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
     protected virtual float GetSpeedMultiplyer()
     {
         return 1;
+    }
+
+    private void IdleUpdate()
+    {
+        MoveUpdate();
+        //When idle face mouse direction
+        transform.localScale = new Vector3(Input.mousePosition.x > (Screen.width*0.5f) ? 1 : -1, 1, 1);
     }
 
     private void MoveUpdate()

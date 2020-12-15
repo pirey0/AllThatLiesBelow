@@ -95,6 +95,7 @@ public class Bed : MonoBehaviour, IInteractable
             effectHandler.SetDay();
             playerToEnableAgain.CanDig = true;
             playerToEnableAgain.Enable();
+            yield return null;
             saveHandler.Save();
             playerToEnableAgain.Disable();
 
