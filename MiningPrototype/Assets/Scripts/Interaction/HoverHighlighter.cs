@@ -68,7 +68,8 @@ public class HoverHighlighter : MonoBehaviour, IHoverable
             child.transform.localPosition = Vector3.zero;
             spriteRenderer = child.AddComponent<SpriteRenderer>();
             spriteRenderer.sprite = parentRenderer.sprite;
-            spriteRenderer.sortingLayerID = SortingLayer.NameToID("UI");
+            spriteRenderer.sortingLayerID = SortingLayer.NameToID("Player");
+            spriteRenderer.sortingOrder = -1000;
             spriteRenderer.material = new Material(shader);
 
             return spriteRenderer.material;
