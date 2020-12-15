@@ -352,9 +352,9 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         var vertical = GetVerticalInput();
         bool up = vertical > 0;
 
-        bool rightDirection = !(up ^ IsBelowTopLadder());
+        bool downOnGround =  !up && IsGrounded() && IsBelowTopLadder();
 
-        return InFrontOfLadder && Mathf.Abs(vertical) > 0.75f && rightDirection;
+        return InFrontOfLadder && Mathf.Abs(vertical) > 0.75f && !downOnGround;
     }
 
     private bool IsNotClimbing()
