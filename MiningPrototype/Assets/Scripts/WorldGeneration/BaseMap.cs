@@ -114,7 +114,7 @@ public class BaseMap : StateListenerBehaviour, ISavable
         }
     }
 
-    public bool DamageAt(int x, int y, float amount, DamageType damageType)
+    public virtual bool DamageAt(int x, int y, float amount, DamageType damageType)
     {
         WrapXIfNecessary(ref x);
         if (IsOutOfBounds(x, y))
@@ -138,6 +138,7 @@ public class BaseMap : StateListenerBehaviour, ISavable
         if (t.Damage > 10)
         {
             BreakBlock(x, y, t, damageType);
+            
 
             return true;
         }

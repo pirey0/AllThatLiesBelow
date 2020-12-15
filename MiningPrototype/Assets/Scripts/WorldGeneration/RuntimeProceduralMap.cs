@@ -165,6 +165,21 @@ public class RuntimeProceduralMap : RenderedMap
         }
     }
 
+    public override bool DamageAt(int x, int y, float amount, DamageType damageType)
+    {
+        bool broke = base.DamageAt(x, y, amount, damageType);
+
+        if (!broke)
+        {
+            if(unstableTiles.Contains(new Vector2Int(x, y)))
+            {
+                var t = this[x, y];
+                t.ReduceStabilityBy(5);
+                this[x, y] = t;
+            }
+        }
+        return broke;
+    }
     private float GetUnstableThreshhold(TileType t)
     {
         int coll = progressionHandler.InstableWorld ? GenerationSettings.instableWorldUnstableThreshhold : GenerationSettings.UnstableThreshhold;

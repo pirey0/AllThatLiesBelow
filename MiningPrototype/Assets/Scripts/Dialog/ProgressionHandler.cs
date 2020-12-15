@@ -285,7 +285,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
             pos.x -= 5;
             pos.y -= 2;
 
-            Destroy(altar.gameObject);
+            DestroyImmediate(altar.gameObject);
             Util.IterateXY(10, (x, y) => map.SetMapAt(pos.x + x, pos.y + y, Tile.Make(TileType.Stone), TileUpdateReason.Generation));
 
             //remap altars list and altarID to properly handle loading and data.sacrificeAtID;
