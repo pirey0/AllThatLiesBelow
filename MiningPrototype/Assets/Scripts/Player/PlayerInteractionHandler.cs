@@ -19,7 +19,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     [SerializeField] AudioSource breakBlock, breakFilling, startMining, cantMine;
     [SerializeField] PickaxeAnimator pickaxeAnimator;
 
-    [SerializeField] ParticleSystem miningParticles;
+    [SerializeField] ParticleSystem miningParticles, cantmineParticles;
     [SerializeField] SpriteRenderer heldItemPreview;
 
     [Inject] ProgressionHandler progressionHandler;
@@ -366,7 +366,9 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
     private void UpdateMiningParticlesPositions()
     {
-        miningParticles.transform.position = MapHelper.GetWorldLocationOfFreeFaceFromSource(map, gridDigTarget.Value, GetPositionInGrid());
+        Vector3 pos = MapHelper.GetWorldLocationOfFreeFaceFromSource(map, gridDigTarget.Value, GetPositionInGrid());
+        miningParticles.transform.position = pos;
+        cantmineParticles.transform.position = pos;
         Debug.DrawLine((Vector3Int)GetPositionInGrid(), miningParticles.transform.position, Color.yellow, 0.1f);
     }
 
@@ -375,8 +377,13 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         if (inMining)
         {
             inMining = false;
+
             var emission = miningParticles.emission;
             emission.rateOverTimeMultiplier = 0;
+
+            emission = cantmineParticles.emission;
+            emission.rateOverTimeMultiplier = 0;
+
             startMining.Stop();
             cantMine.Stop();
             pickaxeAnimator.Stop();
@@ -420,6 +427,8 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
             if (targetDamageMultiplier == 0)
             {
+                var emission = cantmineParticles.emission;
+                emission.rateOverTimeMultiplier = settings.miningParticlesRateOverTime;
                 cantMine.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
                 cantMine.Play();
             }
