@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: ItemLog
   m_EditorClassIdentifier: 
   ItemType: 21
-  DisplayName: Log
-  DisplayTooltip: Some dray logs, that can be burned.
+  DisplayName: Planks
+  DisplayTooltip: Just wood
   DisplaySprite: {fileID: 21300000, guid: 0d4bd0d0439dd304099efa6af35005fe, type: 3}
   DisplaySpriteRead: {fileID: 0}
   Weight: 4
   CanBePlaced: 0
   PickupHoldSprite: {fileID: 0}
+  PickupHoldOffset: {x: 0, y: 0}
   PickupPreviewPrefab: {fileID: 0}
   Prefab: {fileID: 0}
   AmountIsUniqueID: 0
