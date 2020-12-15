@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 11
   ItemToDrop: 0
-  damageMultiplyer: 1
+  damageMultiplyer: 0.5
   damagedByExplosion: 1
   AirLike: 0
   Targetable: 1
