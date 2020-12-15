@@ -94,7 +94,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     public void NotifyAtarDiscovery(int id)
     {
         Debug.Log("Discovered Altar: " + id);
-        if (data.lastFoundAltarID >= 0)
+        if (data.lastFoundAltarID >= 0 && data.lastFoundAltarID != id)
         {
             RemoveAltar(data.lastFoundAltarID);
 
