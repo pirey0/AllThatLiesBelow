@@ -15,7 +15,7 @@ public abstract class SupportBase : TilemapCarvingEntity
         back.size = new Vector2(3, spriteHeight);
 
         tilesToOccupy = new  TileOffsetTypePair[height + 2];
-        tilesToOccupy[0] = new TileOffsetTypePair(0, 0, TileType.CollapsableEntity);
+        tilesToOccupy[0] = new TileOffsetTypePair(0, 0, TileType.CollapsableEntityNotNeighbour);
 
         for (int i = 1; i < height; i++)
         {
