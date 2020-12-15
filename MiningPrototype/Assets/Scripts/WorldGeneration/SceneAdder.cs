@@ -12,6 +12,7 @@ public class SceneAdder : StateListenerBehaviour
     [SerializeField] List<MapAddition> addition;
 
     [SerializeField] int width, height;
+    [SerializeField] MapAdditonEditable sceneAdderEditablePrefab;
 
     [Zenject.Inject] DiContainer diContainer;
     [Zenject.Inject] SaveHandler saveHandler;
@@ -58,6 +59,70 @@ public class SceneAdder : StateListenerBehaviour
         }
         Debug.Log("Scene Adder finished.");
 
+    }
+
+    private void Start()
+    {
+        DestroyAdditonTransforms();
+    }
+
+    [Button]
+    private void CreateAdditonTransforms ()
+    {
+        DestroyAdditonTransforms();
+
+        for (int i = 0; i < addition.Count; i++)
+        {
+            if (sceneAdderEditablePrefab != null)
+                Instantiate(sceneAdderEditablePrefab, transform).Init(addition[i], new Vector2(width, height), this, i);
+        }
+    }
+
+    [Button]
+    private void DestroyAdditonTransforms()
+    {
+        for (int i = transform.childCount - 1; i >= 0; i--)
+            DestroyImmediate(transform.GetChild(i).gameObject);
+    }
+
+    [Button]
+    private void LoadFromTransforms()
+    {
+        for (int i = transform.childCount - 1; i >= 0; i--)
+            addition[i] = transform.GetChild(i).GetComponent<MapAdditonEditable>().Addition;
+
+        DestroyAdditonTransforms();
+    }
+    public void ModifiedAddition(MapAdditonEditable updatedAddition, int index)
+    {
+        for (int i = 0; i < addition.Count; i++)
+        {
+            if (index == -1)
+                Debug.LogWarning(i + " = " + index + " ? " + updatedAddition.sceneName);
+            if (i == index || index == -1 && updatedAddition.sceneName == addition[i].Name)
+            {
+                if (updatedAddition.Addition.SavedSceneFile == null)
+                {
+                    Debug.Log("create new entry from "+  i);
+                    MapAddition add = new MapAddition();
+
+                    add.XOffsetRange = addition[i].XOffsetRange;
+                    add.YOffset = addition[i].YOffset;
+                    add.Size = addition[i].Size;
+                    add.gizmoColor = addition[i].gizmoColor;
+                    add.SavedSceneFile = addition[i].SavedSceneFile;
+                    updatedAddition.Init(add, new Vector2(width, height), this, addition.Count);
+                    addition.Add(add);
+
+                    return;
+                }
+                else
+                {
+                    addition[i] = updatedAddition.Addition;
+                    return;
+                }
+            }
+        }
     }
 
 #if UNITY_EDITOR
