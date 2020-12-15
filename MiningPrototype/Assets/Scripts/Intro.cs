@@ -75,6 +75,8 @@ public class Intro : StateListenerBehaviour
         placingHandler.Placed += OnIntroPlaced;
         cameraPanner.ExitCinematicMode();
 
+        yield return new WaitForSeconds(1);
+
         playerInventoryOpener.StartBlinking();
         playerInventoryOpener.Show();
 

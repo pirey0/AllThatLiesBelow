@@ -181,7 +181,7 @@ MonoBehaviour:
   transitionSpeed: 2
   topImage: {fileID: 637270438764489255}
   botImage: {fileID: 3117881204809259701}
-  barOpeningSpeed: 50
+  barOpeningSpeed: 500
 --- !u!1 &5039792991290950316
 GameObject:
   m_ObjectHideFlags: 0
