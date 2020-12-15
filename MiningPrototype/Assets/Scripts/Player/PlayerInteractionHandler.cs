@@ -55,7 +55,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
     private void Update()
     {
-        bool mouseInInventoryRange = Vector3.Distance(GetPositionInGridV3(), GetClickPositionV3()) <= settings.inventoryOpenDistance;
+        //bool mouseInInventoryRange = Vector3.Distance(GetPositionInGridV3(), GetClickPositionV3()) <= settings.inventoryOpenDistance;
 
         if (player.CanUseInventory())
         {
@@ -65,14 +65,14 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
                 ToggleInventory();
             }
 
-            if (Input.GetMouseButtonDown(1))
-            {
-                PlayerActivity?.Invoke();
-                if (mouseInInventoryRange)
-                {
-                    ToggleInventory();
-                }
-            }
+            //xif (Input.GetMouseButtonDown(1))
+            //x{
+            //x    PlayerActivity?.Invoke();
+            //x    if (mouseInInventoryRange)
+            //x    {
+            //x        ToggleInventory();
+            //x    }
+            //x}
         }
 
         //Stop interacting when too far away
@@ -97,8 +97,8 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
                 {
                     PlayerActivity?.Invoke();
 
-                    if (!mouseInInventoryRange)
-                    {
+                    //if (!mouseInInventoryRange)
+                    //{
 
                         if (!CurrentInteractableIsValid())
                         {
@@ -109,7 +109,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
                             if (eventSystem.IsPointerOverGameObject() == false)
                                 TryStopInteractingIfHover();
                         }
-                    }
+                    //}
                 }
                 else
                 {
