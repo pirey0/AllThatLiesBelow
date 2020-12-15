@@ -26,7 +26,7 @@ public class NewOrderCrateSpawner : StateListenerBehaviour
     }
 
 
-    protected override void OnPostSceneLoad()
+    protected override void OnRealStart()
     {
         spawnLoc = LocationIndicator.Find(IndicatorType.OrderSpawn);
     }
@@ -60,12 +60,17 @@ public class NewOrderCrateSpawner : StateListenerBehaviour
             }
             else
             {
-                Debug.Log(prefabFactory);
-                Vector3 position = spawnLoc.transform.position + new Vector3(0, i * 2);
-
-                Crate newCrate = prefabFactory.Create(cratePrefab, position, Quaternion.identity).GetComponent<Crate>();
-                newCrate.SetCrateType(crateType);
-                newCrate.Pack(item);
+                if(spawnLoc == null)
+                {
+                    Debug.LogError("No spawn location for crateSpawner.");
+                }
+                else
+                {
+                    Vector3 position = spawnLoc.transform.position + new Vector3(0, i * 2);
+                    Crate newCrate = prefabFactory.Create(cratePrefab, position, Quaternion.identity).GetComponent<Crate>();
+                    newCrate.SetCrateType(crateType);
+                    newCrate.Pack(item);
+                }
             }
         }
     }
