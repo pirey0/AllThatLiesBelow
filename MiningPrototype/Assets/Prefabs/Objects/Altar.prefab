@@ -5392,7 +5392,7 @@ GameObject:
   - component: {fileID: -8800675860980122855}
   - component: {fileID: 1549756614959163788}
   - component: {fileID: 7976854011842829104}
-  - component: {fileID: 118588399297401695}
+  - component: {fileID: 2436949320784683742}
   m_Layer: 0
   m_Name: Altar
   m_TagString: Untagged
@@ -5677,8 +5677,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 6
---- !u!58 &118588399297401695
-CircleCollider2D:
+--- !u!61 &2436949320784683742
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5690,9 +5690,19 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.9852942}
+  m_Offset: {x: 0, y: 3}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 8, y: 8}
+    newSize: {x: 8, y: 8}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 4
+  m_Size: {x: 8, y: 6}
+  m_EdgeRadius: 0
 --- !u!1 &7216267869949320864
 GameObject:
   m_ObjectHideFlags: 0
