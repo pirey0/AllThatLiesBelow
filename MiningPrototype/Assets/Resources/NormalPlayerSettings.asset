@@ -21,7 +21,7 @@ MonoBehaviour:
   respawnCooldown: 5
   jumpCooldown: 0.25
   timeAfterGroundedToJump: 0.1
-  feetRadius: 0.2
+  feetRadius: 0.35
   maxDigDistance: 5
   digSpeed: 10
   an_Walk: {fileID: 11400000, guid: a277db9a3fae53741b035a9c4fb2951b, type: 2}

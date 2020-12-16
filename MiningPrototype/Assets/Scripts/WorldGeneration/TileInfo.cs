@@ -23,7 +23,7 @@ public class TileInfo : ScriptableObject
     public bool MinableInOverworld = false;
     public bool DamageIsInBackground;
     public bool DrawsToShifted;
-
+    public CrumbleType CrumbleType;
 
     [Header("Visuals")]
     public bool UseTilesFromOtherInfo;

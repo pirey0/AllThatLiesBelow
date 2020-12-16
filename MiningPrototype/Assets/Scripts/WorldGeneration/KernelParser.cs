@@ -14,15 +14,23 @@ public class KernelParser : MonoBehaviour
         LoadKernels();
     }
 
+    public Kernel[] GetAllKernels()
+    {
+        return kernels;
+    }
+
+    [NaughtyAttributes.Button]
     private void LoadKernels()
     {
         List<Kernel> kernels = new List<Kernel>();
         foreach (var k in kernelFiles)
         {
-            AddKernelsFrom(k, kernels);
+            if (k != null)
+                AddKernelsFrom(k, kernels);
         }
 
         this.kernels = kernels.ToArray();
+        Debug.Log("Loaded " + this.kernels.Length + " Kernels");
     }
 
     private void AddKernelsFrom(TextAsset k, List<Kernel> kernels)
@@ -33,7 +41,7 @@ public class KernelParser : MonoBehaviour
 
         while (index < lines.Length)
         {
-            string currentLine = lines[index].Replace(" ",""); //Remove space character
+            string currentLine = lines[index].Replace(" ", ""); //Remove space character
             if (currentLine.StartsWith("//"))
             {
                 //do nothing on comment
@@ -42,7 +50,15 @@ public class KernelParser : MonoBehaviour
             {
                 if (currentLines.Count > 0)
                 {
-                    kernels.Add(Kernel.FromStrings(currentLines.ToArray()));
+                    Kernel ker = Kernel.FromStrings(currentLines.ToArray());
+                    if (ker == null)
+                    {
+                        Debug.LogError("Null Kernel on line " + index + ": " + currentLine);
+                    }
+                    else
+                    {
+                        kernels.Add(ker);
+                    }
                     currentLines.Clear();
                 }
             }
