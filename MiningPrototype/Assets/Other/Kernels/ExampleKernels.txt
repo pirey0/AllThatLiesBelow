@@ -1,0 +1,17 @@
+//This is how you can define Kernels
+// <- Two slashes represent a comment
+
+//These are the characters to use:
+// 0: Air
+// 1: Stone
+// I/i: Ignore
+// c/C: Crumble (Will make the tile crumble)
+//For changes and additions pls ask :)
+
+//An empty line indicates the start of a new kernel
+//You can have multiple empty lines between kernels
+
+//This kernel represents a Solid surrounded by 8 Air, the center tile will crumble
+000
+0C0
+000
