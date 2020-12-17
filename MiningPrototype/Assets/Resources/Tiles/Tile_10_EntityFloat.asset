@@ -20,14 +20,12 @@ MonoBehaviour:
   Targetable: 1
   TargetPriority: 0
   StabilityAffected: 0
-  CrumbleThreshholdMultiplyer: 1
-  StabilityEffectMultiplyer: 1
   NotifiesInsteadOfCrumbling: 1
   CountsAsNeighbour: 1
   MinableInOverworld: 1
   DamageIsInBackground: 1
   DrawsToShifted: 0
-  CrumbleType: 4
+  CrumbleType: 64
   UseTilesFromOtherInfo: 0
   Tiles: []
   TileSourceInfo: {fileID: 0}

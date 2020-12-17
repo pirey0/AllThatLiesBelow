@@ -24,8 +24,7 @@ public enum TileType
     Grass,
     SolidVoid,
     Platform,
-    FillingStone,
-    RockTop
+    FillingStone
 }
 
 [System.Serializable]
@@ -37,11 +36,7 @@ public struct Tile
 
     public int Visibility;
     public bool Discovered;
-
-    //Up Right Down Left
-    public int[] Stabilities;
-
-    public int Stability { get => Stabilities.Sum(); }
+    public bool Unstable;
 
     public static Tile Air
     {
@@ -53,7 +48,6 @@ public struct Tile
             t.Damage = 0;
             t.Visibility = 0;
             t.Discovered = false;
-            t.Stabilities = new int[4];
             return t;
         }
     }
@@ -65,26 +59,6 @@ public struct Tile
         return tile;
     }
 
-    public void SetStability(Direction dir, int value)
-    {
-        Stabilities[(int)dir] = value;
-    }
-
-    public void ReduceStabilityBy(int i)
-    {
-        Stabilities[(int)Direction.Down] -= i;
-    }
-
-    public void ResetStability()
-    {
-        Stabilities = new int[4];
-    }
-
-    public bool StableWithout(Direction dir)
-    {
-        return Type == TileType.Air || (Stability-Stabilities[(int)dir] >= 100 );
-    }
-
     public void TakeDamage(float amount)
     {
         Damage += amount;
@@ -92,7 +66,7 @@ public struct Tile
 
     public override string ToString()
     {
-        return Type.ToString() + " [N: " + NeighbourBitmask + " D:" + Damage.ToString("n1") + " S: " +Stability + " (" +  string.Join(", " , Stabilities) + ") Dis: " + Discovered + "]" ; 
+        return Type.ToString() + " [N: " + NeighbourBitmask + " D:" + Damage.ToString("n1") + " Dis: " + Discovered + "]" ; 
     }
 }
 

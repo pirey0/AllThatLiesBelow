@@ -57,6 +57,8 @@ public class BaseMap : StateListenerBehaviour, ISavable
         return TilesData.GetTileInfo(type);
     }
 
+
+
     protected void InitMap(int newX, int newY)
     {
         map = new Tile[newX, newY];

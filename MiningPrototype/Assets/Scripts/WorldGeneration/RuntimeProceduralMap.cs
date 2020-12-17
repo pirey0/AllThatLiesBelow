@@ -3,10 +3,30 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+
+public class UnstableTile
+{
+    public Vector2Int Location;
+    public GameObject Effects;
+    public float Duration;
+
+    private float spawnStamp;
+
+    public UnstableTile()
+    {
+        spawnStamp = Time.time;
+    }
+
+    internal bool ShouldCollapse()
+    {
+        return Time.time - spawnStamp > Duration;
+    }
+}
 
 [DefaultExecutionOrder(-100)]
 public class RuntimeProceduralMap : RenderedMap
@@ -27,9 +47,7 @@ public class RuntimeProceduralMap : RenderedMap
 
     bool[,] additiveCoveredMap;
     ITileUpdateReceiver[,] receiverMap;
-    List<Vector2Int> unstableTiles = new List<Vector2Int>();
-    List<GameObject> unstableTilesEffects = new List<GameObject>();
-    Stack<Vector2Int> tilesToStabilityCheck = new Stack<Vector2Int>();
+    List<UnstableTile> unstableTiles = new List<UnstableTile>();
 
     public event System.Action<MirrorState> MirrorSideChanged;
 
@@ -76,8 +94,6 @@ public class RuntimeProceduralMap : RenderedMap
         base.OnDestroy();
         receiverMap = null;
         unstableTiles = null;
-        unstableTilesEffects = null;
-        tilesToStabilityCheck = null;
     }
 
     protected override void OnRealStart()
@@ -98,30 +114,10 @@ public class RuntimeProceduralMap : RenderedMap
     private IEnumerator UpdateUnstableTilesRoutine()
     {
         Debug.Log("Starting UnstableTiles routine");
-        tilesToStabilityCheck.Clear(); //clear on real start
 
         int i = 0;
         while (true)
         {
-            int speed = progressionHandler.InstableWorld ? 3 : 1;
-
-            //loop through tiles to check
-            while (tilesToStabilityCheck.Count > 0)
-            {
-                var loc = tilesToStabilityCheck.Pop();
-                var tile = this[loc];
-                var info = GetTileInfo(tile.Type);
-                if (info.StabilityAffected)
-                {
-                    if (tile.Stability <= GetUnstableThreshhold(tile.Type))
-                    {
-                        float timeLeft = tile.Stability - GenerationSettings.CollapseThreshhold; // to adapt to unstable world
-                        AddUnstableTile(loc, timeLeft);
-                    }
-                }
-            }
-
-            //iterate through unstable tiles
             if (unstableTiles.Count == 0)
             {
                 yield return new WaitForSeconds(0.3f);
@@ -133,11 +129,12 @@ public class RuntimeProceduralMap : RenderedMap
                 i = 0;
             }
 
-            var t = this[unstableTiles[i]];
-            int x = unstableTiles[i].x;
-            int y = unstableTiles[i].y;
+            var current = unstableTiles[i];
+            var t = this[current.Location];
+            int x = current.Location.x;
+            int y = current.Location.y;
 
-            if (t.Stability <= GetCollapseThreshhold(t.Type))
+            if (current.ShouldCollapse())
             {
                 RemoveUnstableTileAt(i);
                 var info = GetTileInfo(t.Type);
@@ -151,49 +148,20 @@ public class RuntimeProceduralMap : RenderedMap
                         CollapseAt(x, y, updateVisuals: true);
                 }
             }
-            else if (t.Stability <= GetUnstableThreshhold(t.Type))
-            {
-                t.ReduceStabilityBy(speed);
-
-                SetMapRawAt(x, y, t);
-                i++;
-            }
             else
             {
-                RemoveUnstableTileAt(i);
+                i++;
             }
         }
     }
 
-    public override bool DamageAt(int x, int y, float amount, DamageType damageType)
+    public CrumbleType GetCrumbleTypeAt(int x, int y)
     {
-        bool broke = base.DamageAt(x, y, amount, damageType);
+        var t = this[x,y];
+        if (t.Unstable)
+            return CrumbleType.Unstable;
 
-        if (!broke)
-        {
-            if(unstableTiles.Contains(new Vector2Int(x, y)))
-            {
-                var t = this[x, y];
-                t.ReduceStabilityBy(5);
-                this[x, y] = t;
-            }
-        }
-        return broke;
-    }
-    private float GetUnstableThreshhold(TileType t)
-    {
-        int coll = progressionHandler.InstableWorld ? GenerationSettings.instableWorldUnstableThreshhold : GenerationSettings.UnstableThreshhold;
-        var info = GetTileInfo(t);
-
-        return coll * info.CrumbleThreshholdMultiplyer;
-    }
-
-    private float GetCollapseThreshhold(TileType t)
-    {
-        float coll = progressionHandler.InstableWorld ? GenerationSettings.instableWorldCollapseThreshhold : GenerationSettings.CollapseThreshhold;
-        var info = GetTileInfo(t);
-
-        return coll * info.CrumbleThreshholdMultiplyer;
+        return GetTileInfo(t.Type).CrumbleType;
     }
 
     protected override void BreakBlock(int x, int y, Tile t, DamageType damageType)
@@ -205,6 +173,12 @@ public class RuntimeProceduralMap : RenderedMap
 
             if (info.ItemToDrop != ItemType.None)
                 inventoryManager.PlayerCollects(info.ItemToDrop, 1);
+        }
+
+        //broke unstable Tile, seems to not be working!
+        if (t.Unstable)
+        {
+            TryRemoveUnstableAt(new Vector2Int(x, y));
         }
     }
 
@@ -225,35 +199,54 @@ public class RuntimeProceduralMap : RenderedMap
         MirrorSideChanged?.Invoke(newState);
     }
 
-    public enum MirrorState { Center, Right, Left };
 
 
-    public void AddTileToCheckForStability(Vector2Int tileLoc)
+    public void MakeTileUnstable(Vector2Int location, float duration)
     {
-        tilesToStabilityCheck.Push(tileLoc);
+        var tile = this[location];
+        if (!tile.Unstable)
+        {
+            UnstableTile t = new UnstableTile();
+            t.Location = location;
+            t.Duration = duration;
+
+            var go = prefabFactory.Create(MapSettings.CrumbleEffects, new Vector3(location.x + 0.5f, location.y), quaternion.identity, transform); //Safe
+            go.GetComponent<CrumblingParticle>().SetDuration(duration);
+            t.Effects = go.gameObject;
+
+            unstableTiles.Add(t);
+            tile.Unstable = true;
+            this[location] = tile;
+        }
     }
 
-    private void AddUnstableTile(Vector2Int unstableTile, float timeLeftToCrumble)
+    public void TryRemoveUnstableAt(Vector2Int loc)
     {
-        if (!unstableTiles.Contains(unstableTile))
+        //this is not working!
+        var t = this[loc];
+        if (!t.Unstable)
+            return;
+
+        var i = FindUnstableMatching(loc);
+        if (i >= 0)
         {
-
-            unstableTiles.Add(unstableTile);
-            var go = prefabFactory.Create(MapSettings.CrumbleEffects, new Vector3(unstableTile.x + 0.5f, unstableTile.y), quaternion.identity, transform); //Safe
-            go.GetComponent<CrumblingParticle>().SetDuration(timeLeftToCrumble);
-
-            unstableTilesEffects.Add(go.gameObject);
+            RemoveUnstableTileAt(i);
         }
 
+        t.Unstable = false;
+        this[loc] = t;
     }
 
-    public void RemoveUnstableTileAt(int i)
+    private int FindUnstableMatching(Vector2Int loc)
     {
-        unstableTiles.RemoveAt(i);
+        return unstableTiles.FindIndex((x) => x.Location == loc);
+    }
 
-        var go = unstableTilesEffects[i];
-        Destroy(go);
-        unstableTilesEffects.RemoveAt(i);
+    private void RemoveUnstableTileAt(int i)
+    {
+        var t = unstableTiles[i];
+        Destroy(t.Effects);
+        unstableTiles.RemoveAt(i);
     }
 
     public void SetReceiverMapAt(int x, int y, ITileUpdateReceiver receiver)
@@ -263,12 +256,6 @@ public class RuntimeProceduralMap : RenderedMap
 
         receiverMap[x, y] = receiver;
     }
-
-    protected override void MarkToCheckForStability(int x, int y)
-    {
-        AddTileToCheckForStability(new Vector2Int(x, y));
-    }
-
 
     private IEnumerator RunCompleteGeneration()
     {
@@ -370,14 +357,6 @@ public class RuntimeProceduralMap : RenderedMap
                 var go = InstantiateEntity(pass.Prefab, pos);
             }
         }
-    }
-
-
-
-
-    private bool ShouldCollapseAt(int x, int y)
-    {
-        return IsBlockAt(x, y) && GetTileAt(x, y).Stability <= GenerationSettings.CollapseThreshhold;
     }
 
     public void CollapseAt(int x, int y, bool updateVisuals)
@@ -584,4 +563,6 @@ public class RuntimeProceduralMap : RenderedMap
             additiveCoveredMap[x + xOffset, y + yOffset] = true;
         }
     }
+
+    public enum MirrorState { Center, Right, Left };
 }

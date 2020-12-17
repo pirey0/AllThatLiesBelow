@@ -5,6 +5,7 @@ using UnityEngine;
 public class KernelIterator : StateListenerBehaviour
 {
     [SerializeField] int sizeX, sizeY;
+    [SerializeField] bool log;
 
     [Zenject.Inject] KernelParser kernelParser;
     [Zenject.Inject] RuntimeProceduralMap map;
@@ -33,9 +34,10 @@ public class KernelIterator : StateListenerBehaviour
         {
             Kernel currentKernel = kernels[currentIndex];
 
-            if (IsMatch(currentKernel, x, y))
+            if (currentKernel.MatchesWith(map, x, y))
             {
-                Debug.Log(currentKernel.Name + " matched at: (" + x + "/" + y + ")");
+                if (log)
+                    Debug.Log(currentKernel.Name + " matched at: (" + x + "/" + y + ")");
                 ApplyKernel(currentKernel, x, y);
             }
 
@@ -72,34 +74,13 @@ public class KernelIterator : StateListenerBehaviour
             {
                 if ((k[x, y] & CrumbleType.Crumble) != CrumbleType.Null)
                 {
-                    if (map.GetTileAt(px + x, py + y).Stability > 40)
-                    {
-                        map.GetTileAt(px + x, py + y).SetStability(Direction.Up, 13);
-                        map.GetTileAt(px + x, py + y).SetStability(Direction.Down, 0);
-                        map.GetTileAt(px + x, py + y).SetStability(Direction.Left, 13);
-                        map.GetTileAt(px + x, py + y).SetStability(Direction.Right, 13);
-                        map.AddTileToCheckForStability(new Vector2Int(px + x, py + y));
-                    }
-                    //map.CollapseAt(px + x, py + y, true);
+                    map.MakeTileUnstable(new Vector2Int(px + x, py + y), 5); //duration needs to be implemented correctly
                 }
             }
         }
     }
 
-    public bool IsMatch(Kernel k, int px, int py)
-    {
-        for (int y = 0; y < k.Height; y++)
-        {
-            for (int x = 0; x < k.Width; x++)
-            {
-                if ((k[x, y] & map.GetTileInfo(map[px + x, py + y].Type).CrumbleType) == CrumbleType.Null)
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
+
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()

@@ -45,3 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kernelFiles:
   - {fileID: 4900000, guid: 5d3aca81964d3684bb68681b09a4c36d, type: 3}
+  - {fileID: 4900000, guid: c7f03b3a81a938c4abe037caeb5faca5, type: 3}

@@ -38,6 +38,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     public int SacrificeProgressionLevel { get => data.sacrificeProgressionLevel; }
     public bool IsMidas { get => data.isMidas; }
 
+    //Useless
     public bool InstableWorld { get => data.instableWorld; }
 
     public float ProgressionTimeScale { get => data.timeScale; }

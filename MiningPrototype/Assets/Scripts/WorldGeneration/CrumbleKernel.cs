@@ -9,9 +9,13 @@ public enum CrumbleType
     Null = 0,
     Crumble = 1,
     Air = 2,
-    Stone = 4,
-    Ignore = 8,
-
+    Normal = 4,
+    Stable = 8,
+    Unstable = 16, //Tile is crumbling. Something could be Stable and Unstable at the same time
+    Rock = 32,
+    Special = 64,
+    AnySolid = Normal | Stable | Rock,
+    Anything = Air | Special |AnySolid
 }
 
 
@@ -71,19 +75,31 @@ public class Kernel
 
     public static CrumbleType CharToCrumbleType(char c)
     {
-
         switch (c)
         {
             case '0':
                 return CrumbleType.Air;
             case '1':
-                return CrumbleType.Stone;
+                return CrumbleType.Normal;
+            case '2':
+                return CrumbleType.Stable;
             case 'I':
             case 'i':
-                return CrumbleType.Ignore;
-            case 'c':
-            case 'C':
-                return CrumbleType.Crumble | CrumbleType.Stone;
+                return CrumbleType.Anything;
+            case 'A':
+            case 'a':
+                return CrumbleType.AnySolid;
+            case 'x':
+            case 'X':
+                return CrumbleType.Crumble | CrumbleType.Normal;
+
+            case 's':
+            case 'S':
+                return CrumbleType.Special;
+
+            case 'R':
+            case 'r':
+                return CrumbleType.Rock;
 
             default:
                 Debug.LogError("Found unknown character: " + c + " " + (int)c);
@@ -91,4 +107,18 @@ public class Kernel
         }
     }
 
+    public bool MatchesWith(RuntimeProceduralMap map, int px, int py)
+    {
+        for (int y = 0; y < Height; y++)
+        {
+            for (int x = 0; x < Width; x++)
+            {
+                if ((this[x, y] & map.GetCrumbleTypeAt(px + x, py + y)) == CrumbleType.Null)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }

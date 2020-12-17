@@ -157,8 +157,6 @@ public class RenderedMap : BaseMap
         {
             CalculateVisibilityAt(nIndex.x, nIndex.y);
         }
-
-        PropagateStabilityUpdatesFrom(x, y);
     }
 
     private void CalculateVisibilityAt(int x, int y)
@@ -227,91 +225,6 @@ public class RenderedMap : BaseMap
 
     }
 
-    private void PropagateStabilityUpdatesFrom(int x, int y)
-    {
-        MarkToCheckForStability(x, y);
-        ResetStabilityAt(x, y);
-        DirectionalStabilityIterator(x, y, Direction.Up);
-        DirectionalStabilityIterator(x, y, Direction.Right);
-        DirectionalStabilityIterator(x, y, Direction.Down);
-        DirectionalStabilityIterator(x, y, Direction.Left);
-    }
-
-    private void DirectionalStabilityIterator(int x, int y, Direction dir)
-    {
-        Vector2Int offset = dir.Inverse().AsV2Int();
-
-        for (int i = 0; i < GenerationSettings.StabilityPropagationDistance; i++)
-        {
-            SetDirectionalStabilityAt(x, y, dir);
-            MarkToCheckForStability(x, y);
-            x += offset.x;
-            y += offset.y;
-        }
-    }
-
-    private void ResetStabilityAt(int x, int y)
-    {
-        var tile = GetTileAt(x, y);
-        tile.ResetStability();
-
-        this[x, y] = tile;
-    }
-
-    private void SetDirectionalStabilityAt(int x, int y, Direction direction)
-    {
-        if (IsAirAt(x, y))
-            return;
-
-        var tile = GetTileAt(x, y);
-
-        if (direction == Direction.Down)
-        {
-            tile.SetStability(direction, IsBlockAt(x, y - 1) ? 100 : 0);
-        }
-        else
-        {
-            Vector2Int offset = direction.AsV2Int();
-            var info = GetTileInfo(this[x + offset.x, y + offset.y].Type);
-
-            int effect = Mathf.FloorToInt(this[x + offset.x, y + offset.y].Stability * info.StabilityEffectMultiplyer * 0.25f);
-            tile.SetStability(direction, Mathf.Min(25, effect));
-        }
-
-        this[x, y] = tile;
-    }
-
-    protected virtual void MarkToCheckForStability(int x, int y)
-    {
-    }
-
-    public override void CalculateStabilityAll()
-    {
-        Util.IterateXY(SizeX, SizeY, (x, y) => ResetStabilityAt(x, y));
-
-        Util.IterateXY(SizeX, SizeY, (x, y) => SetDirectionalStabilityAt(x, y, Direction.Down));
-
-        for (int y = SizeY; y >= 0; y--)
-        {
-            for (int x = 0; x < SizeX; x++)
-            {
-                SetDirectionalStabilityAt(x, y, Direction.Up);
-            }
-        }
-
-        for (int y = 0; y < SizeY; y++)
-        {
-            for (int x = 0; x < SizeX; x++)
-            {
-                SetDirectionalStabilityAt(x, y, Direction.Left);
-            }
-
-            for (int x = SizeX; x >= 0; x--)
-            {
-                SetDirectionalStabilityAt(x, y, Direction.Right);
-            }
-        }
-    }
 
     public override void CalculateVisibilityAll()
     {
