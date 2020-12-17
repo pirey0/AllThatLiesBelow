@@ -24,7 +24,6 @@ public class PlayerWalkEffects : MonoBehaviour
 
             if (type != TileType.Air)
             {
-                Debug.LogWarning("show!!");
                 amount = amountOnWalk;
                 main.startColor = GetColorForType(type);
             }
