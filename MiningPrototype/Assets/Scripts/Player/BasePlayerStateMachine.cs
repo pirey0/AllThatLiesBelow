@@ -18,7 +18,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
     StateMachine.State s_idle, s_crouchIdle, s_jump, s_fall, s_walk, s_slowWalk, s_crouchWalk, s_climb, s_climbIde, s_inventory, s_death, s_hit, s_longIdle, s_disabled, s_fallDeath;
     public event System.Action PlayerDeath;
 
-    private List<Ladder> currentLadders = new List<Ladder>();
+    private List<IClimbable> currentClimbable = new List<IClimbable>();
     private float gravityScale;
     float lastGroundedTimeStamp;
     float lastJumpTimeStamp;
@@ -32,7 +32,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
     protected Rigidbody2D rigidbody;
     float horizontalSpeed;
 
-    private bool InFrontOfLadder { get => currentLadders.Count > 0; }
+    private bool InFrontOfCimbable { get => currentClimbable.Count > 0; }
     private bool IsLocked { get => stateMachine.CurrentState == s_disabled; }
     protected string CurrentStateName { get => stateMachine.CurrentState.Name; }
 
@@ -324,8 +324,8 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         rigidbody.gravityScale = 0;
         NotifyActivity();
 
-        if (currentLadders.Count > 0)
-            currentLadders.ForEach((x) => x.NotifyUse());
+        if (currentClimbable.Count > 0)
+            currentClimbable.ForEach((x) => x.NotifyUse());
     }
 
     private void ClimbingExit()
@@ -333,13 +333,13 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         rigidbody.gravityScale = gravityScale;
         NotifyActivity();
 
-        if (currentLadders.Count > 0)
-            currentLadders.ForEach((x) => x.NotifyLeave());
+        if (currentClimbable.Count > 0)
+            currentClimbable.ForEach((x) => x.NotifyLeave());
     }
 
     private void ClimbingUpdate()
     {
-        if (currentLadders == null)
+        if (currentClimbable == null)
             return;
 
         var horizontal = GetHorizontalInput();
@@ -359,34 +359,34 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         var vertical = GetVerticalInput();
         bool up = vertical > 0;
 
-        bool downOnGround =  !up && IsGrounded() && IsBelowTopLadder();
+        bool downOnGround =  !up && IsGrounded() && IsBelowTopCimbable();
 
-        return InFrontOfLadder && Mathf.Abs(vertical) > 0.75f && !downOnGround;
+        return InFrontOfCimbable && Mathf.Abs(vertical) > 0.75f && !downOnGround;
     }
 
     private bool IsNotClimbing()
     {
-        bool ca = !InFrontOfLadder;
-        bool cb = (IsGrounded() && IsBelowTopLadder());
+        bool ca = !InFrontOfCimbable;
+        bool cb = (IsGrounded() && IsBelowTopCimbable());
 
         return ca || cb;
     }
 
-    private bool IsBelowTopLadder()
+    private bool IsBelowTopCimbable()
     {
-        var topL = GetTopLadder();
+        var topL = GetTopCimbable();
         if (topL == null)
             return false;
 
-        return transform.position.y < (topL.transform.position.y + 5.5f); //hardcoded ladder height
+        return transform.position.y < (topL.GetTopPosition().y);
     }
 
-    private Ladder GetTopLadder()
+    private IClimbable GetTopCimbable()
     {
-        if (currentLadders.Count == 0)
+        if (currentClimbable.Count == 0)
             return null;
 
-        return currentLadders.OrderBy((x) => x.transform.position.y).First();
+        return currentClimbable.OrderBy((x) => x.GetBottomPosition().y).First();
     }
 
     private bool IsIdle()
@@ -515,9 +515,9 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Ladder ladder))
+        if (collision.TryGetComponent(out IClimbable ladder))
         {
-            currentLadders.Add(ladder);
+            currentClimbable.Add(ladder);
             if (InClimbState())
                 ladder.NotifyUse();
         }
@@ -527,7 +527,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
     {
         if (collision.TryGetComponent(out Ladder ladder))
         {
-            currentLadders.Remove(ladder);
+            currentClimbable.Remove(ladder);
             ladder.NotifyLeave();
         }
     }
