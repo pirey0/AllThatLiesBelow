@@ -50,7 +50,7 @@ public class KernelParser : MonoBehaviour
             {
                 if (currentLines.Count > 0)
                 {
-                    Kernel ker = Kernel.FromStrings(currentLines.ToArray());
+                    Kernel ker = Kernel.FromStrings(k.name + " " + index, currentLines.ToArray());
                     if (ker == null)
                     {
                         Debug.LogError("Null Kernel on line " + index + ": " + currentLine);
