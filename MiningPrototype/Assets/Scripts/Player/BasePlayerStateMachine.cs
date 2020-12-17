@@ -394,7 +394,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         return !IsMoving();
     }
 
-    private bool IsMoving()
+    public bool IsMoving()
     {
         return horizontalSpeed.Abs() > settings.idleThreshold;
     }

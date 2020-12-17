@@ -11,6 +11,7 @@ public class PlayerVisualController : MonoBehaviour
     [SerializeField] PickaxeAnimator pickaxe;
     [SerializeField] GameObject pickaxeObject;
     [SerializeField] SpriteRenderer pickaxeRenderer;
+    [SerializeField] PlayerWalkEffects playerWalkEffects;
 
     [SerializeField] PlayerVisualState[] visualStates;
 
@@ -125,6 +126,9 @@ public class PlayerVisualController : MonoBehaviour
                     }
                     break;
             }
+
+            //walk effects
+            playerWalkEffects.SetEffects(player.IsMoving());
         }
         else
         {
