@@ -14,6 +14,7 @@ public class Intro : StateListenerBehaviour
 
     [Zenject.Inject] PlayerStateMachine player;
     [Zenject.Inject] OverworldEffectHandler effectHandler;
+    [Zenject.Inject] ProgressionHandler progressionHandler;
     [Zenject.Inject] ItemPlacingHandler placingHandler;
     [Zenject.Inject] InventoryManager inventoryManager;
     [Zenject.Inject] PlayerInventoryOpener playerInventoryOpener;
@@ -37,6 +38,7 @@ public class Intro : StateListenerBehaviour
         }
         else
         {
+            progressionHandler.StartNextDay();
             player.CanDig = true;
         }
     }

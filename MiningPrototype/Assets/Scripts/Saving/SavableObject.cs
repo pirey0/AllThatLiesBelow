@@ -45,7 +45,8 @@ public enum SpawnableIDType
     Vine,
     LocationIndicator,
     WoodenBlocking,
-    Note
+    Note,
+    Rope
 }
 
 [System.Serializable]

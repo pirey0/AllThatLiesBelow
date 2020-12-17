@@ -50,7 +50,7 @@ MonoBehaviour:
   newOrderCrateSpawner: {fileID: 2388821099892900699}
   startingLetterID: 100
   startingItems:
-  - type: 6
+  - type: 22
     amount: 5
   instantDeliveryAudio: {fileID: 5016016371274373291}
 --- !u!114 &2388821099892900699

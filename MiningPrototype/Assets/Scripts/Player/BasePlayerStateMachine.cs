@@ -525,7 +525,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Ladder ladder))
+        if (collision.TryGetComponent(out IClimbable ladder))
         {
             currentClimbable.Remove(ladder);
             ladder.NotifyLeave();

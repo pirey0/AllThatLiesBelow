@@ -27,7 +27,7 @@ MonoBehaviour:
   MinableInOverworld: 1
   DamageIsInBackground: 1
   DrawsToShifted: 0
-  CrumbleType: 4
+  CrumbleType: 2
   UseTilesFromOtherInfo: 0
   Tiles: []
   TileSourceInfo: {fileID: 0}
