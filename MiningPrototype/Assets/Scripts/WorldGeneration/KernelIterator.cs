@@ -72,7 +72,15 @@ public class KernelIterator : StateListenerBehaviour
             {
                 if ((k[x, y] & CrumbleType.Crumble) != CrumbleType.Null)
                 {
-                    map.CollapseAt(px + x, py + y, true);
+                    if (map.GetTileAt(px + x, py + y).Stability > 40)
+                    {
+                        map.GetTileAt(px + x, py + y).SetStability(Direction.Up, 13);
+                        map.GetTileAt(px + x, py + y).SetStability(Direction.Down, 0);
+                        map.GetTileAt(px + x, py + y).SetStability(Direction.Left, 13);
+                        map.GetTileAt(px + x, py + y).SetStability(Direction.Right, 13);
+                        map.AddTileToCheckForStability(new Vector2Int(px + x, py + y));
+                    }
+                    //map.CollapseAt(px + x, py + y, true);
                 }
             }
         }
