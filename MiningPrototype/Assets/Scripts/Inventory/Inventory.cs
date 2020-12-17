@@ -16,7 +16,7 @@ public class Inventory
     }
 
     [field: NonSerialized]
-    public event System.Action<bool, ItemAmountPair> InventoryChanged;
+    public event System.Action<bool, ItemAmountPair, bool> InventoryChanged;
 
     public ItemAmountPair this[int index]
     {
@@ -29,7 +29,7 @@ public class Inventory
         }
     }
 
-    public void Add(ItemType type, int amount)
+    public void Add(ItemType type, int amount, bool playSound = true)
     {
         bool isReadable = ItemsData.GetItemInfo(type).AmountIsUniqueID;
 
@@ -42,7 +42,7 @@ public class Inventory
                 if (item.type == type)
                 {
                     content[i] = new ItemAmountPair(item.type, item.amount + amount);
-                    InventoryChanged?.Invoke(true, new ItemAmountPair(type,amount));
+                    InventoryChanged?.Invoke(true, new ItemAmountPair(type,amount), playSound);
                     return;
                 }
             }
@@ -51,7 +51,7 @@ public class Inventory
         ItemAmountPair pair = new ItemAmountPair(type, amount);
 
         content.Add(pair);
-        InventoryChanged?.Invoke(true, pair);
+        InventoryChanged?.Invoke(true, pair, playSound);
     }
 
     public void Add(ItemAmountPair pair)
@@ -102,7 +102,7 @@ public class Inventory
             if(i >= 0 && i < content.Count)
             {
                 content.RemoveAt(i);
-                InventoryChanged?.Invoke(false,pair);
+                InventoryChanged?.Invoke(false,pair,true);
                 return true;
             }
         }
@@ -116,14 +116,14 @@ public class Inventory
                     var newPair = new ItemAmountPair(pair.type, content[id].amount - pair.amount);
                     content[id] = newPair;
 
-                    InventoryChanged?.Invoke(false, pair);
+                    InventoryChanged?.Invoke(false, pair, true);
                     return true;
                 }
                 else if (content[id].amount == pair.amount)
                 {
                     content.RemoveAt(id);
 
-                    InventoryChanged?.Invoke(false, pair);
+                    InventoryChanged?.Invoke(false, pair, true);
                     return true;
                 }
             }
@@ -147,7 +147,7 @@ public class Inventory
         if (c.IsNull())
         {
             content.RemoveAt(index);
-            InventoryChanged?.Invoke(false, c);
+            InventoryChanged?.Invoke(false, c, true);
             return c;
         }
 

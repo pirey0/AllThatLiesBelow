@@ -49,12 +49,12 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
         inventory.InventoryChanged += OnInventoryChanged;
     }
 
-    private void OnInventoryChanged(bool add, ItemAmountPair pair)
+    private void OnInventoryChanged(bool add, ItemAmountPair pair, bool playSound)
     {
         if (state == InventoryState.Open && inventoryVisualizer != null)
             inventoryVisualizer.UpdateInventoryDisplay(add, pair);
 
-        if (add && receiveSource != null && gameState.CurrentState == GameState.State.Playing)
+        if (playSound && add && receiveSource != null && gameState.CurrentState == GameState.State.Playing)
             receiveSource.Play();
     }
 

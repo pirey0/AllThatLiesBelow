@@ -12,7 +12,7 @@ public class InventoryManager : MonoBehaviour
 
     public void PlayerCollects(ItemType itemType, int amount)
     {
-        player.Inventory.Add(itemType, amount);
+        player.Inventory.Add(itemType, amount, playSound: false);
 
         PlayerCollected?.Invoke(new ItemAmountPair(itemType, amount));
     }
