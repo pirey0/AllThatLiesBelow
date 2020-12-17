@@ -128,7 +128,7 @@ public class PlayerVisualController : MonoBehaviour
             }
 
             //walk effects
-            playerWalkEffects.SetEffects(player.IsMoving());
+            playerWalkEffects.SetEffects(player.IsMoving() && player.IsGrounded());
         }
         else
         {

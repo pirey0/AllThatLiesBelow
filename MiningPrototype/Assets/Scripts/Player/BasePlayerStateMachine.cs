@@ -349,7 +349,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         rigidbody.velocity = climbVelocity;
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         return isGrounded && Time.time - lastJumpTimeStamp > 0.1f;
     }
