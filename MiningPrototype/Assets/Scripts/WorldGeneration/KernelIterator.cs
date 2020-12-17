@@ -35,7 +35,8 @@ public class KernelIterator : StateListenerBehaviour
 
             if (IsMatch(currentKernel, x, y))
             {
-                Debug.Log("Match at: (" + x + "/" + y + ")");
+                Debug.Log(currentKernel.Name + " matched at: (" + x + "/" + y + ")");
+                ApplyKernel(currentKernel, x, y);
             }
 
             x++;
@@ -49,8 +50,8 @@ public class KernelIterator : StateListenerBehaviour
                     y = currentStartY;
                     yield return null; //1 kernel per frame
                     currentIndex++;
-                    
-                    if(currentIndex >= kernels.Length) //finished all kernels
+
+                    if (currentIndex >= kernels.Length) //finished all kernels
                     {
                         currentIndex = 0;
                         currentStartX = player.transform.position.ToGridPosition().x - sizeX / 2;
@@ -63,13 +64,27 @@ public class KernelIterator : StateListenerBehaviour
         }
     }
 
+    private void ApplyKernel(Kernel k, int px, int py)
+    {
+        for (int y = 0; y < k.Height; y++)
+        {
+            for (int x = 0; x < k.Width; x++)
+            {
+                if ((k[x, y] & CrumbleType.Crumble) != CrumbleType.Null)
+                {
+                    map.CollapseAt(px + x, py + y, true);
+                }
+            }
+        }
+    }
+
     public bool IsMatch(Kernel k, int px, int py)
     {
         for (int y = 0; y < k.Height; y++)
         {
             for (int x = 0; x < k.Width; x++)
             {
-                if (k[x, y] != map.GetTileInfo(map[px + x, py + y].Type).CrumbleType)
+                if ((k[x, y] & map.GetTileInfo(map[px + x, py + y].Type).CrumbleType) == CrumbleType.Null)
                 {
                     return false;
                 }
@@ -81,7 +96,7 @@ public class KernelIterator : StateListenerBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        if(player!= null)
+        if (player != null)
         {
             Vector3 pos = player.transform.position.ToGridPosition().AsV3();
             Gizmos.DrawWireCube(pos, new Vector3(sizeX, sizeY, 0));
