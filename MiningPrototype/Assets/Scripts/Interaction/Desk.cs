@@ -157,4 +157,8 @@ public class Desk : MonoBehaviour, IInteractable
     {
         canSend = false;
     }
+    public Vector3 GetPosition()
+    {
+        return transform.position;
+    }
 }

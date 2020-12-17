@@ -191,6 +191,11 @@ public class Altar : StateListenerBehaviour, IInteractable, IDropReceiver
         return str;
     }
 
+    public Vector3 GetPosition()
+    {
+        return transform.position + Vector3.up * 3;
+    }
+
     public void SubscribeToForceQuit(Action action)
     {
         NotifyForcedEnd += action;

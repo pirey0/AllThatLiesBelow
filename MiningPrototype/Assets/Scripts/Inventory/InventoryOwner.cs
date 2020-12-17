@@ -91,6 +91,11 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
         }
     }
 
+    public Vector3 GetPosition()
+    {
+        return transform.position;
+    }
+
     public virtual void CloseInventory()
     {
         if (state == InventoryState.Open)

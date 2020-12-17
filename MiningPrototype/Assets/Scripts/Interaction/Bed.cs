@@ -160,4 +160,8 @@ public class Bed : MonoBehaviour, IInteractable
 
         sacrificedHappyness = true;
     }
+    public Vector3 GetPosition()
+    {
+        return transform.position;
+    }
 }

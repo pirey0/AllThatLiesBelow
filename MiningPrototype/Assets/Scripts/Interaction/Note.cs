@@ -66,6 +66,11 @@ public class Note : MirrorWorldFollower, IInteractable, INonPersistantSavable
         }
     }
 
+    public Vector3 GetPosition()
+    {
+        return transform.position;
+    }
+
     [System.Serializable]
     public class NoteSaveData: SpawnableSaveData
     {

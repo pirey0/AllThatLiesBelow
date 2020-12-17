@@ -76,7 +76,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         }
 
         //Stop interacting when too far away
-        if (CurrentInteractableIsValid() && Vector3.Distance(transform.position, currentInteractable.gameObject.transform.position) > settings.maxInteractableDistance)
+        if (CurrentInteractableIsValid() && Vector3.Distance(transform.position, currentInteractable.GetPosition()) > settings.maxInteractableDistance)
         {
             TryStopInteracting();
         }

@@ -10,5 +10,7 @@ public interface IInteractable
     void SubscribeToForceQuit(System.Action action);
     void UnsubscribeToForceQuit(System.Action action);
 
+    Vector3 GetPosition();
+
     GameObject gameObject { get; }
 }
