@@ -46,7 +46,8 @@ public enum SpawnableIDType
     LocationIndicator,
     WoodenBlocking,
     Note,
-    Rope
+    Rope,
+    Lift
 }
 
 [System.Serializable]
@@ -62,4 +63,10 @@ public class SpawnableSaveData
     public SerializedVector3 Position;
     public SerializedVector3 Rotation;
 
+
+    public void SaveTransform(Transform t)
+    {
+        Position = new SerializedVector3(t.position);
+        Rotation = new SerializedVector3(t.eulerAngles);
+    }
 }

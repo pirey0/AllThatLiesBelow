@@ -197,6 +197,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 155191563374322045}
+  - component: {fileID: 734060017}
   m_Layer: 0
   m_Name: Lift
   m_TagString: Untagged
@@ -223,6 +224,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &734060017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155191563374322042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7895e1b7f79bb1e4ca45c09e55ceddbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drop:
+    type: 0
+    amount: 0
+  tilesToOccupy:
+  - Offset: {x: 0, y: -1}
+    Type: 10
+  - Offset: {x: 1, y: -1}
+    Type: 10
+  - Offset: {x: 2, y: -1}
+    Type: 10
+  - Offset: {x: -1, y: -1}
+    Type: 10
+  carvingOffset: {x: 0, y: 0, z: 0}
+  cage: {fileID: 359653277613873758}
 --- !u!1 &155191563803580536
 GameObject:
   m_ObjectHideFlags: 0

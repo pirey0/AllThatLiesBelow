@@ -247,4 +247,25 @@ public class LiftCage : MonoBehaviour, IVehicle
         player.transform.parent = null;
         Debug.Log("Player left " + this.name);
     }
+
+    public void SaveTo(Lift.LiftSaveData data)
+    {
+        data.CagePosition = new SerializedVector3(transform.position);
+        data.CageDistance = distanceJoint.distance;
+        data.CageVelocity = liftVelocity;
+        data.CageState = state;
+    }
+
+    public void Load(Lift.LiftSaveData data)
+    {
+        transform.position = data.CagePosition.ToVector3();
+        distanceJoint.distance = data.CageDistance;
+        liftVelocity = data.CageVelocity;
+        state = data.CageState;
+
+        if(state == LiftState.Active || liftVelocity != 0)
+        {
+            StartCoroutine(MoveRoutine());
+        }
+    }
 }
