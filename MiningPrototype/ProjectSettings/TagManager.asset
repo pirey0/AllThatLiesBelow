@@ -53,8 +53,14 @@ TagManager:
   - name: MineableObject
     uniqueID: 3382482131
     locked: 0
+  - name: LiftBackground
+    uniqueID: 1230105485
+    locked: 0
   - name: Player
     uniqueID: 3081657953
+    locked: 0
+  - name: LiftForeground
+    uniqueID: 1159884217
     locked: 0
   - name: Support
     uniqueID: 3730815779
