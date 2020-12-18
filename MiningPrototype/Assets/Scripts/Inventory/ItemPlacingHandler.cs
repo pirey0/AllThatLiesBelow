@@ -12,6 +12,7 @@ public class ItemPlacingHandler : MonoBehaviour
     [Zenject.Inject] InventoryManager inventoryManager;
     [Zenject.Inject] EventSystem eventSystem;
 
+    [SerializeField] AudioClip placingClip, torchPlacingClip;
     [SerializeField] AudioSource placingSound;
 
     bool holdingPlacable;
@@ -111,10 +112,14 @@ public class ItemPlacingHandler : MonoBehaviour
         switch (type)
         {
             case ItemType.Torch:
+                placingSound.clip = torchPlacingClip;
+                placingSound.Play();
+                cameraController.Shake(preview.GetPlacePosition(position), CameraShakeType.hill, 0.1f, 10f, 0.3f);
                 break;
 
             default:
-                placingSound?.Play();
+                placingSound.clip = placingClip;
+                placingSound.Play();
                 cameraController.Shake(preview.GetPlacePosition(position), CameraShakeType.hill, 0.1f, 10f);
                 break;
         }

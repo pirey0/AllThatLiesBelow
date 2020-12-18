@@ -21,23 +21,23 @@ public class CameraShaker : MonoBehaviour
     List<CameraShake> shakes = new List<CameraShake>();
     [SerializeField] bool showShakes;
 
-    private void Start ()
+    private void Start()
     {
         StartCoroutine(CameraShakeRoutine());
     }
 
     //defaultShakeTypes
-    public CameraShake StartShake(CameraShakeType type, float duration, Vector2 location, float range)
+    public CameraShake StartShake(CameraShakeType type, float duration, Vector2 location, float range, float intensity)
     {
-        CameraShake cs = new CameraShake(GetCurveForType(type), location, duration, range);
+        CameraShake cs = new CameraShake(GetCurveForType(type), location, duration, range, intensity);
         shakes.Add(cs);
         return cs;
     }
 
     //customShakeFromCurve
-    public CameraShake StartShake(AnimationCurve customCurve, float duration, Vector2 location, float range)
+    public CameraShake StartShake(AnimationCurve customCurve, float duration, Vector2 location, float range, float intensity)
     {
-        CameraShake cs = new CameraShake(customCurve, location, duration, range);
+        CameraShake cs = new CameraShake(customCurve, location, duration, range, intensity);
         shakes.Add(cs);
         return cs;
     }
@@ -48,7 +48,7 @@ public class CameraShaker : MonoBehaviour
             shakes.Remove(shake);
     }
 
-    private IEnumerator CameraShakeRoutine ()
+    private IEnumerator CameraShakeRoutine()
     {
         while (true)
         {
@@ -75,7 +75,7 @@ public class CameraShaker : MonoBehaviour
             }
             else
             {
-                shakeAmount =  Vector2.zero ;// Vector2.MoveTowards(shakeAmount, new Vector2(0,0), Time.deltaTime);
+                shakeAmount = Vector2.zero;// Vector2.MoveTowards(shakeAmount, new Vector2(0,0), Time.deltaTime);
             }
 
             yield return null;
@@ -104,7 +104,7 @@ public class CameraShaker : MonoBehaviour
     {
         foreach (CameraShake shake in shakes)
         {
-            Gizmos.DrawWireSphere(shake.location, shake.rangeForFalloff);
+            shake.DrawGizmos();
         }
     }
 }
@@ -116,10 +116,11 @@ public class CameraShake
     float curveLength;
     AnimationCurve overTime;
     float duration;
-    public Vector2 location;
-    public float rangeForFalloff = 10;
+    Vector2 location;
+    float rangeForFalloff = 10;
+    float intensity;
 
-    public CameraShake (AnimationCurve curve, Vector2 _location, float _duration, float _range)
+    public CameraShake(AnimationCurve curve, Vector2 _location, float _duration, float _range, float _intensity)
     {
         timeAtStart = Time.time;
         curveLength = curve.keys[curve.length - 1].time;
@@ -130,7 +131,14 @@ public class CameraShake
 
         location = _location;
         rangeForFalloff = _range;
+        intensity = _intensity;
     }
+
+    public void DrawGizmos()
+    {
+        Gizmos.DrawWireSphere(location, rangeForFalloff);
+    }
+
     public float GetIntensity(Vector2 cameraLocation)
     {
         //time is up, please kill me
@@ -139,6 +147,6 @@ public class CameraShake
             return -1;
         }
 
-        return overTime.Evaluate(((Time.time - timeAtStart)/curveLength) / duration) * (1 - Mathf.Clamp(Vector2.Distance(cameraLocation, location) / rangeForFalloff, 0, 1));
+        return intensity * overTime.Evaluate(((Time.time - timeAtStart) / curveLength) / duration) * (1 - Mathf.Clamp(Vector2.Distance(cameraLocation, location) / rangeForFalloff, 0, 1));
     }
 }

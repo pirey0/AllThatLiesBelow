@@ -6,12 +6,13 @@
 // 1: Normal (Normal stones)
 // a/A: Anything (Normal and Air)
 // x/X: Crumble (Will make the tile crumble)
+//s/S: Crumble instantly
 
 //An empty line indicates the start of a new kernel
 //You can have multiple empty lines between kernels
 
 //This kernel represents a Solid surrounded by 8 Air, the center tile will crumble
 000
-0X0
+0S0
 000
 

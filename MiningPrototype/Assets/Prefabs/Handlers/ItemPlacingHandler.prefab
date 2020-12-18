@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4548280680598382781}
   - component: {fileID: -6096071233802249242}
   m_Layer: 0
-  m_Name: ItemPreviewHandler
+  m_Name: ItemPlacingHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1749339f7f8fb74fa6063ff62aad1df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  placingClip: {fileID: 8300000, guid: edf67ac486afa1449a414dc5225df684, type: 3}
+  torchPlacingClip: {fileID: 8300000, guid: a9772a253b955214ebbf5ca640cb38bb, type: 3}
   placingSound: {fileID: -6096071233802249242}
 --- !u!82 &-6096071233802249242
 AudioSource:
