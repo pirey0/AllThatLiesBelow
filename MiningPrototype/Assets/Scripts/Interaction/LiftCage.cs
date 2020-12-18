@@ -29,8 +29,6 @@ public class LiftCage : MonoBehaviour
         }
     }
 
-    
-
     float liftSpeed = 0;
     [SerializeField] float liftMaxSpeed = 10;
     [BoxGroup("Animations")][SerializeField] SpriteAnimator liftFG_anim, liftBG_anim;
@@ -39,6 +37,8 @@ public class LiftCage : MonoBehaviour
     [SerializeField] Transform liftBase;
     [SerializeField] LineRenderer leftRope, rightRope;
     [SerializeField] DistanceJoint2D distanceJoint;
+
+    [SerializeField] AudioSource movingUpAndDownSound;
     private void Start()
     {
         liftOrigin = transform.position + Vector3.up * 3 + Vector3.left * 0.75f;
@@ -85,7 +85,18 @@ public class LiftCage : MonoBehaviour
             distanceJoint.distance -= input.y * Time.deltaTime * liftSpeed;
 
             if (input != Vector3.zero && liftSpeed < liftMaxSpeed)
+            {
                 liftSpeed += Time.deltaTime * 6f;
+
+                if (!movingUpAndDownSound.isPlaying)
+                    movingUpAndDownSound.Play();
+
+                movingUpAndDownSound.pitch = 0.75f + 1f * (liftSpeed / liftMaxSpeed);
+            } else
+            {
+                if (movingUpAndDownSound.isPlaying)
+                    movingUpAndDownSound.Pause();
+            }
         }
     }
 
