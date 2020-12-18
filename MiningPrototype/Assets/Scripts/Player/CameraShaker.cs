@@ -71,11 +71,11 @@ public class CameraShaker : MonoBehaviour
             if (intensity > 0)
             {
                 intensity *= 10 * Time.deltaTime;
-                shakeAmount = Vector2.MoveTowards(shakeAmount, new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)), intensity);
+                shakeAmount = Vector2.MoveTowards(Vector2.zero, new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)), intensity);
             }
             else
             {
-                shakeAmount = Vector2.zero;
+                shakeAmount =  Vector2.zero ;// Vector2.MoveTowards(shakeAmount, new Vector2(0,0), Time.deltaTime);
             }
 
             yield return null;
