@@ -15,7 +15,7 @@ public enum CrumbleType
     Rock = 32,
     Special = 64,
     AnySolid = Normal | Stable | Rock,
-    Anything = Air | Special |AnySolid
+    Anything = Air | Special | AnySolid
 }
 
 
@@ -92,7 +92,6 @@ public class Kernel
             case 'x':
             case 'X':
                 return CrumbleType.Crumble | CrumbleType.Normal;
-
             case 's':
             case 'S':
                 return CrumbleType.Special;
