@@ -20,7 +20,7 @@ MonoBehaviour:
   Targetable: 1
   TargetPriority: 1
   CrumbleType: 4
-  CanBeUnstable: 1
+  CanBeUnstable: 0
   NotifiesInsteadOfCrumbling: 0
   UnstableTimeBeforeCrumble: 5
   CountsAsNeighbour: 1
