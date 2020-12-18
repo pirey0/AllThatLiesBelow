@@ -71,7 +71,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2119514055
-  m_SortingLayer: 5
+  m_SortingLayer: 1
   m_SortingOrder: -10
   m_RenderMode: 0
   m_SortMode: 0
@@ -4883,7 +4883,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2119514055
-  m_SortingLayer: 5
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
@@ -14491,7 +14491,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 254087233
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: -100
   m_RenderMode: 0
   m_SortMode: 0
@@ -14581,8 +14581,8 @@ MonoBehaviour:
   snowstormSounds: {fileID: 7662845370832059535}
   caveSounds: {fileID: 7662845370832059529}
   springSounds: {fileID: 7662845370832059528}
-  maxSnowStormVolume: 0.66
-  maxCaveVolume: 1
+  maxSnowStormVolume: 0.33
+  maxCaveVolume: 0.5
   isNight: 0
   isSpring: 0
 --- !u!82 &7662845370832059535
@@ -14944,7 +14944,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2119514055
-  m_SortingLayer: 5
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
