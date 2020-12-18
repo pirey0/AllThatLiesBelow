@@ -493,15 +493,7 @@ public class RuntimeProceduralMap : RenderedMap
 
     private void PopulateAt(int x, int y)
     {
-        Tile t = Tile.Air;
-
-        bool occupied = GenerationSettings.HeightMultiplyer.Evaluate((float)y / SizeY) * UnityEngine.Random.value < GenerationSettings.InitialAliveCurve.Evaluate((float)y / SizeY);
-        if (y == 0)
-            occupied = true;
-
-        if (occupied)
-            t.Type = TileType.Stone;
-
+        Tile t = Tile.Make(TileType.Stone);
         this[x, y] = t;
     }
 

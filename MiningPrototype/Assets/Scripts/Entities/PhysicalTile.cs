@@ -81,7 +81,7 @@ public class PhysicalTile : MineableObject, IEntity
 
             generator.SetMapAt(position.x, position.y, tile, TileUpdateReason.Place);
 
-            Util.DebugDrawTile(position);
+            Util.DebugDrawTile(position, Color.green, 2);
             Instantiate(onLandEffects);
             Destroy(gameObject);
         }
