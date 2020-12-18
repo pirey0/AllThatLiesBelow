@@ -36,6 +36,8 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
     private bool IsLocked { get => stateMachine.CurrentState == s_disabled; }
     protected string CurrentStateName { get => stateMachine.CurrentState.Name; }
 
+    public Rigidbody2D Rigidbody { get => rigidbody; }
+
     protected virtual void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();

@@ -249,4 +249,15 @@ public class PlayerStateMachine : BasePlayerStateMachine
     {
         return !Util.IsNullOrDestroyed(currentVehicle);
     }
+
+    public void MakeKinematic()
+    {
+        rigidbody.isKinematic = true;
+    }
+
+    public void MakeNotKinematic()
+    {
+        rigidbody.isKinematic = false;
+    }
+
 }

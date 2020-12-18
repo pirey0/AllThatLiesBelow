@@ -12,13 +12,12 @@ public enum LiftState
     Inactive
 }
 
-public class LiftCage : MonoBehaviour
+public class LiftCage : MonoBehaviour, IVehicle
 {
-    
+
     [BoxGroup("Positions")] [SerializeField] Vector3 liftOrigin;
     [BoxGroup("Positions")] [SerializeField] Vector3 leftRopeOffset, rightRopeOffset, leftRopeOffsetBase, rightRopeOffsetBase;
 
-    [SerializeField] float liftMaxSpeed = 10;
     [BoxGroup("Animations")] [SerializeField] SpriteAnimator liftFG_anim, liftBG_anim;
     [BoxGroup("Animations")] [SerializeField] SpriteAnimator[] wheels_anim;
     [BoxGroup("Animations")] [SerializeField] SpriteAnimation liftFG_active, liftFG_inactive, liftBG_active, LiftBG_inactive, LiftWheel_active_left, LiftWheel_active_right, LiftWheel_inactive;
@@ -26,15 +25,20 @@ public class LiftCage : MonoBehaviour
     [SerializeField] Transform liftBase;
     [SerializeField] LineRenderer leftRope, rightRope;
     [SerializeField] DistanceJoint2D distanceJoint;
-
     [SerializeField] AudioSource movingUpAndDownSound;
 
-    [SerializeField] LiftState state = LiftState.Inactive;
-    Direction direction;
+    [Header("Settings")]
+    [SerializeField] float acceleration = 2;
+    [SerializeField] float decelerationMultiplyer = 2;
+    [SerializeField] float maxSpeed = 4;
+    [SerializeField] float minLength = 1, maxLength = 30;
 
-    float liftSpeed = 0;
-    Vector3 playerOffset;
 
+    LiftState state = LiftState.Inactive;
+    PlayerStateMachine player;
+    Vector3 oldPosition;
+
+    float liftVelocity = 0;
 
     LiftState State
     {
@@ -56,7 +60,7 @@ public class LiftCage : MonoBehaviour
 
     private void AdaptVisualsToState(LiftState state)
     {
-        liftFG_anim.Play((state == LiftState.Active) ? liftFG_active:  liftFG_inactive);
+        liftFG_anim.Play((state == LiftState.Active) ? liftFG_active : liftFG_inactive);
         liftBG_anim.Play((state == LiftState.Active) ? liftBG_active : LiftBG_inactive);
     }
 
@@ -74,87 +78,113 @@ public class LiftCage : MonoBehaviour
         rightRope.SetPosition(1, transform.position + rightRopeOffset);
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.GetComponent<PlayerInteractionHandler>() != null)
-    //        State = LiftState.Active;
-    //}
-
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<PlayerInteractionHandler>() != null)
-            StopMoving();
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.GetComponent<PlayerInteractionHandler>() != null)
+        if (collision.TryGetComponent(out PlayerStateMachine psm))
         {
-            Direction input = GetInput();
-            if (direction != input)
+            if (!psm.InVehicle())
             {
-                //is moving
-                if (input.AsVerticalFloat() != 0)
-                {
-                    StopMoving();
-                    StartMoving(input, collision.transform);
-                }
-                else
-                {
-                    StopMoving();
-                }
-            }
-            else
-            {
-                if (input.AsVerticalFloat() != 0)
-                {
-                    MovingUpdate(input, collision.transform);
-                }
+                this.player = psm;
+                psm.EnterVehicle(this);
             }
         }
     }
 
-    private void StartMoving(Direction direction, Transform player)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        this.direction = direction;
-        State = LiftState.Active;
-
-        playerOffset = player.position - transform.position;
-        if (!movingUpAndDownSound.isPlaying)
-            movingUpAndDownSound.Play();
-
-        foreach (SpriteAnimator spriteAnimator in wheels_anim)
-            spriteAnimator.Play((direction == Direction.Up) ? LiftWheel_active_left : LiftWheel_active_right);
-
+        if (collision.TryGetComponent(out PlayerStateMachine psm))
+        {
+            psm.ExitVehicle(this);
+            this.player = null;
+        }
     }
 
-    private void MovingUpdate(Direction direction, Transform player)
+    private IEnumerator MoveRoutine()
     {
-        
-        distanceJoint.distance -= direction.Inverse().AsVerticalFloat() * Time.deltaTime * liftSpeed;
-        player.position = new Vector3(player.position.x, transform.position.y + playerOffset.y);
+        while (!Util.IsNullOrDestroyed(player) || liftVelocity != 0)
+        {
+            Direction input = GetInput().Inverse();
 
-        movingUpAndDownSound.pitch = 0.75f + 1f * (liftSpeed / liftMaxSpeed);
+            if (state == LiftState.Inactive && input != Direction.None)
+            {
+                State = LiftState.Active;
+            }
+            else if (state == LiftState.Active && input == Direction.None)
+            {
+                State = LiftState.Inactive;
+            }
 
-        foreach (SpriteAnimator spriteAnimator in wheels_anim)
-            spriteAnimator.Animation.Speed = (liftSpeed / liftMaxSpeed) * 5;
-
-        if (liftSpeed < liftMaxSpeed)
-            liftSpeed += Time.deltaTime * 2f;
-    }
-    private void StopMoving()
-    {
-        this.direction = Direction.Right;
-        State = LiftState.Inactive;
-        liftSpeed = 0;
-
-        if (movingUpAndDownSound.isPlaying)
-            movingUpAndDownSound.Pause();
-
-        foreach (SpriteAnimator spriteAnimator in wheels_anim)
-            spriteAnimator.Play(LiftWheel_inactive);
+            MovingUpdate(input);
+            yield return null;
+        }
     }
 
+    private void MovingUpdate(Direction direction)
+    {
+        //Movement
+        float vert = direction.AsVerticalFloat();
+        if (state == LiftState.Active && vert != 0)
+        {
+            if (liftVelocity * vert < maxSpeed)
+                liftVelocity += vert * Time.deltaTime * acceleration;
+        }
+        else
+        {
+            liftVelocity = Mathf.Lerp(liftVelocity, 0, Time.deltaTime * decelerationMultiplyer);
+            if (Mathf.Abs(liftVelocity) < 0.005f)
+                liftVelocity = 0;
+        }
+
+        float speedPercent = (Mathf.Abs(liftVelocity) / maxSpeed);
+
+        //Udate Visuals and sound
+        if (speedPercent < 0.05f)
+        {
+            if (movingUpAndDownSound.isPlaying)
+            {
+                movingUpAndDownSound.Pause();
+                foreach (SpriteAnimator spriteAnimator in wheels_anim)
+                    spriteAnimator.Play(LiftWheel_inactive);
+            }
+        }
+        else
+        {
+            if (!movingUpAndDownSound.isPlaying)
+            {
+                movingUpAndDownSound.Play();
+                foreach (SpriteAnimator spriteAnimator in wheels_anim)
+                    spriteAnimator.Play((direction == Direction.Up) ? LiftWheel_active_left : LiftWheel_active_right);
+            }
+
+            movingUpAndDownSound.pitch = 0.75f + 1f * speedPercent;
+        }
+
+        //Update distanceJoint
+        distanceJoint.distance += Time.deltaTime * liftVelocity;
+
+        if (distanceJoint.distance < minLength)
+        {
+            distanceJoint.distance = minLength;
+            liftVelocity = 0;
+        }
+        else if (distanceJoint.distance > maxLength)
+        {
+            distanceJoint.distance = maxLength;
+            liftVelocity = 0;
+        }
+
+
+        //Update animationspeed
+        foreach (SpriteAnimator spriteAnimator in wheels_anim)
+            spriteAnimator.Animation.Speed = speedPercent * 5;
+
+        //Move player to avoid collision
+        Vector2 diff = transform.position - oldPosition;
+        if (player != null)
+            player.Rigidbody.position += diff;
+
+        oldPosition = transform.position;
+    }
 
     private void Update()
     {
@@ -164,18 +194,22 @@ public class LiftCage : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        Handles.Label(transform.position + Vector3.up * 2,liftSpeed.ToString());
+        Handles.Label(transform.position + Vector3.up * 2, liftVelocity.ToString());
     }
 #endif
 
     private Direction GetInput()
     {
-        if (Input.GetKey(KeyCode.Q))
+        if (player == null)
+            return Direction.None;
+        float vert = player.GetVerticalInputRaw();
+
+        if (vert > 0)
             return Direction.Up;
-        else if (Input.GetKey(KeyCode.E))
+        else if (vert < 0)
             return Direction.Down;
         else
-            return Direction.Right;
+            return Direction.None;
     }
 
     private void OnDrawGizmosSelected()
@@ -184,5 +218,29 @@ public class LiftCage : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position + rightRopeOffset, 0.5f);
         Gizmos.DrawWireSphere(liftOrigin + leftRopeOffsetBase, 0.5f);
         Gizmos.DrawWireSphere(liftOrigin + rightRopeOffsetBase, 0.5f);
+    }
+
+    public bool ConsumesVerticalInput()
+    {
+        return true;
+    }
+
+    public bool ConsumesHorizontalInput()
+    {
+        return false;
+    }
+
+    public void EnteredBy(PlayerStateMachine player)
+    {
+        StartCoroutine(MoveRoutine());
+        player.transform.parent = transform;
+        Debug.Log("Player entered " + this.name);
+    }
+
+    public void LeftBy(PlayerStateMachine player)
+    {
+
+        player.transform.parent = null;
+        Debug.Log("Player left " + this.name);
     }
 }

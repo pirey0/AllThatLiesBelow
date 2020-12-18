@@ -73,7 +73,7 @@ public struct Tile
 
 public enum Direction
 {
-    Up, Right, Down, Left
+    Up, Right, Down, Left, None = -1
 }
 
 
