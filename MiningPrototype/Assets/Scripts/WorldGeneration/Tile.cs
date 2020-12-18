@@ -48,6 +48,7 @@ public struct Tile
             t.Damage = 0;
             t.Visibility = 0;
             t.Discovered = false;
+            t.Unstable = false;
             return t;
         }
     }
@@ -66,7 +67,7 @@ public struct Tile
 
     public override string ToString()
     {
-        return Type.ToString() + " [N: " + NeighbourBitmask + " D:" + Damage.ToString("n1") + " Dis: " + Discovered + "]" ; 
+        return Type.ToString() + "[S: "+ !Unstable + " N: " + NeighbourBitmask + " Dmg:" + Damage.ToString("n1") + " Dis: " + Discovered + "]" ; 
     }
 }
 

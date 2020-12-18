@@ -7,8 +7,6 @@ public class Rope : TilemapCarvingEntity, IClimbable
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] BoxCollider2D boxCollider2D;
 
-    [Zenject.Inject] RuntimeProceduralMap map;
-
     int height = 0;
 
     private void Start()
@@ -17,9 +15,9 @@ public class Rope : TilemapCarvingEntity, IClimbable
         Carve();
     }
 
-    IEnumerator AdaptHeightRoutine ()
+    IEnumerator AdaptHeightRoutine()
     {
-        while (map.IsAirAt((int)GetTopPosition().x,(int)GetTopPosition().y - height - 1))
+        while (map.IsAirAt((int)GetTopPosition().x, (int)GetTopPosition().y - height - 1))
         {
             SetHeight(height + 1);
             yield return new WaitForSeconds(0.25f);
@@ -36,10 +34,11 @@ public class Rope : TilemapCarvingEntity, IClimbable
 
     public override void OnTileUpdated(int x, int y, TileUpdateReason reason)
     {
-        if (reason == TileUpdateReason.VisualUpdate && !RuntimeProceduralMap.Instance.IsBlockAt(x,y +1))
+        if (reason == TileUpdateReason.VisualUpdate && !RuntimeProceduralMap.Instance.IsBlockAt(x, y + 1))
         {
             UncarveDestroy();
-        } else if (reason == TileUpdateReason.Destroy)
+        }
+        else if (reason == TileUpdateReason.Destroy)
         {
             UncarveDestroy();
         }

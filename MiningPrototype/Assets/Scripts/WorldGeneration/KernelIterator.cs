@@ -15,7 +15,7 @@ public class KernelIterator : StateListenerBehaviour
 
     int currentStartX;
     int currentStartY;
-
+    int currentIndex;
     protected override void OnRealStart()
     {
         kernels = kernelParser.GetAllKernels();
@@ -24,7 +24,7 @@ public class KernelIterator : StateListenerBehaviour
 
     private IEnumerator KernelRoutine()
     {
-        int currentIndex = 0;
+        currentIndex = 0;
         currentStartX = player.transform.position.ToGridPosition().x - sizeX / 2;
         currentStartY = player.transform.position.ToGridPosition().y - sizeY / 2;
         int x = currentStartX;
@@ -89,7 +89,7 @@ public class KernelIterator : StateListenerBehaviour
         {
             Vector3 pos = player.transform.position.ToGridPosition().AsV3();
             Gizmos.DrawWireCube(pos, new Vector3(sizeX, sizeY, 0));
-            UnityEditor.Handles.Label(pos + new Vector3(-sizeX / 2, sizeY / 2, 0), "KernelIterator");
+            UnityEditor.Handles.Label(pos + new Vector3(-sizeX / 2, sizeY / 2, 0), "KernelIterator #" + currentIndex);
         }
     }
 #endif
