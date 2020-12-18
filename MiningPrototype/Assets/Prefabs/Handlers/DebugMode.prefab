@@ -48,6 +48,7 @@ MonoBehaviour:
   debugObjects:
   - {fileID: 2713967249175578056}
   - {fileID: 4528956498079344807}
+  debugChopper: {fileID: 7579808884389892066, guid: b1dc3fd5abe30eb478834218323df17a, type: 3}
 --- !u!1 &2713967249175578056
 GameObject:
   m_ObjectHideFlags: 0

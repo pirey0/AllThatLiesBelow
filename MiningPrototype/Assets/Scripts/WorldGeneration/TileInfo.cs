@@ -15,13 +15,17 @@ public class TileInfo : ScriptableObject
     public bool Targetable = true;
     public bool TargetPriority = false;
 
-    public bool StabilityAffected = true;
+    [Space(10)]
+    public CrumbleType CrumbleType = CrumbleType.Air;
+    public bool CanBeUnstable = true;
     public bool NotifiesInsteadOfCrumbling = false;
+    public float UnstableTimeBeforeCrumble = 5;
+
+    [Space(10)]
     public bool CountsAsNeighbour = true;
     public bool MinableInOverworld = false;
     public bool DamageIsInBackground;
     public bool DrawsToShifted;
-    public CrumbleType CrumbleType;
 
     [Header("Visuals")]
     public bool UseTilesFromOtherInfo;

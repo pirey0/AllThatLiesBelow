@@ -268,4 +268,9 @@ public static class Util
 
         return interfaces.ToArray();
     }
+
+    public static bool IsNullOrDestroyed(object t)
+    {
+        return (t == null || t.Equals(null));
+    }
 }

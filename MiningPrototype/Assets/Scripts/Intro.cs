@@ -39,7 +39,9 @@ public class Intro : StateListenerBehaviour
         else
         {
             progressionHandler.StartNextDay();
-            player.CanDig = true;
+            var m = LocationIndicator.Find(IndicatorType.InFrontOfMine);
+            if (m != null)
+                player.transform.position = m.transform.position;
         }
     }
 

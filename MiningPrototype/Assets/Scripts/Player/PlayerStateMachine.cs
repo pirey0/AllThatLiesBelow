@@ -27,6 +27,7 @@ public class PlayerStateMachine : BasePlayerStateMachine
     Dictionary<string, PlayerStateInfo> canInteractInStateMap;
     RuntimeProceduralMap.MirrorState currentMirrorLoc;
     bool canDig = true;
+    IVehicle currentVehicle;
 
     public float CinematicHorizontal { get => cinematicHorizontal; set => cinematicHorizontal = value; }
     public float CinematicVertical { get => cinematicVertical; set => cinematicVertical = value; }
@@ -39,10 +40,28 @@ public class PlayerStateMachine : BasePlayerStateMachine
 
     protected override float GetHorizontalInput()
     {
+        if (currentVehicle != null && currentVehicle.ConsumesHorizontalInput())
+            return 0;
+
+        return GetHorizontalInputRaw();
+    }
+
+    //Returns Horizontal Input without Vehicle consuming input
+    public float GetHorizontalInputRaw()
+    {
         return inCinematicMode ? cinematicHorizontal : Input.GetAxis("Horizontal");
     }
 
     protected override float GetVerticalInput()
+    {
+        if (currentVehicle != null && currentVehicle.ConsumesVerticalInput())
+            return 0;
+
+        return GetVerticalInputRaw();
+    }
+
+    //Returns Vertical Input without Vehicle consuming input
+    public float GetVerticalInputRaw()
     {
         if (inCinematicMode)
             return cinematicVertical;
@@ -205,4 +224,24 @@ public class PlayerStateMachine : BasePlayerStateMachine
         return playerInteraction.InventoryDisplayState == InventoryState.Open;
     }
 
+    public void EnterVehicle(IVehicle vehicle)
+    {
+        if (!Util.IsNullOrDestroyed(currentVehicle))
+        {
+            currentVehicle.LeftBy(this);
+        }
+
+        currentVehicle = vehicle;
+
+        if (!Util.IsNullOrDestroyed(currentVehicle))
+        {
+            vehicle.EnteredBy(this);
+        }
+    }
+
+    public void ExitVehicle(IVehicle vehicle)
+    {
+        if (currentVehicle == vehicle)
+            EnterVehicle(null);
+    }
 }

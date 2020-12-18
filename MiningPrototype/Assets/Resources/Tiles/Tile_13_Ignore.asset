@@ -19,13 +19,14 @@ MonoBehaviour:
   AirLike: 1
   Targetable: 0
   TargetPriority: 0
-  StabilityAffected: 0
+  CrumbleType: 4
+  CanBeUnstable: 1
   NotifiesInsteadOfCrumbling: 0
+  UnstableTimeBeforeCrumble: 5
   CountsAsNeighbour: 0
   MinableInOverworld: 0
   DamageIsInBackground: 0
   DrawsToShifted: 0
-  CrumbleType: 64
   UseTilesFromOtherInfo: 0
   Tiles: []
   TileSourceInfo: {fileID: 0}

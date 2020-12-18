@@ -127,6 +127,9 @@ public class RuntimeProceduralMap : RenderedMap
             {
                 yield return new WaitForSeconds(1f);
                 i = 0;
+
+                if (unstableTiles.Count == 0)
+                    continue;
             }
 
             var current = unstableTiles[i];
@@ -157,7 +160,7 @@ public class RuntimeProceduralMap : RenderedMap
 
     public CrumbleType GetCrumbleTypeAt(int x, int y)
     {
-        var t = this[x,y];
+        var t = this[x, y];
         if (t.Unstable)
             return CrumbleType.Unstable;
 
@@ -166,7 +169,13 @@ public class RuntimeProceduralMap : RenderedMap
 
     protected override void BreakBlock(int x, int y, Tile t, DamageType damageType)
     {
+        if (t.Unstable)
+        {
+            TryRemoveUnstableAt(new Vector2Int(x, y));
+        }
+
         base.BreakBlock(x, y, t, damageType);
+
         if (damageType == DamageType.Mining)
         {
             TileInfo info = GetTileInfo(t.Type);
@@ -175,11 +184,7 @@ public class RuntimeProceduralMap : RenderedMap
                 inventoryManager.PlayerCollects(info.ItemToDrop, 1);
         }
 
-        //broke unstable Tile, seems to not be working!
-        if (t.Unstable)
-        {
-            TryRemoveUnstableAt(new Vector2Int(x, y));
-        }
+
     }
 
     public GameObject InstantiateEntity(GameObject prefab, Vector3 position)
@@ -222,8 +227,8 @@ public class RuntimeProceduralMap : RenderedMap
 
     public void TryRemoveUnstableAt(Vector2Int loc)
     {
-        //this is not working!
         var t = this[loc];
+
         if (!t.Unstable)
             return;
 
@@ -231,10 +236,9 @@ public class RuntimeProceduralMap : RenderedMap
         if (i >= 0)
         {
             RemoveUnstableTileAt(i);
+            t.Unstable = false;
+            this[loc] = t;
         }
-
-        t.Unstable = false;
-        this[loc] = t;
     }
 
     private int FindUnstableMatching(Vector2Int loc)

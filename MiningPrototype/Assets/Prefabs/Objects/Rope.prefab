@@ -127,11 +127,12 @@ MonoBehaviour:
     type: 22
     amount: 1
   tilesToOccupy:
-  - Offset: {x: 0, y: 0}
+  - Offset: {x: 0, y: -1}
     Type: 12
-  carvingOffset: {x: 0, y: -1, z: 0}
+  carvingOffset: {x: 0, y: 0, z: 0}
   spriteRenderer: {fileID: 8317119179086846687}
   boxCollider2D: {fileID: 8317119179086846672}
+  maxHeight: 10
 --- !u!114 &6586384858800471234
 MonoBehaviour:
   m_ObjectHideFlags: 0

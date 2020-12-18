@@ -6,18 +6,13 @@ using UnityEngine;
 [System.Flags]
 public enum CrumbleType
 {
-    Null = 0,
-    Crumble = 1,
+    Null = 0, //Error type
+    Crumble = 1, //Flag to make crumble
     Air = 2,
     Normal = 4,
-    Stable = 8,
-    Unstable = 16, //Tile is crumbling. Something could be Stable and Unstable at the same time
-    Rock = 32,
-    Special = 64,
-    AnySolid = Normal | Stable | Rock,
-    Anything = Air | Special |AnySolid
+    Unstable = 16, //Tile is crumbling
+    Anything = Air | Normal | Unstable
 }
-
 
 [System.Serializable]
 public class Kernel
@@ -81,25 +76,12 @@ public class Kernel
                 return CrumbleType.Air;
             case '1':
                 return CrumbleType.Normal;
-            case '2':
-                return CrumbleType.Stable;
-            case 'I':
-            case 'i':
-                return CrumbleType.Anything;
             case 'A':
             case 'a':
-                return CrumbleType.AnySolid;
+                return CrumbleType.Anything;
             case 'x':
             case 'X':
                 return CrumbleType.Crumble | CrumbleType.Normal;
-
-            case 's':
-            case 'S':
-                return CrumbleType.Special;
-
-            case 'R':
-            case 'r':
-                return CrumbleType.Rock;
 
             default:
                 Debug.LogError("Found unknown character: " + c + " " + (int)c);

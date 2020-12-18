@@ -68,5 +68,19 @@ public class KernelParser : MonoBehaviour
             }
             index++;
         }
+
+        //Add last kernel
+        if (currentLines.Count > 0)
+        {
+            Kernel ker = Kernel.FromStrings(k.name + " " + index, currentLines.ToArray());
+            if (ker == null)
+            {
+                Debug.LogError("Null Kernel on line " + index + ": End Of File");
+            }
+            else
+            {
+                kernels.Add(ker);
+            }
+        }
     }
 }

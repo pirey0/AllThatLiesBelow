@@ -45,5 +45,6 @@ public class LocationIndicator : MonoBehaviour, INonPersistantSavable
 public enum IndicatorType
 {
     PlayerStart,
-    OrderSpawn
+    OrderSpawn,
+    InFrontOfMine
 }

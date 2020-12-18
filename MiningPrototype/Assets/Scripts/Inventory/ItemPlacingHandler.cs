@@ -37,8 +37,7 @@ public class ItemPlacingHandler : MonoBehaviour
     {
         if (resetHeldItem)
         {
-            Debug.LogWarning("reset current held item");
-            currentHeld = new ItemAmountPair();
+            currentHeld = ItemAmountPair.Nothing;
         }
 
         player.SetHeldItem(setToPickaxe: true);
@@ -54,8 +53,6 @@ public class ItemPlacingHandler : MonoBehaviour
     public void Show(ItemAmountPair pair, Inventory origin)
     {
         currentHeld = pair;
-
-        Debug.LogWarning("set current held item");
         currentOrigin = origin;
         var info = ItemsData.GetItemInfo(pair.type);
 
