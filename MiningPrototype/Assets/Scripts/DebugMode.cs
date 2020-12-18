@@ -146,6 +146,9 @@ public class DebugMode : MonoBehaviour
             case TeleportDestination.Mine:
                 target = FindObjectOfType<Torch>()?.transform;
                 break;
+            case TeleportDestination.InFrontOfMine:
+                target = LocationIndicator.Find(IndicatorType.InFrontOfMine)?.transform;
+                break;
         }
 
         if (target == null)
@@ -162,7 +165,8 @@ public class DebugMode : MonoBehaviour
     {
         Bed,
         Altar,
-        Mine
+        Mine,
+        InFrontOfMine
     }
 
     private void PlayerGets(ItemType itemType, int amount)

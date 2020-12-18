@@ -6,6 +6,7 @@ public class Rope : TilemapCarvingEntity, IClimbable
 {
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] BoxCollider2D boxCollider2D;
+    [SerializeField] int maxHeight;
 
     int height = 0;
 
@@ -17,7 +18,7 @@ public class Rope : TilemapCarvingEntity, IClimbable
 
     IEnumerator AdaptHeightRoutine()
     {
-        while (map.IsAirAt((int)GetTopPosition().x, (int)GetTopPosition().y - height - 1))
+        while (map.IsAirAt((int)GetTopPosition().x, (int)GetTopPosition().y - height - 1) && height < maxHeight)
         {
             SetHeight(height + 1);
             yield return new WaitForSeconds(0.25f);
