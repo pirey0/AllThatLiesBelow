@@ -279,8 +279,6 @@ public class RuntimeProceduralMap : RenderedMap
 
         PopulateBorders();
 
-        PopulateSnow();
-
         tracker.Stop();
         Time.timeScale = 1;
         gameState.ChangeStateTo(GameState.State.PostLoadScenes);
@@ -405,28 +403,6 @@ public class RuntimeProceduralMap : RenderedMap
             receiverMap[x, y]?.OnTileUpdated(x, y);
         }
     }
-
-    private void PopulateSnow()
-    {
-        Util.IterateXY(SizeX, SizeY, PopulateSnowAt);
-    }
-
-    private void PopulateSnowAt(int x, int y)
-    {
-        if (y < GenerationSettings.SnowStartHeight * SizeY)
-            return;
-
-        var t = GetTileAt(x, y);
-
-
-        if (IsBlockAt(x, y) && ((t.NeighbourBitmask & 2) == 0))
-        {
-            t.Type = TileType.Snow;
-        }
-
-        SetMapAt(x, y, t, TileUpdateReason.Generation, updateProperties: false, updateVisuals: false);
-    }
-
 
     private void Populate()
     {
