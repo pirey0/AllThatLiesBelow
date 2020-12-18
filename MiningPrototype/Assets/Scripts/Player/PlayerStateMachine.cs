@@ -244,4 +244,9 @@ public class PlayerStateMachine : BasePlayerStateMachine
         if (currentVehicle == vehicle)
             EnterVehicle(null);
     }
+
+    public bool InVehicle()
+    {
+        return !Util.IsNullOrDestroyed(currentVehicle);
+    }
 }
