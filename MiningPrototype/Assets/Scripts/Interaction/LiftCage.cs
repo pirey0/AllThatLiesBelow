@@ -23,7 +23,7 @@ public class LiftCage : MonoBehaviour, IVehicle
     [BoxGroup("Animations")] [SerializeField] SpriteAnimation liftFG_active, liftFG_inactive, liftBG_active, LiftBG_inactive, LiftWheel_active_left, LiftWheel_active_right, LiftWheel_inactive;
     [SerializeField] SpriteRenderer ropeRenderer;
     [SerializeField] Transform liftBase;
-    [SerializeField] LineRenderer leftRope, rightRope;
+    [SerializeField] LineRenderer leftRope, rightRope, centerRope;
     [SerializeField] DistanceJoint2D distanceJoint;
     [SerializeField] AudioSource movingUpAndDownSound;
 
@@ -76,6 +76,10 @@ public class LiftCage : MonoBehaviour, IVehicle
         rightRope.positionCount = 2;
         rightRope.SetPosition(0, liftBase.position + rightRopeOffsetBase);
         rightRope.SetPosition(1, transform.position + rightRopeOffset);
+
+        centerRope.positionCount = 2;
+        centerRope.SetPosition(0, liftBase.position );
+        centerRope.SetPosition(1, transform.position + new Vector3(distanceJoint.anchor.x, distanceJoint.anchor.y));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -156,7 +160,7 @@ public class LiftCage : MonoBehaviour, IVehicle
                     spriteAnimator.Play((direction == Direction.Up) ? LiftWheel_active_left : LiftWheel_active_right);
             }
 
-            movingUpAndDownSound.pitch = 0.75f + 1f * speedPercent;
+            movingUpAndDownSound.pitch = 0.75f + 0.75f * speedPercent;
         }
 
         //Update distanceJoint
@@ -216,8 +220,8 @@ public class LiftCage : MonoBehaviour, IVehicle
     {
         Gizmos.DrawWireSphere(transform.position + leftRopeOffset, 0.5f);
         Gizmos.DrawWireSphere(transform.position + rightRopeOffset, 0.5f);
-        Gizmos.DrawWireSphere(liftOrigin + leftRopeOffsetBase, 0.5f);
-        Gizmos.DrawWireSphere(liftOrigin + rightRopeOffsetBase, 0.5f);
+        Gizmos.DrawWireSphere(liftBase.position + leftRopeOffsetBase, 0.5f);
+        Gizmos.DrawWireSphere(liftBase.position + rightRopeOffsetBase, 0.5f);
     }
 
     public bool ConsumesVerticalInput()

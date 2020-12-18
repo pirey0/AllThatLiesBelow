@@ -39,6 +39,10 @@ public class Intro : StateListenerBehaviour
         else
         {
             progressionHandler.StartNextDay();
+            foreach (BlockingLog obj in GameObject.FindObjectsOfType<BlockingLog>())
+            {
+                Destroy(obj.gameObject);
+            }
             var m = LocationIndicator.Find(IndicatorType.InFrontOfMine);
             if (m != null)
                 player.transform.position = m.transform.position;
