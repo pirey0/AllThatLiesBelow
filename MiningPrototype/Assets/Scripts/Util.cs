@@ -201,6 +201,19 @@ public static class Util
         return (Direction)(((int)dir + 2) % 4);
     }
 
+    public static float AsVerticalFloat (this Direction dir)
+    {
+        switch (dir)
+        {
+            case Direction.Up:
+                return 1;
+            case Direction.Down:
+                return -1;
+            default:
+                return 0;
+        }
+    }
+
     public static string GenerateNewSaveGUID()
     {
         return System.Guid.NewGuid().ToString();

@@ -23,6 +23,8 @@ public class SpriteAnimation : ScriptableObject
     public int FramesCount { get => frames.Count; }
     public bool Looping { get => loop; }
 
+    public float Speed { get => speedMultiplyer; set { speedMultiplyer = value; } }
+
     public void AddFrame(AnimationFrame frame)
     {
         if(frames == null) { frames = new List<AnimationFrame>(); }

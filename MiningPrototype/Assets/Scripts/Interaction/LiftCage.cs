@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 
@@ -13,9 +14,28 @@ public enum LiftState
 
 public class LiftCage : MonoBehaviour
 {
-    [SerializeField] LiftState state = LiftState.Inactive;
+    
     [BoxGroup("Positions")] [SerializeField] Vector3 liftOrigin;
     [BoxGroup("Positions")] [SerializeField] Vector3 leftRopeOffset, rightRopeOffset, leftRopeOffsetBase, rightRopeOffsetBase;
+
+    [SerializeField] float liftMaxSpeed = 10;
+    [BoxGroup("Animations")] [SerializeField] SpriteAnimator liftFG_anim, liftBG_anim;
+    [BoxGroup("Animations")] [SerializeField] SpriteAnimator[] wheels_anim;
+    [BoxGroup("Animations")] [SerializeField] SpriteAnimation liftFG_active, liftFG_inactive, liftBG_active, LiftBG_inactive, LiftWheel_active_left, LiftWheel_active_right, LiftWheel_inactive;
+    [SerializeField] SpriteRenderer ropeRenderer;
+    [SerializeField] Transform liftBase;
+    [SerializeField] LineRenderer leftRope, rightRope;
+    [SerializeField] DistanceJoint2D distanceJoint;
+
+    [SerializeField] AudioSource movingUpAndDownSound;
+
+    [SerializeField] LiftState state = LiftState.Inactive;
+    Direction direction;
+
+    float liftSpeed = 0;
+    Vector3 playerOffset;
+
+
     LiftState State
     {
         get => state;
@@ -29,16 +49,6 @@ public class LiftCage : MonoBehaviour
         }
     }
 
-    float liftSpeed = 0;
-    [SerializeField] float liftMaxSpeed = 10;
-    [BoxGroup("Animations")][SerializeField] SpriteAnimator liftFG_anim, liftBG_anim;
-    [BoxGroup("Animations")] [SerializeField] SpriteAnimation liftFG_active, liftFG_inactive, liftBG_active, LiftBG_inactive;
-    [SerializeField] SpriteRenderer ropeRenderer;
-    [SerializeField] Transform liftBase;
-    [SerializeField] LineRenderer leftRope, rightRope;
-    [SerializeField] DistanceJoint2D distanceJoint;
-
-    [SerializeField] AudioSource movingUpAndDownSound;
     private void Start()
     {
         liftOrigin = transform.position + Vector3.up * 3 + Vector3.left * 0.75f;
@@ -64,58 +74,108 @@ public class LiftCage : MonoBehaviour
         rightRope.SetPosition(1, transform.position + rightRopeOffset);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.GetComponent<PlayerInteractionHandler>() != null)
-            State = LiftState.Active;
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.GetComponent<PlayerInteractionHandler>() != null)
+    //        State = LiftState.Active;
+    //}
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.GetComponent<PlayerInteractionHandler>() != null)
-            State = LiftState.Inactive;
+            StopMoving();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.GetComponent<PlayerInteractionHandler>() != null)
         {
-            Vector3 input = GetInput();
-            collision.transform.Translate(input * Time.deltaTime * liftSpeed);
-            distanceJoint.distance -= input.y * Time.deltaTime * liftSpeed;
-
-            if (input != Vector3.zero && liftSpeed < liftMaxSpeed)
+            Direction input = GetInput();
+            if (direction != input)
             {
-                liftSpeed += Time.deltaTime * 6f;
-
-                if (!movingUpAndDownSound.isPlaying)
-                    movingUpAndDownSound.Play();
-
-                movingUpAndDownSound.pitch = 0.75f + 1f * (liftSpeed / liftMaxSpeed);
-            } else
+                //is moving
+                if (input.AsVerticalFloat() != 0)
+                {
+                    StopMoving();
+                    StartMoving(input, collision.transform);
+                }
+                else
+                {
+                    StopMoving();
+                }
+            }
+            else
             {
-                if (movingUpAndDownSound.isPlaying)
-                    movingUpAndDownSound.Pause();
+                if (input.AsVerticalFloat() != 0)
+                {
+                    MovingUpdate(input, collision.transform);
+                }
             }
         }
     }
 
+    private void StartMoving(Direction direction, Transform player)
+    {
+        this.direction = direction;
+        State = LiftState.Active;
+
+        playerOffset = player.position - transform.position;
+        if (!movingUpAndDownSound.isPlaying)
+            movingUpAndDownSound.Play();
+
+        foreach (SpriteAnimator spriteAnimator in wheels_anim)
+            spriteAnimator.Play((direction == Direction.Up) ? LiftWheel_active_left : LiftWheel_active_right);
+
+    }
+
+    private void MovingUpdate(Direction direction, Transform player)
+    {
+        
+        distanceJoint.distance -= direction.Inverse().AsVerticalFloat() * Time.deltaTime * liftSpeed;
+        player.position = new Vector3(player.position.x, transform.position.y + playerOffset.y);
+
+        movingUpAndDownSound.pitch = 0.75f + 1f * (liftSpeed / liftMaxSpeed);
+
+        foreach (SpriteAnimator spriteAnimator in wheels_anim)
+            spriteAnimator.Animation.Speed = (liftSpeed / liftMaxSpeed) * 5;
+
+        if (liftSpeed < liftMaxSpeed)
+            liftSpeed += Time.deltaTime * 2f;
+    }
+    private void StopMoving()
+    {
+        this.direction = Direction.Right;
+        State = LiftState.Inactive;
+        liftSpeed = 0;
+
+        if (movingUpAndDownSound.isPlaying)
+            movingUpAndDownSound.Pause();
+
+        foreach (SpriteAnimator spriteAnimator in wheels_anim)
+            spriteAnimator.Play(LiftWheel_inactive);
+    }
+
+
     private void Update()
     {
-        if (liftSpeed > 0)
-            liftSpeed -= Time.deltaTime*5f;
-
         UpdateCables();
     }
 
-    private Vector3 GetInput()
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Handles.Label(transform.position + Vector3.up * 2,liftSpeed.ToString());
+    }
+#endif
+
+    private Direction GetInput()
     {
         if (Input.GetKey(KeyCode.Q))
-            return Vector3.up;
+            return Direction.Up;
         else if (Input.GetKey(KeyCode.E))
-            return Vector3.down;
+            return Direction.Down;
         else
-            return Vector3.zero;
+            return Direction.Right;
     }
 
     private void OnDrawGizmosSelected()
