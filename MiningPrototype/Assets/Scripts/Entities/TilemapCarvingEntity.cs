@@ -25,7 +25,7 @@ public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateRec
     {
     }
 
-    public virtual void OnTileUpdated(int x, int y, TileUpdateReason reason)
+    public virtual void OnTileUpdated(int x, int y)
     {
     }
 

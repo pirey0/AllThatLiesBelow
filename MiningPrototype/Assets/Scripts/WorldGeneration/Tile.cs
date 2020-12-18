@@ -81,7 +81,7 @@ public interface ITileUpdateReceiver
 {
     void OnTileCrumbleNotified(int x, int y);
     void OnTileChanged(int x, int y, TileUpdateReason reason);
-    void OnTileUpdated(int x, int y, TileUpdateReason reason);
+    void OnTileUpdated(int x, int y);
     GameObject gameObject { get; }
 }
 

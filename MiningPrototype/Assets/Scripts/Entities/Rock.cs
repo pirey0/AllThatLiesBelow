@@ -48,7 +48,7 @@ public class Rock : FallingTilemapCarvingEntity
         }
     }
 
-    public override void OnTileUpdated(int x, int y, TileUpdateReason reason)
+    public override void OnTileUpdated(int x, int y)
     {
         if (this == null)
             return;
