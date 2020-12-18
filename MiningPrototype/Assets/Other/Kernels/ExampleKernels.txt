@@ -4,13 +4,8 @@
 //These are the characters to use:
 // 0: Air
 // 1: Normal (Normal stones)
-// 2: Stable (HardStone, Bedrock)
-// I/i: Ignore / All
-// a/A: Any Solid (Stone, Stable, Rock)
+// a/A: Anything (Normal and Air)
 // x/X: Crumble (Will make the tile crumble)
-// s/S: Special (Ladder, Rope, Support etc)
-// r/R: Rock (Big Rock)
-
 
 //An empty line indicates the start of a new kernel
 //You can have multiple empty lines between kernels

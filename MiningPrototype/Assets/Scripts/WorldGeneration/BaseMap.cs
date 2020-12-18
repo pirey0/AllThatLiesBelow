@@ -57,6 +57,10 @@ public class BaseMap : StateListenerBehaviour, ISavable
         return TilesData.GetTileInfo(type);
     }
 
+    public TileInfo GetTileInfoAt(Vector2Int loc)
+    {
+        return GetTileInfo(this[loc].Type);
+    }
 
 
     protected void InitMap(int newX, int newY)
