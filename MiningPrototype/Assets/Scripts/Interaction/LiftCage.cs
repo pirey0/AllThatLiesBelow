@@ -25,7 +25,8 @@ public class LiftCage : MonoBehaviour, IVehicle
     [SerializeField] Transform liftBase;
     [SerializeField] LineRenderer leftRope, rightRope, centerRope;
     [SerializeField] DistanceJoint2D distanceJoint;
-    [SerializeField] AudioSource movingUpAndDownSound;
+    [SerializeField] AudioSource movingUpAndDownSound, engineSound, startSound, stopSound;
+    [SerializeField] ParticleSystem smokeParticles;
 
     [Header("Settings")]
     [SerializeField] float acceleration = 2;
@@ -139,16 +140,24 @@ public class LiftCage : MonoBehaviour, IVehicle
                 liftVelocity = 0;
         }
 
+        var main = smokeParticles.main;
+        var emit = smokeParticles.emission;
         float speedPercent = (Mathf.Abs(liftVelocity) / maxSpeed);
 
         //Udate Visuals and sound
-        if (speedPercent < 0.05f)
+        if (speedPercent < 0.1f)
         {
             if (movingUpAndDownSound.isPlaying)
             {
                 movingUpAndDownSound.Pause();
+                engineSound.Pause();
+                stopSound.Play();
                 foreach (SpriteAnimator spriteAnimator in wheels_anim)
                     spriteAnimator.Play(LiftWheel_inactive);
+
+                emit.rateOverTimeMultiplier = 0;
+                emit.rateOverDistanceMultiplier = 0;
+
             }
         }
         else
@@ -156,11 +165,18 @@ public class LiftCage : MonoBehaviour, IVehicle
             if (!movingUpAndDownSound.isPlaying)
             {
                 movingUpAndDownSound.Play();
+                engineSound.Play();
+                startSound.Play();
                 foreach (SpriteAnimator spriteAnimator in wheels_anim)
                     spriteAnimator.Play((direction == Direction.Up) ? LiftWheel_active_left : LiftWheel_active_right);
             }
 
             movingUpAndDownSound.pitch = 0.75f + 0.75f * speedPercent;
+            engineSound.pitch = 0.75f + 0.5f * speedPercent;
+
+            emit.rateOverTimeMultiplier = speedPercent * 10;
+            emit.rateOverDistanceMultiplier = speedPercent * 10;
+            main.simulationSpeed = 0.75f + speedPercent * 0.5f;
         }
 
         //Update distanceJoint
