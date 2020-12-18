@@ -7,6 +7,7 @@ public class Rope : TilemapCarvingEntity, IClimbable
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] BoxCollider2D boxCollider2D;
     [SerializeField] int maxHeight;
+    [SerializeField] float delayBetweenHeightIncrease;
 
     int height = 0;
 
@@ -21,7 +22,7 @@ public class Rope : TilemapCarvingEntity, IClimbable
         while (map.IsAirAt((int)GetTopPosition().x, (int)GetTopPosition().y - height - 1) && height < maxHeight)
         {
             SetHeight(height + 1);
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(delayBetweenHeightIncrease);
         }
     }
 
@@ -33,13 +34,19 @@ public class Rope : TilemapCarvingEntity, IClimbable
         spriteRenderer.size = new Vector2(spriteRenderer.size.x, newHeight);
     }
 
-    public override void OnTileUpdated(int x, int y, TileUpdateReason reason)
+    public override void OnTileChanged(int x, int y, TileUpdateReason reason)
     {
-        if (reason == TileUpdateReason.VisualUpdate && !RuntimeProceduralMap.Instance.IsBlockAt(x, y + 1))
+        if(reason == TileUpdateReason.Destroy)
         {
             UncarveDestroy();
         }
-        else if (reason == TileUpdateReason.Destroy)
+    }
+
+    public override void OnTileUpdated(int x, int y)
+    {
+        Debug.Log("Updated");
+        Util.DebugDrawTile(new Vector2Int(x, y+1));
+        if (RuntimeProceduralMap.Instance.IsAirAt(x, y+1))
         {
             UncarveDestroy();
         }

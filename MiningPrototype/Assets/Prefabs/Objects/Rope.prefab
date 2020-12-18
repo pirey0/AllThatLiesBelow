@@ -133,6 +133,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 8317119179086846687}
   boxCollider2D: {fileID: 8317119179086846672}
   maxHeight: 10
+  delayBetweenHeightIncrease: 0.25
 --- !u!114 &6586384858800471234
 MonoBehaviour:
   m_ObjectHideFlags: 0

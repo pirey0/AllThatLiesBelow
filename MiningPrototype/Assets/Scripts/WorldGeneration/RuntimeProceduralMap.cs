@@ -402,7 +402,7 @@ public class RuntimeProceduralMap : RenderedMap
         }
         else
         {
-            receiverMap[x, y]?.OnTileUpdated(x, y, reason);
+            receiverMap[x, y]?.OnTileUpdated(x, y);
         }
     }
 
