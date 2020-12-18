@@ -14,8 +14,6 @@ public enum LiftState
 
 public class LiftCage : MonoBehaviour
 {
-    
-    [BoxGroup("Positions")] [SerializeField] Vector3 liftOrigin;
     [BoxGroup("Positions")] [SerializeField] Vector3 leftRopeOffset, rightRopeOffset, leftRopeOffsetBase, rightRopeOffsetBase;
 
     [SerializeField] float liftMaxSpeed = 10;
@@ -28,6 +26,7 @@ public class LiftCage : MonoBehaviour
     [SerializeField] DistanceJoint2D distanceJoint;
 
     [SerializeField] AudioSource movingUpAndDownSound;
+    [SerializeField] ParticleSystem smokeSystem;
 
     [SerializeField] LiftState state = LiftState.Inactive;
     Direction direction;
@@ -47,11 +46,6 @@ public class LiftCage : MonoBehaviour
             state = value;
             AdaptVisualsToState(state);
         }
-    }
-
-    private void Start()
-    {
-        liftOrigin = transform.position + Vector3.up * 3 + Vector3.left * 0.75f;
     }
 
     private void AdaptVisualsToState(LiftState state)
@@ -182,7 +176,7 @@ public class LiftCage : MonoBehaviour
     {
         Gizmos.DrawWireSphere(transform.position + leftRopeOffset, 0.5f);
         Gizmos.DrawWireSphere(transform.position + rightRopeOffset, 0.5f);
-        Gizmos.DrawWireSphere(liftOrigin + leftRopeOffsetBase, 0.5f);
-        Gizmos.DrawWireSphere(liftOrigin + rightRopeOffsetBase, 0.5f);
+        Gizmos.DrawWireSphere(liftBase.position + leftRopeOffsetBase, 0.5f);
+        Gizmos.DrawWireSphere(liftBase.position + rightRopeOffsetBase, 0.5f);
     }
 }

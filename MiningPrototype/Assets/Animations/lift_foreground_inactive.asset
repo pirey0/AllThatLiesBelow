@@ -17,6 +17,6 @@ MonoBehaviour:
   frames:
   - Sprite: {fileID: 21300000, guid: b4313259cdc02ad498a4a45797770538, type: 3}
     Duration: 0.25
-  fileToLoadFrom: {fileID: 2800000, guid: b4313259cdc02ad498a4a45797770538, type: 3}
+  fileToLoadFrom: {fileID: 2800000, guid: b04142a388d85eb4e8ba61e521243ab2, type: 3}
   defaultTime: 0.25
   loadFromLastToFirst: 0
