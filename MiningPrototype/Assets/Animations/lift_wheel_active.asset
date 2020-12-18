@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d05716d329922cf4abb0b6513364aece, type: 3}
+  m_Name: lift_wheel_active
+  m_EditorClassIdentifier: 
+  loop: 0
+  speedMultiplyer: 1
+  frames:
+  - Sprite: {fileID: -8807140295987733373, guid: 6debba36ebfd01d4583c08028102fa85, type: 3}
+    Duration: 0.25
+  - Sprite: {fileID: -3999315442715415263, guid: 6debba36ebfd01d4583c08028102fa85, type: 3}
+    Duration: 0.25
+  - Sprite: {fileID: -3257433124286110417, guid: 6debba36ebfd01d4583c08028102fa85, type: 3}
+    Duration: 0.25
+  - Sprite: {fileID: 2894945961302825946, guid: 6debba36ebfd01d4583c08028102fa85, type: 3}
+    Duration: 0.25
+  fileToLoadFrom: {fileID: 2800000, guid: 6debba36ebfd01d4583c08028102fa85, type: 3}
+  defaultTime: 0.25
+  loadFromLastToFirst: 0
