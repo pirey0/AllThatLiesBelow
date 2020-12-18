@@ -26,7 +26,8 @@ public enum ItemType
     Lost_Soul,
     FillingStone,
     Log,
-    Rope
+    Rope,
+    Lift
 }
 
 

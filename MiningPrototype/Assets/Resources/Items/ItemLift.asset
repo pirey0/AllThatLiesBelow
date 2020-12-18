@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b4e36afc74fff4f82cd40fcf05b7bc, type: 3}
+  m_Name: ItemLift
+  m_EditorClassIdentifier: 
+  ItemType: 23
+  DisplayName: Lift
+  DisplayTooltip: 
+  DisplaySprite: {fileID: -8807140295987733373, guid: 6debba36ebfd01d4583c08028102fa85, type: 3}
+  DisplaySpriteRead: {fileID: 0}
+  Weight: 1
+  CanBePlaced: 1
+  PickupHoldSprite: {fileID: -3999315442715415263, guid: 6debba36ebfd01d4583c08028102fa85, type: 3}
+  PickupHoldOffset: {x: 0.2, y: 1}
+  PickupPreviewPrefab: {fileID: 4282330290560024562, guid: 65d2f6b17dad1ec49be586930f145c75, type: 3}
+  Prefab: {fileID: 155191563374322042, guid: 9082c89fe302ca143941e047bd6eed66, type: 3}
+  AmountIsUniqueID: 0
+  IsBurnable: 0
+  AltarWords: []
