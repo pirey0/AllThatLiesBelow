@@ -127,8 +127,8 @@ public class PlayerVisualController : MonoBehaviour
                     break;
             }
 
-            //walk effects
-            playerWalkEffects.SetEffects(player.IsMoving() && player.IsGrounded());
+            //show walk effects if the player is walking on the ground while not beeing disabled
+            playerWalkEffects.SetEffects(player.IsMoving() && player.IsGrounded() && visState.StateName != "Disabled");
         }
         else
         {
