@@ -10,6 +10,7 @@ public enum CrumbleType
     Crumble = 1, //Flag to make crumble
     Air = 2,
     Normal = 4,
+    CrumbleInstant = 8, //Flag to make crumble instantly
     Unstable = 16, //Tile is crumbling
     Anything = Air | Normal | Unstable
 }
@@ -82,6 +83,10 @@ public class Kernel
             case 'x':
             case 'X':
                 return CrumbleType.Crumble | CrumbleType.Normal;
+
+            case 's':
+            case 'S':
+                return CrumbleType.CrumbleInstant | CrumbleType.Normal;
 
             default:
                 Debug.LogError("Found unknown character: " + c + " " + (int)c);

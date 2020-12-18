@@ -72,13 +72,17 @@ public class KernelIterator : StateListenerBehaviour
         {
             for (int x = 0; x < k.Width; x++)
             {
-                if ((k[x, y] & CrumbleType.Crumble) != CrumbleType.Null)
+                Vector2Int loc = new Vector2Int(px + x, py + y);
+                var info = map.GetTileInfoAt(loc);
+                if (info.CanBeUnstable)
                 {
-                    Vector2Int loc = new Vector2Int(px + x, py + y);
-                    var info = map.GetTileInfoAt(loc);
-                    if (info.CanBeUnstable)
+                    if ((k[x, y] & CrumbleType.Crumble) != CrumbleType.Null)
                     {
                         map.MakeTileUnstable(loc, info.UnstableTimeBeforeCrumble);
+                    }
+                    else if ((k[x, y] & CrumbleType.CrumbleInstant) != CrumbleType.Null)
+                    {
+                        map.MakeTileUnstable(loc, 0);
                     }
                 }
             }
