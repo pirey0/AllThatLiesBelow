@@ -11,6 +11,14 @@ public class Lift : TilemapCarvingEntity, INonPersistantSavable
         Carve();
     }
 
+    public override void OnTileChanged(int x, int y, TileUpdateReason reason)
+    {
+        if(reason == TileUpdateReason.Destroy)
+        {
+            UncarveDestroy();
+        }
+    }
+
     public void Load(SpawnableSaveData data)
     {
         if(data is LiftSaveData sdata)
