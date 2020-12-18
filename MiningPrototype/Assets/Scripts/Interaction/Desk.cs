@@ -20,6 +20,8 @@ public class Desk : MonoBehaviour, IInteractable
 
     [Zenject.Inject] Zenject.DiContainer diContainer;
     [Zenject.Inject] InventoryManager inventoryManager;
+    [Zenject.Inject] ReadableItemHandler readableItemHandler;
+    [Zenject.Inject] ProgressionHandler progressionHandler;
 
     DeskState deskState;
     private bool canSend = true;
@@ -101,7 +103,7 @@ public class Desk : MonoBehaviour, IInteractable
         if (currentOrder == null)
         {
             currentOrder = diContainer.InstantiatePrefab(newOrderVisualizerPrefab).GetComponent<NewOrderVisualizer>();
-            currentOrder.Handshake(CloseNewOrder);
+            currentOrder.Handshake(FinishNewOrder, AbortNewOrder);
 
             if (paperFold != null)
             {
@@ -139,7 +141,36 @@ public class Desk : MonoBehaviour, IInteractable
         LeaveDesk();
     }
 
-    public void CloseNewOrder()
+    public void FinishNewOrder(List<ItemAmountPair> itemAmountPairs, Dictionary<ItemType, int> cost)
+    {
+        if (paperFold != null)
+        {
+            paperFold.pitch = 0.66f;
+            paperFold.Play();
+        }
+
+        int readableId = readableItemHandler.AddNewReadable(itemAmountPairs);
+        progressionHandler.RegisterOrder(readableId, itemAmountPairs);
+
+        foreach (var singlePrice in cost)
+        {
+            inventoryManager.PlayerTryPay(singlePrice.Key, singlePrice.Value);
+        }
+
+        StartCoroutine(FinishOrderRoutine(readableId));
+    }
+
+    public IEnumerator FinishOrderRoutine(int readableId)
+    {
+        yield return new WaitForSeconds(3);
+        inventoryManager.PlayerCollects(ItemType.NewOrder, readableId);
+
+        letterWritingSource.loop = false;
+        letterWritingSource?.Stop();
+        LeaveDesk();
+    }
+
+    public void AbortNewOrder()
     {
         if (paperFold != null)
         {

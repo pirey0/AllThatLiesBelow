@@ -22,7 +22,8 @@ public class NewOrderVisualizer : ReadableItemVisualizer
 
     Dictionary<ItemType, int> orderedElementsWithAmounts = new Dictionary<ItemType, int>();
     Dictionary<ItemType, int> cost = new Dictionary<ItemType, int>();
-    System.Action OnClose;
+    Action<List<ItemAmountPair>, Dictionary<ItemType, int>> OnFinish;
+    Action OnAbort;
 
     private void Start()
     {
@@ -31,9 +32,11 @@ public class NewOrderVisualizer : ReadableItemVisualizer
         UpdateTutorialDisplays();
     }
 
-    public void Handshake(System.Action onClose)
+    //Hand over the methods to call for fimish and abort from the desk
+    public void Handshake(Action<List<ItemAmountPair>, Dictionary<ItemType, int>> onFinish,Action onAbort)
     {
-        OnClose = onClose;
+        OnFinish = onFinish;
+        OnAbort = onAbort;
     }
 
     public void UpdateAmount(ItemType itemType, int amount, bool increased)
@@ -73,18 +76,6 @@ public class NewOrderVisualizer : ReadableItemVisualizer
             else
                 cost.Add(price.type, price.amount);
         }
-
-        ////calculate the new cost
-        //float amount = 0;
-        //
-        //foreach (int i in orderedElementsWithAmounts.Values)
-        //    amount += i;
-        //
-        //if (amount <= 0)
-        //    return;
-        //
-        //cost[ItemType.Gold] = Mathf.FloorToInt((1f / 3f) * amount);
-        //cost[ItemType.Copper] = Mathf.FloorToInt(((2f/3f) * amount * 2f) - cost[ItemType.Gold] * 2f);
 
         //create cost visualization
         foreach (KeyValuePair<ItemType, int> costElement in cost)
@@ -134,27 +125,17 @@ public class NewOrderVisualizer : ReadableItemVisualizer
 
     public void Cancel()
     {
-        OnClose?.Invoke();
+        OnAbort?.Invoke();
         Hide();
     }
 
     public void Submit()
     {
         List<ItemAmountPair> itemAmountPairs = new List<ItemAmountPair>();
-
         foreach (KeyValuePair<ItemType, int> i in orderedElementsWithAmounts)
             itemAmountPairs.Add(new ItemAmountPair(i.Key, i.Value));
 
-        int readableId = readableItemHandler.AddNewReadable(itemAmountPairs);
-        progressionHandler.RegisterOrder(readableId, itemAmountPairs);
-        inventoryManager.PlayerCollects(ItemType.NewOrder, readableId);
-
-        foreach (var singlePrice in cost)
-        {
-            inventoryManager.PlayerTryPay(singlePrice.Key, singlePrice.Value);
-        }
-
-        OnClose?.Invoke();
+        OnFinish?.Invoke(itemAmountPairs, cost);
         Hide();
     }
 
