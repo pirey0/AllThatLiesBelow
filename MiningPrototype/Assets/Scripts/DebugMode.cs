@@ -9,6 +9,7 @@ public class DebugMode : MonoBehaviour
     public const bool DEBUG_POSSIBLE = true;
 
     [SerializeField] List<GameObject> debugObjects;
+    [SerializeField] GameObject debugChopper;
 
     [Inject] PlayerStateMachine player;
     [Inject] PlayerInteractionHandler playerInteraction;
@@ -17,6 +18,7 @@ public class DebugMode : MonoBehaviour
     [Inject] TooltipHandler tooltipHandler;
     [Inject] CameraController cameraController;
     [Inject] RuntimeProceduralMap map;
+    [Inject] PrefabFactory factory;
 
     Texture2D debugTex;
     bool open;
@@ -41,6 +43,7 @@ public class DebugMode : MonoBehaviour
         DebugLogConsole.AddCommandInstance("/time", "sets time scale", "SetTimeScale", this);
         DebugLogConsole.AddCommandInstance("/showMap", "Visualizes the Map", "ShowMap", this);
         DebugLogConsole.AddCommandInstance("/showAdditiveMap", "Visualizes the Map", "ShowAdditiveMap", this);
+        DebugLogConsole.AddCommandInstance("/chopper", "Spawn a Chopper", "SpawnChopper", this);
     }
 
     private void Update()
@@ -99,6 +102,21 @@ public class DebugMode : MonoBehaviour
 
             debugTex.Apply();
             GUI.DrawTexture(new Rect(Screen.width - debugTex.width * 3, 0, debugTex.width * 3, debugTex.height * 3), debugTex);
+        }
+    }
+
+    private void SpawnChopper()
+    {
+        var prevC = GameObject.FindObjectOfType<DebugChopper>();
+        if (prevC != null)
+        {
+            player.ExitVehicle(prevC);
+            Destroy(prevC.gameObject);
+        }
+        else
+        {
+            var c = factory.Create(debugChopper, player.transform.position + new Vector3(0, 4, 0), Quaternion.identity);
+            player.EnterVehicle(c.GetComponent<IVehicle>());
         }
     }
 
