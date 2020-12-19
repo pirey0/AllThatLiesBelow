@@ -451,7 +451,7 @@ SpriteRenderer:
   m_SortingOrder: 100
   m_Sprite: {fileID: -8807140295987733373, guid: 6debba36ebfd01d4583c08028102fa85, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 2, y: 2}
@@ -662,7 +662,7 @@ MonoBehaviour:
   leftRopeOffset: {x: -1.685, y: 1, z: 0}
   rightRopeOffset: {x: 1.8125, y: 1, z: 0}
   leftRopeOffsetBase: {x: -2, y: 0, z: 0}
-  rightRopeOffsetBase: {x: 1.625, y: 0, z: 0}
+  rightRopeOffsetBase: {x: 2, y: 0, z: 0}
   liftFG_anim: {fileID: 3423477012318206811}
   liftBG_anim: {fileID: 359653277613873698}
   wheels_anim:
@@ -986,7 +986,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.25}
+  m_Offset: {x: 0.5, y: 1.25}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -997,7 +997,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.5, y: 2.5}
+  m_Size: {x: 2.5, y: 2.5}
   m_EdgeRadius: 0
 --- !u!50 &359653277613873703
 Rigidbody2D:
