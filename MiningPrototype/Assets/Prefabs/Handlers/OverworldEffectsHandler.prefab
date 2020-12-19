@@ -4941,7 +4941,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -5559,9 +5559,9 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: -40, y: 5.59, z: 50}
+    m_Position: {x: -100, y: 5.59, z: 50}
     m_Rotation: {x: 0, y: 90, z: 0.6}
-    m_Scale: {x: 50, y: 20, z: 1}
+    m_Scale: {x: 25, y: 20, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
