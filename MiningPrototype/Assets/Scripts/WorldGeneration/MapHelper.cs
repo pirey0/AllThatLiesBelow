@@ -286,7 +286,6 @@ public static class MapHelper
         if (map is RenderedMap rm)
         {
             rm.CalculateAllNeighboursBitmask();
-            rm.CalculateStabilityAll();
         }
 
         map.UpdateAllVisuals();

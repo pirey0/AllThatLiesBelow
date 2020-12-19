@@ -196,11 +196,6 @@ public class BaseMap : StateListenerBehaviour, ISavable
 
     }
 
-    public virtual void CalculateStabilityAll()
-    {
-
-    }
-
     public virtual void CalculateVisibilityAll()
     {
 
@@ -231,7 +226,6 @@ public class BaseMap : StateListenerBehaviour, ISavable
     {
         Debug.Log("Map Refresh all");
         CalculateAllNeighboursBitmask();
-        CalculateStabilityAll();
         CalculateVisibilityAll();
         CalculateDiscoveredAll();
         UpdateAllVisuals();

@@ -183,8 +183,21 @@ public class RuntimeProceduralMap : RenderedMap
             if (info.ItemToDrop != ItemType.None)
                 inventoryManager.PlayerCollects(info.ItemToDrop, 1);
         }
+    }
 
+    public override void SetMapAt(int x, int y, Tile value, TileUpdateReason reason, bool updateProperties = true, bool updateVisuals = true)
+    {
+        //On Place try mark neighbours unstable
+        if (reason == TileUpdateReason.Place && value.Type != TileType.Air)
+        {
+            foreach (var tile in MapHelper.GetNeighboursIndiciesOf(x, y))
+            {
+                Util.DebugDrawTile(tile);
+                TryRemoveUnstableAt(tile);
+            }
+        }
 
+        base.SetMapAt(x, y, value, reason, updateProperties, updateVisuals);
     }
 
     public GameObject InstantiateEntity(GameObject prefab, Vector3 position)
