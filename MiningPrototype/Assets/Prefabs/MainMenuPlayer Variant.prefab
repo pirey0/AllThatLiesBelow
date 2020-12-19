@@ -15,6 +15,7 @@ MonoBehaviour:
   settings: {fileID: 11400000, guid: e0b2ba0468d7ff1498765ca6c35bf0e8, type: 2}
   feet: {fileID: 1850182728315593330}
   walking: {fileID: 7545810748110318790}
+  walkingSlow: {fileID: 0}
   jumpStart: {fileID: 2331669131421531763}
   jumpLand: {fileID: 5602061090021604881}
   fallDeath: {fileID: 0}
@@ -30,6 +31,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 154330390, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1281847262, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
       propertyPath: m_Enabled
       value: 0
