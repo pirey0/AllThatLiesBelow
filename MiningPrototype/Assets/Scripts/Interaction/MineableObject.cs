@@ -11,12 +11,15 @@ public class MineableObject : MirrorWorldFollower, IMinableNonGrid
     [SerializeField] GameObject destroyEffects;
 
     [Zenject.Inject] protected InventoryManager inventoryManager;
-    
+
 
     float damage = 0;
 
     public virtual void Damage(float v)
     {
+        if (Util.IsNullOrDestroyed(transform))
+            return;
+
         float d = v * (damageMultiplier / 10f);
         overlayAnimator?.ActiveUpdate(d);
         damage += d;
@@ -40,7 +43,7 @@ public class MineableObject : MirrorWorldFollower, IMinableNonGrid
 
     public virtual Vector2 GetPosition()
     {
-        if (transform == null) //Still trying to access exception
+        if (Util.IsNullOrDestroyed(transform))
             return Vector3.zero;
 
         return transform.position;
