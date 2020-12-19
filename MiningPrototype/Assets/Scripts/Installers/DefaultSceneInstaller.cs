@@ -20,7 +20,7 @@ public class DefaultSceneInstaller : ScriptableObjectInstaller<DefaultSceneInsta
         Container.Bind<ItemPlacingHandler>().FromComponentInNewPrefab(itemPreviewPrefab).AsSingle().NonLazy();
         Container.Bind<PauseMenu>().FromComponentInNewPrefab(pauseMenuPrefab).AsSingle().NonLazy();
         Container.Bind<TooltipHandler>().FromComponentInNewPrefab(toolTipPrefab).AsSingle().NonLazy();
-        Container.Bind<EventSystem>().FromComponentInNewPrefab(eventSystemPrefab).AsSingle().NonLazy();
+        Container.Bind(typeof(EventSystem),typeof(CustomInputModule)).FromComponentInNewPrefab(eventSystemPrefab).AsSingle().NonLazy();
         Container.Bind<InWorldCanvas>().FromComponentInNewPrefab(inWorldCanvasPrefab).AsSingle().NonLazy();
         Container.Bind<CameraController>().FromComponentInNewPrefab(cameraPrefab).AsSingle().NonLazy();
         Container.Bind<TransitionEffectHandler>().FromComponentInNewPrefab(transitionEffectHandlerPrefab).AsSingle().NonLazy();
