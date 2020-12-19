@@ -109,7 +109,7 @@ public class LiftCage : MonoBehaviour, IVehicle
     private IEnumerator MoveRoutine()
     {
         lift.RecalcuateHeight();
-        maxLength = lift.GetHeight();
+        maxLength = lift.GetHeight() - 1f;
 
         while (!Util.IsNullOrDestroyed(player) || liftVelocity != 0)
         {
@@ -122,7 +122,7 @@ public class LiftCage : MonoBehaviour, IVehicle
                 if (input == Direction.Up) //Recalculate max height when starting to move down
                 {
                     lift.RecalcuateHeight();
-                    maxLength = lift.GetHeight();
+                    maxLength = lift.GetHeight() -1f;
                 }
 
             }

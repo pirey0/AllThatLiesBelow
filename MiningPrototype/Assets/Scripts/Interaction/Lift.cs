@@ -6,6 +6,7 @@ using UnityEngine;
 public class Lift : TilemapCarvingEntity, INonPersistantSavable
 {
     [SerializeField] LiftCage cage;
+    [SerializeField] LineRenderer lineRenderer;
 
     int height;
 
@@ -37,6 +38,9 @@ public class Lift : TilemapCarvingEntity, INonPersistantSavable
         }
 
         height = min;
+
+        lineRenderer.positionCount = 2;
+        lineRenderer.SetPositions(new Vector3[] {transform.position, transform.position + Vector3.down*height});
     }
     public override void OnTileChanged(int x, int y, TileUpdateReason reason)
     {
