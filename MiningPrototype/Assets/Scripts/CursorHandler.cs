@@ -15,7 +15,7 @@ public class CursorHandler : MonoBehaviour
         current = type;
 
         if (!isHidden)
-            Cursor.SetCursor(GetTextureFromType(current), GetOffsetFromType(current), CursorMode.ForceSoftware);
+            Cursor.SetCursor(GetTextureFromType(current), GetOffsetFromType(current), CursorMode.Auto);
     }
 
     public void TryUnsetCursor(CursorType type)
