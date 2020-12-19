@@ -11,6 +11,7 @@ public class ItemPlacingHandler : MonoBehaviour
     [Zenject.Inject] Zenject.DiContainer diContainer;
     [Zenject.Inject] InventoryManager inventoryManager;
     [Zenject.Inject] EventSystem eventSystem;
+    [Zenject.Inject] CursorHandler cursorHandler;
 
     [SerializeField] AudioClip placingClip, torchPlacingClip;
     [SerializeField] AudioSource placingSound;
@@ -41,6 +42,8 @@ public class ItemPlacingHandler : MonoBehaviour
             currentHeld = ItemAmountPair.Nothing;
         }
 
+        cursorHandler.Show();
+
         player.SetHeldItem(setToPickaxe: true);
 
         if (previewTransform != null)
@@ -56,6 +59,7 @@ public class ItemPlacingHandler : MonoBehaviour
         currentHeld = pair;
         currentOrigin = origin;
         var info = ItemsData.GetItemInfo(pair.type);
+        cursorHandler.Hide();
 
         if (info.CanBePlaced)
         {

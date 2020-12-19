@@ -20,6 +20,7 @@ public class Intro : StateListenerBehaviour
     [Zenject.Inject] PlayerInventoryOpener playerInventoryOpener;
     [Zenject.Inject] CameraPanner cameraPanner;
     [Zenject.Inject] PlayerStatementsHandler playerStatements;
+    [Zenject.Inject] CursorHandler cursorHandler;
 
     bool placedTorch;
     bool placedLadder;
@@ -39,6 +40,7 @@ public class Intro : StateListenerBehaviour
         else
         {
             progressionHandler.StartNextDay();
+            cursorHandler.Show();
             foreach (BlockingLog obj in GameObject.FindObjectsOfType<BlockingLog>())
             {
                 Destroy(obj.gameObject);
@@ -52,6 +54,7 @@ public class Intro : StateListenerBehaviour
     IEnumerator IntroCoroutine()
     {
         playerInventoryOpener.Hide();
+        cursorHandler.Hide();
         inventoryManager.PlayerCollects(ItemType.Torch, 1);
         inventoryManager.PlayerCollects(ItemType.Ladder, 1);
         placedTorch = false;
@@ -77,6 +80,7 @@ public class Intro : StateListenerBehaviour
         yield return new WaitForSeconds(4);
 
         playerStatements.Say("Its so dark in here. I should place a torch.", 5);
+        cursorHandler.Show();
         effectHandler.SetSnowAmount(1);
         player.InCinematicMode = false;
         player.CinematicSlowWalk = false;

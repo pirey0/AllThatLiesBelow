@@ -27,6 +27,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     [Inject] EventSystem eventSystem;
     [Inject] RuntimeProceduralMap map;
     [Inject] ItemPlacingHandler itemPlacingHandler;
+    [Inject] CursorHandler cursorHandler;
 
     PlayerVisualController visualController;
     Vector2Int? gridDigTarget, previousGridDigTarget;
@@ -86,7 +87,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
             if (Vector2Int.Distance(GetPositionInGrid(), GetClickCoordinate()) <= settings.maxDigDistance)
             {
                 //Update Hover and only show when no dig target was found
-                UpdateHover(UpdateDigTarget() || UpdateNonGridDigTarget());
+                UpdateHover(player.CanDig && !player.InOverworld() && (UpdateDigTarget() || UpdateNonGridDigTarget()));
 
                 if (Input.GetMouseButton(0))
                 {
@@ -152,9 +153,18 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
                 {
                     //Debug.Log(hit.transform.name);
                     newHover = hoverable;
+                    cursorHandler.SetCursor(CursorType.Interactable);
+
                     break;
                 }
             }
+
+            if (newHover == null)
+                cursorHandler.SetCursor(CursorType.Default);
+
+        } else
+        {
+            cursorHandler.SetCursor(CursorType.Mining);
         }
 
         if (newHover != hover)

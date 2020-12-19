@@ -22,6 +22,7 @@ public class Bed : MonoBehaviour, IInteractable
     [Inject] SaveHandler saveHandler;
     [Inject] OverworldEffectHandler effectHandler;
     [Inject] PlayerStatementsHandler playerStatements;
+    [Inject] CursorHandler cursorHandler;
 
     string defaultWakeUpTest;
     bool sacrificedHappyness = false;
@@ -60,6 +61,8 @@ public class Bed : MonoBehaviour, IInteractable
     private void EnterBed(PlayerStateMachine playerToHide)
     {
         playerToHide.Disable();
+        cursorHandler.Hide();
+
         inventoryManager.ForcePlayerInventoryClose();
         spriteRenderer.sprite = sleeping;
         StartCoroutine(SleepCoroutine(playerToHide));
@@ -69,6 +72,7 @@ public class Bed : MonoBehaviour, IInteractable
     {
         ForceInterrupt?.Invoke();
         playerToEnableAgain.Enable();
+        cursorHandler.Show();
         spriteRenderer.sprite = empty;
     }
 
