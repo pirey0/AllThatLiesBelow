@@ -27,6 +27,7 @@ public class LiftCage : MonoBehaviour, IVehicle
     [SerializeField] DistanceJoint2D distanceJoint;
     [SerializeField] AudioSource movingUpAndDownSound, engineSound, startSound, stopSound;
     [SerializeField] ParticleSystem smokeParticles;
+    [SerializeField] Lift lift;
 
     [Header("Settings")]
     [SerializeField] float acceleration = 2;
@@ -80,7 +81,7 @@ public class LiftCage : MonoBehaviour, IVehicle
         rightRope.SetPosition(1, transform.position + rightRopeOffset);
 
         centerRope.positionCount = 2;
-        centerRope.SetPosition(0, liftBase.position );
+        centerRope.SetPosition(0, liftBase.position);
         centerRope.SetPosition(1, transform.position + new Vector3(distanceJoint.anchor.x, distanceJoint.anchor.y));
     }
 
@@ -107,6 +108,9 @@ public class LiftCage : MonoBehaviour, IVehicle
 
     private IEnumerator MoveRoutine()
     {
+        lift.RecalcuateHeight();
+        maxLength = lift.GetHeight();
+
         while (!Util.IsNullOrDestroyed(player) || liftVelocity != 0)
         {
             Direction input = GetInput().Inverse();
@@ -114,6 +118,13 @@ public class LiftCage : MonoBehaviour, IVehicle
             if (state == LiftState.Inactive && input != Direction.None)
             {
                 State = LiftState.Active;
+                Debug.Log("YO: " + input);
+                if (input == Direction.Up) //Recalculate max height when starting to move down
+                {
+                    lift.RecalcuateHeight();
+                    maxLength = lift.GetHeight();
+                }
+
             }
             else if (state == LiftState.Active && input == Direction.None)
             {
@@ -172,7 +183,7 @@ public class LiftCage : MonoBehaviour, IVehicle
                 foreach (SpriteAnimator spriteAnimator in wheels_anim)
                     spriteAnimator.Play((direction == Direction.Up) ? LiftWheel_active_left : LiftWheel_active_right);
 
-                if(cameraShake != null)
+                if (cameraShake != null)
                 {
                     cameraController.StopShake(cameraShake);
                 }
@@ -289,7 +300,7 @@ public class LiftCage : MonoBehaviour, IVehicle
         liftVelocity = data.CageVelocity;
         state = data.CageState;
 
-        if(state == LiftState.Active || liftVelocity != 0)
+        if (state == LiftState.Active || liftVelocity != 0)
         {
             StartCoroutine(MoveRoutine());
         }

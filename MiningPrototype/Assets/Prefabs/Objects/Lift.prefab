@@ -687,6 +687,7 @@ MonoBehaviour:
   startSound: {fileID: 4727693832056395040}
   stopSound: {fileID: 3963978766927506570}
   smokeParticles: {fileID: 5721394321702183391}
+  lift: {fileID: 734060017}
   acceleration: 2
   decelerationMultiplyer: 2
   maxSpeed: 4

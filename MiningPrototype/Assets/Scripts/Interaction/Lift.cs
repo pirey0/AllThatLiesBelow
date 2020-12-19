@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,14 +7,40 @@ public class Lift : TilemapCarvingEntity, INonPersistantSavable
 {
     [SerializeField] LiftCage cage;
 
+    int height;
+
     private void Start()
     {
         Carve();
+        RecalcuateHeight();
+
     }
 
+    public int GetHeight()
+    {
+        return height;
+    }
+
+    public void RecalcuateHeight()
+    {
+        Debug.Log("Recalculating Lift Height");
+        var gridPos = transform.position.ToGridPosition();
+        int min = int.MaxValue;
+
+        for (int x = -1; x <= 2; x++)
+        {
+            int c = MapHelper.AirTileCount(map, new Vector2Int(gridPos.x + x, gridPos.y - 2), Direction.Down, false);
+            Util.DebugDrawTile(new Vector2Int(gridPos.x + x, gridPos.y - 2), Color.yellow, 1f);
+
+            if(c < min)
+                min = c;
+        }
+
+        height = min;
+    }
     public override void OnTileChanged(int x, int y, TileUpdateReason reason)
     {
-        if(reason == TileUpdateReason.Destroy)
+        if (reason == TileUpdateReason.Destroy)
         {
             UncarveDestroy();
         }
@@ -21,7 +48,7 @@ public class Lift : TilemapCarvingEntity, INonPersistantSavable
 
     public void Load(SpawnableSaveData data)
     {
-        if(data is LiftSaveData sdata)
+        if (data is LiftSaveData sdata)
         {
             cage.Load(sdata);
         }

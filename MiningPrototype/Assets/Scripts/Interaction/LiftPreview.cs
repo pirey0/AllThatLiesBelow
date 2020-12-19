@@ -47,7 +47,6 @@ public class LiftPreview : MonoBehaviour, IItemPreview
         }
         else
         {
-            Debug.Log("Free:" + free + " Occupied: " + occupied);
             foreach (var renderer in renderers)
                 renderer.color = Color.red;
 

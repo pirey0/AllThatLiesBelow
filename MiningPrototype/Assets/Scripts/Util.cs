@@ -198,6 +198,9 @@ public static class Util
     }
     public static Direction Inverse(this Direction dir)
     {
+        if (dir == Direction.None)
+            return Direction.None;
+
         return (Direction)(((int)dir + 2) % 4);
     }
 
