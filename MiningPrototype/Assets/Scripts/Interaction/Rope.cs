@@ -19,9 +19,13 @@ public class Rope : TilemapCarvingEntity, IClimbable
 
     IEnumerator AdaptHeightRoutine()
     {
-        while (map.IsAirAt((int)GetTopPosition().x, (int)GetTopPosition().y - height - 1) && height < maxHeight)
+        int height = MapHelper.AirTileCount(map, (transform.position + Vector3.down).ToGridPosition(), Direction.Down, entitiesAsAir: true);
+
+        int i = 0;
+        while (i < height)
         {
-            SetHeight(height + 1);
+            i++;
+            SetHeight(i);
             yield return new WaitForSeconds(delayBetweenHeightIncrease);
         }
     }
@@ -36,7 +40,7 @@ public class Rope : TilemapCarvingEntity, IClimbable
 
     public override void OnTileChanged(int x, int y, TileUpdateReason reason)
     {
-        if(reason == TileUpdateReason.Destroy)
+        if (reason == TileUpdateReason.Destroy)
         {
             UncarveDestroy();
         }
@@ -44,9 +48,8 @@ public class Rope : TilemapCarvingEntity, IClimbable
 
     public override void OnTileUpdated(int x, int y)
     {
-        Debug.Log("Updated");
-        Util.DebugDrawTile(new Vector2Int(x, y+1));
-        if (RuntimeProceduralMap.Instance.IsAirAt(x, y+1))
+        Util.DebugDrawTile(new Vector2Int(x, y + 1));
+        if (RuntimeProceduralMap.Instance.IsAirAt(x, y + 1))
         {
             UncarveDestroy();
         }
