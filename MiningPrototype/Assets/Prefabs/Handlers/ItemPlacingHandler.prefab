@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placingClip: {fileID: 8300000, guid: edf67ac486afa1449a414dc5225df684, type: 3}
-  torchPlacingClip: {fileID: 8300000, guid: a9772a253b955214ebbf5ca640cb38bb, type: 3}
+  torchPlacingClip: {fileID: 8300000, guid: 741ed8328bb837e4b9ab6a3b661765ae, type: 3}
   placingSound: {fileID: -6096071233802249242}
 --- !u!82 &-6096071233802249242
 AudioSource:
