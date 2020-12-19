@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ball : MineableObject
 {
     [SerializeField] float playerTouchVelocity;
-    Rigidbody2D rigidbody;
+    new Rigidbody2D rigidbody;
 
     private void Awake()
     {

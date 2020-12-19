@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] SceneReference playScene;
     [SerializeField] UnityEngine.UI.Button loadButton;
-    [SerializeField] Transform transform;
+    [SerializeField] Transform targetTransform;
     [SerializeField] float cameraSpeed, cameraDuration;
     private void Start()
     {
@@ -30,7 +30,7 @@ public class MainMenu : MonoBehaviour
     {
         for (float i = 0; i < cameraDuration; i += Time.deltaTime)
         {
-            transform.position += new Vector3(0, cameraSpeed * Time.deltaTime, 0);
+            targetTransform.position += new Vector3(0, cameraSpeed * Time.deltaTime, 0);
             yield return null;
         }
     }

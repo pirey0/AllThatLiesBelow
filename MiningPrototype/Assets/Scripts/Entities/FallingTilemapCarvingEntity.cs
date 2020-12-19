@@ -5,7 +5,7 @@ using UnityEngine;
 public class FallingTilemapCarvingEntity : TilemapCarvingEntity
 {
     [Header("Falling Carving Entity")]
-    [SerializeField] protected Rigidbody2D rigidbody;
+    [SerializeField] protected new Rigidbody2D rigidbody;
     [SerializeField] AudioSource fallSound;
 
     protected virtual void Start()

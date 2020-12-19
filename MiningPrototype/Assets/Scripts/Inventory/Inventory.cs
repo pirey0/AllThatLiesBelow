@@ -213,4 +213,13 @@ public struct ItemAmountPair
         return i1.type != i2.type || i1.amount != i2.amount;
     }
 
+    public override bool Equals(object obj)
+    {
+        return base.Equals(obj);
+    }
+
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
+    }
 }

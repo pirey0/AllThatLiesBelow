@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerWalkEffects : MonoBehaviour
 {
     [SerializeField] float amountOnWalk;
-    [SerializeField] ParticleSystem particleSystem;
+    [SerializeField] new ParticleSystem particleSystem;
     [SerializeField] ParticleSystem.MinMaxGradient snow, stone, grayStone, grass;
     [Zenject.Inject] RuntimeProceduralMap map;
     

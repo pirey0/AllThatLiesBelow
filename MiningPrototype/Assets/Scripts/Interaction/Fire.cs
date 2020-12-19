@@ -8,8 +8,8 @@ public class Fire : MonoBehaviour, IDropReceiver
     [SerializeField] int burnDelay;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Sprite on, off;
-    [SerializeField] ParticleSystem particleSystem;
-    [SerializeField] MonoBehaviour light;
+    [SerializeField] new ParticleSystem particleSystem;
+    [SerializeField] new MonoBehaviour light;
     [SerializeField] AudioSource audioSource;
 
     private FireState state;

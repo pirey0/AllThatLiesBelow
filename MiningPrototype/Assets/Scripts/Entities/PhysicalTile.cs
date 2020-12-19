@@ -11,7 +11,8 @@ public interface IEntity
 
 public class PhysicalTile : MineableObject, IEntity
 {
-    [SerializeField] SpriteRenderer renderer, overlayRenderer;
+    [SerializeField] SpriteRenderer overlayRenderer;
+    [SerializeField] new SpriteRenderer renderer;
     [SerializeField] AudioSource hit;
     [SerializeField] GameObject onLandEffects;
     [SerializeField] float RequiredSpeedForStrongHit;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LadderPreview : MonoBehaviour, IItemPreview
 {
-    SpriteRenderer renderer;
+    new SpriteRenderer renderer;
     bool couldPlace;
 
     private void Awake()
