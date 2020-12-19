@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class PlatformBase : TilemapCarvingEntity
 {
-    [SerializeField] protected SpriteRenderer renderer;
+    [SerializeField] new protected SpriteRenderer renderer;
     [SerializeField] protected int minWidth, maxWidth;
 
     public virtual void AdaptPlacementTo((Direction, int) placementAtr)

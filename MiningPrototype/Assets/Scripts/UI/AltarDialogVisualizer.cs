@@ -16,7 +16,7 @@ public class AltarDialogVisualizer : MonoBehaviour
     DialogElementVisualization[] dialogOptions = new DialogElementVisualization[3];
 
     [SerializeField] Light2D ray1, ray2;
-    [SerializeField] GameObject particleSystem;
+    [SerializeField] new GameObject particleSystem;
     [SerializeField] AnimationCurve opcacityVariance;
     [SerializeField] float opacityAdaptationSpeed = 4;
     float lightOpacityMultiplier = 0;

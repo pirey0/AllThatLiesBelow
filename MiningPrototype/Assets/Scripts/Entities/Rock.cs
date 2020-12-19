@@ -8,7 +8,7 @@ public class Rock : FallingTilemapCarvingEntity
     [SerializeField] float destructionSpeed;
     [SerializeField] AudioSource rockSmashing;
     [SerializeField] float crumbleMinTime = 0.3f;
-    [SerializeField] SpriteRenderer renderer;
+    [SerializeField] new SpriteRenderer renderer;
     [Zenject.Inject] CameraController cameraController;
 
     float lastCrumbleStamp = -1000;

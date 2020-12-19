@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DebugChopper : MonoBehaviour, IVehicle
 {
-    [SerializeField] Rigidbody2D rigidbody;
-    [SerializeField] Collider2D collider;
+    [SerializeField] new Rigidbody2D rigidbody;
+    [SerializeField] new Collider2D collider;
     [SerializeField] float speed;
     [SerializeField] Transform playerPos;
     [SerializeField] SpriteRenderer spriteRenderer;

@@ -29,7 +29,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
     private bool isGrounded;
     private Vector2 oldVelocity;
     Vector2 rightWalkVector = Vector3.right;
-    protected Rigidbody2D rigidbody;
+    protected new Rigidbody2D rigidbody;
     float horizontalSpeed;
 
     private bool InFrontOfCimbable { get => currentClimbable.Count > 0; }

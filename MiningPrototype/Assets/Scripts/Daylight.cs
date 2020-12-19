@@ -5,7 +5,7 @@ using UnityEngine.Experimental.Rendering.Universal;
 
 public class Daylight : StateListenerBehaviour, INonPersistantSavable
 {
-    [SerializeField] Light2D light;
+    [SerializeField] new Light2D light;
     [SerializeField] float[] modeIntensities;
     [SerializeField] [NaughtyAttributes.ReadOnly] Lightmode currentMode;
 
