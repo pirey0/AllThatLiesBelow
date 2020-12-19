@@ -163,7 +163,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
             }
 
             //hover over something interactable
-            if (newHover == null || !newHover.IsInteractable)
+            if ((newHover == null || !newHover.IsInteractable) && !eventSystem.IsPointerOverGameObject())
                 cursorHandler.SetCursor(CursorType.Default);
             else
                 cursorHandler.SetCursor(CursorType.Interactable);
@@ -171,7 +171,8 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         }
         else
         {
-            cursorHandler.SetCursor(CursorType.Mining);
+            if (!eventSystem.IsPointerOverGameObject())
+                cursorHandler.SetCursor(CursorType.Mining);
         }
 
         if (newHover != hover)
