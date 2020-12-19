@@ -32,8 +32,8 @@ public class LiftPreview : MonoBehaviour, IItemPreview
 
             for (int y = -1; y >= -3; y--)
             {
-                Util.DebugDrawTile(new Vector2Int(gridPos.x + x, gridPos.y - y), Color.white, 0.05f);
-                if (RuntimeProceduralMap.Instance.IsBlockAt(gridPos.x + x, gridPos.y - y))
+                Util.DebugDrawTile(new Vector2Int(gridPos.x + x, gridPos.y + y), Color.white, 0.05f);
+                if (RuntimeProceduralMap.Instance.IsBlockAt(gridPos.x + x, gridPos.y + y))
                     free = false;
             }
         }
