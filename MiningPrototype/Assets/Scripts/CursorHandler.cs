@@ -14,8 +14,6 @@ public class CursorHandler : MonoBehaviour
 
     public void SetCursor(CursorType type)
     {
-        Debug.Log(type.ToString());
-
         before = current;
         current = type;
 
