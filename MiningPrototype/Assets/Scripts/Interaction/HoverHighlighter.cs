@@ -6,7 +6,9 @@ using UnityEngine;
 
 public interface IHoverable
 {
-    void HoverEnter();
+    bool IsInteractable { get; }
+
+    void HoverEnter(bool isDraggingItem);
     void HoverExit();
     void HoverUpdate();
 }
@@ -17,6 +19,8 @@ public class HoverHighlighter : MonoBehaviour, IHoverable
     [SerializeField] Shader shader;
     SpriteRenderer parentRenderer;
     SpriteRenderer spriteRenderer;
+
+    bool isInteractable, isDropreceiver;
 
     float blinkDelay = 0.2f;
     Color blinkColor;
@@ -54,8 +58,13 @@ public class HoverHighlighter : MonoBehaviour, IHoverable
         }
     }
 
+    public bool IsInteractable => isInteractable;
+
     private void OnEnable()
     {
+        isInteractable = GetComponent<IInteractable>() != null;
+        isDropreceiver = GetComponent<IDropReceiver>() != null;
+
         parentRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -107,10 +116,13 @@ public class HoverHighlighter : MonoBehaviour, IHoverable
         IsBlinking = false;
     }
 
-    public void HoverEnter()
+    public void HoverEnter(bool isDraggingItem)
     {
-        Material.color = Color.white;
-        Material.SetColor("_OverlayColor",IsBlinking ? blinkColor : new Color(0, 0, 0, 0.2f));
+        if (isInteractable || (isDropreceiver && isDraggingItem))
+        {
+            Material.color = Color.white;
+            Material.SetColor("_OverlayColor", IsBlinking ? blinkColor : new Color(0, 0, 0, 0.2f));
+        }
     }
 
     public void HoverExit()
