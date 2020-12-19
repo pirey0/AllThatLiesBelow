@@ -40,7 +40,6 @@ public class LiftCage : MonoBehaviour, IVehicle
     PlayerStateMachine player;
     Vector3 oldPosition;
     ParentedCameraShake cameraShake;
-
     float liftVelocity = 0;
 
     LiftState State
@@ -173,6 +172,10 @@ public class LiftCage : MonoBehaviour, IVehicle
                 foreach (SpriteAnimator spriteAnimator in wheels_anim)
                     spriteAnimator.Play((direction == Direction.Up) ? LiftWheel_active_left : LiftWheel_active_right);
 
+                if(cameraShake != null)
+                {
+                    cameraController.StopShake(cameraShake);
+                }
                 cameraShake = cameraController.ParentedShake(transform, 10, 1);
             }
 
@@ -258,6 +261,7 @@ public class LiftCage : MonoBehaviour, IVehicle
 
     public void EnteredBy(PlayerStateMachine player)
     {
+        StopAllCoroutines();
         StartCoroutine(MoveRoutine());
         player.transform.parent = transform;
         Debug.Log("Player entered " + this.name);
