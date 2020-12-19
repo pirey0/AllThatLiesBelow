@@ -179,6 +179,10 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
                     //drop half when pressing shift and 1 when not
                     int a = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) ? (amount / 2) : 1;
                     itemPlacingHandler.TryPlace(type, rectTransform.position, amount:a); //try place single item
+
+                    //last torch placed
+                    if (amount <= 1)
+                        OnEndDrag(null); //dirty ++
                 }
                 else
                 {
