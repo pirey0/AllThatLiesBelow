@@ -9,6 +9,7 @@ public class Rock : FallingTilemapCarvingEntity
     [SerializeField] AudioSource rockSmashing;
     [SerializeField] float crumbleMinTime = 0.3f;
     [SerializeField] new SpriteRenderer renderer;
+
     [Zenject.Inject] CameraController cameraController;
 
     float lastCrumbleStamp = -1000;
@@ -53,7 +54,7 @@ public class Rock : FallingTilemapCarvingEntity
         if (this == null)
             return;
 
-        int minVis =3;
+        int minVis = 3;
         var tilemapPos = (transform.position + carvingOffset).ToGridPosition();
         foreach (var item in tilesToOccupy)
         {
@@ -76,7 +77,7 @@ public class Rock : FallingTilemapCarvingEntity
         if (!rockSmashing.isPlaying && speed >= 7 && transform.position.y > collision.transform.position.y)
         {
             rockSmashing.Play();
-            cameraController.Shake(transform.position,CameraShakeType.explosion,0.25f,16f);
+            cameraController.Shake(transform.position, CameraShakeType.explosion, 0.25f, 16f);
         }
 
         if (collision.collider.TryGetComponent(out IEntity entity))
@@ -103,7 +104,7 @@ public class Rock : FallingTilemapCarvingEntity
 
     private void TryDestroyBelow(BaseMap map)
     {
-        Vector3[] offsets = { new Vector3(0, -1), new Vector3(-0.55f, -1), new Vector3(0.55f, -1) };
+        Vector3[] offsets = { new Vector3(0, -1.2f), new Vector3(-0.55f, -1.2f), new Vector3(0.55f, -1.2f) };
 
         foreach (var offset in offsets)
         {
@@ -112,7 +113,10 @@ public class Rock : FallingTilemapCarvingEntity
             bool block = map.IsBlockAt(pos.x, pos.y);
             if (block)
             {
-                map.DamageAt(pos.x, pos.y, 100, BaseMap.DamageType.Crush);
+                if (map[pos.x, pos.y].Type != TileType.Rock)
+                {
+                    map.DamageAt(pos.x, pos.y, 100, BaseMap.DamageType.Crush);
+                }
             }
         }
     }
