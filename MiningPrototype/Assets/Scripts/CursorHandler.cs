@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CursorHandler : MonoBehaviour
 {
     [SerializeField] Texture2D customCursor, customCursor_pointing, customCursor_crosshair;
     CursorType current;
     CursorType before;
-    bool isHidden = true;
+    [SerializeField] bool isHidden = true;
 
     public void SetCursor(CursorType type)
     {
@@ -27,6 +28,7 @@ public class CursorHandler : MonoBehaviour
     public void Hide ()
     {
         isHidden = true;
+        Cursor.visible = false;
     }
 
     public void Show()
@@ -34,6 +36,7 @@ public class CursorHandler : MonoBehaviour
         if (isHidden)
         {
             isHidden = false;
+            Cursor.visible = true;
             SetCursor(current);
         }
     }
@@ -42,9 +45,6 @@ public class CursorHandler : MonoBehaviour
     {
         switch (cursorType)
         {
-            case CursorType.Hidden:
-                return null;
-
             case CursorType.Mining:
                 return customCursor_crosshair;
 
@@ -75,5 +75,4 @@ public enum CursorType
     Default,
     Interactable,
     Mining,
-    Hidden,
 }

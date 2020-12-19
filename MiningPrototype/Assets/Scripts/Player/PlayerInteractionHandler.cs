@@ -155,14 +155,18 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
                 {
                     //Debug.Log(hit.transform.name);
                     newHover = hoverable;
-                    cursorHandler.SetCursor(CursorType.Interactable);
+
+                    
 
                     break;
                 }
             }
 
-            if (newHover == null)
+            //hover over something interactable
+            if (newHover == null || !newHover.IsInteractable)
                 cursorHandler.SetCursor(CursorType.Default);
+            else
+                cursorHandler.SetCursor(CursorType.Interactable);
 
         }
         else
@@ -176,7 +180,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
                 hover.HoverExit();
 
             if (newHover != null)
-                newHover.HoverEnter();
+                newHover.HoverEnter(itemPlacingHandler.IsDraggingItem);
 
             hover = newHover;
         }
