@@ -61,9 +61,6 @@ public class CursorHandler : MonoBehaviour
         {
             case CursorType.Mining:
                 return new Vector2 (customCursor_crosshair.height / 2, customCursor_crosshair.width / 2);
-
-            case CursorType.Interactable:
-                return new Vector2(0, customCursor_pointing.height / 2.66666666f);
         }
 
         return Vector2.zero;
