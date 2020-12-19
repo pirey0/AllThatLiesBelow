@@ -149,7 +149,6 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
         if (!inUI)
         {
-            Debug.Log("Dropped outside UI");
             itemPlacingHandler.TryPlace(type, rectTransform.position);
         }
         itemPlacingHandler.Hide(resetHeldItem: true);
