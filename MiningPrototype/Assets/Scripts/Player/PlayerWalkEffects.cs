@@ -12,6 +12,9 @@ public class PlayerWalkEffects : MonoBehaviour
     
     public void SetEffects(bool showEffects)
     {
+        if (map == null)
+            return;
+
         var emit = particleSystem.emission;
         var main = particleSystem.main;
 
