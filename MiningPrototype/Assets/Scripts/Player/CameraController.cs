@@ -98,7 +98,7 @@ public class CameraController : MonoBehaviour
         return cameraShaker.StartParentedShake(parent, range, intensity);
     }
 
-    public void StopShake(CameraShake shake)
+    public void StopShake(IShake shake)
     {
         cameraShaker.StopShake(shake);
     }

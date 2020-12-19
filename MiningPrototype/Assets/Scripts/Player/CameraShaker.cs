@@ -109,7 +109,7 @@ public class CameraShaker : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        foreach (CameraShake shake in shakes)
+        foreach (IShake shake in shakes)
         {
             shake.DrawGizmos();
         }
@@ -170,7 +170,6 @@ public class ParentedCameraShake : IShake
     float rangeForFalloff = 10;
     float intensity;
     Transform parent;
-    bool done = false;
     public ParentedCameraShake(Transform parent, float _range, float _intensity)
     {
         rangeForFalloff = _range;
@@ -183,10 +182,6 @@ public class ParentedCameraShake : IShake
         Gizmos.DrawWireSphere(parent.position, rangeForFalloff);
     }
 
-    public void Stop()
-    {
-        done = true;
-    }
 
     public void SetIntensity(float i)
     {
@@ -195,11 +190,6 @@ public class ParentedCameraShake : IShake
 
     public float GetIntensity(Vector2 cameraLocation)
     {
-        if (done)
-        {
-            return -1;
-        }
-
         return intensity * (1 - Mathf.Clamp(Vector2.Distance(cameraLocation, parent.position) / rangeForFalloff, 0, 1));
     }
 }

@@ -159,7 +159,7 @@ public class LiftCage : MonoBehaviour, IVehicle
 
                 emit.rateOverTimeMultiplier = 0;
                 emit.rateOverDistanceMultiplier = 0;
-                cameraShake.Stop();
+                cameraController.StopShake(cameraShake);
                 cameraShake = null;
             }
         }
