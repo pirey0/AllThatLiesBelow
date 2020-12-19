@@ -13,7 +13,7 @@ public class OverworldEffectHandler : StateListenerBehaviour
     [SerializeField] float fadeThickness;
 
     [SerializeField] SpriteRenderer nightSky;
-    [SerializeField] ParticleSystem snow, snowRight, snowLeft, clouds;
+    [SerializeField] ParticleSystem snow, snowSecondary, clouds;
     [SerializeField] float amountOfParticles;
     [SerializeField] AudioSource snowstormSounds, caveSounds, springSounds;
     [SerializeField] float maxSnowStormVolume, maxCaveVolume;
@@ -22,12 +22,15 @@ public class OverworldEffectHandler : StateListenerBehaviour
     [SerializeField] bool isSpring = false;
 
     [Zenject.Inject] CameraController cam;
+    [Zenject.Inject] PlayerStateMachine player;
+    [Zenject.Inject] RuntimeProceduralMap map;
 
     float snowMultiplyer = 1;
     float alphaCalculatedBasedOnHeightOfPlayer;
     float audioSourceVolumeMultiplierThroughHut = 1;
     Hut hut;
     Daylight daylight;
+    RuntimeProceduralMap.MirrorState mirrorState;
 
     protected override void OnRealStart()
     {
@@ -42,14 +45,28 @@ public class OverworldEffectHandler : StateListenerBehaviour
         snowstormSounds.Play();
         springSounds.Play();
         UpdateOverworldEffects();
+        map.MirrorSideChanged += OnMirrorSideChanged;
     }
+
 
     protected override void OnDisable()
     {
         base.OnDisable();
+        map.MirrorSideChanged -= OnMirrorSideChanged;
 
         if (hut != null)
             hut.OnHutStateChange -= OnHutStateChange;
+    }
+
+    private void OnMirrorSideChanged(RuntimeProceduralMap.MirrorState newState)
+    {
+        mirrorState = newState;
+        if (mirrorState == RuntimeProceduralMap.MirrorState.Left)
+            snowSecondary.transform.localPosition = new Vector3(200, 0, 0);
+        else if (mirrorState == RuntimeProceduralMap.MirrorState.Right)
+            snowSecondary.transform.localPosition = new Vector3(-200, 0, 0);
+
+        UpdateOverworldEffects();
     }
 
     private void FixedUpdate()
@@ -61,6 +78,8 @@ public class OverworldEffectHandler : StateListenerBehaviour
 
         UpdateOverworldEffects();
     }
+
+
 
     public void SetNight()
     {
@@ -92,11 +111,13 @@ public class OverworldEffectHandler : StateListenerBehaviour
             float rate = (1 - alphaCalculatedBasedOnHeightOfPlayer) * amountOfParticles * snowMultiplyer * (isSpring ? 0f : 1f);
             var snowEmission = snow.emission;
             snowEmission.rateOverTime = rate;
-            snowEmission = snowRight.emission;
-            snowEmission.rateOverTime = rate;
-            snowEmission = snowLeft.emission;
-            snowEmission.rateOverTime = rate;
-            //3 emitters just for worldmirroring :c
+
+            snowEmission = snowSecondary.emission;
+
+            if (mirrorState == RuntimeProceduralMap.MirrorState.Center)
+                snowEmission.rateOverTime = 0;
+            else
+                snowEmission.rateOverTime = rate;
         }
 
         //clouds
