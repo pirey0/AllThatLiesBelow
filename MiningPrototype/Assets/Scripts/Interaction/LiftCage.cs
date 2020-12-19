@@ -34,10 +34,12 @@ public class LiftCage : MonoBehaviour, IVehicle
     [SerializeField] float maxSpeed = 4;
     [SerializeField] float minLength = 1, maxLength = 30;
 
+    [Zenject.Inject] CameraController cameraController;
 
     LiftState state = LiftState.Inactive;
     PlayerStateMachine player;
     Vector3 oldPosition;
+    ParentedCameraShake cameraShake;
 
     float liftVelocity = 0;
 
@@ -157,7 +159,8 @@ public class LiftCage : MonoBehaviour, IVehicle
 
                 emit.rateOverTimeMultiplier = 0;
                 emit.rateOverDistanceMultiplier = 0;
-
+                cameraShake.Stop();
+                cameraShake = null;
             }
         }
         else
@@ -169,6 +172,8 @@ public class LiftCage : MonoBehaviour, IVehicle
                 startSound.Play();
                 foreach (SpriteAnimator spriteAnimator in wheels_anim)
                     spriteAnimator.Play((direction == Direction.Up) ? LiftWheel_active_left : LiftWheel_active_right);
+
+                cameraShake = cameraController.ParentedShake(transform, 10, 1);
             }
 
             movingUpAndDownSound.pitch = 0.75f + 0.75f * speedPercent;
@@ -177,6 +182,7 @@ public class LiftCage : MonoBehaviour, IVehicle
             emit.rateOverTimeMultiplier = speedPercent * 10;
             emit.rateOverDistanceMultiplier = speedPercent * 10;
             main.simulationSpeed = 0.75f + speedPercent * 0.5f;
+            cameraShake.SetIntensity(speedPercent);
         }
 
         //Update distanceJoint

@@ -82,13 +82,20 @@ public class CameraController : MonoBehaviour
         if (Input.GetMouseButtonUp(2))
             Shake(Util.MouseToWorld(Camera));
     }
+
     public CameraShake Shake(Vector2 location, CameraShakeType shakeType = CameraShakeType.hill, float duration = 1f, float range = 10f , float intensity = 1f)
     {
         return cameraShaker.StartShake(shakeType, duration, location, range, intensity);
     }
+
     public CameraShake Shake(Vector2 location, AnimationCurve customCurve, float duration = 1f, float range = 10f, float intensity = 1f)
     {
         return cameraShaker.StartShake(customCurve, duration, location, range, intensity);
+    }
+
+    public ParentedCameraShake ParentedShake(Transform parent,  float range = 10f, float intensity = 1f)
+    {
+        return cameraShaker.StartParentedShake(parent, range, intensity);
     }
 
     public void StopShake(CameraShake shake)

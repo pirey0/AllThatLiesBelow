@@ -18,7 +18,7 @@ public class CameraShaker : MonoBehaviour
     [SerializeField] AnimationCurve explosion;
     [SerializeField] AnimationCurve raising;
 
-    List<CameraShake> shakes = new List<CameraShake>();
+    List<IShake> shakes = new List<IShake>();
     [SerializeField] bool showShakes;
 
     private void Start()
@@ -42,7 +42,14 @@ public class CameraShaker : MonoBehaviour
         return cs;
     }
 
-    internal void StopShake(CameraShake shake)
+    public ParentedCameraShake StartParentedShake(Transform parent, float range, float intensity)
+    {
+        ParentedCameraShake cameraShake = new ParentedCameraShake(parent, range, intensity);
+        shakes.Add(cameraShake);
+        return cameraShake;
+    }
+
+    public void StopShake(IShake shake)
     {
         if (shakes.Contains(shake))
             shakes.Remove(shake);
@@ -109,7 +116,14 @@ public class CameraShaker : MonoBehaviour
     }
 }
 
-public class CameraShake
+public interface IShake
+{
+    float GetIntensity(Vector2 cameraLocation);
+    void DrawGizmos();
+}
+
+
+public class CameraShake : IShake
 {
     float timeAtStart;
     float timeAtEnd;
@@ -148,5 +162,44 @@ public class CameraShake
         }
 
         return intensity * overTime.Evaluate(((Time.time - timeAtStart) / curveLength) / duration) * (1 - Mathf.Clamp(Vector2.Distance(cameraLocation, location) / rangeForFalloff, 0, 1));
+    }
+}
+
+public class ParentedCameraShake : IShake
+{
+    float rangeForFalloff = 10;
+    float intensity;
+    Transform parent;
+    bool done = false;
+    public ParentedCameraShake(Transform parent, float _range, float _intensity)
+    {
+        rangeForFalloff = _range;
+        intensity = _intensity;
+        this.parent = parent;
+    }
+
+    public void DrawGizmos()
+    {
+        Gizmos.DrawWireSphere(parent.position, rangeForFalloff);
+    }
+
+    public void Stop()
+    {
+        done = true;
+    }
+
+    public void SetIntensity(float i)
+    {
+        intensity = i;
+    }
+
+    public float GetIntensity(Vector2 cameraLocation)
+    {
+        if (done)
+        {
+            return -1;
+        }
+
+        return intensity * (1 - Mathf.Clamp(Vector2.Distance(cameraLocation, parent.position) / rangeForFalloff, 0, 1));
     }
 }
