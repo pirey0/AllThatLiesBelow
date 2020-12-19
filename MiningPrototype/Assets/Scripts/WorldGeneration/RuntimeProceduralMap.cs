@@ -190,7 +190,7 @@ public class RuntimeProceduralMap : RenderedMap
         //On Place try mark neighbours unstable
         if (reason == TileUpdateReason.Place && value.Type != TileType.Air)
         {
-            foreach (var tile in MapHelper.GetNeighboursIndiciesOf(x, y))
+            foreach (var tile in MapHelper.GetDirectNeighboursIndiciesOf(x, y))
             {
                 Util.DebugDrawTile(tile);
                 TryRemoveUnstableAt(tile);
