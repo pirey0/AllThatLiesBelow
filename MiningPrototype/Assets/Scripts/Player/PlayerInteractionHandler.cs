@@ -87,7 +87,9 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
             if (Vector2Int.Distance(GetPositionInGrid(), GetClickCoordinate()) <= settings.maxDigDistance)
             {
                 //Update Hover and only show when no dig target was found
-                UpdateHover(player.CanDig && !player.InOverworld() && (UpdateDigTarget() || UpdateNonGridDigTarget()));
+                bool hasTarget = UpdateDigTarget();
+                bool hasNonGridTarget = UpdateNonGridDigTarget();
+                UpdateHover((hasTarget || hasNonGridTarget));
 
                 if (Input.GetMouseButton(0))
                 {
@@ -101,15 +103,15 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
                     //if (!mouseInInventoryRange)
                     //{
 
-                        if (!CurrentInteractableIsValid())
-                        {
-                            TryInteract();
-                        }
-                        else
-                        {
-                            if (eventSystem.IsPointerOverGameObject() == false)
-                                TryStopInteractingIfHover();
-                        }
+                    if (!CurrentInteractableIsValid())
+                    {
+                        TryInteract();
+                    }
+                    else
+                    {
+                        if (eventSystem.IsPointerOverGameObject() == false)
+                            TryStopInteractingIfHover();
+                    }
                     //}
                 }
                 else
@@ -162,7 +164,8 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
             if (newHover == null)
                 cursorHandler.SetCursor(CursorType.Default);
 
-        } else
+        }
+        else
         {
             cursorHandler.SetCursor(CursorType.Mining);
         }
@@ -290,13 +293,18 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
         if (gridDigTarget == null)
         {
-            if (nonGridDigTarget == null || nonGridDigTarget.Equals(null))
+            if (Util.IsNullOrDestroyed(nonGridDigTarget))
                 mouseHighlight.position = new Vector3(-1000, -1000);
             else
                 mouseHighlight.position = new Vector3(nonGridDigTarget.GetPosition().x, nonGridDigTarget.GetPosition().y, 0);
         }
         else
-            mouseHighlight.position = new Vector3(gridDigTarget.Value.x, gridDigTarget.Value.y, 0) + new Vector3(0.5f, 0.5f, 0);
+        {
+            if (CanMineDigTarget())
+                mouseHighlight.position = new Vector3(gridDigTarget.Value.x, gridDigTarget.Value.y, 0) + new Vector3(0.5f, 0.5f, 0);
+            else
+                mouseHighlight.position = new Vector3(-1000, -1000);
+        }
     }
 
     private void TryPlace()
@@ -306,19 +314,31 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
             map.SetMapAt(clickPos.x, clickPos.y, Tile.Make(TileType.Stone), TileUpdateReason.Place);
     }
 
+    private bool CanMineDigTarget()
+    {
+        if (gridDigTarget.HasValue)
+        {
+            var info = map.GetTileInfoAt(gridDigTarget.Value);
+            return (!player.InOverworld() || info.MinableInOverworld);
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     private void TryDig()
     {
         if (gridDigTarget.HasValue)
         {
-            Tile t = map[gridDigTarget.Value];
-            var info = TilesData.GetTileInfo(t.Type);
 
-            if (!player.InOverworld() || info.MinableInOverworld)
+            if (CanMineDigTarget())
             {
                 CloseInventory();
                 PlayerActivity?.Invoke();
                 visualController.ForceUpdate();
 
+                var info = map.GetTileInfoAt(gridDigTarget.Value);
                 bool broken = map.DamageAt(gridDigTarget.Value.x, gridDigTarget.Value.y, Time.deltaTime * settings.digSpeed * progressionHandler.DigSpeedMultiplyer, BaseMap.DamageType.Mining);
 
                 if (broken)
