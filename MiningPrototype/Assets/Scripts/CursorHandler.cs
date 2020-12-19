@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class CursorHandler : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class CursorHandler : MonoBehaviour
     CursorType current;
     CursorType before;
     [SerializeField] bool isHidden = true;
+    [Zenject.Inject] CustomInputModule customInputModule;
 
     public void SetCursor(CursorType type)
     {
@@ -39,6 +41,13 @@ public class CursorHandler : MonoBehaviour
             Cursor.visible = true;
             SetCursor(current);
         }
+    }
+
+    private void Update()
+    {
+        GameObject hovered = customInputModule.GetPointerEventData().pointerCurrentRaycast.gameObject;
+        if (hovered != null && hovered.GetComponent<Button>() != null)
+            SetCursor(CursorType.Interactable);
     }
 
     private Texture2D GetTextureFromType(CursorType cursorType)
