@@ -7,6 +7,7 @@ public class StatsTracker : StateListenerBehaviour, ISavable
 {
 
     [Zenject.Inject] RuntimeProceduralMap map;
+    [Zenject.Inject] ProgressionHandler progressionHandler;
 
 
     StatsTrackerSaveData data;
@@ -31,18 +32,20 @@ public class StatsTracker : StateListenerBehaviour, ISavable
         data.TotalBlocksMined++;
     }
 
-    public void SaveTime()
+    public void SaveTemp()
     {
         data.SecondsPlayed += Time.time - timeStamp;
         timeStamp = Time.time;
+        data.Day = progressionHandler.CurrentDay;
     }
 
     public void LogToConsole()
     {
-        SaveTime();
+        SaveTemp();
 
         Debug.Log("-- Stats summary: --  ");
         Debug.Log("PlayTime: " + data.SecondsPlayed);
+        Debug.Log("Day: " + data.Day);
         Debug.Log("BlocksMined: " + data.TotalBlocksMined);
 
         foreach (var item in data.BlocksMined)
@@ -74,7 +77,7 @@ public class StatsTracker : StateListenerBehaviour, ISavable
     public SaveData ToSaveData()
     {
         data.GUID = GetSaveID();
-        SaveTime();
+        SaveTemp();
         return data;
     }
 
@@ -83,6 +86,7 @@ public class StatsTracker : StateListenerBehaviour, ISavable
     {
         public float SecondsPlayed;
 
+        public int Day;
         public int TotalBlocksMined;
         public Dictionary<TileType, int> BlocksMined;
 
@@ -94,7 +98,12 @@ public class StatsTracker : StateListenerBehaviour, ISavable
                 BlocksMined.Add((TileType)t, 0);
             }
         }
+
+        public string GetFormattedTimePlayed()
+        {
+            TimeSpan time = TimeSpan.FromSeconds(SecondsPlayed);
+            string str = time.ToString(@"hh\:mm\:ss");
+            return str;
+        }
     }
-
-
 }

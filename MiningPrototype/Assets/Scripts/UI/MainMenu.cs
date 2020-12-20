@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] UnityEngine.UI.Button loadButton;
     [SerializeField] Transform targetTransform;
     [SerializeField] float cameraSpeed, cameraDuration;
+    [SerializeField] TMPro.TMP_Text loadText;
     private void Start()
     {
         SaveHandler.LoadFromSavefile = false;
@@ -18,6 +19,20 @@ public class MainMenu : MonoBehaviour
         {
             loadButton.interactable = false;
         }
+        else
+        {
+            var stats = SaveHandler.LoadStatsOnly();
+            if (stats != null)
+            {
+                loadText.text = "Day " + stats.Day + " - " + stats.GetFormattedTimePlayed();
+            }
+            else
+            {
+                loadText.text = "---Error---";
+            }
+        }
+
+
         StartCoroutine(CameraMovement());
     }
 

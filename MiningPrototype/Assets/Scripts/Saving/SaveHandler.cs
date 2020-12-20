@@ -86,13 +86,25 @@ public class SaveHandler : MonoBehaviour
             return;
         }
 
-        var stream = File.Open(GetFullSavePath(), FileMode.Open);
+        var collection = LoadToCollection(GetFullSavePath());
+        BaseLoad(collection, Vector3.zero, additiveMode: false);
+        Debug.Log("Loaded Successfully");
+    }
+
+    public static StatsTracker.StatsTrackerSaveData LoadStatsOnly()
+    {
+        var collection = LoadToCollection(GetFullSavePath());
+        return (StatsTracker.StatsTrackerSaveData)collection.SaveDatas["StatsTracker"];
+    }
+
+    private static SaveDataCollection LoadToCollection(string path)
+    {
+        var stream = File.Open(path, FileMode.Open);
         BinaryFormatter formatter = new BinaryFormatter();
         SaveDataCollection collection = (SaveDataCollection)formatter.Deserialize(stream);
         stream.Close();
 
-        BaseLoad(collection, Vector3.zero, additiveMode: false);
-        Debug.Log("Loaded Successfully");
+        return collection;
     }
 
     public void LoadAdditive(TextAsset saveAsset, Vector3 offset)
