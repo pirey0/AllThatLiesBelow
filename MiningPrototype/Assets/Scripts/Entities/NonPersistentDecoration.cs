@@ -26,16 +26,41 @@ public class NonPersistentDecoration : MirrorWorldFollower, INonPersistantSavabl
         data.Position = new SerializedVector3(transform.position);
         data.Rotation = new SerializedVector3(transform.eulerAngles);
         data.SpawnableIDType = SpawnableIDType.Decoration;
-        int index = (sprites.Contains(spriteRenderer.sprite)) ? sprites.IndexOf(spriteRenderer.sprite) : 0;
-        data.index = index;
+
+        if (IsDefined(spriteRenderer.sprite))
+        {
+            data.index = sprites.IndexOf(spriteRenderer.sprite);
+        }
+        else
+        {
+            data.index = -1;
+            Debug.LogError("No index defined for " + spriteRenderer.sprite.name);
+        }
         return data;
+    }
+
+    public bool IsDefined(Sprite sprite)
+    {
+        foreach (var s in sprites)
+        {
+            if (sprite.Equals(s))
+                return true;
+        }
+        return false;
     }
 
     public void Load(SpawnableSaveData dataOr)
     {
         if (dataOr is NonPersistentDecorationSaveData data)
         {
-            spriteRenderer.sprite = sprites[data.index];
+            if (data.index < 0)
+            {
+                Debug.Log("Decoration: invalid index");
+            }
+            else
+            {
+                spriteRenderer.sprite = sprites[data.index];
+            }
         }
     }
 
