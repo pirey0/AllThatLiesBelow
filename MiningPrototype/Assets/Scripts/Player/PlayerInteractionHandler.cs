@@ -77,7 +77,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         }
 
         //Stop interacting when too far away
-        if (CurrentInteractableIsValid() && Vector3.Distance(transform.position, currentInteractable.GetPosition()) > settings.maxInteractableDistance)
+        if (CurrentInteractableIsValid() && Vector3.Distance(transform.position, currentInteractable.gameObject.transform.position) > settings.maxInteractableDistance)
         {
             TryStopInteracting();
         }
@@ -210,12 +210,19 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
                 continue;
 
             //begin interaction
-            if (hit.transform.TryGetComponent(out IInteractable interactable))
+            if (hit.transform.TryGetComponent(out IBaseInteractable baseInteractable))
             {
-                if (hover != null)
-                    hover.HoverExit();
-                StartInteractionWith(interactable);
-                break;
+                if(baseInteractable is IInteractable interactable1)
+                {
+                    if (hover != null)
+                        hover.HoverExit();
+                    StartInteractionWith(interactable1);
+                    break;
+                }
+                else
+                {
+                    baseInteractable.BeginInteracting(gameObject);
+                }
             }
         }
     }

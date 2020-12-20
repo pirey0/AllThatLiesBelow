@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lift : TilemapCarvingEntity, INonPersistantSavable
+public class Lift : TilemapCarvingEntity, IBaseInteractable, INonPersistantSavable
 {
     [SerializeField] LiftCage cage;
     [SerializeField] LineRenderer lineRenderer;
+    [SerializeField] new BoxCollider2D collider;
+    [SerializeField] AudioSource callSource;
 
     int height;
 
@@ -33,14 +35,17 @@ public class Lift : TilemapCarvingEntity, INonPersistantSavable
             int c = MapHelper.AirTileCount(map, new Vector2Int(gridPos.x + x, gridPos.y - 2), Direction.Down);
             Util.DebugDrawTile(new Vector2Int(gridPos.x + x, gridPos.y - 2), Color.yellow, 1f);
 
-            if(c < min)
+            if (c < min)
                 min = c;
         }
 
         height = min;
 
         lineRenderer.positionCount = 2;
-        lineRenderer.SetPositions(new Vector3[] {transform.position, transform.position + Vector3.down*height});
+        lineRenderer.SetPositions(new Vector3[] { transform.position, transform.position + Vector3.down * height });
+        collider.size = new Vector2(1, height);
+        collider.offset = new Vector2(0, -0.5f - height / 2);
+
     }
     public override void OnTileChanged(int x, int y, TileUpdateReason reason)
     {
@@ -65,6 +70,20 @@ public class Lift : TilemapCarvingEntity, INonPersistantSavable
         data.SpawnableIDType = SpawnableIDType.Lift;
         cage.SaveTo(data);
         return data;
+    }
+
+    public void BeginInteracting(GameObject interactor)
+    {
+        if (cage.CanBeCalled())
+        {
+            Debug.Log("Called Lift");
+            cage.CallTo(interactor.transform.position.y);
+            callSource.Play();
+        }
+        else
+        {
+            Debug.Log("Cannot call Lift when being used");
+        }
     }
 
     [System.Serializable]

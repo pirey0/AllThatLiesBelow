@@ -28,6 +28,7 @@ public class LiftCage : MonoBehaviour, IVehicle
     [SerializeField] AudioSource movingUpAndDownSound, engineSound, startSound, stopSound;
     [SerializeField] ParticleSystem smokeParticles;
     [SerializeField] Lift lift;
+    [SerializeField] new Rigidbody2D rigidbody;
 
     [Header("Settings")]
     [SerializeField] float acceleration = 2;
@@ -42,6 +43,10 @@ public class LiftCage : MonoBehaviour, IVehicle
     Vector3 oldPosition;
     ParentedCameraShake cameraShake;
     float liftVelocity = 0;
+
+    bool playerInControl;
+    bool goingToTarget;
+    float yTarget;
 
     LiftState State
     {
@@ -111,18 +116,17 @@ public class LiftCage : MonoBehaviour, IVehicle
         lift.RecalcuateHeight();
         maxLength = lift.GetHeight() - 1f;
 
-        while (!Util.IsNullOrDestroyed(player) || liftVelocity != 0)
+        while (!Util.IsNullOrDestroyed(player) || liftVelocity != 0 || goingToTarget)
         {
             Direction input = GetInput().Inverse();
 
             if (state == LiftState.Inactive && input != Direction.None)
             {
                 State = LiftState.Active;
-                Debug.Log("YO: " + input);
                 if (input == Direction.Up) //Recalculate max height when starting to move down
                 {
                     lift.RecalcuateHeight();
-                    maxLength = lift.GetHeight() -1f;
+                    maxLength = lift.GetHeight() - 1f;
                 }
 
             }
@@ -131,9 +135,28 @@ public class LiftCage : MonoBehaviour, IVehicle
                 State = LiftState.Inactive;
             }
 
+            if (goingToTarget)
+            {
+                float dist = Mathf.Abs(yTarget - transform.position.y);
+                if (dist < 1)
+                {
+                    goingToTarget = false;
+                    State = LiftState.Inactive;
+                }
+                Debug.Log("Dist: " + dist);
+            }
+
+            if (rigidbody.IsSleeping())
+            {
+                rigidbody.WakeUp();
+            }
+
             MovingUpdate(input);
             yield return null;
         }
+
+        State = LiftState.Inactive;
+        MovingUpdate(Direction.None);
     }
 
     private void MovingUpdate(Direction direction)
@@ -202,15 +225,20 @@ public class LiftCage : MonoBehaviour, IVehicle
         //Update distanceJoint
         distanceJoint.distance += Time.deltaTime * liftVelocity;
 
+        //reached top
         if (distanceJoint.distance < minLength)
         {
             distanceJoint.distance = minLength;
             liftVelocity = 0;
+
+            goingToTarget = false;
         }
+        //reached bottom
         else if (distanceJoint.distance > maxLength)
         {
             distanceJoint.distance = maxLength;
             liftVelocity = 0;
+            goingToTarget = false;
         }
 
 
@@ -240,9 +268,18 @@ public class LiftCage : MonoBehaviour, IVehicle
 
     private Direction GetInput()
     {
-        if (player == null)
-            return Direction.None;
-        float vert = player.GetVerticalInputRaw();
+
+        float vert = 0;
+        if (goingToTarget)
+        {
+            vert = yTarget - transform.position.y;
+        }
+        else
+        {
+            if (player == null)
+                return Direction.None;
+            vert = player.GetVerticalInputRaw();
+        }
 
         if (vert > 0)
             return Direction.Up;
@@ -270,8 +307,23 @@ public class LiftCage : MonoBehaviour, IVehicle
         return false;
     }
 
+    public void CallTo(float yTarget)
+    {
+        this.yTarget = yTarget;
+        goingToTarget = true;
+        StopAllCoroutines();
+        StartCoroutine(MoveRoutine());
+    }
+
+    public bool CanBeCalled()
+    {
+        return !playerInControl;
+    }
+
     public void EnteredBy(PlayerStateMachine player)
     {
+        goingToTarget = false;
+        playerInControl = true;
         StopAllCoroutines();
         StartCoroutine(MoveRoutine());
         player.transform.parent = transform;
@@ -280,7 +332,7 @@ public class LiftCage : MonoBehaviour, IVehicle
 
     public void LeftBy(PlayerStateMachine player)
     {
-
+        playerInControl = false;
         player.transform.parent = null;
         Debug.Log("Player left " + this.name);
     }

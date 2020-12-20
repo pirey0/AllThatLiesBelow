@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IInteractable
+public interface IInteractable : IBaseInteractable
 {
-    void BeginInteracting(GameObject interactor);
     void EndInteracting(GameObject interactor);
 
     void SubscribeToForceQuit(System.Action action);
     void UnsubscribeToForceQuit(System.Action action);
 
-    Vector3 GetPosition();
-
     GameObject gameObject { get; }
+}
+
+public interface IBaseInteractable
+{
+    void BeginInteracting(GameObject interactor);
 }
