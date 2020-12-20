@@ -20,6 +20,7 @@ public class PhysicalTile : MineableObject, IEntity
     private RuntimeProceduralMap generator;
     Tile tile;
     TileInfo info;
+    bool placed;
 
     public void Setup(RuntimeProceduralMap testGeneration, Tile tile, TileInfo info)
     {
@@ -75,16 +76,22 @@ public class PhysicalTile : MineableObject, IEntity
         }
         else if (collision.transform.TryGetComponent(out ITileMapElement element))
         {
-            var position = transform.position.ToGridPosition();
+            if (!placed)
+            {
+                var position = transform.position.ToGridPosition();
 
-            if (generator.IsBlockAt(position.x, position.y))
-                position.y += 1;
+                if (generator.IsBlockAt(position.x, position.y))
+                    position.y += 1;
 
-            generator.SetMapAt(position.x, position.y, tile, TileUpdateReason.Place);
+                generator.SetMapAt(position.x, position.y, tile, TileUpdateReason.Place);
 
-            Util.DebugDrawTile(position, Color.green, 2);
-            Instantiate(onLandEffects);
-            Destroy(gameObject);
+                Util.DebugDrawTile(position, Color.green, 2);
+                if (onLandEffects != null)
+                    Instantiate(onLandEffects);
+
+                Destroy(gameObject);
+                placed = true;
+            }
         }
     }
 
