@@ -15,6 +15,8 @@ public class PlayerInventoryOpener : Button, IDropReceiver
     [Zenject.Inject] PlayerInteractionHandler playerInteractionHandler;
     [Zenject.Inject] CameraController cameraController;
 
+    private bool isBlinking;
+
     protected override void Start()
     {
         bagMaterial = new Material(targetGraphic.material);
@@ -48,12 +50,14 @@ public class PlayerInventoryOpener : Button, IDropReceiver
     {
         StopBlinking();
         StartCoroutine(BliningRoutine());
+        isBlinking = true;
     }
 
     public void StopBlinking()
     {
         StopAllCoroutines();
         bagMaterial.SetColor("_OverlayColor", new Color(0, 0, 0, 0));
+        isBlinking = false;
     }
 
     IEnumerator BliningRoutine()
@@ -92,6 +96,9 @@ public class PlayerInventoryOpener : Button, IDropReceiver
     private void UpdateSprite(InventoryState inventoryState)
     {
         (targetGraphic as Image).sprite = inventoryState == InventoryState.Open ? open : closed;
+
+        if (isBlinking && inventoryState == InventoryState.Open)
+            StopBlinking();
     }
 
     public override void OnPointerEnter(PointerEventData eventData)
@@ -102,13 +109,12 @@ public class PlayerInventoryOpener : Button, IDropReceiver
 
     public override void OnPointerExit(PointerEventData eventData)
     {
-        bagMaterial.color = new Color(0,0,0,0);
+        bagMaterial.color = new Color(0, 0, 0, 0);
         base.OnPointerExit(eventData);
     }
 
     public override void OnPointerDown(PointerEventData eventData)
     {
-        StopBlinking();
         playerInteractionHandler.ToggleInventory();
     }
 
