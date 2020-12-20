@@ -50,6 +50,7 @@ public class RuntimeProceduralMap : RenderedMap
     List<UnstableTile> unstableTiles = new List<UnstableTile>();
 
     public event System.Action<MirrorState> MirrorSideChanged;
+    public event System.Action<TileType> MinedBlock;
 
     public static RuntimeProceduralMap Instance { get => instance; }
 
@@ -179,9 +180,12 @@ public class RuntimeProceduralMap : RenderedMap
         if (damageType == DamageType.Mining)
         {
             TileInfo info = GetTileInfo(t.Type);
-
             if (info.ItemToDrop != ItemType.None)
+            {
                 inventoryManager.PlayerCollects(info.ItemToDrop, 1);
+            }
+
+            MinedBlock?.Invoke(t.Type);
         }
     }
 
@@ -265,7 +269,7 @@ public class RuntimeProceduralMap : RenderedMap
 
         Tile tile = this[t.Location];
         tile.Unstable = false;
-        this[t.Location] = tile;     
+        this[t.Location] = tile;
     }
 
     public void SetReceiverMapAt(int x, int y, ITileUpdateReceiver receiver)

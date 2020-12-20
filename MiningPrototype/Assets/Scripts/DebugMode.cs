@@ -19,6 +19,7 @@ public class DebugMode : MonoBehaviour
     [Inject] CameraController cameraController;
     [Inject] RuntimeProceduralMap map;
     [Inject] PrefabFactory factory;
+    [Inject] StatsTracker statsTracker;
 
     Texture2D debugTex;
     bool open;
@@ -44,6 +45,8 @@ public class DebugMode : MonoBehaviour
         DebugLogConsole.AddCommandInstance("/showMap", "Visualizes the Map", "ShowMap", this);
         DebugLogConsole.AddCommandInstance("/showAdditiveMap", "Visualizes the Map", "ShowAdditiveMap", this);
         DebugLogConsole.AddCommandInstance("/chopper", "Spawn a Chopper", "SpawnChopper", this);
+        DebugLogConsole.AddCommandInstance("/stats", "Logs the stats", "LogStats", this);
+
     }
 
     private void Update()
@@ -103,6 +106,11 @@ public class DebugMode : MonoBehaviour
             debugTex.Apply();
             GUI.DrawTexture(new Rect(Screen.width - debugTex.width * 3, 0, debugTex.width * 3, debugTex.height * 3), debugTex);
         }
+    }
+
+    private void LogStats()
+    {
+        statsTracker.LogToConsole();
     }
 
     private void SpawnChopper()
