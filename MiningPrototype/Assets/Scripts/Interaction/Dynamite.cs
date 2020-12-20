@@ -33,13 +33,16 @@ public class Dynamite : MonoBehaviour
         }
 
         var cs = Physics2D.CircleCastAll(transform.position, destroyEntitySize, Vector2.zero);
-        foreach (var collider in cs)
+        foreach (var hit in cs)
         {
-            if (collider.transform.TryGetComponent(out TilemapCarvingEntity entity))
+            if (hit.collider.isTrigger)
+                continue;
+
+            if (hit.transform.TryGetComponent(out TilemapCarvingEntity entity))
             {
                 entity.UncarveDestroy();
             }
-            else if (collider.transform.TryGetComponent(out PlayerStateMachine player))
+            else if (hit.transform.TryGetComponent(out PlayerStateMachine player))
             {
                 player.TakeDamage(DamageStrength.Strong);
             }

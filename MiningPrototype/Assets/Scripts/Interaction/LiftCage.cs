@@ -141,9 +141,7 @@ public class LiftCage : MonoBehaviour, IVehicle
                 if (dist < 1)
                 {
                     goingToTarget = false;
-                    State = LiftState.Inactive;
                 }
-                Debug.Log("Dist: " + dist);
             }
 
             if (rigidbody.IsSleeping())
@@ -155,6 +153,7 @@ public class LiftCage : MonoBehaviour, IVehicle
             yield return null;
         }
 
+        //Reset before end
         State = LiftState.Inactive;
         MovingUpdate(Direction.None);
     }
