@@ -74,7 +74,7 @@ public class Rock : FallingTilemapCarvingEntity
     {
         float speed = collision.relativeVelocity.magnitude;
 
-        if (!rockSmashing.isPlaying && speed >= 7 && transform.position.y > collision.transform.position.y)
+        if (!rockSmashing.isPlaying && speed >= destructionSpeed && transform.position.y > collision.transform.position.y)
         {
             rockSmashing.Play();
             cameraController.Shake(transform.position, CameraShakeType.explosion, 0.25f, 16f);
