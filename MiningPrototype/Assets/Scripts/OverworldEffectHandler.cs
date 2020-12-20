@@ -58,7 +58,7 @@ public class OverworldEffectHandler : StateListenerBehaviour
             hut.OnHutStateChange -= OnHutStateChange;
     }
 
-    private void OnMirrorSideChanged(RuntimeProceduralMap.MirrorState newState)
+    public void OnMirrorSideChanged(RuntimeProceduralMap.MirrorState newState)
     {
         mirrorState = newState;
         if (mirrorState == RuntimeProceduralMap.MirrorState.Left)

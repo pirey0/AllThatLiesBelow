@@ -61,6 +61,7 @@ public class Intro : StateListenerBehaviour
         introLight.intensity = 0.8f;
         effectHandler.SetNight();
         effectHandler.SetSnowAmount(3);
+        effectHandler.OnMirrorSideChanged(RuntimeProceduralMap.MirrorState.Right);
         player.CanDig = false;
         player.InCinematicMode = true;
         player.CinematicSlowWalk = true;
