@@ -11,8 +11,7 @@
 //An empty line indicates the start of a new kernel
 //You can have multiple empty lines between kernels
 
-//This kernel represents a Solid surrounded by 8 Air, the center tile will crumble
-000
+//This kernel represents a Solid surrounded by 8 Air, the center tile will crumble, where the corners could be anything
+A0A
 0S0
-000
-
+A0A
