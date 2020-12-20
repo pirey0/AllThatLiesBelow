@@ -30,7 +30,7 @@ public class Lift : TilemapCarvingEntity, INonPersistantSavable
 
         for (int x = -1; x <= 2; x++)
         {
-            int c = MapHelper.AirTileCount(map, new Vector2Int(gridPos.x + x, gridPos.y - 2), Direction.Down, false);
+            int c = MapHelper.AirTileCount(map, new Vector2Int(gridPos.x + x, gridPos.y - 2), Direction.Down);
             Util.DebugDrawTile(new Vector2Int(gridPos.x + x, gridPos.y - 2), Color.yellow, 1f);
 
             if(c < min)

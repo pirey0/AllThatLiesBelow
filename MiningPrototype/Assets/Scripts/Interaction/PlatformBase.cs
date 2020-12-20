@@ -23,8 +23,8 @@ public abstract class PlatformBase : TilemapCarvingEntity
 
     public (Direction, int) CalculatePlacement()
     {
-        int wL = MapHelper.AirTileCount(RuntimeProceduralMap.Instance, transform.position.ToGridPosition(), Direction.Left, entitiesAsAir: false);
-        int wR = MapHelper.AirTileCount(RuntimeProceduralMap.Instance, transform.position.ToGridPosition(), Direction.Right, entitiesAsAir: false);
+        int wL = MapHelper.AirTileCount(RuntimeProceduralMap.Instance, transform.position.ToGridPosition(), Direction.Left);
+        int wR = MapHelper.AirTileCount(RuntimeProceduralMap.Instance, transform.position.ToGridPosition(), Direction.Right);
 
         Direction dir = wL > wR ? Direction.Left : Direction.Right;
         int size = Mathf.Max(wL, wR);

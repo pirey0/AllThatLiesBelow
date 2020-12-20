@@ -10,29 +10,43 @@ public class Rope : TilemapCarvingEntity, IClimbable
     [SerializeField] float delayBetweenHeightIncrease;
 
     int height = 0;
+    int visualHeight = 0;
 
     private void Start()
     {
+        UpdateHeight();
+    }
+
+    private void UpdateHeight()
+    {
+        height = MapHelper.AirTileCount(map, (transform.position + Vector3.down).ToGridPosition(), Direction.Down, TileType.Rope);
+        SetTilesToOccupy();
         StartCoroutine(AdaptHeightRoutine());
         Carve();
     }
 
     IEnumerator AdaptHeightRoutine()
     {
-        int height = MapHelper.AirTileCount(map, (transform.position + Vector3.down).ToGridPosition(), Direction.Down, entitiesAsAir: true);
-
-        int i = 0;
-        while (i < height)
+        while (visualHeight < height)
         {
-            i++;
-            SetHeight(i);
+            visualHeight++;
+            SetHeight(visualHeight);
             yield return new WaitForSeconds(delayBetweenHeightIncrease);
+        }
+    }
+
+    private void SetTilesToOccupy()
+    {
+        tilesToOccupy = new TileOffsetTypePair[height];
+        for (int i = 0; i < height; i++)
+        {
+            Vector2Int pos = new Vector2Int(0, -i - 1);
+            tilesToOccupy[i] = new TileOffsetTypePair(pos, TileType.Rope);
         }
     }
 
     private void SetHeight(int newHeight)
     {
-        height = newHeight;
         boxCollider2D.size = new Vector2(boxCollider2D.size.x, newHeight);
         boxCollider2D.offset = new Vector2(0, -newHeight / 2);
         spriteRenderer.size = new Vector2(spriteRenderer.size.x, newHeight);
@@ -48,10 +62,20 @@ public class Rope : TilemapCarvingEntity, IClimbable
 
     public override void OnTileUpdated(int x, int y)
     {
-        Util.DebugDrawTile(new Vector2Int(x, y + 1));
-        if (RuntimeProceduralMap.Instance.IsAirAt(x, y + 1))
+        if (isbeingDestroyed)
+            return;
+
+        Vector2Int pos = transform.position.ToGridPosition();
+        Util.DebugDrawTile(pos + new Vector2Int(0, -height - 1));
+
+        if (RuntimeProceduralMap.Instance.IsAirAt(pos.x, pos.y))
         {
             UncarveDestroy();
+        }
+        else if (RuntimeProceduralMap.Instance.IsAirAt(pos.x, pos.y - height - 1))
+        {
+            Debug.Log("AAAAAAAAAAA");
+            UpdateHeight();
         }
     }
 

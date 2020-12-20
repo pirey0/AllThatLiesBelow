@@ -14,6 +14,7 @@ public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateRec
     [Zenject.Inject] protected RuntimeProceduralMap map;
 
     Vector2Int tilemapPos = new Vector2Int(-1, -1);
+    protected bool isbeingDestroyed;
 
     public BaseMap TileMap { get; private set; }
 
@@ -48,6 +49,7 @@ public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateRec
     {
         if (this != null)
         {
+            isbeingDestroyed = true;
             UnCarvePrevious();
             Destroy(gameObject);
             if (drop.IsValid())
