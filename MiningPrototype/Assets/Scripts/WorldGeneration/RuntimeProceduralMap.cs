@@ -249,8 +249,6 @@ public class RuntimeProceduralMap : RenderedMap
         if (i >= 0)
         {
             RemoveUnstableTileAt(i);
-            t.Unstable = false;
-            this[loc] = t;
         }
     }
 
@@ -264,6 +262,10 @@ public class RuntimeProceduralMap : RenderedMap
         var t = unstableTiles[i];
         Destroy(t.Effects);
         unstableTiles.RemoveAt(i);
+
+        Tile tile = this[t.Location];
+        tile.Unstable = false;
+        this[t.Location] = tile;     
     }
 
     public void SetReceiverMapAt(int x, int y, ITileUpdateReceiver receiver)
