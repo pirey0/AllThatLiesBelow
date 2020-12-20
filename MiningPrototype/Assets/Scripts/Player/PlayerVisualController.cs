@@ -78,15 +78,18 @@ public class PlayerVisualController : MonoBehaviour
                     break;
             }
 
-            switch (visState.HeadState)
+            if (headAnimator != null)
             {
-                case HeadState.Integrated:
-                    headAnimator.enabled = false;
-                    break;
+                switch (visState.HeadState)
+                {
+                    case HeadState.Integrated:
+                        headAnimator.enabled = false;
+                        break;
 
-                case HeadState.Dynamic:
-                    headAnimator.enabled = true;
-                    break;
+                    case HeadState.Dynamic:
+                        headAnimator.enabled = true;
+                        break;
+                }
             }
 
             switch (visState.HandsState)
@@ -128,7 +131,8 @@ public class PlayerVisualController : MonoBehaviour
             }
 
             //show walk effects if the player is walking on the ground while not beeing disabled
-            playerWalkEffects.SetEffects(player.IsMoving() && player.IsGrounded() && visState.StateName != "Disabled");
+            if (playerWalkEffects != null)
+                playerWalkEffects.SetEffects(player.IsMoving() && player.IsGrounded() && visState.StateName != "Disabled");
         }
         else
         {
