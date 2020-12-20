@@ -131,6 +131,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         else
         {
             gridDigTarget = null;
+            TryDisableMiningVisuals();
         }
 
         UpdateDigHighlight();
