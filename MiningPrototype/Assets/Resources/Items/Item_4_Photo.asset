@@ -10,24 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5b4e36afc74fff4f82cd40fcf05b7bc, type: 3}
-  m_Name: ItemLetterFromFamily
+  m_Name: Item_4_Photo
   m_EditorClassIdentifier: 
-  ItemType: 8
-  DisplayName: Family Letter
-  DisplayTooltip: A letter from my wife.
-  DisplaySprite: {fileID: 21300000, guid: 0d6d1ee0315ae1f41997aaa1a79a51f1, type: 3}
-  DisplaySpriteRead: {fileID: 21300000, guid: 35c3a92e197d60443aa96dae19542c71, type: 3}
+  ItemType: 4
+  DisplayName: Family Photo
+  DisplayTooltip: A old picture taken in the times before.
+  DisplaySprite: {fileID: 21300000, guid: 211715158c34453448a58bb258537f0b, type: 3}
+  DisplaySpriteRead: {fileID: 0}
   Weight: 0
   CanBePlaced: 0
   PickupHoldSprite: {fileID: 0}
+  PickupHoldOffset: {x: 0, y: 0}
   PickupPreviewPrefab: {fileID: 0}
   Prefab: {fileID: 0}
-  AmountIsUniqueID: 1
+  AmountIsUniqueID: 0
   IsBurnable: 1
   AltarWords:
-  - Letter
-  - Support
-  - Love
-  - Care
-  - Return
-  - Waiting
+  - Photo
+  - Family
+  - Memory
+  - Remember
+  - Impression
+  - Copy
+  - Shadow

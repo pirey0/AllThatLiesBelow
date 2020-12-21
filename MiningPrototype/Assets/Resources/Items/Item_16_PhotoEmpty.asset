@@ -10,23 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5b4e36afc74fff4f82cd40fcf05b7bc, type: 3}
-  m_Name: ItemLetterToFamily
+  m_Name: Item_16_PhotoEmpty
   m_EditorClassIdentifier: 
-  ItemType: 9
-  DisplayName: Letter To Family
-  DisplayTooltip: A letter for my wife.
-  DisplaySprite: {fileID: 21300000, guid: f5cb6fb70ca550b42acad97c896cc2a9, type: 3}
+  ItemType: 16
+  DisplayName: Photo
+  DisplayTooltip: An old picture showing nothing.
+  DisplaySprite: {fileID: 21300000, guid: 3c283c656fdfbf044a27d4e175e35d2e, type: 3}
   DisplaySpriteRead: {fileID: 0}
   Weight: 0
   CanBePlaced: 0
   PickupHoldSprite: {fileID: 0}
+  PickupHoldOffset: {x: 0, y: 0}
   PickupPreviewPrefab: {fileID: 0}
   Prefab: {fileID: 0}
   AmountIsUniqueID: 0
   IsBurnable: 1
   AltarWords:
-  - Words
-  - Written
-  - Writing
-  - Hope
-  - Send
+  - Photo
+  - Family
+  - loved ones

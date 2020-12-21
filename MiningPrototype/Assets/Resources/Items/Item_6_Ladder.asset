@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5b4e36afc74fff4f82cd40fcf05b7bc, type: 3}
-  m_Name: ItemLadder
+  m_Name: Item_6_Ladder
   m_EditorClassIdentifier: 
   ItemType: 6
   DisplayName: Ladder
@@ -20,6 +20,7 @@ MonoBehaviour:
   Weight: 5
   CanBePlaced: 1
   PickupHoldSprite: {fileID: 21300000, guid: 49e17535157056a4b94e3a0c95f39128, type: 3}
+  PickupHoldOffset: {x: 0, y: 0}
   PickupPreviewPrefab: {fileID: 6369931557817311939, guid: 39c2e1bfc4f40d3448cb204f0d74b778, type: 3}
   Prefab: {fileID: 8917149696465416293, guid: 7905d4868be102248905c1000633a8f3, type: 3}
   AmountIsUniqueID: 0

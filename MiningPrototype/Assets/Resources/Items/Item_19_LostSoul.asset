@@ -10,22 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5b4e36afc74fff4f82cd40fcf05b7bc, type: 3}
-  m_Name: ItemLog
+  m_Name: Item_19_LostSoul
   m_EditorClassIdentifier: 
-  ItemType: 21
-  DisplayName: Planks
-  DisplayTooltip: Just wood
-  DisplaySprite: {fileID: 21300000, guid: 0d4bd0d0439dd304099efa6af35005fe, type: 3}
+  ItemType: 19
+  DisplayName: Echo
+  DisplayTooltip: Close to your ear you can here them whimper.
+  DisplaySprite: {fileID: 21300000, guid: 7ae1eed70e321a746bfd8748a0b82358, type: 3}
   DisplaySpriteRead: {fileID: 0}
-  Weight: 4
+  Weight: 0
   CanBePlaced: 0
   PickupHoldSprite: {fileID: 0}
   PickupHoldOffset: {x: 0, y: 0}
   PickupPreviewPrefab: {fileID: 0}
   Prefab: {fileID: 0}
   AmountIsUniqueID: 0
-  IsBurnable: 1
+  IsBurnable: 0
   AltarWords:
-  - Wood
-  - Tree
-  - Log
+  - Lost
+  - Echo
+  - Whimper
+  - Failed
+  - Weak

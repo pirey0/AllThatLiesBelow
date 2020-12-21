@@ -10,22 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5b4e36afc74fff4f82cd40fcf05b7bc, type: 3}
-  m_Name: ItemGold
+  m_Name: Item_0_None
   m_EditorClassIdentifier: 
-  ItemType: 2
-  DisplayName: Gold
-  DisplayTooltip: 
-  DisplaySprite: {fileID: -6116963357262179218, guid: 1b3b3d6561f0d954d99699f1e3ebafa9, type: 3}
+  ItemType: 0
+  DisplayName: None
+  DisplayTooltip: Undefined
+  DisplaySprite: {fileID: 7278335179177953182, guid: 1d76148694f11da428d7eaabb15fe017, type: 3}
   DisplaySpriteRead: {fileID: 0}
-  Weight: 10
+  Weight: 0
   CanBePlaced: 0
   PickupHoldSprite: {fileID: 0}
+  PickupHoldOffset: {x: 0, y: 0}
   PickupPreviewPrefab: {fileID: 0}
   Prefab: {fileID: 0}
   AmountIsUniqueID: 0
-  AltarWords:
-  - Gold
-  - Golden
-  - Valuable
-  - Heavy
-  - Greed
+  IsBurnable: 0
+  AltarWords: []

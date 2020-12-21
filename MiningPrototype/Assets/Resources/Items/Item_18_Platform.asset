@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5b4e36afc74fff4f82cd40fcf05b7bc, type: 3}
-  m_Name: ItemChest
+  m_Name: Item_18_Platform
   m_EditorClassIdentifier: 
-  ItemType: 12
-  DisplayName: Chest
-  DisplayTooltip: Can be used to store items.
-  DisplaySprite: {fileID: 5045073161074915229, guid: eb18a1feb1c0b324da6e2b9e4d525a9f, type: 3}
+  ItemType: 18
+  DisplayName: Platform
+  DisplayTooltip: 
+  DisplaySprite: {fileID: -8835149551459108778, guid: f132973b45bf13c4bbb7007ca5dee632, type: 3}
   DisplaySpriteRead: {fileID: 0}
-  Weight: 20
+  Weight: 1
   CanBePlaced: 1
-  PickupHoldSprite: {fileID: 5045073161074915229, guid: eb18a1feb1c0b324da6e2b9e4d525a9f, type: 3}
+  PickupHoldSprite: {fileID: -8835149551459108778, guid: f132973b45bf13c4bbb7007ca5dee632, type: 3}
   PickupHoldOffset: {x: 0, y: 1}
-  PickupPreviewPrefab: {fileID: 1009183223787601176, guid: 254920aeba8ed7a49b0b8602c4a2690e, type: 3}
-  Prefab: {fileID: 8202015808849809410, guid: af25004c71045464289d856608c19387, type: 3}
+  PickupPreviewPrefab: {fileID: 4863552724862687380, guid: aee2c6183ab00b341a8d45bf2d4f4f0a, type: 3}
+  Prefab: {fileID: 5000783938460949122, guid: 68b0ad140ae4f47438b8d6d729f88471, type: 3}
   AmountIsUniqueID: 0
   IsBurnable: 1
   AltarWords: []
