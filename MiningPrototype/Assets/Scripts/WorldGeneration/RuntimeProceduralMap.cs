@@ -344,7 +344,7 @@ public class RuntimeProceduralMap : RenderedMap
 
     private void TryPlaceRock(RockPass pass, int y)
     {
-        int x = UnityEngine.Random.Range(0, SizeX);
+        int x = UnityEngine.Random.Range(0, SizeX - 1);
 
         List<Vector2Int> locations = new List<Vector2Int>();
         List<Vector2Int> spawnCheckLocations = new List<Vector2Int>();
