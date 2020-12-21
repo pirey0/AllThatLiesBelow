@@ -11,6 +11,9 @@ public class Crate : MineableObject, INonPersistantSavable
 
     [SerializeField] Sprite[] crateSprites;
 
+    [SerializeField] float speedToLandSound;
+    [SerializeField] AudioSource landSound;
+
     private void Start()
     {
         SetupCrate();
@@ -28,7 +31,7 @@ public class Crate : MineableObject, INonPersistantSavable
         spriteRenderer.sprite = crateSprites[(int)crateType];
         BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
         boxCollider.size = spriteRenderer.bounds.size;
-        boxCollider.offset = (spriteRenderer.bounds.center-transform.position);
+        boxCollider.offset = (spriteRenderer.bounds.center - transform.position);
         transform.rotation = rot;
     }
 
@@ -36,6 +39,17 @@ public class Crate : MineableObject, INonPersistantSavable
     {
         contains = toPack;
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        float speed = Mathf.Abs(collision.relativeVelocity.y);
+        if (speed > speedToLandSound)
+        {
+            if (!landSound.isPlaying)
+                landSound.Play();
+        }
+    }
+
     public override Vector2 GetPosition()
     {
         if (overlayAnimator != null)
@@ -57,7 +71,7 @@ public class Crate : MineableObject, INonPersistantSavable
 
     public void Load(SpawnableSaveData dataOr)
     {
-        if(dataOr is CrateSaveData data)
+        if (dataOr is CrateSaveData data)
         {
             crateType = data.Type;
             contains = data.Content;
