@@ -14,6 +14,7 @@ public enum CameraShakeType
 public class CameraShaker : MonoBehaviour
 {
     Vector2 shakeAmount = Vector2.zero;
+    [SerializeField] float shakeMultiplyer = 0.1f;
     [SerializeField] AnimationCurve hill;
     [SerializeField] AnimationCurve explosion;
     [SerializeField] AnimationCurve raising;
@@ -77,8 +78,7 @@ public class CameraShaker : MonoBehaviour
 
             if (intensity > 0)
             {
-                intensity *= 10 * Time.deltaTime;
-                shakeAmount = Vector2.MoveTowards(Vector2.zero, new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)), intensity);
+                shakeAmount = Vector2.MoveTowards(Vector2.zero, new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)), intensity * shakeMultiplyer);
             }
             else
             {
