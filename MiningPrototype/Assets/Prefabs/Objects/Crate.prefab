@@ -136,6 +136,7 @@ MonoBehaviour:
     amount: 5
   destroyEffects: {fileID: 4888635124280202427, guid: c7333c0e8139a984db63c0ab6a7f05ac, type: 3}
   spriteRenderer: {fileID: 1248040165442377592}
+  inventoryOwner: {fileID: 9155730990501154388}
   crateType: 0
   crateSprites:
   - {fileID: 2958523863171369250, guid: b6aa7f742987cdd47b948d2b191619a6, type: 3}
@@ -145,6 +146,39 @@ MonoBehaviour:
   - {fileID: -7068887109631265336, guid: b6aa7f742987cdd47b948d2b191619a6, type: 3}
   speedToLandSound: 3
   landSound: {fileID: 1847240908458811006}
+--- !u!114 &8201463181402209003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6653240713815217932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df01105a907093e48993808b5c3fecd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: -6465566751694194690, guid: 9712f50582e773f48b3349bf1474009a, type: 3}
+--- !u!114 &9155730990501154388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6653240713815217932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c783d16e49e341341999246ac89ecb55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory:
+    allowStoreing: 0
+    content: []
+  inventoryVisualizerPrefab: {fileID: 8727063801762088802, guid: c396613fa9613cb4d8d82148ef5649a7, type: 3}
+  openSource: {fileID: 1847240908458811006}
+  receiveSource: {fileID: 0}
+  inventoryVisualizerUpdates: 0
+  isPlayerInventory: 0
 --- !u!1001 &6266148904577691169
 PrefabInstance:
   m_ObjectHideFlags: 0

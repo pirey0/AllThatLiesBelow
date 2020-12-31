@@ -6,6 +6,7 @@ using UnityEngine;
 public class Crate : MineableObject, INonPersistantSavable
 {
     [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] InventoryOwner inventoryOwner;
 
     [SerializeField] CrateType crateType;
 
@@ -37,7 +38,7 @@ public class Crate : MineableObject, INonPersistantSavable
 
     public void Pack(ItemAmountPair toPack)
     {
-        contains = toPack;
+        inventoryOwner.Inventory.Add(toPack);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -65,7 +66,10 @@ public class Crate : MineableObject, INonPersistantSavable
         data.Position = new SerializedVector3(transform.position);
         data.Rotation = new SerializedVector3(transform.eulerAngles);
         data.Type = crateType;
-        data.Content = contains;
+
+        if (inventoryOwner.Inventory.Count > 0)
+            data.Content = inventoryOwner.Inventory.GetContent()[0];
+
         return data;
     }
 
@@ -74,7 +78,10 @@ public class Crate : MineableObject, INonPersistantSavable
         if (dataOr is CrateSaveData data)
         {
             crateType = data.Type;
-            contains = data.Content;
+
+            if (data.Content != null)
+                inventoryOwner.Inventory.Add(data.Content);
+
             SetupCrate();
         }
     }
