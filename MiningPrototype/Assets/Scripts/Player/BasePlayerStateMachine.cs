@@ -14,6 +14,8 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
     [SerializeField] protected bool slowWalkMode;
     [SerializeField] bool debug;
 
+    [Zenject.Inject] DamageEffectHandler damageEffectHandler;
+
     StateMachine stateMachine;
     StateMachine.State s_idle, s_crouchIdle, s_jump, s_fall, s_walk, s_slowWalk, s_crouchWalk, s_climb, s_climbIde, s_inventory, s_death, s_hit, s_longIdle, s_disabled, s_fallDeath;
     public event System.Action PlayerDeath;
@@ -583,10 +585,12 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         {
             case DamageStrength.Weak:
                 stateMachine.ForceTransitionTo(s_hit);
+                damageEffectHandler.TakeDamage(0.66f);
                 break;
 
             case DamageStrength.Strong:
                 stateMachine.ForceTransitionTo(s_death);
+                damageEffectHandler.TakeDamage(1f);
                 break;
         }
     }
