@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7411851746530757949}
   - component: {fileID: 7411851746530757950}
+  - component: {fileID: 1192140742037605851}
   - component: {fileID: 7411851746530757939}
   - component: {fileID: 7411851746530757948}
   - component: {fileID: -547285505541878336}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Skeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,17 +75,34 @@ SpriteRenderer:
   m_SortingLayerID: -1946261431
   m_SortingLayer: 9
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 676369cdd8f32444c9eda928709aefbd, type: 3}
+  m_Sprite: {fileID: 4594274849228886550, guid: 676369cdd8f32444c9eda928709aefbd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.875, y: 3}
+  m_Size: {x: 2, y: 2.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1192140742037605851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7411851746530757951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f9312a4f7e302f4c930cb35532ff85b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 4594274849228886550, guid: 676369cdd8f32444c9eda928709aefbd, type: 3}
+  - {fileID: 6380628624945961585, guid: 676369cdd8f32444c9eda928709aefbd, type: 3}
+  - {fileID: 7666252896568499027, guid: 676369cdd8f32444c9eda928709aefbd, type: 3}
+  - {fileID: 2090663768908118286, guid: 676369cdd8f32444c9eda928709aefbd, type: 3}
 --- !u!50 &7411851746530757939
 Rigidbody2D:
   serializedVersion: 4
@@ -119,18 +137,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.935}
+  m_Offset: {x: 0, y: 0.43659592}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.47826087, y: 0.083333336}
-    oldSize: {x: 2.875, y: 3}
-    newSize: {x: 2.875, y: 3}
+    pivot: {x: 0.5, y: 0.05}
+    oldSize: {x: 2, y: 2.5}
+    newSize: {x: 2, y: 2.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 2.12}
+  m_Size: {x: 1, y: 1.1231918}
   m_EdgeRadius: 0
 --- !u!114 &-547285505541878336
 MonoBehaviour:
