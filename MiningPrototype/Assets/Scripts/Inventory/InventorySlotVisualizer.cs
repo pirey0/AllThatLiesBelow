@@ -58,11 +58,11 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         {
             if (info.AmountIsUniqueID && readableItemHandler.HasRead(amount))
             {
-                icon.sprite = info.DisplaySpriteRead;
+                SetIconSprite(info.DisplaySpriteRead);
             }
             else
             {
-                icon.sprite = info.DisplaySprite;
+                SetIconSprite(info.DisplaySprite);
             }
         }
 
@@ -70,6 +70,12 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         {
             amountDisplay.text = amount.ToString();
         }
+    }
+
+    private void SetIconSprite(Sprite sprite)
+    {
+        (icon.transform as RectTransform).sizeDelta = new Vector2((float)sprite.rect.width / 8f, (float)sprite.rect.height / 8f);
+        icon.sprite = sprite;
     }
 
     public void Refresh()
