@@ -25,8 +25,8 @@ public class InventoryCollectDisplayElement : MonoBehaviour
     {
         var info = ItemsData.GetItemInfo(obj.type);
 
-        text.text = "+" + (info.AmountIsUniqueID ? 1 : obj.amount);
-        icon.sprite = ItemsData.GetSpriteByItemType(obj);
+        text.text = "+" + (info.AmountIsUniqueID ? 1 : obj.amount) + " " +  info.DisplayName;
+        //icon.sprite = ItemsData.GetSpriteByItemType(obj);
     }
 
     private IEnumerator FadeOut()
@@ -37,7 +37,7 @@ public class InventoryCollectDisplayElement : MonoBehaviour
         {
             Color c = new Color(text.color.r, text.color.g, text.color.b, fadeCurve.Evaluate(t / duration));
             text.color = c;
-            icon.color = c;
+            //icon.color = c;
             transform.position += new Vector3(0, moveSpeed * Time.deltaTime, 0);
 
             yield return null;
