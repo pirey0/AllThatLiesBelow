@@ -61,14 +61,12 @@ public class Inventory
 
     public bool Contains(ItemAmountPair pair)
     {
-        int id = GetStackIdFor(pair.type);
+        int id = GetStackIdFor(pair);
 
         if (id >= 0)
         {
             if (content[id].amount >= pair.amount)
-            {
                 return true;
-            }
         }
 
         return false;
@@ -108,7 +106,7 @@ public class Inventory
         }
         else
         {
-            int id = GetStackIdFor(pair.type);
+            int id = GetStackIdFor(pair);
             if (id >= 0)
             {
                 if (content[id].amount > pair.amount)
@@ -132,9 +130,12 @@ public class Inventory
         return false;
     }
 
-    private int GetStackIdFor(ItemType type)
+    private int GetStackIdFor(ItemAmountPair pair)
     {
-        return content.FindIndex((x) => x.type == type);
+        if (ItemsData.GetItemInfo(pair.type).AmountIsUniqueID)
+            return content.FindIndex((x) => x.type == pair.type && x.amount == pair.amount);
+        else
+            return content.FindIndex((x) => x.type == pair.type);
     }
 
     public ItemAmountPair RemoveStack(int index)
