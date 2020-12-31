@@ -80,6 +80,9 @@ TagManager:
   - name: VisibilityOverlay
     uniqueID: 1181598813
     locked: 0
+  - name: PlacingPreview
+    uniqueID: 664037351
+    locked: 0
   - name: Vignette
     uniqueID: 1237965333
     locked: 0

@@ -69,8 +69,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 2049621373
-  m_SortingLayer: 9
+  m_SortingLayerID: 664037351
+  m_SortingLayer: 14
   m_SortingOrder: 0
   m_Sprite: {fileID: 8724308943522155073, guid: 7c7b8753eb0e3e6418a7dc6d095274ee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -97,3 +97,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0.5, y: 0.5, z: 0}
   spriteRenderer: {fileID: 901228395799964702}
+  underworldOnly: 0
