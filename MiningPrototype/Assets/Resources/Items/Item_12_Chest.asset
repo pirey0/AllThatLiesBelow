@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemType: 12
   DisplayName: Chest
   DisplayTooltip: Can be used to store items.
-  DisplaySprite: {fileID: 5045073161074915229, guid: eb18a1feb1c0b324da6e2b9e4d525a9f, type: 3}
+  DisplaySprite: {fileID: 21300000, guid: 59238332a87db514eaa1257413d56f1a, type: 3}
   DisplaySpriteRead: {fileID: 0}
   Weight: 20
   CanBePlaced: 1

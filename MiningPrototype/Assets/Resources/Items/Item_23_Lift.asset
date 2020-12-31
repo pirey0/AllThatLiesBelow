@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemType: 23
   DisplayName: Lift
   DisplayTooltip: 
-  DisplaySprite: {fileID: -8807140295987733373, guid: 6debba36ebfd01d4583c08028102fa85, type: 3}
+  DisplaySprite: {fileID: 21300000, guid: 75266bad26fa3494f9a549632571ee35, type: 3}
   DisplaySpriteRead: {fileID: 0}
   Weight: 1
   CanBePlaced: 1

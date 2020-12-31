@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemType: 7
   DisplayName: Support
   DisplayTooltip: Can be used to stop cave ins.
-  DisplaySprite: {fileID: 3661299028102994143, guid: 949e8161680f49940943047337904a65, type: 3}
+  DisplaySprite: {fileID: 21300000, guid: 6b3f839a0dceae74f8fde8aa06845e74, type: 3}
   DisplaySpriteRead: {fileID: 0}
   Weight: 15
   CanBePlaced: 1
