@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemType: 11
   DisplayName: Dynamite
   DisplayTooltip: Can be used to boom
-  DisplaySprite: {fileID: 21300000, guid: c7e59290fc9293b40aa81c41491ba40e, type: 3}
+  DisplaySprite: {fileID: 21300000, guid: 88d494a2ddd73ef48b9def03a00dec0b, type: 3}
   DisplaySpriteRead: {fileID: 0}
   Weight: 20
   CanBePlaced: 1
