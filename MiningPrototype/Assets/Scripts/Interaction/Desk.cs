@@ -99,6 +99,7 @@ public class Desk : MonoBehaviour, IInteractable
             return;
 
         deskState = DeskState.FillingOutOrder;
+        animator.Play(writeAnimation);
 
         if (currentOrder == null)
         {
@@ -111,10 +112,6 @@ public class Desk : MonoBehaviour, IInteractable
                 paperFold.Play();
             }
         }
-
-        letterWritingSource.loop = true;
-        letterWritingSource?.Play();
-        animator.Play(writeAnimation);
 
         foreach (var option in options)
             option.SetActive(false);
@@ -147,6 +144,12 @@ public class Desk : MonoBehaviour, IInteractable
         {
             paperFold.pitch = 0.66f;
             paperFold.Play();
+        }
+
+        if (letterWritingSource != null)
+        {
+            letterWritingSource.loop = true;
+            letterWritingSource?.Play();
         }
 
         int readableId = readableItemHandler.AddNewReadable(itemAmountPairs);

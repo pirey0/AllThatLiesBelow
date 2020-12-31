@@ -15,6 +15,7 @@ public class NewOrderVisualizer : ReadableItemVisualizer
     [SerializeField] TMP_Text costElementPrefab;
     [SerializeField] Transform costGrid;
     [SerializeField] GameObject leftclick, rightclick;
+    [SerializeField] AudioSource writingSounds;
 
     [Inject] ProgressionHandler progressionHandler;
     [Inject] ShopPricesParser shopPricesParser;
@@ -47,6 +48,12 @@ public class NewOrderVisualizer : ReadableItemVisualizer
             progressionHandler.NotifyPassedTutorialFor("NewOrderRightClick");
 
         UpdateTutorialDisplays();
+
+        if (writingSounds != null)
+        {
+            writingSounds.pitch = UnityEngine.Random.Range(0.8f,1.2f);
+            writingSounds.Play();
+        }
 
         if (amount <= 0)
             orderedElementsWithAmounts.Remove(itemType);
