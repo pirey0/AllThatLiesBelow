@@ -172,7 +172,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         }
         else
         {
-            if (!eventSystem.IsPointerOverGameObject())
+            if (!eventSystem.IsPointerOverGameObject() && gameState.CurrentState != GameState.State.Paused)
                 cursorHandler.SetCursor(CursorType.Mining);
         }
 
