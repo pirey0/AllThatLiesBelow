@@ -13,6 +13,7 @@ public class SaveHandler : MonoBehaviour
 
     public static bool LoadFromSavefile;
 
+    [SerializeField] GameObject saveInfoPrefab;
     [SerializeField] GameObject[] spawnablePrefabs;
     [Zenject.Inject] PrefabFactory prefabFactory;
 
@@ -25,6 +26,8 @@ public class SaveHandler : MonoBehaviour
     public void Save()
     {
         BaseSave(GetFullSavePath());
+        if (saveInfoPrefab != null)
+            Instantiate(saveInfoPrefab, Vector3.zero, Quaternion.identity);
     }
 
     public static void Editor_SaveAs(string path)

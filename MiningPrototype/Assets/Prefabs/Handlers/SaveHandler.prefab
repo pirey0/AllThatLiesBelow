@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 394513b730ec5c74a83d611c15b93a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveInfoPrefab: {fileID: 5177201819967694694, guid: 7ece4d17d0dd4dc438d0e02e074f6fa9, type: 3}
   spawnablePrefabs:
   - {fileID: 0}
   - {fileID: 8886592050164078683, guid: 94d8faed3d48d2a4b95add8b4bbc9945, type: 3}
