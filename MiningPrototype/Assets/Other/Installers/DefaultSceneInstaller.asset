@@ -31,4 +31,5 @@ MonoBehaviour:
   gameStatePrefab: {fileID: 7686406743805718258, guid: 09f896c4580bede46830cc6661780fdf, type: 3}
   transitionEffectHandlerPrefab: {fileID: 443711060070812944, guid: e7ebbd7b13a82584bb4d79535af9baf7, type: 3}
   overworldEffectsHandlerPrefab: {fileID: 7662845370832059530, guid: ef921a78cf8e6994ca562a5addf559d6, type: 3}
+  damageEffectHandlerPrefab: {fileID: 2685019420519338939, guid: 393a61f3305f82b44844acef00fd92ff, type: 3}
   statsTrackerPrefab: {fileID: 5298698092792675606, guid: 52d4c69ffc123014f8ff3e68738b5546, type: 3}
