@@ -9,7 +9,6 @@ using Zenject;
 
 public class SceneAdder : StateListenerBehaviour
 {
-    [SerializeField] List<MapAddition> addition;
 
     [SerializeField] int width, height;
     [SerializeField] MapAdditonEditable sceneAdderEditablePrefab;
@@ -17,18 +16,30 @@ public class SceneAdder : StateListenerBehaviour
     [Zenject.Inject] DiContainer diContainer;
     [Zenject.Inject] SaveHandler saveHandler;
 
-    MapAddition current;
+    MapAdditionBase current;
     int loadingIndex = 0;
 
-    public int LoadingTotal { get => addition.Count; }
+    public int LoadingTotal { get => transform.childCount; }
     public int LoadingCurrent { get => loadingIndex; }
 
     public IEnumerator LoadAll()
     {
+        List<MapAdditionBase> addition = new List<MapAdditionBase>();
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if(transform.GetChild(i).TryGetComponent(out MapAdditionBase mab))
+            {
+                addition.Add(mab);
+            }
+        }
+
         return LoadAdditive(addition);
     }
 
-    private IEnumerator LoadAdditive(List<MapAddition> maps)
+
+
+    private IEnumerator LoadAdditive(List<MapAdditionBase> maps)
     {
         loadingIndex = 0;
 
@@ -38,7 +49,7 @@ public class SceneAdder : StateListenerBehaviour
             current = maps[loadingIndex];
             while (maxTries-- > 0)
             {
-                Vector2Int botLeftCorner = current.CollapseOffset();
+                Vector2Int botLeftCorner = current.GetSpawnLocation();
                 List<Vector2Int> locations = new List<Vector2Int>();
                 Util.IterateXY((int)current.Size.x, (int)current.Size.y, (x, y) => locations.Add(botLeftCorner + new Vector2Int(x, y)));
 
@@ -59,111 +70,5 @@ public class SceneAdder : StateListenerBehaviour
         }
         Debug.Log("Scene Adder finished.");
 
-    }
-
-    private void Start()
-    {
-        DestroyAdditonTransforms();
-    }
-
-    [Button]
-    private void CreateAdditonTransforms ()
-    {
-        DestroyAdditonTransforms();
-
-        for (int i = 0; i < addition.Count; i++)
-        {
-            if (sceneAdderEditablePrefab != null)
-                Instantiate(sceneAdderEditablePrefab, transform).Init(addition[i], new Vector2(width, height), this, i);
-        }
-    }
-
-    [Button]
-    private void DestroyAdditonTransforms()
-    {
-        for (int i = transform.childCount - 1; i >= 0; i--)
-            DestroyImmediate(transform.GetChild(i).gameObject);
-    }
-
-    [Button]
-    private void LoadFromTransforms()
-    {
-        for (int i = transform.childCount - 1; i >= 0; i--)
-            addition[i] = transform.GetChild(i).GetComponent<MapAdditonEditable>().Addition;
-
-        DestroyAdditonTransforms();
-    }
-    public void ModifiedAddition(MapAdditonEditable updatedAddition, int index)
-    {
-        for (int i = 0; i < addition.Count; i++)
-        {
-            if (index == -1)
-                Debug.LogWarning(i + " = " + index + " ? " + updatedAddition.sceneName);
-            if (i == index || index == -1 && updatedAddition.sceneName == addition[i].Name)
-            {
-                if (updatedAddition.Addition.SavedSceneFile == null)
-                {
-                    Debug.Log("create new entry from "+  i);
-                    MapAddition add = new MapAddition();
-
-                    add.XOffsetRange = addition[i].XOffsetRange;
-                    add.YOffset = addition[i].YOffset;
-                    add.Size = addition[i].Size;
-                    add.gizmoColor = addition[i].gizmoColor;
-                    add.SavedSceneFile = addition[i].SavedSceneFile;
-                    updatedAddition.Init(add, new Vector2(width, height), this, addition.Count);
-                    addition.Add(add);
-
-                    return;
-                }
-                else
-                {
-                    addition[i] = updatedAddition.Addition;
-                    return;
-                }
-            }
-        }
-    }
-
-#if UNITY_EDITOR
-    void OnDrawGizmosSelected()
-    {
-        foreach (var a in addition)
-        {
-            float xOffsetDif = (a.XOffsetRange.y - a.XOffsetRange.x) * width;
-            float x = xOffsetDif * 0.5f + a.XOffsetRange.x * width + a.Size.x * 0.5f;
-            float y = a.YOffset * height + a.Size.y * 0.5f;
-            float sizeX = xOffsetDif + a.Size.x;
-            float sizeY = a.Size.y;
-
-            Gizmos.color = a.gizmoColor;
-
-            Gizmos.DrawWireCube(new Vector3(x, y, 0), new Vector3(sizeX, 0.5f));
-            Gizmos.DrawWireCube(new Vector3(x - a.Size.x * 0.5f, y, 0), new Vector3(a.Size.x, sizeY));
-            UnityEditor.Handles.Label(new Vector3(x - a.Size.x, y), a.Name);
-        }
-        Gizmos.color = Color.white;
-    }
-#endif
-}
-
-[System.Serializable]
-public struct MapAddition
-{
-    public Vector2 XOffsetRange;
-    public float YOffset;
-    public Vector2 Size;
-    public Color gizmoColor;
-    public TextAsset SavedSceneFile;
-    public string Name
-    {
-        get => SavedSceneFile.name;
-    }
-
-    public Vector2Int CollapseOffset()
-    {
-        int x = Mathf.FloorToInt(RuntimeProceduralMap.Instance.SizeX * Util.RandomInV2(XOffsetRange));
-        int y = Mathf.FloorToInt(RuntimeProceduralMap.Instance.SizeY * YOffset);
-        return new Vector2Int(x, y);
     }
 }

@@ -1,5 +1,2085 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &51234689
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 51234690}
+  - component: {fileID: 51234692}
+  m_Layer: 0
+  m_Name: JungleCave2Scene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &51234690
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51234689}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 126, y: 194.15, z: 0}
+  m_LocalScale: {x: 74, y: 20, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 27
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &51234692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51234689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 10, y: 20}
+  gizmoColor: {r: 0.5057874, g: 1, b: 0, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 384e070d285f1b64ab50c1903455e0df, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 163, y: 194.15, z: 0}
+  areaBotLeft: {x: 89, y: 194.15, z: 0}
+--- !u!1 &57865846
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 57865847}
+  - component: {fileID: 57865849}
+  m_Layer: 0
+  m_Name: Goldvein2Scene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &57865847
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57865846}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 82, y: 236.05, z: 0}
+  m_LocalScale: {x: 156, y: 4, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 32
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &57865849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57865846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 30, y: 4}
+  gizmoColor: {r: 1, g: 0.8352942, b: 0, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: c99c9460b97795c40b944193e408b160, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 160, y: 236.05, z: 0}
+  areaBotLeft: {x: 4, y: 236.05, z: 0}
+--- !u!1 &68763407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 68763408}
+  - component: {fileID: 68763410}
+  m_Layer: 0
+  m_Name: AltarScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &68763408
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68763407}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 37.91, y: 247.4, z: 0}
+  m_LocalScale: {x: 67.85955, y: 12, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &68763410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68763407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 12, y: 12}
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 71.839775, y: 247.4, z: 0}
+  areaBotLeft: {x: 3.9802246, y: 247.4, z: 0}
+--- !u!1 &296375313
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 296375314}
+  - component: {fileID: 296375316}
+  m_Layer: 0
+  m_Name: AltarScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &296375314
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296375313}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 94.1, y: 221.9, z: 0}
+  m_LocalScale: {x: 167.21178, y: 12, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &296375316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296375313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 12, y: 12}
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 177.70589, y: 221.9, z: 0}
+  areaBotLeft: {x: 10.49411, y: 221.9, z: 0}
+--- !u!1 &361415859
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 361415860}
+  - component: {fileID: 361415862}
+  m_Layer: 0
+  m_Name: AltarScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &361415860
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361415859}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 76, y: 259.17, z: 0}
+  m_LocalScale: {x: 72, y: 12, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &361415862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361415859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 12, y: 12}
+  gizmoColor: {r: 1, g: 0, b: 1, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 112, y: 259.17, z: 0}
+  areaBotLeft: {x: 40, y: 259.17, z: 0}
+--- !u!1 &388756953
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 388756954}
+  - component: {fileID: 388756956}
+  m_Layer: 0
+  m_Name: Coppervein1Scene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &388756954
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388756953}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 86, y: 246.7, z: 0}
+  m_LocalScale: {x: 103.82438, y: 4, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 28
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &388756956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388756953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 30, y: 4}
+  gizmoColor: {r: 1, g: 0.2457259, b: 0, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: b1d86e7bc7cc20047b56dca5863bdff4, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 137.91219, y: 246.7, z: 0}
+  areaBotLeft: {x: 34.08781, y: 246.7, z: 0}
+--- !u!1 &435603927
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 435603928}
+  - component: {fileID: 435603930}
+  m_Layer: 0
+  m_Name: AltarScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &435603928
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435603927}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 43.2, y: 208.5, z: 0}
+  m_LocalScale: {x: 85.43889, y: 12, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &435603930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435603927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 12, y: 12}
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 85.91945, y: 208.5, z: 0}
+  areaBotLeft: {x: 0.4805565, y: 208.5, z: 0}
+--- !u!1 &580678116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 580678117}
+  - component: {fileID: 580678119}
+  m_Layer: 0
+  m_Name: CaveMine1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &580678117
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580678116}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 103, y: 262, z: 0}
+  m_LocalScale: {x: 186, y: 8, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &580678119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580678116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 16, y: 8}
+  gizmoColor: {r: 0, g: 0.9805918, b: 1, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: b345a3133e85d9f4d81c0efd3a7a1a1e, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 196, y: 262, z: 0}
+  areaBotLeft: {x: 10, y: 262, z: 0}
+--- !u!1 &593203507
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 593203508}
+  - component: {fileID: 593203510}
+  m_Layer: 0
+  m_Name: DeliveryFactoryScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &593203508
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593203507}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 51.2, y: 142.4, z: 0}
+  m_LocalScale: {x: 64, y: 8, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &593203510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593203507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 8, y: 8}
+  gizmoColor: {r: 0, g: 0.62788606, b: 1, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 0f938ad3d096c7043918364dd21d9af8, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 83.2, y: 142.4, z: 0}
+  areaBotLeft: {x: 19.2, y: 142.4, z: 0}
+--- !u!1 &628287165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 628287166}
+  - component: {fileID: 628287168}
+  m_Layer: 0
+  m_Name: AltarScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &628287166
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628287165}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 83.6, y: 109, z: 0}
+  m_LocalScale: {x: 154.21841, y: 12, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &628287168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628287165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 12, y: 12}
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 160.7092, y: 109, z: 0}
+  areaBotLeft: {x: 6.4907913, y: 109, z: 0}
+--- !u!1 &645411280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 645411281}
+  - component: {fileID: 645411283}
+  m_Layer: 0
+  m_Name: JungleCave1Scene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &645411281
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645411280}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 96.1, y: 191.57, z: 0}
+  m_LocalScale: {x: 172, y: 12, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &645411283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645411280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 10, y: 12}
+  gizmoColor: {r: 0.5057874, g: 1, b: 0, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 39743173ed49bac45b23cdcb570aec76, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 182.1, y: 191.57, z: 0}
+  areaBotLeft: {x: 10.099998, y: 191.57, z: 0}
+--- !u!1 &666056274
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 666056275}
+  - component: {fileID: 666056277}
+  m_Layer: 0
+  m_Name: AltarScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &666056275
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666056274}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 95.9, y: 155, z: 0}
+  m_LocalScale: {x: 154.06482, y: 12, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &666056277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666056274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 12, y: 12}
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 172.9324, y: 155, z: 0}
+  areaBotLeft: {x: 18.867592, y: 155, z: 0}
+--- !u!1 &706549923
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 706549924}
+  - component: {fileID: 706549926}
+  m_Layer: 0
+  m_Name: Coppervein1Scene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &706549924
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706549923}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 94, y: 261.86, z: 0}
+  m_LocalScale: {x: 132, y: 4, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 31
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &706549926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706549923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 30, y: 4}
+  gizmoColor: {r: 1, g: 0.2457259, b: 0, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: b1d86e7bc7cc20047b56dca5863bdff4, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 160, y: 261.86, z: 0}
+  areaBotLeft: {x: 28, y: 261.86, z: 0}
+--- !u!1 &789054972
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 789054973}
+  - component: {fileID: 789054975}
+  m_Layer: 0
+  m_Name: Goldvein1Scene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &789054973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789054972}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 100.76, y: 228.09, z: 0}
+  m_LocalScale: {x: 170, y: 5, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 35
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &789054975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789054972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 30, y: 5}
+  gizmoColor: {r: 1, g: 0.83582294, b: 0, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 185.76001, y: 228.09, z: 0}
+  areaBotLeft: {x: 15.760002, y: 228.09, z: 0}
+--- !u!1 &802831926
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 802831927}
+  - component: {fileID: 802831929}
+  m_Layer: 0
+  m_Name: Coppervein1Scene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &802831927
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802831926}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 94, y: 265.54, z: 0}
+  m_LocalScale: {x: 132, y: 4, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 29
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &802831929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802831926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 30, y: 4}
+  gizmoColor: {r: 1, g: 0.2457259, b: 0, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: b1d86e7bc7cc20047b56dca5863bdff4, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 160, y: 265.54, z: 0}
+  areaBotLeft: {x: 28, y: 265.54, z: 0}
+--- !u!1 &826822199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 826822200}
+  - component: {fileID: 826822202}
+  m_Layer: 0
+  m_Name: Coppervein1Scene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &826822200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826822199}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 148.48, y: 246.7, z: 0}
+  m_LocalScale: {x: 93.942894, y: 4, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 30
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &826822202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826822199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 30, y: 4}
+  gizmoColor: {r: 1, g: 0.2457259, b: 0, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: b1d86e7bc7cc20047b56dca5863bdff4, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 195.45145, y: 246.7, z: 0}
+  areaBotLeft: {x: 101.508545, y: 246.7, z: 0}
+--- !u!1 &861654417
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 861654418}
+  - component: {fileID: 861654420}
+  m_Layer: 0
+  m_Name: AltarScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &861654418
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861654417}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 90.53, y: 142.6, z: 0}
+  m_LocalScale: {x: 166.86272, y: 12, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &861654420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861654417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 12, y: 12}
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 173.96136, y: 142.6, z: 0}
+  areaBotLeft: {x: 7.0986404, y: 142.6, z: 0}
+--- !u!1 &903158221
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 903158222}
+  - component: {fileID: 903158224}
+  m_Layer: 0
+  m_Name: ArchwayScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &903158222
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903158221}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 107.19, y: 193.29, z: 0}
+  m_LocalScale: {x: 156.581, y: 10, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &903158224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903158221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 10, y: 10}
+  gizmoColor: {r: 0, g: 1, b: 0.4876957, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 20b77891fd797464588175a4eeb3eb46, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 185.4805, y: 193.29, z: 0}
+  areaBotLeft: {x: 28.899506, y: 193.29, z: 0}
+--- !u!1 &933439218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 933439219}
+  - component: {fileID: 933439221}
+  m_Layer: 0
+  m_Name: EchoChamber1Scene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &933439219
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933439218}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 141.7, y: 223.77, z: 0}
+  m_LocalScale: {x: 78, y: 16, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &933439221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933439218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 16, y: 16}
+  gizmoColor: {r: 1, g: 0, b: 0.34990263, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: f63f1894a800bd743ad69aff7ea9bc3e, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 180.7, y: 223.77, z: 0}
+  areaBotLeft: {x: 102.7, y: 223.77, z: 0}
+--- !u!1 &966527366
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 966527367}
+  - component: {fileID: 966527369}
+  m_Layer: 0
+  m_Name: ClockScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &966527367
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966527366}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 95, y: 166.02, z: 0}
+  m_LocalScale: {x: 150, y: 10, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &966527369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966527366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 10, y: 10}
+  gizmoColor: {r: 0, g: 0.07424092, b: 1, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 19506d20d12857141b4c0ad2e820c60c, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 170, y: 166.02, z: 0}
+  areaBotLeft: {x: 20, y: 166.02, z: 0}
+--- !u!1 &968209973
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 968209974}
+  - component: {fileID: 968209976}
+  m_Layer: 0
+  m_Name: JungleCave1Scene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &968209974
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968209973}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 43.24, y: 226.34999, z: 0}
+  m_LocalScale: {x: 82.007515, y: 12, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 38
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &968209976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968209973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 10, y: 12}
+  gizmoColor: {r: 0.5057874, g: 1, b: 0, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 39743173ed49bac45b23cdcb570aec76, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 84.24376, y: 226.34999, z: 0}
+  areaBotLeft: {x: 2.2362442, y: 226.34999, z: 0}
+--- !u!1 &998374925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 998374926}
+  - component: {fileID: 998374928}
+  m_Layer: 0
+  m_Name: Goldvein1Scene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &998374926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998374925}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 112, y: 210.25, z: 0}
+  m_LocalScale: {x: 168, y: 4, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 34
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &998374928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998374925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 30, y: 4}
+  gizmoColor: {r: 1, g: 0.8352942, b: 0, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 196, y: 210.25, z: 0}
+  areaBotLeft: {x: 28, y: 210.25, z: 0}
+--- !u!1 &1177119453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1177119454}
+  - component: {fileID: 1177119456}
+  m_Layer: 0
+  m_Name: JungleCity1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1177119454
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1177119453}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 41, y: 186, z: 0}
+  m_LocalScale: {x: 51.428894, y: 32, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1177119456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1177119453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 20, y: 32}
+  gizmoColor: {r: 0, g: 1, b: 0.4876957, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 77428717a38c9d1479feb450d295b82c, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 66.71445, y: 186, z: 0}
+  areaBotLeft: {x: 15.285553, y: 186, z: 0}
+--- !u!1 &1219804482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1219804483}
+  - component: {fileID: 1219804485}
+  m_Layer: 0
+  m_Name: Goldvein1Scene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1219804483
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219804482}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 95.1, y: 179.04, z: 0}
+  m_LocalScale: {x: 172.92441, y: 5, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 36
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1219804485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219804482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 30, y: 5}
+  gizmoColor: {r: 1, g: 0.8352942, b: 0, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 181.5622, y: 179.04, z: 0}
+  areaBotLeft: {x: 8.6377945, y: 179.04, z: 0}
+--- !u!1 &1245298526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1245298527}
+  - component: {fileID: 1245298529}
+  m_Layer: 0
+  m_Name: RuinHallwayScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1245298527
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245298526}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 127.66, y: 174.13, z: 0}
+  m_LocalScale: {x: 77.83258, y: 10, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1245298529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245298526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 30, y: 10}
+  gizmoColor: {r: 0.50609493, g: 1, b: 0, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 45819bb1cec7bff439ef4a8fd3086ede, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 166.5763, y: 174.13, z: 0}
+  areaBotLeft: {x: 88.74371, y: 174.13, z: 0}
+--- !u!1 &1258023487
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1258023488}
+  - component: {fileID: 1258023490}
+  m_Layer: 0
+  m_Name: AltarScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1258023488
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258023487}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 159.22, y: 243.07, z: 0}
+  m_LocalScale: {x: 66.27449, y: 12, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1258023490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258023487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 12, y: 12}
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 192.35724, y: 243.07, z: 0}
+  areaBotLeft: {x: 126.082756, y: 243.07, z: 0}
+--- !u!1 &1308539821
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1308539822}
+  - component: {fileID: 1308539824}
+  m_Layer: 0
+  m_Name: JungleCave1Scene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1308539822
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308539821}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 43, y: 123, z: 0}
+  m_LocalScale: {x: 74.20199, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 39
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1308539824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308539821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 10, y: 12}
+  gizmoColor: {r: 0.5057874, g: 1, b: 0, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 39743173ed49bac45b23cdcb570aec76, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 80.101, y: 123, z: 0}
+  areaBotLeft: {x: 5.899006, y: 123, z: 0}
+--- !u!1 &1349503213
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1349503214}
+  - component: {fileID: 1349503216}
+  m_Layer: 0
+  m_Name: SteleScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1349503214
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349503213}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 140.1, y: 256.33, z: 0}
+  m_LocalScale: {x: 57.815796, y: 8, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1349503216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349503213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 6, y: 8}
+  gizmoColor: {r: 0, g: 1, b: 0.47450984, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: b2017e39947da5e4cb8a0a2b994f657f, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 169.0079, y: 256.33, z: 0}
+  areaBotLeft: {x: 111.19211, y: 256.33, z: 0}
+--- !u!1 &1386046453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1386046454}
+  - component: {fileID: 1386046456}
+  m_Layer: 0
+  m_Name: AltarScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1386046454
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386046453}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 117.29, y: 175.04, z: 0}
+  m_LocalScale: {x: 137.79974, y: 12, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1386046456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386046453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 12, y: 12}
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 186.18988, y: 175.04, z: 0}
+  areaBotLeft: {x: 48.39013, y: 175.04, z: 0}
+--- !u!1 &1515426339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1515426340}
+  - component: {fileID: 1515426342}
+  m_Layer: 0
+  m_Name: BrothersScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1515426340
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515426339}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 109.3, y: 236.4, z: 0}
+  m_LocalScale: {x: 170, y: 5, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1515426342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515426339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 36, y: 5}
+  gizmoColor: {r: 0, g: 1, b: 0.4758966, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 0aeff879f496464419494aa01542a7bf, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 194.3, y: 236.4, z: 0}
+  areaBotLeft: {x: 24.300003, y: 236.4, z: 0}
+--- !u!1 &1574758957
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1574758958}
+  - component: {fileID: 1574758960}
+  m_Layer: 0
+  m_Name: CaveMine2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1574758958
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574758957}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 94.72, y: 249.6, z: 0}
+  m_LocalScale: {x: 182.5523, y: 16, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1574758960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574758957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 6, y: 16}
+  gizmoColor: {r: 0, g: 0.9805918, b: 1, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 81b4ccd9237fdad488108bbbca778843, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 185.99615, y: 249.6, z: 0}
+  areaBotLeft: {x: 3.4438477, y: 249.6, z: 0}
+--- !u!1 &1660411553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1660411554}
+  - component: {fileID: 1660411556}
+  m_Layer: 0
+  m_Name: CanyonMine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1660411554
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660411553}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 100, y: 233.14, z: 0}
+  m_LocalScale: {x: 164, y: 24, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1660411556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660411553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 20, y: 24}
+  gizmoColor: {r: 0, g: 0.7807312, b: 1, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 9dbf398781cb2934898cde0e7ec0c4a2, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 182, y: 233.14, z: 0}
+  areaBotLeft: {x: 18, y: 233.14, z: 0}
+--- !u!1 &1756081569
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1756081570}
+  - component: {fileID: 1756081572}
+  m_Layer: 0
+  m_Name: OverworldScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1756081570
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756081569}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 100.01, y: 278.38, z: 0}
+  m_LocalScale: {x: 199.99998, y: 40.75714, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1756081572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756081569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 200, y: 40}
+  gizmoColor: {r: 1, g: 1, b: 1, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 0c2e33c16589d3f43943304b9113d6b9, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 0
+  YInArea: 0
+  areaTopRight: {x: 100.01, y: 278.38, z: 0}
+  areaBotLeft: {x: 100.01, y: 278.38, z: 0}
+--- !u!1 &1902405187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1902405188}
+  - component: {fileID: 1902405190}
+  m_Layer: 0
+  m_Name: AltarScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1902405188
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902405187}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 140.18, y: 210.81, z: 0}
+  m_LocalScale: {x: 94.00001, y: 12, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1902405190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902405187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 12, y: 12}
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 187.18, y: 210.81, z: 0}
+  areaBotLeft: {x: 93.17999, y: 210.81, z: 0}
+--- !u!1 &1912251687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1912251688}
+  - component: {fileID: 1912251690}
+  m_Layer: 0
+  m_Name: Goldvein1Scene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1912251688
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912251687}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 88.58, y: 220.64, z: 0}
+  m_LocalScale: {x: 148.5221, y: 4, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 33
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1912251690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912251687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 30, y: 4}
+  gizmoColor: {r: 1, g: 0.8352942, b: 0, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 162.84105, y: 220.64, z: 0}
+  areaBotLeft: {x: 14.318954, y: 220.64, z: 0}
+--- !u!1 &1958961045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1958961046}
+  - component: {fileID: 1958961048}
+  m_Layer: 0
+  m_Name: AltarScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1958961046
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958961045}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 114.42, y: 194.61, z: 0}
+  m_LocalScale: {x: 141.29643, y: 12, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1958961048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958961045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 12, y: 12}
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 185.0682, y: 194.61, z: 0}
+  areaBotLeft: {x: 43.771782, y: 194.61, z: 0}
+--- !u!1 &1965986224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1965986225}
+  - component: {fileID: 1965986227}
+  m_Layer: 0
+  m_Name: SteleScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1965986225
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965986224}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 101, y: 218.97, z: 0}
+  m_LocalScale: {x: 146, y: 8, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1965986227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965986224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 6, y: 8}
+  gizmoColor: {r: 0, g: 1, b: 0.47450984, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: b2017e39947da5e4cb8a0a2b994f657f, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 174, y: 218.97, z: 0}
+  areaBotLeft: {x: 28, y: 218.97, z: 0}
+--- !u!1 &2005348833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2005348834}
+  - component: {fileID: 2005348836}
+  m_Layer: 0
+  m_Name: AltarScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2005348834
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005348833}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 100.95, y: 247, z: 0}
+  m_LocalScale: {x: 60.978115, y: 12, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2005348836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005348833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 12, y: 12}
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 131.43906, y: 247, z: 0}
+  areaBotLeft: {x: 70.46094, y: 247, z: 0}
+--- !u!1 &2049936801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2049936802}
+  - component: {fileID: 2049936804}
+  m_Layer: 0
+  m_Name: AltarScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2049936802
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049936801}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 63.840004, y: 226.26, z: 0}
+  m_LocalScale: {x: 121.121056, y: 12, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2049936804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049936801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 12, y: 12}
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 124.40053, y: 226.26, z: 0}
+  areaBotLeft: {x: 3.2794762, y: 226.26, z: 0}
+--- !u!1 &2078297072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2078297073}
+  - component: {fileID: 2078297075}
+  m_Layer: 0
+  m_Name: Goldvein1Scene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2078297073
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078297072}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 94.49, y: 194.6, z: 0}
+  m_LocalScale: {x: 173.98433, y: 5, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 37
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2078297075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078297072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 30, y: 5}
+  gizmoColor: {r: 1, g: 0.8352942, b: 0, a: 1}
+  SavedSceneFile: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
+  Category: 
+  SpawnAttached: 0
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 181.48216, y: 194.6, z: 0}
+  areaBotLeft: {x: 7.4978333, y: 194.6, z: 0}
 --- !u!1 &3510606058087648147
 GameObject:
   m_ObjectHideFlags: 0
@@ -27,7 +2107,47 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1756081570}
+  - {fileID: 1177119454}
+  - {fileID: 1660411554}
+  - {fileID: 1245298527}
+  - {fileID: 903158222}
+  - {fileID: 361415860}
+  - {fileID: 68763408}
+  - {fileID: 2005348834}
+  - {fileID: 2049936802}
+  - {fileID: 435603928}
+  - {fileID: 1902405188}
+  - {fileID: 296375314}
+  - {fileID: 1386046454}
+  - {fileID: 1258023488}
+  - {fileID: 1958961046}
+  - {fileID: 666056275}
+  - {fileID: 628287166}
+  - {fileID: 861654418}
+  - {fileID: 580678117}
+  - {fileID: 1574758958}
+  - {fileID: 966527367}
+  - {fileID: 593203508}
+  - {fileID: 933439219}
+  - {fileID: 1515426340}
+  - {fileID: 1349503214}
+  - {fileID: 1965986225}
+  - {fileID: 645411281}
+  - {fileID: 51234690}
+  - {fileID: 388756954}
+  - {fileID: 802831927}
+  - {fileID: 826822200}
+  - {fileID: 706549924}
+  - {fileID: 57865847}
+  - {fileID: 1912251688}
+  - {fileID: 998374926}
+  - {fileID: 789054973}
+  - {fileID: 1219804483}
+  - {fileID: 2078297073}
+  - {fileID: 968209974}
+  - {fileID: 1308539822}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -43,207 +2163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e03091118b552a49b49193efa4013d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  addition:
-  - XOffsetRange: {x: 0, y: 0}
-    YOffset: 0.86
-    Size: {x: 200, y: 40}
-    gizmoColor: {r: 1, g: 1, b: 1, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 0c2e33c16589d3f43943304b9113d6b9, type: 3}
-  - XOffsetRange: {x: 0.08, y: 0.24}
-    YOffset: 0.5574
-    Size: {x: 20, y: 32}
-    gizmoColor: {r: 0, g: 1, b: 0.4876957, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 77428717a38c9d1479feb450d295b82c, type: 3}
-  - XOffsetRange: {x: 0.09, y: 0.81}
-    YOffset: 0.7371333
-    Size: {x: 20, y: 24}
-    gizmoColor: {r: 0, g: 0.7807312, b: 1, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 9dbf398781cb2934898cde0e7ec0c4a2, type: 3}
-  - XOffsetRange: {x: 0.44371855, y: 0.6828815}
-    YOffset: 0.56376666
-    Size: {x: 30, y: 10}
-    gizmoColor: {r: 0.50609493, g: 1, b: 0, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 45819bb1cec7bff439ef4a8fd3086ede, type: 3}
-  - XOffsetRange: {x: 0.14449753, y: 0.8774025}
-    YOffset: 0.62763333
-    Size: {x: 10, y: 10}
-    gizmoColor: {r: 0, g: 1, b: 0.4876957, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 20b77891fd797464588175a4eeb3eb46, type: 3}
-  - XOffsetRange: {x: 0.2, y: 0.5}
-    YOffset: 0.8439
-    Size: {x: 12, y: 12}
-    gizmoColor: {r: 1, g: 0, b: 1, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  - XOffsetRange: {x: 0.019901123, y: 0.29919887}
-    YOffset: 0.80466664
-    Size: {x: 12, y: 12}
-    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  - XOffsetRange: {x: 0.3523047, y: 0.59719527}
-    YOffset: 0.80333334
-    Size: {x: 12, y: 12}
-    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  - XOffsetRange: {x: 0.016397381, y: 0.56200266}
-    YOffset: 0.7342
-    Size: {x: 12, y: 12}
-    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  - XOffsetRange: {x: 0.0024027824, y: 0.36959723}
-    YOffset: 0.675
-    Size: {x: 12, y: 12}
-    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  - XOffsetRange: {x: 0.46589994, y: 0.8759}
-    YOffset: 0.6827
-    Size: {x: 12, y: 12}
-    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  - XOffsetRange: {x: 0.05247055, y: 0.8285294}
-    YOffset: 0.71966666
-    Size: {x: 12, y: 12}
-    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  - XOffsetRange: {x: 0.24195065, y: 0.8709494}
-    YOffset: 0.56346667
-    Size: {x: 12, y: 12}
-    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  - XOffsetRange: {x: 0.6304138, y: 0.9017862}
-    YOffset: 0.7902334
-    Size: {x: 12, y: 12}
-    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  - XOffsetRange: {x: 0.21885891, y: 0.86534107}
-    YOffset: 0.6287
-    Size: {x: 12, y: 12}
-    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  - XOffsetRange: {x: 0.09433796, y: 0.80466205}
-    YOffset: 0.49666667
-    Size: {x: 12, y: 12}
-    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  - XOffsetRange: {x: 0.032453958, y: 0.743546}
-    YOffset: 0.49666667
-    Size: {x: 12, y: 12}
-    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  - XOffsetRange: {x: 0.035493203, y: 0.80980676}
-    YOffset: 0.45533335
-    Size: {x: 12, y: 12}
-    gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  - XOffsetRange: {x: 0.05, y: 0.9}
-    YOffset: 0.86
-    Size: {x: 16, y: 8}
-    gizmoColor: {r: 0, g: 0.9805918, b: 1, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: b345a3133e85d9f4d81c0efd3a7a1a1e, type: 3}
-  - XOffsetRange: {x: 0.017219238, y: 0.8999808}
-    YOffset: 0.8053334
-    Size: {x: 6, y: 16}
-    gizmoColor: {r: 0, g: 0.9805918, b: 1, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 81b4ccd9237fdad488108bbbca778843, type: 3}
-  - XOffsetRange: {x: 0.1, y: 0.8}
-    YOffset: 0.5367333
-    Size: {x: 10, y: 10}
-    gizmoColor: {r: 0, g: 0.07424092, b: 1, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 19506d20d12857141b4c0ad2e820c60c, type: 3}
-  - XOffsetRange: {x: 0.096, y: 0.37600002}
-    YOffset: 0.4613333
-    Size: {x: 8, y: 8}
-    gizmoColor: {r: 0, g: 0.62788606, b: 1, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 0f938ad3d096c7043918364dd21d9af8, type: 3}
-  - XOffsetRange: {x: 0.5135, y: 0.8235}
-    YOffset: 0.71923333
-    Size: {x: 16, y: 16}
-    gizmoColor: {r: 1, g: 0, b: 0.34990263, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: f63f1894a800bd743ad69aff7ea9bc3e, type: 3}
-  - XOffsetRange: {x: 0.121500015, y: 0.79150003}
-    YOffset: 0.77966666
-    Size: {x: 36, y: 5}
-    gizmoColor: {r: 0, g: 1, b: 0.4758966, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 0aeff879f496464419494aa01542a7bf, type: 3}
-  - XOffsetRange: {x: 0.55596054, y: 0.8150395}
-    YOffset: 0.8411
-    Size: {x: 6, y: 8}
-    gizmoColor: {r: 0, g: 1, b: 0.47450984, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: b2017e39947da5e4cb8a0a2b994f657f, type: 3}
-  - XOffsetRange: {x: 0.14, y: 0.84}
-    YOffset: 0.7165667
-    Size: {x: 6, y: 8}
-    gizmoColor: {r: 0, g: 1, b: 0.47450984, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: b2017e39947da5e4cb8a0a2b994f657f, type: 3}
-  - XOffsetRange: {x: 0.05049999, y: 0.8605}
-    YOffset: 0.6185667
-    Size: {x: 10, y: 12}
-    gizmoColor: {r: 0.5057874, g: 1, b: 0, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 39743173ed49bac45b23cdcb570aec76, type: 3}
-  - XOffsetRange: {x: 0.445, y: 0.765}
-    YOffset: 0.6138333
-    Size: {x: 10, y: 20}
-    gizmoColor: {r: 0.5057874, g: 1, b: 0, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 384e070d285f1b64ab50c1903455e0df, type: 3}
-  - XOffsetRange: {x: 0.027339058, y: 0.39646095}
-    YOffset: 0.8156667
-    Size: {x: 30, y: 4}
-    gizmoColor: {r: 1, g: 0.2457259, b: 0, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: b1d86e7bc7cc20047b56dca5863bdff4, type: 3}
-  - XOffsetRange: {x: 0.14, y: 0.65}
-    YOffset: 0.87846667
-    Size: {x: 30, y: 4}
-    gizmoColor: {r: 1, g: 0.2457259, b: 0, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: b1d86e7bc7cc20047b56dca5863bdff4, type: 3}
-  - XOffsetRange: {x: 0.5075427, y: 0.8272572}
-    YOffset: 0.8156667
-    Size: {x: 30, y: 4}
-    gizmoColor: {r: 1, g: 0.2457259, b: 0, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: b1d86e7bc7cc20047b56dca5863bdff4, type: 3}
-  - XOffsetRange: {x: 0.14, y: 0.65}
-    YOffset: 0.8662
-    Size: {x: 30, y: 4}
-    gizmoColor: {r: 1, g: 0.2457259, b: 0, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: b1d86e7bc7cc20047b56dca5863bdff4, type: 3}
-  - XOffsetRange: {x: 0.02, y: 0.65}
-    YOffset: 0.7801667
-    Size: {x: 30, y: 4}
-    gizmoColor: {r: 1, g: 0.8352942, b: 0, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: c99c9460b97795c40b944193e408b160, type: 3}
-  - XOffsetRange: {x: 0.071594775, y: 0.66420525}
-    YOffset: 0.7288
-    Size: {x: 30, y: 4}
-    gizmoColor: {r: 1, g: 0.8352942, b: 0, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
-  - XOffsetRange: {x: 0.14, y: 0.83}
-    YOffset: 0.69416666
-    Size: {x: 30, y: 4}
-    gizmoColor: {r: 1, g: 0.8352942, b: 0, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
-  - XOffsetRange: {x: 0.07880001, y: 0.7788}
-    YOffset: 0.75196666
-    Size: {x: 30, y: 5}
-    gizmoColor: {r: 1, g: 0.83582294, b: 0, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
-  - XOffsetRange: {x: 0.043188974, y: 0.757811}
-    YOffset: 0.58846664
-    Size: {x: 30, y: 5}
-    gizmoColor: {r: 1, g: 0.8352942, b: 0, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
-  - XOffsetRange: {x: 0.037489165, y: 0.7574108}
-    YOffset: 0.64033335
-    Size: {x: 30, y: 5}
-    gizmoColor: {r: 1, g: 0.8352942, b: 0, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
-  - XOffsetRange: {x: 0.011181221, y: 0.3712188}
-    YOffset: 0.7345
-    Size: {x: 10, y: 12}
-    gizmoColor: {r: 0.5057874, g: 1, b: 0, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 39743173ed49bac45b23cdcb570aec76, type: 3}
-  - XOffsetRange: {x: 0.028195038, y: 0.349205}
-    YOffset: 0.5374667
-    Size: {x: 10, y: 12}
-    gizmoColor: {r: 0.5057874, g: 1, b: 0, a: 1}
-    SavedSceneFile: {fileID: 4900000, guid: 39743173ed49bac45b23cdcb570aec76, type: 3}
   width: 200
   height: 300
   sceneAdderEditablePrefab: {fileID: 340977180016804633, guid: 6a4ed7355ce9d49448d2e1a4712ed856, type: 3}

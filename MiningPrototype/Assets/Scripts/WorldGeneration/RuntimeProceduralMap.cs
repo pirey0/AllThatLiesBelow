@@ -315,7 +315,6 @@ public class RuntimeProceduralMap : RenderedMap
 
     public bool IsAdditivelyCoveredAtAny(List<Vector2Int> locations)
     {
-        bool o = false;
         foreach (var l in locations)
         {
             if (IsAdditivelyCoveredAt(l.x, l.y))
@@ -323,7 +322,7 @@ public class RuntimeProceduralMap : RenderedMap
                 return true;
             }
         }
-        return o;
+        return false;
     }
 
     private void PopulateBorders()
