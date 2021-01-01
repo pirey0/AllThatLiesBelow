@@ -120,6 +120,9 @@ public class InventoryVisualizer : ScalingUIElementBase, IDropReceiver
                             slot.Display(new ItemAmountPair(pair.type, slotPair.amount - pair.amount), inventory);
                         }
 
+                        if (slots.Count <= 0)
+                            Close();
+
                         return;
                     }
                 }
