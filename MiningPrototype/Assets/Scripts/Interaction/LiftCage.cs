@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public enum LiftState
 {
@@ -27,6 +28,7 @@ public class LiftCage : MonoBehaviour, IVehicle
     [SerializeField] DistanceJoint2D distanceJoint;
     [SerializeField] AudioSource movingUpAndDownSound, engineSound, startSound, stopSound;
     [SerializeField] ParticleSystem smokeParticles;
+    [SerializeField] Light2D light2D;
     [SerializeField] Lift lift;
     [SerializeField] new Rigidbody2D rigidbody;
 
@@ -70,6 +72,7 @@ public class LiftCage : MonoBehaviour, IVehicle
     {
         liftFG_anim.Play((state == LiftState.Active) ? liftFG_active : liftFG_inactive);
         liftBG_anim.Play((state == LiftState.Active) ? liftBG_active : LiftBG_inactive);
+        light2D.enabled = state == LiftState.Active;
     }
 
     private void UpdateCables()
