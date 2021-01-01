@@ -7,6 +7,8 @@ public abstract class MapAdditionBase : MonoBehaviour
 {
     public Vector2 Size;
     public TextAsset SavedSceneFile;
+    public Area Area;
+    public bool SpawnAttached;
 
     [Tooltip("Should the addition block other additions from drawing to the same area?")]
     public bool BlocksArea;
@@ -22,9 +24,7 @@ public enum Area
 [ExecuteInEditMode]
 public class MapAdditonEditable : MapAdditionBase
 {
-    public Color gizmoColor;
-    public Area Area;
-    public bool SpawnAttached;
+    [SerializeField] Color gizmoColor;
 
     [NaughtyAttributes.OnValueChanged("OnInAreaChange")]
     public bool XInArea;
