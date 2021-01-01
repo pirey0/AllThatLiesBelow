@@ -8,7 +8,7 @@ public class RenderedMap : BaseMap
     [Header("RenderedMap")]
     [SerializeField] Tilemap tilemap;
     [SerializeField] Tilemap tilemapShifted, oreTilemap, damageOverlayTilemap, damageOverlayBehind;
-    [SerializeField] bool debugRendering;
+    [SerializeField] bool debugRendering, showOverlayAlways;
 
     protected override void Setup()
     {
@@ -133,7 +133,7 @@ public class RenderedMap : BaseMap
         var t = this[x, y];
         var tileInfo = GetTileInfo(t.Type);
 
-        if (t.Visibility > 1 && !debugRendering)
+        if (t.Visibility > 1 && !showOverlayAlways)
             return null;
 
         return tileInfo.Overlay;
