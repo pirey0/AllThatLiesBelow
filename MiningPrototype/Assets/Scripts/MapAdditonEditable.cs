@@ -5,7 +5,8 @@ using UnityEngine;
 
 public abstract class MapAdditionBase : MonoBehaviour
 {
-    public Vector2 Size;
+    public Vector2Int Size;
+    public Vector2Int Padding;
     public TextAsset SavedSceneFile;
     public Area Area;
     public bool SpawnAttached;
@@ -39,7 +40,7 @@ public class MapAdditonEditable : MapAdditionBase
 
     public override Vector2Int GetSpawnLocation(int stepSize)
     {
-        Vector2Int pos = (transform.position - (Vector3)Size * 0.5f).ToGridPosition();
+        Vector2Int pos = (transform.position - Size.AsV3() * 0.5f).ToGridPosition();
 
         if (XInArea)
             pos.x = Mathf.FloorToInt(UnityEngine.Random.Range(areaBotLeft.x, areaTopRight.x) - Size.x * 0.5f);
@@ -92,14 +93,21 @@ public class MapAdditonEditable : MapAdditionBase
         UpdateBotLeft(transform.position + transform.localScale * -0.5f);
     }
 
+    [NaughtyAttributes.Button]
+    public void ResetSizeToFile()
+    {
+       var saveData = SaveHandler.LoadMapOnlyFrom(SavedSceneFile);
+        Size = new Vector2Int(saveData.SizeX, saveData.SizeY);
+    }
+
     void OnDrawGizmos()
     {
         Gizmos.color = gizmoColor;
 
         if (collapsedLocation.HasValue)
-            Gizmos.DrawWireCube((collapsedLocation.Value).AsV3() + (Vector3)Size * 0.5f, Size);
+            Gizmos.DrawWireCube((collapsedLocation.Value).AsV3() + Size.AsV3() * 0.5f, Size.AsV3());
         else
-            Gizmos.DrawWireCube(transform.position, Size);
+            Gizmos.DrawWireCube(transform.position, Size.AsV3());
 
         if (XInArea || YInArea)
         {
