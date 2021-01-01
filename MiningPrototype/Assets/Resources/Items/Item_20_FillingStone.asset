@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Item_20_FillingStone
   m_EditorClassIdentifier: 
   ItemType: 20
-  DisplayName: Filling
+  DisplayName: Gravel
   DisplayTooltip: 
   DisplaySprite: {fileID: 8724308943522155073, guid: 7c7b8753eb0e3e6418a7dc6d095274ee, type: 3}
   DisplaySpriteRead: {fileID: 0}
