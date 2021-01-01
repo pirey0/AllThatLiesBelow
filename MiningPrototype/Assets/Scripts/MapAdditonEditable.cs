@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class MapAdditionBase : MonoBehaviour
 {
     public Vector2Int Size;
-    public Vector2Int Padding;
+    //public Vector2Int Padding;
     public TextAsset SavedSceneFile;
     public Area Area;
     public bool SpawnAttached;
