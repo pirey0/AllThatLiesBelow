@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundedAngle: 88
   jumpVelocity: 9
+  extraFallForce: 10
   moveSpeed: 5
   slowMoveSpeed: 3
   timeToLongIdle: 10

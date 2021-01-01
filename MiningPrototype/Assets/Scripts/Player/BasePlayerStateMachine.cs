@@ -305,7 +305,12 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         }
 
         rigidbody.position += movement;
-        rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
+
+        float ySpeed = rigidbody.velocity.y;
+        if (ySpeed < 0)
+            ySpeed -= Time.deltaTime * settings.extraFallForce;
+
+        rigidbody.velocity = new Vector2(0, ySpeed);
         horizontalSpeed = horizontal * rightWalkVector.x;
 
         if (IsMoving())

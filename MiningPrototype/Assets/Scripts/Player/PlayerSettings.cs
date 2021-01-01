@@ -9,6 +9,7 @@ public class PlayerSettings : ScriptableObject
 
     public float groundedAngle;
     public float jumpVelocity;
+    public float extraFallForce;
     public float moveSpeed;
     public float slowMoveSpeed;
     public float timeToLongIdle;
