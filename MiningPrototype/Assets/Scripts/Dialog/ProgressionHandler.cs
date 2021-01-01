@@ -14,6 +14,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     [SerializeField] int startingLetterID = 100;
     [SerializeField] List<ItemAmountPair> startingItems;
     [SerializeField] AudioSource instantDeliveryAudio;
+    [SerializeField] float timeMiningBeforePassageOfDay;
 
     [Zenject.Inject] OverworldEffectHandler overworldEffectHandler;
     [Zenject.Inject] CameraController cameraController;
@@ -22,6 +23,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     [Zenject.Inject] InventoryManager inventoryManager;
     [Zenject.Inject] SacrificeActions sacrificeActions;
     [Zenject.Inject] SceneAdder sceneAdder;
+    [Zenject.Inject] PlayerStateMachine player;
 
     ProgressionSaveData data;
     Letterbox letterBox;
@@ -60,6 +62,25 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
         for (int i = 0; i < altars.Count; i++)
         {
             altars[i].SetAltarID(i);
+        }
+
+        player.EnteredOverworld += OnEnterOverworld;
+        player.LeftOverworld += OnLeftOverworld;
+    }
+
+    private void OnLeftOverworld()
+    {
+        Debug.Log("Player left overworld");
+        data.leftOverworldTimestamp = Time.time;
+    }
+
+    private void OnEnterOverworld()
+    {
+        float t = (Time.time - data.leftOverworldTimestamp);
+        Debug.Log("Player entered overworld after " + t + " seconds");
+        if(t > timeMiningBeforePassageOfDay)
+        {
+            StartNextDay();
         }
     }
 
@@ -329,6 +350,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     public SaveData ToSaveData()
     {
         data.GUID = GetSaveID();
+        data.saveTimestamp = Time.time;
         return data;
     }
 
@@ -337,6 +359,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
         if (newData is ProgressionSaveData saveData)
         {
             this.data = saveData;
+            data.leftOverworldTimestamp =  Time.time - data.saveTimestamp + data.leftOverworldTimestamp;
         }
         else
         {
@@ -403,4 +426,6 @@ public class ProgressionSaveData : SaveData
     public int lastLetterID = -1;
     public bool wifeRecievedLetter = false;
     public LetterProgressionState letterProgressionState = LetterProgressionState.RecievedDay;
+    public float leftOverworldTimestamp;
+    public float saveTimestamp;
 }

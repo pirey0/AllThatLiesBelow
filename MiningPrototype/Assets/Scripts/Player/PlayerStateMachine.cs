@@ -28,6 +28,10 @@ public class PlayerStateMachine : BasePlayerStateMachine
     RuntimeProceduralMap.MirrorState currentMirrorLoc;
     bool canDig = true;
     IVehicle currentVehicle;
+    bool lastInOverworld;
+
+    public event System.Action EnteredOverworld;
+    public event System.Action LeftOverworld;
 
     public float CinematicHorizontal { get => cinematicHorizontal; set => cinematicHorizontal = value; }
     public float CinematicVertical { get => cinematicVertical; set => cinematicVertical = value; }
@@ -83,6 +87,7 @@ public class PlayerStateMachine : BasePlayerStateMachine
         }
 
         playerInteraction.PlayerActivity += NotifyActivity;
+        lastInOverworld = InOverworld();
     }
 
     protected override void OnNewGame()
@@ -91,6 +96,7 @@ public class PlayerStateMachine : BasePlayerStateMachine
         if (start != null)
         {
             transform.position = start.transform.position;
+            lastInOverworld = InOverworld();
         }
     }
 
@@ -130,6 +136,21 @@ public class PlayerStateMachine : BasePlayerStateMachine
         if (gameState.CurrentState == GameState.State.Playing && progressionHandler.IsMidas)
         {
             MidasUpdate();
+        }
+
+        var inOverworld = InOverworld();
+        if (inOverworld != lastInOverworld)
+        {
+            if (inOverworld)
+            {
+                EnteredOverworld?.Invoke();
+            }
+            else
+            {
+                LeftOverworld?.Invoke();
+            }
+
+            lastInOverworld = InOverworld();
         }
     }
 

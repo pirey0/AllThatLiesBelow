@@ -53,6 +53,7 @@ MonoBehaviour:
   - type: 22
     amount: 5
   instantDeliveryAudio: {fileID: 5016016371274373291}
+  timeMiningBeforePassageOfDay: 600
 --- !u!114 &2388821099892900699
 MonoBehaviour:
   m_ObjectHideFlags: 0

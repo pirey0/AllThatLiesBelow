@@ -18,7 +18,6 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
 
     StateMachine stateMachine;
     StateMachine.State s_idle, s_crouchIdle, s_jump, s_fall, s_walk, s_slowWalk, s_crouchWalk, s_climb, s_climbIde, s_inventory, s_death, s_hit, s_longIdle, s_disabled, s_fallDeath;
-    public event System.Action PlayerDeath;
 
     private List<IClimbable> currentClimbable = new List<IClimbable>();
     private float gravityScale;
@@ -33,6 +32,9 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
     Vector2 rightWalkVector = Vector3.right;
     protected new Rigidbody2D rigidbody;
     float horizontalSpeed;
+
+    public event System.Action PlayerDeath;
+
 
     private bool InFrontOfCimbable { get => currentClimbable.Count > 0; }
     private bool IsLocked { get => stateMachine.CurrentState == s_disabled; }
@@ -273,7 +275,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
     {
         MoveUpdate();
         //When idle face mouse direction
-        transform.localScale = new Vector3(Input.mousePosition.x > (Screen.width*0.5f) ? 1 : -1, 1, 1);
+        transform.localScale = new Vector3(Input.mousePosition.x > (Screen.width * 0.5f) ? 1 : -1, 1, 1);
     }
 
     private void MoveUpdate()
@@ -308,7 +310,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
 
         float ySpeed = rigidbody.velocity.y;
         if (ySpeed < 0)
-            ySpeed -= Time.deltaTime * settings.extraFallForce;
+            ySpeed -= Time.fixedDeltaTime * settings.extraFallForce;
 
         rigidbody.velocity = new Vector2(0, ySpeed);
         horizontalSpeed = horizontal * rightWalkVector.x;
@@ -368,7 +370,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         var vertical = GetVerticalInput();
         bool up = vertical > 0;
 
-        bool downOnGround =  !up && IsGrounded() && IsBelowTopCimbable();
+        bool downOnGround = !up && IsGrounded() && IsBelowTopCimbable();
 
         return InFrontOfCimbable && Mathf.Abs(vertical) > 0.75f && !downOnGround;
     }
