@@ -5,7 +5,7 @@ using UnityEngine;
 public class KernelIterator : StateListenerBehaviour
 {
     [SerializeField] int sizeX, sizeY;
-    [SerializeField] bool log;
+    [SerializeField] bool debug;
 
     [Zenject.Inject] KernelParser kernelParser;
     [Zenject.Inject] RuntimeProceduralMap map;
@@ -36,7 +36,7 @@ public class KernelIterator : StateListenerBehaviour
 
             if (currentKernel.MatchesWith(map, x, y))
             {
-                if (log)
+                if (debug)
                     Debug.Log(currentKernel.Name + " matched at: (" + x + "/" + y + ")");
                 ApplyKernel(currentKernel, x, y);
             }
@@ -99,6 +99,21 @@ public class KernelIterator : StateListenerBehaviour
             Vector3 pos = player.transform.position.ToGridPosition().AsV3();
             Gizmos.DrawWireCube(pos, new Vector3(sizeX, sizeY, 0));
             UnityEditor.Handles.Label(pos + new Vector3(-sizeX / 2, sizeY / 2, 0), "KernelIterator #" + currentIndex);
+
+            if (debug)
+            {
+                for (int y = 0; y < sizeY; y++)
+                {
+                    for (int x = 0; x < sizeX; x++)
+                    {
+                        Vector2Int p = new Vector2Int(currentStartX + x, currentStartY + y);
+                        var i = map.GetTileInfoAt(p);
+
+                        Gizmos.color = i.GetCrumbleTypeColor();
+                        Gizmos.DrawCube(p.AsV3() + new Vector3(0.5f, 0.5f), Vector2.one);
+                    }
+                }
+            }
         }
     }
 #endif
