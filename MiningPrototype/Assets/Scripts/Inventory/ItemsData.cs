@@ -27,7 +27,8 @@ public enum ItemType
     FillingStone,
     Log,
     Rope,
-    Lift
+    Lift,
+    Lantern
 }
 
 

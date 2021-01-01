@@ -47,7 +47,8 @@ public enum SpawnableIDType
     WoodenBlocking,
     Note,
     Rope,
-    Lift
+    Lift,
+    Lantern
 }
 
 [System.Serializable]
