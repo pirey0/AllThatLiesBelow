@@ -6,21 +6,24 @@ using UnityEngine;
 public abstract class MapAdditionBase : MonoBehaviour
 {
     public Vector2 Size;
-    public Color gizmoColor;
     public TextAsset SavedSceneFile;
-    public string Name
-    {
-        get => SavedSceneFile.name;
-    }
-    public abstract Vector2Int GetSpawnLocation();
+
+    [Tooltip("Should the addition block other additions from drawing to the same area?")]
+    public bool BlocksArea;
+    public abstract Vector2Int GetSpawnLocation(int stepSize);
+
 }
 
+public enum Area
+{
+    None, Mining, Jungle, Ice, ElDorado, Final
+}
 
 [ExecuteInEditMode]
 public class MapAdditonEditable : MapAdditionBase
 {
-    [Header("Settings")]
-    public string Category;
+    public Color gizmoColor;
+    public Area Area;
     public bool SpawnAttached;
 
     [NaughtyAttributes.OnValueChanged("OnInAreaChange")]
@@ -34,7 +37,7 @@ public class MapAdditonEditable : MapAdditionBase
 
     private Vector2Int? collapsedLocation;
 
-    public override Vector2Int GetSpawnLocation()
+    public override Vector2Int GetSpawnLocation(int stepSize)
     {
         Vector2Int pos = (transform.position - (Vector3)Size * 0.5f).ToGridPosition();
 
@@ -43,6 +46,9 @@ public class MapAdditonEditable : MapAdditionBase
 
         if (YInArea)
             pos.y = Mathf.FloorToInt(UnityEngine.Random.Range(areaBotLeft.y, areaTopRight.y) - Size.y * 0.5f);
+
+        pos.x -= pos.x % stepSize;
+        pos.y -= pos.y % stepSize;
 
         collapsedLocation = pos;
         return pos;
@@ -100,7 +106,8 @@ public class MapAdditonEditable : MapAdditionBase
             Vector3 extend = (areaTopRight - areaBotLeft);
             Gizmos.DrawWireCube(areaBotLeft + extend * 0.5f, extend);
         }
-        UnityEditor.Handles.Label(transform.position, name);
+
+        UnityEditor.Handles.Label(transform.position + new Vector3(-Size.x / 2, -Size.y / 2), name + (Area == Area.None ? "" : "(" + Area.ToString() + ")"));
     }
 
 #endif

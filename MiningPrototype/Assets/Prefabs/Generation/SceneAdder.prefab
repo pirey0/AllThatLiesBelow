@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 51234690}
   - component: {fileID: 51234692}
   m_Layer: 0
-  m_Name: JungleCave2Scene
+  m_Name: JungleCave2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,9 +44,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 10, y: 20}
-  gizmoColor: {r: 0.5057874, g: 1, b: 0, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 384e070d285f1b64ab50c1903455e0df, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0.5057874, g: 1, b: 0, a: 1}
+  Area: 2
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -63,7 +64,7 @@ GameObject:
   - component: {fileID: 57865847}
   - component: {fileID: 57865849}
   m_Layer: 0
-  m_Name: Goldvein2Scene
+  m_Name: Goldvein2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,9 +97,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 30, y: 4}
-  gizmoColor: {r: 1, g: 0.8352942, b: 0, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: c99c9460b97795c40b944193e408b160, type: 3}
-  Category: 
+  BlocksArea: 0
+  gizmoColor: {r: 1, g: 0.8352942, b: 0, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -115,7 +117,7 @@ GameObject:
   - component: {fileID: 68763408}
   - component: {fileID: 68763410}
   m_Layer: 0
-  m_Name: AltarScene
+  m_Name: Altar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,9 +150,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 12, y: 12}
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -167,7 +170,7 @@ GameObject:
   - component: {fileID: 296375314}
   - component: {fileID: 296375316}
   m_Layer: 0
-  m_Name: AltarScene
+  m_Name: Altar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -200,9 +203,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 12, y: 12}
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -219,7 +223,7 @@ GameObject:
   - component: {fileID: 361415860}
   - component: {fileID: 361415862}
   m_Layer: 0
-  m_Name: AltarScene
+  m_Name: Altar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -252,9 +256,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 12, y: 12}
-  gizmoColor: {r: 1, g: 0, b: 1, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 1, g: 0, b: 1, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -271,7 +276,7 @@ GameObject:
   - component: {fileID: 388756954}
   - component: {fileID: 388756956}
   m_Layer: 0
-  m_Name: Coppervein1Scene
+  m_Name: Coppervein1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -304,9 +309,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 30, y: 4}
-  gizmoColor: {r: 1, g: 0.2457259, b: 0, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: b1d86e7bc7cc20047b56dca5863bdff4, type: 3}
-  Category: 
+  BlocksArea: 0
+  gizmoColor: {r: 1, g: 0.2457259, b: 0, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -323,7 +329,7 @@ GameObject:
   - component: {fileID: 435603928}
   - component: {fileID: 435603930}
   m_Layer: 0
-  m_Name: AltarScene
+  m_Name: Altar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -356,9 +362,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 12, y: 12}
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -408,9 +415,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 16, y: 8}
-  gizmoColor: {r: 0, g: 0.9805918, b: 1, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: b345a3133e85d9f4d81c0efd3a7a1a1e, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0, g: 0.9805918, b: 1, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -427,7 +435,7 @@ GameObject:
   - component: {fileID: 593203508}
   - component: {fileID: 593203510}
   m_Layer: 0
-  m_Name: DeliveryFactoryScene
+  m_Name: DeliveryFactory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -460,9 +468,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 8, y: 8}
-  gizmoColor: {r: 0, g: 0.62788606, b: 1, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 0f938ad3d096c7043918364dd21d9af8, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0, g: 0.62788606, b: 1, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -479,7 +488,7 @@ GameObject:
   - component: {fileID: 628287166}
   - component: {fileID: 628287168}
   m_Layer: 0
-  m_Name: AltarScene
+  m_Name: Altar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -512,9 +521,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 12, y: 12}
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -531,7 +541,7 @@ GameObject:
   - component: {fileID: 645411281}
   - component: {fileID: 645411283}
   m_Layer: 0
-  m_Name: JungleCave1Scene
+  m_Name: JungleCave1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -564,9 +574,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 10, y: 12}
-  gizmoColor: {r: 0.5057874, g: 1, b: 0, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 39743173ed49bac45b23cdcb570aec76, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0.5057874, g: 1, b: 0, a: 1}
+  Area: 2
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -583,7 +594,7 @@ GameObject:
   - component: {fileID: 666056275}
   - component: {fileID: 666056277}
   m_Layer: 0
-  m_Name: AltarScene
+  m_Name: Altar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -616,9 +627,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 12, y: 12}
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -635,7 +647,7 @@ GameObject:
   - component: {fileID: 706549924}
   - component: {fileID: 706549926}
   m_Layer: 0
-  m_Name: Coppervein1Scene
+  m_Name: Coppervein1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -668,9 +680,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 30, y: 4}
-  gizmoColor: {r: 1, g: 0.2457259, b: 0, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: b1d86e7bc7cc20047b56dca5863bdff4, type: 3}
-  Category: 
+  BlocksArea: 0
+  gizmoColor: {r: 1, g: 0.2457259, b: 0, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -687,7 +700,7 @@ GameObject:
   - component: {fileID: 789054973}
   - component: {fileID: 789054975}
   m_Layer: 0
-  m_Name: Goldvein1Scene
+  m_Name: Goldvein1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -720,9 +733,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 30, y: 5}
-  gizmoColor: {r: 1, g: 0.83582294, b: 0, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
-  Category: 
+  BlocksArea: 0
+  gizmoColor: {r: 1, g: 0.83582294, b: 0, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -739,7 +753,7 @@ GameObject:
   - component: {fileID: 802831927}
   - component: {fileID: 802831929}
   m_Layer: 0
-  m_Name: Coppervein1Scene
+  m_Name: Coppervein1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -772,9 +786,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 30, y: 4}
-  gizmoColor: {r: 1, g: 0.2457259, b: 0, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: b1d86e7bc7cc20047b56dca5863bdff4, type: 3}
-  Category: 
+  BlocksArea: 0
+  gizmoColor: {r: 1, g: 0.2457259, b: 0, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -791,7 +806,7 @@ GameObject:
   - component: {fileID: 826822200}
   - component: {fileID: 826822202}
   m_Layer: 0
-  m_Name: Coppervein1Scene
+  m_Name: Coppervein1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -824,9 +839,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 30, y: 4}
-  gizmoColor: {r: 1, g: 0.2457259, b: 0, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: b1d86e7bc7cc20047b56dca5863bdff4, type: 3}
-  Category: 
+  BlocksArea: 0
+  gizmoColor: {r: 1, g: 0.2457259, b: 0, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -843,7 +859,7 @@ GameObject:
   - component: {fileID: 861654418}
   - component: {fileID: 861654420}
   m_Layer: 0
-  m_Name: AltarScene
+  m_Name: Altar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -876,9 +892,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 12, y: 12}
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -895,7 +912,7 @@ GameObject:
   - component: {fileID: 903158222}
   - component: {fileID: 903158224}
   m_Layer: 0
-  m_Name: ArchwayScene
+  m_Name: Archway
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -928,9 +945,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 10, y: 10}
-  gizmoColor: {r: 0, g: 1, b: 0.4876957, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 20b77891fd797464588175a4eeb3eb46, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0, g: 1, b: 0.4876957, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -947,7 +965,7 @@ GameObject:
   - component: {fileID: 933439219}
   - component: {fileID: 933439221}
   m_Layer: 0
-  m_Name: EchoChamber1Scene
+  m_Name: EchoChamber1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -980,9 +998,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 16, y: 16}
-  gizmoColor: {r: 1, g: 0, b: 0.34990263, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: f63f1894a800bd743ad69aff7ea9bc3e, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 1, g: 0, b: 0.34990263, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -999,7 +1018,7 @@ GameObject:
   - component: {fileID: 966527367}
   - component: {fileID: 966527369}
   m_Layer: 0
-  m_Name: ClockScene
+  m_Name: Clock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1032,9 +1051,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 10, y: 10}
-  gizmoColor: {r: 0, g: 0.07424092, b: 1, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 19506d20d12857141b4c0ad2e820c60c, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0, g: 0.07424092, b: 1, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -1051,7 +1071,7 @@ GameObject:
   - component: {fileID: 968209974}
   - component: {fileID: 968209976}
   m_Layer: 0
-  m_Name: JungleCave1Scene
+  m_Name: JungleCave1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1084,9 +1104,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 10, y: 12}
-  gizmoColor: {r: 0.5057874, g: 1, b: 0, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 39743173ed49bac45b23cdcb570aec76, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0.5057874, g: 1, b: 0, a: 1}
+  Area: 2
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -1103,7 +1124,7 @@ GameObject:
   - component: {fileID: 998374926}
   - component: {fileID: 998374928}
   m_Layer: 0
-  m_Name: Goldvein1Scene
+  m_Name: Goldvein1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1136,9 +1157,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 30, y: 4}
-  gizmoColor: {r: 1, g: 0.8352942, b: 0, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
-  Category: 
+  BlocksArea: 0
+  gizmoColor: {r: 1, g: 0.8352942, b: 0, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -1188,9 +1210,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 20, y: 32}
-  gizmoColor: {r: 0, g: 1, b: 0.4876957, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 77428717a38c9d1479feb450d295b82c, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0, g: 1, b: 0.4876957, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -1207,7 +1230,7 @@ GameObject:
   - component: {fileID: 1219804483}
   - component: {fileID: 1219804485}
   m_Layer: 0
-  m_Name: Goldvein1Scene
+  m_Name: Goldvein1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1240,9 +1263,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 30, y: 5}
-  gizmoColor: {r: 1, g: 0.8352942, b: 0, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
-  Category: 
+  BlocksArea: 0
+  gizmoColor: {r: 1, g: 0.8352942, b: 0, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -1259,7 +1283,7 @@ GameObject:
   - component: {fileID: 1245298527}
   - component: {fileID: 1245298529}
   m_Layer: 0
-  m_Name: RuinHallwayScene
+  m_Name: RuinHallway
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1292,9 +1316,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 30, y: 10}
-  gizmoColor: {r: 0.50609493, g: 1, b: 0, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 45819bb1cec7bff439ef4a8fd3086ede, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0.50609493, g: 1, b: 0, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -1311,7 +1336,7 @@ GameObject:
   - component: {fileID: 1258023488}
   - component: {fileID: 1258023490}
   m_Layer: 0
-  m_Name: AltarScene
+  m_Name: Altar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1344,9 +1369,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 12, y: 12}
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -1363,7 +1389,7 @@ GameObject:
   - component: {fileID: 1308539822}
   - component: {fileID: 1308539824}
   m_Layer: 0
-  m_Name: JungleCave1Scene
+  m_Name: JungleCave1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1396,14 +1422,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 10, y: 12}
-  gizmoColor: {r: 0.5057874, g: 1, b: 0, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 39743173ed49bac45b23cdcb570aec76, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0.5057874, g: 1, b: 0, a: 1}
+  Area: 2
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
-  areaTopRight: {x: 80.101, y: 123, z: 0}
-  areaBotLeft: {x: 5.899006, y: 123, z: 0}
+  areaTopRight: {x: 79.18764, y: 123, z: 0}
+  areaBotLeft: {x: 10.134037, y: 123, z: 0}
 --- !u!1 &1349503213
 GameObject:
   m_ObjectHideFlags: 0
@@ -1415,7 +1442,7 @@ GameObject:
   - component: {fileID: 1349503214}
   - component: {fileID: 1349503216}
   m_Layer: 0
-  m_Name: SteleScene
+  m_Name: Stele
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1448,9 +1475,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 6, y: 8}
-  gizmoColor: {r: 0, g: 1, b: 0.47450984, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: b2017e39947da5e4cb8a0a2b994f657f, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0, g: 1, b: 0.47450984, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -1467,7 +1495,7 @@ GameObject:
   - component: {fileID: 1386046454}
   - component: {fileID: 1386046456}
   m_Layer: 0
-  m_Name: AltarScene
+  m_Name: Altar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1500,9 +1528,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 12, y: 12}
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -1519,7 +1548,7 @@ GameObject:
   - component: {fileID: 1515426340}
   - component: {fileID: 1515426342}
   m_Layer: 0
-  m_Name: BrothersScene
+  m_Name: Brothers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1552,9 +1581,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 36, y: 5}
-  gizmoColor: {r: 0, g: 1, b: 0.4758966, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 0aeff879f496464419494aa01542a7bf, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0, g: 1, b: 0.4758966, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -1604,9 +1634,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 6, y: 16}
-  gizmoColor: {r: 0, g: 0.9805918, b: 1, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 81b4ccd9237fdad488108bbbca778843, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0, g: 0.9805918, b: 1, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -1656,9 +1687,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 20, y: 24}
-  gizmoColor: {r: 0, g: 0.7807312, b: 1, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 9dbf398781cb2934898cde0e7ec0c4a2, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0, g: 0.7807312, b: 1, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -1675,7 +1707,7 @@ GameObject:
   - component: {fileID: 1756081570}
   - component: {fileID: 1756081572}
   m_Layer: 0
-  m_Name: OverworldScene
+  m_Name: Overworld
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1708,9 +1740,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 200, y: 40}
-  gizmoColor: {r: 1, g: 1, b: 1, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 0c2e33c16589d3f43943304b9113d6b9, type: 3}
-  Category: 
+  BlocksArea: 0
+  gizmoColor: {r: 1, g: 1, b: 1, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 0
   YInArea: 0
@@ -1727,7 +1760,7 @@ GameObject:
   - component: {fileID: 1902405188}
   - component: {fileID: 1902405190}
   m_Layer: 0
-  m_Name: AltarScene
+  m_Name: Altar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1760,9 +1793,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 12, y: 12}
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -1779,7 +1813,7 @@ GameObject:
   - component: {fileID: 1912251688}
   - component: {fileID: 1912251690}
   m_Layer: 0
-  m_Name: Goldvein1Scene
+  m_Name: Goldvein1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1812,9 +1846,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 30, y: 4}
-  gizmoColor: {r: 1, g: 0.8352942, b: 0, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
-  Category: 
+  BlocksArea: 0
+  gizmoColor: {r: 1, g: 0.8352942, b: 0, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -1831,7 +1866,7 @@ GameObject:
   - component: {fileID: 1958961046}
   - component: {fileID: 1958961048}
   m_Layer: 0
-  m_Name: AltarScene
+  m_Name: Altar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1864,9 +1899,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 12, y: 12}
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -1883,7 +1919,7 @@ GameObject:
   - component: {fileID: 1965986225}
   - component: {fileID: 1965986227}
   m_Layer: 0
-  m_Name: SteleScene
+  m_Name: Stele
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1916,9 +1952,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 6, y: 8}
-  gizmoColor: {r: 0, g: 1, b: 0.47450984, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: b2017e39947da5e4cb8a0a2b994f657f, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0, g: 1, b: 0.47450984, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -1935,7 +1972,7 @@ GameObject:
   - component: {fileID: 2005348834}
   - component: {fileID: 2005348836}
   m_Layer: 0
-  m_Name: AltarScene
+  m_Name: Altar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1968,9 +2005,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 12, y: 12}
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -1987,7 +2025,7 @@ GameObject:
   - component: {fileID: 2049936802}
   - component: {fileID: 2049936804}
   m_Layer: 0
-  m_Name: AltarScene
+  m_Name: Altar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2020,9 +2058,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 12, y: 12}
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Category: 
+  BlocksArea: 1
+  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -2039,7 +2078,7 @@ GameObject:
   - component: {fileID: 2078297073}
   - component: {fileID: 2078297075}
   m_Layer: 0
-  m_Name: Goldvein1Scene
+  m_Name: Goldvein1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2072,9 +2111,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 30, y: 5}
-  gizmoColor: {r: 1, g: 0.8352942, b: 0, a: 1}
   SavedSceneFile: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
-  Category: 
+  BlocksArea: 0
+  gizmoColor: {r: 1, g: 0.8352942, b: 0, a: 1}
+  Area: 0
   SpawnAttached: 0
   XInArea: 1
   YInArea: 0
@@ -2163,6 +2203,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e03091118b552a49b49193efa4013d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 200
-  height: 300
-  sceneAdderEditablePrefab: {fileID: 340977180016804633, guid: 6a4ed7355ce9d49448d2e1a4712ed856, type: 3}
+  stepSize: 10
+  debug: 0
