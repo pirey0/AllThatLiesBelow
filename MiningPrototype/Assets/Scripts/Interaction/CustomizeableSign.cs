@@ -34,14 +34,14 @@ public class CustomizeableSign : MineableObject, INonPersistantSavable, IBaseInt
             return;
         }
 
-        switchSymbolSound.Play();
-        cameraController.Shake(transform.position,CameraShakeType.explosion,0.1f,10,0.25f);
-
         while (!TryDisplay(currentSymbolId + 1))
         {
             currentSymbolId = -1;
         }
-        currentSymbolId++;    
+        currentSymbolId++;
+
+        switchSymbolSound.Play();
+        cameraController.Shake(transform.position, CameraShakeType.explosion, 0.1f, 10, 0.25f);
     }
 
     bool TryDisplay(int id)

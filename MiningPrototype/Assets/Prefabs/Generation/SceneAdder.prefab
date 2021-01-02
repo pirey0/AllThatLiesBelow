@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 74, y: 20, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 27
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &51234692
 MonoBehaviour:
@@ -82,7 +82,7 @@ Transform:
   m_LocalScale: {x: 156, y: 4, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 32
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &57865849
 MonoBehaviour:
@@ -106,59 +106,6 @@ MonoBehaviour:
   YInArea: 0
   areaTopRight: {x: 160, y: 236.05, z: 0}
   areaBotLeft: {x: 4, y: 236.05, z: 0}
---- !u!1 &68763407
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 68763408}
-  - component: {fileID: 68763410}
-  m_Layer: 0
-  m_Name: Altar
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &68763408
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 68763407}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37.91, y: 247.4, z: 0}
-  m_LocalScale: {x: 67.85955, y: 12, z: 0}
-  m_Children: []
-  m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &68763410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 68763407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Size: {x: 12, y: 12}
-  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Area: 0
-  SpawnAttached: 0
-  BlocksArea: 1
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-  XInArea: 1
-  YInArea: 0
-  areaTopRight: {x: 71.839775, y: 247.4, z: 0}
-  areaBotLeft: {x: 3.9802246, y: 247.4, z: 0}
 --- !u!1 &130648568
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,7 +135,7 @@ Transform:
   m_LocalScale: {x: 51.428894, y: 32, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 41
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &130648570
 MonoBehaviour:
@@ -241,7 +188,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 43
+  m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &233272678
 MonoBehaviour:
@@ -265,112 +212,6 @@ MonoBehaviour:
   YInArea: 1
   areaTopRight: {x: 187.84242, y: 87.19775, z: 0}
   areaBotLeft: {x: 15.050179, y: 18.357538, z: 0}
---- !u!1 &296375313
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 296375314}
-  - component: {fileID: 296375316}
-  m_Layer: 0
-  m_Name: Altar
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &296375314
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 296375313}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 94.1, y: 221.9, z: 0}
-  m_LocalScale: {x: 167.21178, y: 12, z: 0}
-  m_Children: []
-  m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &296375316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 296375313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Size: {x: 12, y: 12}
-  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Area: 0
-  SpawnAttached: 0
-  BlocksArea: 1
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-  XInArea: 1
-  YInArea: 0
-  areaTopRight: {x: 177.70589, y: 221.9, z: 0}
-  areaBotLeft: {x: 10.49411, y: 221.9, z: 0}
---- !u!1 &361415859
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 361415860}
-  - component: {fileID: 361415862}
-  m_Layer: 0
-  m_Name: Altar
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &361415860
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 361415859}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 76, y: 259.17, z: 0}
-  m_LocalScale: {x: 72, y: 12, z: 0}
-  m_Children: []
-  m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &361415862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 361415859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Size: {x: 12, y: 12}
-  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Area: 0
-  SpawnAttached: 0
-  BlocksArea: 1
-  gizmoColor: {r: 1, g: 0, b: 1, a: 1}
-  XInArea: 1
-  YInArea: 0
-  areaTopRight: {x: 112, y: 259.17, z: 0}
-  areaBotLeft: {x: 40, y: 259.17, z: 0}
 --- !u!1 &388756953
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,7 +241,7 @@ Transform:
   m_LocalScale: {x: 103.82438, y: 4, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 28
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &388756956
 MonoBehaviour:
@@ -424,59 +265,6 @@ MonoBehaviour:
   YInArea: 0
   areaTopRight: {x: 137.91219, y: 246.7, z: 0}
   areaBotLeft: {x: 34.08781, y: 246.7, z: 0}
---- !u!1 &435603927
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 435603928}
-  - component: {fileID: 435603930}
-  m_Layer: 0
-  m_Name: Altar
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &435603928
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 435603927}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.2, y: 208.5, z: 0}
-  m_LocalScale: {x: 85.43889, y: 12, z: 0}
-  m_Children: []
-  m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &435603930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 435603927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Size: {x: 12, y: 12}
-  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Area: 0
-  SpawnAttached: 0
-  BlocksArea: 1
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-  XInArea: 1
-  YInArea: 0
-  areaTopRight: {x: 85.91945, y: 208.5, z: 0}
-  areaBotLeft: {x: 0.4805565, y: 208.5, z: 0}
 --- !u!1 &580678116
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,7 +294,7 @@ Transform:
   m_LocalScale: {x: 186, y: 8, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 18
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &580678119
 MonoBehaviour:
@@ -559,7 +347,7 @@ Transform:
   m_LocalScale: {x: 64, y: 8, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 21
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &593203510
 MonoBehaviour:
@@ -583,59 +371,6 @@ MonoBehaviour:
   YInArea: 0
   areaTopRight: {x: 83.2, y: 142.4, z: 0}
   areaBotLeft: {x: 19.2, y: 142.4, z: 0}
---- !u!1 &628287165
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 628287166}
-  - component: {fileID: 628287168}
-  m_Layer: 0
-  m_Name: Altar
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &628287166
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 628287165}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 83.6, y: 109, z: 0}
-  m_LocalScale: {x: 154.21841, y: 12, z: 0}
-  m_Children: []
-  m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 16
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &628287168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 628287165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Size: {x: 12, y: 12}
-  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Area: 0
-  SpawnAttached: 0
-  BlocksArea: 1
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-  XInArea: 1
-  YInArea: 0
-  areaTopRight: {x: 160.7092, y: 109, z: 0}
-  areaBotLeft: {x: 6.4907913, y: 109, z: 0}
 --- !u!1 &645411280
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,7 +400,7 @@ Transform:
   m_LocalScale: {x: 172, y: 12, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 26
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &645411283
 MonoBehaviour:
@@ -689,59 +424,6 @@ MonoBehaviour:
   YInArea: 0
   areaTopRight: {x: 182.1, y: 191.57, z: 0}
   areaBotLeft: {x: 10.099998, y: 191.57, z: 0}
---- !u!1 &666056274
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 666056275}
-  - component: {fileID: 666056277}
-  m_Layer: 0
-  m_Name: Altar
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &666056275
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666056274}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 95.9, y: 155, z: 0}
-  m_LocalScale: {x: 154.06482, y: 12, z: 0}
-  m_Children: []
-  m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 15
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &666056277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666056274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Size: {x: 12, y: 12}
-  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Area: 0
-  SpawnAttached: 0
-  BlocksArea: 1
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-  XInArea: 1
-  YInArea: 0
-  areaTopRight: {x: 172.9324, y: 155, z: 0}
-  areaBotLeft: {x: 18.867592, y: 155, z: 0}
 --- !u!1 &706549923
 GameObject:
   m_ObjectHideFlags: 0
@@ -771,7 +453,7 @@ Transform:
   m_LocalScale: {x: 132, y: 4, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 31
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &706549926
 MonoBehaviour:
@@ -824,7 +506,7 @@ Transform:
   m_LocalScale: {x: 170, y: 5, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 35
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &789054975
 MonoBehaviour:
@@ -877,7 +559,7 @@ Transform:
   m_LocalScale: {x: 132, y: 4, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 29
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &802831929
 MonoBehaviour:
@@ -930,7 +612,7 @@ Transform:
   m_LocalScale: {x: 93.942894, y: 4, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 30
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &826822202
 MonoBehaviour:
@@ -954,59 +636,6 @@ MonoBehaviour:
   YInArea: 0
   areaTopRight: {x: 195.45145, y: 246.7, z: 0}
   areaBotLeft: {x: 101.508545, y: 246.7, z: 0}
---- !u!1 &861654417
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 861654418}
-  - component: {fileID: 861654420}
-  m_Layer: 0
-  m_Name: Altar
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &861654418
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 861654417}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 90.53, y: 142.6, z: 0}
-  m_LocalScale: {x: 166.86272, y: 12, z: 0}
-  m_Children: []
-  m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 17
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &861654420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 861654417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Size: {x: 12, y: 12}
-  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Area: 0
-  SpawnAttached: 0
-  BlocksArea: 1
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-  XInArea: 1
-  YInArea: 0
-  areaTopRight: {x: 173.96136, y: 142.6, z: 0}
-  areaBotLeft: {x: 7.0986404, y: 142.6, z: 0}
 --- !u!1 &889062497
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,7 +665,7 @@ Transform:
   m_LocalScale: {x: 51.428894, y: 32, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 48
+  m_RootOrder: 35
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &889062499
 MonoBehaviour:
@@ -1142,7 +771,7 @@ Transform:
   m_LocalScale: {x: 78, y: 16, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 22
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &933439221
 MonoBehaviour:
@@ -1195,7 +824,7 @@ Transform:
   m_LocalScale: {x: 150, y: 10, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 20
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &966527369
 MonoBehaviour:
@@ -1248,7 +877,7 @@ Transform:
   m_LocalScale: {x: 82.007515, y: 12, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 38
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &968209976
 MonoBehaviour:
@@ -1301,7 +930,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 47
+  m_RootOrder: 34
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &985654698
 MonoBehaviour:
@@ -1354,7 +983,7 @@ Transform:
   m_LocalScale: {x: 168, y: 4, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 34
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &998374928
 MonoBehaviour:
@@ -1407,7 +1036,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 42
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1160308705
 MonoBehaviour:
@@ -1442,7 +1071,7 @@ GameObject:
   - component: {fileID: 1177119454}
   - component: {fileID: 1177119456}
   m_Layer: 0
-  m_Name: JungleCity1
+  m_Name: Elevator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1456,7 +1085,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1177119453}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 41, y: 186, z: 0}
+  m_LocalPosition: {x: 65, y: 179, z: 0}
   m_LocalScale: {x: 51.428894, y: 32, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
@@ -1474,16 +1103,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Size: {x: 20, y: 32}
-  SavedSceneFile: {fileID: 4900000, guid: 77428717a38c9d1479feb450d295b82c, type: 3}
+  Size: {x: 8, y: 200}
+  SavedSceneFile: {fileID: 4900000, guid: 07baf7a7a49d63b4383830221c94113a, type: 3}
   Area: 0
   SpawnAttached: 0
   BlocksArea: 1
-  gizmoColor: {r: 0, g: 1, b: 0.4876957, a: 1}
+  gizmoColor: {r: 1, g: 0, b: 0.68625546, a: 1}
   XInArea: 1
   YInArea: 0
-  areaTopRight: {x: 66.71445, y: 186, z: 0}
-  areaBotLeft: {x: 15.285553, y: 186, z: 0}
+  areaTopRight: {x: 80, y: 179, z: 0}
+  areaBotLeft: {x: 60, y: 179, z: 0}
 --- !u!1 &1219804482
 GameObject:
   m_ObjectHideFlags: 0
@@ -1513,7 +1142,7 @@ Transform:
   m_LocalScale: {x: 172.92441, y: 5, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 36
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1219804485
 MonoBehaviour:
@@ -1590,59 +1219,6 @@ MonoBehaviour:
   YInArea: 0
   areaTopRight: {x: 166.5763, y: 174.13, z: 0}
   areaBotLeft: {x: 88.74371, y: 174.13, z: 0}
---- !u!1 &1258023487
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1258023488}
-  - component: {fileID: 1258023490}
-  m_Layer: 0
-  m_Name: Altar
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1258023488
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1258023487}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 159.22, y: 243.07, z: 0}
-  m_LocalScale: {x: 66.27449, y: 12, z: 0}
-  m_Children: []
-  m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1258023490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1258023487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Size: {x: 12, y: 12}
-  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Area: 0
-  SpawnAttached: 0
-  BlocksArea: 1
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-  XInArea: 1
-  YInArea: 0
-  areaTopRight: {x: 192.35724, y: 243.07, z: 0}
-  areaBotLeft: {x: 126.082756, y: 243.07, z: 0}
 --- !u!1 &1308539821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1672,7 +1248,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 39
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1308539824
 MonoBehaviour:
@@ -1725,7 +1301,7 @@ Transform:
   m_LocalScale: {x: 57.815796, y: 8, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 24
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1349503216
 MonoBehaviour:
@@ -1749,59 +1325,6 @@ MonoBehaviour:
   YInArea: 0
   areaTopRight: {x: 169.0079, y: 256.33, z: 0}
   areaBotLeft: {x: 111.19211, y: 256.33, z: 0}
---- !u!1 &1386046453
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1386046454}
-  - component: {fileID: 1386046456}
-  m_Layer: 0
-  m_Name: Altar
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1386046454
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1386046453}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 117.29, y: 175.04, z: 0}
-  m_LocalScale: {x: 137.79974, y: 12, z: 0}
-  m_Children: []
-  m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1386046456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1386046453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Size: {x: 12, y: 12}
-  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Area: 0
-  SpawnAttached: 0
-  BlocksArea: 1
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-  XInArea: 1
-  YInArea: 0
-  areaTopRight: {x: 186.18988, y: 175.04, z: 0}
-  areaBotLeft: {x: 48.39013, y: 175.04, z: 0}
 --- !u!1 &1515426339
 GameObject:
   m_ObjectHideFlags: 0
@@ -1831,7 +1354,7 @@ Transform:
   m_LocalScale: {x: 170, y: 5, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 23
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1515426342
 MonoBehaviour:
@@ -1884,7 +1407,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 40
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1567325016
 MonoBehaviour:
@@ -1937,7 +1460,7 @@ Transform:
   m_LocalScale: {x: 182.5523, y: 16, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 19
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1574758960
 MonoBehaviour:
@@ -2096,7 +1619,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 45
+  m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1840887720
 MonoBehaviour:
@@ -2149,7 +1672,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 44
+  m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1901857623
 MonoBehaviour:
@@ -2173,59 +1696,6 @@ MonoBehaviour:
   YInArea: 1
   areaTopRight: {x: 187.84242, y: 87.19775, z: 0}
   areaBotLeft: {x: 15.050179, y: 18.357538, z: 0}
---- !u!1 &1902405187
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1902405188}
-  - component: {fileID: 1902405190}
-  m_Layer: 0
-  m_Name: Altar
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1902405188
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1902405187}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 140.18, y: 210.81, z: 0}
-  m_LocalScale: {x: 94.00001, y: 12, z: 0}
-  m_Children: []
-  m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1902405190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1902405187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Size: {x: 12, y: 12}
-  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Area: 0
-  SpawnAttached: 0
-  BlocksArea: 1
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-  XInArea: 1
-  YInArea: 0
-  areaTopRight: {x: 187.18, y: 210.81, z: 0}
-  areaBotLeft: {x: 93.17999, y: 210.81, z: 0}
 --- !u!1 &1912251687
 GameObject:
   m_ObjectHideFlags: 0
@@ -2255,7 +1725,7 @@ Transform:
   m_LocalScale: {x: 148.5221, y: 4, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 33
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1912251690
 MonoBehaviour:
@@ -2279,59 +1749,6 @@ MonoBehaviour:
   YInArea: 0
   areaTopRight: {x: 162.84105, y: 220.64, z: 0}
   areaBotLeft: {x: 14.318954, y: 220.64, z: 0}
---- !u!1 &1958961045
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1958961046}
-  - component: {fileID: 1958961048}
-  m_Layer: 0
-  m_Name: Altar
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1958961046
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1958961045}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 114.42, y: 194.61, z: 0}
-  m_LocalScale: {x: 141.29643, y: 12, z: 0}
-  m_Children: []
-  m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 14
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1958961048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1958961045}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Size: {x: 12, y: 12}
-  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Area: 0
-  SpawnAttached: 0
-  BlocksArea: 1
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-  XInArea: 1
-  YInArea: 0
-  areaTopRight: {x: 185.0682, y: 194.61, z: 0}
-  areaBotLeft: {x: 43.771782, y: 194.61, z: 0}
 --- !u!1 &1965986224
 GameObject:
   m_ObjectHideFlags: 0
@@ -2361,7 +1778,7 @@ Transform:
   m_LocalScale: {x: 146, y: 8, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 25
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1965986227
 MonoBehaviour:
@@ -2385,59 +1802,6 @@ MonoBehaviour:
   YInArea: 0
   areaTopRight: {x: 174, y: 218.97, z: 0}
   areaBotLeft: {x: 28, y: 218.97, z: 0}
---- !u!1 &2005348833
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2005348834}
-  - component: {fileID: 2005348836}
-  m_Layer: 0
-  m_Name: Altar
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2005348834
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2005348833}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 100.95, y: 247, z: 0}
-  m_LocalScale: {x: 60.978115, y: 12, z: 0}
-  m_Children: []
-  m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2005348836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2005348833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Size: {x: 12, y: 12}
-  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Area: 0
-  SpawnAttached: 0
-  BlocksArea: 1
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-  XInArea: 1
-  YInArea: 0
-  areaTopRight: {x: 131.43906, y: 247, z: 0}
-  areaBotLeft: {x: 70.46094, y: 247, z: 0}
 --- !u!1 &2033305125
 GameObject:
   m_ObjectHideFlags: 0
@@ -2467,7 +1831,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 46
+  m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2033305127
 MonoBehaviour:
@@ -2491,59 +1855,6 @@ MonoBehaviour:
   YInArea: 1
   areaTopRight: {x: 187.84242, y: 87.19775, z: 0}
   areaBotLeft: {x: 15.050179, y: 18.357538, z: 0}
---- !u!1 &2049936801
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2049936802}
-  - component: {fileID: 2049936804}
-  m_Layer: 0
-  m_Name: Altar
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2049936802
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2049936801}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 63.840004, y: 226.26, z: 0}
-  m_LocalScale: {x: 121.121056, y: 12, z: 0}
-  m_Children: []
-  m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2049936804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2049936801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Size: {x: 12, y: 12}
-  SavedSceneFile: {fileID: 4900000, guid: 61b523fe21523354c8de59883f5f41da, type: 3}
-  Area: 0
-  SpawnAttached: 0
-  BlocksArea: 1
-  gizmoColor: {r: 0.8352942, g: 0.16470589, b: 0.8352942, a: 1}
-  XInArea: 1
-  YInArea: 0
-  areaTopRight: {x: 124.40053, y: 226.26, z: 0}
-  areaBotLeft: {x: 3.2794762, y: 226.26, z: 0}
 --- !u!1 &2078297072
 GameObject:
   m_ObjectHideFlags: 0
@@ -2573,7 +1884,7 @@ Transform:
   m_LocalScale: {x: 173.98433, y: 5, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 37
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2078297075
 MonoBehaviour:
@@ -2630,19 +1941,6 @@ Transform:
   - {fileID: 1660411554}
   - {fileID: 1245298527}
   - {fileID: 903158222}
-  - {fileID: 361415860}
-  - {fileID: 68763408}
-  - {fileID: 2005348834}
-  - {fileID: 2049936802}
-  - {fileID: 435603928}
-  - {fileID: 1902405188}
-  - {fileID: 296375314}
-  - {fileID: 1386046454}
-  - {fileID: 1258023488}
-  - {fileID: 1958961046}
-  - {fileID: 666056275}
-  - {fileID: 628287166}
-  - {fileID: 861654418}
   - {fileID: 580678117}
   - {fileID: 1574758958}
   - {fileID: 966527367}
