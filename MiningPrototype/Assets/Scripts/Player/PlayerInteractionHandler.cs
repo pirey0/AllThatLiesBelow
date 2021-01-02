@@ -8,7 +8,7 @@ using UnityEngine.Tilemaps;
 using UnityEngineInternal;
 using Zenject;
 
-public class PlayerInteractionHandler : InventoryOwner, IDropReceiver, ILayeredUI
+public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 {
     [SerializeField] PlayerSettings settings;
     [SerializeField] PlayerStateMachine player;
@@ -346,7 +346,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver, ILayeredU
         if (gridDigTarget.HasValue)
         {
             var info = map.GetTileInfoAt(gridDigTarget.Value);
-            return (!player.InOverworld() || info.MinableInOverworld);
+            return ((gridDigTarget.Value.y < Constants.OVERWORLD_START_Y) || info.MinableInOverworld);
         }
         else
         {
