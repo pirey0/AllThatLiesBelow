@@ -42,12 +42,12 @@ public class KernelIterator : StateListenerBehaviour
             }
 
             x++;
-            if (x >= map.SizeX - currentKernel.Width)
+            if (x >= map.SizeX - currentKernel.Width || x >= currentStartX+sizeX - currentKernel.Width)
             {
                 x = currentStartX;
                 y++;
 
-                if (y >= map.SizeY - currentKernel.Height)
+                if (y >= map.SizeY - currentKernel.Height || y >= currentStartY + sizeY - currentKernel.Height)
                 {
                     y = currentStartY;
                     yield return null; //1 kernel per frame
