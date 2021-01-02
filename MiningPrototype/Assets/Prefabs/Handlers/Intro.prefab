@@ -54,8 +54,8 @@ MonoBehaviour:
   - text: i'll be so rich...
     duration: 4
   horizontalSpeed: 1
-  delayBeforeTorchRequest: 2
-  skipIntroInEditor: 0
+  delayBeforeTorchRequest: 15
+  skipIntroInEditor: 1
   introLight: {fileID: 7846751759372128578}
 --- !u!114 &7846751759372128578
 MonoBehaviour:

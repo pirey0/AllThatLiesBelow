@@ -56,7 +56,7 @@ public class Intro : StateListenerBehaviour
         playerInventoryOpener.Hide();
         cursorHandler.Hide();
         inventoryManager.PlayerCollects(ItemType.Torch, 1);
-        inventoryManager.PlayerCollects(ItemType.Ladder, 1);
+        inventoryManager.PlayerCollects(ItemType.Rope, 1);
         placedTorch = false;
         introLight.intensity = 0.8f;
         effectHandler.SetNight();
@@ -76,9 +76,9 @@ public class Intro : StateListenerBehaviour
         }
 
         //Torch section
-        yield return new WaitForSeconds(delayBeforeTorchRequest-4);
+        yield return new WaitForSeconds(delayBeforeTorchRequest-2);
         introLight.intensity = 0.3f;
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(2);
 
         playerStatements.Say("Its so dark in here. I should place a torch.", 5);
         cursorHandler.Show();
@@ -99,7 +99,7 @@ public class Intro : StateListenerBehaviour
         introLight.intensity = 0.8f;
 
         yield return new WaitForSeconds(1);
-        playerStatements.Say("I can use a ladder to get out of here.", 5);
+        playerStatements.Say("I can attach a rope to the ceiling to climb out of here.", 5);
 
         while (!placedLadder)
             yield return null;
