@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b4e36afc74fff4f82cd40fcf05b7bc, type: 3}
+  m_Name: Item_25_Sign
+  m_EditorClassIdentifier: 
+  ItemType: 25
+  DisplayName: Sign
+  DisplayTooltip: Allows me to display different kinds of information.
+  DisplaySprite: {fileID: 21300000, guid: f9ff0a30f9f37564e8304fac3e4dc082, type: 3}
+  DisplaySpriteRead: {fileID: 0}
+  Weight: 1
+  CanBePlaced: 1
+  PickupHoldSprite: {fileID: 21300000, guid: f9ff0a30f9f37564e8304fac3e4dc082, type: 3}
+  PickupHoldOffset: {x: 0.2, y: 1}
+  PickupPreviewPrefab: {fileID: 7776149681948237303, guid: 9e560540b5f42be4e8b3953ad121854b, type: 3}
+  Prefab: {fileID: 2572252096484831997, guid: adb948a9d4d0f9340a8600cafaac4d0d, type: 3}
+  AmountIsUniqueID: 0
+  IsBurnable: 1
+  AltarWords: []

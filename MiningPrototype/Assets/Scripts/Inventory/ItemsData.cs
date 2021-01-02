@@ -28,7 +28,8 @@ public enum ItemType
     Log,
     Rope,
     Lift,
-    Lantern
+    Lantern,
+    Sign
 }
 
 

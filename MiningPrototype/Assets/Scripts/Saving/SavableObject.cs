@@ -48,7 +48,8 @@ public enum SpawnableIDType
     Note,
     Rope,
     Lift,
-    Lantern
+    Lantern,
+    Sign
 }
 
 [System.Serializable]
