@@ -24,7 +24,6 @@ public class ReadableItemHandler : MonoBehaviour
             current.Hide();
         else
         {
-
             if (current != null)
                 current.Hide();
 
@@ -33,7 +32,6 @@ public class ReadableItemHandler : MonoBehaviour
             current.id = id;
             ReadLetterSound.pitch = 1;
             ReadLetterSound.Play();
-
             ReadableItem itemToDisplay = (readableItems.Count - 1 < id) ? null : readableItems[id];
 
             if (itemToDisplay == null)

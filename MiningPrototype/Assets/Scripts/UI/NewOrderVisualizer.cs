@@ -26,7 +26,7 @@ public class NewOrderVisualizer : ReadableItemVisualizer
     Action<List<ItemAmountPair>, Dictionary<ItemType, int>> OnFinish;
     Action OnAbort;
 
-    private void Start()
+    protected override void Start()
     {
         StartCoroutine(ScaleCoroutine(scaleUp: true));
         UpdateCost();

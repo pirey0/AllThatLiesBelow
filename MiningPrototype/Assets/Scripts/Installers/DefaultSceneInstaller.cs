@@ -9,7 +9,7 @@ public class DefaultSceneInstaller : ScriptableObjectInstaller<DefaultSceneInsta
     [SerializeField] GameObject playerPrefab, progressionPrefab, readableItemPrefab, cameraPannerPrefab, cameraPrefab, itemPreviewPrefab, playerInventoryOpenerUIPrefab;
     [SerializeField] GameObject pauseMenuPrefab, toolTipPrefab, eventSystemPrefab, inWorldCanvasPrefab, playerStatementsPrefab, cursorHandlerPrefab;
     [SerializeField] GameObject debugModePrefab, inventoryManagerPrefab, saveHandlerPrefab, gameStatePrefab, transitionEffectHandlerPrefab, overworldEffectsHandlerPrefab, damageEffectHandlerPrefab;
-    [SerializeField] GameObject statsTrackerPrefab;
+    [SerializeField] GameObject statsTrackerPrefab, uisHandlerPrefab;
 
     public override void InstallBindings()
     {
@@ -33,6 +33,7 @@ public class DefaultSceneInstaller : ScriptableObjectInstaller<DefaultSceneInsta
         Container.Bind<CursorHandler>().FromComponentInNewPrefab(cursorHandlerPrefab).AsSingle().NonLazy();
         Container.Bind<StatsTracker>().FromComponentInNewPrefab(statsTrackerPrefab).AsSingle().NonLazy();
         Container.Bind<DamageEffectHandler>().FromComponentInNewPrefab(damageEffectHandlerPrefab).AsSingle().NonLazy();
+        Container.Bind<UIsHandler>().FromComponentInNewPrefab(uisHandlerPrefab).AsSingle().NonLazy();
 
         if (DebugMode.DEBUG_POSSIBLE)
         {

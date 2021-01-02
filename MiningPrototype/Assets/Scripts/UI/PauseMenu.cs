@@ -16,12 +16,6 @@ public class PauseMenu : StateListenerBehaviour
         Unpause();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            TogglePause();
-    }
-
     public void TogglePause()
     {
 
