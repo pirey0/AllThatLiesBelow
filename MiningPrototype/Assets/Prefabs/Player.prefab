@@ -11995,6 +11995,25 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 988e26319f42f98449aba9a800e8d4d1, type: 2}
   - {fileID: 11400000, guid: d8c927545905e5b4b8c09e16f70a39e1, type: 2}
   - {fileID: 11400000, guid: 5531e73e90b8ace4cb822d6e5d625b21, type: 2}
+  helmetAndPickaxeBasedAnimationHolders:
+  - helmetState: 0
+    animations:
+    - {fileID: 11400000, guid: b5cd5621b64cd6b43abf14303ce482c3, type: 2}
+    - {fileID: 11400000, guid: a97a1be1e47e9334cbd635c62d924ca8, type: 2}
+    - {fileID: 11400000, guid: ea6d6e7fa969b0a499a03001e6a0d3c5, type: 2}
+    - {fileID: 11400000, guid: 2b5d3511a7806294fba1bd0e894a3869, type: 2}
+  - helmetState: 1
+    animations:
+    - {fileID: 11400000, guid: 2ca46347117551b4d8f4de649a89771a, type: 2}
+    - {fileID: 11400000, guid: 7c6dddbd2d8fe9542a4bb543bc4fe3bf, type: 2}
+    - {fileID: 11400000, guid: 6966416e369763d45b7017375054a6da, type: 2}
+    - {fileID: 11400000, guid: 2d8d6d5af1c7b7c4b85bf1e95fb6913e, type: 2}
+  - helmetState: 2
+    animations:
+    - {fileID: 11400000, guid: 32a479f3b6139fe478f4ea92a1b7d260, type: 2}
+    - {fileID: 11400000, guid: 398eda5ce559e304cb114688a29f52bc, type: 2}
+    - {fileID: 11400000, guid: 5094d3b20ec3e564e9e299e17772af4c, type: 2}
+    - {fileID: 11400000, guid: a7a212d66005dbf44872c5f5fc4a7b0e, type: 2}
 --- !u!114 &651199607118553818
 MonoBehaviour:
   m_ObjectHideFlags: 0

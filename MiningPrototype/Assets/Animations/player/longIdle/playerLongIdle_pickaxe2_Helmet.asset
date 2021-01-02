@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d05716d329922cf4abb0b6513364aece, type: 3}
-  m_Name: playerLongIdle
+  m_Name: playerLongIdle_pickaxe2_Helmet
   m_EditorClassIdentifier: 
   loop: 0
   speedMultiplyer: 1
   frames:
-  - Sprite: {fileID: -8736164668747230439, guid: 94421b5b25e63b4479deff0229d1ed28, type: 3}
+  - Sprite: {fileID: 7965720848616293695, guid: 94421b5b25e63b4479deff0229d1ed28, type: 3}
     Duration: 0.1
-  - Sprite: {fileID: -8644274156481232770, guid: 94421b5b25e63b4479deff0229d1ed28, type: 3}
+  - Sprite: {fileID: 8198754206457082, guid: 94421b5b25e63b4479deff0229d1ed28, type: 3}
     Duration: 0.1
-  - Sprite: {fileID: 4264678704247391246, guid: 94421b5b25e63b4479deff0229d1ed28, type: 3}
+  - Sprite: {fileID: 4316942849038587648, guid: 94421b5b25e63b4479deff0229d1ed28, type: 3}
     Duration: 0.1
-  - Sprite: {fileID: 8111953613110948124, guid: 94421b5b25e63b4479deff0229d1ed28, type: 3}
+  - Sprite: {fileID: 228895602888040428, guid: 94421b5b25e63b4479deff0229d1ed28, type: 3}
     Duration: 0.5
-  - Sprite: {fileID: 7460902856509431920, guid: 94421b5b25e63b4479deff0229d1ed28, type: 3}
+  - Sprite: {fileID: 5050684829281067682, guid: 94421b5b25e63b4479deff0229d1ed28, type: 3}
     Duration: 1
-  - Sprite: {fileID: 6157965838150338649, guid: 94421b5b25e63b4479deff0229d1ed28, type: 3}
+  - Sprite: {fileID: 1587001865661373047, guid: 94421b5b25e63b4479deff0229d1ed28, type: 3}
     Duration: 1
   fileToLoadFrom: {fileID: 2800000, guid: 94421b5b25e63b4479deff0229d1ed28, type: 3}
   defaultTime: 0.25

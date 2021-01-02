@@ -21,6 +21,11 @@ public class SpriteAnimationEditor : Editor
             (serializedObject.targetObject as SpriteAnimation).LoadFromObject();
         }
 
+        if (GUILayout.Button("UpdateFromObject"))
+        {
+            (serializedObject.targetObject as SpriteAnimation).UpdateFromObject();
+        }
+
         preview = EditorGUILayout.Toggle("Preview: ", preview);
 
         if(preview)

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d05716d329922cf4abb0b6513364aece, type: 3}
+  m_Name: playerLongIdle_pickaxe3_noHelmet
+  m_EditorClassIdentifier: 
+  loop: 0
+  speedMultiplyer: 1
+  frames:
+  - Sprite: {fileID: 7785445432352985360, guid: caff9f69f28071049b3e5868962e7ae3, type: 3}
+    Duration: 0.1
+  - Sprite: {fileID: 5808872304846279334, guid: caff9f69f28071049b3e5868962e7ae3, type: 3}
+    Duration: 0.1
+  - Sprite: {fileID: 8036515625959908079, guid: caff9f69f28071049b3e5868962e7ae3, type: 3}
+    Duration: 0.1
+  - Sprite: {fileID: -3404812434500957017, guid: caff9f69f28071049b3e5868962e7ae3, type: 3}
+    Duration: 0.5
+  - Sprite: {fileID: -6777614667367432936, guid: caff9f69f28071049b3e5868962e7ae3, type: 3}
+    Duration: 1
+  - Sprite: {fileID: 5924186180692490667, guid: caff9f69f28071049b3e5868962e7ae3, type: 3}
+    Duration: 1
+  fileToLoadFrom: {fileID: 2800000, guid: caff9f69f28071049b3e5868962e7ae3, type: 3}
+  defaultTime: 0.25
+  loadFromLastToFirst: 0

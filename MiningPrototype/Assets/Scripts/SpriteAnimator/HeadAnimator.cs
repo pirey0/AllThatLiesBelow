@@ -25,7 +25,7 @@ public class HeadAnimator : MonoBehaviour
 
     [Zenject.Inject] CameraController cameraController;
 
-    public void ChangeHelmetState(HelmentState newHelmentState)
+    public void ChangeHelmetState(HelmetState newHelmentState)
     {
         sprites = GetArrayForState(newHelmentState);
     }
@@ -42,13 +42,13 @@ public class HeadAnimator : MonoBehaviour
             spriteRenderer.sprite = sprites[frameToSet];
     }
 
-    private Sprite[] GetArrayForState(HelmentState state)
+    private Sprite[] GetArrayForState(HelmetState state)
     {
         switch(state)
         {
-            case HelmentState.Helmet:
+            case HelmetState.Helmet:
                 return helmet;
-            case HelmentState.HelmetWidthLamp:
+            case HelmetState.HelmetWidthLamp:
                 return helmetWithLamp;
         }
 

@@ -17,6 +17,7 @@ public class PlayerVisualController : MonoBehaviour
 
     [SerializeField] PlayerVisualState[] visualStates;
     [SerializeField] SpriteAnimation[] climbNoHelmet, climbIdleNoHelmet, climbHelmet, climbIdleHelmet, climbHelmetLamp, climbIdleHelmetLamp;
+    [SerializeField] HelmetAndPickaxeBasedAnimationHolder[] helmetAndPickaxeBasedAnimationHolders;
 
 
     Dictionary<string, PlayerVisualState> visualStateMap;
@@ -25,7 +26,7 @@ public class PlayerVisualController : MonoBehaviour
     StateMachine stateMachine;
     StateMachine.State prevOldState, prevNewState;
 
-    HelmentState helmentState;
+    HelmetState helmentState;
     int pickaxeLevel = 1;
     int pickaxeMaxLevel = 4;
 
@@ -52,7 +53,7 @@ public class PlayerVisualController : MonoBehaviour
 
     }
 
-    public void ChangeHelmetState(HelmentState newHelmentState)
+    public void ChangeHelmetState(HelmetState newHelmentState)
     {
         headAnimator.ChangeHelmetState(newHelmentState);
         helmentState = newHelmentState;
@@ -69,19 +70,19 @@ public class PlayerVisualController : MonoBehaviour
     [Button]
     public void AddHelmet()
     {
-        ChangeHelmetState(HelmentState.Helmet);
+        ChangeHelmetState(HelmetState.Helmet);
     }
 
     [Button]
     public void AddHelmetWithLamp()
     {
-        ChangeHelmetState(HelmentState.HelmetWidthLamp);
+        ChangeHelmetState(HelmetState.HelmetWidthLamp);
     }
 
     [Button]
     public void RemoveHelmet()
     {
-        ChangeHelmetState(HelmentState.None);
+        ChangeHelmetState(HelmetState.None);
     }
 
     [Button]
@@ -100,6 +101,7 @@ public class PlayerVisualController : MonoBehaviour
     {
         visualStateMap["Climb"].BodyAnimation = GetBodyAnimationFor("Climb");
         visualStateMap["ClimbIdle"].BodyAnimation = GetBodyAnimationFor("ClimbIdle");
+        visualStateMap["LongIdle"].BodyAnimation = GetBodyAnimationFor("LongIdle");
     }
 
     private SpriteAnimation GetBodyAnimationFor(string statename)
@@ -108,22 +110,29 @@ public class PlayerVisualController : MonoBehaviour
         {
             switch (helmentState)
             {
-                case HelmentState.Helmet:
+                case HelmetState.Helmet:
                     return climbIdleHelmet[pickaxeLevel - 1];
 
-                case HelmentState.HelmetWidthLamp:
+                case HelmetState.HelmetWidthLamp:
                     return climbIdleHelmetLamp[pickaxeLevel - 1];
             }
 
             return climbIdleNoHelmet[pickaxeLevel - 1];
+        } else if (statename == "LongIdle")
+        {
+            foreach (HelmetAndPickaxeBasedAnimationHolder holder in helmetAndPickaxeBasedAnimationHolders)
+            {
+                if (holder.helmetState == helmentState)
+                    return holder.animations[pickaxeLevel - 1];
+            }
         }
 
         switch (helmentState)
         {
-            case HelmentState.Helmet:
+            case HelmetState.Helmet:
                 return climbHelmet[pickaxeLevel - 1];
 
-            case HelmentState.HelmetWidthLamp:
+            case HelmetState.HelmetWidthLamp:
                 return climbHelmetLamp[pickaxeLevel - 1];
         }
 
@@ -226,9 +235,16 @@ public class PlayerVisualController : MonoBehaviour
     }
 }
 
-public enum HelmentState
+public enum HelmetState
 {
     None,
     Helmet,
     HelmetWidthLamp
+}
+
+[System.Serializable]
+public class HelmetAndPickaxeBasedAnimationHolder
+{
+    public HelmetState helmetState;
+    public SpriteAnimation[] animations;
 }
