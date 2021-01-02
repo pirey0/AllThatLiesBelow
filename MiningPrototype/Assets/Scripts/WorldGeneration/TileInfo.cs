@@ -39,17 +39,4 @@ public class TileInfo : ScriptableObject
     public Sprite physicalTileOverlay;
 
 
-    public Color GetCrumbleTypeColor()
-    {
-        switch (CrumbleType)
-        {
-            case CrumbleType.Air:
-                return Color.white;
-            case CrumbleType.Normal:
-                return Color.black;
-
-            default:
-                return Color.gray;
-        }
-    }
 }

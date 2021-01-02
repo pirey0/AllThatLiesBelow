@@ -136,6 +136,17 @@ public static class Util
         Debug.DrawLine(location.AsV3() + Vector3.right, location.AsV3() + Vector3.up + Vector3.right, color, duration);
     }
 
+    public static void DebugDrawTileCrossed(Vector2Int location, Color color, float duration = 1)
+    {
+        Debug.DrawLine(location.AsV3(), location.AsV3() + Vector3.up, color, duration);
+        Debug.DrawLine(location.AsV3(), location.AsV3() + Vector3.right, color, duration);
+        Debug.DrawLine(location.AsV3() + Vector3.up, location.AsV3() + Vector3.up + Vector3.right, color, duration);
+        Debug.DrawLine(location.AsV3() + Vector3.right, location.AsV3() + Vector3.up + Vector3.right, color, duration);
+        Debug.DrawLine(location.AsV3(), location.AsV3() + Vector3.up + Vector3.right, color, duration);
+        Debug.DrawLine(location.AsV3() + Vector3.up, location.AsV3() + Vector3.right, color, duration);
+    }
+
+
     public static void GizmosDrawTile(Vector2Int location)
     {
         Gizmos.DrawLine(location.AsV3(), location.AsV3() + Vector3.up);
@@ -288,5 +299,29 @@ public static class Util
     public static bool IsNullOrDestroyed(object t)
     {
         return (t == null || t.Equals(null));
+    }
+
+    public static Color AsDebugColor(this CrumbleType t)
+    {
+        switch (t)
+        {
+            case CrumbleType.Air:
+                return Color.white;
+            case CrumbleType.Normal:
+                return new Color(1,0.5f,0);
+            case CrumbleType.Crumble | CrumbleType.Normal:
+                return Color.red;
+            case CrumbleType.CrumbleInstant | CrumbleType.Normal:
+                return Color.magenta;
+
+            case CrumbleType.Unstable:
+                return Color.blue;
+
+            case CrumbleType.Anything:
+                return Color.yellow;
+
+            default:
+                return Color.gray;
+        }
     }
 }

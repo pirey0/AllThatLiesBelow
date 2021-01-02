@@ -39,9 +39,12 @@ public class KernelIterator : StateListenerBehaviour
                 if (debug)
                     Debug.Log(currentKernel.Name + " matched at: (" + x + "/" + y + ")");
                 ApplyKernel(currentKernel, x, y);
+
             }
+            //Util.DebugDrawTile(new Vector2Int(x, y), Color.gray,0.1f);
 
             x++;
+
             if (x >= map.SizeX - currentKernel.Width || x >= currentStartX+sizeX - currentKernel.Width)
             {
                 x = currentStartX;
@@ -73,6 +76,9 @@ public class KernelIterator : StateListenerBehaviour
             for (int x = 0; x < k.Width; x++)
             {
                 Vector2Int loc = new Vector2Int(px + x, py + y);
+                Util.DebugDrawTileCrossed(loc, k[x,y].AsDebugColor(), 2f);
+                
+
                 var info = map.GetTileInfoAt(loc);
                 if (info.CanBeUnstable)
                 {
@@ -109,7 +115,7 @@ public class KernelIterator : StateListenerBehaviour
                         Vector2Int p = new Vector2Int(currentStartX + x, currentStartY + y);
                         var i = map.GetTileInfoAt(p);
 
-                        Gizmos.color = i.GetCrumbleTypeColor();
+                        Gizmos.color = i.CrumbleType.AsDebugColor();
                         Gizmos.DrawCube(p.AsV3() + new Vector3(0.5f, 0.5f), Vector2.one);
                     }
                 }
