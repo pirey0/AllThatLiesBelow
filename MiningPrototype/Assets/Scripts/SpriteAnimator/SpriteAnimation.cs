@@ -94,7 +94,7 @@ public class SpriteAnimation : ScriptableObject
 
         if (loadFromLastToFirst)
         {
-            for (int i = sprites.Length -1; i >= 0; i--)
+            for (int i = sprites.Length - 1; i >= 0; i--)
             {
                 AnimationFrame frame = new AnimationFrame();
                 frame.Sprite = sprites[i];
@@ -112,6 +112,23 @@ public class SpriteAnimation : ScriptableObject
             }
         }
     #endif
+
+    }
+
+    public void  UpdateFromObject()
+    {
+#if UNITY_EDITOR
+        if (fileToLoadFrom == null)
+            return;
+
+        var path = AssetDatabase.GetAssetPath(fileToLoadFrom);
+        Sprite[] sprites = AssetDatabase.LoadAllAssetsAtPath(path).OfType<Sprite>().ToArray();
+
+        for (int i = 0; i < frames.Count; i++)
+        {
+            frames[i].Sprite = sprites[i];
+        }
+#endif
     }
 }
 
