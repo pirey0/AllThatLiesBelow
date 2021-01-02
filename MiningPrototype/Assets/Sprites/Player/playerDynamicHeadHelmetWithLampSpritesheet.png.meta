@@ -1,31 +1,40 @@
 fileFormatVersion: 2
-guid: c099f4890c297984490ff015018f9495
+guid: 2a1edf49b10fb0c458b3d6ccf3d265cf
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1522097905951984030
-    second: playerPickaxeSpritesheet_0
+      213: 2584688791920937383
+    second: playerDynamicHeadHelmetWithLampSpritesheet_0
   - first:
-      213: -4857031402594571213
-    second: playerPickaxeSpritesheet_1
+      213: 3748870236306871675
+    second: playerDynamicHeadHelmetWithLampSpritesheet_1
   - first:
-      213: 2793686887763230910
-    second: playerPickaxeSpritesheet_2
+      213: 8778421185917573275
+    second: playerDynamicHeadHelmetWithLampSpritesheet_2
   - first:
-      213: -2140573764911733191
-    second: playerPickaxeSpritesheet_3
+      213: 7118909682205792362
+    second: playerDynamicHeadHelmetWithLampSpritesheet_3
   - first:
-      213: -3322022834941860738
-    second: playerPickaxeSpritesheet_4
+      213: 8733832075759791106
+    second: playerDynamicHeadHelmetWithLampSpritesheet_4
   - first:
-      213: -3189682528193580246
-    second: playerPickaxeSpritesheet_5
+      213: -2734504946166507769
+    second: playerDynamicHeadHelmetWithLampSpritesheet_5
   - first:
-      213: -7303096387755746053
-    second: playerPickaxeSpritesheet_6
+      213: -446218419418951897
+    second: playerDynamicHeadHelmetWithLampSpritesheet_6
   - first:
-      213: 7585674902419984140
-    second: playerPickaxeSpritesheet_7
+      213: -4620725348667444191
+    second: playerDynamicHeadHelmetWithLampSpritesheet_7
+  - first:
+      213: -5346790023608122908
+    second: playerDynamicHeadHelmetWithLampSpritesheet_8
+  - first:
+      213: 3328094458722211672
+    second: playerDynamicHeadHelmetWithLampSpritesheet_9
+  - first:
+      213: -2564969349870626322
+    second: playerDynamicHeadHelmetWithLampSpritesheet_10
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -44,7 +53,7 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-  isReadable: 1
+  isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -113,13 +122,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: playerPickaxeSpritesheet_0
+      name: playerDynamicHeadHelmetWithLampSpritesheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 24
-        height: 24
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,20 +136,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e9942a52bf39f1510800000000000000
-      internalID: 1522097905951984030
+      spriteID: 7a9816113c8aed320800000000000000
+      internalID: 2584688791920937383
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerPickaxeSpritesheet_1
+      name: playerDynamicHeadHelmetWithLampSpritesheet_1
       rect:
         serializedVersion: 2
-        x: 24
+        x: 16
         y: 0
-        width: 24
-        height: 24
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -148,20 +157,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 33cee694cab589cb0800000000000000
-      internalID: -4857031402594571213
+      spriteID: b751b181e99a60430800000000000000
+      internalID: 3748870236306871675
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerPickaxeSpritesheet_2
+      name: playerDynamicHeadHelmetWithLampSpritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b98516bfe8733d970800000000000000
+      internalID: 8778421185917573275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: playerDynamicHeadHelmetWithLampSpritesheet_3
       rect:
         serializedVersion: 2
         x: 48
         y: 0
-        width: 24
-        height: 24
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,20 +199,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb04bce3c6b25c620800000000000000
-      internalID: 2793686887763230910
+      spriteID: a6817fb63a27bc260800000000000000
+      internalID: 7118909682205792362
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerPickaxeSpritesheet_3
+      name: playerDynamicHeadHelmetWithLampSpritesheet_4
       rect:
         serializedVersion: 2
-        x: 72
+        x: 64
         y: 0
-        width: 24
-        height: 24
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,20 +220,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9366ae680872b42e0800000000000000
-      internalID: -2140573764911733191
+      spriteID: 20c2393cffdc43970800000000000000
+      internalID: 8733832075759791106
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerPickaxeSpritesheet_4
+      name: playerDynamicHeadHelmetWithLampSpritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 707523f4d361d0ad0800000000000000
+      internalID: -2734504946166507769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: playerDynamicHeadHelmetWithLampSpritesheet_6
       rect:
         serializedVersion: 2
         x: 96
         y: 0
-        width: 24
-        height: 24
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -211,20 +262,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e74ed8b15ddc5e1d0800000000000000
-      internalID: -3322022834941860738
+      spriteID: 72f0c4236b6bec9f0800000000000000
+      internalID: -446218419418951897
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerPickaxeSpritesheet_5
+      name: playerDynamicHeadHelmetWithLampSpritesheet_7
       rect:
         serializedVersion: 2
-        x: 120
+        x: 112
         y: 0
-        width: 24
-        height: 24
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -232,20 +283,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a2370c8e3a8fbb3d0800000000000000
-      internalID: -3189682528193580246
+      spriteID: 124b80ce6c2efdfb0800000000000000
+      internalID: -4620725348667444191
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerPickaxeSpritesheet_6
+      name: playerDynamicHeadHelmetWithLampSpritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e14c325dc26cc5b0800000000000000
+      internalID: -5346790023608122908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: playerDynamicHeadHelmetWithLampSpritesheet_9
       rect:
         serializedVersion: 2
         x: 144
         y: 0
-        width: 24
-        height: 24
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -253,20 +325,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bfc516f578036aa90800000000000000
-      internalID: -7303096387755746053
+      spriteID: 8575517f644cf2e20800000000000000
+      internalID: 3328094458722211672
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerPickaxeSpritesheet_7
+      name: playerDynamicHeadHelmetWithLampSpritesheet_10
       rect:
         serializedVersion: 2
-        x: 168
+        x: 160
         y: 0
-        width: 24
-        height: 24
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -274,8 +346,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c0fc654122bb54960800000000000000
-      internalID: 7585674902419984140
+      spriteID: ee9523157f5676cd0800000000000000
+      internalID: -2564969349870626322
       vertices: []
       indices: 
       edges: []

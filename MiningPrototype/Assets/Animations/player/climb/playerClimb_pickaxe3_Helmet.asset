@@ -10,12 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d05716d329922cf4abb0b6513364aece, type: 3}
-  m_Name: playerLand
+  m_Name: playerClimb_pickaxe3_Helmet
   m_EditorClassIdentifier: 
-  loop: 0
+  loop: 1
   speedMultiplyer: 1
   frames:
-  - Sprite: {fileID: -508740534161972420, guid: bea1749c2a5f10742902c491aa0fcc1e, type: 3}
-    Duration: 0.2
+  - Sprite: {fileID: 1180881121447496534, guid: df9b9b6f9133047419c8d4a3a395b374, type: 3}
+    Duration: 0.25
+  - Sprite: {fileID: -3587961545637141406, guid: df9b9b6f9133047419c8d4a3a395b374, type: 3}
+    Duration: 0.25
   fileToLoadFrom: {fileID: 0}
   defaultTime: 0.25
+  loadFromLastToFirst: 0

@@ -27,3 +27,4 @@ MonoBehaviour:
     Duration: 0.1
   fileToLoadFrom: {fileID: 2800000, guid: 8430a79a045b8cc46a52c4c37207881c, type: 3}
   defaultTime: 0.1
+  loadFromLastToFirst: 0

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.PlayerLoop;
 public class HeadAnimator : MonoBehaviour
 {
     [SerializeField] SpriteRenderer spriteRenderer;
-    [SerializeField] Sprite[] sprites;
+    [SerializeField] Sprite[] sprites, head, helmet, helmetWithLamp;
     
     [SerializeField] bool flipX;
     [SerializeField] SpriteRenderer playerSpriteRenderer;
@@ -19,7 +20,15 @@ public class HeadAnimator : MonoBehaviour
     [SerializeField] float correctionultiplier = 10f;
     float angleBefore = 0;
 
+    [SerializeField] bool hasHelmet;
+    [SerializeField] bool hasLamp;
+
     [Zenject.Inject] CameraController cameraController;
+
+    public void ChangeHelmetState(HelmentState newHelmentState)
+    {
+        sprites = GetArrayForState(newHelmentState);
+    }
 
     private void Update()
     {
@@ -27,10 +36,23 @@ public class HeadAnimator : MonoBehaviour
         SetFrame(GetFrameFromMouseAngle());
     }
 
-    void SetFrame(int frameToSet)
+    private void SetFrame(int frameToSet)
     {
         if (spriteRenderer != null)
             spriteRenderer.sprite = sprites[frameToSet];
+    }
+
+    private Sprite[] GetArrayForState(HelmentState state)
+    {
+        switch(state)
+        {
+            case HelmentState.Helmet:
+                return helmet;
+            case HelmentState.HelmetWidthLamp:
+                return helmetWithLamp;
+        }
+
+        return head;
     }
 
     private bool TryFlipX()

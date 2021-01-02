@@ -10,12 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d05716d329922cf4abb0b6513364aece, type: 3}
-  m_Name: playerClimbIdle
+  m_Name: playerWalkingSlow
   m_EditorClassIdentifier: 
   loop: 1
   speedMultiplyer: 1
   frames:
-  - Sprite: {fileID: -4364568823649116938, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
-    Duration: 0.25
-  fileToLoadFrom: {fileID: 0}
-  defaultTime: 0.25
+  - Sprite: {fileID: 3486974047226116618, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
+    Duration: 0.4
+  - Sprite: {fileID: 6277849533615305770, guid: ea8d6db7a96b1e7488d9bf80ddb0cd78, type: 3}
+    Duration: 0.4
+  fileToLoadFrom: {fileID: 2800000, guid: f2fce80918792284dbc507948b41bf1e, type: 3}
+  defaultTime: 0.1
+  loadFromLastToFirst: 0

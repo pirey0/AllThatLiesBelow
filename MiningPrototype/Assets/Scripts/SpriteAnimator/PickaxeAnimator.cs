@@ -6,18 +6,24 @@ public class PickaxeAnimator : MonoBehaviour
 {
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] int idleFrame;
-    [SerializeField] Sprite[] sprites;
-    [SerializeField] Sprite[] spritesImproved;
+    [SerializeField] PickaxeFrames[] sprites;
     [SerializeField] AnimationCurve offsetOnSwing;
     [SerializeField] int offsetToMouse = 2;
     [SerializeField] bool hideSwing;
 
-    [SerializeField] bool isImproved  = false;
+    int pickaxeLevel = 1;
 
     [Zenject.Inject] CameraController cameraController;
     private void Start()
     {
         SetFrame(idleFrame);
+    }
+
+    public void SetPickaxeLevel(int newLevel)
+    {
+        pickaxeLevel = newLevel;
+        SetFrame(idleFrame);
+        Debug.LogWarning("pickaxe level: " + newLevel);
     }
     public void Play()
     {
@@ -55,7 +61,7 @@ public class PickaxeAnimator : MonoBehaviour
     {
         if (spriteRenderer != null)
         {
-            int framesMax = sprites.Length;
+            int framesMax = sprites[pickaxeLevel-1].sprites.Length;
 
             while (frameToSet < 12)
                 frameToSet += framesMax;
@@ -63,7 +69,7 @@ public class PickaxeAnimator : MonoBehaviour
             int frameRemapped = (frameToSet) % framesMax;
 
             //Debug.Log("frame:" + frameRemapped);
-            spriteRenderer.sprite = isImproved?spritesImproved[frameRemapped]:sprites[frameRemapped];
+            spriteRenderer.sprite = sprites[pickaxeLevel-1].sprites[frameRemapped];
         }
     }
 
@@ -80,6 +86,12 @@ public class PickaxeAnimator : MonoBehaviour
 
     public void Upgrade()
     {
-        isImproved = true;
+        throw new System.NotImplementedException("Please use the PlayerVisualController for such Upgrades and remove this function, thank you. Have a nice day.");
     }
+}
+
+[System.Serializable]
+public class PickaxeFrames
+{
+    public Sprite[] sprites;
 }

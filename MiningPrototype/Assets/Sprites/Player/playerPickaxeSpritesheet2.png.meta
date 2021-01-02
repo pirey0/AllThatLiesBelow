@@ -1,31 +1,55 @@
 fileFormatVersion: 2
-guid: 6d46dc464abd7a84e9f017c36dbbe2f3
+guid: c099f4890c297984490ff015018f9495
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5689932060248135952
-    second: playerPickaxeSpritesheetImproved_0
+      213: 1522097905951984030
+    second: playerPickaxeSpritesheet_0
   - first:
-      213: 3892259529190627399
-    second: playerPickaxeSpritesheetImproved_1
+      213: -4857031402594571213
+    second: playerPickaxeSpritesheet_1
   - first:
-      213: 3353534004565220883
-    second: playerPickaxeSpritesheetImproved_2
+      213: 2793686887763230910
+    second: playerPickaxeSpritesheet_2
   - first:
-      213: -1166502980159944170
-    second: playerPickaxeSpritesheetImproved_3
+      213: -2140573764911733191
+    second: playerPickaxeSpritesheet_3
   - first:
-      213: -2321040690675556877
-    second: playerPickaxeSpritesheetImproved_4
+      213: -3322022834941860738
+    second: playerPickaxeSpritesheet_4
   - first:
-      213: -695229955007597846
-    second: playerPickaxeSpritesheetImproved_5
+      213: -3189682528193580246
+    second: playerPickaxeSpritesheet_5
   - first:
-      213: 1532446199741056011
-    second: playerPickaxeSpritesheetImproved_6
+      213: -7303096387755746053
+    second: playerPickaxeSpritesheet_6
   - first:
-      213: -8046182359095189456
-    second: playerPickaxeSpritesheetImproved_7
+      213: 7585674902419984140
+    second: playerPickaxeSpritesheet_7
+  - first:
+      213: 4068771841470174233
+    second: playerPickaxeSpritesheet2_0
+  - first:
+      213: -6632934230631524777
+    second: playerPickaxeSpritesheet2_1
+  - first:
+      213: -543815608008971979
+    second: playerPickaxeSpritesheet2_2
+  - first:
+      213: 8729053093221592054
+    second: playerPickaxeSpritesheet2_3
+  - first:
+      213: -5533237671080154248
+    second: playerPickaxeSpritesheet2_4
+  - first:
+      213: 6810964854724061364
+    second: playerPickaxeSpritesheet2_5
+  - first:
+      213: -3846577816565098619
+    second: playerPickaxeSpritesheet2_6
+  - first:
+      213: 7380626927858778763
+    second: playerPickaxeSpritesheet2_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -44,7 +68,7 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -68,8 +92,8 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  alignment: 7
+  spritePivot: {x: 0.5, y: 0}
   spritePixelsToUnits: 8
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -113,7 +137,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: playerPickaxeSpritesheetImproved_0
+      name: playerPickaxeSpritesheet2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -127,14 +151,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 019523fef03b6fe40800000000000000
-      internalID: 5689932060248135952
+      spriteID: 91411fabe6e277830800000000000000
+      internalID: 4068771841470174233
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerPickaxeSpritesheetImproved_1
+      name: playerPickaxeSpritesheet2_1
       rect:
         serializedVersion: 2
         x: 24
@@ -148,14 +172,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74859037b65140630800000000000000
-      internalID: 3892259529190627399
+      spriteID: 756dda4c57513f3a0800000000000000
+      internalID: -6632934230631524777
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerPickaxeSpritesheetImproved_2
+      name: playerPickaxeSpritesheet2_2
       rect:
         serializedVersion: 2
         x: 48
@@ -169,14 +193,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 31e9d4cc8652a8e20800000000000000
-      internalID: 3353534004565220883
+      spriteID: 539ef45f59af378f0800000000000000
+      internalID: -543815608008971979
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerPickaxeSpritesheetImproved_3
+      name: playerPickaxeSpritesheet2_3
       rect:
         serializedVersion: 2
         x: 72
@@ -190,14 +214,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 61ac12e48bfbfcfe0800000000000000
-      internalID: -1166502980159944170
+      spriteID: 6fb6ffe2a83d32970800000000000000
+      internalID: 8729053093221592054
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerPickaxeSpritesheetImproved_4
+      name: playerPickaxeSpritesheet2_4
       rect:
         serializedVersion: 2
         x: 96
@@ -211,14 +235,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3fd5e0b0ac10acfd0800000000000000
-      internalID: -2321040690675556877
+      spriteID: 87b257d87adf533b0800000000000000
+      internalID: -5533237671080154248
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerPickaxeSpritesheetImproved_5
+      name: playerPickaxeSpritesheet2_5
       rect:
         serializedVersion: 2
         x: 120
@@ -232,14 +256,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae2bf861a0c0a56f0800000000000000
-      internalID: -695229955007597846
+      spriteID: 4b86f770378658e50800000000000000
+      internalID: 6810964854724061364
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerPickaxeSpritesheetImproved_6
+      name: playerPickaxeSpritesheet2_6
       rect:
         serializedVersion: 2
         x: 144
@@ -253,14 +277,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0486fc03b7544510800000000000000
-      internalID: 1532446199741056011
+      spriteID: 5875dba1bd53e9ac0800000000000000
+      internalID: -3846577816565098619
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: playerPickaxeSpritesheetImproved_7
+      name: playerPickaxeSpritesheet2_7
       rect:
         serializedVersion: 2
         x: 168
@@ -274,8 +298,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 030ed1066c7365090800000000000000
-      internalID: -8046182359095189456
+      spriteID: b8284be26114d6660800000000000000
+      internalID: 7380626927858778763
       vertices: []
       indices: 
       edges: []
