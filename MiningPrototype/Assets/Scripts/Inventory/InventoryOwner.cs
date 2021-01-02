@@ -9,7 +9,7 @@ public interface IInventoryOwner
     Inventory Inventory { get; }
 }
 
-public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteractable
+public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteractable, ILayeredUI
 {
     [Header("Inventory Owner")]
     [SerializeField] Inventory inventory;
@@ -21,6 +21,7 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
     [Zenject.Inject] InWorldCanvas inWorld;
     [Zenject.Inject] InventoryVisualizer.Factory visualizerFactory;
     [Zenject.Inject] PlayerInventoryOpener playerInventoryOpener;
+    [Zenject.Inject] UIsHandler uIsHandler;
 
     private event System.Action ForceInterrupt;
     public event System.Action<InventoryState> StateChanged;
@@ -138,6 +139,11 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
     public void UnsubscribeToForceQuit(Action action)
     {
         ForceInterrupt -= action;
+    }
+
+    public void ForceClose()
+    {
+        CloseInventory();
     }
 }
 

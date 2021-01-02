@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ReadableItemVisualizer : MonoBehaviour
+public class ReadableItemVisualizer : MonoBehaviour, ILayeredUI
 {
     [SerializeField] TMP_Text text;
     [SerializeField] GameObject familyPhoto;
@@ -16,9 +16,15 @@ public class ReadableItemVisualizer : MonoBehaviour
     [SerializeField] Transform toScaleOnOpenAndClose;
 
     [Zenject.Inject] protected ReadableItemHandler readableItemHandler;
+    [Zenject.Inject] UIsHandler uIsHandler;
 
     Coroutine close;
     [HideInInspector] public int id;
+
+    protected virtual void Start()
+    {
+        uIsHandler.NotifyOpening(this);
+    }
 
     //[SerializeField] float width = 5;
     //[SerializeField] float numberOfCharactersPerHeightUnit = 1;
@@ -70,6 +76,7 @@ public class ReadableItemVisualizer : MonoBehaviour
             return;
         else
         {
+            uIsHandler.NotifyClosing(this);
             StopAllCoroutines();
             close = StartCoroutine(ScaleCoroutine(scaleUp: false));
             spriteAnimator.Play(letterCloseAnimation);
@@ -77,6 +84,10 @@ public class ReadableItemVisualizer : MonoBehaviour
         }
     }
 
+    public void ForceClose()
+    {
+        Hide();
+    }
 
     public class Factory : Zenject.PlaceholderFactory<UnityEngine.Object, ReadableItemVisualizer>
     {

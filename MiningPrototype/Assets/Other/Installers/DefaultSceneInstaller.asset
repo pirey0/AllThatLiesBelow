@@ -33,3 +33,4 @@ MonoBehaviour:
   overworldEffectsHandlerPrefab: {fileID: 7662845370832059530, guid: ef921a78cf8e6994ca562a5addf559d6, type: 3}
   damageEffectHandlerPrefab: {fileID: 2685019420519338939, guid: 393a61f3305f82b44844acef00fd92ff, type: 3}
   statsTrackerPrefab: {fileID: 5298698092792675606, guid: 52d4c69ffc123014f8ff3e68738b5546, type: 3}
+  uisHandlerPrefab: {fileID: 1862846585481757528, guid: 65a6ddabcffc9bb49b65ef18ea54e5ba, type: 3}

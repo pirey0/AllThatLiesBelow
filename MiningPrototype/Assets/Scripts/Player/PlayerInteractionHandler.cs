@@ -28,6 +28,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     [Inject] RuntimeProceduralMap map;
     [Inject] ItemPlacingHandler itemPlacingHandler;
     [Inject] CursorHandler cursorHandler;
+    [Inject] UIsHandler uIsHandler;
 
     PlayerVisualController visualController;
     Vector2Int? gridDigTarget, previousGridDigTarget;
@@ -47,6 +48,19 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         base.Start();
         visualController = GetComponent<PlayerVisualController>();
         player.PlayerDeath += OnDeath;
+        StateChanged += OnInventoryStateChanged;
+    }
+
+    private void OnInventoryStateChanged(InventoryState newState)
+    {
+        if (newState == InventoryState.Open)
+        {
+            uIsHandler.NotifyOpening(this);
+        }
+        else
+        {
+            uIsHandler.NotifyClosing(this);
+        }
     }
 
     private void OnDeath()
@@ -332,7 +346,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         if (gridDigTarget.HasValue)
         {
             var info = map.GetTileInfoAt(gridDigTarget.Value);
-            return (!player.InOverworld() || info.MinableInOverworld);
+            return ((gridDigTarget.Value.y < Constants.OVERWORLD_START_Y) || info.MinableInOverworld);
         }
         else
         {
@@ -587,4 +601,6 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         if (origin.Contains(pair) && origin.TryRemove(pair))
             Inventory.Add(pair);
     }
+
+
 }
