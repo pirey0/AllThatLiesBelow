@@ -34,3 +34,4 @@ MonoBehaviour:
   damageEffectHandlerPrefab: {fileID: 2685019420519338939, guid: 393a61f3305f82b44844acef00fd92ff, type: 3}
   statsTrackerPrefab: {fileID: 5298698092792675606, guid: 52d4c69ffc123014f8ff3e68738b5546, type: 3}
   uisHandlerPrefab: {fileID: 1862846585481757528, guid: 65a6ddabcffc9bb49b65ef18ea54e5ba, type: 3}
+  altarDialogHandlerPrefab: {fileID: 5499054407750593895, guid: 7521942565c5b054294abdfc8ddcec89, type: 3}

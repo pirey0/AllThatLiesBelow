@@ -7,28 +7,40 @@ using System.Net.Security;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
-public class AltarDialogVisualizer : MonoBehaviour
+public interface IDialogVisualizer
+{
+    void DisplaySentence(string message);
+    void DisplayOptions(string[] options);
+
+    void SubscribeToSelection(System.Action<int> a);
+    void UnsubscribeFromSelection(System.Action<int> a);
+
+}
+
+public class AltarDialogVisualizer : MonoBehaviour, IDialogVisualizer
 {
     [SerializeField] Vector3 leftSpawnPosition, rightSpawnposition;
     [SerializeField] Vector3 offsetWithRow;
     [SerializeField] float wordLengthOffsetMultiplier = 1f;
     [SerializeField] DialogElementVisualization dialogOptionPrefab, dialogCommentPrefab;
-    DialogElementVisualization[] dialogOptions = new DialogElementVisualization[3];
 
     [SerializeField] Light2D ray1, ray2;
     [SerializeField] new GameObject particleSystem;
     [SerializeField] AnimationCurve opcacityVariance;
     [SerializeField] float opacityAdaptationSpeed = 4;
-    float lightOpacityMultiplier = 0;
-    float lightOpacityMultiplierTarget = 0.25f;
 
     [SerializeField] AudioSource voicesAudio;
     [SerializeField] float voicesVolumeDecayMultiplier = 1f;
     [SerializeField] float voicesVolumeAdaptMultiplier = 1f;
     [SerializeField] float voiceVolumePerWordOrOption = 1f;
+
+    [Zenject.Inject] AltarDialogHandler dialogHandler;
+
+    DialogElementVisualization[] dialogOptions = new DialogElementVisualization[3];
+    float lightOpacityMultiplier = 0;
+    float lightOpacityMultiplierTarget = 0.25f;
     float voicesVolumeCurrent;
     float voicesVolumeTarget;
-
 
     public event System.Action<int> Progressed;
 
@@ -53,6 +65,7 @@ public class AltarDialogVisualizer : MonoBehaviour
     {
         lightOpacityMultiplierTarget = 1;
         particleSystem.SetActive(true);
+        dialogHandler.SetVisualizer(this);
     }
 
     public void EndDialog()
@@ -61,6 +74,7 @@ public class AltarDialogVisualizer : MonoBehaviour
 
         lightOpacityMultiplierTarget = 0.25f;
         particleSystem.SetActive(false);
+        dialogHandler.ClearVisualizer();
 
         foreach (Transform child in transform)
         {
@@ -148,5 +162,15 @@ public class AltarDialogVisualizer : MonoBehaviour
                 Progressed?.Invoke(i);
             }
         }
+    }
+
+    public void SubscribeToSelection(Action<int> a)
+    {
+        Progressed += a;
+    }
+
+    public void UnsubscribeFromSelection(Action<int> a)
+    {
+        Progressed -= a;
     }
 }

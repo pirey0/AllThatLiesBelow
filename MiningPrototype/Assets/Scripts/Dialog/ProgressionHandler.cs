@@ -78,7 +78,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
     {
         float t = (Time.time - data.leftOverworldTimestamp);
         Debug.Log("Player entered overworld after " + t + " seconds");
-        if(t > timeMiningBeforePassageOfDay)
+        if (t > timeMiningBeforePassageOfDay)
         {
             StartNextDay();
         }
@@ -144,6 +144,31 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
         if (NeedsTutorialFor(s))
             data.achievedTutorials.Add(s);
     }
+
+    public bool GetVariable(string name)
+    {
+        if (data.variables.ContainsKey(name))
+        {
+            return data.variables[name];
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void SetVariable(string name, bool value)
+    {
+        if (data.variables.ContainsKey(name))
+        {
+            data.variables[name] = value;
+        }
+        else
+        {
+            data.variables.Add(name, value);
+        }
+    }
+
 
     [Button]
     public void StartNextDay()
@@ -359,7 +384,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
         if (newData is ProgressionSaveData saveData)
         {
             this.data = saveData;
-            data.leftOverworldTimestamp =  Time.time - data.saveTimestamp + data.leftOverworldTimestamp;
+            data.leftOverworldTimestamp = Time.time - data.saveTimestamp + data.leftOverworldTimestamp;
         }
         else
         {
@@ -420,6 +445,10 @@ public class ProgressionSaveData : SaveData
 
     //tutorial
     public List<string> achievedTutorials = new List<string>();
+
+    //variables
+    public Dictionary<string, bool> variables = new Dictionary<string, bool>();
+
 
     //letters and daily
     public Dictionary<int, List<ItemAmountPair>> ordersForNextDay = new Dictionary<int, List<ItemAmountPair>>();
