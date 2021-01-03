@@ -9,6 +9,9 @@ using UnityEngine.Experimental.Rendering.Universal;
 
 public interface IDialogVisualizer
 {
+    void StartDialog();
+    void EndDialog();
+
     void DisplaySentence(string message);
     void DisplayOptions(string[] options);
 
@@ -173,4 +176,6 @@ public class AltarDialogVisualizer : MonoBehaviour, IDialogVisualizer
     {
         Progressed -= a;
     }
+
+
 }

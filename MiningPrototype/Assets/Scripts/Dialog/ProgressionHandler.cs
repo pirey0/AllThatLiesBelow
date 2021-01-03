@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using System.Linq;
 
-public class ProgressionHandler : StateListenerBehaviour, ISavable
+public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPropertiesHandler
 {
     [ReadOnly] [SerializeField] string saveID = Util.GenerateNewSaveGUID();
 
@@ -147,6 +147,15 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
     public bool GetVariable(string name)
     {
+        if (name == "InEditor")
+        {
+            return Application.isEditor;
+        }
+        else if (name == "Debug")
+        {
+            return true;
+        }
+
         if (data.variables.ContainsKey(name))
         {
             return data.variables[name];
@@ -159,6 +168,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
 
     public void SetVariable(string name, bool value)
     {
+        Debug.Log("Variable " + name + " set to " + value);
         if (data.variables.ContainsKey(name))
         {
             data.variables[name] = value;
@@ -169,6 +179,15 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable
         }
     }
 
+    public void FireEvent(string ev)
+    {
+        Debug.Log("AltarNode fired Event: " + ev);
+
+        if (ev == "Camshake1")
+        {
+            cameraController.Shake(player.transform.position, CameraShakeType.explosion);
+        }
+    }
 
     [Button]
     public void StartNextDay()

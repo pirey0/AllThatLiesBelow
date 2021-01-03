@@ -45,7 +45,12 @@ public class TestDialogVisualizer : MonoBehaviour, IDialogVisualizer
     {
         if (state == State.Display)
         {
-            GUI.Label(new Rect(10, 10, 500, 500), text);
+            GUI.color = Color.blue;
+            GUI.Label(new Rect(10, 10, 200, 500), text);
+            if(GUI.Button(new Rect(230, 10, 50, 30), ">"))
+            {
+                selectionEvent?.Invoke(0);
+            }
         }
         else if (state == State.Selection)
         {
@@ -58,5 +63,15 @@ public class TestDialogVisualizer : MonoBehaviour, IDialogVisualizer
                 }
             }
         }
+    }
+
+    public void StartDialog()
+    {
+        state = State.None;
+    }
+
+    public void EndDialog()
+    {
+        state = State.None;
     }
 }

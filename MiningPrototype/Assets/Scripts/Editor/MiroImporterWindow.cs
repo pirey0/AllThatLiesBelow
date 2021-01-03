@@ -32,7 +32,7 @@ public class MiroImporterWindow : EditorWindow
 
         if(GUILayout.Button("Test Convert to AltarTree"))
         {
-            MiroParser.TestLoadAltarTrees();
+            MiroParser.GetTestAltarDialogWithName("Test1");
         }
 
     }

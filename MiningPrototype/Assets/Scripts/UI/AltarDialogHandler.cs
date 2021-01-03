@@ -56,4 +56,14 @@ public class AltarDialogHandler : MonoBehaviour, IDialogVisualizer
     {
         selectionEvent -= a;
     }
+
+    public void StartDialog()
+    {
+        currentVisualizer.StartDialog();
+    }
+
+    public void EndDialog()
+    {
+        currentVisualizer.EndDialog();
+    }
 }
