@@ -335,4 +335,15 @@ public static class Util
 
         return false;
     }
+
+    public static bool Matches<T>(T text, params T[] options)
+    {
+        foreach (var o in options)
+        {
+            if (text.Equals(o))
+                return true;
+        }
+
+        return false;
+    }
 }

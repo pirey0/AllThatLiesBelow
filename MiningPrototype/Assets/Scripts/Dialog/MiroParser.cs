@@ -9,6 +9,9 @@ public class MiroParser
     const string resourcesTreesAssetPath = "StringTrees";
     const string localTreesAssetPath = "/Resources/" + resourcesTreesAssetPath + ".json";
 
+
+
+#if UNITY_EDITOR
     public static void UpdateStringTreesFromMiroJsonFile(string miroPath)
     {
         if (!File.Exists(miroPath))
@@ -32,6 +35,17 @@ public class MiroParser
         File.WriteAllText(Application.dataPath + localTreesAssetPath, treesAsJson);
         UnityEditor.AssetDatabase.Refresh();
     }
+
+    public static void TestLoadAltarTrees()
+    {
+        var asset = Resources.Load<TextAsset>(resourcesTreesAssetPath);
+
+        StringTreeNode root = JsonUtility.FromJson<StringTreeNode>(asset.text);
+
+        AltarTreeNode res = AltarTreeUtility.MakeAltarTreeFromStringTree(root);
+        Debug.Log(res.ToDebugString());
+    }
+#endif
 }
 
 [System.Serializable]

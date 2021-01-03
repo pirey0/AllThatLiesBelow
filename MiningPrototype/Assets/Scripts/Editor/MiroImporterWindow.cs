@@ -30,5 +30,10 @@ public class MiroImporterWindow : EditorWindow
             MiroParser.UpdateStringTreesFromMiroJsonFile(path);
         }
 
+        if(GUILayout.Button("Test Convert to AltarTree"))
+        {
+            MiroParser.TestLoadAltarTrees();
+        }
+
     }
 }
