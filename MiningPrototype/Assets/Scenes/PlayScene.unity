@@ -313,8 +313,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 939480985}
-  - component: {fileID: 939480986}
   - component: {fileID: 939480987}
+  - component: {fileID: 939480986}
   m_Layer: 0
   m_Name: MiroDialogTester
   m_TagString: Untagged
@@ -345,7 +345,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 939480984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: feb645977628cc348bc55d57e6a16ca1, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e039a5829d2371428743b77db93eb64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogToRun: Showcase

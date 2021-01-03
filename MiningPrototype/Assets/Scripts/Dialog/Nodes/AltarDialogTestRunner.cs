@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestNodeDebugRunner : StateListenerBehaviour
+public class AltarDialogTestRunner : StateListenerBehaviour
 {
     [SerializeField] string dialogToRun = "Test1";
 
@@ -84,7 +84,6 @@ public class TestNodeDebugRunner : StateListenerBehaviour
             }
             else
             {
-
                 if (node is IEndableNode endableNode)
                     endableNode.OnEnd(provider);
 

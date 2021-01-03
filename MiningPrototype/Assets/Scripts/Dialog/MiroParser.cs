@@ -28,7 +28,7 @@ public class MiroParser
         board.FilterOutUnnecessaryWidgets();
         Debug.Log("Widgets after Filter: " + board.widgets.Count);
 
-        StringTreeCollection trees = board.FilterOutStringTreesWithRoot(log: true , "Dialog", "Choice");
+        StringTreeCollection trees = board.FilterOutStringTrees(log: true, "Dialog", "Choice");
 
         trees.PrepareForSerialization();
         string treesAsJson = JsonUtility.ToJson(trees);
@@ -48,9 +48,9 @@ public class MiroParser
 
         foreach (var c in res.Roots)
         {
-            if(c is AltarDialogRootNode rootNode)
+            if (c is AltarDialogRootNode rootNode)
             {
-                if(rootNode.Name == name)
+                if (rootNode.Name == name)
                 {
                     return rootNode;
                 }
@@ -65,57 +65,71 @@ public class MiroBoard
 {
     public List<MiroWidgetRaw> widgets;
 
-
-
-    public StringTreeCollection FilterOutStringTreesWithRoot(bool log, params string[] acceptedRoots)
+    public StringTreeCollection FilterOutStringTrees(bool log, params string[] acceptedRoots)
     {
         Dictionary<string, MiroTreeWidget> treeWidgets = new Dictionary<string, MiroTreeWidget>();
-
-        //create nodes
-        foreach (var w in widgets)
-        {
-            if (w.type == "STICKER")
-            {
-                var nw = new MiroTreeWidget();
-                nw.id = w.id;
-                nw.plainText = w.plainText;
-                treeWidgets.Add(w.id, nw);
-            }
-        }
-
-        //Connect nodes
-        foreach (var w in widgets)
-        {
-            if (w.type == "LINE")
-            {
-                if (treeWidgets.ContainsKey(w.startWidgetId) && treeWidgets.ContainsKey(w.endWidgetId))
-                {
-                    var wStart = treeWidgets[w.startWidgetId];
-                    var wEnd = treeWidgets[w.endWidgetId];
-                    wStart.childrenIds.Add(w.endWidgetId);
-                    wEnd.parentsIds.Add(w.startWidgetId);
-                }
-            }
-        }
-
-        //Remove all widgets that are not connected by Lines
-        List<string> keysToRemove = new List<string>();
-        foreach (var p in treeWidgets)
-        {
-            if (p.Value.childrenIds.Count == 0 && p.Value.parentsIds.Count == 0)
-            {
-                keysToRemove.Add(p.Key);
-            }
-        }
-        foreach (var key in keysToRemove)
-        {
-            treeWidgets.Remove(key);
-        }
+        CreateNodes(treeWidgets);
+        ConnectNodes(treeWidgets);
+        RemoveUnconnectedWidgets(treeWidgets);
 
         if (log)
             Debug.Log("TreeWidgets: " + treeWidgets.Count);
 
-        //Find root widgets
+        List<MiroTreeWidget> rootWidgets = FindRootWidgets(treeWidgets);
+
+        if (log)
+            Debug.Log("Root Widgets found: " + rootWidgets.Count);
+
+        RemoveNonMatchingRoots(acceptedRoots, rootWidgets);
+
+        if (log)
+            Debug.Log("Accepted Root Widgets: " + rootWidgets.Count);
+
+        RemoveNonCoveredWidgets(treeWidgets, rootWidgets);
+
+        StringTreeCollection collection = ConvertToStringTreeCollection(treeWidgets, rootWidgets);
+
+        SimplifyIds(collection);
+
+        return collection;
+    }
+
+    private void SimplifyIds(StringTreeCollection collection)
+    {
+        int currId = 0;
+        Dictionary<string, string> oldToNewMap = new Dictionary<string, string>();
+        Dictionary<string, StringTreeNode> newDict = new Dictionary<string, StringTreeNode>();
+
+        //remap keys
+        foreach (var item in collection.Nodes)
+        {
+            string newId = (++currId).ToString();
+            oldToNewMap.Add(item.Key, newId);
+            newDict.Add(newId, item.Value);
+            item.Value.id = newId;
+        }
+
+        //change rootsids
+        for (int i = 0; i < collection.RootIds.Length; i++)
+        {
+            collection.RootIds[i] = oldToNewMap[collection.RootIds[i]];
+        }
+
+        //set to new dict
+        collection.Nodes = newDict;
+
+        //change childsids
+        foreach (var item in collection.Nodes)
+        {
+            for (int i = 0; i < item.Value.childrenIds.Length; i++)
+            {
+                item.Value.childrenIds[i] = oldToNewMap[item.Value.childrenIds[i]];
+            }
+        }
+    }
+
+    private static List<MiroTreeWidget> FindRootWidgets(Dictionary<string, MiroTreeWidget> treeWidgets)
+    {
         List<MiroTreeWidget> rootWidgets = new List<MiroTreeWidget>();
         foreach (var p in treeWidgets)
         {
@@ -125,26 +139,11 @@ public class MiroBoard
             }
         }
 
-        if (log)
-            Debug.Log("Root Widgets found: " + rootWidgets.Count);
+        return rootWidgets;
+    }
 
-        //Remove all that dont match accepted roots
-        for (int i = 0; i < rootWidgets.Count; i++)
-        {
-            if (!Util.StringMatches(rootWidgets[i].plainText, acceptedRoots))
-            {
-                rootWidgets.RemoveAt(i);
-                i--;
-            }
-        }
-
-        if (log)
-            Debug.Log("Accepted Root Widgets: " + rootWidgets.Count);
-
-        //ToDo: Remove all that are not in the accepted roots
-
-
-        //Convert to string tree
+    private StringTreeCollection ConvertToStringTreeCollection(Dictionary<string, MiroTreeWidget> treeWidgets, List<MiroTreeWidget> rootWidgets)
+    {
         Dictionary<string, StringTreeNode> stringTrees = new Dictionary<string, StringTreeNode>();
         string[] roots = new string[rootWidgets.Count];
 
@@ -164,6 +163,91 @@ public class MiroBoard
         return collection;
     }
 
+    private void RemoveNonCoveredWidgets(Dictionary<string, MiroTreeWidget> treeWidgets, List<MiroTreeWidget> rootWidgets)
+    {
+        List<string> coveredIDs = new List<string>();
+        foreach (var item in rootWidgets)
+        {
+            RecAddIdToList(treeWidgets, coveredIDs, item);
+        }
+        List<string> keys = treeWidgets.Keys.ToList();
+        for (int i = 0; i < keys.Count; i++)
+        {
+            if (!coveredIDs.Contains(keys[i]))
+            {
+                treeWidgets.Remove(keys[i]);
+            }
+        }
+    }
+
+    private static void RemoveNonMatchingRoots(string[] acceptedRoots, List<MiroTreeWidget> rootWidgets)
+    {
+        for (int i = 0; i < rootWidgets.Count; i++)
+        {
+            if (!Util.StringMatches(rootWidgets[i].plainText, acceptedRoots))
+            {
+                rootWidgets.RemoveAt(i);
+                i--;
+            }
+        }
+    }
+
+    private static void RemoveUnconnectedWidgets(Dictionary<string, MiroTreeWidget> treeWidgets)
+    {
+        List<string> keysToRemove = new List<string>();
+        foreach (var p in treeWidgets)
+        {
+            if (p.Value.childrenIds.Count == 0 && p.Value.parentsIds.Count == 0)
+            {
+                keysToRemove.Add(p.Key);
+            }
+        }
+        foreach (var key in keysToRemove)
+        {
+            treeWidgets.Remove(key);
+        }
+    }
+
+    private void ConnectNodes(Dictionary<string, MiroTreeWidget> treeWidgets)
+    {
+        foreach (var w in widgets)
+        {
+            if (w.type == "LINE")
+            {
+                if (treeWidgets.ContainsKey(w.startWidgetId) && treeWidgets.ContainsKey(w.endWidgetId))
+                {
+                    var wStart = treeWidgets[w.startWidgetId];
+                    var wEnd = treeWidgets[w.endWidgetId];
+                    wStart.childrenIds.Add(w.endWidgetId);
+                    wEnd.parentsIds.Add(w.startWidgetId);
+                }
+            }
+        }
+    }
+
+    private void CreateNodes(Dictionary<string, MiroTreeWidget> treeWidgets)
+    {
+        foreach (var w in widgets)
+        {
+            if (w.type == "STICKER")
+            {
+                var nw = new MiroTreeWidget();
+                nw.id = w.id;
+                nw.plainText = w.plainText;
+                treeWidgets.Add(w.id, nw);
+            }
+        }
+    }
+
+    private void RecAddIdToList(Dictionary<string, MiroTreeWidget> nodes, List<string> list, MiroTreeWidget node)
+    {
+        list.Add(node.id);
+        foreach (var id in node.childrenIds)
+        {
+            if (!list.Contains(id))
+                RecAddIdToList(nodes, list, nodes[id]);
+        }
+    }
 
     public void FilterOutUnnecessaryWidgets()
     {
@@ -216,7 +300,7 @@ public class StringTreeCollection
 
     [System.NonSerialized] public Dictionary<string, StringTreeNode> Nodes;
 
-    [SerializeField]  private string[] keys;
+    [SerializeField] private string[] keys;
     [SerializeField] private StringTreeNode[] values;
 
     public void PrepareForSerialization()
