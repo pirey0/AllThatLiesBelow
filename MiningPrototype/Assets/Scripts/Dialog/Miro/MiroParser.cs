@@ -1,27 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 
 public class MiroParser
 {
-    const string path = "MiroBoard";
+    const string resourcesTreesAssetPath = "StringTrees";
+    const string localTreesAssetPath = "/Resources/" + resourcesTreesAssetPath + ".json";
 
-    public static void TestRun()
+    public static void UpdateStringTreesFromMiroJsonFile(string miroPath)
     {
-        TextAsset textAsset = Resources.Load<TextAsset>(path);
-        if (textAsset == null)
+        if (!File.Exists(miroPath))
         {
-            Debug.LogError("Failed to load " + path);
+            Debug.LogError("Invalid file");
             return;
         }
 
-        string json = "{\"widgets\":" + textAsset.text + "}";
+        string text = File.ReadAllText(miroPath);
+
+        string json = "{\"widgets\":" + text + "}";
         var board = JsonUtility.FromJson<MiroBoard>(json);
 
         board.FilterOutUnnecessaryWidgets();
         Debug.Log("Widgets after Filter: " + board.widgets.Count);
-        board.CreateTreeWidgets();
+
+        StringTreeNode trees = board.FilterOutStringTreesWithRoot(log: true , "Dialog", "Choice");
+
+        string treesAsJson = JsonUtility.ToJson(trees);
+
+        File.WriteAllText(Application.dataPath + localTreesAssetPath, treesAsJson);
+        UnityEditor.AssetDatabase.Refresh();
     }
 }
 
@@ -30,7 +39,9 @@ public class MiroBoard
 {
     public List<MiroWidgetRaw> widgets;
 
-    public void CreateTreeWidgets()
+
+
+    public StringTreeNode FilterOutStringTreesWithRoot(bool log, params string[] acceptedRoots)
     {
         Dictionary<string, MiroTreeWidget> treeWidgets = new Dictionary<string, MiroTreeWidget>();
 
@@ -55,7 +66,7 @@ public class MiroBoard
                     var wStart = treeWidgets[w.startWidgetId];
                     var wEnd = treeWidgets[w.endWidgetId];
                     wStart.children.Add(wEnd);
-                    wEnd.children.Add(wStart);
+                    wEnd.parents.Add(wStart);
                 }
             }
         }
@@ -74,7 +85,93 @@ public class MiroBoard
             treeWidgets.Remove(key);
         }
 
+        if(log)
         Debug.Log("TreeWidgets: " + treeWidgets.Count);
+
+        //Find root widgets
+        List<MiroTreeWidget> rootWidgets = new List<MiroTreeWidget>();
+        foreach (var p in treeWidgets)
+        {
+            if (p.Value.parents.Count == 0)
+            {
+                rootWidgets.Add(p.Value);
+            }
+        }
+
+        if(log)
+        Debug.Log("Root Widgets found: " + rootWidgets.Count);
+
+        //Remove all that dont match accepted roots
+
+        for (int i = 0; i < rootWidgets.Count; i++)
+        {
+            if (!Util.StringMatches(rootWidgets[i].plainText, acceptedRoots))
+            {
+                rootWidgets.RemoveAt(i);
+                i--;
+            }
+        }
+
+        if(log)
+        Debug.Log("Accepted Root Widgets: " + rootWidgets.Count);
+
+        //Check for circularities
+        for (int i = 0; i < rootWidgets.Count; i++)
+        {
+            if(HasCircularities(rootWidgets[i], new List<MiroTreeWidget>(), out MiroTreeWidget culprit))
+            {
+                Debug.Log("Circularities in " + rootWidgets[i].plainText + " at " + culprit.plainText);
+                rootWidgets.RemoveAt(i);
+                i--;
+            }
+        }
+
+        if (log)
+        {
+            foreach (var item in rootWidgets)
+            {
+                Debug.Log(item.plainText + " with a count of " + item.GetSubWidgetCount());
+            }
+        }
+    
+
+        //Convert to string tree
+        StringTreeNode[] trees = new StringTreeNode[rootWidgets.Count];
+
+        for (int i = 0; i < trees.Length; i++)
+        {
+            trees[i] = Rec_MiroTreeToStringTree(rootWidgets[i]);
+            if (log)
+                Debug.Log(trees[i].ToDebugString());
+        }
+
+        StringTreeNode root = new StringTreeNode();
+        root.text = "ROOT";
+        root.children = trees;
+        return root;
+    }
+
+    public bool HasCircularities(MiroTreeWidget widget, List<MiroTreeWidget> covered, out MiroTreeWidget culprit)
+    {
+        if (covered.Contains(widget))
+        {
+            culprit = widget;
+            return true;
+        }
+        else
+        {
+            covered.Add(widget);
+            foreach (var item in widget.children)
+            {
+               if( HasCircularities(item, covered, out culprit))
+                {
+                    return true;
+                }
+            }
+        }
+
+        culprit = null;
+        return false;
     }
 
 
@@ -110,6 +207,50 @@ public class MiroBoard
             }
         }
     }
+
+
+    public StringTreeNode Rec_MiroTreeToStringTree(MiroTreeWidget root)
+    {
+        StringTreeNode node = new StringTreeNode();
+        node.text = root.plainText;
+
+        if (root.children.Count > 0)
+        {
+            node.children = new StringTreeNode[root.children.Count];
+
+            for (int i = 0; i < node.children.Length; i++)
+            {
+                node.children[i] = Rec_MiroTreeToStringTree(root.children[i]);
+            }
+        }
+        return node;
+    }
+}
+
+
+[System.Serializable]
+public class StringTreeNode
+{
+    public string text;
+    public StringTreeNode[] children;
+
+
+    public string ToDebugString()
+    {
+        string s = text;
+
+        if (children != null)
+        {
+            s += "(";
+            foreach (var item in children)
+            {
+                s += item.ToDebugString();
+                s += ", ";
+            }
+            s += ")";
+        }
+        return s;
+    }
 }
 
 
@@ -119,6 +260,16 @@ public class MiroTreeWidget
 
     public List<MiroTreeWidget> parents = new List<MiroTreeWidget>();
     public List<MiroTreeWidget> children = new List<MiroTreeWidget>();
+
+    public int GetSubWidgetCount()
+    {
+        int count = children.Count;
+        foreach (var item in children)
+        {
+            count += item.GetSubWidgetCount();
+        }
+        return count;
+    }
 }
 
 [System.Serializable]

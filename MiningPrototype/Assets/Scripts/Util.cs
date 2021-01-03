@@ -215,7 +215,7 @@ public static class Util
         return (Direction)(((int)dir + 2) % 4);
     }
 
-    public static float AsVerticalFloat (this Direction dir)
+    public static float AsVerticalFloat(this Direction dir)
     {
         switch (dir)
         {
@@ -308,7 +308,7 @@ public static class Util
             case CrumbleType.Air:
                 return Color.white;
             case CrumbleType.Normal:
-                return new Color(1,0.5f,0);
+                return new Color(1, 0.5f, 0);
             case CrumbleType.Crumble | CrumbleType.Normal:
                 return Color.red;
             case CrumbleType.CrumbleInstant | CrumbleType.Normal:
@@ -323,5 +323,16 @@ public static class Util
             default:
                 return Color.gray;
         }
+    }
+
+    public static bool StringMatches(string text, params string[] options)
+    {
+        foreach (var o in options)
+        {
+            if (text == o)
+                return true;
+        }
+
+        return false;
     }
 }
