@@ -13,7 +13,7 @@ public class CustomizeableSign : MineableObject, INonPersistantSavable, IBaseInt
     [SerializeField] AudioSource switchSymbolSound;
     [Zenject.Inject] CameraController cameraController;
 
-    int currentSymbolId;
+    [SerializeField] int currentSymbolId;
 
     private void Start()
     {
@@ -70,8 +70,9 @@ public class CustomizeableSign : MineableObject, INonPersistantSavable, IBaseInt
     {
         if (dataOr is CustomizeableSignSaveData data)
         {
-            if (!TryDisplay(data.symbolId))
-                Debug.Log("Sign: invalid symbol index " + data.symbolId);
+            currentSymbolId = data.symbolId;
+            if (!TryDisplay(currentSymbolId))
+                Debug.Log("Sign: invalid symbol index " + currentSymbolId);
         }
     }
 
