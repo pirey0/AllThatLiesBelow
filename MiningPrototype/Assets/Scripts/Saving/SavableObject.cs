@@ -49,7 +49,8 @@ public enum SpawnableIDType
     Rope,
     Lift,
     Lantern,
-    Sign
+    Sign,
+    JungleHeart
 }
 
 [System.Serializable]

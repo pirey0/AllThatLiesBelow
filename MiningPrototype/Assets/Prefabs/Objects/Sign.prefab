@@ -78,6 +78,7 @@ MonoBehaviour:
   - {fileID: 4349194221718237241, guid: 69106d98aa9c051439bc56aacaa2e999, type: 3}
   - {fileID: -1317731936657165286, guid: 69106d98aa9c051439bc56aacaa2e999, type: 3}
   switchSymbolSound: {fileID: 4712283882522628048}
+  currentSymbolId: 0
 --- !u!82 &4712283882522628048
 AudioSource:
   m_ObjectHideFlags: 0
