@@ -556,6 +556,12 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         {
             Debug.Log("Killed from fall Damage with a speed of: " + -oldVelocity.y);
             stateMachine.ForceTransitionTo(s_fallDeath);
+            damageEffectHandler.TakeDamage(1f);
+        }
+        else if(-oldVelocity.y > settings.fallSpeedThatHurts)
+        {
+            stateMachine.ForceTransitionTo(s_hit);
+            damageEffectHandler.TakeDamage(0.66f);
         }
     }
 
