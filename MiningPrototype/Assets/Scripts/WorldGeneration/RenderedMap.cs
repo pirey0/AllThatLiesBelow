@@ -6,9 +6,9 @@ using UnityEngine.Tilemaps;
 public class RenderedMap : BaseMap
 {
     [Header("RenderedMap")]
-    [SerializeField] Tilemap tilemap;
-    [SerializeField] Tilemap tilemapShifted, oreTilemap, damageOverlayTilemap, damageOverlayBehind;
-    [SerializeField] bool debugRendering, showOverlayAlways;
+    [SerializeField] protected Tilemap tilemap;
+    [SerializeField] protected Tilemap tilemapShifted, oreTilemap, damageOverlayTilemap, damageOverlayBehind;
+    [SerializeField] protected bool debugRendering, showOverlayAlways;
 
     protected override void Setup()
     {

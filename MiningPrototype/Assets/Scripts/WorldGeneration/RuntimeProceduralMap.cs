@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Sprites;
 using UnityEngine.Tilemaps;
 
 public class UnstableTile
@@ -38,6 +39,7 @@ public class RuntimeProceduralMap : RenderedMap
     [SerializeField] string saveID = Util.GenerateNewSaveGUID();
 
     [SerializeField] Transform entitiesParent;
+    [SerializeField] Material unlitMaterial, litMaterial;
 
     [Zenject.Inject] ProgressionHandler progressionHandler;
     [Zenject.Inject] InventoryManager inventoryManager;
@@ -101,6 +103,25 @@ public class RuntimeProceduralMap : RenderedMap
     {
         RefreshAll();
         StartCoroutine(UpdateUnstableTilesRoutine());
+    }
+
+    [Button]
+    public void ShowOres()
+    {
+        SetOresAllwaysVisible(true);
+    }
+
+    [Button]
+    public void HideOres()
+    {
+        SetOresAllwaysVisible(false);
+    }
+
+    public void SetOresAllwaysVisible(bool visible)
+    {
+        oreTilemap.GetComponent<TilemapRenderer>().material =  visible? unlitMaterial : litMaterial;
+        showOverlayAlways = visible;
+        RefreshAll();
     }
     public override void RefreshAll()
     {

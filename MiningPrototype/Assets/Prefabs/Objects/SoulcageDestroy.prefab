@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1314042581845525720}
   - component: {fileID: 9134857709097594637}
   - component: {fileID: 7609689822635917436}
-  - component: {fileID: 4272796638892633540}
   - component: {fileID: 1433220650509774326}
+  - component: {fileID: 9000202680020917444}
   m_Layer: 0
   m_Name: SoulcageDestroy
   m_TagString: Untagged
@@ -49,7 +49,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -4856,7 +4856,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2049621373
-  m_SortingLayer: 9
+  m_SortingLayer: 11
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
@@ -4883,19 +4883,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &4272796638892633540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 832428661842439038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3120362360eecfa42bc159190eb5a672, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeTillDestroy: 5
 --- !u!82 &1433220650509774326
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4992,6 +4979,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &9000202680020917444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832428661842439038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 539b23de8ef890e44af9536d6faf69cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeLeft: 60
 --- !u!1 &7686746229480828175
 GameObject:
   m_ObjectHideFlags: 0
