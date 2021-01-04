@@ -23,7 +23,7 @@ public class PickaxeAnimator : MonoBehaviour
     {
         pickaxeLevel = newLevel;
         SetFrame(idleFrame);
-        Debug.LogWarning("pickaxe level: " + newLevel);
+        Debug.Log("Upgrade Pickaxe level: " + newLevel);
     }
     public void Play()
     {
