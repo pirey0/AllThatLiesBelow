@@ -88,7 +88,7 @@ public class AltarDialogTestRunner : StateListenerBehaviour
 
                 var newNode = SelectFirstViableChildNodeStartingAt(node, provider, (int)result);
                 if (newNode == null)
-                    Debug.Log("NodeDebugRunnerEnded: Result: " + result + ", Node: " + node + " " + node.ToDebugString());
+                    Debug.Log("NodeDebugRunnerEnded due to Node: " + node + " " + node.ToDebugString());
 
                 node = newNode;
                 result = NodeResult.Wait;
