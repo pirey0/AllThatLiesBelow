@@ -21,22 +21,31 @@ public class AltarDialogTestRunner : StateListenerBehaviour
     public void Run()
     {
 
-        var node = MiroParser.GetTestAltarDialogWithName(dialogToRun);
+        var collection = MiroParser.LoadTreesAsAltarTreeCollection();
 
-        if (node != null)
+        if (collection != null)
         {
-            StartCoroutine(RunRoutine(node));
+            var node = MiroParser.FindDialogWithName(collection, dialogToRun);
+            if (node != null)
+            {
+                StartCoroutine(RunRoutine(collection, node));
+            }
+            else
+            {
+                Debug.LogError("TestDialog not found");
+            }
         }
         else
         {
-            Debug.LogError("TestDialog was Null");
+            Debug.LogError("Failed to load AltarTreeCollection");
         }
     }
 
-    public IEnumerator RunRoutine(AltarBaseNode node)
+    public IEnumerator RunRoutine(AltarTreeCollection collection, AltarBaseNode node)
     {
         Debug.Log("NodeDebugRunner Start");
-        INodeServiceProvider provider = new TestAltarDialogServiceProvider(dialogVisualizer, (progression == null) ? (IDialogPropertiesHandler)new TestPropertiesHandler() : progression); ;
+        var prog = (progression == null) ? (IDialogPropertiesHandler)new TestPropertiesHandler() : progression;
+        INodeServiceProvider provider = new TestAltarDialogServiceProvider(dialogVisualizer, prog, collection);
         NodeResult result = NodeResult.Wait;
         dialogVisualizer.StartDialog();
         while (node != null)
@@ -109,14 +118,19 @@ public class AltarDialogTestRunner : StateListenerBehaviour
     {
         IDialogVisualizer visualizer;
         IDialogPropertiesHandler properties;
-        public TestAltarDialogServiceProvider(IDialogVisualizer vis, IDialogPropertiesHandler prop)
+        AltarTreeCollection treeCollection;
+
+        public TestAltarDialogServiceProvider(IDialogVisualizer vis, IDialogPropertiesHandler prop, AltarTreeCollection treeCollection)
         {
             visualizer = vis;
             properties = prop;
+            this.treeCollection = treeCollection;
         }
 
         public IDialogVisualizer DialogVisualizer => visualizer;
         public IDialogPropertiesHandler Properties => properties;
+
+        public AltarTreeCollection AltarTreeCollection => treeCollection;
     }
 
     public class TestPropertiesHandler : IDialogPropertiesHandler

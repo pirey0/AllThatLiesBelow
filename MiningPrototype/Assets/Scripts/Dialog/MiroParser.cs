@@ -28,7 +28,7 @@ public class MiroParser
         board.FilterOutUnnecessaryWidgets();
         Debug.Log("Widgets after Filter: " + board.widgets.Count);
 
-        StringTreeCollection trees = board.FilterOutStringTrees(log: true, "Dialog", "Choice");
+        StringTreeCollection trees = board.FilterOutStringTrees(log: true, "Dialog", "Option");
 
         trees.PrepareForSerialization();
         string treesAsJson = JsonUtility.ToJson(trees);
@@ -38,15 +38,19 @@ public class MiroParser
     }
 #endif
 
-    public static AltarBaseNode GetTestAltarDialogWithName(string name)
+    public static AltarTreeCollection LoadTreesAsAltarTreeCollection()
     {
         var asset = Resources.Load<TextAsset>(resourcesTreesAssetPath);
 
-        StringTreeCollection root = JsonUtility.FromJson<StringTreeCollection>(asset.text);
-        root.CleanupAfterDeserialization();
-        AltarTreeCollection res = AltarTreeUtility.ConvertStringCollectionToAltarTree(root);
+        StringTreeCollection collection = JsonUtility.FromJson<StringTreeCollection>(asset.text);
+        collection.CleanupAfterDeserialization();
+        AltarTreeCollection res = AltarTreeUtility.ConvertStringCollectionToAltarTree(collection);
+        return res;
+    }
 
-        foreach (var c in res.Roots)
+    public static AltarDialogRootNode FindDialogWithName(AltarTreeCollection collection, string name)
+    {
+        foreach (var c in collection.Roots)
         {
             if (c is AltarDialogRootNode rootNode)
             {
@@ -58,6 +62,7 @@ public class MiroParser
         }
         return null;
     }
+
 }
 
 [System.Serializable]

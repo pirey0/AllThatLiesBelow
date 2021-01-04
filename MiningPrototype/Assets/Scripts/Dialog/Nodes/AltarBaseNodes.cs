@@ -13,6 +13,7 @@ public interface INodeServiceProvider
 {
     IDialogVisualizer DialogVisualizer { get; }
     IDialogPropertiesHandler Properties { get; }
+    AltarTreeCollection AltarTreeCollection { get; }
 }
 
 public interface IDialogPropertiesHandler

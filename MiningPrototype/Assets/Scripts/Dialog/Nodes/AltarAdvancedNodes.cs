@@ -4,6 +4,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+public class AltarSelectionChoiceNode : AltarChoiceNode, IStartableNode, ITickingNode, IEndableNode
+{
+    public override NodeResult Start(INodeServiceProvider services)
+    {
+        List<AltarBaseNode> choiceNodes = new List<AltarBaseNode>();
+
+        foreach (var item in services.AltarTreeCollection.Roots)
+        {
+            if(item is AltarOptionNode)
+            {
+                choiceNodes.Add(item);
+            }
+        }
+
+        Children = choiceNodes.ToArray();
+        return base.Start(services);
+    }
+}
+
 public class AltarChoiceNode : AltarBaseNode, IStartableNode, ITickingNode, IEndableNode
 {
     int selected = -1;
@@ -15,7 +34,7 @@ public class AltarChoiceNode : AltarBaseNode, IStartableNode, ITickingNode, IEnd
         selected = obj;
     }
 
-    public NodeResult Start(INodeServiceProvider services)
+    public virtual NodeResult Start(INodeServiceProvider services)
     {
         selected = -1;
         services.DialogVisualizer.SubscribeToSelection(OnSelect);
@@ -42,8 +61,11 @@ public class AltarChoiceNode : AltarBaseNode, IStartableNode, ITickingNode, IEnd
         {
             if (Children[i] is AltarOptionNode optionNode)
             {
-                options.Add(optionNode.OptionText);
-                mapOptionsIndexToChildrenId.Add(i);
+                if (optionNode.ConditionPassed(services))
+                {
+                    options.Add(optionNode.OptionText);
+                    mapOptionsIndexToChildrenId.Add(i);
+                }
             }
         }
 

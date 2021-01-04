@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e039a5829d2371428743b77db93eb64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogToRun: Showcase
+  dialogToRun: Selection
   runOnStart: 1
   dialogVisualizer: {fileID: 939480987}
 --- !u!114 &939480987
@@ -605,6 +605,10 @@ PrefabInstance:
     - target: {fileID: 1113203590791219625, guid: 60c77369bde1c074494aee14c3a744d1, type: 3}
       propertyPath: m_Name
       value: KernelIterator
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113203590791219630, guid: 60c77369bde1c074494aee14c3a744d1, type: 3}
+      propertyPath: sizeY
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 1113203590791219631, guid: 60c77369bde1c074494aee14c3a744d1, type: 3}
       propertyPath: m_LocalPosition.x
