@@ -12,6 +12,7 @@ public class NewOrderUpgradeUIElement : MonoBehaviour, IPointerClickHandler
     [Zenject.Inject] ProgressionHandler progressionHandler;
 
     bool selected;
+    string displayName;
     NewOrderVisualizer order;
 
     private void Start()
@@ -20,11 +21,13 @@ public class NewOrderUpgradeUIElement : MonoBehaviour, IPointerClickHandler
         order = GetComponentInParent<NewOrderVisualizer>();
         if (progressionHandler.IsMaxUpgradeLevel(upgradeType))
             Destroy(gameObject);
+        displayName = progressionHandler.GetDisplayNameForUpgrade(upgradeType);
+        UpdateText();
     }
 
     private void UpdateText()
     {
-        text.text = (selected?"1":"0") + " x " + upgradeType.ToString() + "Upgrade";
+        text.text = (selected?"1":"0") + " x " + displayName;
         text.color = (selected) ? color_selected : color_notSelected;
     }
 

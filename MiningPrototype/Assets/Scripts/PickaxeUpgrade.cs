@@ -8,6 +8,7 @@ public class PickaxeUpgrade : ScriptableObject
     public UpgradeType Type;
     public int RequiredLevel;
     public int Level;
+    public string DisplayName;
     public ItemAmountPair Costs;
     public float MiningSpeed;
 }

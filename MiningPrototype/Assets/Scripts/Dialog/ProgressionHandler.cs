@@ -429,6 +429,17 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
         return 100000;
     }
 
+    public string GetDisplayNameForUpgrade(UpgradeType type)
+    {
+        foreach (var upgrade in pickaxeUpgrades)
+        {
+            if (upgrade.Type == type && upgrade.RequiredLevel == currentPickaxeLevel)
+                return upgrade.DisplayName;
+        }
+
+        return "better "+type.ToString();
+    }
+
     public SaveData ToSaveData()
     {
         data.GUID = GetSaveID();

@@ -15,6 +15,7 @@ MonoBehaviour:
   Type: 0
   RequiredLevel: 1
   Level: 2
+  DisplayName: Iron Pickaxe
   Costs:
     type: 3
     amount: 30

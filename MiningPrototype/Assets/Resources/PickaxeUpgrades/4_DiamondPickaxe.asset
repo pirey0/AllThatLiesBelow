@@ -15,6 +15,7 @@ MonoBehaviour:
   Type: 0
   RequiredLevel: 3
   Level: 4
+  DisplayName: Diamond Pickaxe
   Costs:
     type: 5
     amount: 30
