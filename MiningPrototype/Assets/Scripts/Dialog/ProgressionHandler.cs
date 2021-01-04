@@ -399,7 +399,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
         return 0; // SacrificePricesParser.GetPriceFor(reward, resource);
     }
 
-    private void UpgradePickaxe()
+    public void UpgradePickaxe()
     {
         if (IsMaxUpgradeLevel(UpgradeType.Pickaxe))
             return;
