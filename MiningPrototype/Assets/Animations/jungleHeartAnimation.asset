@@ -15,10 +15,10 @@ MonoBehaviour:
   loop: 1
   speedMultiplyer: 1
   frames:
-  - Sprite: {fileID: 724920192116989661, guid: 86804afb60fec1247b5dceed2c6f2b96, type: 3}
-    Duration: 0.5
   - Sprite: {fileID: -9161616980123465507, guid: 86804afb60fec1247b5dceed2c6f2b96, type: 3}
-    Duration: 0.5
+    Duration: 0.2
+  - Sprite: {fileID: 724920192116989661, guid: 86804afb60fec1247b5dceed2c6f2b96, type: 3}
+    Duration: 0.8
   fileToLoadFrom: {fileID: 2800000, guid: 86804afb60fec1247b5dceed2c6f2b96, type: 3}
   defaultTime: 0.5
   loadFromLastToFirst: 0

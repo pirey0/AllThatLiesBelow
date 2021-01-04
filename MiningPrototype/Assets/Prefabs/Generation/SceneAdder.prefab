@@ -908,8 +908,8 @@ MonoBehaviour:
   gizmoColor: {r: 0.5057874, g: 1, b: 0, a: 1}
   XInArea: 1
   YInArea: 1
-  areaTopRight: {x: 187.84242, y: 87.19775, z: 0}
-  areaBotLeft: {x: 15.050179, y: 18.357538, z: 0}
+  areaTopRight: {x: 187.84242, y: 87.197754, z: 0}
+  areaBotLeft: {x: 15.272926, y: 40, z: 0}
 --- !u!1 &9174997455884871907
 GameObject:
   m_ObjectHideFlags: 0
