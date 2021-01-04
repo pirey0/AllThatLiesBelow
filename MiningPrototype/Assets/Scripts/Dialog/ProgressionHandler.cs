@@ -17,8 +17,6 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     [SerializeField] AudioSource instantDeliveryAudio;
     [SerializeField] float timeMiningBeforePassageOfDay;
 
-    [SerializeField] private int currentPickaxeLevel = 1;
-
     [Zenject.Inject] OverworldEffectHandler overworldEffectHandler;
     [Zenject.Inject] CameraController cameraController;
     [Zenject.Inject] LettersParser lettersParser;
@@ -43,7 +41,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     public float JumpMultiplyer { get => data.jumpMultiplyer; }
     public bool DailySacrificeExpired { get => data.sacrificedAtID >= 0; }
     public int SacrificeProgressionLevel { get => data.sacrificeProgressionLevel; }
-    public int PickaxeLevel { get => currentPickaxeLevel; }
+    public int PickaxeLevel { get => data.pickaxeLevel; }
     public bool IsMidas { get => data.isMidas; }
 
     //Useless
@@ -117,6 +115,8 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
 
         letterBox = FindObjectOfType<Letterbox>();
         postbox = FindObjectOfType<DropBox>();
+
+        OnChangePickaxeLevel?.Invoke(data.pickaxeLevel);
     }
 
     public void NotifyAtarDiscovery(int id)
@@ -404,9 +404,9 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
         if (IsMaxUpgradeLevel(UpgradeType.Pickaxe))
             return;
 
-        currentPickaxeLevel++;
-        data.digSpeedMultiplyer = GetMiningSpeedByPickaxeLevel(currentPickaxeLevel);
-        OnChangePickaxeLevel?.Invoke(currentPickaxeLevel);
+        data.pickaxeLevel++;
+        data.digSpeedMultiplyer = GetMiningSpeedByPickaxeLevel(data.pickaxeLevel);
+        OnChangePickaxeLevel?.Invoke(data.pickaxeLevel);
     }
 
     public bool IsMaxUpgradeLevel(UpgradeType type)
@@ -433,7 +433,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     {
         foreach (var upgrade in pickaxeUpgrades)
         {
-            if (upgrade.Type == type && upgrade.RequiredLevel == currentPickaxeLevel)
+            if (upgrade.Type == type && upgrade.RequiredLevel == data.pickaxeLevel)
                 return upgrade.DisplayName;
         }
 
@@ -525,4 +525,7 @@ public class ProgressionSaveData : SaveData
     public LetterProgressionState letterProgressionState = LetterProgressionState.RecievedDay;
     public float leftOverworldTimestamp;
     public float saveTimestamp;
+
+    //upgrades;
+    public int pickaxeLevel = 1;
 }
