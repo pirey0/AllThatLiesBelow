@@ -61,7 +61,7 @@ public class CustomizeableSign : MineableObject, INonPersistantSavable, IBaseInt
         var data = new CustomizeableSignSaveData();
         data.Position = new SerializedVector3(transform.position);
         data.Rotation = new SerializedVector3(transform.eulerAngles);
-        data.SpawnableIDType = SpawnableIDType.Decoration;
+        data.SpawnableIDType = SpawnableIDType.Sign;
         data.symbolId = currentSymbolId;
         return data;
     }
