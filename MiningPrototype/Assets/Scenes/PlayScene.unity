@@ -316,7 +316,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 589325803474934636, guid: c4b3c62dd26f04b4b8fe68da9bd7447c, type: 3}
       propertyPath: showOverlayAlways
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2173153710873331550, guid: c4b3c62dd26f04b4b8fe68da9bd7447c, type: 3}
       propertyPath: m_Name

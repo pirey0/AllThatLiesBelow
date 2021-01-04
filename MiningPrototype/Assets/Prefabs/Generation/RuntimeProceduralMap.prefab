@@ -55,7 +55,7 @@ MonoBehaviour:
   damageOverlayTilemap: {fileID: 7788511327972709305}
   damageOverlayBehind: {fileID: 7741898377245514116}
   debugRendering: 0
-  showOverlayAlways: 1
+  showOverlayAlways: 0
   saveID: 41d50015-c133-49af-b92a-208671ee1322
   entitiesParent: {fileID: 4487784778877613469}
   unlitMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}

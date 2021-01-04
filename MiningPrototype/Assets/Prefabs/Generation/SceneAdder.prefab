@@ -371,7 +371,7 @@ MonoBehaviour:
   YInArea: 0
   areaTopRight: {x: 100.01, y: 278.38, z: 0}
   areaBotLeft: {x: 100.01, y: 278.38, z: 0}
---- !u!1 &895110724207207969
+--- !u!1 &872557360880745111
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -379,43 +379,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8031463762697626080}
-  - component: {fileID: 3931914552865107433}
+  - component: {fileID: 8314058533795355943}
+  - component: {fileID: 2303423342703771768}
   m_Layer: 0
-  m_Name: JungleHouse1 (3)
+  m_Name: JungleHouse2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8031463762697626080
+--- !u!4 &8314058533795355943
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 895110724207207969}
+  m_GameObject: {fileID: 872557360880745111}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 62.8, y: -7.4, z: 0}
+  m_LocalPosition: {x: 145.65, y: 15.5, z: 0}
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 13
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3931914552865107433
+--- !u!114 &2303423342703771768
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 895110724207207969}
+  m_GameObject: {fileID: 872557360880745111}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Size: {x: 12, y: 12}
-  SavedSceneFile: {fileID: 4900000, guid: ad8e0d72e7d193d438651f0fb38838d6, type: 3}
+  Size: {x: 10, y: 30}
+  SavedSceneFile: {fileID: 4900000, guid: 4182a858334447f42a7c3b21626945f7, type: 3}
   Area: 2
   SpawnAttached: 1
   BlocksArea: 1
@@ -518,8 +518,10 @@ Transform:
   - {fileID: 1362578053458958847}
   - {fileID: 1992741376901072735}
   - {fileID: 8773986075743285108}
-  - {fileID: 8031463762697626080}
   - {fileID: 6023537597355098496}
+  - {fileID: 4072751182005152769}
+  - {fileID: 9070399057705166755}
+  - {fileID: 8314058533795355943}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -749,6 +751,112 @@ MonoBehaviour:
   YInArea: 1
   areaTopRight: {x: 187.84242, y: 87.19775, z: 0}
   areaBotLeft: {x: 15.050179, y: 18.357538, z: 0}
+--- !u!1 &8149418798219623295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9070399057705166755}
+  - component: {fileID: 8703701506312716418}
+  m_Layer: 0
+  m_Name: Goldvein1 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9070399057705166755
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8149418798219623295}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 119.1, y: 15.25, z: 0}
+  m_LocalScale: {x: 74.20199, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8703701506312716418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8149418798219623295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 32, y: 8}
+  SavedSceneFile: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
+  Area: 2
+  SpawnAttached: 1
+  BlocksArea: 1
+  gizmoColor: {r: 1, g: 0.83486855, b: 0, a: 1}
+  XInArea: 1
+  YInArea: 1
+  areaTopRight: {x: 187.59134, y: 86.77285, z: 0}
+  areaBotLeft: {x: 15.2756195, y: 18.573456, z: 0}
+--- !u!1 &8409560089529908916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4072751182005152769}
+  - component: {fileID: 8614415099498857087}
+  m_Layer: 0
+  m_Name: Goldvein1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4072751182005152769
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8409560089529908916}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 119.1, y: 26.5, z: 0}
+  m_LocalScale: {x: 74.20199, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8614415099498857087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8409560089529908916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 32, y: 8}
+  SavedSceneFile: {fileID: 4900000, guid: 2efadb89b3ee9c1459e1c9b96496f822, type: 3}
+  Area: 2
+  SpawnAttached: 1
+  BlocksArea: 1
+  gizmoColor: {r: 1, g: 0.83486855, b: 0, a: 1}
+  XInArea: 1
+  YInArea: 1
+  areaTopRight: {x: 187.59134, y: 86.77285, z: 0}
+  areaBotLeft: {x: 15.2756195, y: 18.573456, z: 0}
 --- !u!1 &8956044971055364802
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,7 +886,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8354195560945835919
 MonoBehaviour:
