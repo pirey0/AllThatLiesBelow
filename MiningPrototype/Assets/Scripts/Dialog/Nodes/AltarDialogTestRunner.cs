@@ -8,6 +8,7 @@ public class AltarDialogTestRunner : StateListenerBehaviour
 
     [SerializeField] bool runOnStart;
     [SerializeField] TestDialogVisualizer dialogVisualizer;
+    [SerializeField] Inventory debugInventory;
 
     protected override void OnRealStart()
     {
@@ -45,7 +46,7 @@ public class AltarDialogTestRunner : StateListenerBehaviour
     {
         Debug.Log("NodeDebugRunner Start");
         var prog = (progression == null) ? (IDialogPropertiesHandler)new TestPropertiesHandler() : progression;
-        INodeServiceProvider provider = new TestAltarDialogServiceProvider(dialogVisualizer, prog, collection);
+        INodeServiceProvider provider = new TestAltarDialogServiceProvider(debugInventory, dialogVisualizer, prog, collection);
         NodeResult result = NodeResult.Wait;
         dialogVisualizer.StartDialog();
         while (node != null)
@@ -128,23 +129,37 @@ public class AltarDialogTestRunner : StateListenerBehaviour
         return null;
     }
 
-    public class TestAltarDialogServiceProvider : INodeServiceProvider
+    public class TestAltarDialogServiceProvider : INodeServiceProvider, IDialogInventoryHandler
     {
         IDialogVisualizer visualizer;
         IDialogPropertiesHandler properties;
         AltarTreeCollection treeCollection;
+        Inventory inventory;
 
-        public TestAltarDialogServiceProvider(IDialogVisualizer vis, IDialogPropertiesHandler prop, AltarTreeCollection treeCollection)
+        public TestAltarDialogServiceProvider(Inventory inventory, IDialogVisualizer vis, IDialogPropertiesHandler prop, AltarTreeCollection treeCollection)
         {
             visualizer = vis;
             properties = prop;
             this.treeCollection = treeCollection;
+            this.inventory = inventory;
         }
 
         public IDialogVisualizer DialogVisualizer => visualizer;
         public IDialogPropertiesHandler Properties => properties;
 
         public AltarTreeCollection AltarTreeCollection => treeCollection;
+
+        public IDialogInventoryHandler DialogInventoryHandler => this;
+
+        public Inventory GetConnectedInventory()
+        {
+            return inventory;
+        }
+
+        public bool InventoryConnected()
+        {
+            return inventory != null;
+        }
     }
 
     public class TestPropertiesHandler : IDialogPropertiesHandler

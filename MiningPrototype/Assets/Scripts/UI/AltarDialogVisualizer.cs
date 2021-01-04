@@ -15,6 +15,8 @@ public interface IDialogVisualizer
     void DisplaySentence(string message);
     void DisplayOptions(string[] options);
 
+    void Clear();
+
     void SubscribeToSelection(System.Action<int> a);
     void UnsubscribeFromSelection(System.Action<int> a);
 
@@ -79,12 +81,7 @@ public class AltarDialogVisualizer : MonoBehaviour, IDialogVisualizer
         particleSystem.SetActive(false);
         dialogHandler.ClearVisualizer();
 
-        foreach (Transform child in transform)
-        {
-            DialogElementVisualization dev = child.GetComponent<DialogElementVisualization>();
-            if (dev != null)
-                dev.Destroy();
-        }
+        Clear();
     }
 
     public void DisplaySentence(string sentence)
@@ -177,5 +174,13 @@ public class AltarDialogVisualizer : MonoBehaviour, IDialogVisualizer
         Progressed -= a;
     }
 
-
+    public void Clear()
+    {
+        foreach (Transform child in transform)
+        {
+            DialogElementVisualization dev = child.GetComponent<DialogElementVisualization>();
+            if (dev != null)
+                dev.Destroy();
+        }
+    }
 }

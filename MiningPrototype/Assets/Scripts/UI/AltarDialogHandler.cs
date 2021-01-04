@@ -66,4 +66,9 @@ public class AltarDialogHandler : MonoBehaviour, IDialogVisualizer
     {
         currentVisualizer.EndDialog();
     }
+
+    public void Clear()
+    {
+        currentVisualizer.Clear();
+    }
 }

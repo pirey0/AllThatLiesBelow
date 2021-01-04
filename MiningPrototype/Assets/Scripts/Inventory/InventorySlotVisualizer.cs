@@ -297,7 +297,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
     public bool WouldTakeDrop(ItemAmountPair pair)
     {
-        return origin.allowStoreing;
+        return origin.CanDeposit;
     }
 
     public void BeginHoverWith(ItemAmountPair pair)

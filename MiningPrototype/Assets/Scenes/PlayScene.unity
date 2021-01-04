@@ -295,6 +295,11 @@ MonoBehaviour:
   dialogToRun: Selection
   runOnStart: 1
   dialogVisualizer: {fileID: 939480987}
+  debugInventory:
+    readOnly: 0
+    content:
+    - type: 3
+      amount: 1
 --- !u!114 &939480987
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,6 +4,73 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+public class AltarPaymentNode : AltarBaseNode, IStartableNode, ITickingNode, IEndableNode
+{
+    public ItemAmountPair paymentRequired;
+
+    NodeResult state = NodeResult.Wait;
+    Inventory inventory;
+
+    public NodeResult Start(INodeServiceProvider services)
+    {
+        state = NodeResult.Wait;
+        inventory = null;
+
+        services.DialogVisualizer.SubscribeToSelection(OnSelection);
+
+        if (services.DialogInventoryHandler.InventoryConnected())
+        {
+            inventory = services.DialogInventoryHandler.GetConnectedInventory();
+            inventory.InventoryChanged += OnInventoryChanged;
+            services.DialogVisualizer.DisplayOptions(new string[] { "another time..." });
+
+            //Call manually to trigger payment if player placed premptively, without needing an InventoryChanged event
+            OnInventoryChanged(true, ItemAmountPair.Nothing, false);
+            return NodeResult.Wait;
+        }
+        else
+        {
+            Debug.LogError("No connected inventory for AltarPayment Node");
+            return NodeResult.Error;
+        }
+    }
+
+    private void OnInventoryChanged(bool add, ItemAmountPair element, bool playsound)
+    {
+        if (state == NodeResult.Wait && inventory.Contains(paymentRequired))
+        {
+            //First == Payed succesfully
+            state = NodeResult.First;
+        }
+    }
+
+    private void OnSelection(int obj)
+    {
+        //Second == Cancel
+        state = NodeResult.Second;
+    }
+
+    public NodeResult Tick(INodeServiceProvider services)
+    {
+        if (state == NodeResult.First)
+        {
+            Debug.Log("Payment Node paying: " + paymentRequired.ToString());
+            bool success = inventory.TryRemove(paymentRequired);
+            if (!success)
+                Debug.LogError("Payment Failed");
+        }
+
+        return state;
+    }
+
+    public void OnEnd(INodeServiceProvider services)
+    {
+        inventory.InventoryChanged -= OnInventoryChanged;
+        services.DialogVisualizer.UnsubscribeFromSelection(OnSelection);
+        services.DialogVisualizer.Clear();
+    }
+}
+
 public class AltarSelectionChoiceNode : AltarChoiceNode, IStartableNode, ITickingNode, IEndableNode
 {
     public override NodeResult Start(INodeServiceProvider services)
@@ -12,7 +79,7 @@ public class AltarSelectionChoiceNode : AltarChoiceNode, IStartableNode, ITickin
 
         foreach (var item in services.AltarTreeCollection.Roots)
         {
-            if(item is AltarOptionNode)
+            if (item is AltarOptionNode)
             {
                 choiceNodes.Add(item);
             }

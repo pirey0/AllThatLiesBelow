@@ -6,7 +6,8 @@ public enum NodeResult
 {
     Error = -2,
     Wait = -1,
-    First = 0
+    First = 0,
+    Second = 1
 }
 
 public interface INodeServiceProvider
@@ -14,6 +15,17 @@ public interface INodeServiceProvider
     IDialogVisualizer DialogVisualizer { get; }
     IDialogPropertiesHandler Properties { get; }
     AltarTreeCollection AltarTreeCollection { get; }
+
+    IDialogInventoryHandler DialogInventoryHandler { get; }
+
+
+}
+
+public interface IDialogInventoryHandler
+{
+    bool InventoryConnected();
+
+    Inventory GetConnectedInventory();
 }
 
 public interface IDialogPropertiesHandler

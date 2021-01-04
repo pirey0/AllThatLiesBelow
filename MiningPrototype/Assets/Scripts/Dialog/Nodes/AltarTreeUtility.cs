@@ -66,6 +66,20 @@ public static class AltarTreeUtility
         {
             node = new AltarSelectionChoiceNode();
         }
+        else if (NodeMatchesConditions(root, out elements, "Payment", 3))
+        {
+            if (ItemAmountPair.TryParse(elements[2], elements[1], out ItemAmountPair item))
+            {
+                var pNode = new AltarPaymentNode();
+                pNode.paymentRequired = item;
+                node = pNode;
+            }
+            else
+            {
+                Debug.LogError("Failed to parse PaymentMode items " + elements[2] + " " + elements[1]);
+                return null;
+            }
+        }
         else if (NodeMatchesConditions(root, out elements, "Name", 2))
         {
             return null;

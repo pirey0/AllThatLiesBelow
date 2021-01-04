@@ -74,4 +74,9 @@ public class TestDialogVisualizer : MonoBehaviour, IDialogVisualizer
     {
         state = State.None;
     }
+
+    public void Clear()
+    {
+        state = State.None;
+    }
 }

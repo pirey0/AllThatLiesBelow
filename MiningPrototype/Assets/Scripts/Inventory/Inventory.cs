@@ -8,15 +8,19 @@ using UnityEngine;
 [System.Serializable]
 public class Inventory
 {
-    [SerializeField] public bool allowStoreing = true;
+    [UnityEngine.Serialization.FormerlySerializedAs("allowStoreing")]
+    [SerializeField] bool canDeposit = true;
     [SerializeField] List<ItemAmountPair> content = new List<ItemAmountPair>();
-    public int Count
-    {
-        get => content.Count;
-    }
+
+    public int Count {  get => content.Count; }
+    public bool CanDeposit { get => canDeposit; }
+
+
+    //Added delegate to make bool arguments understandable
+    public delegate void InventoryChangedDelegate(bool add, ItemAmountPair element, bool playsound);
 
     [field: NonSerialized]
-    public event System.Action<bool, ItemAmountPair, bool> InventoryChanged;
+    public event InventoryChangedDelegate InventoryChanged;
 
     public ItemAmountPair this[int index]
     {
@@ -107,6 +111,7 @@ public class Inventory
         else
         {
             int id = GetStackIdFor(pair);
+
             if (id >= 0)
             {
                 if (content[id].amount > pair.amount)
@@ -178,6 +183,21 @@ public struct ItemAmountPair
         type = itemType;
         amount = itemAmount;
     }
+
+    public static bool TryParse(string typeS, string amountS, out ItemAmountPair pair)
+    {
+        if (int.TryParse(amountS, out int amount))
+        {
+            if (System.Enum.TryParse(typeS, out ItemType type))
+            {
+               pair = new ItemAmountPair(type, amount);
+                return true;
+            }
+        }
+        pair = ItemAmountPair.Nothing;
+        return false;
+    }
+
 
     public override string ToString()
     {

@@ -243,7 +243,7 @@ public class InventoryVisualizer : ScalingUIElementBase, IDropReceiver
 
     public bool WouldTakeDrop(ItemAmountPair pair)
     {
-        return inventory.allowStoreing;
+        return inventory.CanDeposit;
     }
 
     public void BeginHoverWith(ItemAmountPair pair)
