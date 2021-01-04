@@ -41,7 +41,7 @@ public class CustomizeableSign : MineableObject, INonPersistantSavable, IBaseInt
         currentSymbolId++;
 
         switchSymbolSound.Play();
-        cameraController.Shake(transform.position, CameraShakeType.explosion, 0.1f, 10, 0.25f);
+        cameraController?.Shake(transform.position, CameraShakeType.explosion, 0.1f, 10, 0.25f);
     }
 
     bool TryDisplay(int id)
@@ -50,7 +50,8 @@ public class CustomizeableSign : MineableObject, INonPersistantSavable, IBaseInt
         {
             symbolRenderer.sprite = symbols[id];
             return true;
-        } else
+        }
+        else
         {
             return false;
         }
@@ -59,8 +60,7 @@ public class CustomizeableSign : MineableObject, INonPersistantSavable, IBaseInt
     public SpawnableSaveData ToSaveData()
     {
         var data = new CustomizeableSignSaveData();
-        data.Position = new SerializedVector3(transform.position);
-        data.Rotation = new SerializedVector3(transform.eulerAngles);
+        data.SaveTransform(transform);
         data.SpawnableIDType = SpawnableIDType.Sign;
         data.symbolId = currentSymbolId;
         return data;
