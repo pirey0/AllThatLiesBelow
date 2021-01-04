@@ -13,8 +13,11 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     [SerializeField] NewOrderCrateSpawner newOrderCrateSpawner;
     [SerializeField] int startingLetterID = 100;
     [SerializeField] List<ItemAmountPair> startingItems;
+    [SerializeField] PickaxeUpgrade[] pickaxeUpgrades;
     [SerializeField] AudioSource instantDeliveryAudio;
     [SerializeField] float timeMiningBeforePassageOfDay;
+
+    [SerializeField] private int currentPickaxeLevel = 1;
 
     [Zenject.Inject] OverworldEffectHandler overworldEffectHandler;
     [Zenject.Inject] CameraController cameraController;
@@ -24,6 +27,8 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     [Zenject.Inject] SacrificeActions sacrificeActions;
     [Zenject.Inject] SceneAdder sceneAdder;
     [Zenject.Inject] PlayerStateMachine player;
+
+    public System.Action<int> OnChangePickaxeLevel;
 
     ProgressionSaveData data;
     Letterbox letterBox;
@@ -38,6 +43,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     public float JumpMultiplyer { get => data.jumpMultiplyer; }
     public bool DailySacrificeExpired { get => data.sacrificedAtID >= 0; }
     public int SacrificeProgressionLevel { get => data.sacrificeProgressionLevel; }
+    public int PickaxeLevel { get => currentPickaxeLevel; }
     public bool IsMidas { get => data.isMidas; }
 
     //Useless
@@ -219,14 +225,15 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
                 {
                     if (data.ordersForNextDay.ContainsKey(storedItem.amount))
                     {
-                        List<ItemAmountPair> order = data.ordersForNextDay[storedItem.amount];
-                        if (order == null || order.Count == 0)
+                        Order order = data.ordersForNextDay[storedItem.amount];
+                        if (order == null || (order.Items.Length == 0 && order.Upgrades.Length == 0))
                         {
                             Debug.LogError("There is an order ID with no elements: " + storedItem.amount);
                         }
                         else
                         {
-                            newOrderCrateSpawner.SpawnOrder(order);
+                            newOrderCrateSpawner.SpawnOrder(new List<ItemAmountPair>(order.Items));
+                            UpgradePickaxe();
                         }
 
                         data.ordersForNextDay.Remove(storedItem.amount);
@@ -373,22 +380,53 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
         data.sacrificeProgressionLevel = level;
     }
 
-    public void RegisterOrder(int id, List<ItemAmountPair> itemAmountPairs)
+    public void RegisterOrder(int id, Order order)
     {
         if (data.instantDelivery)
         {
             instantDeliveryAudio.Play();
-            newOrderCrateSpawner.SpawnOrder(itemAmountPairs);
+            newOrderCrateSpawner.SpawnOrder(new List<ItemAmountPair>(order.Items));
+            UpgradePickaxe();
         }
         else
         {
-            data.ordersForNextDay.Add(id, itemAmountPairs);
+            data.ordersForNextDay.Add(id, order);
         }
     }
 
     public float GetPriceOf(string reward, string resource)
     {
         return 0; // SacrificePricesParser.GetPriceFor(reward, resource);
+    }
+
+    private void UpgradePickaxe()
+    {
+        if (IsMaxUpgradeLevel(UpgradeType.Pickaxe))
+            return;
+
+        currentPickaxeLevel++;
+        data.digSpeedMultiplyer = GetMiningSpeedByPickaxeLevel(currentPickaxeLevel);
+        OnChangePickaxeLevel?.Invoke(currentPickaxeLevel);
+    }
+
+    public bool IsMaxUpgradeLevel(UpgradeType type)
+    {
+        if (type == UpgradeType.Pickaxe)
+            return PickaxeLevel == 4;
+
+        return false;
+    }
+
+    public float GetMiningSpeedByPickaxeLevel(int level)
+    {
+        foreach (var upgrade in pickaxeUpgrades)
+        {
+            if (upgrade.Level == level)
+                return upgrade.MiningSpeed;
+        }
+
+        Debug.LogWarning("no mining speed info found for level " + level);
+        return 100000;
     }
 
     public SaveData ToSaveData()
@@ -470,7 +508,7 @@ public class ProgressionSaveData : SaveData
 
 
     //letters and daily
-    public Dictionary<int, List<ItemAmountPair>> ordersForNextDay = new Dictionary<int, List<ItemAmountPair>>();
+    public Dictionary<int, Order> ordersForNextDay = new Dictionary<int, Order>();
     public int lastLetterID = -1;
     public bool wifeRecievedLetter = false;
     public LetterProgressionState letterProgressionState = LetterProgressionState.RecievedDay;

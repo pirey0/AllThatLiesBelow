@@ -138,7 +138,7 @@ public class Desk : MonoBehaviour, IInteractable
         LeaveDesk();
     }
 
-    public void FinishNewOrder(List<ItemAmountPair> itemAmountPairs, Dictionary<ItemType, int> cost)
+    public void FinishNewOrder(Order order)
     {
         if (paperFold != null)
         {
@@ -152,10 +152,10 @@ public class Desk : MonoBehaviour, IInteractable
             letterWritingSource?.Play();
         }
 
-        int readableId = readableItemHandler.AddNewReadable(itemAmountPairs);
-        progressionHandler.RegisterOrder(readableId, itemAmountPairs);
+        int readableId = readableItemHandler.AddNewReadable(order);
+        progressionHandler.RegisterOrder(readableId, order);
 
-        foreach (var singlePrice in cost)
+        foreach (var singlePrice in order.Costs)
         {
             inventoryManager.PlayerTryPay(singlePrice.Key, singlePrice.Value);
         }

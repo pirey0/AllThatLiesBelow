@@ -7,16 +7,31 @@ public class ShopPricesParser
 {
     const string PATH = "ShopPricesData";
 
-    private Dictionary<ItemType, ItemAmountPair> pricingTable;
+    private Dictionary<ItemType, ItemAmountPair> itemPricingTable;
+    private PickaxeUpgrade[] upgradePricingTable;
 
     public ShopPricesParser()
+    {
+        LoadItemPricesFromExcelTable();
+        LoadUpgradePricesScriptableObjects();
+    }
+
+    private void LoadUpgradePricesScriptableObjects()
+    {
+        upgradePricingTable = Resources.LoadAll<PickaxeUpgrade>("PickaxeUpgrades");
+
+        if (upgradePricingTable == null || upgradePricingTable.Length <= 0)
+            Debug.Log("No Pickaxe Upgrades were loaded");
+    }
+
+    private void LoadItemPricesFromExcelTable()
     {
         DurationTracker tracker = new DurationTracker("ShopPricesParser");
 
         if (CSVHelper.ResourceMissing(PATH))
             return;
 
-        pricingTable = new Dictionary<ItemType, ItemAmountPair>();
+        itemPricingTable = new Dictionary<ItemType, ItemAmountPair>();
         string[,] table = CSVHelper.LoadTableAtPath(PATH);
 
 
@@ -52,8 +67,8 @@ public class ShopPricesParser
                 Debug.Log("Cannot convert " + table[1, y] + " to int");
             }
 
-            if (!pricingTable.ContainsKey(product))
-                pricingTable.Add(product, new ItemAmountPair(costType, amount));
+            if (!itemPricingTable.ContainsKey(product))
+                itemPricingTable.Add(product, new ItemAmountPair(costType, amount));
         }
 
         tracker.Stop();
@@ -64,13 +79,25 @@ public class ShopPricesParser
     /// </summary>
     public ItemAmountPair GetPriceFor(ItemType type, int count)
     {
-        if (pricingTable.ContainsKey(type))
+        if (itemPricingTable.ContainsKey(type))
         {
-            var value = pricingTable[type];
+            var value = itemPricingTable[type];
 
             return new ItemAmountPair(value.type, value.amount * count);
         }
 
         return new ItemAmountPair(ItemType.None, 69);
+    }
+
+    public ItemAmountPair GetPriceFor(UpgradeType type, int currentLevel)
+    {
+        foreach (PickaxeUpgrade upgrade in upgradePricingTable)
+        {
+            if (type == upgrade.Type && upgrade.RequiredLevel == currentLevel)
+                return upgrade.Costs;
+        }
+
+        Debug.LogWarning("No prices for an upgrade from pickaxe level " + currentLevel + " found.");
+        return new ItemAmountPair(ItemType.Diamond,99999999);
     }
 }

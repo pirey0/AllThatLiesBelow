@@ -19,6 +19,7 @@ public class PlayerVisualController : MonoBehaviour
     [SerializeField] SpriteAnimation[] climbNoHelmet, climbIdleNoHelmet, climbHelmet, climbIdleHelmet, climbHelmetLamp, climbIdleHelmetLamp;
     [SerializeField] HelmetAndPickaxeBasedAnimationHolder[] helmetAndPickaxeBasedAnimationHolders;
 
+    [Zenject.Inject] ProgressionHandler progressionHandler;
 
     Dictionary<string, PlayerVisualState> visualStateMap;
 
@@ -50,7 +51,16 @@ public class PlayerVisualController : MonoBehaviour
         {
             Debug.LogError("No StateMachine found");
         }
+    }
 
+    private void OnEnable()
+    {
+        progressionHandler.OnChangePickaxeLevel += ChangePickaxeLevel;
+    }
+
+    private void OnDisable()
+    {
+        progressionHandler.OnChangePickaxeLevel -= ChangePickaxeLevel;
     }
 
     public void ChangeHelmetState(HelmetState newHelmentState)

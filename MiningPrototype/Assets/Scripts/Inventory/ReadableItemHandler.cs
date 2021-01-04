@@ -75,13 +75,18 @@ public class ReadableItemHandler : MonoBehaviour
         }
     }
 
-    public int AddNewReadable(List<ItemAmountPair> itemAmountPairs)
+    public int AddNewReadable(Order order)
     {
         string str = "New Order:\n";
 
-        foreach (ItemAmountPair pair in itemAmountPairs)
+        foreach (ItemAmountPair pair in order.Items)
         {
             str += ItemsData.GetItemInfo(pair.type).DisplayName + " x " + pair.amount + "\n";
+        }
+
+        foreach (UpgradeType upgrade in order.Upgrades)
+        {
+            str += upgrade.ToString() + "\n";
         }
 
         readableItems.Add(new ReadableItem(str, ItemType.NewOrder));

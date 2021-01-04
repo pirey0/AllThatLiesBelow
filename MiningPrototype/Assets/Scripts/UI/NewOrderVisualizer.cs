@@ -22,8 +22,9 @@ public class NewOrderVisualizer : ReadableItemVisualizer
     [Inject] InventoryManager inventoryManager;
 
     Dictionary<ItemType, int> orderedElementsWithAmounts = new Dictionary<ItemType, int>();
+    List<UpgradeType> orderedUpgrades = new List<UpgradeType>();
     Dictionary<ItemType, int> cost = new Dictionary<ItemType, int>();
-    Action<List<ItemAmountPair>, Dictionary<ItemType, int>> OnFinish;
+    Action<Order> OnFinish;
     Action OnAbort;
 
     protected override void Start()
@@ -33,8 +34,40 @@ public class NewOrderVisualizer : ReadableItemVisualizer
         UpdateTutorialDisplays();
     }
 
+    public void TryAddUpgrade(UpgradeType upgradeType)
+    {
+        if (!orderedUpgrades.Contains(upgradeType))
+        {
+            orderedUpgrades.Add(upgradeType);
+
+            if (writingSounds != null)
+            {
+                writingSounds.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+                writingSounds.Play();
+            }
+
+            UpdateCost();
+        } 
+    }
+
+    public void TryRemoveUpgrade(UpgradeType upgradeType)
+    {
+        if (orderedUpgrades.Contains(upgradeType))
+        {
+            orderedUpgrades.Remove(upgradeType);
+
+            if (writingSounds != null)
+            {
+                writingSounds.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+                writingSounds.Play();
+            }
+
+            UpdateCost();
+        }
+    }
+
     //Hand over the methods to call for fimish and abort from the desk
-    public void Handshake(Action<List<ItemAmountPair>, Dictionary<ItemType, int>> onFinish,Action onAbort)
+    public void Handshake(Action<Order> onFinish,Action onAbort)
     {
         OnFinish = onFinish;
         OnAbort = onAbort;
@@ -77,6 +110,17 @@ public class NewOrderVisualizer : ReadableItemVisualizer
         foreach (KeyValuePair<ItemType, int> item in orderedElementsWithAmounts)
         {
             ItemAmountPair price = shopPricesParser.GetPriceFor(item.Key, item.Value);
+
+            if (cost.ContainsKey(price.type))
+                cost[price.type] += price.amount;
+            else
+                cost.Add(price.type, price.amount);
+        }
+
+        //new cost fetching after implementation
+        foreach (UpgradeType upgrade in orderedUpgrades)
+        {
+            ItemAmountPair price = shopPricesParser.GetPriceFor(upgrade, progressionHandler.PickaxeLevel);
 
             if (cost.ContainsKey(price.type))
                 cost[price.type] += price.amount;
@@ -142,7 +186,7 @@ public class NewOrderVisualizer : ReadableItemVisualizer
         foreach (KeyValuePair<ItemType, int> i in orderedElementsWithAmounts)
             itemAmountPairs.Add(new ItemAmountPair(i.Key, i.Value));
 
-        OnFinish?.Invoke(itemAmountPairs, cost);
+        OnFinish?.Invoke(new Order(cost, itemAmountPairs.ToArray(), orderedUpgrades.ToArray()));
         Hide();
     }
 

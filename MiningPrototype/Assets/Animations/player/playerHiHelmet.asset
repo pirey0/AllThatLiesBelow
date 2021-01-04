@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d05716d329922cf4abb0b6513364aece, type: 3}
-  m_Name: playerHit
+  m_Name: playerHiHelmet
   m_EditorClassIdentifier: 
   loop: 0
   speedMultiplyer: 1
   frames:
-  - Sprite: {fileID: -5010878985237893848, guid: e0e653eb664f99240af5fc835c92efaa, type: 3}
+  - Sprite: {fileID: -1660316314693276861, guid: e0e653eb664f99240af5fc835c92efaa, type: 3}
     Duration: 0.25
-  - Sprite: {fileID: -7194323726269135038, guid: e0e653eb664f99240af5fc835c92efaa, type: 3}
+  - Sprite: {fileID: 3887283873528570864, guid: e0e653eb664f99240af5fc835c92efaa, type: 3}
     Duration: 0.25
   fileToLoadFrom: {fileID: 2800000, guid: e0e653eb664f99240af5fc835c92efaa, type: 3}
   defaultTime: 0.25
