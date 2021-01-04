@@ -21,7 +21,7 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
     [Zenject.Inject] InWorldCanvas inWorld;
     [Zenject.Inject] InventoryVisualizer.Factory visualizerFactory;
     [Zenject.Inject] PlayerInventoryOpener playerInventoryOpener;
-    [Zenject.Inject] UIsHandler uIsHandler;
+    [Zenject.Inject] protected UIsHandler uIsHandler;
 
     private event System.Action ForceInterrupt;
     public event System.Action<InventoryState> StateChanged;

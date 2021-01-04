@@ -28,7 +28,6 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     [Inject] RuntimeProceduralMap map;
     [Inject] ItemPlacingHandler itemPlacingHandler;
     [Inject] CursorHandler cursorHandler;
-    [Inject] UIsHandler uIsHandler;
 
     PlayerVisualController visualController;
     Vector2Int? gridDigTarget, previousGridDigTarget;
