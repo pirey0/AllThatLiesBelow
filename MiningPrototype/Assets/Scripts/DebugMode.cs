@@ -46,6 +46,7 @@ public class DebugMode : MonoBehaviour
         DebugLogConsole.AddCommandInstance("/showAdditiveMap", "Visualizes the Map", "ShowAdditiveMap", this);
         DebugLogConsole.AddCommandInstance("/chopper", "Spawn a Chopper", "SpawnChopper", this);
         DebugLogConsole.AddCommandInstance("/stats", "Logs the stats", "LogStats", this);
+        DebugLogConsole.AddCommandInstance("/upgradepickaxe", "Upgrades the pickaxe level","UpgradePickaxe", this);
 
     }
 
@@ -192,6 +193,11 @@ public class DebugMode : MonoBehaviour
     private void SetProgressionLevel(int level)
     {
         progressionHandler.SetAltarProgressionLevel(level);
+    }
+
+    private void UpgradePickaxe()
+    {
+        progressionHandler.UpgradePickaxe();
     }
 
     private void Reward(AltarRewardType reward)
