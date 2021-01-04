@@ -58,6 +58,10 @@ public static class AltarTreeUtility
         {
             node = new AltarChoiceNode();
         }
+        else if (NodeMatchesConditions(root, out elements, "Conditional", 1))
+        {
+            node = new AltarConditionalNode();
+        }
         else if (NodeMatchesConditions(root, out elements, "Selection", 1))
         {
             node = new AltarSelectionChoiceNode();

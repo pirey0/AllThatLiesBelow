@@ -81,38 +81,52 @@ public class AltarDialogTestRunner : StateListenerBehaviour
                 Debug.LogError("NodeDebugRunner exited with Error");
                 yield break;
             }
-            else if ((int)result < node.Children.Length && (int)result >= 0)
-            {
-                if (node is IEndableNode endableNode)
-                {
-                    endableNode.OnEnd(provider);
-                }
-
-                node = node.Children[(int)result];
-                result = NodeResult.Wait;
-            }
             else
             {
                 if (node is IEndableNode endableNode)
                     endableNode.OnEnd(provider);
 
-                if (node.Children != null && node.Children.Length > 0)
-                {
-                    node = node.Children[0];
-                }
-                else
-                {
-                    Debug.Log("Result: " + result + ", Node: " + node + " " + node.ToDebugString());
-                    node = null;
-                }
+                var newNode = SelectFirstViableChildNodeStartingAt(node, provider, (int)result);
+                if (newNode == null)
+                    Debug.Log("NodeDebugRunnerEnded: Result: " + result + ", Node: " + node + " " + node.ToDebugString());
+
+                node = newNode;
                 result = NodeResult.Wait;
             }
         }
 
         dialogVisualizer.EndDialog();
-        Debug.Log("NodeDebugRunner Finish");
     }
 
+    private static AltarBaseNode SelectFirstViableChildNodeStartingAt(AltarBaseNode node, INodeServiceProvider provider, int startIndex)
+    {
+        if (node.Children != null && node.Children.Length > 0)
+        {
+            //start from 0 if startIndex is negative
+            int i = Mathf.Max(0, startIndex);
+            while (i < node.Children.Length)
+            {
+                var currentChild = node.Children[i];
+                if (currentChild is AltarConditionalNode conditional)
+                {
+                    if (conditional.ConditionPassed(provider))
+                    {
+                        return currentChild;
+                    }
+                    else
+                    {
+                        i++;
+                    }
+                }
+                else
+                {
+                    return currentChild;
+                }
+            }
+        }
+
+        return null;
+    }
 
     public class TestAltarDialogServiceProvider : INodeServiceProvider
     {

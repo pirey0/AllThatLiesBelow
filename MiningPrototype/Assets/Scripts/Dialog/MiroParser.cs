@@ -215,17 +215,17 @@ public class MiroBoard
 
     private void ConnectNodes(Dictionary<string, MiroTreeWidget> treeWidgets)
     {
-        foreach (var w in widgets)
+        //Order lines so notes are run top to bottom
+        List<MiroWidgetRaw> lines = widgets.FindAll((x) => x.type == "LINE").OrderBy((x) => x.endPosition.y).ToList();
+
+        foreach (var w in lines)
         {
-            if (w.type == "LINE")
+            if (treeWidgets.ContainsKey(w.startWidgetId) && treeWidgets.ContainsKey(w.endWidgetId))
             {
-                if (treeWidgets.ContainsKey(w.startWidgetId) && treeWidgets.ContainsKey(w.endWidgetId))
-                {
-                    var wStart = treeWidgets[w.startWidgetId];
-                    var wEnd = treeWidgets[w.endWidgetId];
-                    wStart.childrenIds.Add(w.endWidgetId);
-                    wEnd.parentsIds.Add(w.startWidgetId);
-                }
+                var wStart = treeWidgets[w.startWidgetId];
+                var wEnd = treeWidgets[w.endWidgetId];
+                wStart.childrenIds.Add(w.endWidgetId);
+                wEnd.parentsIds.Add(w.startWidgetId);
             }
         }
     }
@@ -368,7 +368,9 @@ public class MiroWidgetRaw
     public string id;
 
     public string startWidgetId;
+
     public string endWidgetId;
+    public Vector2 endPosition;
 
     public string plainText;
 }
