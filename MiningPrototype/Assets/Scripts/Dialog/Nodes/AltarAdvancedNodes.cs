@@ -14,13 +14,12 @@ public class AltarPaymentNode : AltarBaseNode, IStartableNode, ITickingNode, IEn
     public NodeResult Start(INodeServiceProvider services)
     {
         state = NodeResult.Wait;
-        inventory = null;
 
         services.DialogVisualizer.SubscribeToSelection(OnSelection);
+        inventory = services.SpawnInventory();
 
-        if (services.DialogInventoryHandler.InventoryConnected())
+        if (inventory != null)
         {
-            inventory = services.DialogInventoryHandler.GetConnectedInventory();
             inventory.InventoryChanged += OnInventoryChanged;
             services.DialogVisualizer.DisplayOptions(new string[] { "another time..." });
 
@@ -66,6 +65,7 @@ public class AltarPaymentNode : AltarBaseNode, IStartableNode, ITickingNode, IEn
     public void OnEnd(INodeServiceProvider services)
     {
         inventory.InventoryChanged -= OnInventoryChanged;
+        services.DestroyInventory();
         services.DialogVisualizer.UnsubscribeFromSelection(OnSelection);
         services.DialogVisualizer.Clear();
     }
@@ -77,7 +77,7 @@ public class AltarSelectionChoiceNode : AltarChoiceNode, IStartableNode, ITickin
     {
         List<AltarBaseNode> choiceNodes = new List<AltarBaseNode>();
 
-        foreach (var item in services.AltarTreeCollection.Roots)
+        foreach (var item in services.Properties.AltarDialogCollection.Roots)
         {
             if (item is AltarOptionNode)
             {

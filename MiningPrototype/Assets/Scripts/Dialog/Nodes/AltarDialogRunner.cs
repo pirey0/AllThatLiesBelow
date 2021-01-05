@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AltarDialogRunner : StateListenerBehaviour, IInventoryOwner
+public class AltarDialogRunner : StateListenerBehaviour
 {
     [SerializeField] string testDialogToRun = "Test1";
 
     [SerializeField] bool runOnStart;
     [SerializeField] TestDialogVisualizer dialogVisualizer;
-    [SerializeField] Inventory debugInventory;
+    [SerializeField] GameObject debugInventory;
 
     [Zenject.Inject] ProgressionHandler progression;
 
-    public Inventory Inventory => debugInventory;
 
     protected override void OnRealStart()
     {
@@ -31,9 +30,10 @@ public class AltarDialogRunner : StateListenerBehaviour, IInventoryOwner
             var node = collection.FindDialogWithName(testDialogToRun);
             if (node != null)
             {
-                var prog = (progression == null) ? (IDialogPropertiesHandler)new TestDialogPropertiesHandler() : progression;
-                INodeServiceProvider provider = new BasicDialogServiceProvider(collection, dialogVisualizer, prog, this);
-                StartCoroutine(RunDialogCoroutine(provider, node));
+                BasicDialogServiceProvider provider = new BasicDialogServiceProvider(progression);
+                provider.SetVisualizer(dialogVisualizer);
+                provider.SetInventory(debugInventory);
+                StartCoroutine(DialogCoroutine(provider, node));
             }
             else
             {
@@ -46,7 +46,7 @@ public class AltarDialogRunner : StateListenerBehaviour, IInventoryOwner
         }
     }
 
-    public static IEnumerator RunDialogCoroutine(INodeServiceProvider provider, AltarBaseNode node)
+    public static IEnumerator DialogCoroutine(INodeServiceProvider provider, AltarBaseNode node)
     {
         Debug.Log("NodeDebugRunner Start");
 
@@ -145,63 +145,47 @@ public class AltarDialogRunner : StateListenerBehaviour, IInventoryOwner
     }
 }
 
-public class BasicDialogServiceProvider : INodeServiceProvider, IDialogInventoryHandler
+public class BasicDialogServiceProvider : INodeServiceProvider
 {
     IDialogVisualizer visualizer;
     IDialogPropertiesHandler properties;
-    AltarDialogCollection treeCollection;
-    IInventoryOwner inventoryOwner;
+    GameObject inventoryGO;
+    Inventory inventory;
 
-    public BasicDialogServiceProvider(AltarDialogCollection treeCollection, IDialogVisualizer vis, IDialogPropertiesHandler prop, IInventoryOwner inventoryOwner)
+    public BasicDialogServiceProvider(IDialogPropertiesHandler prop)
+    {
+        properties = prop;
+    }
+
+    public void SetVisualizer(IDialogVisualizer vis)
     {
         visualizer = vis;
-        properties = prop;
-        this.treeCollection = treeCollection;
-        this.inventoryOwner = inventoryOwner;
+    }
+
+    public void SetInventory(GameObject inventoryGO)
+    {
+        this.inventoryGO = inventoryGO;
+        if(inventoryGO.TryGetComponent(out IInventoryOwner owner))
+        {
+            inventory = owner.Inventory;
+        }
+    }
+
+    public Inventory SpawnInventory()
+    {
+        inventoryGO.SetActive(true);
+        return inventory;
+    }
+
+    public void DestroyInventory()
+    {
+        inventoryGO.SetActive(false);
     }
 
     public IDialogVisualizer DialogVisualizer => visualizer;
     public IDialogPropertiesHandler Properties => properties;
 
-    public AltarDialogCollection AltarTreeCollection => treeCollection;
-
-    public IDialogInventoryHandler DialogInventoryHandler => this;
-
     public bool Aborted { get; set; }
 
-    public Inventory GetConnectedInventory()
-    {
-        return inventoryOwner.Inventory;
-    }
-
-    public bool InventoryConnected()
-    {
-        return inventoryOwner != null;
-    }
 }
 
-public class TestDialogPropertiesHandler : IDialogPropertiesHandler
-{
-    public void FireEvent(string @event)
-    {
-        Debug.Log("EventFired: " + @event);
-    }
-
-    public bool GetVariable(string name)
-    {
-        return true;
-    }
-
-    public bool HasRunDialog(string id)
-    {
-        return false;
-    }
-
-    public void MarkRanDialog(string id)
-    {
-    }
-
-    public void SetVariable(string variableName, bool variableState)
-    {
-    }
-}

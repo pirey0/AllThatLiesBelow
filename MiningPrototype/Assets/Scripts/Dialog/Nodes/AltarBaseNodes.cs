@@ -14,19 +14,14 @@ public interface INodeServiceProvider
 {
     IDialogVisualizer DialogVisualizer { get; }
     IDialogPropertiesHandler Properties { get; }
-    AltarDialogCollection AltarTreeCollection { get; }
 
-    IDialogInventoryHandler DialogInventoryHandler { get; }
+    Inventory SpawnInventory();
+
+    void DestroyInventory();
 
     bool Aborted { get; set; }
 }
 
-public interface IDialogInventoryHandler
-{
-    bool InventoryConnected();
-
-    Inventory GetConnectedInventory();
-}
 
 public interface IDialogPropertiesHandler
 {
@@ -36,6 +31,8 @@ public interface IDialogPropertiesHandler
 
     void MarkRanDialog(string id);
     bool HasRunDialog(string id);
+
+    AltarDialogCollection AltarDialogCollection { get; }
 }
 
 public interface IStartableNode
