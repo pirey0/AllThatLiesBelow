@@ -1,10 +1,10 @@
 Product;Cost Amount;Cost Type
-Ladder;5;Copper
-Support;5;Copper
+Rope ;5;Copper
+Support;3;Copper
 Ball;1;Gold
 Dynamite;3;Gold
 Chest;10;Gold
 Torch;1;Copper
 Platform;5;Copper
-Rope ;5;Copper
+Sign;2;Copper
 Lift;30;Gold
