@@ -77,7 +77,7 @@ public class NewOrderVisualizer : ReadableItemVisualizer
         //new cost fetching after implementation
         foreach (KeyValuePair<ItemType, int> item in orderedElementsWithAmounts)
         {
-            ItemAmountPair price = ItemsData.GetItemInfo(item.Key).IsUpgrade ? shopPricesParser.GetUpgradePrice(item.Key, progressionHandler.GetLevelForUpgrade(item.Key)) : shopPricesParser.GetPriceFor(item.Key, item.Value);
+            ItemAmountPair price = shopPricesParser.GetPriceFor(item.Key, item.Value);
 
             if (cost.ContainsKey(price.type))
                 cost[price.type] += price.amount;

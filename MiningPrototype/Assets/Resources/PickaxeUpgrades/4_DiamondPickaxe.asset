@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e88a37577a4ac84a916062c8879bfaf, type: 3}
   m_Name: 4_DiamondPickaxe
   m_EditorClassIdentifier: 
-  Type: 26
+  Type: 28
   RequiredLevel: 3
   Level: 4
   DisplayName: Diamond Pickaxe

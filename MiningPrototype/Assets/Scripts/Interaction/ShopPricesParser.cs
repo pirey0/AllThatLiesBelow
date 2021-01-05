@@ -88,16 +88,4 @@ public class ShopPricesParser
 
         return new ItemAmountPair(ItemType.None, 69);
     }
-
-    public ItemAmountPair GetUpgradePrice(ItemType type, int currentLevel)
-    {
-        foreach (PickaxeUpgrade upgrade in upgradePricingTable)
-        {
-            if (type == upgrade.Type && upgrade.RequiredLevel == currentLevel)
-                return upgrade.Costs;
-        }
-
-        Debug.LogWarning("No prices for an upgrade from pickaxe level " + currentLevel + " found.");
-        return new ItemAmountPair(ItemType.Diamond,99999999);
-    }
 }

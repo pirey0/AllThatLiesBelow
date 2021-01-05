@@ -313,36 +313,42 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
 
     public void Upgrade(ItemType type)
     {
-        if (IsMaxUpgradeLevel(type))
-            return;
-
         switch (type)
         {
-            case ItemType.PickaxeUpgrade:
-                data.pickaxeLevel++;
+            case ItemType.IronPickaxe:
+            case ItemType.SteelPickaxe:
+            case ItemType.DiamondPickaxe:
+                data.pickaxeLevel = GetLevelByUpgrade(type);
                 data.digSpeedMultiplyer = GetMiningSpeedByPickaxeLevel(data.pickaxeLevel);
                 OnChangePickaxeLevel?.Invoke(data.pickaxeLevel);
                 break;
         }
     }
 
-    public bool IsMaxUpgradeLevel(ItemType type)
-    {
-        if (type == ItemType.PickaxeUpgrade)
-            return PickaxeLevel == 4;
-
-        return false;
-    }
-
-    public int GetLevelForUpgrade(ItemType key)
+    public int GetLevelByUpgrade(ItemType key)
     {
         switch (key)
         {
-            case ItemType.PickaxeUpgrade:
-                return PickaxeLevel;
+            case ItemType.IronPickaxe:
+                return 2;
+
+            case ItemType.SteelPickaxe:
+                return 3;
+            case ItemType.DiamondPickaxe:
+                return 4;
         }
 
         return 0;
+    }
+
+    public void UpgradePickaxe()
+    {
+        switch (PickaxeLevel)
+        {
+            case 1: Upgrade(ItemType.IronPickaxe); break;
+            case 2: Upgrade(ItemType.SteelPickaxe); break;
+            case 3: Upgrade(ItemType.DiamondPickaxe); break;
+        }
     }
 
     public float GetMiningSpeedByPickaxeLevel(int level)
@@ -355,28 +361,6 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
 
         Debug.LogWarning("no mining speed info found for level " + level);
         return 100000;
-    }
-
-    public string GetDisplayNameForUpgrade(ItemType type)
-    {
-        foreach (var upgrade in pickaxeUpgrades)
-        {
-            if (upgrade.Type == type && upgrade.RequiredLevel == data.pickaxeLevel)
-                return upgrade.DisplayName;
-        }
-
-        return "better " + type.ToString();
-    }
-
-    public Sprite GetSpriteForUpgrade(ItemType type)
-    {
-        foreach (var upgrade in pickaxeUpgrades)
-        {
-            if (upgrade.Type == type && upgrade.RequiredLevel == data.pickaxeLevel)
-                return upgrade.Sprite;
-        }
-
-        return null;
     }
 
     public SaveData ToSaveData()

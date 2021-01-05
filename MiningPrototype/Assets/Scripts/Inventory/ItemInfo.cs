@@ -26,6 +26,8 @@ public class ItemInfo : ScriptableObject
 
     [Header("Upgrade")]
     public bool IsUpgrade;
+    public int RequiredLevel;
+    public int LevelUpgrade;
 
     [Header("Burnable")]
     public bool IsBurnable;
