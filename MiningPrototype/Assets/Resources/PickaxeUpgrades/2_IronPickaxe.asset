@@ -20,3 +20,4 @@ MonoBehaviour:
     type: 3
     amount: 30
   MiningSpeed: 1.3
+  Sprite: {fileID: -3129454273406894086, guid: c9ec6d69c2f041c429cb6376552e13c8, type: 3}
