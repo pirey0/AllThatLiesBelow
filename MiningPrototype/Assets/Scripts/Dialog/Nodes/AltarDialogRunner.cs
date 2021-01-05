@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AltarDialogRunner : StateListenerBehaviour
 {
-    [SerializeField] string testDialogToRun = "Test1";
+    [SerializeField] string testDialogToRun = "Selection";
 
     [SerializeField] bool runOnStart;
     [SerializeField] TestDialogVisualizer dialogVisualizer;

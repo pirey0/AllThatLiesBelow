@@ -50,7 +50,8 @@ public enum SpawnableIDType
     Lift,
     Lantern,
     Sign,
-    JungleHeart
+    JungleHeart,
+    DialogVariableTrigger
 }
 
 [System.Serializable]
