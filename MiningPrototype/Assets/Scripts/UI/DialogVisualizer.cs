@@ -6,23 +6,29 @@ using UnityEngine;
 public class DialogVisualizer : MonoBehaviour, IDialogVisualizer
 {
     [Zenject.Inject] InWorldCanvas inWorldCanvas;
+    [Zenject.Inject] PlayerInteractionHandler playerInteractionHandler;
+
     [SerializeField] DialogElement dialogElement;
     [SerializeField] Vector3 sentenceOffset, optionsOffset;
     List<DialogElement> dialogElements = new List<DialogElement>();
+    event System.Action<int> selectOption;
 
     public void DisplayOptions(string[] options)
     {
-        dialogElements.Add(InstatiateElement(optionsOffset).Init(options, this));
+        DialogElement element = InstatiateElement();
+        element.StartFollowing(playerInteractionHandler.transform, optionsOffset);
+        element.Init(options, this, optionsOffset);
+        dialogElements.Add(element);
     }
 
     public void DisplaySentence(string message)
     {
-        dialogElements.Add(InstatiateElement(sentenceOffset).Init(message));
+        dialogElements.Add(InstatiateElement().Init(message, this, sentenceOffset));
     }
 
-    private DialogElement InstatiateElement(Vector3 offset)
+    private DialogElement InstatiateElement()
     {
-        return Instantiate(dialogElement, transform.position + offset, Quaternion.identity, inWorldCanvas.transform);
+        return Instantiate(dialogElement, transform.position, Quaternion.identity, inWorldCanvas.transform);
     }
 
     public void EndDialog()
@@ -40,21 +46,21 @@ public class DialogVisualizer : MonoBehaviour, IDialogVisualizer
         {
             dialogElements[i].Hide();
         }
-        Destroy(gameObject);
     }
 
     public void SubscribeToSelection(Action<int> a)
     {
-        a += SelectOption;
+        selectOption += a;
     }
 
     public void UnsubscribeFromSelection(Action<int> a)
     {
-        a += SelectOption;
+        selectOption -= a;
     }
 
-    public void SelectOption(int optionSelected)
+    public void OnSelectOption(int optionSelected)
     {
-
+        Clear();
+        selectOption?.Invoke(optionSelected);
     }
 }
