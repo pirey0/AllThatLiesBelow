@@ -5,9 +5,9 @@ using UnityEngine;
 
 public static class AltarTreeUtility
 {
-    public static AltarTreeCollection ConvertStringCollectionToAltarTree(StringTreeCollection collection)
+    public static AltarDialogCollection ConvertStringCollectionToAltarTree(StringTreeCollection collection)
     {
-        AltarTreeCollection newCollection = new AltarTreeCollection();
+        AltarDialogCollection newCollection = new AltarDialogCollection();
         newCollection.Nodes = new Dictionary<string, AltarBaseNode>();
 
         foreach (var n in collection.Nodes)
@@ -107,7 +107,7 @@ public static class AltarTreeUtility
         return node;
     }
 
-    public static void SetDelayedReferences(AltarBaseNode node, StringTreeNode root, AltarTreeCollection collection, StringTreeCollection stringCollection)
+    public static void SetDelayedReferences(AltarBaseNode node, StringTreeNode root, AltarDialogCollection collection, StringTreeCollection stringCollection)
     {
         List<AltarBaseNode> children = new List<AltarBaseNode>();
 

@@ -8,7 +8,7 @@ public class DefaultProjectInstaller : ScriptableObjectInstaller<DefaultProjectI
     public override void InstallBindings()
     {
         Container.Bind<LettersParser>().AsSingle().NonLazy();
-        Container.Bind<SacrificePricesParser>().AsSingle().NonLazy();
+        //Container.Bind<SacrificePricesParser>().AsSingle().NonLazy();
         Container.Bind<ShopPricesParser>().AsSingle().NonLazy();
 
         Container.Bind<KernelParser>().FromComponentInNewPrefab(KernelIteratorPrefab).AsSingle().NonLazy();

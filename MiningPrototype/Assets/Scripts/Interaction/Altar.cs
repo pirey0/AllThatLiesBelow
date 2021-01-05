@@ -17,35 +17,30 @@ public interface IDropReceiver
 public enum AltarState
 {
     Off,
-    Intro,
-    RewardSelection,
-    AskForPayment,
-    AwaitPayment,
-    PaymentAccepted,
-    PaymentInsufficient,
-    PaymentRefused
+    InProgress
 }
 
-public class Altar : StateListenerBehaviour, IInteractable, IDropReceiver
+public class Altar : StateListenerBehaviour, IInteractable
 {
     [SerializeField] Transform cameraTarget;
     [SerializeField] AltarDialogVisualizer visualizer;
-    [SerializeField] string testDialog;
 
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Sprite[] sprites;
-    [SerializeField] [NaughtyAttributes.ReadOnly] int altarID;
     [SerializeField] AudioSource voicesAudio;
+
+    [SerializeField] bool encounter;
+    [NaughtyAttributes.HideIf("encounter")]
+    [SerializeField] string dialogName;
+
+    [SerializeField] InventoryOwner dialogInventory;
 
     [Inject] ProgressionHandler progressionHandler;
     [Inject] CameraController cameraController;
-    [Inject] SacrificePricesParser sacrificePricesParser;
 
     AltarState currentState = AltarState.Off;
-    string[] availableRewards;
-    string selectedReward;
-    ItemAmountPair[] acceptedPayments;
-    bool discovered;
+    INodeServiceProvider dialogServices;
+    Coroutine dialogRoutine;
 
     private event System.Action NotifyForcedEnd;
 
@@ -55,140 +50,50 @@ public class Altar : StateListenerBehaviour, IInteractable, IDropReceiver
     {
         GetComponent<AudioSource>().Play();
         voicesAudio.Play();
+
+        dialogServices = new BasicDialogServiceProvider(progressionHandler.AltarDialogCollection, visualizer, progressionHandler, dialogInventory == null ? null : dialogInventory.Inventory);
     }
 
     public void BeginInteracting(GameObject interactor)
     {
+        dialogServices.Aborted = false;
+        Debug.Log("Begin Altar Interaction");
         gameObject.layer = 12;
-        visualizer.Progressed += OnProgressed;
-        if (progressionHandler.DailySacrificeExpired)
-            ChangeStateTo(AltarState.PaymentAccepted);
-        else
-            ChangeStateTo(AltarState.Intro);
-    }
 
-    public void SetAltarID(int newId)
-    {
-        altarID = newId;
-        if (sprites != null && sprites.Length > 0)
-            spriteRenderer.sprite = sprites[Mathf.Min((newId/3)*2, sprites.Length - 1)];
-    }
-
-    private void OnProgressed(int index)
-    {
-        if (!InInteraction)
-            return;
-
-        switch (currentState)
+        if (encounter)
         {
-            case AltarState.Intro:
-                availableRewards = sacrificePricesParser.GetRewardsAvailableAtLevel(progressionHandler.SacrificeProgressionLevel, progressionHandler.RewardsReceived);
+            var dialogNode = progressionHandler.AltarDialogCollection.GetFirstViableEncounter(dialogServices);
 
-
-
-                ChangeStateTo(AltarState.RewardSelection);
-                break;
-
-            case AltarState.RewardSelection:
-                selectedReward = availableRewards[index];
-                acceptedPayments = sacrificePricesParser.GetPaymentsFor(selectedReward);
-                ChangeStateTo(AltarState.AskForPayment);
-                break;
-
-            case AltarState.AskForPayment:
-                ChangeStateTo(AltarState.AwaitPayment);
-                break;
-
-            case AltarState.PaymentRefused:
-            case AltarState.PaymentInsufficient:
-                ChangeStateTo(AltarState.AwaitPayment);
-                break;
-
-            case AltarState.PaymentAccepted:
-                ChangeStateTo(AltarState.Off);
-                break;
+            if (dialogNode != null)
+            {
+                dialogRoutine = StartCoroutine(AltarDialogRunner.RunDialogCoroutine(dialogServices, dialogNode));
+            }
+            else
+            {
+                Debug.LogError("No available Encounter");
+            }
         }
-
+        else
+        {
+            var dialogNode = progressionHandler.AltarDialogCollection.FindDialogWithName(dialogName);
+            if (dialogNode != null)
+            {
+                dialogRoutine = StartCoroutine(AltarDialogRunner.RunDialogCoroutine(dialogServices, dialogNode));
+            }
+            else
+            {
+                Debug.LogError("Unable to find dialog named " + dialogName);
+            }
+        }
     }
 
     public void EndInteracting(GameObject interactor)
     {
         Debug.Log("End Altar Interaction");
-        visualizer.Progressed -= OnProgressed;
-        visualizer.EndDialog();
         cameraController.TransitionToDefault();
         gameObject.layer = 0;
-        ChangeStateTo(AltarState.Off);
-    }
-
-    private void ChangeStateTo(AltarState newState)
-    {
-
-        switch (newState)
-        {
-            case AltarState.Intro:
-                visualizer.StartDialog();
-                cameraController.TransitionToNewTarget(cameraTarget);
-                visualizer.DisplaySentence("What do you desire?");
-                break;
-
-            case AltarState.RewardSelection:
-                string[] rewardsContent = new string[availableRewards.Length];
-
-                for (int i = 0; i < availableRewards.Length; i++)
-                    rewardsContent[i] = sacrificePricesParser.GetDisplayNameOf(availableRewards[i]);
-
-                visualizer.DisplayOptions(rewardsContent);
-                break;
-
-            case AltarState.AskForPayment:
-
-                visualizer.DisplaySentence("And how will you pay?");
-                break;
-
-            case AltarState.PaymentAccepted:
-                visualizer.DisplaySentence("Seek your reward in the morning");
-                break;
-
-            case AltarState.PaymentInsufficient:
-                visualizer.DisplaySentence("That will take more..");
-                break;
-
-            case AltarState.PaymentRefused:
-                visualizer.DisplaySentence(SuggestPossiblePaymentMethods());
-                break;
-
-            case AltarState.Off:
-                NotifyForcedEnd?.Invoke();
-                break;
-
-        }
-
-        currentState = newState;
-    }
-
-    public string SuggestPossiblePaymentMethods()
-    {
-        List<string> paymentWords = new List<string>();
-
-        foreach (ItemAmountPair payment in acceptedPayments)
-        {
-            string[] pw = ItemsData.GetItemInfo(payment.type).AltarWords;
-
-            if (pw != null && pw.Length > 0)
-                paymentWords.AddRange(pw);
-        }
-
-        string str = Util.ChooseRandomString("What about ", "Give me ", "I want ");
-
-        paymentWords = paymentWords.OrderBy(a => Guid.NewGuid()).ToList(); //random shuffle
-
-        for (int i = 0; i < (Mathf.Min(5, paymentWords.Count)); i++)
-        {
-            str += paymentWords[i] + " ";
-        }
-
-        return str;
+        dialogServices.Aborted = true;
+        
     }
 
     public Vector3 GetPosition()
@@ -206,33 +111,6 @@ public class Altar : StateListenerBehaviour, IInteractable, IDropReceiver
         NotifyForcedEnd -= action;
     }
 
-    public bool WouldTakeDrop(ItemAmountPair pair)
-    {
-
-        if (currentState == AltarState.AwaitPayment || currentState == AltarState.AskForPayment)
-        {
-            if (acceptedPayments == null || acceptedPayments.Length == 0)
-            {
-                Debug.LogError("No accepted payments for " + selectedReward);
-                return false;
-            }
-
-            return true;
-        }
-
-        return false;
-
-    }
-
-    public void BeginHoverWith(ItemAmountPair pair)
-    {
-        if (!WouldTakeDrop(pair))
-            return;
-
-        //spriteRenderer.material = spriteOuline;
-        //spriteRenderer.color = new Color(0.8f, 0.8f, 0.8f);
-    }
-
     public void EndHover()
     {
         if (this == null)
@@ -242,89 +120,10 @@ public class Altar : StateListenerBehaviour, IInteractable, IDropReceiver
         //spriteRenderer.color = Color.white;
     }
 
-    public void ReceiveDrop(ItemAmountPair pair, Inventory inventoryPaidFrom)
-    {
-        spriteRenderer.color = Color.grey;
-
-        if (IsValidItemToPayWith(pair))
-        {
-            if (IsEnoughToPayWith(pair))
-            {
-
-                Debug.Log("Received drop of " + pair.type);
-
-                ItemAmountPair payment = ItemAmountPair.Nothing;
-                for (int i = 0; i < acceptedPayments.Length; i++)
-                {
-                    if (acceptedPayments[i].type == pair.type)
-                        payment = acceptedPayments[i];
-                }
-
-                ChangeStateTo(AltarState.PaymentAccepted);
-                progressionHandler.Aquired(selectedReward, payment, altarID);
-                inventoryPaidFrom.TryRemove(payment);
-            }
-            else
-            {
-                ChangeStateTo(AltarState.PaymentInsufficient);
-            }
-        }
-        else
-        {
-            ChangeStateTo(AltarState.PaymentRefused);
-        }
-    }
-
-    public void HoverUpdate(ItemAmountPair pair)
-    {
-        //if (WouldTakeDrop(pair))
-        //{
-        //    overlay.color = Color.green;
-        //}
-        //else
-        //{
-        //    overlay.color = Color.red;
-        //}
-    }
-
-    private bool IsValidItemToPayWith(ItemAmountPair pair)
-    {
-        for (int i = 0; i < acceptedPayments.Length; i++)
-        {
-            if (acceptedPayments[i].type == pair.type)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private bool IsEnoughToPayWith(ItemAmountPair pair)
-    {
-        for (int i = 0; i < acceptedPayments.Length; i++)
-        {
-            if (acceptedPayments[i].type == pair.type)
-            {
-                if (acceptedPayments[i].amount <= pair.amount)
-                {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent<PlayerInteractionHandler>(out var pi))
         {
-            if (!discovered)
-            {
-                discovered = true;
-                progressionHandler.NotifyAtarDiscovery(altarID);
-            }
             pi.ForceInteractionWith(this);
         }
     }
@@ -333,7 +132,7 @@ public class Altar : StateListenerBehaviour, IInteractable, IDropReceiver
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        UnityEditor.Handles.Label(transform.position, altarID.ToString());
+        UnityEditor.Handles.Label(transform.position, encounter ? "Encounter" : dialogName);
     }
 #endif
 }

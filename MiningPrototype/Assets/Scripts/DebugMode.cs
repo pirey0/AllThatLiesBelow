@@ -36,10 +36,7 @@ public class DebugMode : MonoBehaviour
         DebugLogConsole.AddCommandInstance("/tp", "Teleport to " + Util.EnumToString(typeof(TeleportDestination)), "TeleportToAltar", this);
         DebugLogConsole.AddCommandInstance("/give", "Give player items " + Util.EnumToString(typeof(ItemType)), "PlayerGets", this);
         DebugLogConsole.AddCommandInstance("/kill", "Kill the player", "KillPlayer", this);
-        DebugLogConsole.AddCommandInstance("/reward", "Get a reward without suffering the consequences " + Util.EnumToString(typeof(AltarRewardType)), "Reward", this);
-        DebugLogConsole.AddCommandInstance("/sacrifice", "Sacrifice trade " + Util.EnumToString(typeof(AltarRewardType)) + " and " + Util.EnumToString(typeof(ItemType)), "Sacrifice", this);
-        DebugLogConsole.AddCommandInstance("/sacrificeItem", "Sacrifice with no reward " + Util.EnumToString(typeof(ItemType)), "SacrificeItem", this);
-        DebugLogConsole.AddCommandInstance("/sacrificeProgression", "Set the altar progression level. (Unlock different options 0-10)", "SetProgressionLevel", this);
+        DebugLogConsole.AddCommandInstance("/reward", "Get an altar reward" + Util.EnumToString(typeof(AltarRewardType)), "Reward", this);
         DebugLogConsole.AddCommandInstance("/deleteSave", "Delete your save file", "DeleteSaveFile", this);
         DebugLogConsole.AddCommandInstance("/time", "sets time scale", "SetTimeScale", this);
         DebugLogConsole.AddCommandInstance("/showMap", "Visualizes the Map", "ShowMap", this);
@@ -189,12 +186,6 @@ public class DebugMode : MonoBehaviour
         player?.TakeDamage(DamageStrength.Strong);
     }
 
-
-    private void SetProgressionLevel(int level)
-    {
-        progressionHandler.SetAltarProgressionLevel(level);
-    }
-
     private void UpgradePickaxe()
     {
         progressionHandler.Upgrade(ItemType.PickaxeUpgrade);
@@ -202,19 +193,7 @@ public class DebugMode : MonoBehaviour
 
     private void Reward(AltarRewardType reward)
     {
-        progressionHandler.Aquired(reward.ToString(), ItemAmountPair.Nothing, -1);
-        progressionHandler.StartNextDay();
-    }
-
-    private void SacrificeItem(ItemType item)
-    {
-        progressionHandler.Aquired(AltarRewardType.None.ToString(), new ItemAmountPair(item, 9999), -1);
-        progressionHandler.StartNextDay();
-    }
-
-    private void Sacrifice(AltarRewardType reward, ItemType item)
-    {
-        progressionHandler.Aquired(reward.ToString(), new ItemAmountPair(item, 9999), -1);
+        progressionHandler.Aquired(reward.ToString());
         progressionHandler.StartNextDay();
     }
 

@@ -14,11 +14,11 @@ public interface INodeServiceProvider
 {
     IDialogVisualizer DialogVisualizer { get; }
     IDialogPropertiesHandler Properties { get; }
-    AltarTreeCollection AltarTreeCollection { get; }
+    AltarDialogCollection AltarTreeCollection { get; }
 
     IDialogInventoryHandler DialogInventoryHandler { get; }
 
-
+    bool Aborted { get; set; }
 }
 
 public interface IDialogInventoryHandler
@@ -84,26 +84,40 @@ public class AltarBaseNode
     }
 }
 
-public class AltarTreeCollection
+public class AltarDialogCollection
 {
     public AltarBaseNode[] Roots;
     public Dictionary<string, AltarBaseNode> Nodes;
 
 
-    public AltarBaseNode[] GetEncounters()
+    public AltarDialogRootNode[] GetEncounters()
     {
-        List<AltarBaseNode> encounters = new List<AltarBaseNode>(Roots.Length);
+        List<AltarDialogRootNode> encounters = new List<AltarDialogRootNode>(Roots.Length);
 
         foreach (var item in Roots)
         {
-            if(item is AltarDialogRootNode rootNode)
+            if (item is AltarDialogRootNode rootNode)
             {
                 if (rootNode.IsEncounter)
-                    encounters.Add(item);
+                    encounters.Add(rootNode);
             }
         }
 
         return encounters.ToArray();
+    }
+
+    public AltarDialogRootNode GetFirstViableEncounter(INodeServiceProvider provider)
+    {
+        var encounters = GetEncounters();
+
+        foreach (var e in encounters)
+        {
+            if (e.ConditionPassed(provider))
+            {
+                return e;
+            }
+        }
+        return null;
     }
 
     public AltarDialogRootNode FindDialogWithName(string name)
@@ -120,4 +134,5 @@ public class AltarTreeCollection
         }
         return null;
     }
+
 }
