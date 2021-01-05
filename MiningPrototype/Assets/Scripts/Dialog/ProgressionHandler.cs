@@ -233,7 +233,6 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
                         else
                         {
                             newOrderCrateSpawner.SpawnOrder(new List<ItemAmountPair>(order.Items));
-                            UpgradePickaxe();
                         }
 
                         data.ordersForNextDay.Remove(storedItem.amount);
@@ -386,7 +385,6 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
         {
             instantDeliveryAudio.Play();
             newOrderCrateSpawner.SpawnOrder(new List<ItemAmountPair>(order.Items));
-            UpgradePickaxe();
         }
         else
         {
@@ -399,22 +397,38 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
         return 0; // SacrificePricesParser.GetPriceFor(reward, resource);
     }
 
-    public void UpgradePickaxe()
+    public void Upgrade(ItemType type)
     {
-        if (IsMaxUpgradeLevel(UpgradeType.Pickaxe))
+        if (IsMaxUpgradeLevel(type))
             return;
 
-        data.pickaxeLevel++;
-        data.digSpeedMultiplyer = GetMiningSpeedByPickaxeLevel(data.pickaxeLevel);
-        OnChangePickaxeLevel?.Invoke(data.pickaxeLevel);
+        switch(type)
+        {
+            case ItemType.PickaxeUpgrade:
+                data.pickaxeLevel++;
+                data.digSpeedMultiplyer = GetMiningSpeedByPickaxeLevel(data.pickaxeLevel);
+                OnChangePickaxeLevel?.Invoke(data.pickaxeLevel);
+                break;
+        }
     }
 
-    public bool IsMaxUpgradeLevel(UpgradeType type)
+    public bool IsMaxUpgradeLevel(ItemType type)
     {
-        if (type == UpgradeType.Pickaxe)
+        if (type == ItemType.PickaxeUpgrade)
             return PickaxeLevel == 4;
 
         return false;
+    }
+
+    public int GetLevelForUpgrade(ItemType key)
+    {
+        switch (key)
+        {
+            case ItemType.PickaxeUpgrade:
+                return PickaxeLevel;
+        }
+
+        return 0;
     }
 
     public float GetMiningSpeedByPickaxeLevel(int level)
@@ -429,7 +443,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
         return 100000;
     }
 
-    public string GetDisplayNameForUpgrade(UpgradeType type)
+    public string GetDisplayNameForUpgrade(ItemType type)
     {
         foreach (var upgrade in pickaxeUpgrades)
         {

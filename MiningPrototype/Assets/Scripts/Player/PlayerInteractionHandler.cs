@@ -428,6 +428,19 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         Debug.DrawLine((Vector3Int)GetPositionInGrid(), miningParticles.transform.position, Color.yellow, 0.1f);
     }
 
+    protected override void OnInventoryChanged(bool add, ItemAmountPair pair, bool playSound)
+    {
+        if (add && ItemsData.GetItemInfo(pair.type).IsUpgrade)
+        {
+            Inventory.TryRemove(pair);
+            progressionHandler.Upgrade(pair.type);
+        }
+        else
+        {
+            base.OnInventoryChanged(add, pair, playSound);
+        }
+    }
+
     private void TryDisableMiningVisuals()
     {
         if (inMining)

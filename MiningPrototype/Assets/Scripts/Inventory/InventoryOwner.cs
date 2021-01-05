@@ -51,7 +51,7 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
         inventory.InventoryChanged += OnInventoryChanged;
     }
 
-    private void OnInventoryChanged(bool add, ItemAmountPair pair, bool playSound)
+    protected virtual void OnInventoryChanged(bool add, ItemAmountPair pair, bool playSound)
     {
 
         if (state == InventoryState.Open && inventoryVisualizer != null)

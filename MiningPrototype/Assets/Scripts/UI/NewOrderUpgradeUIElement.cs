@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class NewOrderUpgradeUIElement : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] TMP_Text text;
-    [SerializeField] UpgradeType upgradeType;
+    [SerializeField] ItemType upgradeType;
     [SerializeField] Color color_notSelected, color_selected;
     [Zenject.Inject] ProgressionHandler progressionHandler;
 
@@ -43,7 +43,7 @@ public class NewOrderUpgradeUIElement : MonoBehaviour, IPointerClickHandler
             return;
 
         selected = true;
-        order?.TryAddUpgrade(upgradeType);
+        order?.UpdateAmount(upgradeType, 1, increased: true);
         UpdateText();
     }
 
@@ -53,7 +53,7 @@ public class NewOrderUpgradeUIElement : MonoBehaviour, IPointerClickHandler
             return;
 
         selected = false;
-        order?.TryRemoveUpgrade(upgradeType);
+        order?.UpdateAmount(upgradeType, 0, increased: false);
         UpdateText();
     }
 }

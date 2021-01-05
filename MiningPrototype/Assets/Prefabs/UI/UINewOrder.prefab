@@ -2580,6 +2580,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UINewOrderUpgradeElement
       objectReference: {fileID: 0}
+    - target: {fileID: 5874762017889656364, guid: 15f64e18f7f9b9d4fb00c55e8f69be67, type: 3}
+      propertyPath: upgradeType
+      value: 26
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15f64e18f7f9b9d4fb00c55e8f69be67, type: 3}
 --- !u!224 &4095727277065263084 stripped

@@ -24,6 +24,9 @@ public class ItemInfo : ScriptableObject
     [Header("ReadableItem")]
     public bool AmountIsUniqueID;
 
+    [Header("Upgrade")]
+    public bool IsUpgrade;
+
     [Header("Burnable")]
     public bool IsBurnable;
 

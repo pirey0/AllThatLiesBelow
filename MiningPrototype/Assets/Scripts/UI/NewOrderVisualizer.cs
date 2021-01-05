@@ -34,38 +34,6 @@ public class NewOrderVisualizer : ReadableItemVisualizer
         UpdateTutorialDisplays();
     }
 
-    public void TryAddUpgrade(UpgradeType upgradeType)
-    {
-        if (!orderedUpgrades.Contains(upgradeType))
-        {
-            orderedUpgrades.Add(upgradeType);
-
-            if (writingSounds != null)
-            {
-                writingSounds.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
-                writingSounds.Play();
-            }
-
-            UpdateCost();
-        } 
-    }
-
-    public void TryRemoveUpgrade(UpgradeType upgradeType)
-    {
-        if (orderedUpgrades.Contains(upgradeType))
-        {
-            orderedUpgrades.Remove(upgradeType);
-
-            if (writingSounds != null)
-            {
-                writingSounds.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
-                writingSounds.Play();
-            }
-
-            UpdateCost();
-        }
-    }
-
     //Hand over the methods to call for fimish and abort from the desk
     public void Handshake(Action<Order> onFinish,Action onAbort)
     {
@@ -109,18 +77,7 @@ public class NewOrderVisualizer : ReadableItemVisualizer
         //new cost fetching after implementation
         foreach (KeyValuePair<ItemType, int> item in orderedElementsWithAmounts)
         {
-            ItemAmountPair price = shopPricesParser.GetPriceFor(item.Key, item.Value);
-
-            if (cost.ContainsKey(price.type))
-                cost[price.type] += price.amount;
-            else
-                cost.Add(price.type, price.amount);
-        }
-
-        //new cost fetching after implementation
-        foreach (UpgradeType upgrade in orderedUpgrades)
-        {
-            ItemAmountPair price = shopPricesParser.GetPriceFor(upgrade, progressionHandler.PickaxeLevel);
+            ItemAmountPair price = ItemsData.GetItemInfo(item.Key).IsUpgrade ? shopPricesParser.GetUpgradePrice(item.Key, progressionHandler.GetLevelForUpgrade(item.Key)) : shopPricesParser.GetPriceFor(item.Key, item.Value);
 
             if (cost.ContainsKey(price.type))
                 cost[price.type] += price.amount;

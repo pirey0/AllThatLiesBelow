@@ -89,7 +89,7 @@ public class ShopPricesParser
         return new ItemAmountPair(ItemType.None, 69);
     }
 
-    public ItemAmountPair GetPriceFor(UpgradeType type, int currentLevel)
+    public ItemAmountPair GetUpgradePrice(ItemType type, int currentLevel)
     {
         foreach (PickaxeUpgrade upgrade in upgradePricingTable)
         {

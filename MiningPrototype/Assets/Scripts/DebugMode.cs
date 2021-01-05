@@ -197,7 +197,7 @@ public class DebugMode : MonoBehaviour
 
     private void UpgradePickaxe()
     {
-        progressionHandler.UpgradePickaxe();
+        progressionHandler.Upgrade(ItemType.PickaxeUpgrade);
     }
 
     private void Reward(AltarRewardType reward)

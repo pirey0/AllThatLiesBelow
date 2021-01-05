@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e88a37577a4ac84a916062c8879bfaf, type: 3}
   m_Name: 3_SteelPickaxe
   m_EditorClassIdentifier: 
-  Type: 0
+  Type: 26
   RequiredLevel: 2
   Level: 3
   DisplayName: Steel Pickaxe

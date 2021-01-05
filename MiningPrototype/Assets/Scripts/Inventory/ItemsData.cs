@@ -29,7 +29,9 @@ public enum ItemType
     Rope,
     Lift,
     Lantern,
-    Sign
+    Sign,
+    PickaxeUpgrade,
+    HelmentUpgrade
 }
 
 

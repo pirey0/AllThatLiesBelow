@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class PickaxeUpgrade : ScriptableObject
 {
-    public UpgradeType Type;
+    public ItemType Type;
     public int RequiredLevel;
     public int Level;
     public string DisplayName;
@@ -15,5 +15,5 @@ public class PickaxeUpgrade : ScriptableObject
 
 public enum UpgradeType
 {
-    Pickaxe
+    Pickaxe,
 }

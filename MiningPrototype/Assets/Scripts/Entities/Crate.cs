@@ -51,6 +51,12 @@ public class Crate : MineableObject, INonPersistantSavable
         }
     }
 
+    protected override void Destroyed()
+    {
+        contains = inventoryOwner.Inventory.GetContent()[0];
+        base.Destroyed();
+    }
+
     public override Vector2 GetPosition()
     {
         if (overlayAnimator != null)
