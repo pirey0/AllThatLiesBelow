@@ -128,7 +128,7 @@ public class AltarChoiceNode : AltarBaseNode, IStartableNode, ITickingNode, IEnd
         {
             if (Children[i] is AltarOptionNode optionNode)
             {
-                if (optionNode.ConditionPassed(services))
+                if (optionNode.ConditionsPassed(services))
                 {
                     options.Add(optionNode.OptionText);
                     mapOptionsIndexToChildrenId.Add(i);
@@ -186,15 +186,15 @@ public class AltarDialogRootNode : AltarConditionalNode
     }
 }
 
-public class AltarConditionalNode : AltarBaseNode, IConditionalNode
+public class AltarConditionalNode : AltarBaseNode, IConditionalNode, IMarkIdOnRunNode
 {
-    public List<(string, bool)> Requirements = new List<(string, bool)>();
+    public List<INodeRequirement> Requirements = new List<INodeRequirement>();
 
-    public virtual bool ConditionPassed(INodeServiceProvider services)
+    public virtual bool ConditionsPassed(INodeServiceProvider services)
     {
         foreach (var r in Requirements)
         {
-            if (services.Properties.GetVariable(r.Item1) != r.Item2)
+            if (!r.RequirementPassed(services))
                 return false;
         }
 
@@ -206,13 +206,56 @@ public class AltarConditionalNode : AltarBaseNode, IConditionalNode
         string s = "";
         foreach (var r in Requirements)
         {
-            s += " Req: " + r.Item1 + " " + r.Item2;
+            s += r.ToDebugString() + " ";
         }
 
         s += base.ToDebugString();
         return s;
     }
 }
+
+public class AltarVariableRequirement : INodeRequirement
+{
+    string name;
+    bool state;
+
+    public AltarVariableRequirement(string name, bool state)
+    {
+        this.name = name;
+        this.state = state;
+    }
+
+    public bool RequirementPassed(INodeServiceProvider services)
+    {
+        return services.Properties.GetVariable(name) == state;
+    }
+
+    public string ToDebugString()
+    {
+        return "Req: " + name + " " + state;
+    }
+}
+
+public class AltarRunOnceOnlyRequirement : INodeRequirement
+{
+    public string sourceId;
+
+    public AltarRunOnceOnlyRequirement(string sourceID)
+    {
+        sourceId = sourceID;
+    }
+
+    public bool RequirementPassed(INodeServiceProvider services)
+    {
+        return !services.Properties.HasRunDialog(sourceId);
+    }
+
+    public string ToDebugString()
+    {
+        return "RunOnlyOnce";
+    }
+}
+
 
 [System.Serializable]
 public class AltarTextNode : AltarBaseNode, IStartableNode, ITickingNode, IEndableNode
