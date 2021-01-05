@@ -353,16 +353,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e039a5829d2371428743b77db93eb64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameState: {fileID: 0}
-  dialogToRun: Selection
-  runOnStart: 1
-  dialogVisualizer: {fileID: 939480987}
-  debugInventory:
-    canDeposit: 1
-    content:
-    - type: 3
-      amount: 1
-  progression: {fileID: 0}
 --- !u!114 &939480987
 MonoBehaviour:
   m_ObjectHideFlags: 0
