@@ -44,6 +44,7 @@ public class DebugMode : MonoBehaviour
         DebugLogConsole.AddCommandInstance("/chopper", "Spawn a Chopper", "SpawnChopper", this);
         DebugLogConsole.AddCommandInstance("/stats", "Logs the stats", "LogStats", this);
         DebugLogConsole.AddCommandInstance("/upgradepickaxe", "Upgrades the pickaxe level","UpgradePickaxe", this);
+        DebugLogConsole.AddCommandInstance("/setVariable", "Set a dialog variable", "SetDialogVariable", this);
 
     }
 
@@ -193,8 +194,13 @@ public class DebugMode : MonoBehaviour
 
     private void Reward(AltarRewardType reward)
     {
-        progressionHandler.Aquired(reward.ToString());
+        progressionHandler.AquireAltarReward(reward);
         progressionHandler.StartNextDay();
+    }
+
+    private void SetDialogVariable(string name , bool value)
+    {
+        progressionHandler.SetVariable(name, value);
     }
 
     private void DeleteSaveFile()
