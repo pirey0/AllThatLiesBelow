@@ -23,7 +23,7 @@ public class MiroParser
         string text = File.ReadAllText(miroPath);
 
         string json = "{\"widgets\":" + text + "}";
-        var board = JsonUtility.FromJson<MiroBoard>(json);
+        MiroBoard board = JsonUtility.FromJson<MiroBoard>(json);
 
         board.FilterOutUnnecessaryWidgets();
         Debug.Log("Widgets after Filter: " + board.widgets.Count);

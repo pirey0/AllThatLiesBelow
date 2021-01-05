@@ -84,6 +84,10 @@ public static class AltarTreeUtility
         {
             return null;
         }
+        else if (NodeMatchesConditions(root, out elements, "Encounter", 1))
+        {
+            return null;
+        }
         else if (NodeMatchesConditions(root, out elements, "Require", 2, 3))
         {
             return null;
@@ -149,11 +153,12 @@ public static class AltarTreeUtility
                 {
                     altarDialogRootNode.Name = elements[1];
                 }
+                else if ((NodeMatchesConditions(stringCollection.Nodes[nodeId], out elements, "Encounter", 1)))
+                {
+                    altarDialogRootNode.IsEncounter = true;
+                }
             }
         }
-
-
-
     }
 
     private static void AddRequirementsToConditionalNode(StringTreeNode stringNode, AltarConditionalNode node, StringTreeCollection stringCollection)

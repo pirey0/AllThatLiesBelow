@@ -44,11 +44,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     public int PickaxeLevel { get => data.pickaxeLevel; }
     public bool IsMidas { get => data.isMidas; }
 
-    //Useless
-    public bool InstableWorld { get => data.instableWorld; }
-
-    public float ProgressionTimeScale { get => data.timeScale; }
-
+    //Old Atar
     public List<string> RewardsReceived { get => data.rewardsReceived.Select((x) => x.ToString()).ToList(); }
 
     protected override void OnPostSceneLoad()

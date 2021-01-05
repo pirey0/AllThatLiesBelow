@@ -178,6 +178,7 @@ public class AltarOptionNode : AltarConditionalNode
 public class AltarDialogRootNode : AltarConditionalNode
 {
     public string Name;
+    public bool IsEncounter;
 
     public override string ToDebugString()
     {

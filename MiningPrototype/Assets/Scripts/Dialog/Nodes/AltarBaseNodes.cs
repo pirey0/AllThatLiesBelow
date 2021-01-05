@@ -88,4 +88,36 @@ public class AltarTreeCollection
 {
     public AltarBaseNode[] Roots;
     public Dictionary<string, AltarBaseNode> Nodes;
+
+
+    public AltarBaseNode[] GetEncounters()
+    {
+        List<AltarBaseNode> encounters = new List<AltarBaseNode>(Roots.Length);
+
+        foreach (var item in Roots)
+        {
+            if(item is AltarDialogRootNode rootNode)
+            {
+                if (rootNode.IsEncounter)
+                    encounters.Add(item);
+            }
+        }
+
+        return encounters.ToArray();
+    }
+
+    public AltarDialogRootNode FindDialogWithName(string name)
+    {
+        foreach (var c in Roots)
+        {
+            if (c is AltarDialogRootNode rootNode)
+            {
+                if (rootNode.Name == name)
+                {
+                    return rootNode;
+                }
+            }
+        }
+        return null;
+    }
 }

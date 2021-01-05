@@ -9,8 +9,6 @@ public class PauseMenu : StateListenerBehaviour
     [SerializeField] SceneReference mainMenu;
     [SerializeField] Image darkoverlay;
 
-    [Zenject.Inject] ProgressionHandler progressionHandler;
-
     protected override void OnRealStart()
     {
         Unpause();
@@ -19,11 +17,11 @@ public class PauseMenu : StateListenerBehaviour
     public void TogglePause()
     {
 
-        if ( gameState.CurrentState == GameState.State.Paused)
+        if (gameState.CurrentState == GameState.State.Paused)
         {
             Unpause();
         }
-        else if(gameState.CurrentState == GameState.State.Playing)
+        else if (gameState.CurrentState == GameState.State.Playing)
         {
             Pause();
         }
@@ -44,14 +42,8 @@ public class PauseMenu : StateListenerBehaviour
 
     public void Unpause()
     {
-        if (gameState.Playing)
-        {
-            Time.timeScale = progressionHandler.ProgressionTimeScale;
-        }
-        else
-        {
-            Time.timeScale = 1;
-        }
+
+        Time.timeScale = 1;
 
         darkoverlay.color = new Color(0, 0, 0, 0);
 
