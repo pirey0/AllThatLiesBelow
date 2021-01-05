@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -17,12 +18,28 @@ public class NewOrderUpgradeUIElement : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
+        var info = ItemsData.GetItemInfo(upgradeType);
+
+        if (!ProgressionRequirementsAreFullfilled(info.RequiredLevel))
+            Destroy(gameObject);
+
         UpdateText();
         order = GetComponentInParent<NewOrderVisualizer>();
-        if (progressionHandler.IsMaxUpgradeLevel(upgradeType))
-            Destroy(gameObject);
-        displayName = progressionHandler.GetDisplayNameForUpgrade(upgradeType);
+        displayName = info.DisplayName;
         UpdateText();
+    }
+
+    private bool ProgressionRequirementsAreFullfilled(int requiredLevel)
+    {
+        switch (upgradeType)
+        {
+            case ItemType.IronPickaxe:
+            case ItemType.SteelPickaxe:
+            case ItemType.DiamondPickaxe:
+                return requiredLevel == progressionHandler.PickaxeLevel;
+        }
+
+        return false;
     }
 
     private void UpdateText()

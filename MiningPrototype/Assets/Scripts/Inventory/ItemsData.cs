@@ -30,8 +30,11 @@ public enum ItemType
     Lift,
     Lantern,
     Sign,
-    PickaxeUpgrade,
-    HelmentUpgrade
+    IronPickaxe,
+    SteelPickaxe,
+    DiamondPickaxe,
+    Helmet,
+    HeadLamp
 }
 
 

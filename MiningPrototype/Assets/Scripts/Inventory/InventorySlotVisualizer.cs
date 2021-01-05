@@ -59,9 +59,6 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
             if (info.AmountIsUniqueID && readableItemHandler.HasRead(amount))
             {
                 SetIconSprite(info.DisplaySpriteRead);
-            } else if (info.IsUpgrade)
-            {
-                SetIconSprite(progressionHandler.GetSpriteForUpgrade(pair.type));
             }
             else
             {
