@@ -397,6 +397,16 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     {
         return 20;
     }
+
+    public void MarkRanDialog(string id)
+    {
+        data.dialogsRan.Add(id);
+    }
+
+    public bool HasRunDialog(string id)
+    {
+        return data.dialogsRan.Contains(id);
+    }
 }
 
 public enum LetterProgressionState
@@ -418,10 +428,7 @@ public class ProgressionSaveData : SaveData
     public bool isMidas = false;
     public List<AltarRewardType> rewardsReceived = new List<AltarRewardType>();
     public List<AltarRewardType> rewardsSacrificed = new List<AltarRewardType>();
-
-    //sacriifce consequences
-    public bool cannotSend;
-    public bool paidEverything;
+    public List<string> dialogsRan = new List<string>();
 
     //tutorial
     public List<string> achievedTutorials = new List<string>();

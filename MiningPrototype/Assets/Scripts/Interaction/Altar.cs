@@ -51,7 +51,7 @@ public class Altar : StateListenerBehaviour, IInteractable
         GetComponent<AudioSource>().Play();
         voicesAudio.Play();
 
-        dialogServices = new BasicDialogServiceProvider(progressionHandler.AltarDialogCollection, visualizer, progressionHandler, dialogInventory == null ? null : dialogInventory.Inventory);
+        dialogServices = new BasicDialogServiceProvider(progressionHandler.AltarDialogCollection, visualizer, progressionHandler, dialogInventory);
     }
 
     public void BeginInteracting(GameObject interactor)

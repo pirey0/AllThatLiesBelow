@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AltarDialogRunner : StateListenerBehaviour
+public class AltarDialogRunner : StateListenerBehaviour, IInventoryOwner
 {
     [SerializeField] string testDialogToRun = "Test1";
 
@@ -10,13 +10,15 @@ public class AltarDialogRunner : StateListenerBehaviour
     [SerializeField] TestDialogVisualizer dialogVisualizer;
     [SerializeField] Inventory debugInventory;
 
+    [Zenject.Inject] ProgressionHandler progression;
+
+    public Inventory Inventory => debugInventory;
+
     protected override void OnRealStart()
     {
         if (runOnStart)
             Run();
     }
-
-    [Zenject.Inject] ProgressionHandler progression;
 
     [NaughtyAttributes.Button(null, NaughtyAttributes.EButtonEnableMode.Playmode)]
     public void Run()
@@ -30,7 +32,7 @@ public class AltarDialogRunner : StateListenerBehaviour
             if (node != null)
             {
                 var prog = (progression == null) ? (IDialogPropertiesHandler)new TestDialogPropertiesHandler() : progression;
-                INodeServiceProvider provider = new BasicDialogServiceProvider(collection, dialogVisualizer, prog, debugInventory);
+                INodeServiceProvider provider = new BasicDialogServiceProvider(collection, dialogVisualizer, prog, this);
                 StartCoroutine(RunDialogCoroutine(provider, node));
             }
             else
@@ -48,17 +50,24 @@ public class AltarDialogRunner : StateListenerBehaviour
     {
         Debug.Log("NodeDebugRunner Start");
 
+
+
         NodeResult result = NodeResult.Wait;
         provider.DialogVisualizer.StartDialog();
         while (node != null && !provider.Aborted)
         {
             if (node is IConditionalNode conditionalNode)
             {
-                if (!conditionalNode.ConditionPassed(provider))
+                if (!conditionalNode.ConditionsPassed(provider))
                 {
                     Debug.LogError("NodeDebugRunner stopped from failed conditions " + node.ToDebugString());
-                    yield break;
+                    break;
                 }
+            }
+
+            if (node is IMarkIdOnRunNode)
+            {
+                provider.Properties.MarkRanDialog(node.ID);
             }
 
             if (node is IStartableNode startableNode)
@@ -87,7 +96,7 @@ public class AltarDialogRunner : StateListenerBehaviour
             else if (result == NodeResult.Error)
             {
                 Debug.LogError("NodeDebugRunner exited with Error");
-                yield break;
+                break;
             }
             else
             {
@@ -116,7 +125,7 @@ public class AltarDialogRunner : StateListenerBehaviour
                 var currentChild = node.Children[i];
                 if (currentChild is AltarConditionalNode conditional)
                 {
-                    if (conditional.ConditionPassed(provider))
+                    if (conditional.ConditionsPassed(provider))
                     {
                         return currentChild;
                     }
@@ -141,14 +150,14 @@ public class BasicDialogServiceProvider : INodeServiceProvider, IDialogInventory
     IDialogVisualizer visualizer;
     IDialogPropertiesHandler properties;
     AltarDialogCollection treeCollection;
-    Inventory inventory;
+    IInventoryOwner inventoryOwner;
 
-    public BasicDialogServiceProvider(AltarDialogCollection treeCollection, IDialogVisualizer vis, IDialogPropertiesHandler prop, Inventory inventory)
+    public BasicDialogServiceProvider(AltarDialogCollection treeCollection, IDialogVisualizer vis, IDialogPropertiesHandler prop, IInventoryOwner inventoryOwner)
     {
         visualizer = vis;
         properties = prop;
         this.treeCollection = treeCollection;
-        this.inventory = inventory;
+        this.inventoryOwner = inventoryOwner;
     }
 
     public IDialogVisualizer DialogVisualizer => visualizer;
@@ -162,12 +171,12 @@ public class BasicDialogServiceProvider : INodeServiceProvider, IDialogInventory
 
     public Inventory GetConnectedInventory()
     {
-        return inventory;
+        return inventoryOwner.Inventory;
     }
 
     public bool InventoryConnected()
     {
-        return inventory != null;
+        return inventoryOwner != null;
     }
 }
 
@@ -181,6 +190,15 @@ public class TestDialogPropertiesHandler : IDialogPropertiesHandler
     public bool GetVariable(string name)
     {
         return true;
+    }
+
+    public bool HasRunDialog(string id)
+    {
+        return false;
+    }
+
+    public void MarkRanDialog(string id)
+    {
     }
 
     public void SetVariable(string variableName, bool variableState)

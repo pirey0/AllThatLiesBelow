@@ -33,6 +33,9 @@ public interface IDialogPropertiesHandler
     bool GetVariable(string name);
     void SetVariable(string variableName, bool variableState);
     void FireEvent(string @event);
+
+    void MarkRanDialog(string id);
+    bool HasRunDialog(string id);
 }
 
 public interface IStartableNode
@@ -40,6 +43,9 @@ public interface IStartableNode
     NodeResult Start(INodeServiceProvider services);
 }
 
+public interface IMarkIdOnRunNode
+{
+}
 
 public interface ITickingNode
 {
@@ -53,7 +59,13 @@ public interface IEndableNode
 
 public interface IConditionalNode
 {
-    bool ConditionPassed(INodeServiceProvider services);
+    bool ConditionsPassed(INodeServiceProvider services);
+}
+
+public interface INodeRequirement
+{
+    bool RequirementPassed(INodeServiceProvider services);
+    string ToDebugString();
 }
 
 
@@ -112,7 +124,7 @@ public class AltarDialogCollection
 
         foreach (var e in encounters)
         {
-            if (e.ConditionPassed(provider))
+            if (e.ConditionsPassed(provider))
             {
                 return e;
             }

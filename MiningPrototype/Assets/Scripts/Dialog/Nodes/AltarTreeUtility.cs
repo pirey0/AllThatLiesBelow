@@ -92,6 +92,10 @@ public static class AltarTreeUtility
         {
             return null;
         }
+        else if (NodeMatchesConditions(root, out elements, "RunOnlyOnce", 1))
+        {
+            return null;
+        }
         else if (StringNodeMatchesConditions(root, out elements, "Text"))
         {
             return null;
@@ -170,15 +174,19 @@ public static class AltarTreeUtility
             {
                 if (elements.Length == 2)
                 {
-                    node.Requirements.Add((elements[1], true));
+                    node.Requirements.Add(new AltarVariableRequirement(elements[1], true));
                 }
                 else if (elements.Length == 3)
                 {
                     if (Util.StringMatches(elements[1], "not", "Not"))
                     {
-                        node.Requirements.Add((elements[2], false));
+                        node.Requirements.Add(new AltarVariableRequirement(elements[2], false));
                     }
                 }
+            }
+            else if((NodeMatchesConditions(stringCollection.Nodes[nodeId], out elements, "RunOnlyOnce", 1)))
+            {
+                node.Requirements.Add(new AltarRunOnceOnlyRequirement(node.ID));
             }
         }
     }
