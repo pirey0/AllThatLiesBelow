@@ -23,7 +23,7 @@ public class MiroParser
         string text = File.ReadAllText(miroPath);
 
         string json = "{\"widgets\":" + text + "}";
-        var board = JsonUtility.FromJson<MiroBoard>(json);
+        MiroBoard board = JsonUtility.FromJson<MiroBoard>(json);
 
         board.FilterOutUnnecessaryWidgets();
         Debug.Log("Widgets after Filter: " + board.widgets.Count);
@@ -38,30 +38,17 @@ public class MiroParser
     }
 #endif
 
-    public static AltarTreeCollection LoadTreesAsAltarTreeCollection()
+    public static AltarDialogCollection LoadTreesAsAltarTreeCollection()
     {
         var asset = Resources.Load<TextAsset>(resourcesTreesAssetPath);
 
         StringTreeCollection collection = JsonUtility.FromJson<StringTreeCollection>(asset.text);
         collection.CleanupAfterDeserialization();
-        AltarTreeCollection res = AltarTreeUtility.ConvertStringCollectionToAltarTree(collection);
+        AltarDialogCollection res = AltarTreeUtility.ConvertStringCollectionToAltarTree(collection);
         return res;
     }
 
-    public static AltarDialogRootNode FindDialogWithName(AltarTreeCollection collection, string name)
-    {
-        foreach (var c in collection.Roots)
-        {
-            if (c is AltarDialogRootNode rootNode)
-            {
-                if (rootNode.Name == name)
-                {
-                    return rootNode;
-                }
-            }
-        }
-        return null;
-    }
+  
 
 }
 

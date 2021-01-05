@@ -116,7 +116,8 @@ public class PlayerStateMachine : BasePlayerStateMachine
 
     protected override float GetJumpMultiplyer()
     {
-        return progressionHandler.JumpMultiplyer;
+        //Old altar reward, defaults to 1
+        return 1;
     }
 
     protected override float GetSpeedMultiplyer()
@@ -124,7 +125,8 @@ public class PlayerStateMachine : BasePlayerStateMachine
         if (gameState.CurrentState != GameState.State.Playing)
             return 0;
 
-        return progressionHandler.SpeedMultiplyer;
+        //Old altar reward, defaulted to 1
+        return 1;
     }
 
     protected override void BaseMoveUpdate(float horizontal, Vector2 movement)

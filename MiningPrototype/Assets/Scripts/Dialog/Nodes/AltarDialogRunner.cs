@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AltarDialogTestRunner : StateListenerBehaviour
+public class AltarDialogRunner : StateListenerBehaviour
 {
-    [SerializeField] string dialogToRun = "Test1";
+    [SerializeField] string testDialogToRun = "Test1";
 
     [SerializeField] bool runOnStart;
     [SerializeField] TestDialogVisualizer dialogVisualizer;
@@ -26,10 +26,12 @@ public class AltarDialogTestRunner : StateListenerBehaviour
 
         if (collection != null)
         {
-            var node = MiroParser.FindDialogWithName(collection, dialogToRun);
+            var node = collection.FindDialogWithName(testDialogToRun);
             if (node != null)
             {
-                StartCoroutine(RunRoutine(collection, node));
+                var prog = (progression == null) ? (IDialogPropertiesHandler)new TestDialogPropertiesHandler() : progression;
+                INodeServiceProvider provider = new BasicDialogServiceProvider(collection, dialogVisualizer, prog, debugInventory);
+                StartCoroutine(RunDialogCoroutine(provider, node));
             }
             else
             {
@@ -42,14 +44,13 @@ public class AltarDialogTestRunner : StateListenerBehaviour
         }
     }
 
-    public IEnumerator RunRoutine(AltarTreeCollection collection, AltarBaseNode node)
+    public static IEnumerator RunDialogCoroutine(INodeServiceProvider provider, AltarBaseNode node)
     {
         Debug.Log("NodeDebugRunner Start");
-        var prog = (progression == null) ? (IDialogPropertiesHandler)new TestPropertiesHandler() : progression;
-        INodeServiceProvider provider = new TestAltarDialogServiceProvider(debugInventory, dialogVisualizer, prog, collection);
+
         NodeResult result = NodeResult.Wait;
-        dialogVisualizer.StartDialog();
-        while (node != null)
+        provider.DialogVisualizer.StartDialog();
+        while (node != null && !provider.Aborted)
         {
             if (node is IConditionalNode conditionalNode)
             {
@@ -69,7 +70,7 @@ public class AltarDialogTestRunner : StateListenerBehaviour
             {
                 if (node is ITickingNode tickingNode)
                 {
-                    while (result == NodeResult.Wait)
+                    while (result == NodeResult.Wait && !provider.Aborted)
                     {
                         yield return null;
                         result = tickingNode.Tick(provider);
@@ -77,7 +78,13 @@ public class AltarDialogTestRunner : StateListenerBehaviour
                 }
             }
 
-            if (result == NodeResult.Error)
+            if (provider.Aborted)
+            {
+                if (node is IEndableNode endableNode)
+                    endableNode.OnEnd(provider);
+                node = null;
+            }
+            else if (result == NodeResult.Error)
             {
                 Debug.LogError("NodeDebugRunner exited with Error");
                 yield break;
@@ -95,8 +102,7 @@ public class AltarDialogTestRunner : StateListenerBehaviour
                 result = NodeResult.Wait;
             }
         }
-
-        dialogVisualizer.EndDialog();
+        provider.DialogVisualizer.EndDialog();
     }
 
     private static AltarBaseNode SelectFirstViableChildNodeStartingAt(AltarBaseNode node, INodeServiceProvider provider, int startIndex)
@@ -128,54 +134,56 @@ public class AltarDialogTestRunner : StateListenerBehaviour
 
         return null;
     }
+}
 
-    public class TestAltarDialogServiceProvider : INodeServiceProvider, IDialogInventoryHandler
+public class BasicDialogServiceProvider : INodeServiceProvider, IDialogInventoryHandler
+{
+    IDialogVisualizer visualizer;
+    IDialogPropertiesHandler properties;
+    AltarDialogCollection treeCollection;
+    Inventory inventory;
+
+    public BasicDialogServiceProvider(AltarDialogCollection treeCollection, IDialogVisualizer vis, IDialogPropertiesHandler prop, Inventory inventory)
     {
-        IDialogVisualizer visualizer;
-        IDialogPropertiesHandler properties;
-        AltarTreeCollection treeCollection;
-        Inventory inventory;
-
-        public TestAltarDialogServiceProvider(Inventory inventory, IDialogVisualizer vis, IDialogPropertiesHandler prop, AltarTreeCollection treeCollection)
-        {
-            visualizer = vis;
-            properties = prop;
-            this.treeCollection = treeCollection;
-            this.inventory = inventory;
-        }
-
-        public IDialogVisualizer DialogVisualizer => visualizer;
-        public IDialogPropertiesHandler Properties => properties;
-
-        public AltarTreeCollection AltarTreeCollection => treeCollection;
-
-        public IDialogInventoryHandler DialogInventoryHandler => this;
-
-        public Inventory GetConnectedInventory()
-        {
-            return inventory;
-        }
-
-        public bool InventoryConnected()
-        {
-            return inventory != null;
-        }
+        visualizer = vis;
+        properties = prop;
+        this.treeCollection = treeCollection;
+        this.inventory = inventory;
     }
 
-    public class TestPropertiesHandler : IDialogPropertiesHandler
+    public IDialogVisualizer DialogVisualizer => visualizer;
+    public IDialogPropertiesHandler Properties => properties;
+
+    public AltarDialogCollection AltarTreeCollection => treeCollection;
+
+    public IDialogInventoryHandler DialogInventoryHandler => this;
+
+    public bool Aborted { get; set; }
+
+    public Inventory GetConnectedInventory()
     {
-        public void FireEvent(string @event)
-        {
-            Debug.Log("EventFired: " + @event);
-        }
+        return inventory;
+    }
 
-        public bool GetVariable(string name)
-        {
-            return true;
-        }
+    public bool InventoryConnected()
+    {
+        return inventory != null;
+    }
+}
 
-        public void SetVariable(string variableName, bool variableState)
-        {
-        }
+public class TestDialogPropertiesHandler : IDialogPropertiesHandler
+{
+    public void FireEvent(string @event)
+    {
+        Debug.Log("EventFired: " + @event);
+    }
+
+    public bool GetVariable(string name)
+    {
+        return true;
+    }
+
+    public void SetVariable(string variableName, bool variableState)
+    {
     }
 }

@@ -5,9 +5,9 @@ using UnityEngine;
 
 public static class AltarTreeUtility
 {
-    public static AltarTreeCollection ConvertStringCollectionToAltarTree(StringTreeCollection collection)
+    public static AltarDialogCollection ConvertStringCollectionToAltarTree(StringTreeCollection collection)
     {
-        AltarTreeCollection newCollection = new AltarTreeCollection();
+        AltarDialogCollection newCollection = new AltarDialogCollection();
         newCollection.Nodes = new Dictionary<string, AltarBaseNode>();
 
         foreach (var n in collection.Nodes)
@@ -84,6 +84,10 @@ public static class AltarTreeUtility
         {
             return null;
         }
+        else if (NodeMatchesConditions(root, out elements, "Encounter", 1))
+        {
+            return null;
+        }
         else if (NodeMatchesConditions(root, out elements, "Require", 2, 3))
         {
             return null;
@@ -103,7 +107,7 @@ public static class AltarTreeUtility
         return node;
     }
 
-    public static void SetDelayedReferences(AltarBaseNode node, StringTreeNode root, AltarTreeCollection collection, StringTreeCollection stringCollection)
+    public static void SetDelayedReferences(AltarBaseNode node, StringTreeNode root, AltarDialogCollection collection, StringTreeCollection stringCollection)
     {
         List<AltarBaseNode> children = new List<AltarBaseNode>();
 
@@ -149,11 +153,12 @@ public static class AltarTreeUtility
                 {
                     altarDialogRootNode.Name = elements[1];
                 }
+                else if ((NodeMatchesConditions(stringCollection.Nodes[nodeId], out elements, "Encounter", 1)))
+                {
+                    altarDialogRootNode.IsEncounter = true;
+                }
             }
         }
-
-
-
     }
 
     private static void AddRequirementsToConditionalNode(StringTreeNode stringNode, AltarConditionalNode node, StringTreeCollection stringCollection)

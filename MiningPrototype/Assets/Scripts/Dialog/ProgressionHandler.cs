@@ -31,25 +31,18 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     ProgressionSaveData data;
     Letterbox letterBox;
     DropBox postbox;
-    List<Altar> altars;
+    AltarDialogCollection altarDialogs;
 
     public int CurrentDay { get => data.day; }
-    public float SpeedMultiplyer { get => data.speedMultiplyer; }
-    public float DigSpeedMultiplyer { get => data.digSpeedMultiplyer; }
-    public float StrengthMultiplyer { get => data.strengthMultiplyer; }
-
-    public float JumpMultiplyer { get => data.jumpMultiplyer; }
-    public bool DailySacrificeExpired { get => data.sacrificedAtID >= 0; }
-    public int SacrificeProgressionLevel { get => data.sacrificeProgressionLevel; }
     public int PickaxeLevel { get => data.pickaxeLevel; }
     public bool IsMidas { get => data.isMidas; }
+    public float DigSpeedMultiplyer { get => data.digSpeedMultiplyer; }
+    public AltarDialogCollection AltarDialogCollection { get => altarDialogs; }
 
-    //Useless
-    public bool InstableWorld { get => data.instableWorld; }
-
-    public float ProgressionTimeScale { get => data.timeScale; }
-
-    public List<string> RewardsReceived { get => data.rewardsReceived.Select((x) => x.ToString()).ToList(); }
+    void Start()
+    {
+        altarDialogs = MiroParser.LoadTreesAsAltarTreeCollection();
+    }
 
     protected override void OnPostSceneLoad()
     {
@@ -59,15 +52,6 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
 
     protected override void OnRealStart()
     {
-        var altarsArr = GameObject.FindObjectsOfType<Altar>();
-        altars = new List<Altar>(altarsArr);
-        altars.Sort((x, y) => (int)(x.transform.position.y - y.transform.position.y));
-
-        for (int i = 0; i < altars.Count; i++)
-        {
-            altars[i].SetAltarID(i);
-        }
-
         player.EnteredOverworld += OnEnterOverworld;
         player.LeftOverworld += OnLeftOverworld;
     }
@@ -108,38 +92,27 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
             sacrificeActions.ApplyReward(item, data);
         }
 
-        foreach (var item in data.itemSacrificed)
-        {
-            sacrificeActions.ApplyItemSacrificeConsequence(item, data);
-        }
-
         letterBox = FindObjectOfType<Letterbox>();
         postbox = FindObjectOfType<DropBox>();
 
         OnChangePickaxeLevel?.Invoke(data.pickaxeLevel);
     }
 
-    public void NotifyAtarDiscovery(int id)
+
+
+    public void Aquired(string altarRewardType)
     {
-        Debug.Log("Discovered Altar: " + id);
-        if (data.lastFoundAltarID >= 0 && data.lastFoundAltarID != id)
+        if (Enum.TryParse(altarRewardType, out AltarRewardType rewardType))
         {
-            RemoveAltar(data.lastFoundAltarID);
-
-            if (data.lastFoundAltarID < id)
-                id -= 1; //as we remaped the list, the altar needs to go down by 1 if above the other
+            data.rewardsSacrificed.Add(rewardType);
+            Debug.Log(rewardType + " added to rewards list");
         }
-
-        data.lastFoundAltarID = id;
+        else
+        {
+            Debug.LogError("Attempting to sacrifice unknown type: " + altarRewardType);
+        }
     }
 
-    public void Aquired(string topic, ItemAmountPair payment, int altarID)
-    {
-        Debug.Log(topic + " unlocked in the morning!");
-        data.sacrificedAtID = altarID;
-        data.aquiredList.Add((topic, payment));
-
-    }
     public bool NeedsTutorialFor(string s)
     {
         return !data.achievedTutorials.Contains(s);
@@ -310,74 +283,15 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
 
     private void UpdateSacrifices()
     {
-
-        foreach (var aquired in data.aquiredList)
+        foreach (var aquired in data.rewardsSacrificed)
         {
-            Debug.Log("Aquired: " + aquired.Item1 + " by paying with " + aquired.Item2.ToString());
-
-            if (Enum.TryParse(aquired.Item1, out AltarRewardType altarReward))
-            {
-                if (!data.rewardsReceived.Contains(altarReward))
-                    data.rewardsReceived.Add(altarReward);
-
-                sacrificeActions.ApplyReward(altarReward, data);
-            }
-            else
-            {
-                Debug.LogWarning("No altar reward named: " + aquired.Item1);
-            }
-
-            if (aquired.Item2.type != ItemType.None)
-            {
-                if (data.itemSacrificed.Contains(aquired.Item2.type))
-                    data.itemSacrificed.Add(aquired.Item2.type);
-
-                sacrificeActions.ApplyItemSacrificeConsequence(aquired.Item2.type, data);
-            }
-
-            data.sacrificeProgressionLevel++;
+            Debug.Log("Aquired: " + aquired);
+            data.rewardsReceived.Add(aquired);
+            sacrificeActions.ApplyReward(aquired, data);
         }
-        data.aquiredList.Clear();
-
-        if (data.sacrificedAtID >= 0)
-        {
-            RemoveAltar(data.sacrificedAtID);
-            data.sacrificedAtID = -1; //reset sacrifice id, allowing new sacrifices
-            data.lastFoundAltarID = -1;
-        }
+        data.rewardsSacrificed.Clear();
     }
 
-    private void RemoveAltar(int id)
-    {
-        var altar = altars[id];
-        if (altar != null)
-        {
-            Debug.Log("Deleting old altar");
-            Vector2Int pos = altar.transform.position.ToGridPosition();
-            pos.x -= 5;
-            pos.y -= 2;
-
-
-            Destroy(altar.gameObject);
-            Util.IterateXY(10, (x, y) => map.SetMapAt(pos.x + x, pos.y + y, Tile.Make(TileType.Stone), TileUpdateReason.Generation));
-
-            //remap altars list and altarID to properly handle loading and data.sacrificeAtID;
-            altars.RemoveAt(id);
-            for (int i = id; i < altars.Count; i++)
-            {
-                altars[i].SetAltarID(i);
-            }
-        }
-    }
-
-    /// <summary>
-    /// Cheat to set the progression level.
-    /// Used by Altar to decide viable Rewards.
-    /// </summary>
-    public void SetAltarProgressionLevel(int level)
-    {
-        data.sacrificeProgressionLevel = level;
-    }
 
     public void RegisterOrder(int id, Order order)
     {
@@ -402,7 +316,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
         if (IsMaxUpgradeLevel(type))
             return;
 
-        switch(type)
+        switch (type)
         {
             case ItemType.PickaxeUpgrade:
                 data.pickaxeLevel++;
@@ -451,7 +365,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
                 return upgrade.DisplayName;
         }
 
-        return "better "+type.ToString();
+        return "better " + type.ToString();
     }
 
     public Sprite GetSpriteForUpgrade(ItemType type)
@@ -509,39 +423,22 @@ public class ProgressionSaveData : SaveData
 {
     public int day = 0;
 
-    //sacrifice
-    public int sacrificedAtID = -1;
-    public int lastFoundAltarID = -1;
-    public int sacrificeProgressionLevel = 1;
-    public List<(string, ItemAmountPair)> aquiredList = new List<(string, ItemAmountPair)>();
-
-    //sacrifice rewards
-    public float speedMultiplyer = 1;
-    public float digSpeedMultiplyer = 1;
-    public float strengthMultiplyer = 1;
-    public float jumpMultiplyer = 1;
+    //sacrifices
     public bool instantDelivery = false;
     public bool isSpring = false;
     public bool isMidas = false;
-    public bool hasLove = false;
-    public bool hasWon = false;
-    public bool hasWayOut = false;
-    public bool isFree = false;
-    public float timeScale = 1;
     public List<AltarRewardType> rewardsReceived = new List<AltarRewardType>();
-    public List<ItemType> itemSacrificed = new List<ItemType>();
+    public List<AltarRewardType> rewardsSacrificed = new List<AltarRewardType>();
 
     //sacriifce consequences
     public bool cannotSend;
     public bool paidEverything;
-    public bool instableWorld;
 
     //tutorial
     public List<string> achievedTutorials = new List<string>();
 
     //variables
     public Dictionary<string, bool> variables = new Dictionary<string, bool>();
-
 
     //letters and daily
     public Dictionary<int, Order> ordersForNextDay = new Dictionary<int, Order>();
@@ -553,4 +450,5 @@ public class ProgressionSaveData : SaveData
 
     //upgrades;
     public int pickaxeLevel = 1;
+    public float digSpeedMultiplyer = 1;
 }
