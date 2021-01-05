@@ -100,17 +100,10 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
 
 
 
-    public void Aquired(string altarRewardType)
+    public void AquireAltarReward(AltarRewardType altarRewardType)
     {
-        if (Enum.TryParse(altarRewardType, out AltarRewardType rewardType))
-        {
-            data.rewardsSacrificed.Add(rewardType);
-            Debug.Log(rewardType + " added to rewards list");
-        }
-        else
-        {
-            Debug.LogError("Attempting to sacrifice unknown type: " + altarRewardType);
-        }
+            data.rewardsSacrificed.Add(altarRewardType);
+            Debug.Log(altarRewardType + " added to rewards list");
     }
 
     public bool NeedsTutorialFor(string s)
@@ -160,11 +153,21 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
 
     public void FireEvent(string ev)
     {
-        Debug.Log("AltarNode fired Event: " + ev);
+        Debug.Log("Fired Event: " + ev);
 
-        if (ev == "Camshake1")
+        switch (ev)
         {
-            cameraController.Shake(player.transform.position, CameraShakeType.explosion);
+            case "Camshake1":
+                cameraController.Shake(player.transform.position, CameraShakeType.explosion);
+                break;
+            case "Spring":
+                AquireAltarReward(AltarRewardType.Spring);
+                break;
+
+
+            default:
+                Debug.LogWarning("Fired unimplemented event " + ev);
+                break;
         }
     }
 
