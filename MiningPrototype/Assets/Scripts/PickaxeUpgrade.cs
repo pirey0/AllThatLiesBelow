@@ -11,6 +11,7 @@ public class PickaxeUpgrade : ScriptableObject
     public string DisplayName;
     public ItemAmountPair Costs;
     public float MiningSpeed;
+    public Sprite Sprite;
 }
 
 public enum UpgradeType

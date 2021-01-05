@@ -368,6 +368,17 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
         return "better " + type.ToString();
     }
 
+    public Sprite GetSpriteForUpgrade(ItemType type)
+    {
+        foreach (var upgrade in pickaxeUpgrades)
+        {
+            if (upgrade.Type == type && upgrade.RequiredLevel == data.pickaxeLevel)
+                return upgrade.Sprite;
+        }
+
+        return null;
+    }
+
     public SaveData ToSaveData()
     {
         data.GUID = GetSaveID();

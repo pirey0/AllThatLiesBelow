@@ -16,7 +16,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
     [SerializeField] GameObject canDropOverlay, canNotDropOverlay;
     [SerializeField] AnimationCurve scaleOnOpenAndCloseCurve;
 
-
+    [Inject] ProgressionHandler progressionHandler;
     [Inject] ItemPlacingHandler itemPlacingHandler;
     [Inject] ReadableItemHandler readableItemHandler;
     [Inject] TooltipHandler tooltipHandler;
@@ -59,6 +59,9 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
             if (info.AmountIsUniqueID && readableItemHandler.HasRead(amount))
             {
                 SetIconSprite(info.DisplaySpriteRead);
+            } else if (info.IsUpgrade)
+            {
+                SetIconSprite(progressionHandler.GetSpriteForUpgrade(pair.type));
             }
             else
             {
