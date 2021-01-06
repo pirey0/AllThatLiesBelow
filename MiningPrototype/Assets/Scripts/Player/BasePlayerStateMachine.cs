@@ -15,6 +15,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
     [SerializeField] bool debug;
 
     [Zenject.Inject] DamageEffectHandler damageEffectHandler;
+    [Zenject.Inject] ProgressionHandler progressionHandler;
 
     StateMachine stateMachine;
     StateMachine.State s_idle, s_crouchIdle, s_jump, s_fall, s_walk, s_slowWalk, s_crouchWalk, s_climb, s_climbIde, s_inventory, s_death, s_hit, s_longIdle, s_disabled, s_fallDeath;
@@ -594,17 +595,14 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
     public void TakeDamage(DamageStrength strength)
     {
 
-        switch (strength)
+        if (strength == DamageStrength.Strong || (strength == DamageStrength.Weak && progressionHandler.HelmetLevel == 0))
         {
-            case DamageStrength.Weak:
-                stateMachine.ForceTransitionTo(s_hit);
-                damageEffectHandler.TakeDamage(0.66f);
-                break;
-
-            case DamageStrength.Strong:
-                stateMachine.ForceTransitionTo(s_death);
-                damageEffectHandler.TakeDamage(1f);
-                break;
+            stateMachine.ForceTransitionTo(s_death);
+            damageEffectHandler.TakeDamage(1f);
+        } else if (strength == DamageStrength.Strong)
+        {
+            stateMachine.ForceTransitionTo(s_hit);
+            damageEffectHandler.TakeDamage(0.66f);
         }
     }
 

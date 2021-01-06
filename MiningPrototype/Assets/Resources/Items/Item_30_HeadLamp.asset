@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemType: 30
   DisplayName: Helmet
   DisplayTooltip: 
-  DisplaySprite: {fileID: 21300000, guid: f9ff0a30f9f37564e8304fac3e4dc082, type: 3}
+  DisplaySprite: {fileID: -2734504946166507769, guid: 2a1edf49b10fb0c458b3d6ccf3d265cf, type: 3}
   DisplaySpriteRead: {fileID: 0}
   Weight: 1
   CanBePlaced: 0

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5b4e36afc74fff4f82cd40fcf05b7bc, type: 3}
-  m_Name: Item_29_HelmetUpgrade
+  m_Name: Item_29_Helmet
   m_EditorClassIdentifier: 
   ItemType: 29
   DisplayName: Helmet
   DisplayTooltip: 
-  DisplaySprite: {fileID: 21300000, guid: f9ff0a30f9f37564e8304fac3e4dc082, type: 3}
+  DisplaySprite: {fileID: -4194526030996591247, guid: 8af332ec7604e4346a6aa76c630a747e, type: 3}
   DisplaySpriteRead: {fileID: 0}
   Weight: 1
   CanBePlaced: 0
