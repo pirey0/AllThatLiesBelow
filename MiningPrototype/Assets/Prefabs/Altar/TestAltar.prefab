@@ -72,7 +72,7 @@ MonoBehaviour:
       lookAtPlayer: 0
     - State: 1
       Animation: {fileID: 11400000, guid: e6edbbaa96ad02f46bd9e09dfdfb0957, type: 2}
-      AudioClip: {fileID: 8300000, guid: a7f0fac40b269e64081baff27f2d2a90, type: 3}
+      AudioClip: {fileID: 8300000, guid: 9cdbb56c656c48e478891a784b62ea34, type: 3}
       lookAtPlayer: 1
     - State: 2
       Animation: {fileID: 11400000, guid: e6edbbaa96ad02f46bd9e09dfdfb0957, type: 2}
