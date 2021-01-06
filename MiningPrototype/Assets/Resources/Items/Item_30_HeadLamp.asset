@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Item_30_HeadLamp
   m_EditorClassIdentifier: 
   ItemType: 30
-  DisplayName: Helmet
+  DisplayName: Head lamp
   DisplayTooltip: 
   DisplaySprite: {fileID: -2734504946166507769, guid: 2a1edf49b10fb0c458b3d6ccf3d265cf, type: 3}
   DisplaySpriteRead: {fileID: 0}
