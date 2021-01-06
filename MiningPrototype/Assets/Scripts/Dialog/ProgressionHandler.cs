@@ -16,6 +16,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     [SerializeField] PickaxeUpgrade[] pickaxeUpgrades;
     [SerializeField] AudioSource instantDeliveryAudio;
     [SerializeField] float timeMiningBeforePassageOfDay;
+    [SerializeField] bool includeDebugDialogs;
 
     [Zenject.Inject] OverworldEffectHandler overworldEffectHandler;
     [Zenject.Inject] CameraController cameraController;
@@ -127,7 +128,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
         }
         else if (name == "Debug")
         {
-            return true;
+            return includeDebugDialogs;
         }
 
         if (data.variables.ContainsKey(name))
@@ -309,11 +310,6 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
         {
             data.ordersForNextDay.Add(id, order);
         }
-    }
-
-    public float GetPriceOf(string reward, string resource)
-    {
-        return 0; // SacrificePricesParser.GetPriceFor(reward, resource);
     }
 
     public void Upgrade(ItemType type)
