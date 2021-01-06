@@ -51,7 +51,6 @@ public class DropBox : HoverHighlighter, IDropReceiver, INonPersistantSavable
     public SpawnableSaveData ToSaveData()
     {
         var data = new DropBoxSaveData();
-        data.SpawnableIDType = SpawnableIDType.DropBox;
         data.Position = new SerializedVector3(transform.position);
         data.Rotation = new SerializedVector3(transform.eulerAngles);
         data.Inventory = inventory;
@@ -64,6 +63,11 @@ public class DropBox : HoverHighlighter, IDropReceiver, INonPersistantSavable
         {
             inventory = data.Inventory;
         }
+    }
+
+    public SaveID GetSavaDataID()
+    {
+        return new SaveID(SpawnableIDType.DropBox);
     }
 
     [System.Serializable]

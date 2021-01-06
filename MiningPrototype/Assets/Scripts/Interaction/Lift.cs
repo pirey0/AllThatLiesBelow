@@ -67,7 +67,6 @@ public class Lift : TilemapCarvingEntity, IBaseInteractable, INonPersistantSavab
     {
         var data = new LiftSaveData();
         data.SaveTransform(transform);
-        data.SpawnableIDType = SpawnableIDType.Lift;
         cage.SaveTo(data);
         return data;
     }
@@ -84,6 +83,11 @@ public class Lift : TilemapCarvingEntity, IBaseInteractable, INonPersistantSavab
         {
             Debug.Log("Cannot call Lift when being used");
         }
+    }
+
+    public SaveID GetSavaDataID()
+    {
+        return new SaveID(SpawnableIDType.Lift);
     }
 
     [System.Serializable]

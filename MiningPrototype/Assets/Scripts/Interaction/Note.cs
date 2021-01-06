@@ -53,7 +53,6 @@ public class Note : MirrorWorldFollower, IInteractable, INonPersistantSavable
         data.Text = text;
         data.Position = new SerializedVector3(transform.position);
         data.Rotation = new SerializedVector3(transform.eulerAngles);
-        data.SpawnableIDType = SpawnableIDType.Note;
         return data;
     }
 
@@ -69,6 +68,11 @@ public class Note : MirrorWorldFollower, IInteractable, INonPersistantSavable
     public Vector3 GetPosition()
     {
         return transform.position;
+    }
+
+    public SaveID GetSavaDataID()
+    {
+        return new SaveID(SpawnableIDType.Note);
     }
 
     [System.Serializable]

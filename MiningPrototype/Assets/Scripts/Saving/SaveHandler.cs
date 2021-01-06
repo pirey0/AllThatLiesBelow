@@ -14,9 +14,7 @@ public class SaveHandler : MonoBehaviour
     public static bool LoadFromSavefile;
 
     [SerializeField] GameObject saveInfoPrefab;
-    [SerializeField] GameObject[] spawnablePrefabs;
     [Zenject.Inject] PrefabFactory prefabFactory;
-
 
     private static string GetFullSavePath()
     {
@@ -199,7 +197,7 @@ public class SaveHandler : MonoBehaviour
 
         //Load non persistant
         var npsm = new NonPersistantSaveManager(); //Non persistant stuff
-        npsm.SetSpawnables(spawnablePrefabs, prefabFactory);
+        npsm.Setup(prefabFactory);
         npsm.SetOffset(offset);
         npsm.Load(collection[npsm.GetSaveID()]);
     }

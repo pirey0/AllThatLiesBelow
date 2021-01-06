@@ -5,15 +5,37 @@ using UnityEngine;
 
 public class NonPersistantSaveManager : ISavable
 {
-    [SerializeField] GameObject[] spawnablePrefabs;
-
     PrefabFactory prefabFactory;
     Vector3 offset;
+    Dictionary<string, GameObject> keyPrefabMap;
 
-    public void SetSpawnables(GameObject[] spawnables, PrefabFactory factory)
+
+    public void Setup(PrefabFactory factory)
     {
-        spawnablePrefabs = spawnables;
         this.prefabFactory = factory;
+
+        //LoadSavables
+        keyPrefabMap = new Dictionary<string, GameObject>();
+        var objects = Resources.LoadAll("SpawnableObjects/");
+        foreach (var o in objects)
+        {
+            if (o is GameObject go)
+            {
+                if (go.TryGetComponent(out INonPersistantSavable nps))
+                {
+                   var s = nps.GetSavaDataID().AsStringID();
+
+                    if (string.IsNullOrEmpty(s))
+                    {
+                        Debug.LogError("Undefined SaveDataID on " + go.name);
+                    }
+                    else
+                    {
+                        keyPrefabMap.Add(s, go);
+                    }
+                }
+            }
+        }
     }
 
     public void SetOffset(Vector3 v)
@@ -39,16 +61,24 @@ public class NonPersistantSaveManager : ISavable
         {
             foreach (var data in container)
             {
-                if (data.SpawnableIDType == SpawnableIDType.None)
-                    continue;
-
-                if((int)data.SpawnableIDType < spawnablePrefabs.Length)
+                string saveID = data.GetSaveID().AsStringID();
+                if (string.IsNullOrEmpty(saveID))
                 {
-                    var t = prefabFactory.Create(spawnablePrefabs[(int)data.SpawnableIDType]);
+                    Debug.LogError("Invalid SpawnID on" + data.ToString());
+                    continue;
+                }
+
+                if (keyPrefabMap.ContainsKey(saveID))
+                {
+                    var t = prefabFactory.Create(keyPrefabMap[saveID]);
                     t.position = data.Position.ToVector3() + offset;
                     t.eulerAngles = data.Rotation.ToVector3();
                     var savComp = t.GetComponent<INonPersistantSavable>();
                     savComp.Load(data);
+                }
+                else
+                {
+                    Debug.LogError("Cannot find prefab for SpawnID " + saveID);
                 }
             }
 
@@ -66,7 +96,10 @@ public class NonPersistantSaveManager : ISavable
 
         foreach (var s in objs)
         {
-            container.Add(s.ToSaveData());
+            var sd = s.ToSaveData();
+            sd.SpawnableIDType = s.GetSavaDataID().IDType;
+            sd.SpawnableID = s.GetSavaDataID().IDString;
+            container.Add(sd);
         }
         Debug.Log("Saved " + objs.Length + " non persistant savables.");
 

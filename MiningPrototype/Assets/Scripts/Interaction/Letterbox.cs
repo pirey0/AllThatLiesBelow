@@ -106,11 +106,11 @@ public class Letterbox : InventoryOwner, INonPersistantSavable, IDropReceiver
     public SpawnableSaveData ToSaveData()
     {
         var data = new LetterBoxSaveData();
-        data.SpawnableIDType = SpawnableIDType.LetterBox;
         data.Position = new SerializedVector3(transform.position);
         data.Rotation = new SerializedVector3(transform.eulerAngles);
         data.Inventory = Inventory;
         data.Status = status;
+        data.SpawnableIDType = SpawnableIDType.Chest;
         return data;
     }
 
@@ -146,6 +146,11 @@ public class Letterbox : InventoryOwner, INonPersistantSavable, IDropReceiver
     public void ReceiveDrop(ItemAmountPair pair, Inventory origin)
     {
         //
+    }
+
+    public SaveID GetSavaDataID()
+    {
+        return new SaveID(SpawnableIDType.LetterBox);
     }
 
     [System.Serializable]

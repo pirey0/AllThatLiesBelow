@@ -25,7 +25,6 @@ public class NonPersistentDecoration : MirrorWorldFollower, INonPersistantSavabl
         var data = new NonPersistentDecorationSaveData();
         data.Position = new SerializedVector3(transform.position);
         data.Rotation = new SerializedVector3(transform.eulerAngles);
-        data.SpawnableIDType = SpawnableIDType.Decoration;
 
         if (IsDefined(spriteRenderer.sprite))
         {
@@ -62,6 +61,11 @@ public class NonPersistentDecoration : MirrorWorldFollower, INonPersistantSavabl
                 spriteRenderer.sprite = sprites[data.index];
             }
         }
+    }
+
+    public SaveID GetSavaDataID()
+    {
+        return new SaveID(SpawnableIDType.Decoration);
     }
 
     [System.Serializable]

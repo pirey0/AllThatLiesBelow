@@ -17,9 +17,50 @@ public interface ISavable
 public interface INonPersistantSavable
 {
     SpawnableSaveData ToSaveData();
+
+    SaveID GetSavaDataID();
+    
     void Load(SpawnableSaveData data);
 
 }
+
+[System.Serializable]
+public class SaveID
+{
+    public SpawnableIDType IDType;
+    public string IDString;
+
+    public SaveID(SpawnableIDType type)
+    {
+        IDType = type;
+        IDString = "";
+    }
+
+    public SaveID(string s)
+    {
+        IDString = s;
+        IDType = SpawnableIDType.None;
+    }
+
+    public SaveID(string s, SpawnableIDType type)
+    {
+        IDString = s;
+        IDType = type;
+    }
+
+    public string AsStringID()
+    {
+        if(IDType == SpawnableIDType.None)
+        {
+            return IDString;
+        }
+        else
+        {
+            return IDType.ToString();
+        }
+    }
+}
+
 
 public enum SpawnableIDType
 {
@@ -64,7 +105,9 @@ public class SaveData
 [System.Serializable]
 public class SpawnableSaveData
 {
+    public string SpawnableID;
     public SpawnableIDType SpawnableIDType;
+
     public SerializedVector3 Position;
     public SerializedVector3 Rotation;
 
@@ -73,5 +116,10 @@ public class SpawnableSaveData
     {
         Position = new SerializedVector3(t.position);
         Rotation = new SerializedVector3(t.eulerAngles);
+    }
+
+    public SaveID GetSaveID()
+    {
+        return new SaveID(SpawnableID, SpawnableIDType);
     }
 }

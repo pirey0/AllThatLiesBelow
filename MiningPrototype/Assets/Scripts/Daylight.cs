@@ -27,7 +27,6 @@ public class Daylight : StateListenerBehaviour, INonPersistantSavable
         var data = new DaylightSaveData();
         data.Position = new SerializedVector3(transform.position);
         data.Rotation = new SerializedVector3(transform.eulerAngles);
-        data.SpawnableIDType = SpawnableIDType.OverworldLight;
         data.Lightmode = currentMode;
 
         return data;
@@ -39,6 +38,11 @@ public class Daylight : StateListenerBehaviour, INonPersistantSavable
         {
             currentMode = sdata.Lightmode;
         }
+    }
+
+    public SaveID GetSavaDataID()
+    {
+        return new SaveID(SpawnableIDType.OverworldLight);
     }
 
     [System.Serializable]

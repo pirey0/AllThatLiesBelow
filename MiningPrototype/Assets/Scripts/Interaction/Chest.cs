@@ -70,7 +70,6 @@ public class Chest : FallingTilemapCarvingEntity, IDropReceiver, INonPersistantS
     public SpawnableSaveData ToSaveData()
     {
         var data = new ChestSaveData();
-        data.SpawnableIDType = SpawnableIDType.Chest;
         data.Position = new SerializedVector3(transform.position);
         data.Rotation = new SerializedVector3(transform.eulerAngles);
         data.Inventory = inventoryOwner.Inventory;
@@ -92,6 +91,11 @@ public class Chest : FallingTilemapCarvingEntity, IDropReceiver, INonPersistantS
 
         UncarveDestroy();
         Debug.Log("Destroying chest " + reason);
+    }
+
+    public SaveID GetSavaDataID()
+    {
+        return new SaveID(SpawnableIDType.Chest);
     }
 
     [System.Serializable]

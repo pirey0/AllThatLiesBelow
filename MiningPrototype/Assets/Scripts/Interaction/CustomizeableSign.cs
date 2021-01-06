@@ -61,7 +61,6 @@ public class CustomizeableSign : MineableObject, INonPersistantSavable, IBaseInt
     {
         var data = new CustomizeableSignSaveData();
         data.SaveTransform(transform);
-        data.SpawnableIDType = SpawnableIDType.Sign;
         data.symbolId = currentSymbolId;
         return data;
     }
@@ -74,6 +73,11 @@ public class CustomizeableSign : MineableObject, INonPersistantSavable, IBaseInt
             if (!TryDisplay(currentSymbolId))
                 Debug.Log("Sign: invalid symbol index " + currentSymbolId);
         }
+    }
+
+    public SaveID GetSavaDataID()
+    {
+        return new SaveID(SpawnableIDType.Sign);
     }
 
     [System.Serializable]

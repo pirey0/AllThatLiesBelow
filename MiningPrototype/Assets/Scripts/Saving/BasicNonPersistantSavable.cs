@@ -4,7 +4,19 @@ using UnityEngine;
 
 public class BasicNonPersistantSavable : MonoBehaviour, INonPersistantSavable
 {
+
     [SerializeField] SpawnableIDType type;
+    [Header("For new Objects: Set type to None and assign a uniqueName")]
+    [SerializeField] string uniqueName;
+
+    public SaveID GetSavaDataID()
+    {
+        if (type == SpawnableIDType.None)
+            return new SaveID(uniqueName);
+        else
+            return new SaveID(type);
+    }
+
     public void Load(SpawnableSaveData data)
     {
     }
@@ -12,11 +24,10 @@ public class BasicNonPersistantSavable : MonoBehaviour, INonPersistantSavable
     public SpawnableSaveData ToSaveData()
     {
         var data = new SpawnableSaveData();
-        data.SpawnableIDType = type;
 
         //Wrap position in case Mirror Follower is in mirrored position
         var pos = transform.position;
-        if(RuntimeProceduralMap.Instance != null)
+        if (RuntimeProceduralMap.Instance != null)
         {
             int sizeX = RuntimeProceduralMap.Instance.SizeX;
             pos.x = (pos.x + sizeX) % sizeX;
@@ -27,5 +38,5 @@ public class BasicNonPersistantSavable : MonoBehaviour, INonPersistantSavable
         return data;
     }
 
-   
+
 }

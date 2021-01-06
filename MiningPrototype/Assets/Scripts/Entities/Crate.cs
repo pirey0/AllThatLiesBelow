@@ -68,7 +68,6 @@ public class Crate : MineableObject, INonPersistantSavable
     public SpawnableSaveData ToSaveData()
     {
         var data = new CrateSaveData();
-        data.SpawnableIDType = SpawnableIDType.Crate;
         data.Position = new SerializedVector3(transform.position);
         data.Rotation = new SerializedVector3(transform.eulerAngles);
         data.Type = crateType;
@@ -90,6 +89,11 @@ public class Crate : MineableObject, INonPersistantSavable
 
             SetupCrate();
         }
+    }
+
+    public SaveID GetSavaDataID()
+    {
+        return new SaveID(SpawnableIDType.Crate);
     }
 
     [System.Serializable]

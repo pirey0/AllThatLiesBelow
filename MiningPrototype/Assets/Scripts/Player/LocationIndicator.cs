@@ -24,7 +24,6 @@ public class LocationIndicator : MonoBehaviour, INonPersistantSavable
         data.Type = Type;
         data.Position = new SerializedVector3(transform.position);
         data.Rotation = new SerializedVector3(transform.eulerAngles);
-        data.SpawnableIDType = SpawnableIDType.LocationIndicator;
         return data;
     }
 
@@ -34,6 +33,11 @@ public class LocationIndicator : MonoBehaviour, INonPersistantSavable
         {
             Type = data.Type;
         }
+    }
+
+    public SaveID GetSavaDataID()
+    {
+        return new SaveID(SpawnableIDType.LocationIndicator);
     }
 
     [System.Serializable]

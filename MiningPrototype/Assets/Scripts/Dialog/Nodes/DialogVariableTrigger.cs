@@ -49,10 +49,14 @@ public class DialogVariableTrigger : MonoBehaviour, INonPersistantSavable
         data.SaveTransform(transform);
         data.VariableName = variableName;
         data.VariableState = setToTrue;
-        data.SpawnableIDType = SpawnableIDType.DialogVariableTrigger;
         data.colliderOffset = new SerializedVector3(boxCollider.offset);
         data.colliderSize = new SerializedVector3(boxCollider.size);
         return data;
+    }
+
+    public SaveID GetSavaDataID()
+    {
+        return new SaveID(SpawnableIDType.DialogVariableTrigger);
     }
 
     [System.Serializable]
