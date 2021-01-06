@@ -26,7 +26,8 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     [Zenject.Inject] SceneAdder sceneAdder;
     [Zenject.Inject] PlayerStateMachine player;
 
-    public System.Action<int> OnChangePickaxeLevel;
+    public event System.Action<int> OnChangePickaxeLevel;
+    public event System.Action<int> OnChangeHelmetLevel;
 
     ProgressionSaveData data;
     Letterbox letterBox;
@@ -35,6 +36,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
 
     public int CurrentDay { get => data.day; }
     public int PickaxeLevel { get => data.pickaxeLevel; }
+    public int HelmetLevel { get => data.helmetLevel; }
     public bool IsMidas { get => data.isMidas; }
     public float DigSpeedMultiplyer { get => data.digSpeedMultiplyer; }
     public AltarDialogCollection AltarDialogCollection { get => altarDialogs; }
@@ -325,6 +327,16 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
                 data.digSpeedMultiplyer = GetMiningSpeedByPickaxeLevel(data.pickaxeLevel);
                 OnChangePickaxeLevel?.Invoke(data.pickaxeLevel);
                 break;
+
+            case ItemType.Helmet:
+                data.helmetLevel = 1;
+                OnChangeHelmetLevel?.Invoke(data.helmetLevel);
+                break;
+
+            case ItemType.HeadLamp:
+                data.helmetLevel = 2;
+                OnChangeHelmetLevel?.Invoke(data.helmetLevel);
+                break;
         }
     }
 
@@ -444,5 +456,6 @@ public class ProgressionSaveData : SaveData
 
     //upgrades;
     public int pickaxeLevel = 1;
+    public int helmetLevel = 0;
     public float digSpeedMultiplyer = 1;
 }

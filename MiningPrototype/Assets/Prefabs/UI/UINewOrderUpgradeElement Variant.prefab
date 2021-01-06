@@ -23,6 +23,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4795206521028861191, guid: 368e74ecddb90f64a94cd958a5f835b1, type: 3}
+      propertyPath: m_fontSize
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4795206521028861192, guid: 368e74ecddb90f64a94cd958a5f835b1, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -3.105011
@@ -93,11 +97,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4795206521112447199, guid: 368e74ecddb90f64a94cd958a5f835b1, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4795206521112447199, guid: 368e74ecddb90f64a94cd958a5f835b1, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4795206521112447199, guid: 368e74ecddb90f64a94cd958a5f835b1, type: 3}
       propertyPath: m_AnchorMin.x
@@ -125,7 +129,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4795206521112447200, guid: 368e74ecddb90f64a94cd958a5f835b1, type: 3}
       propertyPath: m_Name
-      value: UINewOrderUpgradeElement
+      value: UINewOrderUpgradeElement Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5292199689761788640, guid: 368e74ecddb90f64a94cd958a5f835b1, type: 3}
       propertyPath: elementName

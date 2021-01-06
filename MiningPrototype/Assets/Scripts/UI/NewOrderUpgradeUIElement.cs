@@ -37,6 +37,10 @@ public class NewOrderUpgradeUIElement : MonoBehaviour, IPointerClickHandler
             case ItemType.SteelPickaxe:
             case ItemType.DiamondPickaxe:
                 return requiredLevel == progressionHandler.PickaxeLevel;
+
+            case ItemType.Helmet:
+            case ItemType.HeadLamp:
+                return requiredLevel == progressionHandler.HelmetLevel;
         }
 
         return false;

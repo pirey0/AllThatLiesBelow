@@ -56,17 +56,19 @@ public class PlayerVisualController : MonoBehaviour
     private void OnEnable()
     {
         progressionHandler.OnChangePickaxeLevel += ChangePickaxeLevel;
+        progressionHandler.OnChangeHelmetLevel += ChangeHelmetLevel;
     }
 
     private void OnDisable()
     {
         progressionHandler.OnChangePickaxeLevel -= ChangePickaxeLevel;
+        progressionHandler.OnChangeHelmetLevel -= ChangeHelmetLevel;
     }
 
-    public void ChangeHelmetState(HelmetState newHelmentState)
+    public void ChangeHelmetLevel(int newLevel)
     {
-        headAnimator.ChangeHelmetState(newHelmentState);
-        helmentState = newHelmentState;
+        helmentState = newLevel > 0 ? newLevel == 2? HelmetState.HelmetWidthLamp : HelmetState.Helmet : HelmetState.None;
+        headAnimator.ChangeHelmetState(helmentState);
         UpdateClimbAnimations();
     }
 
@@ -80,19 +82,19 @@ public class PlayerVisualController : MonoBehaviour
     [Button]
     public void AddHelmet()
     {
-        ChangeHelmetState(HelmetState.Helmet);
+        ChangeHelmetLevel(1);
     }
 
     [Button]
     public void AddHelmetWithLamp()
     {
-        ChangeHelmetState(HelmetState.HelmetWidthLamp);
+        ChangeHelmetLevel(2);
     }
 
     [Button]
     public void RemoveHelmet()
     {
-        ChangeHelmetState(HelmetState.None);
+        ChangeHelmetLevel(0);
     }
 
     [Button]
