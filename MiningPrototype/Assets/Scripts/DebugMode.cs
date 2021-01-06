@@ -34,6 +34,7 @@ public class DebugMode : MonoBehaviour
         debugTex.filterMode = FilterMode.Point;
 
         DebugLogConsole.AddCommandInstance("/tp", "Teleport to " + Util.EnumToString(typeof(TeleportDestination)), "TeleportToAltar", this);
+        DebugLogConsole.AddCommandInstance("/tpo", "Teleport to game object by name", "TeleportTo", this);
         DebugLogConsole.AddCommandInstance("/give", "Give player items " + Util.EnumToString(typeof(ItemType)), "PlayerGets", this);
         DebugLogConsole.AddCommandInstance("/kill", "Kill the player", "KillPlayer", this);
         DebugLogConsole.AddCommandInstance("/reward", "Get an altar reward" + Util.EnumToString(typeof(AltarRewardType)), "Reward", this);
@@ -166,6 +167,13 @@ public class DebugMode : MonoBehaviour
         {
             player.transform.position = target.position;
         }
+    }
+
+    public void TeleportTo(string name)
+    {
+        Transform target = GameObject.Find(name).transform;
+        if (target != null)
+            player.transform.position = target.position;
     }
 
     public enum TeleportDestination
