@@ -93,7 +93,10 @@ public enum SpawnableIDType
     Sign,
     JungleHeart,
     DialogVariableTrigger,
-    Vase
+    Vase,
+    BigMushroom,
+    JungleStatue,
+    FleshEatingPlant
 }
 
 [System.Serializable]
