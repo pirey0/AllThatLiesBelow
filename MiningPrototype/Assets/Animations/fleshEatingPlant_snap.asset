@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d05716d329922cf4abb0b6513364aece, type: 3}
+  m_Name: fleshEatingPlant_snap
+  m_EditorClassIdentifier: 
+  loop: 0
+  speedMultiplyer: 1
+  frames:
+  - Sprite: {fileID: 8194065509099609439, guid: b3d69172c991f5746b4d09d704ea40f2, type: 3}
+    Duration: 0.1
+  - Sprite: {fileID: 1970193034011574571, guid: b3d69172c991f5746b4d09d704ea40f2, type: 3}
+    Duration: 0.1
+  - Sprite: {fileID: 1970193034011574571, guid: b3d69172c991f5746b4d09d704ea40f2, type: 3}
+    Duration: 0.1
+  - Sprite: {fileID: 1653692372333136597, guid: b3d69172c991f5746b4d09d704ea40f2, type: 3}
+    Duration: 0.25
+  - Sprite: {fileID: 3945773225898684042, guid: b3d69172c991f5746b4d09d704ea40f2, type: 3}
+    Duration: 0.1
+  - Sprite: {fileID: 1970193034011574571, guid: b3d69172c991f5746b4d09d704ea40f2, type: 3}
+    Duration: 0.1
+  - Sprite: {fileID: 3945773225898684042, guid: b3d69172c991f5746b4d09d704ea40f2, type: 3}
+    Duration: 0.1
+  - Sprite: {fileID: 1653692372333136597, guid: b3d69172c991f5746b4d09d704ea40f2, type: 3}
+    Duration: 0.5
+  - Sprite: {fileID: 3945773225898684042, guid: b3d69172c991f5746b4d09d704ea40f2, type: 3}
+    Duration: 0.5
+  - Sprite: {fileID: 1653692372333136597, guid: b3d69172c991f5746b4d09d704ea40f2, type: 3}
+    Duration: 0.5
+  fileToLoadFrom: {fileID: 2800000, guid: b3d69172c991f5746b4d09d704ea40f2, type: 3}
+  defaultTime: 0.1
+  loadFromLastToFirst: 0

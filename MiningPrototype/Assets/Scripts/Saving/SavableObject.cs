@@ -53,7 +53,9 @@ public enum SpawnableIDType
     JungleHeart,
     DialogVariableTrigger,
     Vase,
-    BigMushroom
+    BigMushroom,
+    JungleStatue,
+    FleshEatingPlant
 }
 
 [System.Serializable]
