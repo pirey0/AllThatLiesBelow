@@ -51,7 +51,8 @@ public enum SpawnableIDType
     Lantern,
     Sign,
     JungleHeart,
-    DialogVariableTrigger
+    DialogVariableTrigger,
+    Vase
 }
 
 [System.Serializable]
