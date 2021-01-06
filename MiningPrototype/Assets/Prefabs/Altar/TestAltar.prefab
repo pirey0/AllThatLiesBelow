@@ -10,11 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 5015372644985189750}
   - component: {fileID: 1964703870295849393}
+  - component: {fileID: 7088996093680247500}
   - component: {fileID: 5015372644985189751}
   - component: {fileID: 1047457050871778170}
   - component: {fileID: 5015372644985189759}
+  - component: {fileID: 1205494507673233337}
   m_Layer: 0
-  m_Name: 'Altar '
+  m_Name: TestAltar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,6 +48,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3666647b35fc37640a920506be0fe3b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7088996093680247500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5015372644985189744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1839ff8fa7f1f7e468adceecb92f37df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skin: 0
+  spriteAnimator: {fileID: 1205494507673233337}
+  audioSource: {fileID: 1047457050871778170}
+  skins:
+  - Skin: 0
+    States:
+    - State: 0
+      Animation: {fileID: 11400000, guid: fadbf31df21420c469c036dc4d7c8fd8, type: 2}
+      AudioClip: {fileID: 8300000, guid: f1e85ded994031148978de475da7452d, type: 3}
+      lookAtPlayer: 0
+    - State: 1
+      Animation: {fileID: 11400000, guid: e6edbbaa96ad02f46bd9e09dfdfb0957, type: 2}
+      AudioClip: {fileID: 8300000, guid: a7f0fac40b269e64081baff27f2d2a90, type: 3}
+      lookAtPlayer: 1
+    - State: 2
+      Animation: {fileID: 11400000, guid: e6edbbaa96ad02f46bd9e09dfdfb0957, type: 2}
+      AudioClip: {fileID: 0}
+      lookAtPlayer: 1
 --- !u!212 &5015372644985189751
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -107,8 +139,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 33251739e03cf384095c4cc22097497e, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 6958250455ce17d47b55afb3d4775a6d, type: 3}
-  m_PlayOnAwake: 0
+  m_audioClip: {fileID: 8300000, guid: f1e85ded994031148978de475da7452d, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
@@ -246,3 +278,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6, y: 4}
   m_EdgeRadius: 0
+--- !u!114 &1205494507673233337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5015372644985189744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e54841db1ebc224b88bd82537e065cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingAnimation: {fileID: 11400000, guid: fadbf31df21420c469c036dc4d7c8fd8, type: 2}
+  renderer: {fileID: 5015372644985189751}

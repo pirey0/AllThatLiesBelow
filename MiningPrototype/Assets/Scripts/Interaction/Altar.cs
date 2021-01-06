@@ -14,12 +14,6 @@ public interface IDropReceiver
     void ReceiveDrop(ItemAmountPair pair, Inventory origin);
 }
 
-public enum AltarState
-{
-    Off,
-    InProgress
-}
-
 public class Altar : StateListenerBehaviour, IInteractable, IDialogUser
 {
     INodeServiceProvider dialogServices;
@@ -67,5 +61,4 @@ public class Altar : StateListenerBehaviour, IInteractable, IDialogUser
         dialogServices = services;
         startingNode = node;
     }
-
 }

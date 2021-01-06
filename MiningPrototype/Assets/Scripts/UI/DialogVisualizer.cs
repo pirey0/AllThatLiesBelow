@@ -12,6 +12,7 @@ public class DialogVisualizer : MonoBehaviour, IDialogVisualizer
     [SerializeField] Vector3 sentenceOffset, optionsOffset;
     List<DialogElement> dialogElements = new List<DialogElement>();
     event System.Action<int> selectOption;
+    public event System.Action<AltarState> OnChangeState;
 
     public void DisplayOptions(string[] options)
     {
@@ -19,11 +20,14 @@ public class DialogVisualizer : MonoBehaviour, IDialogVisualizer
         element.StartFollowing(playerInteractionHandler.transform, optionsOffset);
         element.Init(options, this, optionsOffset);
         dialogElements.Add(element);
+
+        OnChangeState?.Invoke(AltarState.Idle);
     }
 
     public void DisplaySentence(string message)
     {
         dialogElements.Add(InstatiateElement().Init(message, this, sentenceOffset));
+        OnChangeState?.Invoke(AltarState.Talking);
     }
 
     private DialogElement InstatiateElement()
@@ -33,12 +37,13 @@ public class DialogVisualizer : MonoBehaviour, IDialogVisualizer
 
     public void EndDialog()
     {
+        OnChangeState?.Invoke(AltarState.Passive);
         Clear();
     }
 
     public void StartDialog()
     {
-        //
+        OnChangeState?.Invoke(AltarState.Idle);
     }
     public void Clear()
     {

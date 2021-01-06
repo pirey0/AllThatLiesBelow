@@ -79,7 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   encounter: 0
   dialogName: Selection
-  dialogVisualizerPrefab: {fileID: 3644033556203465136, guid: 088b319ccad02e44e99beed6824b848a, type: 3}
+  dialogVisualizerPrefab: {fileID: 4928746856500993310, guid: 4d74de850e4e80c4d8e7a4ee042e423d, type: 3}
   visualAltarPrefab: {fileID: 5015372644985189744, guid: 8d82bda16db171744bd4ebb1e40ed263, type: 3}
   altarInventoryPrefab: {fileID: 8202015808849809410, guid: af25004c71045464289d856608c19387, type: 3}
   visualizerSpawnLocation: {fileID: 5293726412507664650}
