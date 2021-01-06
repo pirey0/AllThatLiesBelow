@@ -22,6 +22,8 @@ MonoBehaviour:
   - Sprite: {fileID: 7172745934116117514, guid: 7ef9db6c509300845aee53464a1ceb66, type: 3}
     Duration: 0.05
   - Sprite: {fileID: -2346987153893424476, guid: 7ef9db6c509300845aee53464a1ceb66, type: 3}
+    Duration: 0.05
+  - Sprite: {fileID: 21300000, guid: 0de5d8a566398b0469e2272b63b1eb54, type: 3}
     Duration: 1
   fileToLoadFrom: {fileID: 2800000, guid: 7ef9db6c509300845aee53464a1ceb66, type: 3}
   defaultTime: 0.25
