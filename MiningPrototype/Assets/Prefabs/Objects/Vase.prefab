@@ -106,6 +106,7 @@ MonoBehaviour:
     type: 0
     amount: 0
   destroyEffects: {fileID: 1893171088858827870, guid: 42279b1522d04dd4ab272bbc057e1513, type: 3}
+  drops: {fileID: 11400000, guid: 6e9f325ef17e1ed41b42a7e4fb02178c, type: 2}
 --- !u!114 &2954736545770838015
 MonoBehaviour:
   m_ObjectHideFlags: 0
