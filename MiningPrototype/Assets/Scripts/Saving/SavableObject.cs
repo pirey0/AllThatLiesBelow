@@ -52,7 +52,8 @@ public enum SpawnableIDType
     Sign,
     JungleHeart,
     DialogVariableTrigger,
-    Vase
+    Vase,
+    BigMushroom
 }
 
 [System.Serializable]
