@@ -8,17 +8,33 @@ public class ItemDrops : ScriptableObject
     [SerializeField] private ItemDrop[] drops;
     public ItemAmountPair GetRandomDrop()
     {
-        List<ItemAmountPair> pairs = new List<ItemAmountPair>();
-
-        foreach (ItemDrop drop in drops)
+        if (drops == null || drops.Length == 0)
+            return ItemAmountPair.Nothing;
+        
+        int i = Random.Range(0, GetDropSum());
+        foreach (var d in drops)
         {
-            for (int i = 0; i < drop.DropRate; i++)
+            if(d.DropRate > i)
             {
-                pairs.Add(drop.Drop);
+                return d.Drop;
+            }
+            else
+            {
+                i -= d.DropRate;
             }
         }
+        throw new System.Exception();
+    }
 
-        return (pairs[Random.Range(0, pairs.Count)]);
+    private int GetDropSum()
+    {
+        int s = 0;
+        foreach (var d in drops)
+        {
+            s += d.DropRate;
+        }
+
+        return s;
     }
 }
 
