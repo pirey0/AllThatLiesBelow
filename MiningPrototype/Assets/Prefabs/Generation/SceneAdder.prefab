@@ -53,6 +53,59 @@ MonoBehaviour:
   YInArea: 1
   areaTopRight: {x: 170, y: 70, z: 0}
   areaBotLeft: {x: 100, y: 40, z: 0}
+--- !u!1 &201875970
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 201875971}
+  - component: {fileID: 201875972}
+  m_Layer: 0
+  m_Name: JungleHallway1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &201875971
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201875970}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 166.2, y: 11.200001, z: 0}
+  m_LocalScale: {x: 74.20199, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &201875972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201875970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 20, y: 10}
+  SavedSceneFile: {fileID: 4900000, guid: 12486a7a6db9b4b4793cd7351b4dc6b6, type: 3}
+  Area: 2
+  SpawnAttached: 1
+  BlocksArea: 1
+  gizmoColor: {r: 0.46721733, g: 1, b: 0, a: 1}
+  XInArea: 1
+  YInArea: 1
+  areaTopRight: {x: 187.84242, y: 87.19775, z: 0}
+  areaBotLeft: {x: 15.050179, y: 18.357538, z: 0}
 --- !u!1 &233272676
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,6 +477,59 @@ MonoBehaviour:
   YInArea: 1
   areaTopRight: {x: 187.84242, y: 87.19775, z: 0}
   areaBotLeft: {x: 15.050179, y: 18.357538, z: 0}
+--- !u!1 &1336247373773282285
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4694278677382500625}
+  - component: {fileID: 4197327048555070319}
+  m_Layer: 0
+  m_Name: JungleTrap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4694278677382500625
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336247373773282285}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 124.95, y: -2.7999992, z: 0}
+  m_LocalScale: {x: 74.20199, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4197327048555070319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336247373773282285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 10, y: 20}
+  SavedSceneFile: {fileID: 4900000, guid: ca325ba53a87c3947951bf216c081be4, type: 3}
+  Area: 2
+  SpawnAttached: 1
+  BlocksArea: 1
+  gizmoColor: {r: 0.46721733, g: 1, b: 0, a: 1}
+  XInArea: 1
+  YInArea: 1
+  areaTopRight: {x: 187.84242, y: 87.19775, z: 0}
+  areaBotLeft: {x: 15.050179, y: 18.357538, z: 0}
 --- !u!1 &2570786994410162374
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,6 +628,10 @@ Transform:
   - {fileID: 4072751182005152769}
   - {fileID: 9070399057705166755}
   - {fileID: 8314058533795355943}
+  - {fileID: 2225794488002477838}
+  - {fileID: 201875971}
+  - {fileID: 8054313014804635354}
+  - {fileID: 4694278677382500625}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -539,6 +649,112 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stepSize: 10
   debug: 0
+--- !u!1 &3618773912569992534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2225794488002477838}
+  - component: {fileID: 4115336093739445199}
+  m_Layer: 0
+  m_Name: JungleMushroomCave1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2225794488002477838
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3618773912569992534}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 166.2, y: 25.2, z: 0}
+  m_LocalScale: {x: 74.20199, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4115336093739445199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3618773912569992534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 20, y: 10}
+  SavedSceneFile: {fileID: 4900000, guid: 7a60a6c188fdd1e4c928f7c1f16d120e, type: 3}
+  Area: 2
+  SpawnAttached: 1
+  BlocksArea: 1
+  gizmoColor: {r: 0.46721733, g: 1, b: 0, a: 1}
+  XInArea: 1
+  YInArea: 1
+  areaTopRight: {x: 187.84242, y: 87.19775, z: 0}
+  areaBotLeft: {x: 15.050179, y: 18.357538, z: 0}
+--- !u!1 &4718019392664483123
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8054313014804635354}
+  - component: {fileID: 7090875848098543953}
+  m_Layer: 0
+  m_Name: JungleTrap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8054313014804635354
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4718019392664483123}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 109.2, y: -2.7999992, z: 0}
+  m_LocalScale: {x: 74.20199, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7090875848098543953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4718019392664483123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 10, y: 20}
+  SavedSceneFile: {fileID: 4900000, guid: ca325ba53a87c3947951bf216c081be4, type: 3}
+  Area: 2
+  SpawnAttached: 1
+  BlocksArea: 1
+  gizmoColor: {r: 0.46721733, g: 1, b: 0, a: 1}
+  XInArea: 1
+  YInArea: 1
+  areaTopRight: {x: 187.84242, y: 87.19775, z: 0}
+  areaBotLeft: {x: 15.050179, y: 18.357538, z: 0}
 --- !u!1 &6041486164947576616
 GameObject:
   m_ObjectHideFlags: 0
