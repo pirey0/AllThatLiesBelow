@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5268286054734132515}
   - component: {fileID: 1448764870321159282}
   - component: {fileID: 5268286054734132517}
+  - component: {fileID: 8931148375827504678}
   m_Layer: 0
   m_Name: JungleStatue
   m_TagString: Untagged
@@ -118,3 +119,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 31
+  uniqueName: 
+--- !u!68 &8931148375827504678
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5268286054734132518}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.5, y: 2}
+  - {x: 0.5, y: 2}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
