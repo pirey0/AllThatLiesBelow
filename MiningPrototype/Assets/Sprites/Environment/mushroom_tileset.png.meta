@@ -8,6 +8,12 @@ TextureImporter:
   - first:
       213: 1013489743850146157
     second: mushroom_tileset_1
+  - first:
+      213: -2202379030880190564
+    second: mushroom_tileset_2
+  - first:
+      213: -2535915102128499587
+    second: mushroom_tileset_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -26,7 +32,7 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -99,7 +105,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 16
         width: 16
         height: 16
       alignment: 9
@@ -120,7 +126,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 0
+        y: 16
         width: 16
         height: 16
       alignment: 9
@@ -132,6 +138,48 @@ TextureImporter:
       bones: []
       spriteID: d6980b56d83a01e00800000000000000
       internalID: 1013489743850146157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mushroom_tileset_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9ffd9ba0f39f61e0800000000000000
+      internalID: -2202379030880190564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mushroom_tileset_3
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d74151586ae9eccd0800000000000000
+      internalID: -2535915102128499587
       vertices: []
       indices: 
       edges: []

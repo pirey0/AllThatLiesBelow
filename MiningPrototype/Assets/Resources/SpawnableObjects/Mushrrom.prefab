@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 3877697759154577226}
   - component: {fileID: 6669907723581543996}
   - component: {fileID: 1463627275459214338}
+  - component: {fileID: 9209084938339595520}
   m_Layer: 0
   m_Name: Mushrrom
   m_TagString: Untagged
@@ -289,6 +290,10 @@ MonoBehaviour:
   uniqueName: 
   bounceAudio: {fileID: 2792717099880323466}
   particleSystem: {fileID: 4614050870621900189}
+  spriteAnimator: {fileID: 9209084938339595520}
+  spriteAnimation:
+  - {fileID: 11400000, guid: 9a21aa74227aed74f8eac301a6296e3d, type: 2}
+  - {fileID: 11400000, guid: 022537e3dfcad5f4ea580baa16cf66c3, type: 2}
 --- !u!82 &2792717099880323466
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5257,3 +5262,17 @@ MonoBehaviour:
     type: 0
     amount: 0
   destroyEffects: {fileID: 0}
+--- !u!114 &9209084938339595520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7813767547359419721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e54841db1ebc224b88bd82537e065cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingAnimation: {fileID: 0}
+  renderer: {fileID: 7813767547359419723}
