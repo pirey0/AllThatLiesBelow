@@ -13,6 +13,7 @@ public class DialogVisualizer : MonoBehaviour, IDialogVisualizer
     List<DialogElement> dialogElements = new List<DialogElement>();
     event System.Action<int> selectOption;
     public event System.Action<AltarState> OnChangeState;
+    public int SentenceCharacterLength = 0;
 
     public void DisplayOptions(string[] options)
     {
@@ -27,6 +28,7 @@ public class DialogVisualizer : MonoBehaviour, IDialogVisualizer
     public void DisplaySentence(string message)
     {
         dialogElements.Add(InstatiateElement().Init(message, this, sentenceOffset));
+        SentenceCharacterLength = message == "..." ? 0 : message.Length;
         OnChangeState?.Invoke(AltarState.Talking);
     }
 
@@ -47,7 +49,7 @@ public class DialogVisualizer : MonoBehaviour, IDialogVisualizer
     }
     public void Clear()
     {
-        for (int i = dialogElements.Count-1; i >= 0; i--)
+        for (int i = dialogElements.Count - 1; i >= 0; i--)
         {
             dialogElements[i].Hide();
         }

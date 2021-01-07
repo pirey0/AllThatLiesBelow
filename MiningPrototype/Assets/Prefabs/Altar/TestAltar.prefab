@@ -70,14 +70,52 @@ MonoBehaviour:
       Animation: {fileID: 11400000, guid: fadbf31df21420c469c036dc4d7c8fd8, type: 2}
       AudioClip: {fileID: 8300000, guid: f1e85ded994031148978de475da7452d, type: 3}
       lookAtPlayer: 0
+      IsTalking: 0
+      talkingAudios: []
     - State: 1
       Animation: {fileID: 11400000, guid: e6edbbaa96ad02f46bd9e09dfdfb0957, type: 2}
       AudioClip: {fileID: 8300000, guid: 9cdbb56c656c48e478891a784b62ea34, type: 3}
       lookAtPlayer: 1
+      IsTalking: 1
+      talkingAudios:
+      - AudioClip: {fileID: 8300000, guid: 704b22e86ed58c145afc89c968e30178, type: 3}
+        CharacterLength: 4
+      - AudioClip: {fileID: 8300000, guid: 94c0eeb4b14b6b24abcf5ba153b492f4, type: 3}
+        CharacterLength: 5
+      - AudioClip: {fileID: 8300000, guid: 83b7b573119ba2c4ca91842f822b370c, type: 3}
+        CharacterLength: 8
+      - AudioClip: {fileID: 8300000, guid: 6314a5e7de079c543a5a0f4675fd7872, type: 3}
+        CharacterLength: 11
+      - AudioClip: {fileID: 8300000, guid: 419710cecf8c39e43aa75ac6b722288e, type: 3}
+        CharacterLength: 15
+      - AudioClip: {fileID: 8300000, guid: ec7a0ec3eaa21bd4fa2072eeaf1ad477, type: 3}
+        CharacterLength: 18
+      - AudioClip: {fileID: 8300000, guid: e53942fb1830d2c4098d3e2c889a4609, type: 3}
+        CharacterLength: 22
+      - AudioClip: {fileID: 8300000, guid: c0d88fb5a125a2c49b029234dace774e, type: 3}
+        CharacterLength: 23
+      - AudioClip: {fileID: 8300000, guid: 0edc85c5d0feb134e893e6b36972ad5f, type: 3}
+        CharacterLength: 26
+      - AudioClip: {fileID: 8300000, guid: 1a5c61994dffa634abbd3ae5111aef71, type: 3}
+        CharacterLength: 27
+      - AudioClip: {fileID: 8300000, guid: 57dcdccb0dcaee8409ed46bebb0d722e, type: 3}
+        CharacterLength: 28
+      - AudioClip: {fileID: 8300000, guid: bbc65c217ea5fb04ca37574297528b74, type: 3}
+        CharacterLength: 29
+      - AudioClip: {fileID: 8300000, guid: 7349a579be8604842b2d27491251db00, type: 3}
+        CharacterLength: 30
+      - AudioClip: {fileID: 8300000, guid: 151a17a4e72857942adc81c80f466536, type: 3}
+        CharacterLength: 33
+      - AudioClip: {fileID: 8300000, guid: d81c4b54370b4da46be6b15d0da9979d, type: 3}
+        CharacterLength: 34
+      - AudioClip: {fileID: 8300000, guid: 779b5361a051dff4888ae46d0229dbe9, type: 3}
+        CharacterLength: 41
     - State: 2
       Animation: {fileID: 11400000, guid: e6edbbaa96ad02f46bd9e09dfdfb0957, type: 2}
       AudioClip: {fileID: 0}
       lookAtPlayer: 1
+      IsTalking: 0
+      talkingAudios: []
 --- !u!212 &5015372644985189751
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -143,7 +181,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

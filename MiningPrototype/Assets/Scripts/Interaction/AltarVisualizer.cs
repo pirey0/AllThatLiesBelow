@@ -7,6 +7,7 @@ using UnityEngine;
 public class AltarVisualizer : MonoBehaviour
 {
     DialogVisualizer dialogVisualizer;
+    AudioClip last;
 
     [SerializeField] AltarSkin skin;
 
@@ -38,21 +39,36 @@ public class AltarVisualizer : MonoBehaviour
             dialogVisualizer.OnChangeState -= OnChangeState;
     }
 
-    private void OnChangeState (AltarState altarState)
+    private void OnChangeState(AltarState altarState)
     {
         AltarVisualStateInfo info = GetInfoForState(altarState);
+
         if (info == null)
+        {
             Debug.LogWarning("no skin and state info defined for " + skin + " and " + altarState);
+        }
         else
         {
+            spriteAnimator.Renderer.flipX = info.lookAtPlayer ? playerInteractionHandler.transform.position.x < transform.position.x : false;
+
             if (spriteAnimator.Animation != info.Animation)
                 spriteAnimator.Play(info.Animation);
 
-            if (audioSource.clip != info.AudioClip)
-                audioSource.clip = info.AudioClip; if (audioSource.clip != null) { audioSource.Play(); }
+            if (info.IsTalking)
+            {
+                audioSource.clip = info.GetTalkingAudioByCharacterLength(dialogVisualizer.SentenceCharacterLength, last);
+                last = audioSource.clip;
+            }
+            else
+            {
+                if (audioSource.clip != info.AudioClip)
+                    audioSource.clip = info.AudioClip;
+            }
 
-            spriteAnimator.Renderer.flipX = info.lookAtPlayer ? playerInteractionHandler.transform.position.x < transform.position.x : false;
-
+            if (audioSource.clip != null)
+            {
+                audioSource.Play();
+            }
         }
     }
 
@@ -100,4 +116,28 @@ public class AltarVisualStateInfo
     public SpriteAnimation Animation;
     public AudioClip AudioClip;
     public bool lookAtPlayer;
+
+    public bool IsTalking;
+    [SerializeField] private AudioCharacterLengthPair[] talkingAudios;
+
+    public AudioClip GetTalkingAudioByCharacterLength(int length, AudioClip clipToNotUse)
+    {
+        if (length == 0)
+            return null;
+
+        foreach (AudioCharacterLengthPair pair in talkingAudios)
+        {
+            if (pair.CharacterLength > (length / 2) && pair.AudioClip != clipToNotUse)
+                return pair.AudioClip;
+        }
+
+        return talkingAudios[talkingAudios.Length - 1].AudioClip;
+    }
+}
+
+[System.Serializable]
+public class AudioCharacterLengthPair
+{
+    public AudioClip AudioClip;
+    public int CharacterLength;
 }
