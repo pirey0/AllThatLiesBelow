@@ -48,14 +48,18 @@ public class DialogOption : MonoBehaviour
         {
             for (int i = 0; i < text.Length; i++)
             {
-                textDisplay.text = text.Substring(0, i);
+                textDisplay.text = text.Substring(0, i) + "<alpha=#00>" + text.Substring(i, text.Length-i);
                 yield return new WaitForSeconds(0.05f);
             }
 
             textDisplay.text = text;
         }
-        
+
         (isOption ? answerArrow : commentArrow).enabled = true;
+    }
+
+    private void GetSpaces(int count)
+    {
     }
 
     public void Interact()
