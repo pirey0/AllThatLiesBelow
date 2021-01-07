@@ -8,6 +8,9 @@ public class BigMushroom : BasicNonPersistantSavable
     [SerializeField] GameObject explosionPrefab;
     [SerializeField] AudioSource audioSource;
     [SerializeField] float explosionWaitTime;
+
+    [Zenject.Inject] CameraController cameraController;
+
     Coroutine currentExplosion;
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -15,6 +18,7 @@ public class BigMushroom : BasicNonPersistantSavable
             return;
 
         currentExplosion = StartCoroutine(ExplosionRoutine());
+        cameraController.Shake(transform.position,CameraShakeType.raising,3,12,1);
         audioSource.Play();
         animator.SetTrigger("Explode");
                 

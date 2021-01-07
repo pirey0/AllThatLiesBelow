@@ -10,6 +10,8 @@ public class Mushroom : BasicNonPersistantSavable
     [SerializeField] SpriteAnimator spriteAnimator;
     [SerializeField] SpriteAnimation[] spriteAnimation;
 
+    [Zenject.Inject] CameraController cameraController;
+
     int variant = 0;
 
     private void OnEnable()
@@ -32,6 +34,7 @@ public class Mushroom : BasicNonPersistantSavable
             return;
 
         bounceAudio.pitch = UnityEngine.Random.Range(0.6f, 1);
+        cameraController.Shake(transform.position, CameraShakeType.explosion, 0.15f, 10, 0.25f);
         bounceAudio.Play();
         particleSystem.Play();        
     }
