@@ -13,7 +13,7 @@ public class Intro : StateListenerBehaviour
     [SerializeField] Light2D introLight;
 
     [Zenject.Inject] PlayerStateMachine player;
-    [Zenject.Inject] OverworldEffectHandler effectHandler;
+    [Zenject.Inject] EnvironmentEffectsHandler effectHandler;
     [Zenject.Inject] ProgressionHandler progressionHandler;
     [Zenject.Inject] ItemPlacingHandler placingHandler;
     [Zenject.Inject] InventoryManager inventoryManager;

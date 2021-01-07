@@ -5,15 +5,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OverworldEffectHandler : StateListenerBehaviour
+public class EnvironmentEffectsHandler : StateListenerBehaviour
 {
 
     [SerializeField] Vector3 offset;
-    [SerializeField] float fadeHeight;
-    [SerializeField] float fadeThickness;
+
+    [SerializeField] float overworldFadeHeight;
+    [SerializeField] float overworldFadeThickness;
+
+    [SerializeField] float jungleFadeInHeight;
+    [SerializeField] float jungleFadeOutHeight;
+    [SerializeField] float jungleFadeThickness;
 
     [SerializeField] SpriteRenderer nightSky;
-    [SerializeField] ParticleSystem snow, snowSecondary, clouds;
+    [SerializeField] ParticleSystem snow, snowSecondary, clouds, jungle;
     [SerializeField] float amountOfParticles;
     [SerializeField] AudioSource snowstormSounds, caveSounds, springSounds;
     [SerializeField] float maxSnowStormVolume, maxCaveVolume;
@@ -46,6 +51,9 @@ public class OverworldEffectHandler : StateListenerBehaviour
         springSounds.Play();
         UpdateOverworldEffects();
         map.MirrorSideChanged += OnMirrorSideChanged;
+
+        StopAllCoroutines();
+        StartCoroutine(SlowUpdate());
     }
 
 
@@ -72,11 +80,20 @@ public class OverworldEffectHandler : StateListenerBehaviour
     private void FixedUpdate()
     {
         transform.position = cam.transform.position + offset;
+    }
 
-        if (transform.position.y < fadeHeight - fadeThickness || transform.position.y > fadeHeight + fadeThickness)
-            return;
+    private IEnumerator SlowUpdate()
+    {
+        while (true)
+        {
+            if (transform.position.y > overworldFadeHeight - overworldFadeThickness && transform.position.y < overworldFadeHeight + overworldFadeThickness)
+                UpdateOverworldEffects();
 
-        UpdateOverworldEffects();
+            if ((transform.position.y > jungleFadeOutHeight - jungleFadeThickness && transform.position.y < jungleFadeOutHeight + jungleFadeThickness) || (transform.position.y > jungleFadeInHeight - jungleFadeThickness && transform.position.y < jungleFadeInHeight + jungleFadeThickness))
+                UpdateJungleEffects();
+
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 
 
@@ -99,11 +116,20 @@ public class OverworldEffectHandler : StateListenerBehaviour
         UpdateOverworldEffects();
     }
 
+    private void UpdateJungleEffects()
+    {
+        float height = transform.position.y;
+        alphaCalculatedBasedOnHeightOfPlayer =  1 - (Mathf.Clamp((jungleFadeOutHeight - height) / (jungleFadeThickness * 0.5f), 0, 1) + Mathf.Clamp((height - jungleFadeInHeight) / (jungleFadeThickness * 0.5f), 0, 1));
+
+        var emit = jungle.emission;
+        emit.rateOverTime = alphaCalculatedBasedOnHeightOfPlayer * 20;
+    }
+
     private void UpdateOverworldEffects()
     {
 
         float height = transform.position.y;
-        alphaCalculatedBasedOnHeightOfPlayer = Mathf.Clamp((fadeHeight - height) / fadeThickness, 0, 1);
+        alphaCalculatedBasedOnHeightOfPlayer = Mathf.Clamp((overworldFadeHeight - height) / (overworldFadeThickness * 0.5f), 0, 1);
 
         //snow
         if (snow != null)
@@ -134,6 +160,8 @@ public class OverworldEffectHandler : StateListenerBehaviour
         nightSky.gameObject.SetActive(isNight);
         daylight?.SetIntensity(isNight ? Daylight.Lightmode.Night : Daylight.Lightmode.Day);
     }
+
+    
 
     private void UpdateSounds()
     {

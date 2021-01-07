@@ -21,7 +21,7 @@ public class SacrificeActions : MonoBehaviour
     [SerializeField] PostProcessProfile noHappinessProfile;
 
     [Zenject.Inject] RuntimeProceduralMap map;
-    [Zenject.Inject] OverworldEffectHandler effectHandler;
+    [Zenject.Inject] EnvironmentEffectsHandler effectHandler;
     [Zenject.Inject] InventoryManager inventoryManager;
     [Zenject.Inject] CameraController cameraController;
 

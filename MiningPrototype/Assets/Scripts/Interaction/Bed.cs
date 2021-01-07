@@ -20,7 +20,7 @@ public class Bed : MonoBehaviour, IInteractable
     [Inject] ProgressionHandler progressionHandler;
     [Inject] InventoryManager inventoryManager;
     [Inject] SaveHandler saveHandler;
-    [Inject] OverworldEffectHandler effectHandler;
+    [Inject] EnvironmentEffectsHandler effectHandler;
     [Inject] PlayerStatementsHandler playerStatements;
     [Inject] CursorHandler cursorHandler;
 

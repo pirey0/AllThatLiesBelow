@@ -28,7 +28,7 @@ public class DefaultSceneInstaller : ScriptableObjectInstaller<DefaultSceneInsta
         Container.Bind<InventoryManager>().FromComponentInNewPrefab(inventoryManagerPrefab).AsSingle().NonLazy();
         Container.Bind<SaveHandler>().FromComponentInNewPrefab(saveHandlerPrefab).AsSingle().NonLazy();
         Container.Bind<GameState>().FromComponentInNewPrefab(gameStatePrefab).AsSingle().NonLazy();
-        Container.Bind<OverworldEffectHandler>().FromComponentInNewPrefab(overworldEffectsHandlerPrefab).AsSingle().NonLazy();
+        Container.Bind<EnvironmentEffectsHandler>().FromComponentInNewPrefab(overworldEffectsHandlerPrefab).AsSingle().NonLazy();
         Container.Bind<PlayerStatementsHandler>().FromComponentInNewPrefab(playerStatementsPrefab).AsSingle().NonLazy();
         Container.Bind<CursorHandler>().FromComponentInNewPrefab(cursorHandlerPrefab).AsSingle().NonLazy();
         Container.Bind<StatsTracker>().FromComponentInNewPrefab(statsTrackerPrefab).AsSingle().NonLazy();

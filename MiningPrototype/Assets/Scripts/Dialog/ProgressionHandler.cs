@@ -18,7 +18,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     [SerializeField] float timeMiningBeforePassageOfDay;
     [SerializeField] bool includeDebugDialogs;
 
-    [Zenject.Inject] OverworldEffectHandler overworldEffectHandler;
+    [Zenject.Inject] EnvironmentEffectsHandler overworldEffectHandler;
     [Zenject.Inject] CameraController cameraController;
     [Zenject.Inject] LettersParser lettersParser;
     [Zenject.Inject] RuntimeProceduralMap map;
