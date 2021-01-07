@@ -71,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2049621373
+  m_SortingLayer: 11
   m_SortingOrder: 0
   m_Sprite: {fileID: -8405128740852415204, guid: b3d69172c991f5746b4d09d704ea40f2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -128,6 +128,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 32
+  uniqueName: 
   spriteAnimator: {fileID: 5706411829084128118}
   walkOver: {fileID: 11400000, guid: 74faa5b5e13c3314ab622924a176ff21, type: 2}
   snap: {fileID: 11400000, guid: 58f77582ea944d5498a91086d21a6211, type: 2}
+  snapDelay: 3
+  snapAnimationTilSnap: 0.5
+  snapAnimationRestDuration: 4
