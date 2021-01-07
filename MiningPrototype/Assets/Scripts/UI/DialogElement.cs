@@ -93,6 +93,9 @@ public class DialogElement : MonoBehaviour
         if (this == null)
             return;
 
+        for (int i = optionsGroup.transform.childCount - 1; i >= 0; i--)
+            Destroy(optionsGroup.transform.GetChild(i).gameObject);
+
         StopAllCoroutines();
         StartCoroutine(HideRoutine());
     }

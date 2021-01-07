@@ -7,26 +7,55 @@ using UnityEngine.UI;
 
 public class DialogOption : MonoBehaviour
 {
-    [SerializeField] TMP_Text text;
+    [SerializeField] TMP_Text textDisplay;
     [SerializeField] Image answerArrow, commentArrow;
+
+    string text = "";
     DialogVisualizer dialogVisualizer;
     int index = 0;
 
     public void Init(string text, DialogVisualizer dialogVisualizer)
     {
-        this.text.text = text;
+        this.text = text;
         this.dialogVisualizer = dialogVisualizer;
-        answerArrow.enabled = false;
-        commentArrow.enabled = true;
+
+        StartCoroutine(ShowTextDelayed(isOption: false));
     }
 
     public void Init(string text, int index, DialogVisualizer dialogVisualizer)
     {
-        this.text.text = text;
+        this.text = text;
         this.dialogVisualizer = dialogVisualizer;
+
         this.index = index;
-        answerArrow.enabled = true;
-        commentArrow.enabled = false;
+
+        StartCoroutine(ShowTextDelayed(isOption: true));
+    }
+
+    IEnumerator ShowTextDelayed(bool isOption)
+    {
+        if (isOption)
+        {
+            textDisplay.text = text;
+
+            for (int i = 0; i <= 5; i++)
+            {
+                textDisplay.rectTransform.localScale = Vector3.one * (float)i / 5f;
+                yield return new WaitForSeconds(0.05f);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < text.Length; i++)
+            {
+                textDisplay.text = text.Substring(0, i);
+                yield return new WaitForSeconds(0.05f);
+            }
+
+            textDisplay.text = text;
+        }
+        
+        (isOption ? answerArrow : commentArrow).enabled = true;
     }
 
     public void Interact()
@@ -35,5 +64,5 @@ public class DialogOption : MonoBehaviour
             dialogVisualizer.OnSelectOption(index);
     }
 
-    
+
 }
