@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FleshEatingPlant : BasicNonPersistantSavable
+public class FleshEatingPlant : MonoBehaviour
 {
     [SerializeField] SpriteAnimator spriteAnimator;
     [SerializeField] SpriteAnimation walkOver, snap;
