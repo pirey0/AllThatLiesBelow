@@ -20,6 +20,7 @@ public class DebugMode : MonoBehaviour
     [Inject] RuntimeProceduralMap map;
     [Inject] PrefabFactory factory;
     [Inject] StatsTracker statsTracker;
+    [Inject] EnvironmentEffectsHandler environmentEffectsHandler;
 
     Texture2D debugTex;
     bool open;
@@ -166,6 +167,8 @@ public class DebugMode : MonoBehaviour
         else
         {
             player.transform.position = target.position;
+            environmentEffectsHandler.UpdateOverworldEffects();
+            environmentEffectsHandler.UpdateJungleEffects();
         }
     }
 
@@ -173,7 +176,11 @@ public class DebugMode : MonoBehaviour
     {
         GameObject target = GameObject.Find(name);
         if (target != null)
+        {
             player.transform.position = target.transform.position;
+            environmentEffectsHandler.UpdateOverworldEffects();
+            environmentEffectsHandler.UpdateJungleEffects();
+        }
     }
 
     public enum TeleportDestination

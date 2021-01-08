@@ -116,7 +116,7 @@ public class EnvironmentEffectsHandler : StateListenerBehaviour
         UpdateOverworldEffects();
     }
 
-    private void UpdateJungleEffects()
+    public void UpdateJungleEffects()
     {
         float height = transform.position.y;
         alphaCalculatedBasedOnHeightOfPlayer =  1 - (Mathf.Clamp((jungleFadeOutHeight - height) / (jungleFadeThickness * 0.5f), 0, 1) + Mathf.Clamp((height - jungleFadeInHeight) / (jungleFadeThickness * 0.5f), 0, 1));
@@ -125,7 +125,7 @@ public class EnvironmentEffectsHandler : StateListenerBehaviour
         emit.rateOverTime = alphaCalculatedBasedOnHeightOfPlayer * 20;
     }
 
-    private void UpdateOverworldEffects()
+    public void UpdateOverworldEffects()
     {
 
         float height = transform.position.y;
