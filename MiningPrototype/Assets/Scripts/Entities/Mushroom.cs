@@ -36,7 +36,8 @@ public class Mushroom : BasicNonPersistantSavable
         bounceAudio.pitch = UnityEngine.Random.Range(0.6f, 1);
         cameraController.Shake(transform.position, CameraShakeType.explosion, 0.15f, 10, 0.25f);
         bounceAudio.Play();
-        particleSystem.Play();        
+        particleSystem.Play();
+        TryPlayAnimation();
     }
 
     private void OnCollisionStay2D(Collision2D collision)
