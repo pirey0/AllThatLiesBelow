@@ -221,7 +221,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5706411829084128116, guid: cee0ff4d959b64d4cadd17d70fbcf2ac, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5706411829084128116, guid: cee0ff4d959b64d4cadd17d70fbcf2ac, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -305,67 +305,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4aaa7bf81b4a5c34099006b07a549854, type: 3}
---- !u!1001 &943726103
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5293726411210119233, guid: fbad55f72d51abe4bb8b0e7fc1daa9ad, type: 3}
-      propertyPath: dialogName
-      value: ElevatorDialog
-      objectReference: {fileID: 0}
-    - target: {fileID: 5293726411210119234, guid: fbad55f72d51abe4bb8b0e7fc1daa9ad, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 93.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 5293726411210119234, guid: fbad55f72d51abe4bb8b0e7fc1daa9ad, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 285.52
-      objectReference: {fileID: 0}
-    - target: {fileID: 5293726411210119234, guid: fbad55f72d51abe4bb8b0e7fc1daa9ad, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5293726411210119234, guid: fbad55f72d51abe4bb8b0e7fc1daa9ad, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5293726411210119234, guid: fbad55f72d51abe4bb8b0e7fc1daa9ad, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5293726411210119234, guid: fbad55f72d51abe4bb8b0e7fc1daa9ad, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5293726411210119234, guid: fbad55f72d51abe4bb8b0e7fc1daa9ad, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5293726411210119234, guid: fbad55f72d51abe4bb8b0e7fc1daa9ad, type: 3}
-      propertyPath: m_RootOrder
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5293726411210119234, guid: fbad55f72d51abe4bb8b0e7fc1daa9ad, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5293726411210119234, guid: fbad55f72d51abe4bb8b0e7fc1daa9ad, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5293726411210119234, guid: fbad55f72d51abe4bb8b0e7fc1daa9ad, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5293726411210119295, guid: fbad55f72d51abe4bb8b0e7fc1daa9ad, type: 3}
-      propertyPath: m_Name
-      value: AltarLocation
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: fbad55f72d51abe4bb8b0e7fc1daa9ad, type: 3}
 --- !u!1001 &1188798376
 PrefabInstance:
   m_ObjectHideFlags: 0
