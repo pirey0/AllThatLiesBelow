@@ -13,6 +13,7 @@ public class Bed : MonoBehaviour, IInteractable
     [SerializeField] Sprite empty, sleeping, wakeup, badDream;
     [SerializeField] Hut hut;
     [SerializeField] Image nightFadeToBlack;
+    [SerializeField] float sleepCooldown = 60;
 
     [SerializeField] string wakeUpText;
 
@@ -26,6 +27,7 @@ public class Bed : MonoBehaviour, IInteractable
 
     string defaultWakeUpTest;
     bool sacrificedHappyness = false;
+    float lastSleepTimeStamp = -10000;
 
     private event System.Action<IInteractable> ForceInterrupt;
 
@@ -37,8 +39,16 @@ public class Bed : MonoBehaviour, IInteractable
     {
         PlayerStateMachine player = interactor.GetComponent<PlayerStateMachine>();
 
-        if (hut.IsOpen())
+        if (hut.IsOpen() && Time.time - lastSleepTimeStamp > sleepCooldown)
+        {
+            lastSleepTimeStamp = Time.time;
             EnterBed(player);
+        }
+        else
+        {
+            LeaveBed(player);
+            playerStatements.Say("I just woke up...", 3f);
+        }
     }
 
     public void EndInteracting(GameObject interactor)
@@ -103,7 +113,8 @@ public class Bed : MonoBehaviour, IInteractable
             saveHandler.Save();
             playerToEnableAgain.Disable();
 
-            if (sacrificedHappyness) {
+            if (sacrificedHappyness)
+            {
                 transitionEffectHandler.FadeIn(FadeType.Nightmare);
                 nightFadeToBlack.color = new Color(0, 0, 0, 0);
             }
@@ -112,9 +123,9 @@ public class Bed : MonoBehaviour, IInteractable
 
             yield return new WaitForSeconds(0.25f);
 
-            spriteRenderer.sprite = sacrificedHappyness? badDream:wakeup;
+            spriteRenderer.sprite = sacrificedHappyness ? badDream : wakeup;
 
-            playerStatements.Say(wakeUpText,7f);
+            playerStatements.Say(wakeUpText, 7f);
 
             if (!sacrificedHappyness)
             {
@@ -128,7 +139,8 @@ public class Bed : MonoBehaviour, IInteractable
                     yield return null;
                 }
 
-            } else
+            }
+            else
             {
                 yield return new WaitForSeconds(5f);
             }
@@ -146,9 +158,9 @@ public class Bed : MonoBehaviour, IInteractable
 
     IEnumerator NightmareCoroutine(PlayerStateMachine playerToEnableAgain)
     {
-       spriteRenderer.sprite = badDream;
-       yield return new WaitForSeconds(5f);
-       LeaveBed(playerToEnableAgain);
+        spriteRenderer.sprite = badDream;
+        yield return new WaitForSeconds(5f);
+        LeaveBed(playerToEnableAgain);
     }
 
     public void ChangeWakeUpText(string newWakeUpText)
