@@ -49,7 +49,7 @@ public class ItemAmountPairPropertyDrawer : PropertyDrawer
                 if (GUI.Button(buttonRect, "Create"))
                 {
                    var newLetter = ScriptableObject.CreateInstance<Letter>();
-                    newLetter.Id = id;
+                    newLetter.ID = id;
                     newLetter.name = id + "_NewLetter";
                     UnityEditor.AssetDatabase.CreateAsset(newLetter, "Assets/Resources/Letters/" + newLetter.name + ".asset");
                     AssetDatabase.Refresh();
