@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class Letter : ScriptableObject
 {
-    public int id;
+    public int ID;
     public string Author;
 
     [TextArea(10, 100)]

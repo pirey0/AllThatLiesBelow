@@ -33,7 +33,7 @@ public class LettersHolder
         lettersTable = new Dictionary<int, Letter>();
         foreach (var l in letters)
         {
-            lettersTable.Add(l.Id, l);
+            lettersTable.Add(l.ID, l);
         }
         Debug.Log("LettersParser: loaded " + letters.Length + " letters.");
     }
