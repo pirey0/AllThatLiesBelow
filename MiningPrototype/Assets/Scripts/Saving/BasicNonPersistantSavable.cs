@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicNonPersistantSavable : MonoBehaviour, INonPersistantSavable
+public sealed class BasicNonPersistantSavable : MonoBehaviour, INonPersistantSavable
 {
 
     [SerializeField] SpawnableIDType type;

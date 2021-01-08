@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 689968038}
   - component: {fileID: 5257947157915077520}
   - component: {fileID: 122015594887928418}
+  - component: {fileID: 2508763234559260806}
   m_Layer: 0
   m_Name: BigMushroom
   m_TagString: Untagged
@@ -99,7 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a547d5393963df44e910ad7cc9e1c531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 30
   animator: {fileID: 689968038}
   explosionPrefab: {fileID: 4200292356520221087, guid: f8b941eac75a2eb409f77a775a20e09a, type: 3}
   audioSource: {fileID: 122015594887928418}
@@ -235,6 +235,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2508763234559260806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4286787554297043612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b881ed04caf12745a91f5af9c91ac07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 30
+  uniqueName: 
 --- !u!1 &5185108760318256092
 GameObject:
   m_ObjectHideFlags: 0

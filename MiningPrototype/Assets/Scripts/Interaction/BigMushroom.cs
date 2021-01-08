@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BigMushroom : BasicNonPersistantSavable
+public class BigMushroom : MonoBehaviour
 {
     [SerializeField] Animator animator;
     [SerializeField] GameObject explosionPrefab;

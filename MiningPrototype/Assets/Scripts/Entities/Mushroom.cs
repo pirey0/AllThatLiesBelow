@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mushroom : BasicNonPersistantSavable
+public class Mushroom : MonoBehaviour
 {
     [SerializeField] AudioSource bounceAudio;
     [SerializeField] ParticleSystem particleSystem;
