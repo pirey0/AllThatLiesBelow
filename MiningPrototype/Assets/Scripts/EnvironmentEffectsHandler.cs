@@ -20,8 +20,8 @@ public class EnvironmentEffectsHandler : StateListenerBehaviour
     [SerializeField] SpriteRenderer nightSky;
     [SerializeField] ParticleSystem snow, snowSecondary, clouds, jungle;
     [SerializeField] float amountOfParticles;
-    [SerializeField] AudioSource snowstormSounds, caveSounds, springSounds;
-    [SerializeField] float maxSnowStormVolume, maxCaveVolume;
+    [SerializeField] AudioSource snowstormSounds, caveSounds, springSounds, jungleSounds;
+    [SerializeField] float maxSnowStormVolume, maxCaveVolume, maxJungleVolume;
     [SerializeField] bool isNight;
 
     [SerializeField] bool isSpring = false;
@@ -123,6 +123,8 @@ public class EnvironmentEffectsHandler : StateListenerBehaviour
 
         var emit = jungle.emission;
         emit.rateOverTime = alphaCalculatedBasedOnHeightOfPlayer * 20;
+
+        jungleSounds.volume = maxJungleVolume * alphaCalculatedBasedOnHeightOfPlayer;
     }
 
     public void UpdateOverworldEffects()

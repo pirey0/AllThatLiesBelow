@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d05716d329922cf4abb0b6513364aece, type: 3}
   m_Name: jungle_tree
   m_EditorClassIdentifier: 
-  loop: 0
+  loop: 1
   speedMultiplyer: 1
   frames:
   - Sprite: {fileID: 3479128316119214309, guid: 887349ea8707de74c9f368e8b9594840, type: 3}
