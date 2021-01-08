@@ -20,7 +20,6 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
 
     [Zenject.Inject] EnvironmentEffectsHandler overworldEffectHandler;
     [Zenject.Inject] CameraController cameraController;
-    [Zenject.Inject] LettersParser lettersParser;
     [Zenject.Inject] RuntimeProceduralMap map;
     [Zenject.Inject] InventoryManager inventoryManager;
     [Zenject.Inject] SacrificeActions sacrificeActions;
@@ -81,9 +80,8 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     {
         data = new ProgressionSaveData();
         data.lastLetterID = startingLetterID;
-        data.letterProgressionState = LetterProgressionState.RecievedDay;
         if (letterBox != null)
-            SetPostboxLetterToID(data.lastLetterID);
+            ReceiveLetterWithID(data.lastLetterID);
 
         if (newOrderCrateSpawner != null)
             newOrderCrateSpawner.SpawnOrder(startingItems);
@@ -191,17 +189,11 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
         Debug.Log("Starting day " + data.day);
     }
 
-    [Button]
-    private void WifeRecievedLetter()
-    {
-        data.wifeRecievedLetter = true;
-    }
 
     private void UpdateLetters()
     {
         if (postbox != null)
         {
-            bool sentToWife = false;
             while (!postbox.IsEmpty())
             {
                 ItemAmountPair storedItem = postbox.FetchItem();
@@ -225,14 +217,9 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
                         data.ordersForNextDay.Remove(storedItem.amount);
                     }
                 }
-
-                if (storedItem.type == ItemType.LetterToFamily)
-                {
-                    sentToWife = true;
-                }
             }
 
-            StepLetterProgression(sentToWife);
+            StepLetterProgression();
         }
         else
         {
@@ -240,57 +227,15 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
         }
     }
 
-    private void StepLetterProgression(bool sentLetterToWife)
+    private void StepLetterProgression()
     {
-        //When out of content
-        if (data.lastLetterID <= 0)
-            return;
+        //TO REWRITE
 
-        //Update old state
-        switch (data.letterProgressionState)
-        {
-            case LetterProgressionState.RecievedDay:
-                if (sentLetterToWife)
-                {
-                    data.letterProgressionState = LetterProgressionState.WaitDay2;
-                    data.wifeRecievedLetter = true;
-                }
-                else
-                {
-                    data.letterProgressionState = LetterProgressionState.WaitDay1;
-                }
+        // ReceiveLetterWithID();
 
-                break;
-            case LetterProgressionState.WaitDay1:
-                if (sentLetterToWife)
-                    data.wifeRecievedLetter = true;
-
-                data.letterProgressionState = LetterProgressionState.WaitDay2;
-                break;
-            case LetterProgressionState.WaitDay2:
-                if (sentLetterToWife)
-                    data.wifeRecievedLetter = true;
-                data.letterProgressionState = LetterProgressionState.RecievedDay;
-                break;
-        }
-
-        //Start new state
-        switch (data.letterProgressionState)
-        {
-            case LetterProgressionState.RecievedDay:
-                if (data.wifeRecievedLetter)
-                    data.lastLetterID = lettersParser.GetLetterWithID(data.lastLetterID).AnswerId;
-                else
-                    data.lastLetterID = lettersParser.GetLetterWithID(data.lastLetterID).IgnoreId;
-
-                if (data.lastLetterID > 0)
-                    SetPostboxLetterToID(data.lastLetterID);
-                data.wifeRecievedLetter = false;
-                break;
-        }
     }
 
-    private void SetPostboxLetterToID(int id)
+    private void ReceiveLetterWithID(int id)
     {
         letterBox.AddStoredItem(new ItemAmountPair(ItemType.LetterFromFamily, id));
     }
@@ -453,8 +398,6 @@ public class ProgressionSaveData : SaveData
     //letters and daily
     public Dictionary<int, Order> ordersForNextDay = new Dictionary<int, Order>();
     public int lastLetterID = -1;
-    public bool wifeRecievedLetter = false;
-    public LetterProgressionState letterProgressionState = LetterProgressionState.RecievedDay;
     public float leftOverworldTimestamp;
     public float saveTimestamp;
 
