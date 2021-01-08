@@ -18,8 +18,6 @@ public class PlayerStateMachine : BasePlayerStateMachine
     [SerializeField] float cinematicHorizontal;
     [SerializeField] float cinematicVertical;
 
-
-    [Inject] ProgressionHandler progressionHandler;
     [Inject] RuntimeProceduralMap map;
     [Inject] TransitionEffectHandler transitionEffectHandler;
     [Inject] InventoryManager inventoryManager;
