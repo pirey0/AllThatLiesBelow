@@ -79,6 +79,10 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     protected override void OnNewGame()
     {
         data = new ProgressionSaveData();
+
+        var letter = LettersHolder.Instance.GetLetterWithID(startingLetterID);
+        if (letter != null)
+            data.daysToNextLetter = letter.daysToNext;
         data.lastNarrativeLetterID = startingLetterID;
         if (letterBox != null)
             ReceiveLetterWithID(data.lastNarrativeLetterID);
