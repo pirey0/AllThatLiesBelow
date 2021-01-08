@@ -25,8 +25,10 @@ public class Platform : TilemapCarvingEntity
 
     public override void OnTileUpdated(int x, int y)
     {
-        spriteRenderer.sprite = UpdateVisualsBaseOnNeighbours(x, y);
-        base.OnTileUpdated(x, y);
+        if (this != null)
+        {
+            spriteRenderer.sprite = UpdateVisualsBaseOnNeighbours(x, y);
+        }
     }
 
     private Sprite UpdateVisualsBaseOnNeighbours(int x, int y)
@@ -66,7 +68,7 @@ public class Platform : TilemapCarvingEntity
         {
             return this.centerDot;
         }
-        
+
         return this.center;
     }
 

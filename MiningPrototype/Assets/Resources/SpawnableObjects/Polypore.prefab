@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2757673793107631525}
   - component: {fileID: 5664381662228721488}
   - component: {fileID: 4333550453911485975}
+  - component: {fileID: 8716342143534462100}
   m_Layer: 0
   m_Name: Polypore
   m_TagString: Untagged
@@ -162,10 +163,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93cfc36059b6e8447b20fe694bc280ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  uniqueName: Polypore
   bounceAudio: {fileID: 913114898506623724}
   particleSystem: {fileID: 5664381662228721488}
+  spriteAnimator: {fileID: 0}
+  spriteAnimation: []
 --- !u!82 &913114898506623724
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5141,6 +5142,20 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &8716342143534462100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8641846660944095422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b881ed04caf12745a91f5af9c91ac07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  uniqueName: Polypore
 --- !u!1 &8641846661115821588
 GameObject:
   m_ObjectHideFlags: 0
