@@ -429,7 +429,7 @@ public class RuntimeProceduralMap : RenderedMap
             NotifyRecieversOfUpdates(n.x, n.y, TileUpdateReason.VisualUpdate);
     }
 
-    private void NotifyRecieversOfUpdates(int x, int y, TileUpdateReason reason)
+    public void NotifyRecieversOfUpdates(int x, int y, TileUpdateReason reason)
     {
         WrapXIfNecessary(ref x);
         if (IsOutOfBounds(x, y))
