@@ -5,13 +5,17 @@ using UnityEngine;
 
 public class ReadableItemHandler : MonoBehaviour
 {
+    const int START_INDEX = 10000;
+
     [SerializeField] Sprite iconClosed, iconOpen;
     [SerializeField] ReadableItemVisualizer textDisplayPrefab;
     [SerializeField] AudioSource ReadLetterSound;
-    ReadableItemVisualizer current;
     [SerializeField] Canvas canvas;
-    List<ReadableItem> readableItems = new List<ReadableItem>();
+
+    Dictionary<int, ReadableItem> readableItems = new Dictionary<int, ReadableItem>();
     List<int> readLettersIds = new List<int>();
+    int currentIndex = START_INDEX;
+    ReadableItemVisualizer current;
 
     [Zenject.Inject] ReadableItemVisualizer.Factory readableItemFactory;
 
@@ -20,7 +24,9 @@ public class ReadableItemHandler : MonoBehaviour
     public void Display(int id, InventorySlotVisualizer slotVisualizer)
     {
         if (current != null && current.id == id)
+        {
             current.Hide();
+        }
         else
         {
             if (current != null)
@@ -31,15 +37,19 @@ public class ReadableItemHandler : MonoBehaviour
             current.id = id;
             ReadLetterSound.pitch = 1;
             ReadLetterSound.Play();
-            ReadableItem itemToDisplay = (readableItems.Count - 1 < id) ? null : readableItems[id];
+            ReadableItem itemToDisplay = null;
 
-            if (itemToDisplay == null)
+            if (readableItems.ContainsKey(id))
+            {
+                itemToDisplay = readableItems[id];
+            }
+            else
             {
                 var letterInfo = LettersHolder.Instance.GetLetterWithID(id);
                 if (letterInfo != null)
                     itemToDisplay = new ReadableItem(letterInfo.Content);
             }
-          
+
             if (!readLettersIds.Contains(id))
             {
                 readLettersIds.Add(id);
@@ -49,11 +59,12 @@ public class ReadableItemHandler : MonoBehaviour
             if (itemToDisplay == null)
             {
                 Debug.LogError("No letter found matching ID " + id);
-                return;
             }
-
-            current.DisplayText(transform, itemToDisplay);
-            Debug.Log("display letter with id:" + id);
+            else
+            {
+                current.DisplayText(transform, itemToDisplay);
+                Debug.Log("display letter with ID " + id);
+            }
         }
     }
 
@@ -88,14 +99,16 @@ public class ReadableItemHandler : MonoBehaviour
             str += upgrade.ToString() + "\n";
         }
 
-        readableItems.Add(new ReadableItem(str, ItemType.NewOrder));
-        return readableItems.Count - 1;
+        int index = currentIndex++;
+        readableItems.Add(index, new ReadableItem(str, ItemType.NewOrder));
+        return index;
     }
 
     public int AddNewReadable(string str)
     {
-        readableItems.Add(new ReadableItem(str));
-        return readableItems.Count - 1;
+        int index = currentIndex++;
+        readableItems.Add(index, new ReadableItem(str));
+        return index;
     }
 }
 
