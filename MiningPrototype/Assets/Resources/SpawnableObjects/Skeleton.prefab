@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7411851746530757949}
+  - component: {fileID: 5277259280636076659}
   - component: {fileID: 7411851746530757950}
   - component: {fileID: 1192140742037605851}
   - component: {fileID: 7411851746530757939}
   - component: {fileID: 7411851746530757948}
-  - component: {fileID: -547285505541878336}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Untagged
@@ -35,6 +35,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5277259280636076659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7411851746530757951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93a650ce8760c647b49c2ae92b6db3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory:
+    canDeposit: 0
+    content:
+    - type: 3
+      amount: 2
+  inventoryVisualizerPrefab: {fileID: 8727063801762088802, guid: c396613fa9613cb4d8d82148ef5649a7, type: 3}
+  openSource: {fileID: 0}
+  receiveSource: {fileID: 0}
+  inventoryVisualizerUpdates: 0
+  isPlayerInventory: 0
 --- !u!212 &7411851746530757950
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -150,16 +172,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.1231918}
   m_EdgeRadius: 0
---- !u!114 &-547285505541878336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7411851746530757951}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b881ed04caf12745a91f5af9c91ac07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 13
