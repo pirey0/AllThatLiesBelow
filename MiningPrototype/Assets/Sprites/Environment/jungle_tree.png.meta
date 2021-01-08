@@ -1,7 +1,22 @@
 fileFormatVersion: 2
 guid: 887349ea8707de74c9f368e8b9594840
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 3479128316119214309
+    second: jungle_tree_0
+  - first:
+      213: -7350267303991605986
+    second: jungle_tree_1
+  - first:
+      213: -4917148395752134485
+    second: jungle_tree_0
+  - first:
+      213: -8026493318405072105
+    second: jungle_tree_1
+  - first:
+      213: 1107178899118418427
+    second: jungle_tree_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -20,7 +35,7 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -41,7 +56,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 7
@@ -87,7 +102,70 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: jungle_tree_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 104
+        height: 128
+      alignment: 9
+      pivot: {x: 0.4519231, y: 0.0546875}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba8ef431697c2cbb0800000000000000
+      internalID: -4917148395752134485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jungle_tree_1
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 0
+        width: 104
+        height: 128
+      alignment: 9
+      pivot: {x: 0.4519231, y: 0.0546875}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71b5b646ada2c9090800000000000000
+      internalID: -8026493318405072105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jungle_tree_2
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 0
+        width: 104
+        height: 128
+      alignment: 9
+      pivot: {x: 0.4519231, y: 0.0546875}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf9e2c8b75d7d5f00800000000000000
+      internalID: 1107178899118418427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
