@@ -46,6 +46,9 @@ public class MineableObject : MirrorWorldFollower, IMinableNonGrid
         if (Util.IsNullOrDestroyed(transform))
             return Vector3.zero;
 
+        if (overlayAnimator != null)
+            return overlayAnimator.transform.position;
+
         return transform.position;
     }
 
