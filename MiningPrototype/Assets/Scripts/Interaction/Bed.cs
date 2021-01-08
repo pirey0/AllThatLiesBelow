@@ -27,7 +27,7 @@ public class Bed : MonoBehaviour, IInteractable
     string defaultWakeUpTest;
     bool sacrificedHappyness = false;
 
-    private event System.Action ForceInterrupt;
+    private event System.Action<IInteractable> ForceInterrupt;
 
     private void Start()
     {
@@ -48,12 +48,12 @@ public class Bed : MonoBehaviour, IInteractable
         LeaveBed(player);
     }
 
-    public void SubscribeToForceQuit(Action action)
+    public void SubscribeToForceQuit(Action<IInteractable> action)
     {
         ForceInterrupt += action;
     }
 
-    public void UnsubscribeToForceQuit(Action action)
+    public void UnsubscribeToForceQuit(Action<IInteractable> action)
     {
         ForceInterrupt -= action;
     }
@@ -70,7 +70,7 @@ public class Bed : MonoBehaviour, IInteractable
 
     private void LeaveBed(PlayerStateMachine playerToEnableAgain)
     {
-        ForceInterrupt?.Invoke();
+        ForceInterrupt?.Invoke(this);
         playerToEnableAgain.Enable();
         cursorHandler.Show();
         spriteRenderer.sprite = empty;

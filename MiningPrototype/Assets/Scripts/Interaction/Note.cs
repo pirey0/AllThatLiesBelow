@@ -11,7 +11,7 @@ public class Note : MirrorWorldFollower, IInteractable, INonPersistantSavable
     [Zenject.Inject] ReadableItemHandler readableItemHandler;
 
     int id;
-    private event System.Action forceQuit;
+    private event System.Action<IInteractable> forceQuit;
 
     private void Start()
     {
@@ -27,7 +27,7 @@ public class Note : MirrorWorldFollower, IInteractable, INonPersistantSavable
 
     private void OnHide()
     {
-        forceQuit?.Invoke();
+        forceQuit?.Invoke(this);
     }
 
     public void EndInteracting(GameObject interactor)
@@ -37,12 +37,12 @@ public class Note : MirrorWorldFollower, IInteractable, INonPersistantSavable
         Destroy(gameObject);
     }
 
-    public void SubscribeToForceQuit(Action action)
+    public void SubscribeToForceQuit(Action<IInteractable> action)
     {
         forceQuit += action;
     }
 
-    public void UnsubscribeToForceQuit(Action action)
+    public void UnsubscribeToForceQuit(Action<IInteractable> action)
     {
         forceQuit -= action;
     }

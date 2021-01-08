@@ -6,8 +6,8 @@ public interface IInteractable : IBaseInteractable
 {
     void EndInteracting(GameObject interactor);
 
-    void SubscribeToForceQuit(System.Action action);
-    void UnsubscribeToForceQuit(System.Action action);
+    void SubscribeToForceQuit(System.Action<IInteractable> action);
+    void UnsubscribeToForceQuit(System.Action<IInteractable> action);
 
     GameObject gameObject { get; }
 }

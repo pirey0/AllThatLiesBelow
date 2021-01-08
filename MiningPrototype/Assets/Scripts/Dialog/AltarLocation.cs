@@ -114,6 +114,7 @@ public class AltarLocation : PlayerTrigger, INonPersistantSavable
         if (altarInventorySpawnLocation != null)
             UnityEditor.Handles.Label(altarInventorySpawnLocation.position, "I");
     }
+#endif
 
     public SpawnableSaveData ToSaveData()
     {
@@ -146,7 +147,7 @@ public class AltarLocation : PlayerTrigger, INonPersistantSavable
             visualizerSpawnLocation.localPosition = lsd.VisualizerLocalPos.ToVector3();
         }
     }
-#endif
+
 
     [System.Serializable]
     public class AltarLocationSaveData : SpawnableSaveData

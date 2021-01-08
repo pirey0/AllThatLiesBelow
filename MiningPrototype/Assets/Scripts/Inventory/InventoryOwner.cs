@@ -23,7 +23,7 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
     [Zenject.Inject] PlayerInventoryOpener playerInventoryOpener;
     [Zenject.Inject] protected UIsHandler uIsHandler;
 
-    private event System.Action ForceInterrupt;
+    private event Action<IInteractable> ForceInterrupt;
     public event System.Action<InventoryState> StateChanged;
 
     InventoryVisualizer inventoryVisualizer;
@@ -117,7 +117,7 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
             }
 
             StateChanged?.Invoke(state);
-            ForceInterrupt?.Invoke();
+            ForceInterrupt?.Invoke(this);
         }
     }
 
@@ -131,12 +131,12 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
         CloseInventory();
     }
 
-    public void SubscribeToForceQuit(Action action)
+    public void SubscribeToForceQuit(Action<IInteractable> action)
     {
         ForceInterrupt += action;
     }
 
-    public void UnsubscribeToForceQuit(Action action)
+    public void UnsubscribeToForceQuit(Action<IInteractable> action)
     {
         ForceInterrupt -= action;
     }

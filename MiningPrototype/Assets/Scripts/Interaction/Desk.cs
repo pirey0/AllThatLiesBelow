@@ -26,7 +26,7 @@ public class Desk : MonoBehaviour, IInteractable
     DeskState deskState;
     private bool canSend = true;
 
-    private event System.Action InterruptInteraction;
+    private event System.Action<IInteractable> InterruptInteraction;
 
 
     private enum DeskState
@@ -50,12 +50,12 @@ public class Desk : MonoBehaviour, IInteractable
         LeaveDesk();
     }
 
-    public void SubscribeToForceQuit(Action action)
+    public void SubscribeToForceQuit(Action<IInteractable> action)
     {
         InterruptInteraction += action;
     }
 
-    public void UnsubscribeToForceQuit(Action action)
+    public void UnsubscribeToForceQuit(Action<IInteractable> action)
     {
         InterruptInteraction += action;
     }
@@ -90,7 +90,7 @@ public class Desk : MonoBehaviour, IInteractable
         spriteRenderer.sprite = deskEmpty;
         optionsCanvas.gameObject.SetActive(false);
         seatedPlayer.Enable();
-        InterruptInteraction?.Invoke();
+        InterruptInteraction?.Invoke(this);
     }
 
     public void FillOutOrder ()

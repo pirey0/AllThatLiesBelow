@@ -31,7 +31,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
     PlayerVisualController visualController;
     Vector2Int? gridDigTarget, previousGridDigTarget;
-    IInteractable currentInteractable;
+    List<IInteractable> currentInteractables = new List<IInteractable>();
     IMinableNonGrid nonGridDigTarget;
     IHoverable hover;
 
@@ -53,13 +53,9 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     private void OnInventoryStateChanged(InventoryState newState)
     {
         if (newState == InventoryState.Open)
-        {
             uIsHandler.NotifyOpening(this);
-        }
         else
-        {
             uIsHandler.NotifyClosing(this);
-        }
     }
 
     private void OnDeath()
@@ -69,77 +65,64 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
     private void Update()
     {
-        //bool mouseInInventoryRange = Vector3.Distance(GetPositionInGridV3(), GetClickPositionV3()) <= settings.inventoryOpenDistance;
+        RemoveDistantInteractables();
+        UpdateDigHighlight();
 
         if (player.CanUseInventory())
         {
-
             if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.E))
             {
                 ToggleInventory();
             }
-
-            //xif (Input.GetMouseButtonDown(1))
-            //x{
-            //x    PlayerActivity?.Invoke();
-            //x    if (mouseInInventoryRange)
-            //x    {
-            //x        ToggleInventory();
-            //x    }
-            //x}
-        }
-
-        //Stop interacting when too far away
-        if (CurrentInteractableIsValid() && Vector3.Distance(transform.position, currentInteractable.gameObject.transform.position) > settings.maxInteractableDistance)
-        {
-            TryStopInteracting();
         }
 
         if (player.CanInteract())
         {
-            if (Vector2Int.Distance(GetPositionInGrid(), GetClickCoordinate()) <= settings.maxDigDistance)
+            UpdateInteract();
+        }
+        else
+        {
+            gridDigTarget = null;
+            TryDisableMiningVisuals();
+        }
+    }
+
+    private void RemoveDistantInteractables()
+    {
+        for (int i = 0; i < currentInteractables.Count; i++)
+        {
+            var current = currentInteractables[i];
+            if (!Util.IsNullOrDestroyed(current) && Vector3.Distance(transform.position, current.gameObject.transform.position) > settings.maxInteractableDistance)
             {
-                //Update Hover and only show when no dig target was found
-                bool hasTarget = UpdateDigTarget();
-                bool hasNonGridTarget = UpdateNonGridDigTarget();
-                UpdateHover((hasTarget || hasNonGridTarget));
+                if (TryStopInteractingWith(current))
+                    i--;
+            }
+        }
+    }
 
-                if (Input.GetMouseButton(0))
-                {
-                    if (eventSystem.currentSelectedGameObject == null && player.CanDig && !itemPlacingHandler.IsDraggingItem)
-                        TryDig();
-                }
-                else if (Input.GetMouseButtonDown(1))
-                {
-                    PlayerActivity?.Invoke();
+    private void UpdateInteract()
+    {
+        if (Vector2Int.Distance(GetPositionInGrid(), GetClickCoordinate()) <= settings.maxDigDistance)
+        {
+            //Update Hover and only show when no dig target was found
+            bool hasTarget = UpdateDigTarget();
+            bool hasNonGridTarget = UpdateNonGridDigTarget();
+            UpdateHover((hasTarget || hasNonGridTarget));
 
-                    //if (!mouseInInventoryRange)
-                    //{
-
-                    if (!CurrentInteractableIsValid())
-                    {
-                        TryInteract();
-                    }
-                    else
-                    {
-                        if (eventSystem.IsPointerOverGameObject() == false)
-                            TryStopInteractingIfHover();
-                    }
-                    //}
-                }
-                else
-                {
-                    TryDisableMiningVisuals();
-                }
+            if (Input.GetMouseButton(0))
+            {
+                if (eventSystem.currentSelectedGameObject == null && player.CanDig && !itemPlacingHandler.IsDraggingItem)
+                    TryDig();
+            }
+            else if (Input.GetMouseButtonDown(1))
+            {
+                PlayerActivity?.Invoke();
+                TryInteract();
             }
             else
             {
-                gridDigTarget = null;
                 TryDisableMiningVisuals();
             }
-
-            if (!CurrentInteractableIsValid())
-                PlayerActivity?.Invoke();
         }
         else
         {
@@ -147,12 +130,13 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
             TryDisableMiningVisuals();
         }
 
-        UpdateDigHighlight();
+        if (InInteraction())
+            PlayerActivity?.Invoke();
     }
 
-    private bool CurrentInteractableIsValid()
+    private bool InInteraction()
     {
-        return currentInteractable != null && !currentInteractable.Equals(null);
+        return currentInteractables.Count > 0;
     }
 
     private void UpdateHover(bool hasDigTarget)
@@ -160,43 +144,33 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         var hits = Util.RaycastFromMouse(cameraController.Camera);
 
         IHoverable newHover = null;
-
         if (!hasDigTarget)
         {
             foreach (var hit in hits)
             {
                 if (hit.transform.TryGetComponent(out IHoverable hoverable))
                 {
-                    //Debug.Log(hit.transform.name);
                     newHover = hoverable;
-
-                    
-
                     break;
                 }
             }
-
             //hover over something interactable
             if ((newHover == null || !newHover.IsInteractable) && !eventSystem.IsPointerOverGameObject())
                 cursorHandler.SetCursor(CursorType.Default);
             else
                 cursorHandler.SetCursor(CursorType.Interactable);
-
         }
         else
         {
             if (!eventSystem.IsPointerOverGameObject() && gameState.CurrentState != GameState.State.Paused)
                 cursorHandler.SetCursor(CursorType.Mining);
         }
-
         if (newHover != hover)
         {
             if (hover != null)
                 hover.HoverExit();
-
             if (newHover != null)
                 newHover.HoverEnter(itemPlacingHandler.IsDraggingItem);
-
             hover = newHover;
         }
 
@@ -216,20 +190,22 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     {
         var hits = Util.RaycastFromMouse(cameraController.Camera, settings.interactionMask.value);
 
-        currentInteractable = null;
         foreach (var hit in hits)
         {
             if (hit.transform == transform)
                 continue;
 
-            //begin interaction
             if (hit.transform.TryGetComponent(out IBaseInteractable baseInteractable))
             {
-                if(baseInteractable is IInteractable interactable1)
+                if (baseInteractable is IInteractable interactable1)
                 {
                     if (hover != null)
                         hover.HoverExit();
-                    StartInteractionWith(interactable1);
+
+                    if (currentInteractables.Contains(interactable1))
+                        TryStopInteractingWith(interactable1);
+                    else
+                        StartInteractionWith(interactable1);
                     break;
                 }
                 else
@@ -243,20 +219,19 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     private void StartInteractionWith(IInteractable interactable)
     {
         Debug.Log("Started interacting with: " + interactable.gameObject.name);
-        currentInteractable = interactable;
-        currentInteractable.SubscribeToForceQuit(OnInteractableForceQuit);
-        currentInteractable.BeginInteracting(gameObject);
+        currentInteractables.Add(interactable);
+        interactable.SubscribeToForceQuit(OnInteractableForceQuit);
+        interactable.BeginInteracting(gameObject);
     }
 
     public void ForceInteractionWith(IInteractable interactable)
     {
-        TryStopInteracting();
         StartInteractionWith(interactable);
     }
 
-    private void OnInteractableForceQuit()
+    private void OnInteractableForceQuit(IInteractable i)
     {
-        TryStopInteracting();
+        TryStopInteractingWith(i);
     }
 
     private bool UpdateDigTarget()
@@ -299,7 +274,6 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         }
 
         //Debug.Log("new target: " + (newTarget != null).ToString() + " / old target:" + (nonGridDigTarget != null).ToString());
-
         if (newTarget != nonGridDigTarget)
         {
             if (nonGridDigTarget != null)
@@ -459,33 +433,16 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         }
     }
 
-    private void TryStopInteracting()
+    private bool TryStopInteractingWith(IInteractable interactable)
     {
-        if (CurrentInteractableIsValid())
+        if (!Util.IsNullOrDestroyed(interactable))
         {
-            currentInteractable.UnsubscribeToForceQuit(OnInteractableForceQuit);
-            currentInteractable.EndInteracting(gameObject);
-            currentInteractable = null;
+            interactable.UnsubscribeToForceQuit(OnInteractableForceQuit);
+            interactable.EndInteracting(gameObject);
+            currentInteractables.Remove(interactable);
+            return true;
         }
-    }
-
-    private void TryStopInteractingIfHover()
-    {
-        var hits = Util.RaycastFromMouse(cameraController.Camera, settings.interactionMask.value);
-
-        foreach (var hit in hits)
-        {
-            if (hit.transform == transform)
-                continue;
-
-            if (hit.transform.TryGetComponent(out IInteractable interactable))
-            {
-                if (interactable == currentInteractable)
-                {
-                    TryStopInteracting();
-                }
-            }
-        }
+        return false;
     }
 
     private void TryEnableMiningVisuals(float targetDamageMultiplier = 1)

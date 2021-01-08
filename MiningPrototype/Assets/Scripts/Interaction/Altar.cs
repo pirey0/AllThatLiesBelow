@@ -19,7 +19,7 @@ public class Altar : StateListenerBehaviour, IInteractable, IDialogUser
     INodeServiceProvider dialogServices;
     AltarBaseNode startingNode;
 
-    private event System.Action NotifyForcedEnd;
+    private event System.Action<IInteractable> NotifyForcedEnd;
 
     public void BeginInteracting(GameObject interactor)
     {
@@ -38,12 +38,12 @@ public class Altar : StateListenerBehaviour, IInteractable, IDialogUser
         
     }
 
-    public void SubscribeToForceQuit(Action action)
+    public void SubscribeToForceQuit(Action<IInteractable> action)
     {
         NotifyForcedEnd += action;
     }
 
-    public void UnsubscribeToForceQuit(Action action)
+    public void UnsubscribeToForceQuit(Action<IInteractable> action)
     {
         NotifyForcedEnd -= action;
     }
