@@ -6,8 +6,9 @@ public class LettersHolder
 {
     const string PATH = "Letters/";
 
-    Dictionary<int, Letter> lettersTable;
+    public const string LETTERS_ID_DESC = "0-100 NarrativeLetters, 101-9999 Custom Letters , 10000- Orders"; 
 
+    Dictionary<int, Letter> lettersTable;
     private static LettersHolder instance;
 
     public static LettersHolder Instance
@@ -45,5 +46,4 @@ public class LettersHolder
         }
         return null;
     }
-
 }

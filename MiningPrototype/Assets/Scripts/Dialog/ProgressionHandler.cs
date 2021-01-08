@@ -79,9 +79,9 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     protected override void OnNewGame()
     {
         data = new ProgressionSaveData();
-        data.lastLetterID = startingLetterID;
+        data.lastNarrativeLetterID = startingLetterID;
         if (letterBox != null)
-            ReceiveLetterWithID(data.lastLetterID);
+            ReceiveLetterWithID(data.lastNarrativeLetterID);
 
         if (newOrderCrateSpawner != null)
             newOrderCrateSpawner.SpawnOrder(startingItems);
@@ -105,8 +105,8 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
 
     public void AquireAltarReward(AltarRewardType altarRewardType)
     {
-            data.rewardsSacrificed.Add(altarRewardType);
-            Debug.Log(altarRewardType + " added to rewards list");
+        data.rewardsSacrificed.Add(altarRewardType);
+        Debug.Log(altarRewardType + " added to rewards list");
     }
 
     public bool NeedsTutorialFor(string s)
@@ -229,10 +229,47 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
 
     private void StepLetterProgression()
     {
-        //TO REWRITE
-
-        // ReceiveLetterWithID();
-
+        if (data.unprocessedSentLetters.Count > 0)
+        {
+            Letter sent = LettersHolder.Instance.GetLetterWithID(data.unprocessedSentLetters[0]);
+            if (sent != null)
+            {
+                Letter toRecv = LettersHolder.Instance.GetLetterWithID(sent.NextID);
+                if (toRecv != null)
+                {
+                    ReceiveLetterWithID(sent.NextID);
+                }
+            }
+            data.unprocessedSentLetters.RemoveAt(0);
+        }
+        else
+        {
+            if (data.lastNarrativeLetterID >= 0)
+            {
+                if (data.daysToNextLetter > 0)
+                {
+                    data.daysToNextLetter--;
+                }
+                else
+                {
+                    Letter last = LettersHolder.Instance.GetLetterWithID(data.lastNarrativeLetterID);
+                    if (last != null)
+                    {
+                        Letter next = LettersHolder.Instance.GetLetterWithID(last.NextID);
+                        if (next != null)
+                        {
+                            data.lastNarrativeLetterID = last.NextID;
+                            data.daysToNextLetter = next.daysToNext;
+                            ReceiveLetterWithID(last.NextID);
+                        }
+                        else
+                        {
+                            data.lastNarrativeLetterID = -1;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private void ReceiveLetterWithID(int id)
@@ -397,7 +434,10 @@ public class ProgressionSaveData : SaveData
 
     //letters and daily
     public Dictionary<int, Order> ordersForNextDay = new Dictionary<int, Order>();
-    public int lastLetterID = -1;
+    public int lastNarrativeLetterID = -1;
+    public int daysToNextLetter = 0;
+    public List<int> unprocessedSentLetters = new List<int>();
+
     public float leftOverworldTimestamp;
     public float saveTimestamp;
 

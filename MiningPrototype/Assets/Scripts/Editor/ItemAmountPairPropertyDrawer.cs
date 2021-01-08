@@ -32,6 +32,7 @@ public class ItemAmountPairPropertyDrawer : PropertyDrawer
         ItemType type = (ItemType)property.FindPropertyRelative("type").enumValueIndex;
         if (type == ItemType.LetterFromFamily)
         {
+            EditorGUI.LabelField(unitRect, new GUIContent("", LettersHolder.LETTERS_ID_DESC));
             int id = property.FindPropertyRelative("amount").intValue;
             var letter = LettersHolder.Instance.GetLetterWithID(id);
 
