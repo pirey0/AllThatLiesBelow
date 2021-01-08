@@ -22,8 +22,8 @@ public class RenderedMap : BaseMap
         tilemapShifted?.ClearAllTiles();
         damageOverlayTilemap.ClearAllTiles();
         damageOverlayBehind.ClearAllTiles();
-
         oreTilemap.ClearAllTiles();
+
         Util.IterateXY(SizeX, SizeY, SetVisualsAt);
     }
 

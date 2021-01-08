@@ -171,9 +171,9 @@ public class DebugMode : MonoBehaviour
 
     public void TeleportTo(string name)
     {
-        Transform target = GameObject.Find(name).transform;
+        GameObject target = GameObject.Find(name);
         if (target != null)
-            player.transform.position = target.position;
+            player.transform.position = target.transform.position;
     }
 
     public enum TeleportDestination

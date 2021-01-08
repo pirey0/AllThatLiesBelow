@@ -121,8 +121,11 @@ public class RuntimeProceduralMap : RenderedMap
     {
         oreTilemap.GetComponent<TilemapRenderer>().material =  visible? unlitMaterial : litMaterial;
         showOverlayAlways = visible;
+        
+        //Should not call refresh all !!! too expensive
         RefreshAll();
     }
+
     public override void RefreshAll()
     {
         base.RefreshAll();
