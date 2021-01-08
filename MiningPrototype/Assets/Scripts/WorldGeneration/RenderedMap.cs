@@ -128,7 +128,7 @@ public class RenderedMap : BaseMap
         return Settings.DamageOverlayTiles[Mathf.FloorToInt(t.Damage)];
     }
 
-    private TileBase GetVisualOverlayTileFor(int x, int y)
+    protected TileBase GetVisualOverlayTileFor(int x, int y)
     {
         var t = this[x, y];
         var tileInfo = GetTileInfo(t.Type);
