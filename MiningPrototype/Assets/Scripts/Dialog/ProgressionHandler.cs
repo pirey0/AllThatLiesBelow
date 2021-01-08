@@ -69,9 +69,11 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     {
         float t = (Time.time - data.leftOverworldTimestamp);
         Debug.Log("Player entered overworld after " + t + " seconds");
-        if (t > timeMiningBeforePassageOfDay)
+
+        int a = Mathf.FloorToInt(t / timeMiningBeforePassageOfDay);
+        for (int i = 0; i < a; i++)
         {
-            StartNextDay();
+            StartNextDayNoSacrificeUpdate();
         }
     }
 
@@ -174,13 +176,19 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
         }
     }
 
+
     [Button]
     public void StartNextDay()
     {
         UpdateSacrifices();
-        UpdateLetters();
+        StartNextDayNoSacrificeUpdate();
+    }
 
+    private void StartNextDayNoSacrificeUpdate()
+    {
+        UpdateLetters();
         data.day++;
+        Debug.Log("Starting day " + data.day);
     }
 
     [Button]
