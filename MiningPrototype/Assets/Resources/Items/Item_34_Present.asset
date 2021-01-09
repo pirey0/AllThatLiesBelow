@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Item_34_Present
   m_EditorClassIdentifier: 
   ItemType: 34
-  DisplayName: Present
+  DisplayName: Special Present
   DisplayTooltip: Small box with a ribbon
   DisplaySprite: {fileID: 21300000, guid: 92f1678899422634f8535528d7058fb7, type: 3}
   DisplaySpriteRead: {fileID: 0}
