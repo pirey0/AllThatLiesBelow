@@ -40,7 +40,7 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
         inventory.InventoryChanged += OnInventoryChanged;
     }
 
-    public Inventory GetInventory()
+    public virtual Inventory GetInventory()
     {
         return inventory;
     }

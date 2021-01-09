@@ -9,6 +9,7 @@ public class Minecart : MirrorWorldFollower, INonPersistantSavable
     {
         return new SaveID("Minecart");
     }
+
     public SpawnableSaveData ToSaveData()
     {
         var data = new MinecartSaveData();
