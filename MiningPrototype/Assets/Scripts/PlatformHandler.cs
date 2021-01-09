@@ -1,61 +1,84 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlatformHandler : MonoBehaviour
 {
     private List<PlatformObject> platformObjects = new List<PlatformObject>();
-    const bool SHOW_DEBUG = false;
+    const bool SHOW_DEBUG = true;
 
     public void NotifyPlatformPlaced(Platform newPlatform)
     {
+        PlatformObject adjacendPlatformObject = null;
+
         foreach (PlatformObject platformObject in platformObjects)
         {
             foreach (Platform platform in platformObject.platforms)
             {
                 if (platform != null && platform.IsAdjacendTo(newPlatform))
                 {
-                    platformObject.AddNewPlatform(newPlatform);
-                    return;
+                    if (adjacendPlatformObject == null)
+                        adjacendPlatformObject = platformObject;
+                    else
+                    {
+                        platformObject.AddNewPlatform(newPlatform);
+
+                        if (platformObject != adjacendPlatformObject)
+                            MergePlatformObjects(platformObject, adjacendPlatformObject);
+
+                        return;
+                    }
                 }
             }
+        }
+
+        if (adjacendPlatformObject != null)
+        {
+            adjacendPlatformObject.AddNewPlatform(newPlatform);
+            return;
         }
 
         platformObjects.Add(new PlatformObject(newPlatform));
     }
 
+    private void MergePlatformObjects(PlatformObject platformObject, PlatformObject adjacendPlatformObject)
+    {
+        PlatformObject first = platformObject.startX < adjacendPlatformObject.startX ? platformObject : adjacendPlatformObject;
+        PlatformObject second = platformObject.startX > adjacendPlatformObject.startX ? platformObject : adjacendPlatformObject;
+
+        PlatformObject merged = new PlatformObject(first.startX);
+        merged.platforms.AddRange(first.platforms);
+        merged.platforms.AddRange(second.platforms);
+
+        platformObjects.Remove(first);
+        platformObjects.Remove(second);
+
+        platformObjects.Add(merged);
+    }
+
     public void NotifyPlatformDestroyed(Platform platform)
     {
+        Debug.LogWarning("destroyed platform" + platform);
+
         for (int p = platformObjects.Count - 1; p > 0; p--)
         {
             PlatformObject platformObject = platformObjects[p];
             if (platformObject != null && platformObject.platforms.Contains(platform))
             {
                 int x = platform.transform.position.ToGridPosition().x;
+                Debug.LogWarning("index: " + x);
 
-                List<Platform> potentiallyUnstable = new List<Platform>();
-
-                //left
-                CheckForConnectionsLeft(platformObject, x, potentiallyUnstable);
-
-                foreach (Platform unstable in potentiallyUnstable)
-                {
-                    platformObject.platforms.Remove(unstable);
-                    unstable.UncarveDestroy();
-                }
-
-                potentiallyUnstable.Clear();
-
-                //right
-                CheckForConnectionsRight(platformObject, x, potentiallyUnstable);
+                List<Platform> potentiallyUnstable = CheckForConnectionsLeft(platformObject, x);
+                potentiallyUnstable.AddRange(CheckForConnectionsRight(platformObject, x));
 
                 foreach (Platform unstable in potentiallyUnstable)
                 {
-                    platformObject.platforms.Remove(unstable);
+                    platformObject.Remove(unstable);
                     unstable.UncarveDestroy();
                 }
 
-                platformObject.platforms.Remove(platform);
+                platformObject.Remove(platform);
 
                 if (platformObject.platforms.Count <= 0)
                     platformObjects.Remove(platformObject);
@@ -63,8 +86,10 @@ public class PlatformHandler : MonoBehaviour
         }
     }
 
-    private static void CheckForConnectionsLeft(PlatformObject platformObject, int x, List<Platform> potentiallyUnstable)
+    private static List<Platform> CheckForConnectionsLeft(PlatformObject platformObject, int x)
     {
+        List<Platform> potentiallyUnstable = new List<Platform>();
+
         for (int i = x - 1; i >= (platformObject.startX); i--)
         {
             //Debug.LogWarning("check left x " + i + " index => " + (i - platformObject.startX));
@@ -77,17 +102,29 @@ public class PlatformHandler : MonoBehaviour
 
                 if (i == platformObject.startX && current.HasConnectionToWall())
                 {
-                    //Debug.LogWarning("found wall at " + i + " index => " + (i - platformObject.startX));
+                    Debug.LogWarning("found wall at " + i + " index => " + (i - platformObject.startX));
                     potentiallyUnstable.Clear();
                     break;
                 }
-
             }
+            else
+                break;
         }
+
+        string str = "";
+
+        foreach (var item in potentiallyUnstable)
+            str += item.transform.position.ToGridPosition().x + ", ";
+
+        Debug.LogWarning("found " + potentiallyUnstable.Count + " to the left : " + str);
+
+        return potentiallyUnstable;
     }
 
-    private static void CheckForConnectionsRight(PlatformObject platformObject, int x, List<Platform> potentiallyUnstable)
+    private static List<Platform> CheckForConnectionsRight(PlatformObject platformObject, int x)
     {
+        List<Platform> potentiallyUnstable = new List<Platform>();
+
         for (int i = x + 1; i < (platformObject.startX + platformObject.platforms.Count); i++)
         {
             //Debug.LogWarning("check right x " + i + " index => " + (i - platformObject.startX));
@@ -100,13 +137,23 @@ public class PlatformHandler : MonoBehaviour
 
                 if (i == (platformObject.startX + platformObject.platforms.Count - 1) && current.HasConnectionToWall())
                 {
-                    //Debug.LogWarning("found wall at " + i + " index => " + (i - platformObject.startX));
+                    Debug.LogWarning("found wall at " + i + " index => " + (i - platformObject.startX));
                     potentiallyUnstable.Clear();
                     break;
                 }
-
             }
+            else
+                break;
         }
+
+        string str = "";
+
+        foreach (var item in potentiallyUnstable)
+            str += item.transform.position.ToGridPosition().x + ", ";
+
+        Debug.LogWarning("found " + potentiallyUnstable.Count + " to the right : " + str);
+
+        return potentiallyUnstable;
     }
 
     public class PlatformObject
@@ -119,6 +166,12 @@ public class PlatformHandler : MonoBehaviour
             startX = platform.transform.position.ToGridPosition().x;
             platforms.Add(platform);
         }
+
+        public PlatformObject(int x)
+        {
+            startX = x;
+        }
+
         public void Destroy()
         {
             for (int i = platforms.Count - 1; i >= 0; i--)
@@ -158,6 +211,25 @@ public class PlatformHandler : MonoBehaviour
             platforms.Add(newPlatform);
 
         }
+
+        public void Remove(Platform unstable)
+        {
+            Debug.LogWarning("remove " + (platforms.IndexOf(unstable)) + " of " + platforms.Count);
+
+            platforms[platforms.IndexOf(unstable)] = null;
+            int i = 0;
+
+            while (i >= 0 && i < platforms.Count && platforms[i] == null)
+                platforms.RemoveAt(i);
+
+            i = platforms.Count - 1;
+
+            while (i >= 0 && i < platforms.Count && platforms[i] == null)
+                platforms.RemoveAt(i--);
+
+            if (platforms.Count > 0)
+                startX = platforms[0].transform.position.ToGridPosition().x;
+        }
     }
 
     private void OnGUI()
@@ -170,7 +242,7 @@ public class PlatformHandler : MonoBehaviour
 
         foreach (PlatformObject platformObject in platformObjects)
         {
-            str += "platform " + index + " : ";
+            str += "platform " + index + " (start: " + platformObject.startX + ") : ";
 
             foreach (Platform platform in platformObject.platforms)
             {
