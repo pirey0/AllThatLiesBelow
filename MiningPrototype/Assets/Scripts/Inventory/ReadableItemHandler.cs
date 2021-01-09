@@ -110,6 +110,14 @@ public class ReadableItemHandler : MonoBehaviour
         readableItems.Add(index, new ReadableItem(str));
         return index;
     }
+
+    //force to a specific id
+    public int AddNewReadable(string str, int id)
+    {
+        readableItems.Add(id, new ReadableItem(str));
+        return id;
+    }
+
 }
 
 public class ReadableItem
