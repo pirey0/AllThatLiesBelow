@@ -109,6 +109,7 @@ public enum AltarState
 public enum AltarSkin
 {
     Miner,
+    Archeologist,
 }
 
 [System.Serializable]
