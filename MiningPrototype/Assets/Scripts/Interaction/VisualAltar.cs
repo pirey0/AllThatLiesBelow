@@ -32,6 +32,7 @@ public class VisualAltar : MonoBehaviour, IDialogUser
                 if (Enum.TryParse(root.Skin.SkinName, out AltarSkin newSkin))
                 {
                     skin = newSkin;
+                    Debug.Log("Changed skin to " + skin);
                 }
                 else
                 {
@@ -43,7 +44,8 @@ public class VisualAltar : MonoBehaviour, IDialogUser
 
     private void OnDestroy()
     {
-        dialogVisualizer.OnChangeState -= OnChangeState;
+        if (dialogVisualizer)
+            dialogVisualizer.OnChangeState -= OnChangeState;
     }
 
     private void OnChangeState(AltarState altarState)

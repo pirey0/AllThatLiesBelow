@@ -67,7 +67,7 @@ public interface INodeRequirement
 
 
 [System.Serializable]
-public class AltarBaseNode
+public abstract class AltarBaseNode
 {
     public AltarBaseNode[] Children;
     public string ID;
@@ -77,20 +77,7 @@ public class AltarBaseNode
         return Children != null && Children.Length > 0;
     }
 
-    public virtual string ToDebugString()
-    {
-        if (Children == null || Children.Length == 0)
-            return "";
-
-        string s = " (";
-        foreach (var item in Children)
-        {
-            s += item.ToDebugString();
-            s += ", ";
-        }
-        s += ")";
-        return s;
-    }
+    public abstract string ToDebugString();
 }
 
 public class AltarDialogCollection

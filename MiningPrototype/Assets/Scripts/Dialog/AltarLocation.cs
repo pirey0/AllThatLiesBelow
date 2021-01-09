@@ -48,14 +48,17 @@ public class AltarLocation : PlayerTrigger, INonPersistantSavable
                     serviceProvider.SetInventory(inventoryObject.gameObject);
                 }
 
+
                 if (visualizer.TryGetComponent(out IDialogVisualizer vis))
                 {
                     serviceProvider.SetVisualizer(vis);
                     visualEntity = prefabFactory.Create(visualAltarPrefab, visualAltarSpawnLocation.position, Quaternion.identity, null);
 
-                    if (visualEntity.TryGetComponent(out IDialogUser dialogUser))
+                    var dialogUsers = visualEntity.GetComponents<IDialogUser>();
+
+                    foreach (var user in dialogUsers)
                     {
-                        dialogUser.Setup(serviceProvider, node);
+                        user.Setup(serviceProvider, node);
                     }
                 }
             }
@@ -105,11 +108,11 @@ public class AltarLocation : PlayerTrigger, INonPersistantSavable
         UnityEditor.Handles.Label(transform.position, encounter ? "Enconter" : dialogName);
 
         if (visualAltarSpawnLocation != null)
-         UnityEditor.Handles.Label(visualAltarSpawnLocation.position, "A");
+            UnityEditor.Handles.Label(visualAltarSpawnLocation.position, "A");
 
         if (visualizerSpawnLocation != null)
             UnityEditor.Handles.Label(visualizerSpawnLocation.position, "V");
-        
+
         if (altarInventorySpawnLocation != null)
             UnityEditor.Handles.Label(altarInventorySpawnLocation.position, "I");
     }
@@ -137,7 +140,7 @@ public class AltarLocation : PlayerTrigger, INonPersistantSavable
 
     public void Load(SpawnableSaveData data)
     {
-        if(data is AltarLocationSaveData lsd)
+        if (data is AltarLocationSaveData lsd)
         {
             encounter = lsd.Encounter;
             dialogName = lsd.DialogName;

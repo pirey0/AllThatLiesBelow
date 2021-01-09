@@ -69,6 +69,11 @@ public class AltarPaymentNode : AltarBaseNode, IStartableNode, ITickingNode, IEn
         services.DialogVisualizer.UnsubscribeFromSelection(OnSelection);
         services.DialogVisualizer.Clear();
     }
+
+    public override string ToDebugString()
+    {
+        return "AltarPaymentNode";
+    }
 }
 
 public class AltarSelectionChoiceNode : AltarChoiceNode, IStartableNode, ITickingNode, IEndableNode
@@ -161,6 +166,11 @@ public class AltarChoiceNode : AltarBaseNode, IStartableNode, ITickingNode, IEnd
     {
         services.DialogVisualizer.UnsubscribeFromSelection(OnSelect);
     }
+
+    public override string ToDebugString()
+    {
+        return "AltarChoiceNode";
+    }
 }
 
 public class AltarOptionNode : AltarConditionalNode
@@ -222,7 +232,6 @@ public class AltarConditionalNode : AltarBaseNode, IConditionalNode, IMarkIdOnRu
             s += r.ToDebugString() + " ";
         }
 
-        s += base.ToDebugString();
         return s;
     }
 }
@@ -303,7 +312,7 @@ public class AltarTextNode : AltarBaseNode, IStartableNode, ITickingNode, IEndab
 
     public override string ToDebugString()
     {
-        return "\"" + Text + "\"" + base.ToDebugString();
+        return "\"" + Text + "\"" ;
     }
 }
 
@@ -321,7 +330,7 @@ public class AltarSetVariableNode : AltarBaseNode, IStartableNode
 
     public override string ToDebugString()
     {
-        return "Set: " + VariableName + ": " + VariableState + base.ToDebugString();
+        return "Set: " + VariableName + ": " + VariableState ;
     }
 }
 
@@ -338,7 +347,7 @@ public class AltarEventTriggerNode : AltarBaseNode, IStartableNode
 
     public override string ToDebugString()
     {
-        return "Event: " + Event + base.ToDebugString();
+        return "Event: " + Event ;
     }
 }
 
