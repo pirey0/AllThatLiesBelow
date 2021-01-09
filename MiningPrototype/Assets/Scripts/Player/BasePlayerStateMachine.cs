@@ -209,6 +209,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         NotifyActivity();
         gameState.ChangeStateTo(GameState.State.Respawning);
         PlayerDeath?.Invoke();
+        progressionHandler.NotifyPlayerDeath();
     }
 
     private void DeathUpdate()

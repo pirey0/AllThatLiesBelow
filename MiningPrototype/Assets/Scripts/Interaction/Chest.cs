@@ -11,6 +11,12 @@ public class Chest : FallingTilemapCarvingEntity, IDropReceiver, INonPersistantS
 
     protected override void Start()
     {
+        //Force chests in correct location to fix placement errors in scenes
+        if (transform.position.x % 0.5f != 0)
+        {
+            transform.position = new Vector3(transform.position.x + 0.5f - (transform.position.x % 0.5f), transform.position.y);
+        }
+
         base.Start();
         inventoryOwner.StateChanged += OnStateChanged;
         Carve();
@@ -78,7 +84,7 @@ public class Chest : FallingTilemapCarvingEntity, IDropReceiver, INonPersistantS
 
     public void Load(SpawnableSaveData dataOr)
     {
-        if(dataOr is ChestSaveData data)
+        if (dataOr is ChestSaveData data)
         {
             inventoryOwner.SetInventory(data.Inventory);
         }
