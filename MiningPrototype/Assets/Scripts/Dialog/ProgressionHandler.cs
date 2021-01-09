@@ -178,10 +178,17 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
                 AquireAltarReward(AltarRewardType.Spring);
                 break;
 
+            case "InstantDelivery":
+                AquireAltarReward(AltarRewardType.InstantDelivery);
+                break;
+
             case "ReceiveSpareHelmet":
                 inventoryManager.PlayerCollects(ItemType.Helmet, 1);
                 break;
 
+            case "OreVision":
+                StartCoroutine(OreVisibilityEffector.SetOreVisibleForCoroutine(map, 60));
+                break;
 
             default:
                 Debug.LogWarning("Fired unimplemented event " + ev);

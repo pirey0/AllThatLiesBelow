@@ -41,7 +41,7 @@ public class DialogOption : MonoBehaviour
             for (int i = 0; i <= 5; i++)
             {
                 textDisplay.rectTransform.localScale = Vector3.one * (float)i / 5f;
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.03f);
             }
         }
         else
@@ -49,7 +49,7 @@ public class DialogOption : MonoBehaviour
             for (int i = 0; i < text.Length; i++)
             {
                 textDisplay.text = text.Substring(0, i) + "<alpha=#00>" + text.Substring(i, text.Length-i);
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.03f);
             }
 
             textDisplay.text = text;

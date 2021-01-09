@@ -12,31 +12,25 @@ public class OreVisibilityEffector : MonoBehaviour
     void Start()
     {
         active = true;
-        if (runtimeProceduralMap == null)
-            runtimeProceduralMap = FindObjectOfType<RuntimeProceduralMap>();
 
-        runtimeProceduralMap.SetOresAllwaysVisible(true);
+        StartCoroutine(SetOreVisibleForCoroutine(runtimeProceduralMap, timeLeft, Callback));
+
     }
 
-    private void End()
+    private void Callback()
     {
-        if (!active)
-            return;
-
-        if (runtimeProceduralMap == null)
-            runtimeProceduralMap = FindObjectOfType<RuntimeProceduralMap>();
-
-        runtimeProceduralMap.SetOresAllwaysVisible(false);
         Destroy(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
+    public static IEnumerator SetOreVisibleForCoroutine(RuntimeProceduralMap map, float time, System.Action callback = null)
     {
-        timeLeft -= Time.deltaTime;
+        map.SetOresAllwaysVisible(true);
 
-        if (timeLeft <= 0)
-            End();
+        yield return new WaitForSeconds(time);
+        map.SetOresAllwaysVisible(false);
+        callback?.Invoke();
     }
-}
+
     
+}
+
