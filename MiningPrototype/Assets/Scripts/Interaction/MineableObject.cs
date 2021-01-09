@@ -30,6 +30,11 @@ public class MineableObject : MirrorWorldFollower, IMinableNonGrid
 
     protected virtual void Destroyed()
     {
+        InventoryOwner inventoryOwner = GetComponent<InventoryOwner>();
+
+        if (inventoryOwner != null && contains.IsNull())
+            contains = inventoryOwner.GetInventory().GetContent()[0];
+
         if (!contains.IsNull() && contains.amount > 0)
         {
             inventoryManager.PlayerCollects(contains.type, contains.amount);

@@ -20,4 +20,10 @@ public class InventoryOwnerDropBased : InventoryOwner
         }
         base.OpenInventory();
     }
+
+    public override Inventory GetInventory()
+    {
+        Inventory.Add(drops.GetRandomDrop());
+        return base.GetInventory();
+    }
 }

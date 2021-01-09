@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5b4e36afc74fff4f82cd40fcf05b7bc, type: 3}
-  m_Name: Item_32_LetterNote
+  m_Name: Item_34_Present
   m_EditorClassIdentifier: 
-  ItemType: 32
-  DisplayName: Note
-  DisplayTooltip: 
-  DisplaySprite: {fileID: 21300000, guid: d13d4d4ad13b9904b8fd9c248b98a012, type: 3}
-  DisplaySpriteRead: {fileID: 21300000, guid: d13d4d4ad13b9904b8fd9c248b98a012, type: 3}
+  ItemType: 34
+  DisplayName: Special Present
+  DisplayTooltip: Small box with a ribbon
+  DisplaySprite: {fileID: 21300000, guid: 92f1678899422634f8535528d7058fb7, type: 3}
+  DisplaySpriteRead: {fileID: 0}
   Weight: 1
   CanBePlaced: 0
   PickupHoldSprite: {fileID: 0}
   PickupHoldOffset: {x: 0, y: 0}
   PickupPreviewPrefab: {fileID: 0}
   Prefab: {fileID: 0}
-  AmountIsUniqueID: 1
+  AmountIsUniqueID: 0
   IsUpgrade: 0
   RequiredLevel: 0
   LevelUpgrade: 0
-  IsBurnable: 1
+  IsBurnable: 0
