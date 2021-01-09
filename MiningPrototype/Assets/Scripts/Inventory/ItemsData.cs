@@ -38,6 +38,7 @@ public enum ItemType
     Fossil,
     LetterNote,
     DragonClaw,
+    Present,
 }
 
 

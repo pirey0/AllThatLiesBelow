@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b4e36afc74fff4f82cd40fcf05b7bc, type: 3}
+  m_Name: Item_34_Present
+  m_EditorClassIdentifier: 
+  ItemType: 34
+  DisplayName: Present
+  DisplayTooltip: Small box with a ribbon
+  DisplaySprite: {fileID: 21300000, guid: 92f1678899422634f8535528d7058fb7, type: 3}
+  DisplaySpriteRead: {fileID: 0}
+  Weight: 1
+  CanBePlaced: 0
+  PickupHoldSprite: {fileID: 0}
+  PickupHoldOffset: {x: 0, y: 0}
+  PickupPreviewPrefab: {fileID: 0}
+  Prefab: {fileID: 0}
+  AmountIsUniqueID: 0
+  IsUpgrade: 0
+  RequiredLevel: 0
+  LevelUpgrade: 0
+  IsBurnable: 0
