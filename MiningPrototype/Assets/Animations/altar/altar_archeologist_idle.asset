@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d05716d329922cf4abb0b6513364aece, type: 3}
   m_Name: altar_archeologist_idle
   m_EditorClassIdentifier: 
-  loop: 0
+  loop: 1
   speedMultiplyer: 1
   frames:
   - Sprite: {fileID: -1917487662983968570, guid: 81291464a9d520c4aa7e80336fed6d70, type: 3}
