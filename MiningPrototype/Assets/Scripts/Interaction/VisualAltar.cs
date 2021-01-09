@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using UnityEditorInternal;
 using UnityEngine;
 
-public class AltarVisualizer : MonoBehaviour
+public class VisualAltar : MonoBehaviour, IDialogUser
 {
-    DialogVisualizer dialogVisualizer;
-    AudioClip last;
 
     [SerializeField] AltarSkin skin;
 
@@ -18,25 +16,34 @@ public class AltarVisualizer : MonoBehaviour
 
     [Zenject.Inject] PlayerInteractionHandler playerInteractionHandler;
 
-    private void OnEnable()
-    {
-        dialogVisualizer = FindObjectOfType<DialogVisualizer>();
+    AudioClip last;
+    DialogVisualizer dialogVisualizer;
 
-        if (dialogVisualizer == null)
+    public void Setup(INodeServiceProvider services, AltarBaseNode node)
+    {
+        dialogVisualizer = (DialogVisualizer)services.DialogVisualizer;
+
+        dialogVisualizer.OnChangeState += OnChangeState;
+
+        if (node is AltarDialogRootNode root)
         {
-            Debug.LogError("No dialog Visualizer found for altar.");
-            Destroy(gameObject);
+            if (root.Skin != null)
+            {
+                if (Enum.TryParse(root.Skin.SkinName, out AltarSkin newSkin))
+                {
+                    skin = newSkin;
+                }
+                else
+                {
+                    Debug.LogError("Could not parse Skin " + root.Skin.SkinName);
+                }
+            }
         }
-        else
-            dialogVisualizer.OnChangeState += OnChangeState;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
-        if (dialogVisualizer == null)
-            Destroy(gameObject);
-        else
-            dialogVisualizer.OnChangeState -= OnChangeState;
+        dialogVisualizer.OnChangeState -= OnChangeState;
     }
 
     private void OnChangeState(AltarState altarState)
@@ -88,6 +95,8 @@ public class AltarVisualizer : MonoBehaviour
 
         return null;
     }
+
+
 }
 
 public enum AltarState

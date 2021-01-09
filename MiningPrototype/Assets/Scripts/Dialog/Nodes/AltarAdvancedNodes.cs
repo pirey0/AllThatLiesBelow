@@ -180,11 +180,24 @@ public class AltarDialogRootNode : AltarConditionalNode
     public string Name;
     public bool IsEncounter;
 
+    public AltarSelectSkinAtribute Skin;
+
     public override string ToDebugString()
     {
         return "Root: " + Name + base.ToDebugString();
     }
 }
+
+public class AltarSelectSkinAtribute 
+{
+    public string SkinName;
+
+    public AltarSelectSkinAtribute(string name)
+    {
+        SkinName = name;
+    }
+}
+
 
 public class AltarConditionalNode : AltarBaseNode, IConditionalNode, IMarkIdOnRunNode
 {

@@ -74,8 +74,7 @@ public class AltarLocation : PlayerTrigger, INonPersistantSavable
             node = progressionHandler.AltarDialogCollection.GetFirstViableEncounter(serviceProvider);
 
             if (node == null)
-                Debug.LogError("No available Encounter");
-
+                Debug.Log("No available Encounter");
         }
         else
         {

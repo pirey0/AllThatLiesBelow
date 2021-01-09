@@ -100,6 +100,10 @@ public static class AltarTreeUtility
         {
             return null;
         }
+        else if (NodeMatchesConditions(root, out elements, "Skin", 2))
+        {
+            return null;
+        }
         else
         {
             var tnode = new AltarTextNode();
@@ -160,6 +164,10 @@ public static class AltarTreeUtility
                 else if ((NodeMatchesConditions(stringCollection.Nodes[nodeId], out elements, "Encounter", 1)))
                 {
                     altarDialogRootNode.IsEncounter = true;
+                }
+                else if ((NodeMatchesConditions(stringCollection.Nodes[nodeId], out elements, "Skin", 2)))
+                {
+                    altarDialogRootNode.Skin = new AltarSelectSkinAtribute(elements[1]);
                 }
             }
         }
