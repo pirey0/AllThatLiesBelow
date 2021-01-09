@@ -37,7 +37,7 @@ public enum ItemType
     HeadLamp,
     Fossil,
     LetterNote,
-    DragonClaw,
+    CopperClaw,
     SpecialPresent,
 }
 
