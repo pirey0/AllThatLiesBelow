@@ -103,31 +103,35 @@ public class Desk : MonoBehaviour, IInteractable
 
         if (!progressionHandler.GetVariable("Sent10Gold"))
         {
-            options.Add(PaymentOption(10, 0));
+            options.Add(PaymentOption(10));
         }
         else if (!progressionHandler.GetVariable("Sent100Gold"))
         {
-            options.Add(PaymentOption(100, 1));
+            options.Add(PaymentOption(100));
         }
         else if (!progressionHandler.GetVariable("Sent1000Gold"))
         {
-            options.Add(PaymentOption(1000, 2));
+            options.Add(PaymentOption(1000));
         }
 
         return options;
     }
 
-    private DeskOption PaymentOption(int amount, int index)
+    private DeskOption PaymentOption(int amount)
     {
-        return new DeskOption("Send " + amount + " Gold to family", delegate { PayXGold(amount, index); }, inventoryManager.PlayerHas(ItemType.Gold, amount));
+        return new DeskOption("Send " + amount + " Gold to family", delegate { PayXGold(amount); }, inventoryManager.PlayerHas(ItemType.Gold, amount));
     }
 
-    private void PayXGold(int amount, int index)
+    private void PayXGold(int amount)
     {
         if (inventoryManager.PlayerTryPay(ItemType.Gold, amount))
         {
-            int readableId = readableItemHandler.AddNewReadable("Yo, i payed " + amount + "gold :)", 9990 + index);
-            inventoryManager.PlayerCollects(ItemType.LetterFromFamily, readableId);
+            var type = amount == 10 ? LetterToFamily.LetterType.Payed10 : amount == 100 ? LetterToFamily.LetterType.Payed100 : LetterToFamily.LetterType.Payed1000;
+            LetterToFamily order = new LetterToFamily(type);
+            int id = readableItemHandler.AddNewLetterToFamily("Here are " + amount + " gold. \n With Love, \n Thomas");
+            progressionHandler.RegisterSpecialLetter(id, order);
+            inventoryManager.PlayerCollects(ItemType.LetterToFamily, id);
+
             LeaveDesk();
 
             Debug.Log("Created object for " + amount + " Gold to family");
@@ -136,6 +140,11 @@ public class Desk : MonoBehaviour, IInteractable
         {
             Debug.Log("Sending money to family failed");
         }
+    }
+
+    private void SetPayedVariable(int amount)
+    {
+        progressionHandler.SetVariable("Sent" + amount + "Gold", true);
     }
 
     public void SitAtDesk(PlayerStateMachine playerToHide)
@@ -231,8 +240,8 @@ public class Desk : MonoBehaviour, IInteractable
             letterWritingSource?.Play();
         }
 
-        int readableId = readableItemHandler.AddNewReadable(order);
-        progressionHandler.RegisterOrder(readableId, order);
+        int readableId = readableItemHandler.AddNewOrder(order);
+        progressionHandler.RegisterSpecialLetter(readableId, order);
 
         foreach (var singlePrice in order.Costs)
         {

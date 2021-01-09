@@ -16,18 +16,15 @@ MonoBehaviour:
   DisplayName: Letter To Family
   DisplayTooltip: A letter for my wife.
   DisplaySprite: {fileID: 21300000, guid: f5cb6fb70ca550b42acad97c896cc2a9, type: 3}
-  DisplaySpriteRead: {fileID: 0}
+  DisplaySpriteRead: {fileID: 21300000, guid: f5cb6fb70ca550b42acad97c896cc2a9, type: 3}
   Weight: 0
   CanBePlaced: 0
   PickupHoldSprite: {fileID: 0}
   PickupHoldOffset: {x: 0, y: 0}
   PickupPreviewPrefab: {fileID: 0}
   Prefab: {fileID: 0}
-  AmountIsUniqueID: 0
+  AmountIsUniqueID: 1
+  IsUpgrade: 0
+  RequiredLevel: 0
+  LevelUpgrade: 0
   IsBurnable: 1
-  AltarWords:
-  - Words
-  - Written
-  - Writing
-  - Hope
-  - Send

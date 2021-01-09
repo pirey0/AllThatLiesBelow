@@ -16,7 +16,7 @@ public class Note : MirrorWorldFollower, IInteractable, INonPersistantSavable
     private void Start()
     {
         if (!string.IsNullOrEmpty(text))
-            id = readableItemHandler.AddNewReadable(text);
+            id = readableItemHandler.AddNewReceivedLetter(text);
     }
 
     public void BeginInteracting(GameObject interactor)
@@ -61,7 +61,7 @@ public class Note : MirrorWorldFollower, IInteractable, INonPersistantSavable
         if(data is NoteSaveData sdata)
         {
             text = sdata.Text;
-            id = readableItemHandler.AddNewReadable(text);
+            id = readableItemHandler.AddNewReceivedLetter(text);
         }
     }
 

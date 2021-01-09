@@ -32,6 +32,4 @@ public class ItemInfo : ScriptableObject
     [Header("Burnable")]
     public bool IsBurnable;
 
-    [Header("Altar Words used")]
-    public string[] AltarWords;
 }

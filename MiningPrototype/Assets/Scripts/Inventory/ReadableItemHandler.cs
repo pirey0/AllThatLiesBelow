@@ -85,7 +85,7 @@ public class ReadableItemHandler : MonoBehaviour
         }
     }
 
-    public int AddNewReadable(Order order)
+    public int AddNewOrder(Order order)
     {
         string str = "New Order:\n";
 
@@ -104,18 +104,18 @@ public class ReadableItemHandler : MonoBehaviour
         return index;
     }
 
-    public int AddNewReadable(string str)
+    public int AddNewLetterToFamily(string str)
     {
         int index = currentIndex++;
-        readableItems.Add(index, new ReadableItem(str));
+        readableItems.Add(index, new ReadableItem(str, ItemType.LetterToFamily));
         return index;
     }
 
-    //force to a specific id
-    public int AddNewReadable(string str, int id)
+    public int AddNewReceivedLetter(string str)
     {
-        readableItems.Add(id, new ReadableItem(str));
-        return id;
+        int index = currentIndex++;
+        readableItems.Add(index, new ReadableItem(str, ItemType.LetterFromFamily));
+        return index;
     }
 
 }

@@ -18,6 +18,10 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     [SerializeField] float timeMiningBeforePassageOfDay;
     [SerializeField] bool includeDebugDialogs;
 
+    [SerializeField] int payed10LetterId;
+    [SerializeField] int payed100LetterId;
+    [SerializeField] int payed1000LetterId;
+
     [Zenject.Inject] EnvironmentEffectsHandler overworldEffectHandler;
     [Zenject.Inject] CameraController cameraController;
     [Zenject.Inject] RuntimeProceduralMap map;
@@ -82,10 +86,13 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
 
         var letter = LettersHolder.Instance.GetLetterWithID(startingLetterID);
         if (letter != null)
+        {
+            if (letterBox != null)
+                ReceiveLetterWithID(startingLetterID);
+
             data.daysToNextLetter = letter.daysToNext;
-        data.lastNarrativeLetterID = startingLetterID;
-        if (letterBox != null)
-            ReceiveLetterWithID(data.lastNarrativeLetterID);
+            data.nextLetterID = letter.NextID;
+        }
 
         if (newOrderCrateSpawner != null)
             newOrderCrateSpawner.SpawnOrder(startingItems);
@@ -188,13 +195,13 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
 
     private void StartNextDayNoSacrificeUpdate()
     {
-        UpdateLetters();
+        UpdateLettersAndOrders();
         data.day++;
         Debug.Log("Starting day " + data.day);
     }
 
 
-    private void UpdateLetters()
+    private void UpdateLettersAndOrders()
     {
         if (postbox != null)
         {
@@ -206,9 +213,9 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
                 //orders
                 if (storedItem.type == ItemType.NewOrder)
                 {
-                    if (data.ordersForNextDay.ContainsKey(storedItem.amount))
+                    if (data.specialLettersForNextDay.ContainsKey(storedItem.amount))
                     {
-                        Order order = data.ordersForNextDay[storedItem.amount];
+                        Order order = (Order)data.specialLettersForNextDay[storedItem.amount];
                         if (order == null || (order.Items.Length == 0 && order.Upgrades.Length == 0))
                         {
                             Debug.LogError("There is an order ID with no elements: " + storedItem.amount);
@@ -218,7 +225,15 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
                             newOrderCrateSpawner.SpawnOrder(new List<ItemAmountPair>(order.Items));
                         }
 
-                        data.ordersForNextDay.Remove(storedItem.amount);
+                        data.specialLettersForNextDay.Remove(storedItem.amount);
+                    }
+                }
+                else if (storedItem.type == ItemType.LetterToFamily)
+                {
+                    if (data.specialLettersForNextDay.ContainsKey(storedItem.amount))
+                    {
+                        LetterToFamily l = (LetterToFamily)data.specialLettersForNextDay[storedItem.amount];
+                        ExcecuteLetterToFamilyConsequences(l);
                     }
                 }
             }
@@ -228,6 +243,44 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
         else
         {
             Debug.LogError("No Postbox found!");
+        }
+    }
+
+    private void ExcecuteLetterToFamilyConsequences(LetterToFamily l)
+    {
+        if (l != null)
+        {
+            //Missing if happy or sad letter
+            switch (l.Type)
+            {
+                case LetterToFamily.LetterType.Payed10:
+                    if (!GetVariable("Sent10Gold"))
+                    {
+                        data.nextLetterID = payed10LetterId;
+                        SetVariable("Sent10Gold", true);
+                    }
+                    break;
+
+                case LetterToFamily.LetterType.Payed100:
+                    if (!GetVariable("Sent100Gold"))
+                    {
+                        data.nextLetterID = payed100LetterId;
+                        SetVariable("Sent100Gold", true);
+                    }
+                    break;
+
+                case LetterToFamily.LetterType.Payed1000:
+                    if (!GetVariable("Sent1000Gold"))
+                    {
+                        data.nextLetterID = payed1000LetterId;
+                        SetVariable("Sent1000Gold", true);
+                    }
+                    break;
+            }
+        }
+        else
+        {
+            Debug.LogError("Null Letter to family received.");
         }
     }
 
@@ -248,29 +301,18 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
         }
         else
         {
-            if (data.lastNarrativeLetterID >= 0)
+            if (data.daysToNextLetter > 0)
             {
-                if (data.daysToNextLetter > 0)
+                data.daysToNextLetter--;
+            }
+            else
+            {
+                Letter newLetter = LettersHolder.Instance.GetLetterWithID(data.nextLetterID);
+                if (newLetter != null)
                 {
-                    data.daysToNextLetter--;
-                }
-                else
-                {
-                    Letter last = LettersHolder.Instance.GetLetterWithID(data.lastNarrativeLetterID);
-                    if (last != null)
-                    {
-                        Letter next = LettersHolder.Instance.GetLetterWithID(last.NextID);
-                        if (next != null)
-                        {
-                            data.lastNarrativeLetterID = last.NextID;
-                            data.daysToNextLetter = next.daysToNext;
-                            ReceiveLetterWithID(last.NextID);
-                        }
-                        else
-                        {
-                            data.lastNarrativeLetterID = -1;
-                        }
-                    }
+                    ReceiveLetterWithID(newLetter.ID);
+                    data.nextLetterID = newLetter.NextID;
+                    data.daysToNextLetter = newLetter.daysToNext;
                 }
             }
         }
@@ -293,16 +335,16 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     }
 
 
-    public void RegisterOrder(int id, Order order)
+    public void RegisterSpecialLetter(int id, ILetter letter)
     {
-        if (data.instantDelivery)
+        if (data.instantDelivery && letter is Order order)
         {
             instantDeliveryAudio.Play();
             newOrderCrateSpawner.SpawnOrder(new List<ItemAmountPair>(order.Items));
         }
         else
         {
-            data.ordersForNextDay.Add(id, order);
+            data.specialLettersForNextDay.Add(id, letter);
         }
     }
 
@@ -437,8 +479,8 @@ public class ProgressionSaveData : SaveData
     public Dictionary<string, bool> variables = new Dictionary<string, bool>();
 
     //letters and daily
-    public Dictionary<int, Order> ordersForNextDay = new Dictionary<int, Order>();
-    public int lastNarrativeLetterID = -1;
+    public Dictionary<int, ILetter> specialLettersForNextDay = new Dictionary<int, ILetter>();
+    public int nextLetterID = -1;
     public int daysToNextLetter = 0;
     public List<int> unprocessedSentLetters = new List<int>();
 
