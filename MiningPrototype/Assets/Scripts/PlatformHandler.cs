@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlatformHandler : MonoBehaviour
 {
     private List<PlatformObject> platformObjects = new List<PlatformObject>();
-    const bool SHOW_DEBUG = true;
+    const bool SHOW_DEBUG = false;
 
     public void NotifyPlatformPlaced(Platform newPlatform)
     {
@@ -59,15 +59,12 @@ public class PlatformHandler : MonoBehaviour
 
     public void NotifyPlatformDestroyed(Platform platform)
     {
-        Debug.LogWarning("destroyed platform" + platform);
-
         for (int p = platformObjects.Count - 1; p > 0; p--)
         {
             PlatformObject platformObject = platformObjects[p];
             if (platformObject != null && platformObject.platforms.Contains(platform))
             {
                 int x = platform.transform.position.ToGridPosition().x;
-                Debug.LogWarning("index: " + x);
 
                 List<Platform> potentiallyUnstable = CheckForConnectionsLeft(platformObject, x);
                 potentiallyUnstable.AddRange(CheckForConnectionsRight(platformObject, x));
@@ -92,8 +89,6 @@ public class PlatformHandler : MonoBehaviour
 
         for (int i = x - 1; i >= (platformObject.startX); i--)
         {
-            //Debug.LogWarning("check left x " + i + " index => " + (i - platformObject.startX));
-
             Platform current = platformObject.platforms[i - platformObject.startX];
 
             if (current != null)
@@ -102,7 +97,6 @@ public class PlatformHandler : MonoBehaviour
 
                 if (i == platformObject.startX && current.HasConnectionToWall())
                 {
-                    Debug.LogWarning("found wall at " + i + " index => " + (i - platformObject.startX));
                     potentiallyUnstable.Clear();
                     break;
                 }
@@ -110,13 +104,6 @@ public class PlatformHandler : MonoBehaviour
             else
                 break;
         }
-
-        string str = "";
-
-        foreach (var item in potentiallyUnstable)
-            str += item.transform.position.ToGridPosition().x + ", ";
-
-        Debug.LogWarning("found " + potentiallyUnstable.Count + " to the left : " + str);
 
         return potentiallyUnstable;
     }
@@ -127,8 +114,6 @@ public class PlatformHandler : MonoBehaviour
 
         for (int i = x + 1; i < (platformObject.startX + platformObject.platforms.Count); i++)
         {
-            //Debug.LogWarning("check right x " + i + " index => " + (i - platformObject.startX));
-
             Platform current = platformObject.platforms[i - platformObject.startX];
 
             if (current != null)
@@ -137,7 +122,6 @@ public class PlatformHandler : MonoBehaviour
 
                 if (i == (platformObject.startX + platformObject.platforms.Count - 1) && current.HasConnectionToWall())
                 {
-                    Debug.LogWarning("found wall at " + i + " index => " + (i - platformObject.startX));
                     potentiallyUnstable.Clear();
                     break;
                 }
@@ -145,13 +129,6 @@ public class PlatformHandler : MonoBehaviour
             else
                 break;
         }
-
-        string str = "";
-
-        foreach (var item in potentiallyUnstable)
-            str += item.transform.position.ToGridPosition().x + ", ";
-
-        Debug.LogWarning("found " + potentiallyUnstable.Count + " to the right : " + str);
 
         return potentiallyUnstable;
     }
@@ -190,7 +167,6 @@ public class PlatformHandler : MonoBehaviour
             //first
             if (x < startX)
             {
-                Debug.LogWarning("placed left");
                 startX--;
                 List<Platform> newPlatformFirst = new List<Platform>();
                 newPlatformFirst.Add(newPlatform);
@@ -206,7 +182,6 @@ public class PlatformHandler : MonoBehaviour
                 return;
             }
 
-            Debug.LogWarning("placed right");
             //last
             platforms.Add(newPlatform);
 
@@ -214,8 +189,6 @@ public class PlatformHandler : MonoBehaviour
 
         public void Remove(Platform unstable)
         {
-            Debug.LogWarning("remove " + (platforms.IndexOf(unstable)) + " of " + platforms.Count);
-
             platforms[platforms.IndexOf(unstable)] = null;
             int i = 0;
 
