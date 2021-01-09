@@ -12,7 +12,7 @@ public class ReadableItemHandler : MonoBehaviour
     [SerializeField] AudioSource ReadLetterSound;
     [SerializeField] Canvas canvas;
 
-    Dictionary<int, ReadableItem> readableItems = new Dictionary<int, ReadableItem>();
+    Dictionary<int, string> readableItems = new Dictionary<int, string>();
     List<int> readLettersIds = new List<int>();
     int currentIndex = START_INDEX;
     ReadableItemVisualizer current;
@@ -37,17 +37,17 @@ public class ReadableItemHandler : MonoBehaviour
             current.id = id;
             ReadLetterSound.pitch = 1;
             ReadLetterSound.Play();
-            ReadableItem itemToDisplay = null;
+            string textToDisplay = null;
 
             if (readableItems.ContainsKey(id))
             {
-                itemToDisplay = readableItems[id];
+                textToDisplay = readableItems[id];
             }
             else
             {
                 var letterInfo = LettersHolder.Instance.GetLetterWithID(id);
                 if (letterInfo != null)
-                    itemToDisplay = new ReadableItem(letterInfo.Content);
+                    textToDisplay = letterInfo.Content;
             }
 
             if (!readLettersIds.Contains(id))
@@ -56,13 +56,13 @@ public class ReadableItemHandler : MonoBehaviour
                 slotVisualizer?.Refresh();
             }
 
-            if (itemToDisplay == null)
+            if (textToDisplay == null)
             {
                 Debug.LogError("No letter found matching ID " + id);
             }
             else
             {
-                current.DisplayText(transform, itemToDisplay);
+                current.DisplayText(transform, textToDisplay);
                 Debug.Log("display letter with ID " + id);
             }
         }
@@ -100,34 +100,15 @@ public class ReadableItemHandler : MonoBehaviour
         }
 
         int index = currentIndex++;
-        readableItems.Add(index, new ReadableItem(str, ItemType.NewOrder));
+        readableItems.Add(index, str);
         return index;
     }
 
-    public int AddNewLetterToFamily(string str)
+    public int AddNewReadable(string str)
     {
         int index = currentIndex++;
-        readableItems.Add(index, new ReadableItem(str, ItemType.LetterToFamily));
+        readableItems.Add(index, str);
         return index;
     }
 
-    public int AddNewReceivedLetter(string str)
-    {
-        int index = currentIndex++;
-        readableItems.Add(index, new ReadableItem(str, ItemType.LetterFromFamily));
-        return index;
-    }
-
-}
-
-public class ReadableItem
-{
-    public ItemType itemType;
-    public string text;
-
-    public ReadableItem(string _text, ItemType _itemType = ItemType.LetterFromFamily)
-    {
-        text = _text;
-        itemType = _itemType;
-    }
 }

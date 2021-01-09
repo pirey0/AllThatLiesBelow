@@ -35,7 +35,8 @@ public enum ItemType
     DiamondPickaxe,
     Helmet,
     HeadLamp,
-    Fossil
+    Fossil,
+    LetterNote
 }
 
 

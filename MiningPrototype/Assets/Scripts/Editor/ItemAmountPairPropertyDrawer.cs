@@ -30,7 +30,7 @@ public class ItemAmountPairPropertyDrawer : PropertyDrawer
         EditorGUI.PropertyField(unitRect, property.FindPropertyRelative("amount"), GUIContent.none);
 
         ItemType type = (ItemType)property.FindPropertyRelative("type").enumValueIndex;
-        if (type == ItemType.LetterFromFamily)
+        if (type == ItemType.LetterNote)
         {
             EditorGUI.LabelField(unitRect, new GUIContent("", LettersHolder.LETTERS_ID_DESC));
             int id = property.FindPropertyRelative("amount").intValue;
@@ -50,7 +50,7 @@ public class ItemAmountPairPropertyDrawer : PropertyDrawer
                 {
                    var newLetter = ScriptableObject.CreateInstance<Letter>();
                     newLetter.ID = id;
-                    newLetter.name = "Letter_" +id + "_";
+                    newLetter.name = "Note_" +id + "_";
                     UnityEditor.AssetDatabase.CreateAsset(newLetter, "Assets/Resources/Letters/" + newLetter.name + ".asset");
                     AssetDatabase.Refresh();
                     LettersHolder.Instance.Refresh();

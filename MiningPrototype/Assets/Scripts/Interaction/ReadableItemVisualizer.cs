@@ -28,10 +28,10 @@ public class ReadableItemVisualizer : MonoBehaviour, ILayeredUI
 
     //[SerializeField] float width = 5;
     //[SerializeField] float numberOfCharactersPerHeightUnit = 1;
-    public void DisplayText(Transform objSpawnedFrom, ReadableItem readable, bool showFamilyPhoto = false)
+    public void DisplayText(Transform objSpawnedFrom, string message, bool showFamilyPhoto = false)
     {
         //set text
-        text.text = readable.text;
+        text.text = message;
 
         StartCoroutine(ScaleCoroutine(scaleUp: true));
 
