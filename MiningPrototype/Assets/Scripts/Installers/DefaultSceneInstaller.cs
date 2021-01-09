@@ -35,6 +35,7 @@ public class DefaultSceneInstaller : ScriptableObjectInstaller<DefaultSceneInsta
         Container.Bind<DamageEffectHandler>().FromComponentInNewPrefab(damageEffectHandlerPrefab).AsSingle().NonLazy();
         Container.Bind<UIsHandler>().FromComponentInNewPrefab(uisHandlerPrefab).AsSingle().NonLazy();
         Container.Bind(typeof(IDialogVisualizer), typeof(AltarDialogHandler)).FromComponentInNewPrefab(altarDialogHandlerPrefab).AsSingle().NonLazy();
+        Container.Bind<PlatformHandler>().FromNewComponentOnNewGameObject().AsSingle().NonLazy();
 
         if (DebugMode.DEBUG_POSSIBLE)
         {

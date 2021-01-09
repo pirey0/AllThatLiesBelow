@@ -8,6 +8,9 @@ public class Platform : TilemapCarvingEntity
     [SerializeField] EdgeCollider2D edgeCollider;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Sprite farLeft, left, center, centerDot, right, farRight;
+
+    [Zenject.Inject] PlatformHandler platformHandler;
+
     int fLeft, nLeft, nRight, fRight;
 
     private void Start()
@@ -21,6 +24,7 @@ public class Platform : TilemapCarvingEntity
         map.NotifyRecieversOfUpdates(pos.x + 1, pos.y, TileUpdateReason.VisualUpdate);
         map.NotifyRecieversOfUpdates(pos.x - 1, pos.y, TileUpdateReason.VisualUpdate);
         spriteRenderer.sprite = UpdateVisualsBaseOnNeighbours(pos.x, pos.y);
+        platformHandler.NotifyPlatformPlaced(this);
     }
 
     public override void OnTileUpdated(int x, int y)
@@ -37,9 +41,6 @@ public class Platform : TilemapCarvingEntity
         fRight = (map.IsNeighbourAt(x + 2, y) ? 4 : 0);
         nLeft = (map.IsBlockAt(x - 1, y) ? 1 : 0) + (map.IsNeighbourAt(x - 1, y) ? 2 : 0);
         nRight = (map.IsBlockAt(x + 1, y) ? 1 : 0) + (map.IsNeighbourAt(x + 1, y) ? 2 : 0);
-
-        if ((nRight + nLeft) == 0)
-            UncarveDestroy();
 
         if ((nLeft + fLeft) > 1)
         {
@@ -76,7 +77,8 @@ public class Platform : TilemapCarvingEntity
     {
         if (this != null && reason == TileUpdateReason.Destroy)
         {
-            Debug.Log("Support destroyed.");
+            Debug.Log("Platform destroyed.");
+            platformHandler.NotifyPlatformDestroyed(this);
             UncarveDestroy();
         }
     }
@@ -87,11 +89,30 @@ public class Platform : TilemapCarvingEntity
         //Platform broke... What happens now?
     }
 
+    public bool IsAdjacendTo(Platform platform)
+    {
+        if (transform.position.ToGridPosition().y != platform.transform.position.ToGridPosition().y)
+            return false;
+
+        return Mathf.Abs(platform.transform.position.x - transform.position.x) <= 1;
+    }
+    public bool HasConnectionToWall()
+    {
+        var pos = transform.position.ToGridPosition();
+        return map.IsNeighbourAt(pos.x + 1, pos.y) || map.IsNeighbourAt(pos.x - 1, pos.y);
+    }
+
+    public int GetNumberOfNeightbours()
+    {
+        var pos = transform.position.ToGridPosition();
+        return (map.IsBlockAt(pos.x + 1, pos.y) ? 1 : 0) + (map.IsNeighbourAt(pos.x - 1, pos.y) ? 1 : 0);
+    }
+
 
 #if UNITY_EDITOR
     void OnDrawGizmos()
     {
-        UnityEditor.Handles.Label(transform.position, fLeft + "<" + nLeft + " - " + nRight + ">" + fRight + "\n  == " + ((fLeft + nLeft) - (nRight + fLeft)) + " ==");
+        UnityEditor.Handles.Label(transform.position, fLeft + "<" + nLeft + " - " + nRight + ">" + fRight);
     }
 
 #endif
