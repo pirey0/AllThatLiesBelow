@@ -9,20 +9,22 @@ public class Desk : MonoBehaviour, IInteractable
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Sprite deskEmpty;
     [SerializeField] Canvas optionsCanvas;
-    [SerializeField] GameObject[] options;
     [SerializeField] GameObject writeLetterOption;
     [SerializeField] NewOrderVisualizer newOrderVisualizerPrefab;
     [SerializeField] AudioSource letterWritingSource, paperFold;
     [SerializeField] SpriteAnimator animator;
     [SerializeField] SpriteAnimation idleAnimation, writeAnimation;
-    NewOrderVisualizer currentOrder;
-    PlayerStateMachine seatedPlayer;
+    [SerializeField] Transform optionsParent;
+    [SerializeField] GameObject optionPrefab;
 
     [Zenject.Inject] Zenject.DiContainer diContainer;
     [Zenject.Inject] InventoryManager inventoryManager;
     [Zenject.Inject] ReadableItemHandler readableItemHandler;
     [Zenject.Inject] ProgressionHandler progressionHandler;
 
+    List<GameObject> optionInstances;
+    PlayerStateMachine seatedPlayer;
+    NewOrderVisualizer currentOrder;
     DeskState deskState;
     private bool canSend = true;
 
@@ -41,6 +43,7 @@ public class Desk : MonoBehaviour, IInteractable
     {
         PlayerStateMachine player = interactor.GetComponent<PlayerStateMachine>();
         seatedPlayer = player;
+        RefreshOptions();
         SitAtDesk(player);
     }
 
@@ -60,6 +63,81 @@ public class Desk : MonoBehaviour, IInteractable
         InterruptInteraction += action;
     }
 
+    private void RefreshOptions()
+    {
+        //Delete procedural children
+        for (int i = optionsParent.childCount - 1; i >= 0; i--)
+        {
+            Destroy(optionsParent.GetChild(i).gameObject);
+        }
+
+        List<DeskOption> availableOptions = GetAvailableOptions();
+        optionInstances = new List<GameObject>();
+
+        foreach (var option in availableOptions)
+        {
+            optionInstances.Add(CreateButtonFor(option));
+        }
+    }
+
+
+    private GameObject CreateButtonFor(DeskOption option)
+    {
+        var o = Instantiate(optionPrefab, optionsParent);
+        o.name = option.Text;
+        var text = o.GetComponentInChildren<TMPro.TMP_Text>();
+        var button = o.GetComponentInChildren<UnityEngine.UI.Button>();
+        text.text = option.Text;
+        button.onClick.AddListener(option.Action);
+        button.interactable = option.Active;
+
+        return o;
+    }
+
+    private List<DeskOption> GetAvailableOptions()
+    {
+        var options = new List<DeskOption>();
+
+        options.Add(new DeskOption("Leave Desk", LeaveDesk, true));
+        options.Add(new DeskOption("Order New Equipment", FillOutOrder, true));
+
+        if (!progressionHandler.GetVariable("Sent10Gold"))
+        {
+            options.Add(PaymentOption(10, 0));
+        }
+        else if (!progressionHandler.GetVariable("Sent100Gold"))
+        {
+            options.Add(PaymentOption(100, 1));
+        }
+        else if (!progressionHandler.GetVariable("Sent1000Gold"))
+        {
+            options.Add(PaymentOption(1000, 2));
+        }
+
+        return options;
+    }
+
+    private DeskOption PaymentOption(int amount, int index)
+    {
+        return new DeskOption("Send " + amount + " Gold to family", delegate { PayXGold(amount, index); }, inventoryManager.PlayerHas(ItemType.Gold, amount));
+    }
+
+    private void PayXGold(int amount, int index)
+    {
+        if (inventoryManager.PlayerTryPay(ItemType.Gold, amount))
+        {
+            int readableId = readableItemHandler.AddNewReadable("Yo, i payed " + amount + "gold :)", 9990 + index);
+            inventoryManager.PlayerCollects(ItemType.LetterFromFamily, readableId);
+            LeaveDesk();
+
+            Debug.Log("Created object for " + amount + " Gold to family");
+        }
+        else
+        {
+            Debug.Log("Sending money to family failed");
+        }
+    }
+
     public void SitAtDesk(PlayerStateMachine playerToHide)
     {
         if (deskState == DeskState.Sitting)
@@ -69,7 +147,7 @@ public class Desk : MonoBehaviour, IInteractable
         animator.Play(idleAnimation);
         optionsCanvas.gameObject.SetActive(true);
 
-        foreach (var option in options)
+        foreach (var option in optionInstances)
             option.SetActive(true);
 
         if (writeLetterOption != null)
@@ -93,7 +171,7 @@ public class Desk : MonoBehaviour, IInteractable
         InterruptInteraction?.Invoke(this);
     }
 
-    public void FillOutOrder ()
+    public void FillOutOrder()
     {
         if (deskState == DeskState.FillingOutOrder)
             return;
@@ -113,10 +191,11 @@ public class Desk : MonoBehaviour, IInteractable
             }
         }
 
-        foreach (var option in options)
+        foreach (var option in optionInstances)
             option.SetActive(false);
     }
 
+    [System.Obsolete]
     public void WriteLetterToFamily()
     {
         if (deskState == DeskState.WritingLetterForFamily)
@@ -128,7 +207,7 @@ public class Desk : MonoBehaviour, IInteractable
 
     public IEnumerator LetterWritingRoutine()
     {
-        foreach (var option in options)
+        foreach (var option in optionInstances)
             option.SetActive(false);
 
         animator.Play(writeAnimation);
@@ -194,5 +273,20 @@ public class Desk : MonoBehaviour, IInteractable
     public Vector3 GetPosition()
     {
         return transform.position;
+    }
+}
+
+
+public class DeskOption
+{
+    public string Text;
+    public UnityEngine.Events.UnityAction Action;
+    public bool Active;
+
+    public DeskOption(string text, UnityEngine.Events.UnityAction action, bool active)
+    {
+        Text = text;
+        Action = action;
+        Active = active;
     }
 }

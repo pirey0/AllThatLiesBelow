@@ -149,10 +149,5 @@ public class SceneAdder : StateListenerBehaviour
                 }
             }
         }
-
-
-
- 
     }
-
 }
