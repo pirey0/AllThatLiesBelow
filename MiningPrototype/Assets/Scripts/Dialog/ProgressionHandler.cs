@@ -174,6 +174,11 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
             case "Camshake1":
                 cameraController.Shake(player.transform.position, CameraShakeType.explosion);
                 break;
+
+            case "Camshake2":
+                cameraController.Shake(player.transform.position, CameraShakeType.hill, 5);
+                break;
+
             case "Spring":
                 AquireAltarReward(AltarRewardType.Spring);
                 break;
@@ -189,6 +194,12 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
             case "OreVision":
                 StartCoroutine(OreVisibilityEffector.SetOreVisibleForCoroutine(map, 60));
                 break;
+
+            case "KillPlayer":
+                player.TakeDamage(DamageStrength.Strong);
+                break;
+
+
 
             default:
                 Debug.LogWarning("Fired unimplemented event " + ev);
