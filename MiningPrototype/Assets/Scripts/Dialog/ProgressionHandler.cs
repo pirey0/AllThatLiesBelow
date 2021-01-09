@@ -178,6 +178,10 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
                 AquireAltarReward(AltarRewardType.Spring);
                 break;
 
+            case "ReceiveSpareHelmet":
+                inventoryManager.PlayerCollects(ItemType.Helmet, 1);
+                break;
+
 
             default:
                 Debug.LogWarning("Fired unimplemented event " + ev);
@@ -223,6 +227,9 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
                         else
                         {
                             newOrderCrateSpawner.SpawnOrder(new List<ItemAmountPair>(order.Items));
+                            CheckOrderForNarrativeTriggers(order);
+
+
                         }
 
                         data.specialLettersForNextDay.Remove(storedItem.amount);
@@ -244,6 +251,20 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
         {
             Debug.LogError("No Postbox found!");
         }
+    }
+
+    private void CheckOrderForNarrativeTriggers(Order order)
+    {
+        foreach (var item in order.Items)
+        {
+            switch (item.type)
+            {
+                case ItemType.Helmet:
+                    SetVariable("BoughtHelmet", true);
+                    break;
+            }
+        }
+
     }
 
     private void ExcecuteLetterToFamilyConsequences(LetterToFamily l)
@@ -448,6 +469,11 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     public bool HasRunDialog(string id)
     {
         return data.dialogsRan.Contains(id);
+    }
+
+    public void NotifyPlayerDeath()
+    {
+        SetVariable("Died", true);
     }
 }
 
