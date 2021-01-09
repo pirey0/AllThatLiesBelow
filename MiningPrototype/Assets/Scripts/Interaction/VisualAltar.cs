@@ -32,6 +32,7 @@ public class VisualAltar : MonoBehaviour, IDialogUser
                 if (Enum.TryParse(root.Skin.SkinName, out AltarSkin newSkin))
                 {
                     skin = newSkin;
+                    OnChangeState(AltarState.Passive);
                     Debug.Log("Changed skin to " + skin);
                 }
                 else
