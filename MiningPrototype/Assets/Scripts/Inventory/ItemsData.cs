@@ -36,7 +36,8 @@ public enum ItemType
     Helmet,
     HeadLamp,
     Fossil,
-    LetterNote
+    LetterNote,
+    DragonClaw,
 }
 
 
