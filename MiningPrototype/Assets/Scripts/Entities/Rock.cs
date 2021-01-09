@@ -31,7 +31,7 @@ public class Rock : FallingTilemapCarvingEntity
 
         if (Time.time - lastCrumbleStamp < crumbleMinTime)
         {
-            TryDestroyBelow(RuntimeProceduralMap.Instance); //<-dirty
+            TryDestroyBelow(map); //<-dirty
             Debug.Log("Instant Crumble!");
         }
 
@@ -59,7 +59,7 @@ public class Rock : FallingTilemapCarvingEntity
         foreach (var item in tilesToOccupy)
         {
             Vector2Int pos = tilemapPos + item.Offset;
-            Tile t = RuntimeProceduralMap.Instance[pos];
+            Tile t = map[pos];
             if (t.Visibility < minVis)
                 minVis = t.Visibility;
         }

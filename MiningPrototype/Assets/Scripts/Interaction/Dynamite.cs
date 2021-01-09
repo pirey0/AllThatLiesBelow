@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
-public class Dynamite : MonoBehaviour
+public class Dynamite : MirrorWorldFollower
 {
     [SerializeField] float delay;
     [SerializeField] int explostionSize = 5, destroyEntitySize;
@@ -28,7 +28,7 @@ public class Dynamite : MonoBehaviour
             for (int y = -explostionSize; y <= explostionSize; y++)
             {
                 if (Vector2Int.Distance(Vector2Int.zero, new Vector2Int(x, y)) <= explostionSize)
-                    RuntimeProceduralMap.Instance.DamageAt(position.x + x, position.y + y, 100, BaseMap.DamageType.Explosion);
+                    map.DamageAt(position.x + x, position.y + y, 100, BaseMap.DamageType.Explosion);
             }
         }
 

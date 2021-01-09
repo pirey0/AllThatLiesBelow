@@ -82,11 +82,11 @@ public class Rope : TilemapCarvingEntity, IClimbable
         Vector2Int pos = transform.position.ToGridPosition();
         Util.DebugDrawTile(pos + new Vector2Int(0, -height - 1));
 
-        if (RuntimeProceduralMap.Instance.IsAirAt(pos.x, pos.y))
+        if (map.IsAirAt(pos.x, pos.y))
         {
             UncarveDestroy();
         }
-        else if (RuntimeProceduralMap.Instance.IsAirAt(pos.x, pos.y - height - 1))
+        else if (map.IsAirAt(pos.x, pos.y - height - 1))
         {
             UpdateHeight();
         }

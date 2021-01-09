@@ -12,7 +12,7 @@ public class PlayerStatementsHandler : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(msg))
         {
-            DialogElementVisualization text = Instantiate(textPrefab, textSpawnPosition.position, Quaternion.identity, textCanvas.transform);
+            DialogElementVisualization text = Instantiate(textPrefab, textSpawnPosition.position, Quaternion.identity, textCanvas.transform); //Safe
             text.Init(null, msg, duration);
         }
     }

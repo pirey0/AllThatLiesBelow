@@ -6,10 +6,11 @@ public class PlaceOnStart : MonoBehaviour
 {
     [SerializeField] TileType type;
 
+    [Zenject.Inject] RuntimeProceduralMap map;
     private void Start()
     {
         var p = transform.position.ToGridPosition();
-        RuntimeProceduralMap.Instance.SetMapAt(p.x, p.y, Tile.Make(type), TileUpdateReason.Place);
+        map.SetMapAt(p.x, p.y, Tile.Make(type), TileUpdateReason.Place);
         Destroy(gameObject);
     }
 }

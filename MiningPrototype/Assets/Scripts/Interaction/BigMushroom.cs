@@ -27,7 +27,7 @@ public class BigMushroom : MonoBehaviour
     private IEnumerator ExplosionRoutine()
     {
         yield return new WaitForSeconds(explosionWaitTime);
-        Instantiate(explosionPrefab,transform.position + Vector3.up,Quaternion.identity);
+        Instantiate(explosionPrefab,transform.position + Vector3.up,Quaternion.identity); //Safe
         yield return new WaitForSeconds(0.25f);
         Destroy(gameObject);
     }

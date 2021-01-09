@@ -9,6 +9,8 @@ public class GridBasedItemPreview : MonoBehaviour, IItemPreview
     [SerializeField] bool underworldOnly = false;
     bool couldPlace;
 
+    [Zenject.Inject] RuntimeProceduralMap map;
+
     public Vector3 GetPlacePosition(Vector3 pointPosition)
     {
         return pointPosition.ToGridPosition().AsV3() + offset;
@@ -19,7 +21,7 @@ public class GridBasedItemPreview : MonoBehaviour, IItemPreview
         var gridPos = position.ToGridPosition();
         transform.position = gridPos.AsV3() + offset;
     
-        if (RuntimeProceduralMap.Instance.IsAirAt(gridPos.x, gridPos.y) && (!underworldOnly || gridPos.y < Constants.OVERWORLD_START_Y))
+        if (map.IsAirAt(gridPos.x, gridPos.y) && (!underworldOnly || gridPos.y < Constants.OVERWORLD_START_Y))
         {
             spriteRenderer.color = Color.green;
             couldPlace = true;

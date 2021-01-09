@@ -27,7 +27,12 @@ public class Altar : StateListenerBehaviour, IInteractable, IDialogUser
         Debug.Log("Begin Altar Interaction");
         gameObject.layer = 12;
 
-       StartCoroutine(AltarDialogRunner.DialogCoroutine(dialogServices, startingNode));
+       StartCoroutine(AltarDialogRunner.DialogCoroutine(dialogServices, startingNode, onDialogFinished));
+    }
+
+    private void onDialogFinished()
+    {
+        NotifyForcedEnd?.Invoke(this);
     }
 
     public void EndInteracting(GameObject interactor)

@@ -27,11 +27,7 @@ public sealed class BasicNonPersistantSavable : MonoBehaviour, INonPersistantSav
 
         //Wrap position in case Mirror Follower is in mirrored position
         var pos = transform.position;
-        if (RuntimeProceduralMap.Instance != null)
-        {
-            int sizeX = RuntimeProceduralMap.Instance.SizeX;
-            pos.x = (pos.x + sizeX) % sizeX;
-        }
+        pos.x = (pos.x + Constants.WIDTH) % Constants.WIDTH;
 
         data.Position = new SerializedVector3(pos);
         data.Rotation = new SerializedVector3(transform.eulerAngles);

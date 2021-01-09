@@ -70,7 +70,7 @@ public class DebugMode : MonoBehaviour
         if (open)
         {
             var p = Util.MouseToWorld(cameraController.Camera).ToGridPosition();
-            tooltipHandler.Display(transform, p.ToString(), RuntimeProceduralMap.Instance[p].ToString());
+            tooltipHandler.Display(transform, p.ToString(), map[p].ToString());
         }
     }
 

@@ -81,7 +81,7 @@ public class BasicSpriteAnimator
         }
 
         original = ani;
-        animation = MonoBehaviour.Instantiate(ani);
+        animation = MonoBehaviour.Instantiate(ani); //Safe
     }
 
     public bool IsDone()

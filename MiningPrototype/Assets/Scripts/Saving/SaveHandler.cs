@@ -15,6 +15,7 @@ public class SaveHandler : MonoBehaviour
 
     [SerializeField] GameObject saveInfoPrefab;
     [Zenject.Inject] PrefabFactory prefabFactory;
+    [Zenject.Inject] RuntimeProceduralMap map;
 
     private static string GetFullSavePath()
     {
@@ -174,7 +175,7 @@ public class SaveHandler : MonoBehaviour
             if (collection.ContainsKey("EditorMap"))
             {
                 var data = collection["EditorMap"];
-                RuntimeProceduralMap.Instance.AdditiveLoad((BaseMapSaveData)data, Mathf.FloorToInt(offset.x), Mathf.FloorToInt(offset.y));
+                map.AdditiveLoad((BaseMapSaveData)data, Mathf.FloorToInt(offset.x), Mathf.FloorToInt(offset.y));
             }
         }
         else

@@ -7,6 +7,8 @@ public class RopePreview : MonoBehaviour, IItemPreview
     new SpriteRenderer renderer;
     bool couldPlace;
 
+    [Zenject.Inject] RuntimeProceduralMap map;
+
     private void Awake()
     {
         renderer = GetComponent<SpriteRenderer>();
@@ -20,7 +22,7 @@ public class RopePreview : MonoBehaviour, IItemPreview
     {
         transform.position = GetPlacePosition(position);
         var gridPos = position.ToGridPosition();
-        if (RuntimeProceduralMap.Instance.IsBlockAt(gridPos.x, gridPos.y) && RuntimeProceduralMap.Instance.IsAirAt(gridPos.x, gridPos.y - 1))
+        if (map.IsBlockAt(gridPos.x, gridPos.y) && map.IsAirAt(gridPos.x, gridPos.y - 1))
         {
             renderer.color = Color.green;
             couldPlace = true;

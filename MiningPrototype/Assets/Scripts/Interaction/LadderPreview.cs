@@ -7,6 +7,8 @@ public class LadderPreview : MonoBehaviour, IItemPreview
     new SpriteRenderer renderer;
     bool couldPlace;
 
+    [Zenject.Inject] RuntimeProceduralMap map;
+
     private void Awake()
     {
         renderer = GetComponent<SpriteRenderer>();
@@ -20,8 +22,8 @@ public class LadderPreview : MonoBehaviour, IItemPreview
     {
         transform.position = GetPlacePosition(position);
         var gridPos = position.ToGridPosition();
-        int cAbove = MapHelper.AirTileCountAbove(RuntimeProceduralMap.Instance, gridPos, TileType.FloatingEntityNotNeighbour, TileType.CollapsableEntityNotNeighbour);
-        if (RuntimeProceduralMap.Instance.IsBlockAt(gridPos.x, gridPos.y - 1) && cAbove >= 6)
+        int cAbove = MapHelper.AirTileCountAbove(map, gridPos, TileType.FloatingEntityNotNeighbour, TileType.CollapsableEntityNotNeighbour);
+        if (map.IsBlockAt(gridPos.x, gridPos.y - 1) && cAbove >= 6)
         {
             renderer.color = Color.green;
             couldPlace = true;

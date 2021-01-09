@@ -46,7 +46,7 @@ public class AltarDialogRunner : StateListenerBehaviour
         }
     }
 
-    public static IEnumerator DialogCoroutine(INodeServiceProvider provider, AltarBaseNode node)
+    public static IEnumerator DialogCoroutine(INodeServiceProvider provider, AltarBaseNode node, System.Action finishedCallback = null)
     {
         Debug.Log("NodeDebugRunner Start");
 
@@ -112,6 +112,7 @@ public class AltarDialogRunner : StateListenerBehaviour
             }
         }
         provider.DialogVisualizer.EndDialog();
+        finishedCallback?.Invoke();
     }
 
     private static AltarBaseNode SelectFirstViableChildNodeStartingAt(AltarBaseNode node, INodeServiceProvider provider, int startIndex)

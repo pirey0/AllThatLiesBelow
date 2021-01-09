@@ -83,7 +83,7 @@ public class Desk : MonoBehaviour, IInteractable
 
     private GameObject CreateButtonFor(DeskOption option)
     {
-        var o = Instantiate(optionPrefab, optionsParent);
+        var o = Instantiate(optionPrefab, optionsParent); //Safe
         o.name = option.Text;
         var text = o.GetComponentInChildren<TMPro.TMP_Text>();
         var button = o.GetComponentInChildren<UnityEngine.UI.Button>();

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Mushroom : MonoBehaviour
 {
     [SerializeField] AudioSource bounceAudio;
-    [SerializeField] ParticleSystem particleSystem;
+    [SerializeField] new ParticleSystem particleSystem;
     [SerializeField] SpriteAnimator spriteAnimator;
     [SerializeField] SpriteAnimation[] spriteAnimation;
 

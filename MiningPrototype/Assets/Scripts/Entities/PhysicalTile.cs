@@ -87,7 +87,7 @@ public class PhysicalTile : MineableObject, IEntity
 
                 Util.DebugDrawTile(position, Color.green, 2);
                 if (onLandEffects != null)
-                    Instantiate(onLandEffects);
+                    Instantiate(onLandEffects); //Safe
 
                 Destroy(gameObject);
                 placed = true;

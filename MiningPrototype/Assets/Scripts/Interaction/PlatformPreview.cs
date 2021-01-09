@@ -18,9 +18,9 @@ public class PlatformPreview : PlatformBase, IItemPreview
         var gridPos = position.ToGridPosition();
         transform.position = gridPos.AsV3();
 
-        bool tS = RuntimeProceduralMap.Instance.IsAirAt(gridPos.x, gridPos.y);
-        bool tL = RuntimeProceduralMap.Instance.IsBlockAt(gridPos.x+1, gridPos.y);
-        bool tR = RuntimeProceduralMap.Instance.IsBlockAt(gridPos.x-1, gridPos.y);
+        bool tS = map.IsAirAt(gridPos.x, gridPos.y);
+        bool tL = map.IsBlockAt(gridPos.x+1, gridPos.y);
+        bool tR = map.IsBlockAt(gridPos.x-1, gridPos.y);
 
         if (tS && (tL || tR))
         {

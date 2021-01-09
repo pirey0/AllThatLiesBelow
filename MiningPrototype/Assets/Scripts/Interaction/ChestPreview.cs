@@ -7,6 +7,8 @@ public class ChestPreview : MonoBehaviour, IItemPreview
     bool couldPlace;
     [SerializeField] SpriteRenderer spriteRenderer;
 
+    [Zenject.Inject] RuntimeProceduralMap map;
+
     public Vector3 GetPlacePosition(Vector3 pointPosition)
     {
         return pointPosition.ToGridPosition().AsV3() + new Vector3(0.5f, 0);
@@ -17,7 +19,7 @@ public class ChestPreview : MonoBehaviour, IItemPreview
         var gridPos = position.ToGridPosition();
         transform.position = gridPos.AsV3() + new Vector3(0.5f, 0);
 
-        if (RuntimeProceduralMap.Instance.IsAirAt(gridPos.x, gridPos.y))
+        if (map.IsAirAt(gridPos.x, gridPos.y))
         {
             spriteRenderer.color = Color.green;
             couldPlace = true;

@@ -7,19 +7,21 @@ public class MirrorWorldFollower : MonoBehaviour
 {
     const int MIRROR_AMOUNT = 20;
 
+    [Zenject.Inject] protected RuntimeProceduralMap map;
+
     protected virtual void OnEnable()
     {
-        RuntimeProceduralMap.Instance.MirrorSideChanged += OnMirrorSideChanged;
+        map.MirrorSideChanged += OnMirrorSideChanged;
     }
 
     protected virtual void OnDisable()
     {
-        RuntimeProceduralMap.Instance.MirrorSideChanged -= OnMirrorSideChanged;
+        map.MirrorSideChanged -= OnMirrorSideChanged;
     }
 
     private void OnMirrorSideChanged(RuntimeProceduralMap.MirrorState state)
     {
-        int sizeX = RuntimeProceduralMap.Instance.SizeX;
+        int sizeX = Constants.WIDTH;
 
         switch (state)
         {

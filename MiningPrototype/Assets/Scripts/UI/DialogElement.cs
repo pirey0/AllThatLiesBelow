@@ -12,7 +12,6 @@ public class DialogElement : MonoBehaviour
     [SerializeField] ImageSpriteAnimator imageSpriteAnimator;
     [SerializeField] SpriteAnimation hideAnimation;
 
-    bool isChoice = false;
     Transform transformToFollow;
     Vector3 startPosition;
     Vector3 offset;
@@ -31,7 +30,6 @@ public class DialogElement : MonoBehaviour
 
     public DialogElement Init(string[] options, DialogVisualizer dialogVisualizer, Vector3 newOffset)
     {
-        isChoice = true;
         offset = newOffset;
 
         startPosition = transform.position;

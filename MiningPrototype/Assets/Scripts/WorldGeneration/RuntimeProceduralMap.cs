@@ -32,8 +32,6 @@ public class UnstableTile
 [DefaultExecutionOrder(-100)]
 public class RuntimeProceduralMap : RenderedMap
 {
-    private static RuntimeProceduralMap instance;
-
     [Header("RuntimeProceduralMap")]
     [ReadOnly]
     [SerializeField] string saveID = Util.GenerateNewSaveGUID();
@@ -54,21 +52,8 @@ public class RuntimeProceduralMap : RenderedMap
     public event System.Action<MirrorState> MirrorSideChanged;
     public event System.Action<TileType> MinedBlock;
 
-    public static RuntimeProceduralMap Instance { get => instance; }
-
     protected virtual void Awake()
     {
-        if (Instance != this && instance != null)
-        {
-            Destroy(gameObject);
-            Debug.LogError("Second RuntimeProceduralMap found.");
-            return;
-        }
-        else
-        {
-            instance = this;
-        }
-
         Setup();
     }
 

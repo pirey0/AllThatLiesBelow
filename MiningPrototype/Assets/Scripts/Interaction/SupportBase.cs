@@ -28,6 +28,6 @@ public abstract class SupportBase : TilemapCarvingEntity
 
     public int CalculateHeight()
     {
-        return Mathf.Min(maxHeight, MapHelper.AirTileCountAbove(RuntimeProceduralMap.Instance, transform.position.ToGridPosition(), TileType.FloatingEntityNotNeighbour, TileType.CollapsableEntityNotNeighbour));
+        return Mathf.Min(maxHeight, MapHelper.AirTileCountAbove(map, transform.position.ToGridPosition(), TileType.FloatingEntityNotNeighbour, TileType.CollapsableEntityNotNeighbour));
     }
 }

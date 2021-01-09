@@ -13,6 +13,7 @@ public class SceneAdder : StateListenerBehaviour
     [SerializeField] bool debug;
 
     [Zenject.Inject] SaveHandler saveHandler;
+    [Zenject.Inject] RuntimeProceduralMap map;
 
     int loadingIndex = 0;
     List<Rect> drawnRects;
@@ -62,7 +63,7 @@ public class SceneAdder : StateListenerBehaviour
                         //Secondary check through set times on map
                         locations.Clear();
                         Util.IterateXY((int)current.Size.x, (int)current.Size.y, (x, y) => locations.Add(center + new Vector2Int(x, y)));
-                        if (!RuntimeProceduralMap.Instance.IsAdditivelyCoveredAtAny(locations))
+                        if (!map.IsAdditivelyCoveredAtAny(locations))
                         {
                             saveHandler.LoadAdditive(current.SavedSceneFile, center.AsV3());
                             Debug.Log("Loaded Scene " + current.SavedSceneFile.name);
