@@ -17,14 +17,13 @@ public class PhysicalTile : MineableObject, IEntity
     [SerializeField] GameObject onLandEffects;
     [SerializeField] float RequiredSpeedForStrongHit;
 
-    private RuntimeProceduralMap generator;
     Tile tile;
     TileInfo info;
     bool placed;
 
     public void Setup(RuntimeProceduralMap testGeneration, Tile tile, TileInfo info)
     {
-        generator = testGeneration;
+        map = testGeneration;
         this.tile = tile;
         this.info = info;
 
@@ -52,6 +51,17 @@ public class PhysicalTile : MineableObject, IEntity
         Destroy(gameObject);
     }
 
+    private void Update()
+    {
+        var pos = transform.position.ToGridPosition();
+        Util.DebugDrawTile(pos, Color.red, 0.1f);
+        
+        if(map.IsBlockAt(pos.x, pos.y))
+        {
+            TryPlace();
+        }
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -76,22 +86,27 @@ public class PhysicalTile : MineableObject, IEntity
         }
         else if (collision.transform.TryGetComponent(out ITileMapElement element))
         {
-            if (!placed)
-            {
-                var position = transform.position.ToGridPosition();
+            TryPlace();
+        }
+    }
 
-                if (generator.IsBlockAt(position.x, position.y))
-                    position.y += 1;
+    private void TryPlace()
+    {
+        if (!placed)
+        {
+            var position = transform.position.ToGridPosition();
 
-                generator.SetMapAt(position.x, position.y, tile, TileUpdateReason.Place);
+            if (map.IsBlockAt(position.x, position.y))
+                position.y += 1;
 
-                Util.DebugDrawTile(position, Color.green, 2);
-                if (onLandEffects != null)
-                    Instantiate(onLandEffects); //Safe
+            map.SetMapAt(position.x, position.y, tile, TileUpdateReason.Place);
 
-                Destroy(gameObject);
-                placed = true;
-            }
+            Util.DebugDrawTile(position, Color.green, 2);
+            if (onLandEffects != null)
+                Instantiate(onLandEffects); //Safe
+
+            Destroy(gameObject);
+            placed = true;
         }
     }
 
