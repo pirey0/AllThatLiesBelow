@@ -113,6 +113,7 @@ public enum AltarSkin
 {
     Miner,
     Archeologist,
+    Hunter,
 }
 
 [System.Serializable]

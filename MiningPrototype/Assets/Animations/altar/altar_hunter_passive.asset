@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d05716d329922cf4abb0b6513364aece, type: 3}
+  m_Name: altar_hunter_passive
+  m_EditorClassIdentifier: 
+  loop: 1
+  speedMultiplyer: 1
+  frames:
+  - Sprite: {fileID: -6527263488302059352, guid: f59ae518500f66741a9be2354040b2e5, type: 3}
+    Duration: 1
+  - Sprite: {fileID: -2748908123710469646, guid: f59ae518500f66741a9be2354040b2e5, type: 3}
+    Duration: 2
+  - Sprite: {fileID: -1284719228485422117, guid: f59ae518500f66741a9be2354040b2e5, type: 3}
+    Duration: 0.15
+  - Sprite: {fileID: -6527263488302059352, guid: f59ae518500f66741a9be2354040b2e5, type: 3}
+    Duration: 1
+  - Sprite: {fileID: 781163962123544572, guid: f59ae518500f66741a9be2354040b2e5, type: 3}
+    Duration: 0.5
+  - Sprite: {fileID: -8867561500134718015, guid: f59ae518500f66741a9be2354040b2e5, type: 3}
+    Duration: 0.2
+  - Sprite: {fileID: 8906359339443332207, guid: f59ae518500f66741a9be2354040b2e5, type: 3}
+    Duration: 0.5
+  - Sprite: {fileID: -219579856214810610, guid: f59ae518500f66741a9be2354040b2e5, type: 3}
+    Duration: 0.15
+  - Sprite: {fileID: 8906359339443332207, guid: f59ae518500f66741a9be2354040b2e5, type: 3}
+    Duration: 0.5
+  - Sprite: {fileID: -219579856214810610, guid: f59ae518500f66741a9be2354040b2e5, type: 3}
+    Duration: 0.15
+  - Sprite: {fileID: 8906359339443332207, guid: f59ae518500f66741a9be2354040b2e5, type: 3}
+    Duration: 1
+  - Sprite: {fileID: -6527263488302059352, guid: f59ae518500f66741a9be2354040b2e5, type: 3}
+    Duration: 1
+  fileToLoadFrom: {fileID: 2800000, guid: f59ae518500f66741a9be2354040b2e5, type: 3}
+  defaultTime: 0.5
+  loadFromLastToFirst: 0
