@@ -10,7 +10,7 @@ public class Support : SupportBase
     {
         var height = CalculateHeight();
         AdaptHeightTo(height);
-        Debug.Log("Support placed with height: " + height);
+        //Debug.Log("Support placed with height: " + height);
         Carve();
 
         StabilizeAt(height);
