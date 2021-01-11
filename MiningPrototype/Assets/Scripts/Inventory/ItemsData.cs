@@ -39,6 +39,7 @@ public enum ItemType
     LetterNote,
     CopperClaw,
     SpecialPresent,
+    HeartOfForest
 }
 
 
