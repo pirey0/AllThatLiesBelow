@@ -82,7 +82,7 @@ Transform:
   m_LocalScale: {x: 51, y: 32, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 15
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &130648570
 MonoBehaviour:
@@ -135,7 +135,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 30
+  m_RootOrder: 35
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &201875972
 MonoBehaviour:
@@ -188,7 +188,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 20
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &233272678
 MonoBehaviour:
@@ -241,7 +241,7 @@ Transform:
   m_LocalScale: {x: 82.007515, y: 12, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 14
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &968209976
 MonoBehaviour:
@@ -294,7 +294,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 21
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &985654698
 MonoBehaviour:
@@ -347,7 +347,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 19
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1160308705
 MonoBehaviour:
@@ -555,11 +555,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 374510622520052330}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.25, y: 220.75, z: 0}
+  m_LocalPosition: {x: 70, y: 225, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 8
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4509528626470774150
 MonoBehaviour:
@@ -576,13 +576,13 @@ MonoBehaviour:
   Size: {x: 50, y: 10}
   SavedSceneFile: {fileID: 4900000, guid: f1bf8d1308846cf4791f639517f0fabe, type: 3}
   Area: 1
-  SpawnAttached: 1
+  SpawnAttached: 0
   BlocksArea: 1
   gizmoColor: {r: 0.8018868, g: 0.670183, b: 0, a: 1}
-  XInArea: 1
-  YInArea: 1
-  areaTopRight: {x: 95.010925, y: 239.88292, z: 0}
-  areaBotLeft: {x: -5.2009354, y: 159.927, z: 0}
+  XInArea: 0
+  YInArea: 0
+  areaTopRight: {x: 70, y: 225, z: 0}
+  areaBotLeft: {x: 70, y: 225, z: 0}
 --- !u!1 &872557360880745111
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,7 +612,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 28
+  m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2303423342703771768
 MonoBehaviour:
@@ -665,7 +665,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 32
+  m_RootOrder: 37
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4197327048555070319
 MonoBehaviour:
@@ -741,7 +741,7 @@ MonoBehaviour:
   XInArea: 1
   YInArea: 1
   areaTopRight: {x: 96.013985, y: 251.77971, z: 0}
-  areaBotLeft: {x: -3.2188263, y: 147.62747, z: 0}
+  areaBotLeft: {x: -3.2188263, y: 170, z: 0}
 --- !u!1 &2570786994410162374
 GameObject:
   m_ObjectHideFlags: 0
@@ -771,7 +771,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 24
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2678256100082281184
 MonoBehaviour:
@@ -847,7 +847,7 @@ MonoBehaviour:
   XInArea: 1
   YInArea: 1
   areaTopRight: {x: 96.013985, y: 251.77971, z: 0}
-  areaBotLeft: {x: -3.2188263, y: 147.62747, z: 0}
+  areaBotLeft: {x: -3.2188263, y: 170, z: 0}
 --- !u!1 &3510606058087648147
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,15 +881,20 @@ Transform:
   - {fileID: 1177119454}
   - {fileID: 1231778250}
   - {fileID: 34519160}
+  - {fileID: 7706670249785811735}
   - {fileID: 7925308375326680746}
   - {fileID: 8784280650103986155}
   - {fileID: 2276926598129044168}
-  - {fileID: 7706670249785811735}
   - {fileID: 8338614085477081292}
   - {fileID: 1680370898351456137}
   - {fileID: 5558903740918725763}
   - {fileID: 1152353959361097041}
   - {fileID: 2703905814140401822}
+  - {fileID: 3044270131297169823}
+  - {fileID: 1823192905446849221}
+  - {fileID: 8400359556948404722}
+  - {fileID: 3197277496001852520}
+  - {fileID: 8952327473601122683}
   - {fileID: 968209974}
   - {fileID: 130648569}
   - {fileID: 2525716282587243701}
@@ -909,7 +914,6 @@ Transform:
   - {fileID: 201875971}
   - {fileID: 8054313014804635354}
   - {fileID: 4694278677382500625}
-  - {fileID: 3044270131297169823}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -927,6 +931,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stepSize: 10
   debug: 0
+--- !u!1 &3526362980307594668
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1823192905446849221}
+  - component: {fileID: 2281606244528801182}
+  m_Layer: 0
+  m_Name: ShoppingListScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1823192905446849221
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3526362980307594668}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 125, y: 225, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2281606244528801182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3526362980307594668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 10, y: 10}
+  SavedSceneFile: {fileID: 4900000, guid: 8b385a2c5c2d08840bf0a0c9b5f2fa85, type: 3}
+  Area: 0
+  SpawnAttached: 0
+  BlocksArea: 1
+  gizmoColor: {r: 0.8, g: 0.30750096, b: 0, a: 1}
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 170, y: 225, z: 0}
+  areaBotLeft: {x: 110, y: 225, z: 0}
 --- !u!1 &3618773912569992534
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,7 +1013,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 29
+  m_RootOrder: 34
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4115336093739445199
 MonoBehaviour:
@@ -1009,7 +1066,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7039766550860655665
 MonoBehaviour:
@@ -1032,7 +1089,7 @@ MonoBehaviour:
   XInArea: 1
   YInArea: 1
   areaTopRight: {x: 95, y: 239.9024, z: 0}
-  areaBotLeft: {x: -5.404953, y: 159.90582, z: 0}
+  areaBotLeft: {x: -5.404953, y: 170, z: 0}
 --- !u!1 &4718019392664483123
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,7 +1119,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 31
+  m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7090875848098543953
 MonoBehaviour:
@@ -1111,11 +1168,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5038251809236529489}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 80, y: 180, z: 0}
+  m_LocalPosition: {x: 30.4, y: 189.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3497570464798829367
 MonoBehaviour:
@@ -1132,13 +1189,13 @@ MonoBehaviour:
   Size: {x: 30, y: 20}
   SavedSceneFile: {fileID: 4900000, guid: 29d1d24c2ebcf704ba397f5e838d8453, type: 3}
   Area: 1
-  SpawnAttached: 0
+  SpawnAttached: 1
   BlocksArea: 1
   gizmoColor: {r: 0.8018868, g: 0.670183, b: 0, a: 1}
   XInArea: 1
   YInArea: 1
-  areaTopRight: {x: 80, y: 180, z: 0}
-  areaBotLeft: {x: 80, y: 180, z: 0}
+  areaTopRight: {x: 96.34251, y: 251.70387, z: 0}
+  areaBotLeft: {x: -5.426735, y: 169.5974, z: 0}
 --- !u!1 &5128507124403573031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1191,7 +1248,113 @@ MonoBehaviour:
   XInArea: 1
   YInArea: 1
   areaTopRight: {x: 96.013985, y: 251.77971, z: 0}
-  areaBotLeft: {x: -3.2188263, y: 147.62747, z: 0}
+  areaBotLeft: {x: -3.2188263, y: 170, z: 0}
+--- !u!1 &5350741862891798573
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8400359556948404722}
+  - component: {fileID: 6218239481818174992}
+  m_Layer: 0
+  m_Name: CrazyMinerScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8400359556948404722
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5350741862891798573}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 170, y: 190, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6218239481818174992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5350741862891798573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 80, y: 30}
+  SavedSceneFile: {fileID: 4900000, guid: 1749bac3ae115f9469783e613ca30b1b, type: 3}
+  Area: 0
+  SpawnAttached: 0
+  BlocksArea: 1
+  gizmoColor: {r: 0.48301125, g: 0, b: 0.8, a: 1}
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 180, y: 190, z: 0}
+  areaBotLeft: {x: 150, y: 190, z: 0}
+--- !u!1 &6037491789791805121
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8952327473601122683}
+  - component: {fileID: 8714518659057029093}
+  m_Layer: 0
+  m_Name: MushroomEaterCave2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8952327473601122683
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6037491789791805121}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 170, y: 155, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8714518659057029093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6037491789791805121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 20, y: 10}
+  SavedSceneFile: {fileID: 4900000, guid: 7d3888fd039e13b42a26a4d1aec65552, type: 3}
+  Area: 0
+  SpawnAttached: 0
+  BlocksArea: 1
+  gizmoColor: {r: 0.48301125, g: 0, b: 0.8, a: 1}
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 200, y: 155, z: 0}
+  areaBotLeft: {x: 110, y: 155, z: 0}
 --- !u!1 &6041486164947576616
 GameObject:
   m_ObjectHideFlags: 0
@@ -1221,7 +1384,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 17
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6337068164653493850
 MonoBehaviour:
@@ -1327,7 +1490,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 22
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7354858493614454786
 MonoBehaviour:
@@ -1403,7 +1566,7 @@ MonoBehaviour:
   XInArea: 1
   YInArea: 1
   areaTopRight: {x: 96.013985, y: 251.77971, z: 0}
-  areaBotLeft: {x: -3.2188263, y: 147.62747, z: 0}
+  areaBotLeft: {x: -3.2188263, y: 170, z: 0}
 --- !u!1 &7787533671540122906
 GameObject:
   m_ObjectHideFlags: 0
@@ -1433,7 +1596,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 18
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &335290826389894785
 MonoBehaviour:
@@ -1486,7 +1649,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 23
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5420569903678099675
 MonoBehaviour:
@@ -1539,7 +1702,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 27
+  m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8703701506312716418
 MonoBehaviour:
@@ -1592,7 +1755,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 33
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2104861815079801302
 MonoBehaviour:
@@ -1615,7 +1778,7 @@ MonoBehaviour:
   XInArea: 1
   YInArea: 1
   areaTopRight: {x: 96.013985, y: 251.77971, z: 0}
-  areaBotLeft: {x: -3.2188263, y: 147.62747, z: 0}
+  areaBotLeft: {x: -3.2188263, y: 170, z: 0}
 --- !u!1 &8409560089529908916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1645,7 +1808,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 26
+  m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8614415099498857087
 MonoBehaviour:
@@ -1669,6 +1832,59 @@ MonoBehaviour:
   YInArea: 1
   areaTopRight: {x: 187.59134, y: 86.77285, z: 0}
   areaBotLeft: {x: 15.2756195, y: 18.573456, z: 0}
+--- !u!1 &8690674063734621068
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3197277496001852520}
+  - component: {fileID: 8566532069771822324}
+  m_Layer: 0
+  m_Name: MushroomEaterCave1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3197277496001852520
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8690674063734621068}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 135, y: 155, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3510606058087648145}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8566532069771822324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8690674063734621068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06f1bbb4b173d14494058aa77e0e6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 10, y: 10}
+  SavedSceneFile: {fileID: 4900000, guid: 6434d5a0de814104a829b6707d08fe9e, type: 3}
+  Area: 0
+  SpawnAttached: 0
+  BlocksArea: 1
+  gizmoColor: {r: 0.48301125, g: 0, b: 0.8, a: 1}
+  XInArea: 1
+  YInArea: 0
+  areaTopRight: {x: 200, y: 155, z: 0}
+  areaBotLeft: {x: 110, y: 155, z: 0}
 --- !u!1 &8750822072654982306
 GameObject:
   m_ObjectHideFlags: 0
@@ -1698,7 +1914,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1535084766565602049
 MonoBehaviour:
@@ -1721,7 +1937,7 @@ MonoBehaviour:
   XInArea: 1
   YInArea: 1
   areaTopRight: {x: 94.82091, y: 239.88292, z: 0}
-  areaBotLeft: {x: -5.0109253, y: 159.73695, z: 0}
+  areaBotLeft: {x: -5.0109253, y: 170, z: 0}
 --- !u!1 &8893436636502711985
 GameObject:
   m_ObjectHideFlags: 0
@@ -1774,7 +1990,7 @@ MonoBehaviour:
   XInArea: 1
   YInArea: 1
   areaTopRight: {x: 96.013985, y: 251.77971, z: 0}
-  areaBotLeft: {x: -3.2188263, y: 147.62747, z: 0}
+  areaBotLeft: {x: -3.2188263, y: 170, z: 0}
 --- !u!1 &8956044971055364802
 GameObject:
   m_ObjectHideFlags: 0
@@ -1804,7 +2020,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 25
+  m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8354195560945835919
 MonoBehaviour:
@@ -1857,7 +2073,7 @@ Transform:
   m_LocalScale: {x: 74.20199, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
-  m_RootOrder: 16
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2134301586919168732
 MonoBehaviour:
