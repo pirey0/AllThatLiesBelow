@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3447797fe2bbafb4f91c9c92cdfdf251, type: 3}
+  m_Name: Note_101_StorageRoom
+  m_EditorClassIdentifier: 
+  ID: 101
+  Author: Segor
+  Content: 'Dear fellow miners and friends, I decided to deny the storage of dynamite
+    undergrounds. The risks for an incident are too high. The remaining dynamite
+    was moved to storage room B7 and is waiting there to fetched.
+
+    - Segor'
+  NextID: -1
+  daysToNext: 0

@@ -132,8 +132,8 @@ MonoBehaviour:
   overlayAnimator: {fileID: 8520543258188593246}
   damageMultiplier: 1
   contains:
-    type: 7
-    amount: 5
+    type: 0
+    amount: 0
   destroyEffects: {fileID: 4888635124280202427, guid: c7333c0e8139a984db63c0ab6a7f05ac, type: 3}
   spriteRenderer: {fileID: 1248040165442377592}
   inventoryOwner: {fileID: 9155730990501154388}
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory:
-    allowStoreing: 0
+    canDeposit: 0
     content: []
   inventoryVisualizerPrefab: {fileID: 8727063801762088802, guid: c396613fa9613cb4d8d82148ef5649a7, type: 3}
   openSource: {fileID: 1847240908458811006}
