@@ -493,6 +493,11 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     {
         SetVariable("Died", true);
     }
+
+    public void Cheat_SetDigSpeedMultiplyer(float f)
+    {
+        data.digSpeedMultiplyer = f;
+    }
 }
 
 public enum LetterProgressionState
