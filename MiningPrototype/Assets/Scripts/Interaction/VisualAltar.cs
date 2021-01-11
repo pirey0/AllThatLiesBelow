@@ -66,11 +66,13 @@ public class VisualAltar : MonoBehaviour, IDialogUser
 
             if (info.IsTalking)
             {
+                audioSource.loop = false;
                 audioSource.clip = info.GetTalkingAudioByCharacterLength(dialogVisualizer.SentenceCharacterLength, last);
                 last = audioSource.clip;
             }
             else
             {
+                audioSource.loop = true;
                 if (audioSource.clip != info.AudioClip)
                     audioSource.clip = info.AudioClip;
             }

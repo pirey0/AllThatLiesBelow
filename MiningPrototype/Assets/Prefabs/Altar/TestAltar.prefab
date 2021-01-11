@@ -120,7 +120,7 @@ MonoBehaviour:
     States:
     - State: 0
       Animation: {fileID: 11400000, guid: 3c352a912ed9dbd43a17adaceb7b453b, type: 2}
-      AudioClip: {fileID: 8300000, guid: 8e717e0ad7390b64386a77212bd7b431, type: 3}
+      AudioClip: {fileID: 8300000, guid: 3926dcdc755b59f44b29881393433a6d, type: 3}
       lookAtPlayer: 0
       IsTalking: 0
       talkingAudios: []
@@ -172,7 +172,7 @@ MonoBehaviour:
     States:
     - State: 0
       Animation: {fileID: 11400000, guid: 4cff42b963edb7f43b3705ee1156cc6b, type: 2}
-      AudioClip: {fileID: 8300000, guid: 4c0b7278a08dc8a42adc3458c9120dd3, type: 3}
+      AudioClip: {fileID: 8300000, guid: acadaaac6e8cc244bac42e2b5ff5841b, type: 3}
       lookAtPlayer: 0
       IsTalking: 0
       talkingAudios: []

@@ -26,7 +26,7 @@ MonoBehaviour:
   - Sprite: {fileID: 781163962123544572, guid: f59ae518500f66741a9be2354040b2e5, type: 3}
     Duration: 0.5
   - Sprite: {fileID: -8867561500134718015, guid: f59ae518500f66741a9be2354040b2e5, type: 3}
-    Duration: 0.2
+    Duration: 0.15
   - Sprite: {fileID: 8906359339443332207, guid: f59ae518500f66741a9be2354040b2e5, type: 3}
     Duration: 0.5
   - Sprite: {fileID: -219579856214810610, guid: f59ae518500f66741a9be2354040b2e5, type: 3}
