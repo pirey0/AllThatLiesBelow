@@ -18,7 +18,7 @@ public class Altar : StateListenerBehaviour, IInteractable, IDialogUser
 {
     INodeServiceProvider dialogServices;
     AltarBaseNode startingNode;
-
+    private bool inInteraction;
     private event System.Action<IInteractable> NotifyForcedEnd;
 
     public void BeginInteracting(GameObject interactor)
@@ -26,8 +26,9 @@ public class Altar : StateListenerBehaviour, IInteractable, IDialogUser
         dialogServices.Aborted = false;
         Debug.Log("Begin Altar Interaction");
         gameObject.layer = 12;
+        inInteraction = true;
 
-       StartCoroutine(AltarDialogRunner.DialogCoroutine(dialogServices, startingNode, onDialogFinished));
+        StartCoroutine(AltarDialogRunner.DialogCoroutine(dialogServices, startingNode, onDialogFinished));
     }
 
     private void onDialogFinished()
@@ -40,7 +41,7 @@ public class Altar : StateListenerBehaviour, IInteractable, IDialogUser
         Debug.Log("End Altar Interaction");
         gameObject.layer = 0;
         dialogServices.Aborted = true;
-        
+        inInteraction = false;
     }
 
     public void SubscribeToForceQuit(Action<IInteractable> action)
@@ -55,7 +56,7 @@ public class Altar : StateListenerBehaviour, IInteractable, IDialogUser
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<PlayerInteractionHandler>(out var pi))
+        if (!inInteraction && collision.TryGetComponent<PlayerInteractionHandler>(out var pi))
         {
             pi.ForceInteractionWith(this);
         }

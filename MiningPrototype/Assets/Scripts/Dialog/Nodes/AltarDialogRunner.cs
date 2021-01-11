@@ -48,10 +48,6 @@ public class AltarDialogRunner : StateListenerBehaviour
 
     public static IEnumerator DialogCoroutine(INodeServiceProvider provider, AltarBaseNode node, System.Action finishedCallback = null)
     {
-        Debug.Log("NodeDebugRunner Start");
-
-
-
         NodeResult result = NodeResult.Wait;
         provider.DialogVisualizer.StartDialog();
         while (node != null && !provider.Aborted)
@@ -60,7 +56,7 @@ public class AltarDialogRunner : StateListenerBehaviour
             {
                 if (!conditionalNode.ConditionsPassed(provider))
                 {
-                    Debug.LogError("NodeDebugRunner stopped from failed conditions " + node.ToDebugString());
+                    Debug.LogError("NodeRunner stopped from failed conditions " + node.ToDebugString());
                     break;
                 }
             }
@@ -95,7 +91,7 @@ public class AltarDialogRunner : StateListenerBehaviour
             }
             else if (result == NodeResult.Error)
             {
-                Debug.LogError("NodeDebugRunner exited with Error");
+                Debug.LogError("NodeRunner exited with Error");
                 break;
             }
             else
@@ -105,7 +101,7 @@ public class AltarDialogRunner : StateListenerBehaviour
 
                 var newNode = SelectFirstViableChildNodeStartingAt(node, provider, (int)result);
                 if (newNode == null)
-                    Debug.Log("NodeDebugRunnerEnded due to Node: " + node + " " + node.ToDebugString());
+                    Debug.Log("NodeRunnerEnded due to Node: " + node + " " + node.ToDebugString());
 
                 node = newNode;
                 result = NodeResult.Wait;

@@ -32,7 +32,6 @@ public class VisualAltar : MonoBehaviour, IDialogUser
                 if (Enum.TryParse(root.Skin.SkinName, out AltarSkin newSkin))
                 {
                     skin = newSkin;
-                    OnChangeState(AltarState.Passive);
                     Debug.Log("Changed skin to " + skin);
                 }
                 else
@@ -41,6 +40,11 @@ public class VisualAltar : MonoBehaviour, IDialogUser
                 }
             }
         }
+    }
+
+    private void Start()
+    {
+        OnChangeState(AltarState.Passive);
     }
 
     private void OnDestroy()
@@ -62,7 +66,9 @@ public class VisualAltar : MonoBehaviour, IDialogUser
             spriteAnimator.Renderer.flipX = info.lookAtPlayer ? playerInteractionHandler.transform.position.x < transform.position.x : false;
 
             if (spriteAnimator.Animation != info.Animation)
+            {
                 spriteAnimator.Play(info.Animation);
+            }
 
             if (info.IsTalking)
             {
