@@ -49,7 +49,9 @@ public class EnvironmentEffectsHandler : StateListenerBehaviour
         caveSounds.Play();
         snowstormSounds.Play();
         springSounds.Play();
+        jungle.Play();
         UpdateOverworldEffects();
+        UpdateJungleEffects();
         map.MirrorSideChanged += OnMirrorSideChanged;
     }
 
@@ -72,6 +74,7 @@ public class EnvironmentEffectsHandler : StateListenerBehaviour
             snowSecondary.transform.localPosition = new Vector3(-200, 0, 0);
 
         UpdateOverworldEffects();
+        UpdateJungleEffects();
     }
 
     private void FixedUpdate()
