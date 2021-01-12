@@ -16,10 +16,14 @@ public class PhysicalTile : MineableObject, IEntity
     [SerializeField] AudioSource hit;
     [SerializeField] GameObject onLandEffects;
     [SerializeField] float RequiredSpeedForStrongHit;
+    [SerializeField] float RequiredSpeedForStrongHitWithHelmet;
+
+    [Zenject.Inject] ProgressionHandler progressionHandler;
 
     Tile tile;
     TileInfo info;
     bool placed;
+    float startY;
 
     public void Setup(RuntimeProceduralMap testGeneration, Tile tile, TileInfo info)
     {
@@ -30,6 +34,7 @@ public class PhysicalTile : MineableObject, IEntity
         renderer.sprite = info.UseTilesFromOtherInfo ? info.TileSourceInfo.physicalTileSprite : info.physicalTileSprite;
         overlayRenderer.sprite = info.physicalTileOverlay;
         overlayAnimator.ActiveUpdate(tile.Damage / 10);
+        startY = transform.position.y;
     }
 
     public override void Damage(float v)
@@ -55,8 +60,8 @@ public class PhysicalTile : MineableObject, IEntity
     {
         var pos = transform.position.ToGridPosition();
         Util.DebugDrawTile(pos, Color.red, 0.1f);
-        
-        if(map.IsBlockAt(pos.x, pos.y))
+
+        if (map.IsBlockAt(pos.x, pos.y))
         {
             TryPlace();
         }
@@ -67,10 +72,15 @@ public class PhysicalTile : MineableObject, IEntity
     {
         if (collision.transform.TryGetComponent(out IEntity entity))
         {
+            float endY = transform.position.y;
+            float yDif = startY - endY;
+
             if (transform.position.y > collision.transform.position.y)
             {
-                Debug.Log("Physical Tile hit with speed: " + collision.relativeVelocity.y);
-                if (collision.relativeVelocity.y > RequiredSpeedForStrongHit)
+                Debug.Log("Physical Tile hit after fall of height: " + yDif);
+                float reqHeight = progressionHandler.HelmetLevel > 0 ? RequiredSpeedForStrongHitWithHelmet : RequiredSpeedForStrongHit;
+
+                if (yDif > reqHeight)
                 {
                     Debug.Log("Strong Bonk!");
                     entity.TakeDamage(DamageStrength.Strong);

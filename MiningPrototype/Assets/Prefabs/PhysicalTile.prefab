@@ -76,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1946261431
-  m_SortingLayer: 7
+  m_SortingLayer: 9
   m_SortingOrder: 0
   m_Sprite: {fileID: -69876229055562210, guid: 567c604209d7d05438e5e5c4b6f720b7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -154,11 +154,12 @@ MonoBehaviour:
     type: 0
     amount: 0
   destroyEffects: {fileID: 0}
-  renderer: {fileID: 1505758800330834957}
   overlayRenderer: {fileID: 8445093048323941638}
+  renderer: {fileID: 1505758800330834957}
   hit: {fileID: 1409926833936099124}
   onLandEffects: {fileID: 1586765510811434306, guid: 3d65f7745bb6c4b45861ec80fb7ae2f9, type: 3}
-  RequiredSpeedForStrongHit: 10
+  RequiredSpeedForStrongHit: 3
+  RequiredSpeedForStrongHitWithHelmet: 6
 --- !u!82 &6570287908250345048
 AudioSource:
   m_ObjectHideFlags: 0
@@ -429,7 +430,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1946261431
-  m_SortingLayer: 7
+  m_SortingLayer: 9
   m_SortingOrder: 1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -512,7 +513,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1946261431
-  m_SortingLayer: 7
+  m_SortingLayer: 9
   m_SortingOrder: 2
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

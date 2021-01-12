@@ -598,7 +598,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
     public void TakeDamage(DamageStrength strength)
     {
 
-        if (strength == DamageStrength.Strong || (strength == DamageStrength.Weak && progressionHandler.HelmetLevel == 0))
+        if (strength == DamageStrength.Strong)
         {
             stateMachine.ForceTransitionTo(s_death);
             damageEffectHandler.TakeDamage(1f);
