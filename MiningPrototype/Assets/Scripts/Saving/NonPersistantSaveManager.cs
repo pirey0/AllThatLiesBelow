@@ -55,7 +55,7 @@ public class NonPersistantSaveManager : ISavable
 
     public void Load(SaveData saveData)
     {
-        Debug.Log("Loading NonPersistant");
+        //Debug.Log("Loading NonPersistant");
 
         if(saveData is SpawnableSaveDataContainer container)
         {
@@ -82,7 +82,7 @@ public class NonPersistantSaveManager : ISavable
                 }
             }
 
-            Debug.Log("Loaded " + container.Count + " non persistant savables.");
+            //Debug.Log("Loaded " + container.Count + " non persistant savables.");
         }
     }
 

@@ -54,7 +54,7 @@ public class NonPersistentDecoration : MirrorWorldFollower, INonPersistantSavabl
         {
             if (data.index < 0)
             {
-                Debug.Log("Decoration: invalid index");
+                Debug.LogWarning("Decoration: invalid index");
             }
             else
             {

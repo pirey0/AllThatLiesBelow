@@ -432,5 +432,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e54841db1ebc224b88bd82537e065cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingAnimation: {fileID: 11400000, guid: fadbf31df21420c469c036dc4d7c8fd8, type: 2}
+  startingAnimation: {fileID: 0}
   renderer: {fileID: 5015372644985189751}

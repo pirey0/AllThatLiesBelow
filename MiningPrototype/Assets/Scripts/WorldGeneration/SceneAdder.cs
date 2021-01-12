@@ -66,7 +66,7 @@ public class SceneAdder : StateListenerBehaviour
                         if (!map.IsAdditivelyCoveredAtAny(locations))
                         {
                             saveHandler.LoadAdditive(current.SavedSceneFile, center.AsV3());
-                            Debug.Log("Loaded Scene " + current.SavedSceneFile.name);
+                            //Debug.Log("Loaded Scene " + current.SavedSceneFile.name);
 
                             if (current.BlocksArea)
                             {

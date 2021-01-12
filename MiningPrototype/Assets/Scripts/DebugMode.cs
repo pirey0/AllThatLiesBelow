@@ -26,7 +26,7 @@ public class DebugMode : MonoBehaviour
     bool open;
     bool showMap;
     bool showMapAdditiveLayer;
-
+    List<string> commands = new List<string>();
     private void Awake()
     {
         open = false;
@@ -34,20 +34,35 @@ public class DebugMode : MonoBehaviour
         debugTex = new Texture2D(map.SizeX, map.SizeY);
         debugTex.filterMode = FilterMode.Point;
 
-        DebugLogConsole.AddCommandInstance("/tp", "Teleport to " + Util.EnumToString(typeof(TeleportDestination)), "TeleportToAltar", this);
-        DebugLogConsole.AddCommandInstance("/tpo", "Teleport to game object by name", "TeleportTo", this);
-        DebugLogConsole.AddCommandInstance("/give", "Give player items " + Util.EnumToString(typeof(ItemType)), "PlayerGets", this);
-        DebugLogConsole.AddCommandInstance("/kill", "Kill the player", "KillPlayer", this);
-        DebugLogConsole.AddCommandInstance("/reward", "Get an altar reward" + Util.EnumToString(typeof(AltarRewardType)), "Reward", this);
-        DebugLogConsole.AddCommandInstance("/deleteSave", "Delete your save file", "DeleteSaveFile", this);
-        DebugLogConsole.AddCommandInstance("/time", "sets time scale", "SetTimeScale", this);
-        DebugLogConsole.AddCommandInstance("/showMap", "Visualizes the Map", "ShowMap", this);
-        DebugLogConsole.AddCommandInstance("/showAdditiveMap", "Visualizes the Map", "ShowAdditiveMap", this);
-        DebugLogConsole.AddCommandInstance("/chopper", "Spawn a Chopper", "SpawnChopper", this);
-        DebugLogConsole.AddCommandInstance("/stats", "Logs the stats", "LogStats", this);
-        DebugLogConsole.AddCommandInstance("/upgradepickaxe", "Upgrades the pickaxe level","UpgradePickaxe", this);
-        DebugLogConsole.AddCommandInstance("/setVariable", "Set a dialog variable", "SetDialogVariable", this);
+        AddCheat("/tp", "Teleport to " + Util.EnumToString(typeof(TeleportDestination)), "TeleportToAltar");
+        AddCheat("/tpo", "Teleport to game object by name", "TeleportTo");
+        AddCheat("/give", "Give player items " + Util.EnumToString(typeof(ItemType)), "PlayerGets");
+        AddCheat("/kill", "Kill the player", "KillPlayer");
+        AddCheat("/reward", "Get an altar reward" + Util.EnumToString(typeof(AltarRewardType)), "Reward");
+        AddCheat("/deleteSave", "Delete your save file", "DeleteSaveFile");
+        AddCheat("/time", "sets time scale", "SetTimeScale");
+        AddCheat("/showMap", "Visualizes the Map", "ShowMap");
+        AddCheat("/showAdditiveMap", "Visualizes the Map", "ShowAdditiveMap");
+        AddCheat("/chopper", "Spawn a Chopper", "SpawnChopper");
+        AddCheat("/stats", "Logs the stats", "LogStats");
+        AddCheat("/upgradepickaxe", "Upgrades the pickaxe level","UpgradePickaxe");
+        AddCheat("/setVariable", "Set a dialog variable", "SetDialogVariable");
+        AddCheat("/efficiency", "Set the mining speed multiplyer", "SetMiningSpeed");
+    }
 
+    private void AddCheat(string command, string description, string methodname)
+    {
+        DebugLogConsole.AddCommandInstance(command, description, methodname, this);
+        commands.Add(command);
+    }
+
+    private void OnDestroy()
+    {
+        foreach (var item in commands)
+        {
+            DebugLogConsole.RemoveCommand(item);
+        }
+        commands.Clear();
     }
 
     private void Update()
@@ -109,6 +124,10 @@ public class DebugMode : MonoBehaviour
         }
     }
 
+    private void SetMiningSpeed(float mult)
+    {
+        progressionHandler.Cheat_SetDigSpeedMultiplyer(mult);
+    }
     private void LogStats()
     {
         statsTracker.LogToConsole();
