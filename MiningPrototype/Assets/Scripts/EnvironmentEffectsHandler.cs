@@ -51,9 +51,6 @@ public class EnvironmentEffectsHandler : StateListenerBehaviour
         springSounds.Play();
         UpdateOverworldEffects();
         map.MirrorSideChanged += OnMirrorSideChanged;
-
-        StopAllCoroutines();
-        StartCoroutine(SlowUpdate());
     }
 
 
@@ -80,23 +77,12 @@ public class EnvironmentEffectsHandler : StateListenerBehaviour
     private void FixedUpdate()
     {
         transform.position = cam.transform.position + offset;
+        if (transform.position.y > overworldFadeHeight - overworldFadeThickness && transform.position.y < overworldFadeHeight + overworldFadeThickness)
+            UpdateOverworldEffects();
+
+        if ((transform.position.y > jungleFadeOutHeight - jungleFadeThickness && transform.position.y < jungleFadeOutHeight + jungleFadeThickness) || (transform.position.y > jungleFadeInHeight - jungleFadeThickness && transform.position.y < jungleFadeInHeight + jungleFadeThickness))
+            UpdateJungleEffects();
     }
-
-    private IEnumerator SlowUpdate()
-    {
-        while (true)
-        {
-            if (transform.position.y > overworldFadeHeight - overworldFadeThickness && transform.position.y < overworldFadeHeight + overworldFadeThickness)
-                UpdateOverworldEffects();
-
-            if ((transform.position.y > jungleFadeOutHeight - jungleFadeThickness && transform.position.y < jungleFadeOutHeight + jungleFadeThickness) || (transform.position.y > jungleFadeInHeight - jungleFadeThickness && transform.position.y < jungleFadeInHeight + jungleFadeThickness))
-                UpdateJungleEffects();
-
-            yield return new WaitForSeconds(0.5f);
-        }
-    }
-
-
 
     public void SetNight()
     {
