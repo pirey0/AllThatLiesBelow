@@ -14,6 +14,9 @@ public class DialogOption : MonoBehaviour
     DialogVisualizer dialogVisualizer;
     int index = 0;
 
+    bool isOption;
+    bool finishedSpawning = false;
+
     public void Init(string text, DialogVisualizer dialogVisualizer)
     {
         this.text = text;
@@ -34,6 +37,8 @@ public class DialogOption : MonoBehaviour
 
     IEnumerator ShowTextDelayed(bool isOption)
     {
+        this.isOption = isOption;
+
         if (isOption)
         {
             textDisplay.text = text;
@@ -43,6 +48,7 @@ public class DialogOption : MonoBehaviour
                 textDisplay.rectTransform.localScale = Vector3.one * (float)i / 5f;
                 yield return new WaitForSeconds(0.03f);
             }
+            finishedSpawning = true;
         }
         else
         {
@@ -51,10 +57,16 @@ public class DialogOption : MonoBehaviour
                 textDisplay.text = text.Substring(0, i) + "<alpha=#00>" + text.Substring(i, text.Length-i);
                 yield return new WaitForSeconds(0.03f);
             }
-
-            textDisplay.text = text;
         }
 
+        FinishSpawning();
+    }
+
+    private void FinishSpawning()
+    {
+        finishedSpawning = true;
+        StopAllCoroutines();
+        textDisplay.text = text;
         (isOption ? answerArrow : commentArrow).enabled = true;
     }
 
@@ -62,10 +74,21 @@ public class DialogOption : MonoBehaviour
     {
     }
 
+    public float GetHeight()
+    {
+        return (transform as RectTransform).sizeDelta.y;
+    }
+
     public void Interact()
     {
-        if (dialogVisualizer != null)
-            dialogVisualizer.OnSelectOption(index);
+        if (finishedSpawning)
+        {
+            if (dialogVisualizer != null)
+                dialogVisualizer.OnSelectOption(index);
+        } else
+        {
+            FinishSpawning();
+        }
     }
 
 
