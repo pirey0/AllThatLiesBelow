@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -75,7 +76,7 @@ public class CameraPanner : MonoBehaviour
         dir = new Vector3(dir.x.Sign() * curve.Evaluate(dir.x.Abs()), dir.y.Sign() * curve.Evaluate(dir.y.Abs()));
 
 
-        if (player.InOverworld() || cinematicMode)
+        if (player.InOverworld() || cinematicMode || interactionHandler.InDialog())
             yOffset += transitionSpeed * Time.deltaTime;
         else
             yOffset -= transitionSpeed * Time.deltaTime;
@@ -84,4 +85,6 @@ public class CameraPanner : MonoBehaviour
 
         transform.position = player.transform.position + (cinematicMode ? Vector3.zero : dir) + new Vector3(0, yOffset);
     }
+
+ 
 }

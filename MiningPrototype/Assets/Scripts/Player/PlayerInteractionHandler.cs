@@ -436,6 +436,18 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         }
     }
 
+    public bool InDialog()
+    {
+        foreach (var i in currentInteractables)
+        {
+            if(i is Altar)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private bool TryStopInteractingWith(IInteractable interactable)
     {
         if (!Util.IsNullOrDestroyed(interactable))
