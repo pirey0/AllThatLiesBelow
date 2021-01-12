@@ -66,8 +66,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     private void Update()
     {
         RemoveDistantInteractables();
-        UpdateDigHighlight();
-
+        
         if (player.CanUseInventory())
         {
             if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.E))
@@ -85,6 +84,8 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
             gridDigTarget = null;
             TryDisableMiningVisuals();
         }
+
+        UpdateDigHighlight();
     }
 
     private void RemoveDistantInteractables()
@@ -238,6 +239,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     {
         previousGridDigTarget = gridDigTarget;
         gridDigTarget = MapHelper.GetMiningTarget(map, GetPositionInGridV3(), GetClickCoordinate());
+        Util.DebugDrawTile(gridDigTarget.Value, Color.yellow, 0.05f);
         if (!map.CanTarget(gridDigTarget.Value.x, gridDigTarget.Value.y))
         {
             var secondary = GetSecondaryClickCoordinate();
@@ -305,6 +307,8 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
             else
                 mouseHighlight.position = new Vector3(-1000, -1000);
         }
+
+        
     }
 
     private void TryPlace()
@@ -479,7 +483,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     /// </summary>
     public Vector3 GetPositionInGridV3()
     {
-        return new Vector3(transform.position.x, transform.position.y + 1.4f); //+1 to be at center of player
+        return new Vector3(transform.position.x, transform.position.y + 1.4f); //+1.4 to be at center of player
     }
 
     private Vector2Int GetClickCoordinate()
