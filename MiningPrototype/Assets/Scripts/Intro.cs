@@ -56,7 +56,7 @@ public class Intro : StateListenerBehaviour
         playerInventoryOpener.Hide();
         cursorHandler.Hide();
         inventoryManager.PlayerCollects(ItemType.Torch, 1);
-        inventoryManager.PlayerCollects(ItemType.Rope, 1);
+        inventoryManager.PlayerCollects(ItemType.Rope, 5);
         placedTorch = false;
         introLight.intensity = 0.8f;
         effectHandler.SetNight();
@@ -76,7 +76,7 @@ public class Intro : StateListenerBehaviour
         }
 
         //Torch section
-        yield return new WaitForSeconds(delayBeforeTorchRequest-2);
+        yield return new WaitForSeconds(delayBeforeTorchRequest - 2);
         introLight.intensity = 0.3f;
         yield return new WaitForSeconds(2);
 
@@ -116,7 +116,7 @@ public class Intro : StateListenerBehaviour
             placedTorch = true;
         }
 
-        if(obj == ItemType.Ladder)
+        if (obj == ItemType.Ladder)
         {
             placedLadder = true;
         }

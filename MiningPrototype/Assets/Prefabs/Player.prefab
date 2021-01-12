@@ -11832,10 +11832,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory:
-    allowStoreing: 1
-    content:
-    - type: 4
-      amount: 1
+    canDeposit: 1
+    content: []
   inventoryVisualizerPrefab: {fileID: 8727063801762088802, guid: c396613fa9613cb4d8d82148ef5649a7, type: 3}
   openSource: {fileID: 1456414342}
   receiveSource: {fileID: 1456414342}
