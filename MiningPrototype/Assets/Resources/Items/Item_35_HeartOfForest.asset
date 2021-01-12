@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemType: 35
   DisplayName: Heart of the Forest
-  DisplayTooltip: A beating heart found on a tree in a grassy cave
+  DisplayTooltip: A beating heart found on a tree in a grassy cave.
   DisplaySprite: {fileID: 724920192116989661, guid: 86804afb60fec1247b5dceed2c6f2b96, type: 3}
   DisplaySpriteRead: {fileID: 0}
   Weight: 1

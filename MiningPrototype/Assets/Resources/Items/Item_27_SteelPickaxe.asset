@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemType: 27
   DisplayName: Steel Pickaxe
-  DisplayTooltip: 
+  DisplayTooltip: better Pickaxe.
   DisplaySprite: {fileID: 2313566135873249128, guid: c9ec6d69c2f041c429cb6376552e13c8, type: 3}
   DisplaySpriteRead: {fileID: 0}
   Weight: 1
@@ -28,4 +28,3 @@ MonoBehaviour:
   RequiredLevel: 2
   LevelUpgrade: 3
   IsBurnable: 0
-  AltarWords: []

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemType: 30
   DisplayName: Head lamp
-  DisplayTooltip: 
+  DisplayTooltip: Decoration for your Helmet.
   DisplaySprite: {fileID: -2734504946166507769, guid: 2a1edf49b10fb0c458b3d6ccf3d265cf, type: 3}
   DisplaySpriteRead: {fileID: 0}
   Weight: 1
@@ -28,4 +28,3 @@ MonoBehaviour:
   RequiredLevel: 1
   LevelUpgrade: 2
   IsBurnable: 0
-  AltarWords: []

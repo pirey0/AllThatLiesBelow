@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemType: 32
   DisplayName: Note
-  DisplayTooltip: 
+  DisplayTooltip: An old handwritten Note.
   DisplaySprite: {fileID: 21300000, guid: d13d4d4ad13b9904b8fd9c248b98a012, type: 3}
   DisplaySpriteRead: {fileID: 21300000, guid: d13d4d4ad13b9904b8fd9c248b98a012, type: 3}
   Weight: 1

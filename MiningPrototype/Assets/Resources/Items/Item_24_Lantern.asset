@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemType: 24
   DisplayName: Lantern
-  DisplayTooltip: Let there be light.
+  DisplayTooltip: More effective than the torch. Is placed on the ground.
   DisplaySprite: {fileID: 21300000, guid: a8fc62cc7f4540449a9e36c29d7ddfef, type: 3}
   DisplaySpriteRead: {fileID: 0}
   Weight: 1
@@ -24,9 +24,7 @@ MonoBehaviour:
   PickupPreviewPrefab: {fileID: 7283003918353065621, guid: bd7481ae30e85d747af3c0d4132e2f54, type: 3}
   Prefab: {fileID: 3472422416399133472, guid: 3d8c7cff48b1ba546b4ce4c2c25b819d, type: 3}
   AmountIsUniqueID: 0
+  IsUpgrade: 0
+  RequiredLevel: 0
+  LevelUpgrade: 0
   IsBurnable: 1
-  AltarWords:
-  - Light
-  - Fire
-  - Flames
-  - Burning

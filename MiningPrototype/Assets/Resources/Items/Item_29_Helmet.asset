@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemType: 29
   DisplayName: Helmet
-  DisplayTooltip: 
+  DisplayTooltip: Used to protect the player from falling stones.
   DisplaySprite: {fileID: -4194526030996591247, guid: 8af332ec7604e4346a6aa76c630a747e, type: 3}
   DisplaySpriteRead: {fileID: 0}
   Weight: 1
@@ -28,4 +28,3 @@ MonoBehaviour:
   RequiredLevel: 0
   LevelUpgrade: 1
   IsBurnable: 0
-  AltarWords: []

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemType: 31
   DisplayName: Fossil
-  DisplayTooltip: The bones of a dead creature
+  DisplayTooltip: The bones of a dead creature.
   DisplaySprite: {fileID: 21300000, guid: 39e2d45beeb3fa049bd3ad5c7157c4a2, type: 3}
   DisplaySpriteRead: {fileID: 0}
   Weight: 1
@@ -28,4 +28,3 @@ MonoBehaviour:
   RequiredLevel: 0
   LevelUpgrade: 0
   IsBurnable: 0
-  AltarWords: []

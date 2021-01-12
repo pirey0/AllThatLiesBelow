@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemType: 23
   DisplayName: Lift
-  DisplayTooltip: 
+  DisplayTooltip: Brand new lift that helps the player to traverse faster.
   DisplaySprite: {fileID: 21300000, guid: 75266bad26fa3494f9a549632571ee35, type: 3}
   DisplaySpriteRead: {fileID: 0}
   Weight: 1
@@ -24,5 +24,7 @@ MonoBehaviour:
   PickupPreviewPrefab: {fileID: 4282330290560024562, guid: 65d2f6b17dad1ec49be586930f145c75, type: 3}
   Prefab: {fileID: 155191563374322042, guid: 9082c89fe302ca143941e047bd6eed66, type: 3}
   AmountIsUniqueID: 0
+  IsUpgrade: 0
+  RequiredLevel: 0
+  LevelUpgrade: 0
   IsBurnable: 0
-  AltarWords: []

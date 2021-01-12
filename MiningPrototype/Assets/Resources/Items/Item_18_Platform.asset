@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemType: 18
   DisplayName: Platform
-  DisplayTooltip: 
+  DisplayTooltip: Used to overcome gaps and give structure to your mine.
   DisplaySprite: {fileID: -8835149551459108778, guid: f132973b45bf13c4bbb7007ca5dee632, type: 3}
   DisplaySpriteRead: {fileID: 0}
   Weight: 1
@@ -24,5 +24,7 @@ MonoBehaviour:
   PickupPreviewPrefab: {fileID: 4863552724862687380, guid: aee2c6183ab00b341a8d45bf2d4f4f0a, type: 3}
   Prefab: {fileID: 5000783938460949122, guid: 68b0ad140ae4f47438b8d6d729f88471, type: 3}
   AmountIsUniqueID: 0
+  IsUpgrade: 0
+  RequiredLevel: 0
+  LevelUpgrade: 0
   IsBurnable: 1
-  AltarWords: []
