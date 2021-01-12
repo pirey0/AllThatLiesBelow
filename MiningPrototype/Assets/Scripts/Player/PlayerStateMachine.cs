@@ -88,6 +88,11 @@ public class PlayerStateMachine : BasePlayerStateMachine
         lastInOverworld = InOverworld();
     }
 
+    protected override void OnRealStart()
+    {
+        ForceToState("Idle");
+    }
+
     protected override void OnNewGame()
     {
         var start = LocationIndicator.Find(IndicatorType.PlayerStart);
