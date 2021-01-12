@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 9
   ItemToDrop: 0
-  damageMultiplyer: 1
+  damageMultiplyer: 0.5
   damagedByExplosion: 1
   AirLike: 0
   Targetable: 1
@@ -23,7 +23,7 @@ MonoBehaviour:
   CanBeUnstable: 1
   NotifiesInsteadOfCrumbling: 1
   UnstableTimeBeforeCrumble: 5
-  CountsAsNeighbour: 1
+  CountsAsNeighbour: 0
   MinableInOverworld: 1
   DamageIsInBackground: 1
   DrawsToShifted: 0

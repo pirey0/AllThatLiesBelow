@@ -90,6 +90,7 @@ public class Desk : MonoBehaviour, IInteractable
         text.text = option.Text;
         button.onClick.AddListener(option.Action);
         button.interactable = option.Active;
+        text.GetComponent<UnityEngine.UI.Button>().interactable = option.Active;
 
         return o;
     }

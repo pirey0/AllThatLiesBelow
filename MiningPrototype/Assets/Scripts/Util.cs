@@ -346,4 +346,9 @@ public static class Util
 
         return false;
     }
+
+    public static bool InOverworld(float y)
+    {
+        return y >= Constants.OVERWORLD_START_Y;
+    }
 }

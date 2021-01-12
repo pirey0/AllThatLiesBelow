@@ -21,7 +21,7 @@ public class GridBasedItemPreview : MonoBehaviour, IItemPreview
         var gridPos = position.ToGridPosition();
         transform.position = gridPos.AsV3() + offset;
     
-        if (map.IsAirAt(gridPos.x, gridPos.y) && (!underworldOnly || gridPos.y < Constants.OVERWORLD_START_Y))
+        if (map.IsAirAt(gridPos.x, gridPos.y) && (!underworldOnly || !Util.InOverworld(gridPos.y)))
         {
             spriteRenderer.color = Color.green;
             couldPlace = true;

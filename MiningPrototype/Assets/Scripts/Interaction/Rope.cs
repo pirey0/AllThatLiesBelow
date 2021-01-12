@@ -24,7 +24,7 @@ public class Rope : TilemapCarvingEntity, IClimbable
         if (adaptHeightRoutine != null)
             StopCoroutine(adaptHeightRoutine);
 
-        height = MapHelper.AirTileCount(map, (transform.position + Vector3.down).ToGridPosition(), Direction.Down, TileType.Rope);
+        height = Mathf.Min(maxHeight, MapHelper.AirTileCount(map, (transform.position + Vector3.down).ToGridPosition(), Direction.Down, TileType.Rope));
         SetTilesToOccupy();
         adaptHeightRoutine = StartCoroutine(AdaptHeightRoutine());
         Carve();

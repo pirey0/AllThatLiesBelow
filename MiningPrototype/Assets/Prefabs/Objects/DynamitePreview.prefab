@@ -97,4 +97,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0.5, y: 0, z: 0}
   spriteRenderer: {fileID: 7607273202403215163}
-  underworldOnly: 0
+  underworldOnly: 1

@@ -132,7 +132,7 @@ MonoBehaviour:
   carvingOffset: {x: 0, y: 0, z: 0}
   spriteRenderer: {fileID: 8317119179086846687}
   boxCollider2D: {fileID: 8317119179086846672}
-  maxHeight: 10
+  maxHeight: 15
   delayBetweenHeightIncrease: 0.25
 --- !u!114 &6586384858800471234
 MonoBehaviour:
@@ -147,3 +147,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 23
+  uniqueName: 

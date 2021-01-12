@@ -463,7 +463,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
 
     public bool InOverworld()
     {
-        return transform.position.y >= Constants.OVERWORLD_START_Y;
+        return Util.InOverworld(transform.position.y);
     }
 
     private bool InClimbState()
@@ -553,13 +553,16 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
     {
         UpdateWalkVector(collision);
 
-        if (-oldVelocity.y > settings.fallSpeedThatKills)
+        float killSpeed = progressionHandler.HelmetLevel > 0 ? settings.helmetFallSpeedThatKills : settings.fallSpeedThatKills;
+        float hurtSpeed = progressionHandler.HelmetLevel > 0 ? settings.helmetFallSpeedThatHurts : settings.fallSpeedThatHurts;
+
+        if (-oldVelocity.y > killSpeed)
         {
             Debug.Log("Killed from fall Damage with a speed of: " + -oldVelocity.y);
             stateMachine.ForceTransitionTo(s_fallDeath);
             damageEffectHandler.TakeDamage(1f);
         }
-        else if(-oldVelocity.y > settings.fallSpeedThatHurts)
+        else if(-oldVelocity.y > hurtSpeed)
         {
             stateMachine.ForceTransitionTo(s_hit);
             damageEffectHandler.TakeDamage(0.66f);
