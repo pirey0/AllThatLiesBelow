@@ -55,26 +55,32 @@ public class PlayerVisualController : MonoBehaviour
 
     private void OnEnable()
     {
-        progressionHandler.OnChangePickaxeLevel += ChangePickaxeLevel;
-        progressionHandler.OnChangeHelmetLevel += ChangeHelmetLevel;
+        if (progressionHandler != null)
+        {
+            progressionHandler.OnChangePickaxeLevel += ChangePickaxeLevel;
+            progressionHandler.OnChangeHelmetLevel += ChangeHelmetLevel;
+        }
     }
 
     private void OnDisable()
     {
-        progressionHandler.OnChangePickaxeLevel -= ChangePickaxeLevel;
-        progressionHandler.OnChangeHelmetLevel -= ChangeHelmetLevel;
+        if (progressionHandler != null)
+        {
+            progressionHandler.OnChangePickaxeLevel -= ChangePickaxeLevel;
+            progressionHandler.OnChangeHelmetLevel -= ChangeHelmetLevel;
+        }
     }
 
     public void ChangeHelmetLevel(int newLevel)
     {
-        helmentState = newLevel > 0 ? newLevel == 2? HelmetState.HelmetWidthLamp : HelmetState.Helmet : HelmetState.None;
+        helmentState = newLevel > 0 ? newLevel == 2 ? HelmetState.HelmetWidthLamp : HelmetState.Helmet : HelmetState.None;
         headAnimator.ChangeHelmetState(helmentState);
         UpdateClimbAnimations();
     }
 
     public void ChangePickaxeLevel(int newLevel)
     {
-        pickaxeLevel = Mathf.Clamp(newLevel,1, pickaxeMaxLevel);
+        pickaxeLevel = Mathf.Clamp(newLevel, 1, pickaxeMaxLevel);
         pickaxe.SetPickaxeLevel(pickaxeLevel);
         UpdateClimbAnimations();
     }
@@ -130,7 +136,8 @@ public class PlayerVisualController : MonoBehaviour
             }
 
             return climbIdleNoHelmet[pickaxeLevel - 1];
-        } else if (statename == "LongIdle")
+        }
+        else if (statename == "LongIdle")
         {
             foreach (HelmetAndPickaxeBasedAnimationHolder holder in helmetAndPickaxeBasedAnimationHolders)
             {
