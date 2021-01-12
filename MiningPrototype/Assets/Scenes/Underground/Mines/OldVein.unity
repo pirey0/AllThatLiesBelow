@@ -12515,7 +12515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2572252096484831996, guid: adb948a9d4d0f9340a8600cafaac4d0d, type: 3}
       propertyPath: currentSymbolId
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 2572252096484831997, guid: adb948a9d4d0f9340a8600cafaac4d0d, type: 3}
       propertyPath: m_Name
@@ -12524,7 +12524,7 @@ PrefabInstance:
     - target: {fileID: 2572252096488208330, guid: adb948a9d4d0f9340a8600cafaac4d0d, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 2964997792904937247, guid: 69106d98aa9c051439bc56aacaa2e999, type: 3}
+      objectReference: {fileID: -7577253146961616730, guid: 69106d98aa9c051439bc56aacaa2e999, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adb948a9d4d0f9340a8600cafaac4d0d, type: 3}
 --- !u!1001 &1911567467
