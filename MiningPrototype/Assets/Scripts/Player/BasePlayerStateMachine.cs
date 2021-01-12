@@ -463,7 +463,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
 
     public bool InOverworld()
     {
-        return transform.position.y >= Constants.OVERWORLD_START_Y;
+        return Util.InOverworld(transform.position.y);
     }
 
     private bool InClimbState()

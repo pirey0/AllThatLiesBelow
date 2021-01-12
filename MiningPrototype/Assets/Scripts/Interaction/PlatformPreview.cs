@@ -22,7 +22,7 @@ public class PlatformPreview : PlatformBase, IItemPreview
         bool tL = map.IsBlockAt(gridPos.x+1, gridPos.y);
         bool tR = map.IsBlockAt(gridPos.x-1, gridPos.y);
 
-        if (tS && (tL || tR))
+        if (tS && (tL || tR) && !Util.InOverworld(gridPos.y))
         {
             renderer.color = Color.green;
             couldPlace = true;
