@@ -158,7 +158,7 @@ MonoBehaviour:
     amount: 1
   tilesToOccupy:
   - Offset: {x: 0, y: 0}
-    Type: 11
+    Type: 9
   carvingOffset: {x: 0, y: 0.5, z: 0}
   rigidbody: {fileID: 7396027554805798268}
   fallSound: {fileID: 0}
