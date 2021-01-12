@@ -27,7 +27,6 @@ public class StatsTracker : StateListenerBehaviour, ISavable
 
     private void OnBlockMined(TileType obj)
     {
-        Debug.Log("Block Mined");
         data.BlocksMined[obj] += 1;
         data.TotalBlocksMined++;
     }
