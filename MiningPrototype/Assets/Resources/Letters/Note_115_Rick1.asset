@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3447797fe2bbafb4f91c9c92cdfdf251, type: 3}
+  m_Name: Note_115_Rick1
+  m_EditorClassIdentifier: 
+  ID: 115
+  Author: 
+  Content: 'I was advised to bring theese boxes here for you. They are filled with
+    things you might need up here.
+
+    I wasn''t told anything about getting the
+    crates back, so feel free to destroy them, or burn them. You are going to need
+    the warmth.
+
+    - Rick'
+  NextID: -1
+  daysToNext: 0

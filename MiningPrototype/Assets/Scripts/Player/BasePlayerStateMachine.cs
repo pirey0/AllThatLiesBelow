@@ -293,10 +293,10 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         Vector2 p2 = transform.position + new Vector3(0, 1.6f);
         Vector2 dir = horizontal > 0 ? rightWalkVector : -rightWalkVector;
         List<RaycastHit2D> hits = new List<RaycastHit2D>();
-        hits.AddRange(Physics2D.RaycastAll(p1, dir, 0.7f, settings.collisionMask));
-        hits.AddRange(Physics2D.RaycastAll(p2, dir, 0.7f, settings.collisionMask));
-        Debug.DrawLine(p1, p1 + dir * 0.7f, Color.red, Time.deltaTime);
-        Debug.DrawLine(p2, p2 + dir * 0.7f, Color.red, Time.deltaTime);
+        hits.AddRange(Physics2D.RaycastAll(p1, dir, 0.5f, settings.collisionMask));
+        hits.AddRange(Physics2D.RaycastAll(p2, dir, 0.5f, settings.collisionMask));
+        Debug.DrawLine(p1, p1 + dir * 0.5f, Color.red, Time.deltaTime);
+        Debug.DrawLine(p2, p2 + dir * 0.5f, Color.red, Time.deltaTime);
 
         foreach (var hit in hits)
         {
