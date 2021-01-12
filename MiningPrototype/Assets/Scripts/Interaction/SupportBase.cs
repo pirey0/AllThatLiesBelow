@@ -9,7 +9,7 @@ public abstract class SupportBase : TilemapCarvingEntity
 
     public void AdaptHeightTo(int height)
     {
-        float spriteHeight = (float)height * (10f / 7.5f);
+        float spriteHeight = (float)height * 1.1875f;
 
         front.size = new Vector2(3, spriteHeight);
         back.size = new Vector2(3, spriteHeight);
