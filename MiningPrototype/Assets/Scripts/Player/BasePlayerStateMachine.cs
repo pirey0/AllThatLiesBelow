@@ -553,8 +553,8 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
     {
         UpdateWalkVector(collision);
 
-        float killSpeed = progressionHandler.HelmetLevel > 0 ? settings.helmetFallSpeedThatKills : settings.fallSpeedThatKills;
-        float hurtSpeed = progressionHandler.HelmetLevel > 0 ? settings.helmetFallSpeedThatHurts : settings.fallSpeedThatHurts;
+        float killSpeed = settings.fallSpeedThatKills;
+        float hurtSpeed = settings.fallSpeedThatHurts;
 
         if (-oldVelocity.y > killSpeed)
         {

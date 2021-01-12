@@ -46,9 +46,6 @@ public class PlayerSettings : ScriptableObject
     public float fallSpeedThatHurts;
     public float fallSpeedThatKills;
 
-    public float helmetFallSpeedThatHurts;
-    public float helmetFallSpeedThatKills;
-
 
     public LayerMask collisionMask;
     public LayerMask interactionMask;
