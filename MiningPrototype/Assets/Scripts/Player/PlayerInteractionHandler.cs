@@ -338,7 +338,6 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
             if (CanMineDigTarget())
             {
-                CloseInventory();
                 PlayerActivity?.Invoke();
                 visualController.ForceUpdate();
 

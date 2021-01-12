@@ -9,7 +9,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
 
     [SerializeField] PlayerSettings settings;
     [SerializeField] Transform feet;
-    [SerializeField] AudioSource walking, walkingSlow, jumpStart, jumpLand, fallDeath;
+    [SerializeField] AudioSource walking, walkingSlow, jumpStart, jumpLand, fallDeath, climbSound;
 
     [SerializeField] protected bool slowWalkMode;
     [SerializeField] bool debug;
@@ -116,8 +116,8 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         s_walk = stateMachine.AddState("Walk", null, MoveUpdate, WalkExit);
         s_slowWalk = stateMachine.AddState("SlowWalk", null, SlowMoveUpdate, WalkExit);
         s_crouchWalk = stateMachine.AddState("CrouchWalk", null, SlowMoveUpdate, WalkExit);
-        s_climb = stateMachine.AddState("Climb", ClimbingEnter, ClimbingUpdate, ClimbingExit);
-        s_climbIde = stateMachine.AddState("ClimbIdle", ClimbingEnter, ClimbingUpdate, ClimbingExit);
+        s_climb = stateMachine.AddState("Climb", MoveClimbEnter, ClimbingUpdate, MoveClimbingExit);
+        s_climbIde = stateMachine.AddState("ClimbIdle", BaseClimbingEnter, ClimbingUpdate, BaseClimbingExit);
         s_inventory = stateMachine.AddState("Inventory", null, MoveUpdate);
         s_death = stateMachine.AddState("Death", DeathEnter, DeathUpdate, DeathExit);
         s_fallDeath = stateMachine.AddState("FallDeath", DeathEnter, DeathUpdate, DeathExit);
@@ -331,7 +331,14 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         transform.localScale = new Vector3(right ? 1 : -1, 1, 1);
     }
 
-    private void ClimbingEnter()
+    private void MoveClimbEnter()
+    {
+        climbSound.Play();
+        BaseClimbingEnter();
+    }
+
+ 
+    private void BaseClimbingEnter()
     {
         rigidbody.gravityScale = 0;
         NotifyActivity();
@@ -340,7 +347,13 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
             currentClimbable.ForEach((x) => x.NotifyUse());
     }
 
-    private void ClimbingExit()
+    private void MoveClimbingExit()
+    {
+        climbSound.Stop();
+        BaseClimbingExit();
+    }
+
+    private void BaseClimbingExit()
     {
         rigidbody.gravityScale = gravityScale;
         NotifyActivity();
