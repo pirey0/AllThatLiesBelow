@@ -66,6 +66,11 @@ public struct Tile
         Damage += amount;
     }
 
+    public bool IsEntityType()
+    {
+        return Type == TileType.FloatingEntity || Type == TileType.FloatingEntityNotNeighbour || Type == TileType.CollapsableEntity || Type == TileType.CollapsableEntityNotNeighbour || Type == TileType.Rope;
+    }
+
     public override string ToString()
     {
         return Type.ToString() + "[S: "+ !Unstable + " N: " + NeighbourBitmask + " Dmg:" + Damage.ToString("n1") + " Dis: " + Discovered + "]" ; 

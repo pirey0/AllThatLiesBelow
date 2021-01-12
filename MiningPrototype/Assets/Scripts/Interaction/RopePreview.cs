@@ -22,7 +22,9 @@ public class RopePreview : MonoBehaviour, IItemPreview
     {
         transform.position = GetPlacePosition(position);
         var gridPos = position.ToGridPosition();
-        if (map.IsBlockAt(gridPos.x, gridPos.y) && map.IsAirAt(gridPos.x, gridPos.y - 1))
+        var tile = map[gridPos];
+
+        if (map.IsBlockAt(gridPos.x, gridPos.y) && !tile.IsEntityType() && map.IsAirAt(gridPos.x, gridPos.y - 1))
         {
             renderer.color = Color.green;
             couldPlace = true;
