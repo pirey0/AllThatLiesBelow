@@ -338,7 +338,6 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
             if (CanMineDigTarget())
             {
-                CloseInventory();
                 PlayerActivity?.Invoke();
                 visualController.ForceUpdate();
 
@@ -435,6 +434,18 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
             cantMine.Stop();
             pickaxeAnimator.Stop();
         }
+    }
+
+    public bool InDialog()
+    {
+        foreach (var i in currentInteractables)
+        {
+            if(i is Altar)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private bool TryStopInteractingWith(IInteractable interactable)
