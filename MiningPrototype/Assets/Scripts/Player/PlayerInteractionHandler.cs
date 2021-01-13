@@ -142,36 +142,36 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
     private void UpdateHover(bool hasDigTarget)
     {
-        var hits = Util.RaycastFromMouse(cameraController.Camera);
+        var hits = Util.RaycastFromMouse(cameraController.Camera, settings.interactionMask.value);
 
         IHoverable newHover = null;
-        if (!hasDigTarget)
+
+        foreach (var hit in hits)
         {
-            foreach (var hit in hits)
+            if (hit.transform.TryGetComponent(out IHoverable hoverable))
             {
-                if (hit.transform.TryGetComponent(out IHoverable hoverable))
-                {
-                    newHover = hoverable;
-                    break;
-                }
+                newHover = hoverable;
+                break;
             }
-            //hover over something interactable
-            if ((newHover == null || !newHover.IsInteractable) && !eventSystem.IsPointerOverGameObject())
-                cursorHandler.SetCursor(CursorType.Default);
-            else
-                cursorHandler.SetCursor(CursorType.Interactable);
         }
+
+        //hover over something interactable
+        if ((newHover == null || !newHover.IsInteractable) && !eventSystem.IsPointerOverGameObject())
+            cursorHandler.SetCursor(CursorType.Default);
+        else if (hasDigTarget && !eventSystem.IsPointerOverGameObject() && gameState.CurrentState != GameState.State.Paused)
+            cursorHandler.SetCursor(CursorType.Mining);
         else
-        {
-            if (!eventSystem.IsPointerOverGameObject() && gameState.CurrentState != GameState.State.Paused)
-                cursorHandler.SetCursor(CursorType.Mining);
-        }
+                cursorHandler.SetCursor(CursorType.Interactable);
+
         if (newHover != hover)
         {
             if (hover != null)
                 hover.HoverExit();
             if (newHover != null)
+            {
                 newHover.HoverEnter(itemPlacingHandler.IsDraggingItem);
+                Debug.LogWarning("Hover Enter");
+            }
             hover = newHover;
         }
 

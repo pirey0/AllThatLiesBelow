@@ -39,7 +39,8 @@ public enum ItemType
     LetterNote,
     CopperClaw,
     SpecialPresent,
-    HeartOfForest
+    HeartOfForest,
+    Radio
 }
 
 

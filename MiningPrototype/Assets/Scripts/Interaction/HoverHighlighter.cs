@@ -62,7 +62,7 @@ public class HoverHighlighter : MonoBehaviour, IHoverable
 
     private void OnEnable()
     {
-        isInteractable = GetComponent<IInteractable>() != null;
+        isInteractable = GetComponent<IBaseInteractable>() != null;
         isDropreceiver = GetComponent<IDropReceiver>() != null;
 
         parentRenderer = GetComponent<SpriteRenderer>();
