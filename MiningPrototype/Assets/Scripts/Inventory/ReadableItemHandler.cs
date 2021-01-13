@@ -113,6 +113,8 @@ public class ReadableItemHandler : MonoBehaviour
 
     internal string GetAuthor(int id)
     {
-        return LettersHolder.Instance.GetLetterWithID(id).Author;
+        var letter = LettersHolder.Instance.GetLetterWithID(id);
+
+        return letter == null ? null : letter.Author;
     }
 }

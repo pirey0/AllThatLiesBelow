@@ -100,9 +100,14 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         base.OnPointerDown(eventData);
         var info = ItemsData.GetItemInfo(type);
         if (info.AmountIsUniqueID && eventData.button == PointerEventData.InputButton.Right)
+        {
             readableItemHandler.Display(amount, this);
+        }
         else
-            tooltipHandler?.Display(transform, info.DisplayName + (info.AmountIsUniqueID?" <i>by " + readableItemHandler.GetAuthor(amount) + "</i>":""), info.DisplayTooltip);
+        {
+            string author = readableItemHandler.GetAuthor(amount);
+            tooltipHandler?.Display(transform, info.DisplayName + ((author != null && info.AmountIsUniqueID) ? " <i>by " + author + "</i>" : ""), info.DisplayTooltip);
+        }
     }
 
     public override void OnPointerEnter(PointerEventData eventData)
@@ -181,7 +186,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         while (inDrag)
         {
             rectTransform.position = Util.MouseToWorld(cameraController.Camera);
-            
+
             UpdatePlacingPreview();
 
             if (Input.GetMouseButtonDown(1)) //On right click while dragging <- dirty
@@ -190,7 +195,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
                 {
                     //drop half when pressing shift and 1 when not
                     int a = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) ? (amount / 2) : 1;
-                    itemPlacingHandler.TryPlace(type, rectTransform.position, amount:a); //try place single item
+                    itemPlacingHandler.TryPlace(type, rectTransform.position, amount: a); //try place single item
 
                     //last torch placed
                     if (amount <= 1)
@@ -240,7 +245,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
             }
 
             itemPlacingHandler.UpdatePosition(rectTransform.position);
-            
+
         }
         else
         {
