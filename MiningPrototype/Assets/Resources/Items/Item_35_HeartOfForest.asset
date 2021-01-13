@@ -28,3 +28,6 @@ MonoBehaviour:
   RequiredLevel: 0
   LevelUpgrade: 0
   IsBurnable: 0
+  ShouldAnimate: 1
+  Animation: {fileID: 11400000, guid: bed12aaa373c01d478fad46776f67d4a, type: 2}
+  AudioClip: {fileID: 8300000, guid: a6c247b86aa656047b11c94d23ca4acb, type: 3}

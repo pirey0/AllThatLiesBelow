@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 using Zenject;
-using System.Text.RegularExpressions;
 
 public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropReceiver
 {
     [SerializeField] public Image icon;
     [SerializeField] public TMP_Text amountDisplay;
+    [SerializeField] ImageSpriteAnimator imageSpriteAnimator;
+    [SerializeField] AudioSource audioSource;
     [SerializeField] GameObject canDropOverlay, canNotDropOverlay;
     [SerializeField] AnimationCurve scaleOnOpenAndCloseCurve;
 
@@ -69,6 +69,13 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         if (amountDisplay != null && !info.AmountIsUniqueID)
         {
             amountDisplay.text = amount.ToString();
+        }
+
+        if (info.ShouldAnimate)
+        {
+            imageSpriteAnimator.Play(info.Animation);
+            audioSource.clip = info.AudioClip;
+            audioSource.Play();
         }
     }
 

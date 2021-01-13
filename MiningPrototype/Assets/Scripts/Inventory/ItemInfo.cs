@@ -32,4 +32,8 @@ public class ItemInfo : ScriptableObject
     [Header("Burnable")]
     public bool IsBurnable;
 
+    [Header("Animation")]
+    public bool ShouldAnimate;
+    public SpriteAnimation Animation;
+    public AudioClip AudioClip;
 }
