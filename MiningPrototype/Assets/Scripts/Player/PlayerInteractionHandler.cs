@@ -168,10 +168,8 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
             if (hover != null)
                 hover.HoverExit();
             if (newHover != null)
-            {
                 newHover.HoverEnter(itemPlacingHandler.IsDraggingItem);
-                Debug.LogWarning("Hover Enter");
-            }
+
             hover = newHover;
         }
 
