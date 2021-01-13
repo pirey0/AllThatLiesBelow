@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemType: 37
   DisplayName: Painting
   DisplayTooltip: Picture created by a Painter.
-  DisplaySprite: {fileID: 7278335179177953182, guid: 1d76148694f11da428d7eaabb15fe017, type: 3}
+  DisplaySprite: {fileID: 21300000, guid: 887fae77b27c12445b7043523912a674, type: 3}
   DisplaySpriteRead: {fileID: 0}
   Weight: 1
   CanBePlaced: 1
