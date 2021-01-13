@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b4e36afc74fff4f82cd40fcf05b7bc, type: 3}
+  m_Name: Item_37_Painting
+  m_EditorClassIdentifier: 
+  ItemType: 37
+  DisplayName: Painting
+  DisplayTooltip: Picture created by a Painter.
+  DisplaySprite: {fileID: 7278335179177953182, guid: 1d76148694f11da428d7eaabb15fe017, type: 3}
+  DisplaySpriteRead: {fileID: 0}
+  Weight: 1
+  CanBePlaced: 1
+  PickupHoldSprite: {fileID: 1875917246518206917, guid: e7e6e97dc47eeec4d8d1ca9beb28ab1f, type: 3}
+  PickupHoldOffset: {x: 0, y: 0}
+  PickupPreviewPrefab: {fileID: 7024461087653307507, guid: 6ebea5c246ec31e4fb3e305ebf5b2919, type: 3}
+  Prefab: {fileID: 5359568407585226657, guid: 13ca65725fd3922499b6dc2a872ab186, type: 3}
+  AmountIsUniqueID: 0
+  IsUpgrade: 0
+  RequiredLevel: 0
+  LevelUpgrade: 0
+  IsBurnable: 0
+  ShouldAnimate: 0
+  Animation: {fileID: 0}
+  AudioClip: {fileID: 0}

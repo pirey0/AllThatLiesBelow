@@ -40,7 +40,8 @@ public enum ItemType
     CopperClaw,
     SpecialPresent,
     HeartOfForest,
-    Radio
+    Radio,
+    Painting
 }
 
 
