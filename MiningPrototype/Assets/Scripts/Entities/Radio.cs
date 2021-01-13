@@ -13,15 +13,34 @@ public class Radio : MineableObject, IBaseInteractable
     [Zenject.Inject] CameraController cameraController;
 
     bool inTransition;
+    int radioIndex = 0;
+
     public void BeginInteracting(GameObject interactor)
     {
         if (!inTransition)
         {
             StopAllCoroutines();
-            StartCoroutine(TransitionCoroutine(switches[UnityEngine.Random.Range(0,switches.Length)], channelClips[UnityEngine.Random.Range(0, channelClips.Length)]));
-            spriteRenderer.sprite = sprites[UnityEngine.Random.Range(0, sprites.Length)];
+            radioIndex = (radioIndex + 1) % channelClips.Length;
+
+            var clip = channelClips[radioIndex];
+            var transition = switches[UnityEngine.Random.Range(0, switches.Length)];
+            if (clip == null)
+                TurnOff(transition);
+            else
+                StartCoroutine(TransitionCoroutine(transition, channelClips[radioIndex]));
+
+            var spriteIndex = radioIndex % sprites.Length;
+            spriteRenderer.sprite = sprites[spriteIndex];
             cameraController.Shake(transform.position, shakeType: CameraShakeType.explosion, 0.25f, 10, 0.25f);
         }
+    }
+
+    private void TurnOff(AudioClip transition)
+    {
+        switchingSource.clip = transition;
+        switchingSource.pitch = UnityEngine.Random.Range(0.75f, 1.5f);
+        switchingSource.Play();
+        channelSource.Stop();
     }
 
     IEnumerator TransitionCoroutine(AudioClip transition, AudioClip target)
@@ -34,7 +53,7 @@ public class Radio : MineableObject, IBaseInteractable
         switchingSource.pitch = UnityEngine.Random.Range(0.75f, 1.5f);
         switchingSource.Play();
 
-        while ((t+= Time.deltaTime) < (length / 2))
+        while ((t += Time.deltaTime) < (length / 2))
         {
             channelSource.volume = maxVolume * (1 - (t / (length / 2)));
             yield return null;

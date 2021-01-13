@@ -119,6 +119,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6f342bdf8147c314ba536ef484298a9e, type: 3}
   - {fileID: 8300000, guid: 663f7b0b1204bb3428130f0d433be3e0, type: 3}
   channelClips:
+  - {fileID: 0}
   - {fileID: 8300000, guid: aa817ae296d14214181ab692dfd0e1cb, type: 3}
   - {fileID: 8300000, guid: f1268528b010453498d8664848ed2dca, type: 3}
   - {fileID: 8300000, guid: bba97e689688e92449c7ac1cac46e208, type: 3}

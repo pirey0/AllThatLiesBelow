@@ -87,11 +87,12 @@ public class Desk : MonoBehaviour, IInteractable
         o.name = option.Text;
         var text = o.GetComponentInChildren<TMPro.TMP_Text>();
         var button = o.GetComponentInChildren<UnityEngine.UI.Button>();
+        var button2 = text.GetComponent<UnityEngine.UI.Button>();
         text.text = option.Text;
         button.onClick.AddListener(option.Action);
         button.interactable = option.Active;
-        text.GetComponent<UnityEngine.UI.Button>().interactable = option.Active;
-
+        button2.onClick.AddListener(option.Action);
+        button2.interactable = option.Active;
         return o;
     }
 
