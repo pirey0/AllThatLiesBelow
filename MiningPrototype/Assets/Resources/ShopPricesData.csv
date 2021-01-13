@@ -5,7 +5,7 @@ Ball;1;Gold
 Dynamite;3;Gold
 Chest;10;Gold
 Torch;1;Copper
-Platform;5;Copper
+Platform;2;Copper
 Sign;2;Copper
 Lift;30;Gold
 Lantern;1;Gold
@@ -14,3 +14,4 @@ SteelPickaxe;50;Gold
 DiamondPickaxe;10;Diamond
 Helmet;20;Copper
 HeadLamp;10;Gold
+Radio;7;Copper
