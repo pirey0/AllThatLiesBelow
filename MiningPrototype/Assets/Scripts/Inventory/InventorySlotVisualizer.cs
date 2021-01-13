@@ -102,7 +102,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         if (info.AmountIsUniqueID && eventData.button == PointerEventData.InputButton.Right)
             readableItemHandler.Display(amount, this);
         else
-            tooltipHandler?.Display(transform, info.DisplayName, info.DisplayTooltip);
+            tooltipHandler?.Display(transform, info.DisplayName + (info.AmountIsUniqueID?" <i>by " + readableItemHandler.GetAuthor(amount) + "</i>":""), info.DisplayTooltip);
     }
 
     public override void OnPointerEnter(PointerEventData eventData)
@@ -117,7 +117,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
     {
         yield return new WaitForSeconds(0.66f);
         var info = ItemsData.GetItemInfo(type);
-        tooltipHandler?.Display(transform, info.DisplayName, info.DisplayTooltip);
+        tooltipHandler?.Display(transform, info.DisplayName + (info.AmountIsUniqueID ? " <i>by " + readableItemHandler.GetAuthor(amount) + "</i>" : ""), info.DisplayTooltip);
     }
 
     public override void OnPointerExit(PointerEventData eventData)
