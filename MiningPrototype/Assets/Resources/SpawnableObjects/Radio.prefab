@@ -121,10 +121,12 @@ MonoBehaviour:
   channelClips:
   - {fileID: 8300000, guid: aa817ae296d14214181ab692dfd0e1cb, type: 3}
   - {fileID: 8300000, guid: f1268528b010453498d8664848ed2dca, type: 3}
-  - {fileID: 8300000, guid: 3753f09a1d9971d499404d3c132af1f8, type: 3}
+  - {fileID: 8300000, guid: bba97e689688e92449c7ac1cac46e208, type: 3}
   - {fileID: 8300000, guid: d3a1639cc24c0e7479a1bb9fe863517f, type: 3}
   - {fileID: 8300000, guid: d30b3d0cea9235b49b7ad2c05b88eb22, type: 3}
   - {fileID: 8300000, guid: 54bc16138e850f747ac92df4547c051b, type: 3}
+  - {fileID: 8300000, guid: c3d74dbaf7e83c14782023be1b81b38f, type: 3}
+  - {fileID: 8300000, guid: 70e50ad2b108d634784ad42dbb5cdca8, type: 3}
   spriteRenderer: {fileID: 3972625243980868047}
   sprites:
   - {fileID: 1875917246518206917, guid: e7e6e97dc47eeec4d8d1ca9beb28ab1f, type: 3}
@@ -149,7 +151,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
@@ -245,7 +247,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 10
   MaxDistance: 20
   Pan2D: 0
