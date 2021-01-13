@@ -9,6 +9,7 @@ public class Rock : FallingTilemapCarvingEntity
     [SerializeField] AudioSource rockSmashing;
     [SerializeField] float crumbleMinTime = 0.3f;
     [SerializeField] new SpriteRenderer renderer;
+    [SerializeField] Sprite[] sprites;
 
     [Zenject.Inject] CameraController cameraController;
 
@@ -18,6 +19,7 @@ public class Rock : FallingTilemapCarvingEntity
     {
         base.Start();
         Carve();
+        renderer.sprite = sprites[UnityEngine.Random.Range(0,sprites.Length)];
         renderer.sortingOrder = UnityEngine.Random.Range(0, 100);
     }
 

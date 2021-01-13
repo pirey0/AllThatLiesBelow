@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  uniqueName: 
 --- !u!114 &8886592050164078686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,6 +82,11 @@ MonoBehaviour:
   rockSmashing: {fileID: 4335561351364783350}
   crumbleMinTime: 2
   renderer: {fileID: 8886592050164078685}
+  sprites:
+  - {fileID: -9001424152580196360, guid: a367597dc9fd4ec4d99604d8fe439114, type: 3}
+  - {fileID: 5695066495760894353, guid: a367597dc9fd4ec4d99604d8fe439114, type: 3}
+  - {fileID: -5502097760226253700, guid: a367597dc9fd4ec4d99604d8fe439114, type: 3}
+  - {fileID: 6744976827901728961, guid: a367597dc9fd4ec4d99604d8fe439114, type: 3}
 --- !u!212 &8886592050164078685
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -129,7 +135,7 @@ SpriteRenderer:
   m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &8886592050164078684
