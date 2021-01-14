@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3972625243980868044}
   - component: {fileID: 3972625243980868047}
   - component: {fileID: 3972625243980868083}
+  - component: {fileID: 1021434048550090917}
   - component: {fileID: 3972625243980868082}
   - component: {fileID: 3972625243980868045}
   - component: {fileID: 3972625243980868081}
@@ -127,11 +128,24 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 54bc16138e850f747ac92df4547c051b, type: 3}
   - {fileID: 8300000, guid: c3d74dbaf7e83c14782023be1b81b38f, type: 3}
   - {fileID: 8300000, guid: 70e50ad2b108d634784ad42dbb5cdca8, type: 3}
-  spriteRenderer: {fileID: 3972625243980868047}
-  sprites:
-  - {fileID: 1875917246518206917, guid: e7e6e97dc47eeec4d8d1ca9beb28ab1f, type: 3}
-  - {fileID: 6024717204825164481, guid: e7e6e97dc47eeec4d8d1ca9beb28ab1f, type: 3}
+  spriteAnimator: {fileID: 1021434048550090917}
+  on: {fileID: 11400000, guid: 79d1a0f0eebc6544992ffe1a8b1e52ce, type: 2}
+  off: {fileID: 11400000, guid: 6d32901f9e355384889ff818d08242c5, type: 2}
   maxVolume: 1
+--- !u!114 &1021434048550090917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3972625243980868046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e54841db1ebc224b88bd82537e065cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingAnimation: {fileID: 0}
+  renderer: {fileID: 3972625243980868047}
 --- !u!82 &3972625243980868082
 AudioSource:
   m_ObjectHideFlags: 0

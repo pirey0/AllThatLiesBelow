@@ -126,7 +126,7 @@ MonoBehaviour:
   SmallTextSize: 6
   SpecialText: '- special thanks -
 
-    to our Proffessor: Csongor Baranyai
+    to our Professor: Csongor Baranyai
 
 
     to
@@ -134,5 +134,7 @@ MonoBehaviour:
 
     Max Bredlau
 
-    Nickels Witte'
+    Nickels Witte
+
+    Jean Isserstedt'
   SpecialTextSize: 8

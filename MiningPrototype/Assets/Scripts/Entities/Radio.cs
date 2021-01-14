@@ -6,8 +6,8 @@ public class Radio : MineableObject, IBaseInteractable, INonPersistantSavable
 {
     [SerializeField] AudioSource switchingSource, channelSource;
     [SerializeField] AudioClip[] switches, channelClips;
-    [SerializeField] SpriteRenderer spriteRenderer;
-    [SerializeField] Sprite[] sprites;
+    [SerializeField] SpriteAnimator spriteAnimator;
+    [SerializeField] SpriteAnimation on, off;
     [SerializeField] float maxVolume;
 
     [Zenject.Inject] CameraController cameraController;
@@ -23,8 +23,7 @@ public class Radio : MineableObject, IBaseInteractable, INonPersistantSavable
             radioIndex = (radioIndex + 1) % channelClips.Length;
             TryPlayIndex(radioIndex);
 
-            var spriteIndex = radioIndex % sprites.Length;
-            spriteRenderer.sprite = sprites[spriteIndex];
+            spriteAnimator.Play(radioIndex == 0?off:on);
             cameraController.Shake(transform.position, shakeType: CameraShakeType.explosion, 0.25f, 10, 0.25f);
         }
     }
