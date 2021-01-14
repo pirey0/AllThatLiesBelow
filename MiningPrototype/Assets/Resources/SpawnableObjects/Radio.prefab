@@ -121,13 +121,13 @@ MonoBehaviour:
   channelClips:
   - {fileID: 0}
   - {fileID: 8300000, guid: aa817ae296d14214181ab692dfd0e1cb, type: 3}
-  - {fileID: 8300000, guid: f1268528b010453498d8664848ed2dca, type: 3}
-  - {fileID: 8300000, guid: bba97e689688e92449c7ac1cac46e208, type: 3}
   - {fileID: 8300000, guid: d3a1639cc24c0e7479a1bb9fe863517f, type: 3}
-  - {fileID: 8300000, guid: d30b3d0cea9235b49b7ad2c05b88eb22, type: 3}
-  - {fileID: 8300000, guid: 54bc16138e850f747ac92df4547c051b, type: 3}
-  - {fileID: 8300000, guid: c3d74dbaf7e83c14782023be1b81b38f, type: 3}
   - {fileID: 8300000, guid: 70e50ad2b108d634784ad42dbb5cdca8, type: 3}
+  - {fileID: 8300000, guid: bba97e689688e92449c7ac1cac46e208, type: 3}
+  - {fileID: 8300000, guid: c3d74dbaf7e83c14782023be1b81b38f, type: 3}
+  - {fileID: 8300000, guid: f1268528b010453498d8664848ed2dca, type: 3}
+  - {fileID: 8300000, guid: 7c9515057f2edb9449232e215c419108, type: 3}
+  - {fileID: 8300000, guid: 54bc16138e850f747ac92df4547c051b, type: 3}
   spriteAnimator: {fileID: 1021434048550090917}
   on: {fileID: 11400000, guid: 79d1a0f0eebc6544992ffe1a8b1e52ce, type: 2}
   off: {fileID: 11400000, guid: 6d32901f9e355384889ff818d08242c5, type: 2}

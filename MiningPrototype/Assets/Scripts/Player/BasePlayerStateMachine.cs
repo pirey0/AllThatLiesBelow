@@ -27,6 +27,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
     float lastActivityTimeStamp;
     float lastDeathTimeStamp;
     float lastMineTimeStamp;
+    float lastHitTimeStamp;
 
     private bool isGrounded;
     private Vector2 oldVelocity;
@@ -121,7 +122,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         s_inventory = stateMachine.AddState("Inventory", null, MoveUpdate);
         s_death = stateMachine.AddState("Death", DeathEnter, DeathUpdate, DeathExit);
         s_fallDeath = stateMachine.AddState("FallDeath", DeathEnter, DeathUpdate, DeathExit);
-        s_hit = stateMachine.AddState("Hit", null);
+        s_hit = stateMachine.AddState("Hit", HitEnter);
         s_longIdle = stateMachine.AddState("LongIdle", null, SlowMoveUpdate);
         s_disabled = stateMachine.AddState("Disabled", null, null, DisableExit);
         s_fall = stateMachine.AddState("Fall", null, MoveUpdate, FallExit);
@@ -174,6 +175,11 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         s_crouchWalk.AddTransition(IsFalling, s_fall);
 
         s_hit.AddTransition(HitFinished, s_idle);
+    }
+
+    private void HitEnter()
+    {
+        lastHitTimeStamp = Time.time;
     }
 
     protected virtual bool ShouldCrouch()
@@ -234,7 +240,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
 
     private bool HitFinished()
     {
-        return Time.time - lastActivityTimeStamp > settings.hitDuration;
+        return Time.time - lastHitTimeStamp > settings.hitDuration;
     }
 
     private bool IsSlowWalking()
@@ -337,7 +343,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         BaseClimbingEnter();
     }
 
- 
+
     private void BaseClimbingEnter()
     {
         rigidbody.gravityScale = 0;
@@ -575,7 +581,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
             stateMachine.ForceTransitionTo(s_fallDeath);
             damageEffectHandler.TakeDamage(1f);
         }
-        else if(-oldVelocity.y > hurtSpeed)
+        else if (-oldVelocity.y > hurtSpeed)
         {
             stateMachine.ForceTransitionTo(s_hit);
             damageEffectHandler.TakeDamage(0.66f);
@@ -610,12 +616,12 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
 
     public void TakeDamage(DamageStrength strength)
     {
-
         if (strength == DamageStrength.Strong)
         {
             stateMachine.ForceTransitionTo(s_death);
             damageEffectHandler.TakeDamage(1f);
-        } else if (strength == DamageStrength.Strong)
+        }
+        else if (strength == DamageStrength.Weak)
         {
             stateMachine.ForceTransitionTo(s_hit);
             damageEffectHandler.TakeDamage(0.66f);
