@@ -28,19 +28,27 @@ public class Mushroom : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (bounceAudio.isPlaying)
-            return;
+        if (collision.transform.position.y > transform.position.y)
+        {
+            if (bounceAudio.isPlaying || collision.attachedRigidbody == null)
+                return;
 
-        bounceAudio.pitch = UnityEngine.Random.Range(0.6f, 1);
-        cameraController.Shake(transform.position, CameraShakeType.explosion, 0.15f, 10, 0.25f);
-        bounceAudio.Play();
-        particleSystem.Play();
-        TryPlayAnimation();
+            var vel = collision.attachedRigidbody.velocity;
+            if (vel.y < 0)
+            {
+                bounceAudio.pitch = UnityEngine.Random.Range(0.6f, 1);
+                cameraController.Shake(transform.position, CameraShakeType.explosion, 0.15f, 10, 0.25f);
+                bounceAudio.Play();
+                particleSystem.Play();
+                TryPlayAnimation();
+                collision.attachedRigidbody.velocity = new Vector2(vel.x, Mathf.Abs(vel.y));
+            }
+        }
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         TryPlayAnimation();
     }
