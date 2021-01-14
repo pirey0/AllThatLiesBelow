@@ -75,6 +75,8 @@ public static class ItemsData
         {
             return itemInfos[itemType];
         }
+
+        Debug.LogWarning("No Item-Info for " + itemType.ToString() + "found.");
         return null;
     }
 

@@ -53,8 +53,12 @@ public class Crate : MineableObject, INonPersistantSavable
 
     protected override void Destroyed()
     {
-        contains = inventoryOwner.Inventory.GetContent()[0];
-        base.Destroyed();
+        inventoryManager.PlayerCollects(inventoryOwner.Inventory.GetContent());
+
+        if (destroyEffects != null)
+            Instantiate(destroyEffects, GetPosition(), Quaternion.identity); //Safe no injection
+
+        Destroy(gameObject);
     }
 
     public override Vector2 GetPosition()
@@ -73,7 +77,7 @@ public class Crate : MineableObject, INonPersistantSavable
         data.Type = crateType;
 
         if (inventoryOwner.Inventory.Count > 0)
-            data.Content = inventoryOwner.Inventory.GetContent()[0];
+            data.Content = inventoryOwner.Inventory.GetContent();
 
         return data;
     }
@@ -85,7 +89,13 @@ public class Crate : MineableObject, INonPersistantSavable
             crateType = data.Type;
 
             if (data.Content != null)
-                inventoryOwner.Inventory.Add(data.Content);
+            {
+                foreach (var itemAmountPair in data.Content)
+                {
+                    if (itemAmountPair.type != ItemType.None || itemAmountPair.amount > 0)
+                        inventoryOwner.Inventory.Add(itemAmountPair);
+                }
+            }
 
             SetupCrate();
         }
@@ -99,7 +109,7 @@ public class Crate : MineableObject, INonPersistantSavable
     [System.Serializable]
     public class CrateSaveData : SpawnableSaveData
     {
-        public ItemAmountPair Content;
+        public ItemAmountPair[] Content;
         public CrateType Type;
     }
 }
