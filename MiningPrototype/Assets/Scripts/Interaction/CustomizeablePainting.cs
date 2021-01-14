@@ -16,7 +16,11 @@ public class CustomizeablePainting : MineableObject, INonPersistantSavable, IBas
 
     private void Start()
     {
-        spriteRenderer.sortingOrder = 10000 - (int)transform.position.y;
+        var gridPos = transform.position.ToGridPosition();
+        //this is to conform with: The value must be between -32768 and 32767 (https://docs.unity3d.com/ScriptReference/Renderer-sortingOrder.html)
+        //and we need 60000 to cover all of our tiles
+        int val = -32768 + gridPos.y * Constants.WIDTH + gridPos.x;
+        spriteRenderer.sortingOrder = val;
     }
 
     public void BeginInteracting(GameObject interactor)
