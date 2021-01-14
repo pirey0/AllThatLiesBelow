@@ -583,6 +583,4 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         if (origin.Contains(pair) && origin.TryRemove(pair))
             Inventory.Add(pair);
     }
-
-
 }
