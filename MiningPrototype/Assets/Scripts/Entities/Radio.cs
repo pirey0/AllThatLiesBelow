@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Radio : MineableObject, IBaseInteractable
+public class Radio : MineableObject, IBaseInteractable, INonPersistantSavable
 {
     [SerializeField] AudioSource switchingSource, channelSource;
     [SerializeField] AudioClip[] switches, channelClips;
@@ -21,18 +21,22 @@ public class Radio : MineableObject, IBaseInteractable
         {
             StopAllCoroutines();
             radioIndex = (radioIndex + 1) % channelClips.Length;
-
-            var clip = channelClips[radioIndex];
-            var transition = switches[UnityEngine.Random.Range(0, switches.Length)];
-            if (clip == null)
-                TurnOff(transition);
-            else
-                StartCoroutine(TransitionCoroutine(transition, channelClips[radioIndex]));
+            TryPlayIndex(radioIndex);
 
             var spriteIndex = radioIndex % sprites.Length;
             spriteRenderer.sprite = sprites[spriteIndex];
             cameraController.Shake(transform.position, shakeType: CameraShakeType.explosion, 0.25f, 10, 0.25f);
         }
+    }
+
+    private void TryPlayIndex(int index)
+    {
+        var clip = channelClips[index];
+        var transition = switches[UnityEngine.Random.Range(0, switches.Length)];
+        if (clip == null)
+            TurnOff(transition);
+        else
+            StartCoroutine(TransitionCoroutine(transition, channelClips[index]));
     }
 
     private void TurnOff(AudioClip transition)
@@ -69,5 +73,33 @@ public class Radio : MineableObject, IBaseInteractable
         }
 
         inTransition = false;
+    }
+
+    public SpawnableSaveData ToSaveData()
+    {
+        var data = new RadioSaveData();
+        data.SaveTransform(transform);
+        data.Channel = radioIndex;
+        return data;
+    }
+
+    public SaveID GetSavaDataID()
+    {
+        return new SaveID("Radio");
+    }
+
+    public void Load(SpawnableSaveData dataOr)
+    {
+        if (dataOr is RadioSaveData data)
+        {
+            radioIndex = data.Channel;
+            TryPlayIndex(radioIndex);
+        }
+    }
+
+    [System.Serializable]
+    private class RadioSaveData : SpawnableSaveData
+    {
+        public int Channel;
     }
 }
