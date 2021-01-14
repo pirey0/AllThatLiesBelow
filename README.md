@@ -2,9 +2,9 @@
 
 This is the bachelor project of Luca Martinelli and Lucas Bödeker.
 
-It's has been developed collaboratively in the _second phase_ of the whole bachelor.
+It was developed collaboratively in the _second phase_ of the bachelor.
 
-Since the game is not the solitary creation of one of us, we decided to create a new shared repository for this project.
+Since the game is not the solitary creation of one of us, we decided to create a shared repository for this project.
 
 The individual bachelor repositories, containing the our respective _theses_ and _proposals_ can be found here:
 
@@ -12,7 +12,9 @@ The individual bachelor repositories, containing the our respective _theses_ and
 
 * [Luca Martinelli individual repository](https://bitbucket.org/btkgamedesign/2020_ba_luca_martinelli/)
 
-__This is the bitbucket repository for ALL THAT LIES BELOW that is owned by the university, the original repository is independantly on gitHub and can be found [here](https://github.com/LucxMangaJet/BAMiningPrototype) __
+The repository is hosted in two locations:
+__ On [GitHub](https://github.com/LucxMangaJet/BAMiningPrototype) __
+__ And on the UEs [BitBucket] (https://bitbucket.org/btkgamedesign/2020_ba_luca_martinelli_lucas_boedeker_project/src/main/) __
 
 * [Process documentation](insert miro link here)
 
