@@ -10,4 +10,7 @@ public class MainMenuCredits : ScriptableObject
 
     [TextArea] public string SmallText;
     public int SmallTextSize;
+
+    [TextArea] public string SpecialText;
+    public int SpecialTextSize;
 }

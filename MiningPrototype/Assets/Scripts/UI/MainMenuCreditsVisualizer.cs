@@ -7,6 +7,7 @@ public class MainMenuCreditsVisualizer : MonoBehaviour
 {
     [SerializeField] TMP_Text bigText;
     [SerializeField] TMP_Text smallText;
+    [SerializeField] TMP_Text specialText;
     [SerializeField] MainMenuCredits content;
 
     [SerializeField] AnimationCurve inOutCurve;
@@ -63,5 +64,7 @@ public class MainMenuCreditsVisualizer : MonoBehaviour
         bigText.fontSize = content.BigTextSize;
         smallText.text = content.SmallText;
         smallText.fontSize = content.SmallTextSize;
+        specialText.text = content.SpecialText;
+        specialText.fontSize = content.SpecialTextSize;
     }
 }
