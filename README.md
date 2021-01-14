@@ -13,8 +13,10 @@ The individual bachelor repositories, containing the our respective _theses_ and
 * [Luca Martinelli individual repository](https://bitbucket.org/btkgamedesign/2020_ba_luca_martinelli/)
 
 The repository is hosted in two locations:
+
 __ On [GitHub](https://github.com/LucxMangaJet/BAMiningPrototype) __
-__ And on the UEs [BitBucket] (https://bitbucket.org/btkgamedesign/2020_ba_luca_martinelli_lucas_boedeker_project/src/main/) __
+
+__ And on the UEs [BitBucket] (https://bitbucket.org/btkgamedesign/2020_ba_luca_martinelli_lucas_boedeker_project/src/main) __
 
 * [Process documentation](insert miro link here)
 
