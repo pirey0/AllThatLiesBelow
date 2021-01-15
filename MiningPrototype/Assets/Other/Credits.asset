@@ -16,15 +16,13 @@ MonoBehaviour:
 
     LUCA            LUCAS
 
-    MARTINELLI    BOEDEKER
-
-
-    Letters
-    written by:
-
-    REBECCA FISCHER'
+    MARTINELLI    BOEDEKER'
   BigTextSize: 20
-  SmallText: 'Sounds from Freesounds.org:
+  SmallText: "Letters written by:\nREBECCA FISCHER\n\n- special thanks -\n\nto our
+    Professor: \nCsongor Baranyai\n\nand our Advisors:\nRita Santoyo Venegas\r\nG\xF6tz
+    Grandpierre\n\nto our Playtesters:\nMax Bredlau\nNickels Witte\nJean Isserstedt"
+  SmallTextSize: 6
+  SpecialText: 'Sounds from Freesounds.org:
 
     "landing on the ground.aif" (86005)
     by nextmaking is licensed under CC Sampling Plus 1.0
@@ -123,18 +121,4 @@ MonoBehaviour:
     3.0
 
     "Final Applause" (207727) by unfa is licensed under CC0 1.0'
-  SmallTextSize: 6
-  SpecialText: '- special thanks -
-
-    to our Professor: Csongor Baranyai
-
-
-    to
-    our Playtesters:
-
-    Max Bredlau
-
-    Nickels Witte
-
-    Jean Isserstedt'
   SpecialTextSize: 8
