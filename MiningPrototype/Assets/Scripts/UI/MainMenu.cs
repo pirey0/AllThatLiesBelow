@@ -11,6 +11,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] Transform targetTransform;
     [SerializeField] float cameraSpeed, cameraDuration;
     [SerializeField] TMPro.TMP_Text loadText;
+    [SerializeField] AnimationCurve FadeInYPosition;
+
     private void Start()
     {
         SaveHandler.LoadFromSavefile = false;
@@ -45,7 +47,7 @@ public class MainMenu : MonoBehaviour
     {
         for (float i = 0; i < cameraDuration; i += Time.deltaTime)
         {
-            targetTransform.position += new Vector3(0, cameraSpeed * Time.deltaTime, 0);
+            targetTransform.localPosition = new Vector3(targetTransform.localPosition.x, FadeInYPosition.Evaluate(i), targetTransform.localPosition.z);
             yield return null;
         }
     }
