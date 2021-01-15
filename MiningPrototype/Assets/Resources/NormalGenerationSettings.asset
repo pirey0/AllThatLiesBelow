@@ -293,33 +293,42 @@ MonoBehaviour:
       m_RotationOrder: 4
     DirectionProportions: {x: 4, y: 1}
   - TileType: 5
-    OreVeinSize: {x: 2, y: 4}
+    OreVeinSize: {x: 1, y: 1}
     Probability:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.005248687
-        value: 1.1038244
-        inSlope: -1.6875204
-        outSlope: -1.6875204
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.6858548
-        value: -0.044712365
-        inSlope: -12.8679085
-        outSlope: -12.8679085
+        time: 0.0013843989
+        value: 0.5032995
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.029301368
-        outWeight: 0.075322956
+        inWeight: 0
+        outWeight: 0.080770925
+      - serializedVersion: 3
+        time: 0.56924766
+        value: 0.5038942
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.6518847
+        value: -0.0069754347
+        inSlope: 0.022494469
+        outSlope: 0.022494469
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.03040569
+        outWeight: 0.1307112
       - serializedVersion: 3
         time: 1
         value: 0
-        inSlope: -0.39378583
-        outSlope: -0.39378583
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.19412796
@@ -382,10 +391,6 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     Prefab: {fileID: 8886592050164078683, guid: 94d8faed3d48d2a4b95add8b4bbc9945, type: 3}
-  UnstableThreshhold: 40
-  CollapseThreshhold: 30
-  instableWorldUnstableThreshhold: 80
-  instableWorldCollapseThreshhold: 50
   CrumbleEmitAmount: 5
   PhysicalTilePrefab: {fileID: 1505758800330834963, guid: b97c886a8f31d534dbde7b2320b4d3e3, type: 3}
   StabilityPropagationDistance: 5
