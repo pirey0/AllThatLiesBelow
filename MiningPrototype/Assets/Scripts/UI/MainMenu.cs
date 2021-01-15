@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] float cameraSpeed, cameraDuration;
     [SerializeField] TMPro.TMP_Text loadText;
     [SerializeField] AnimationCurve FadeInYPosition;
+    [SerializeField] AudioSource walkingAudio;
 
     private void Start()
     {
@@ -48,6 +49,7 @@ public class MainMenu : MonoBehaviour
         for (float i = 0; i < cameraDuration; i += Time.deltaTime)
         {
             targetTransform.localPosition = new Vector3(targetTransform.localPosition.x, FadeInYPosition.Evaluate(i), targetTransform.localPosition.z);
+            walkingAudio.volume = Mathf.Clamp(i - (cameraDuration - 3f),0f,1f);
             yield return null;
         }
     }
