@@ -126,6 +126,8 @@ public class Intro : StateListenerBehaviour
 [System.Serializable]
 public class IntroTextElement
 {
+
+    [TextArea(5,100)]
     public string text;
     public float duration;
 }
