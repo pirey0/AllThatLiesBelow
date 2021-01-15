@@ -173,7 +173,7 @@ SpriteRenderer:
   m_SortingLayerID: -564151517
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3661299028102994143, guid: 949e8161680f49940943047337904a65, type: 3}
+  m_Sprite: {fileID: -9056695302992660725, guid: 949e8161680f49940943047337904a65, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -205,6 +205,16 @@ MonoBehaviour:
   back: {fileID: 8232163616488642127}
   maxHeight: 5
   stabilityRange: {x: -2, y: 2}
+  frontSprites:
+  - {fileID: 3661299028102994143, guid: 949e8161680f49940943047337904a65, type: 3}
+  - {fileID: -3000764038784551444, guid: 949e8161680f49940943047337904a65, type: 3}
+  - {fileID: -4269800629396735383, guid: 949e8161680f49940943047337904a65, type: 3}
+  - {fileID: -9056695302992660725, guid: 949e8161680f49940943047337904a65, type: 3}
+  backSprites:
+  - {fileID: 272271371869044422, guid: 949e8161680f49940943047337904a65, type: 3}
+  - {fileID: 3696703606967712766, guid: 949e8161680f49940943047337904a65, type: 3}
+  - {fileID: 6358956762803226150, guid: 949e8161680f49940943047337904a65, type: 3}
+  - {fileID: 3958011768049520005, guid: 949e8161680f49940943047337904a65, type: 3}
 --- !u!61 &8945557450427240917
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -220,7 +230,7 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 1.125}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 1.25, z: 0, w: 1.25}
+    border: {x: 0, y: 1.25, z: 0, w: 1.5}
     pivot: {x: 0.5, y: 0.125}
     oldSize: {x: 3, y: 3}
     newSize: {x: 3, y: 3}
@@ -316,7 +326,7 @@ SpriteRenderer:
   m_SortingLayerID: 254087233
   m_SortingLayer: 2
   m_SortingOrder: 10
-  m_Sprite: {fileID: 272271371869044422, guid: 949e8161680f49940943047337904a65, type: 3}
+  m_Sprite: {fileID: 3958011768049520005, guid: 949e8161680f49940943047337904a65, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
