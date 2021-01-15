@@ -8,6 +8,7 @@ public class Radio : MineableObject, IBaseInteractable, INonPersistantSavable
     [SerializeField] AudioClip[] switches, channelClips;
     [SerializeField] SpriteAnimator spriteAnimator;
     [SerializeField] SpriteAnimation on, off;
+    [SerializeField] SpriteRenderer waveEffectsRenderer;
     [SerializeField] float maxVolume;
 
     [Zenject.Inject] CameraController cameraController;
@@ -22,8 +23,7 @@ public class Radio : MineableObject, IBaseInteractable, INonPersistantSavable
             StopAllCoroutines();
             radioIndex = (radioIndex + 1) % channelClips.Length;
             TryPlayIndex(radioIndex);
-
-            spriteAnimator.Play(radioIndex == 0?off:on);
+ 
             cameraController.Shake(transform.position, shakeType: CameraShakeType.explosion, 0.25f, 10, 0.25f);
         }
     }
@@ -36,6 +36,9 @@ public class Radio : MineableObject, IBaseInteractable, INonPersistantSavable
             TurnOff(transition);
         else
             StartCoroutine(TransitionCoroutine(transition, channelClips[index]));
+
+        spriteAnimator.Play(index == 0 ? off : on);
+        waveEffectsRenderer.enabled = index != 0;
     }
 
     private void TurnOff(AudioClip transition)
