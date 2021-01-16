@@ -20,7 +20,6 @@ public class Rope : TilemapCarvingEntity, IClimbable
 
     private void UpdateHeight()
     {
-        Debug.Log("Updating Rope Height");
         if (adaptHeightRoutine != null)
             StopCoroutine(adaptHeightRoutine);
 

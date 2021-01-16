@@ -29,6 +29,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     [Zenject.Inject] SacrificeActions sacrificeActions;
     [Zenject.Inject] SceneAdder sceneAdder;
     [Zenject.Inject] PlayerStateMachine player;
+    [Zenject.Inject] GameInstanceDataManger gameInstanceData;
 
     public event System.Action<int> OnChangePickaxeLevel;
     public event System.Action<int> OnChangeHelmetLevel;
@@ -60,6 +61,12 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     {
         player.EnteredOverworld += OnEnterOverworld;
         player.LeftOverworld += OnLeftOverworld;
+
+        if (gameInstanceData.LoadBecauseOfDeath)
+        {
+            Debug.Log("Setting Died variable because load from death");
+            SetVariable("Died", true);
+        }
     }
 
     private void OnLeftOverworld()
@@ -491,7 +498,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
 
     public void NotifyPlayerDeath()
     {
-        SetVariable("Died", true);
+        gameInstanceData.LoadBecauseOfDeath = true;
     }
 
     public void Cheat_SetDigSpeedMultiplyer(float f)

@@ -9,6 +9,8 @@ public class PauseMenu : StateListenerBehaviour
     [SerializeField] SceneReference mainMenu;
     [SerializeField] Image darkoverlay;
 
+    [Zenject.Inject] GameInstanceDataManger gameInstanceData;
+
     public event System.Action PauseEnter, PauseExit;
 
     protected override void OnRealStart()
@@ -60,6 +62,8 @@ public class PauseMenu : StateListenerBehaviour
     public void ReturnToMainMenu()
     {
         Unpause();
+
+        gameInstanceData.ReturnToMenuFromScene = true;
         SceneManager.LoadScene(mainMenu);
     }
 }
