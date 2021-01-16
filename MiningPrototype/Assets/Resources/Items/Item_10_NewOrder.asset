@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Item_10_NewOrder
   m_EditorClassIdentifier: 
   ItemType: 10
-  DisplayName: New Order
-  DisplayTooltip: A list of things I need to put into the postbox to order them.
+  DisplayName: Purchase Order
+  DisplayTooltip: Needs to be sent out in the dropbox to be fullfilled.
   DisplaySprite: {fileID: 21300000, guid: 85880727b886d7443a5163a381e671c6, type: 3}
   DisplaySpriteRead: {fileID: 21300000, guid: 85880727b886d7443a5163a381e671c6, type: 3}
   Weight: 0
@@ -24,8 +24,10 @@ MonoBehaviour:
   PickupPreviewPrefab: {fileID: 0}
   Prefab: {fileID: 0}
   AmountIsUniqueID: 1
+  IsUpgrade: 0
+  RequiredLevel: 0
+  LevelUpgrade: 0
   IsBurnable: 1
-  AltarWords:
-  - List
-  - something written
-  - Text
+  ShouldAnimate: 0
+  Animation: {fileID: 0}
+  AudioClip: {fileID: 0}

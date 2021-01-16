@@ -105,8 +105,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         }
         else
         {
-            string author = readableItemHandler.GetAuthor(amount);
-            tooltipHandler?.Display(transform, info.DisplayName + ((author != null && info.AmountIsUniqueID) ? " <i>by " + author + "</i>" : ""), info.DisplayTooltip);
+            DisplayTooltipText(info);
         }
     }
 
@@ -122,7 +121,13 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
     {
         yield return new WaitForSeconds(0.66f);
         var info = ItemsData.GetItemInfo(type);
-        tooltipHandler?.Display(transform, info.DisplayName + (info.AmountIsUniqueID ? " <i>by " + readableItemHandler.GetAuthor(amount) + "</i>" : ""), info.DisplayTooltip);
+        DisplayTooltipText(info);
+    }
+
+    private void DisplayTooltipText(ItemInfo info)
+    {
+        string author = readableItemHandler.GetAuthor(amount);
+        tooltipHandler?.Display(transform, info.DisplayName + ((author != null && info.AmountIsUniqueID) ? " <i>by " + author + "</i>" : ""), info.DisplayTooltip);
     }
 
     public override void OnPointerExit(PointerEventData eventData)
