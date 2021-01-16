@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5598461475983656863}
+  - component: {fileID: 728126311843293901}
   - component: {fileID: 425980362742002209}
   - component: {fileID: 5345422729110727811}
   - component: {fileID: 5818989150743188878}
@@ -34,6 +35,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &728126311843293901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4200292356520221087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff3dec1401d8d9446b112381f32fdbd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explostionSize: 3
+  destroyEntitySize: 3
 --- !u!198 &425980362742002209
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4903,7 +4918,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1254342071
-  m_SortingLayer: 10
+  m_SortingLayer: 12
   m_SortingOrder: 1000
   m_RenderMode: 0
   m_SortMode: 3

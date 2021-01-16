@@ -6,10 +6,9 @@ using NaughtyAttributes;
 public class Dynamite : MirrorWorldFollower
 {
     [SerializeField] float delay;
-    [SerializeField] int explostionSize = 5, destroyEntitySize;
     [SerializeField] GameObject explosionPrefab;
 
-    [Zenject.Inject] CameraController cameraController;
+    [Zenject.Inject] PrefabFactory prefabFactory;
 
     private void Start()
     {
@@ -19,36 +18,7 @@ public class Dynamite : MirrorWorldFollower
     [Button]
     public void Detonate()
     {
-        Vector2Int position = Util.ToGridPosition(transform.position);
-
-        cameraController.Shake(position, shakeType: CameraShakeType.explosion, 1, explostionSize * 2 + 10);
-
-        for (int x = -explostionSize; x <= explostionSize; x++)
-        {
-            for (int y = -explostionSize; y <= explostionSize; y++)
-            {
-                if (Vector2Int.Distance(Vector2Int.zero, new Vector2Int(x, y)) <= explostionSize)
-                    map.DamageAt(position.x + x, position.y + y, 100, BaseMap.DamageType.Explosion);
-            }
-        }
-
-        var cs = Physics2D.CircleCastAll(transform.position, destroyEntitySize, Vector2.zero);
-        foreach (var hit in cs)
-        {
-            if (hit.collider.isTrigger)
-                continue;
-
-            if (hit.transform.TryGetComponent(out TilemapCarvingEntity entity))
-            {
-                entity.UncarveDestroy();
-            }
-            else if (hit.transform.TryGetComponent(out PlayerStateMachine player))
-            {
-                player.TakeDamage(DamageStrength.Strong);
-            }
-        }
-
-        Instantiate(explosionPrefab, transform.position, Quaternion.identity);//safe no injection needed
+        prefabFactory.Create(explosionPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }
