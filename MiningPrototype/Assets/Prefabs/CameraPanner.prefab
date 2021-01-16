@@ -177,7 +177,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  overWorldOffset: 2
+  highOffset: 2
+  veryHighOffset: 4
   transitionSpeed: 2
   topImage: {fileID: 637270438764489255}
   botImage: {fileID: 3117881204809259701}
