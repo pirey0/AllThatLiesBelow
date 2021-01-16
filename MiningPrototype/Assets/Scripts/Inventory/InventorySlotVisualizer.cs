@@ -10,7 +10,7 @@ using Zenject;
 public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropReceiver
 {
     [SerializeField] public Image icon;
-    [SerializeField] public TMP_Text amountDisplay;
+    [SerializeField] public TMP_Text amountDisplay, shortcutDisplay;
     [SerializeField] ImageSpriteAnimator imageSpriteAnimator;
     [SerializeField] AudioSource audioSource;
     [SerializeField] GameObject canDropOverlay, canNotDropOverlay;
@@ -33,6 +33,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
     Coroutine updateRoutine;
     Coroutine showTooltipRoutine;
     bool inDrag;
+    bool showShortcut;
     private bool VisualsEnabled { get => icon.enabled; }
 
     protected override void Awake()
@@ -46,11 +47,12 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         StartCoroutine(ScaleCoroutine(scaleUp: true));
     }
 
-    public void Display(ItemAmountPair pair, Inventory origin)
+    public void Display(ItemAmountPair pair, Inventory origin, bool showShortcut)
     {
         this.origin = origin;
         amount = pair.amount;
         type = pair.type;
+        this.showShortcut = showShortcut;
 
         var info = ItemsData.GetItemInfo(type);
 
@@ -77,6 +79,14 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
             audioSource.clip = info.AudioClip;
             audioSource.Play();
         }
+
+        if(info.Shortcut != KeyCode.None && showShortcut)
+        {
+            var shortCut = info.Shortcut.ToString();
+            if (shortCut.StartsWith("Alpha"))
+                shortCut = shortCut.Substring(5);
+            shortcutDisplay.text = shortCut;
+        }
     }
 
     private void SetIconSprite(Sprite sprite)
@@ -87,7 +97,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
     public void Refresh()
     {
-        Display(new ItemAmountPair(type, amount), origin);
+        Display(new ItemAmountPair(type, amount), origin, showShortcut);
     }
 
     public void SetButtonToSlot(UnityAction action)

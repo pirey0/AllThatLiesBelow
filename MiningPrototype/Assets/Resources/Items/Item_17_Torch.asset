@@ -23,8 +23,12 @@ MonoBehaviour:
   PickupHoldOffset: {x: 0.2, y: 1}
   PickupPreviewPrefab: {fileID: 1854387351486894348, guid: dfc72d35b22213644a0e94a8c7cd6090, type: 3}
   Prefab: {fileID: 5173125646740089078, guid: c14593fa1334ee9488f1c182b98cbe2a, type: 3}
+  Shortcut: 49
   AmountIsUniqueID: 0
   IsUpgrade: 0
   RequiredLevel: 0
   LevelUpgrade: 0
   IsBurnable: 1
+  ShouldAnimate: 0
+  Animation: {fileID: 0}
+  AudioClip: {fileID: 0}

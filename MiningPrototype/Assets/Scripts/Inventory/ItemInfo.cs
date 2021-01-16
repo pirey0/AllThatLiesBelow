@@ -20,6 +20,7 @@ public class ItemInfo : ScriptableObject
     public Vector2 PickupHoldOffset;
     public GameObject PickupPreviewPrefab;
     public GameObject Prefab;
+    public KeyCode Shortcut = KeyCode.None;
 
     [Header("ReadableItem")]
     public bool AmountIsUniqueID;

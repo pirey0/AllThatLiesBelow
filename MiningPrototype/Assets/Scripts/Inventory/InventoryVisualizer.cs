@@ -71,7 +71,7 @@ public class InventoryVisualizer : ScalingUIElementBase, IDropReceiver
                     ItemAmountPair existingPair = slot.GetPair();
                     if (existingPair.type == pair.type)
                     {
-                        slot.Display(new ItemAmountPair(existingPair.type, existingPair.amount + pair.amount), inventory);
+                        slot.Display(new ItemAmountPair(existingPair.type, existingPair.amount + pair.amount), inventory, useCustomPlayerInventory);
                         return;
                     }
                 }
@@ -117,7 +117,7 @@ public class InventoryVisualizer : ScalingUIElementBase, IDropReceiver
                             slots.Remove(slot);
                         } else
                         {
-                            slot.Display(new ItemAmountPair(pair.type, slotPair.amount - pair.amount), inventory);
+                            slot.Display(new ItemAmountPair(pair.type, slotPair.amount - pair.amount), inventory, useCustomPlayerInventory);
                         }
 
                         if (slots.Count <= 0)
@@ -210,7 +210,7 @@ public class InventoryVisualizer : ScalingUIElementBase, IDropReceiver
         {
             InventorySlotVisualizer newSlot = slotFactory.Create(inventorySlotPrefab);
             newSlot.transform.SetParent(gridLayoutParent, worldPositionStays: false);
-            newSlot.Display(itemsToVisualize[i], inventory);
+            newSlot.Display(itemsToVisualize[i], inventory, useCustomPlayerInventory);
             slots.Add(newSlot);
             yield return new WaitForSeconds(0.1f);
         }
