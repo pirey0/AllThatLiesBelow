@@ -19,8 +19,6 @@ public class AltarLocation : PlayerTrigger, INonPersistantSavable
     [SerializeField] GameObject visualAltarPrefab;
     [SerializeField] GameObject altarInventoryPrefab;
 
-    [SerializeField] Transform visualizerSpawnLocation, visualAltarSpawnLocation, altarInventorySpawnLocation;
-
     [Zenject.Inject] ProgressionHandler progressionHandler;
     [Zenject.Inject] PrefabFactory prefabFactory;
 
@@ -39,8 +37,8 @@ public class AltarLocation : PlayerTrigger, INonPersistantSavable
 
             if (node != null)
             {
-                visualizer = prefabFactory.Create(dialogVisualizerPrefab, visualizerSpawnLocation.position, Quaternion.identity, null);
-                inventoryObject = prefabFactory.Create(altarInventoryPrefab, altarInventorySpawnLocation.position, Quaternion.identity, null);
+                visualizer = prefabFactory.Create(dialogVisualizerPrefab, transform.position, Quaternion.identity, null);
+                inventoryObject = prefabFactory.Create(altarInventoryPrefab, transform.position + Vector3.up, Quaternion.identity, null);
 
                 if (inventoryObject != null)
                 {
@@ -52,7 +50,7 @@ public class AltarLocation : PlayerTrigger, INonPersistantSavable
                 if (visualizer.TryGetComponent(out IDialogVisualizer vis))
                 {
                     serviceProvider.SetVisualizer(vis);
-                    visualEntity = prefabFactory.Create(visualAltarPrefab, visualAltarSpawnLocation.position, Quaternion.identity, null);
+                    visualEntity = prefabFactory.Create(visualAltarPrefab, transform.position, Quaternion.identity, null);
 
                     var dialogUsers = visualEntity.GetComponents<IDialogUser>();
 
@@ -106,15 +104,6 @@ public class AltarLocation : PlayerTrigger, INonPersistantSavable
     private void OnDrawGizmos()
     {
         UnityEditor.Handles.Label(transform.position, encounter ? "Enconter" : dialogName);
-
-        if (visualAltarSpawnLocation != null)
-            UnityEditor.Handles.Label(visualAltarSpawnLocation.position, "A");
-
-        if (visualizerSpawnLocation != null)
-            UnityEditor.Handles.Label(visualizerSpawnLocation.position, "V");
-
-        if (altarInventorySpawnLocation != null)
-            UnityEditor.Handles.Label(altarInventorySpawnLocation.position, "I");
     }
 #endif
 
@@ -125,10 +114,6 @@ public class AltarLocation : PlayerTrigger, INonPersistantSavable
 
         sd.Encounter = encounter;
         sd.DialogName = dialogName;
-
-        sd.InventoryLocalPos = new SerializedVector3(altarInventorySpawnLocation.localPosition);
-        sd.VisualLocalPos = new SerializedVector3(visualAltarSpawnLocation.localPosition);
-        sd.VisualizerLocalPos = new SerializedVector3(visualizerSpawnLocation.localPosition);
 
         return sd;
     }
@@ -144,9 +129,6 @@ public class AltarLocation : PlayerTrigger, INonPersistantSavable
         {
             encounter = lsd.Encounter;
             dialogName = lsd.DialogName;
-            altarInventorySpawnLocation.localPosition = lsd.InventoryLocalPos.ToVector3();
-            visualAltarSpawnLocation.localPosition = lsd.VisualLocalPos.ToVector3();
-            visualizerSpawnLocation.localPosition = lsd.VisualizerLocalPos.ToVector3();
         }
     }
 
@@ -156,8 +138,5 @@ public class AltarLocation : PlayerTrigger, INonPersistantSavable
     {
         public bool Encounter;
         public string DialogName;
-        public SerializedVector3 VisualizerLocalPos;
-        public SerializedVector3 VisualLocalPos;
-        public SerializedVector3 InventoryLocalPos;
     }
 }
