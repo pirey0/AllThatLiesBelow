@@ -116,7 +116,7 @@ public class HoverHighlighter : MonoBehaviour, IHoverable
         IsBlinking = false;
     }
 
-    public void HoverEnter(bool isDraggingItem)
+    public virtual void HoverEnter(bool isDraggingItem)
     {
         if (isInteractable || (isDropreceiver && isDraggingItem))
         {
@@ -125,7 +125,7 @@ public class HoverHighlighter : MonoBehaviour, IHoverable
         }
     }
 
-    public void HoverExit()
+    public virtual void HoverExit()
     {
         if (this == null)
             return;

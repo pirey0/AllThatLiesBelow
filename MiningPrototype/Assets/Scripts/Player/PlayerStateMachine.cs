@@ -113,7 +113,7 @@ public class PlayerStateMachine : BasePlayerStateMachine
 
     protected override void DeathExit()
     {
-        transitionEffectHandler.FadeIn(FadeType.Nightmare);
+
         base.DeathExit();
     }
 
