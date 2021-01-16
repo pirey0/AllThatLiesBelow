@@ -119,7 +119,6 @@ public class PlayerVisualController : MonoBehaviour
     {
         visualStateMap["Climb"].BodyAnimation = GetBodyAnimationFor("Climb");
         visualStateMap["ClimbIdle"].BodyAnimation = GetBodyAnimationFor("ClimbIdle");
-        visualStateMap["LongIdle"].BodyAnimation = GetBodyAnimationFor("LongIdle");
     }
 
     private SpriteAnimation GetBodyAnimationFor(string statename)
