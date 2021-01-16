@@ -329,6 +329,15 @@ public class BaseMap : StateListenerBehaviour, ISavable
             x -= sizeX;
     }
 
+    public void WrapXIfNecessary(ref Vector2Int v2)
+    {
+        if (v2.x < 0)
+            v2.x += SizeX;
+        else if (v2.x >= sizeX)
+            v2.x -= sizeX;
+    }
+
+
     public bool IsOutOfBounds(int x, int y)
     {
         return (x < 0 || y < 0 || x >= SizeX || y >= SizeY);

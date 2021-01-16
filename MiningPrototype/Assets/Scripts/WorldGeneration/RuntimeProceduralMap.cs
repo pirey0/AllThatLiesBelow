@@ -243,6 +243,8 @@ public class RuntimeProceduralMap : RenderedMap
 
     public void MakeTileUnstable(Vector2Int location, float duration)
     {
+        WrapXIfNecessary(ref location);
+
         var tile = this[location];
         if (!tile.Unstable)
         {
