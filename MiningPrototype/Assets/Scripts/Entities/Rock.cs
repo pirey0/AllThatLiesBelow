@@ -19,7 +19,7 @@ public class Rock : FallingTilemapCarvingEntity
     {
         base.Start();
         Carve();
-        renderer.sprite = sprites[UnityEngine.Random.Range(0,sprites.Length)];
+        renderer.sprite = sprites[UnityEngine.Random.Range(0, sprites.Length)];
         renderer.sortingOrder = UnityEngine.Random.Range(0, 100);
     }
 
@@ -74,14 +74,6 @@ public class Rock : FallingTilemapCarvingEntity
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        float speed = collision.relativeVelocity.magnitude;
-
-        if (!rockSmashing.isPlaying && speed >= destructionSpeed && transform.position.y > collision.transform.position.y)
-        {
-            rockSmashing.Play();
-            cameraController.Shake(transform.position, CameraShakeType.explosion, 0.25f, 16f);
-        }
-
         if (collision.collider.TryGetComponent(out IEntity entity))
         {
             float angle = Mathf.Acos(Vector2.Dot(collision.contacts[0].normal, Vector2.up)) * Mathf.Rad2Deg;
@@ -91,6 +83,11 @@ public class Rock : FallingTilemapCarvingEntity
             {
                 entity.TakeDamage(DamageStrength.Strong);
                 rigidbody.velocity = collision.relativeVelocity * -1;
+                if (!rockSmashing.isPlaying)
+                {
+                    rockSmashing.Play();
+                    cameraController.Shake(transform.position, CameraShakeType.explosion, 0.25f, 16f);
+                }
             }
         }
         else if (collision.collider.TryGetComponent(out ITileMapElement gridElement))
@@ -101,6 +98,11 @@ public class Rock : FallingTilemapCarvingEntity
             }
 
             TryDestroyBelow(gridElement.TileMap);
+            if (!rockSmashing.isPlaying)
+            {
+                rockSmashing.Play();
+                cameraController.Shake(transform.position, CameraShakeType.explosion, 0.25f, 16f);
+            }
         }
     }
 

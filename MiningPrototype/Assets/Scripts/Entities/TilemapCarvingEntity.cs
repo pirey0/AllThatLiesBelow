@@ -15,7 +15,7 @@ public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateRec
     Vector2Int tilemapPos = new Vector2Int(-1, -1);
     protected bool isbeingDestroyed;
 
-    public BaseMap TileMap { get; private set; }
+    public BaseMap TileMap { get => map; }
 
     public virtual void OnTileChanged(int x, int y, TileUpdateReason reason)
     {
@@ -99,7 +99,7 @@ public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateRec
 
     public void Setup(BaseMap tileMap)
     {
-        TileMap = tileMap;
+        map = (RuntimeProceduralMap)tileMap;
     }
 }
 
