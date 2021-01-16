@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CursorHandler : MonoBehaviour
+public class CursorHandler : StateListenerBehaviour
 {
     [SerializeField] Texture2D customCursor, customCursor_pointing, customCursor_crosshair;
     CursorType current;
@@ -31,6 +31,16 @@ public class CursorHandler : MonoBehaviour
     {
         isHidden = true;
         Cursor.visible = false;
+    }
+
+    protected override void OnPostLoadFromFile()
+    {
+        Show();
+    }
+
+    protected override void OnNewGame()
+    {
+        Show();
     }
 
     public void Show()
