@@ -11,8 +11,10 @@ public class MainMenu : MonoBehaviour
     [SerializeField] Transform targetTransform;
     [SerializeField] float cameraSpeed, cameraDuration;
     [SerializeField] TMPro.TMP_Text loadText;
-    [SerializeField] AnimationCurve FadeInYPosition;
+    [SerializeField] AnimationCurve introYCameraPan, shortYPan;
     [SerializeField] AudioSource walkingAudio;
+
+    [Zenject.Inject] GameInstanceDataManger gameInstanceDataManger;
 
     private void Start()
     {
@@ -35,8 +37,16 @@ public class MainMenu : MonoBehaviour
             }
         }
 
-
-        StartCoroutine(CameraMovement());
+        if (gameInstanceDataManger != null && gameInstanceDataManger.ReturnToMenuFromScene)
+        {
+            animator.SetTrigger("ReturnToMenu");
+            StartCoroutine(CameraMovement(shortYPan, shortYPan.keys[shortYPan.length-1].time));
+        }
+        else
+        {
+            animator.SetTrigger("EnterFromStartup");
+            StartCoroutine(CameraMovement(introYCameraPan, cameraDuration, delayWalkingSounds: true));
+        }
     }
 
     public void MenueAction(string coroutineName)
@@ -44,12 +54,15 @@ public class MainMenu : MonoBehaviour
         StartCoroutine(coroutineName);
     }
 
-    private IEnumerator CameraMovement()
+    private IEnumerator CameraMovement(AnimationCurve curve, float duration, bool delayWalkingSounds = false)
     {
-        for (float i = 0; i < cameraDuration; i += Time.deltaTime)
+        for (float i = 0; i < duration; i += Time.deltaTime)
         {
-            targetTransform.localPosition = new Vector3(targetTransform.localPosition.x, FadeInYPosition.Evaluate(i), targetTransform.localPosition.z);
-            walkingAudio.volume = Mathf.Clamp(i - (cameraDuration - 3f),0f,1f);
+            targetTransform.localPosition = new Vector3(targetTransform.localPosition.x, curve.Evaluate(i), targetTransform.localPosition.z);
+
+            if (delayWalkingSounds)
+                walkingAudio.volume = Mathf.Clamp(i - (duration - 3f),0f,1f);
+
             yield return null;
         }
     }
