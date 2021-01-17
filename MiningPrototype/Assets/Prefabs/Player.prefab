@@ -11831,6 +11831,7 @@ GameObject:
   - component: {fileID: 9156434778629824202}
   - component: {fileID: 651199607118553818}
   - component: {fileID: 6332330309916232596}
+  - component: {fileID: 7601346859764138071}
   - component: {fileID: 8633471933228471855}
   - component: {fileID: 1894981212}
   - component: {fileID: 519325506634579372}
@@ -12170,6 +12171,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingAnimation: {fileID: 11400000, guid: a277db9a3fae53741b035a9c4fb2951b, type: 2}
   renderer: {fileID: 8633471933228471855}
+--- !u!114 &7601346859764138071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8633471933228471848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed0e879babaab284e824ef5c474bb95e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 497824006148765930}
 --- !u!212 &8633471933228471855
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12701,6 +12715,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 562e47677541fc741804e2557b49653b, type: 3}
+--- !u!114 &3210262223222190072 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1566438266, guid: 562e47677541fc741804e2557b49653b, type: 3}
+  m_PrefabInstance: {fileID: 3210262223949552770}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4724523066374434780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c429d83c33032e640814e00af29a6c1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &5165143014864439578 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 7720122279049008536, guid: 562e47677541fc741804e2557b49653b, type: 3}
@@ -12716,14 +12741,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4325085931206026516, guid: 562e47677541fc741804e2557b49653b, type: 3}
   m_PrefabInstance: {fileID: 3210262223949552770}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3210262223222190072 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1566438266, guid: 562e47677541fc741804e2557b49653b, type: 3}
-  m_PrefabInstance: {fileID: 3210262223949552770}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4724523066374434780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c429d83c33032e640814e00af29a6c1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
