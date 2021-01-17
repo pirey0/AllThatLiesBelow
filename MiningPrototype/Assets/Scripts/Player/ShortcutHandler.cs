@@ -6,6 +6,9 @@ public class ShortcutHandler : MonoBehaviour
 {
     [SerializeField] InventoryOwner inventory;
 
+    [Zenject.Inject] ItemPlacingHandler itemPlacingHandler;
+    [Zenject.Inject] CameraController cameraController;
+
     Dictionary<KeyCode, ItemType> shortcutDict;
 
     ItemType currentShortcut = ItemType.None;
@@ -27,7 +30,7 @@ public class ShortcutHandler : MonoBehaviour
     {
         foreach (var item in shortcutDict)
         {
-            if (Input.GetKeyDown(item.Key))
+            if (Input.GetKeyDown(item.Key) && inventory.Inventory.Contains(ItemAmountPair.One(item.Value)))
             {
                 OnShortcutDown(item.Value);
             }
@@ -36,24 +39,37 @@ public class ShortcutHandler : MonoBehaviour
                 OnShortcutUp(item.Value);
             }
         }
+
+        if (currentShortcut != ItemType.None)
+        {
+            var mousePos = Util.MouseToWorld(cameraController.Camera);
+            itemPlacingHandler.UpdatePosition(mousePos);
+            if (Input.GetMouseButtonDown(1))
+            {
+                itemPlacingHandler.TryPlace(currentShortcut, mousePos);
+                OnShortcutUp(currentShortcut);
+            }
+        }
     }
 
     private void OnShortcutDown(ItemType value)
     {
-        if(currentShortcut != ItemType.None)
+        if (currentShortcut != ItemType.None)
         {
             OnShortcutUp(currentShortcut);
         }
 
         currentShortcut = value;
+        itemPlacingHandler.Show(new ItemAmountPair(currentShortcut, 1), inventory.Inventory);
         Debug.Log("Pressed shortcut for " + value);
     }
 
     private void OnShortcutUp(ItemType value)
     {
-        if(currentShortcut == value)
+        if (currentShortcut == value)
         {
             Debug.Log("Released shortcut for " + value);
+            itemPlacingHandler.Hide(resetHeldItem: true);
         }
     }
 }

@@ -219,6 +219,11 @@ public struct ItemAmountPair
         get => new ItemAmountPair(ItemType.None, -1);
     }
 
+    public static ItemAmountPair One(ItemType type)
+    {
+        return new ItemAmountPair(type, 1);
+    }
+
     public int GetTotalWeight()
     {
         return amount * ItemsData.GetItemInfo(type).Weight;
