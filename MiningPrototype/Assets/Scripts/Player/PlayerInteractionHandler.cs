@@ -560,7 +560,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
     public bool WouldTakeDrop(ItemAmountPair pair)
     {
-        return true;
+        return Inventory.CanDeposit;
     }
 
     public void BeginHoverWith(ItemAmountPair pair)
@@ -582,5 +582,10 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     {
         if (origin.Contains(pair) && origin.TryRemove(pair))
             Inventory.Add(pair);
+    }
+
+    public bool IsSameInventory(Inventory inventory)
+    {
+        return inventory == Inventory;
     }
 }

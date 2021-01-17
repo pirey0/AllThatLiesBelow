@@ -140,29 +140,33 @@ public class ItemPlacingHandler : MonoBehaviour
 
         var hits = Util.RaycastFromMouse(cameraController.Camera);
         IDropReceiver dropReceiver = null;
+        List<IDropReceiver> receivers = new List<IDropReceiver>();
         foreach (var hit in hits)
         {
             if (hit.transform.TryGetComponent(out IDropReceiver receiver))
+                receivers.Add(receiver);
+        }
+
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+
+        foreach (RaycastResult item in results)
+        {
+            IDropReceiver receiver = item.gameObject.GetComponentInParent<IDropReceiver>();
+            if (receiver != null)
+                receivers.Add(receiver);
+        }
+
+        foreach (var receiver in receivers)
+        {
+            if (currentOrigin == null || currentOrigin != null && !receiver.IsSameInventory(currentOrigin))
             {
                 dropReceiver = receiver;
                 break;
             }
         }
-
-        if (dropReceiver == null)
-        {
-            PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-            eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            List<RaycastResult> results = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-
-            foreach (RaycastResult item in results)
-            {
-                if (dropReceiver == null)
-                    dropReceiver = item.gameObject.GetComponentInParent<IDropReceiver>();
-            }
-        }
-
 
         if (dropReceiver != currentReceiver)
         {

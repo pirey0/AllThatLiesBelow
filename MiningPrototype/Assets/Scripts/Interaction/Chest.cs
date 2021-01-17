@@ -104,6 +104,11 @@ public class Chest : FallingTilemapCarvingEntity, IDropReceiver, INonPersistantS
         return new SaveID(SpawnableIDType.Chest);
     }
 
+    public bool IsSameInventory(Inventory inventory)
+    {
+        return inventoryOwner.Inventory == inventory;
+    }
+
     [System.Serializable]
     public class ChestSaveData : SpawnableSaveData
     {

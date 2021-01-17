@@ -348,6 +348,11 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
             this.origin.Add(pair);
     }
 
+    public bool IsSameInventory(Inventory inventory)
+    {
+        return origin == inventory;
+    }
+
     public class Factory : Zenject.PlaceholderFactory<UnityEngine.Object, InventorySlotVisualizer>
     {
     }

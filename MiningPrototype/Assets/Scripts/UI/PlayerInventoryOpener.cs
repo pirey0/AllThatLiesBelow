@@ -143,6 +143,11 @@ public class PlayerInventoryOpener : Button, IDropReceiver
         playerInteractionHandler.ReceiveDrop(pair, origin);
     }
 
+    public bool IsSameInventory(Inventory inventory)
+    {
+        return playerInteractionHandler.Inventory == inventory;
+    }
+
     //public void UpdatePosition()
     //{
     //    Vector3 worldPoint = cameraController.Camera.ScreenToWorldPoint(new Vector3(Screen.width - Screen.height / 10, Screen.height - Screen.height / 10, -10));

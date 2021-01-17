@@ -267,6 +267,11 @@ public class InventoryVisualizer : ScalingUIElementBase, IDropReceiver
             inventory.Add(pair);
     }
 
+    public bool IsSameInventory(Inventory inventory)
+    {
+        return this.inventory == inventory;
+    }
+
     public class Factory : Zenject.PlaceholderFactory<GameObject, InventoryVisualizer>
     {
     }

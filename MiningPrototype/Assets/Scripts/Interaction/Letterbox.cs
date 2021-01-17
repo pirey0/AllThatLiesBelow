@@ -153,6 +153,11 @@ public class Letterbox : InventoryOwner, INonPersistantSavable, IDropReceiver
         return new SaveID(SpawnableIDType.LetterBox);
     }
 
+    public bool IsSameInventory(Inventory inventory)
+    {
+        return inventory == Inventory;
+    }
+
     [System.Serializable]
     public class LetterBoxSaveData : SpawnableSaveData
     {

@@ -70,6 +70,11 @@ public class DropBox : HoverHighlighter, IDropReceiver, INonPersistantSavable
         return new SaveID(SpawnableIDType.DropBox);
     }
 
+    public bool IsSameInventory(Inventory inventory)
+    {
+        return this.inventory == inventory;
+    }
+
     [System.Serializable]
     public class DropBoxSaveData : SpawnableSaveData
     {

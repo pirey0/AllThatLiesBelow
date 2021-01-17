@@ -38,4 +38,9 @@ public class Fire : MonoBehaviour, IDropReceiver
             particleSystem.Emit(Mathf.Clamp(2*pair.amount,10,100));
         }
     }
+
+    public bool IsSameInventory(Inventory inventory)
+    {
+        return false;
+    }
 }

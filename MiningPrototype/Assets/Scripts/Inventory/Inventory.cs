@@ -10,10 +10,18 @@ public class Inventory
 {
     [UnityEngine.Serialization.FormerlySerializedAs("allowStoreing")]
     [SerializeField] bool canDeposit = true;
+    [SerializeField] int maxSize = 0;
     [SerializeField] List<ItemAmountPair> content = new List<ItemAmountPair>();
 
-    public int Count {  get => content.Count; }
-    public bool CanDeposit { get => canDeposit; }
+    public int Count { get => content.Count; }
+    public bool HasSpace
+    {
+        get
+        {
+            return maxSize <= 0 || content.Count < maxSize;
+        }
+    }
+    public bool CanDeposit { get => canDeposit && HasSpace; }
 
 
     //Added delegate to make bool arguments understandable
@@ -46,7 +54,7 @@ public class Inventory
                 if (item.type == type)
                 {
                     content[i] = new ItemAmountPair(item.type, item.amount + amount);
-                    InventoryChanged?.Invoke(true, new ItemAmountPair(type,amount), playSound);
+                    InventoryChanged?.Invoke(true, new ItemAmountPair(type, amount), playSound);
                     return;
                 }
             }
@@ -100,11 +108,11 @@ public class Inventory
         var info = ItemsData.GetItemInfo(pair.type);
         if (info.AmountIsUniqueID)
         {
-            int i = content.FindIndex(0,(x) => x == pair);
-            if(i >= 0 && i < content.Count)
+            int i = content.FindIndex(0, (x) => x == pair);
+            if (i >= 0 && i < content.Count)
             {
                 content.RemoveAt(i);
-                InventoryChanged?.Invoke(false,pair,true);
+                InventoryChanged?.Invoke(false, pair, true);
                 return true;
             }
         }
@@ -190,7 +198,7 @@ public struct ItemAmountPair
         {
             if (System.Enum.TryParse(typeS, out ItemType type))
             {
-               pair = new ItemAmountPair(type, amount);
+                pair = new ItemAmountPair(type, amount);
                 return true;
             }
         }
