@@ -12,6 +12,7 @@ public interface IDropReceiver
     void EndHover();
     void HoverUpdate(ItemAmountPair pair);
     void ReceiveDrop(ItemAmountPair pair, Inventory origin);
+    bool IsSameInventory(Inventory inventory);
 }
 
 public class Altar : StateListenerBehaviour, IInteractable, IDialogUser
