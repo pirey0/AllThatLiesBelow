@@ -21,6 +21,7 @@ public class Intro : StateListenerBehaviour
     [Zenject.Inject] CameraPanner cameraPanner;
     [Zenject.Inject] PlayerStatementsHandler playerStatements;
     [Zenject.Inject] CursorHandler cursorHandler;
+    [Zenject.Inject] PauseMenu pauseMenu;
 
     bool placedTorch;
     bool placedLadder;
@@ -67,6 +68,8 @@ public class Intro : StateListenerBehaviour
         player.CinematicSlowWalk = true;
         player.CinematicHorizontal = horizontalSpeed;
         cameraPanner.EnterCinematicMode();
+        pauseMenu.PauseEnter += OnPausedEnter;
+        pauseMenu.PauseExit += OnPauseEnd;
 
         for (int i = 0; i < texts.Count; i++)
         {
@@ -87,6 +90,8 @@ public class Intro : StateListenerBehaviour
         player.CinematicSlowWalk = false;
         placingHandler.Placed += OnIntroPlaced;
         cameraPanner.ExitCinematicMode();
+        pauseMenu.PauseEnter -= OnPausedEnter;
+        pauseMenu.PauseExit -= OnPauseEnd;
 
         yield return new WaitForSeconds(1);
 
@@ -107,6 +112,17 @@ public class Intro : StateListenerBehaviour
 
         playerStatements.Say("It's not far now...", 5);
         player.CanDig = true;
+
+    }
+
+    private void OnPausedEnter()
+    {
+        cursorHandler?.Show();
+    }
+
+    private void OnPauseEnd()
+    {
+        cursorHandler?.Hide();
     }
 
     private void OnIntroPlaced(ItemType obj)

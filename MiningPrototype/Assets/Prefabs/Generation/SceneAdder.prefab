@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 34519159}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 160, y: 250, z: 0}
+  m_LocalPosition: {x: 144, y: 266, z: 0}
   m_LocalScale: {x: 51.428894, y: 32, z: 0}
   m_Children: []
   m_Father: {fileID: 3510606058087648145}
@@ -51,8 +51,8 @@ MonoBehaviour:
   gizmoColor: {r: 0.8018868, g: 0.670183, b: 0, a: 1}
   XInArea: 1
   YInArea: 0
-  areaTopRight: {x: 180, y: 250, z: 0}
-  areaBotLeft: {x: 120, y: 250, z: 0}
+  areaTopRight: {x: 169.71445, y: 266, z: 0}
+  areaBotLeft: {x: 144.18587, y: 266, z: 0}
 --- !u!1 &130648568
 GameObject:
   m_ObjectHideFlags: 0
@@ -930,7 +930,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stepSize: 10
-  debug: 0
+  debug: 1
 --- !u!1 &3526362980307594668
 GameObject:
   m_ObjectHideFlags: 0

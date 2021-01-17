@@ -7,7 +7,7 @@ using UnityEngine.Rendering;
 public class CameraPanner : MonoBehaviour
 {
     [SerializeField] AnimationCurve curve;
-    [SerializeField] float overWorldOffset;
+    [SerializeField] float highOffset, veryHighOffset;
     [SerializeField] float transitionSpeed;
     [SerializeField] RectTransform topImage, botImage;
     [SerializeField] float barOpeningSpeed;
@@ -59,7 +59,7 @@ public class CameraPanner : MonoBehaviour
         {
             yield return null;
             topImage.anchoredPosition += new Vector2(0, dir * Time.deltaTime * barOpeningSpeed);
-            botImage.anchoredPosition += new Vector2(0, -dir * Time.deltaTime* barOpeningSpeed);
+            botImage.anchoredPosition += new Vector2(0, -dir * Time.deltaTime * barOpeningSpeed);
         }
         botImage.anchoredPosition = new Vector2(0, -dir * barhalfHeight);
         topImage.anchoredPosition = new Vector2(0, dir * barhalfHeight);
@@ -75,16 +75,58 @@ public class CameraPanner : MonoBehaviour
         dir = dir - new Vector3(0.5f, 0.5f);
         dir = new Vector3(dir.x.Sign() * curve.Evaluate(dir.x.Abs()), dir.y.Sign() * curve.Evaluate(dir.y.Abs()));
 
+        var state = GetCurrentTargetState();
+        var targetOffset = GetTargetOffset(state);
 
-        if (player.InOverworld() || cinematicMode || interactionHandler.InDialog())
-            yOffset += transitionSpeed * Time.deltaTime;
-        else
+        if (yOffset > targetOffset)
+        {
             yOffset -= transitionSpeed * Time.deltaTime;
-
-        yOffset = Mathf.Clamp(yOffset, 0, overWorldOffset);
+            if (yOffset < targetOffset)
+                yOffset = targetOffset;
+        }
+        else if (yOffset < targetOffset)
+        {
+            yOffset += transitionSpeed * Time.deltaTime;
+            if (yOffset > targetOffset)
+                yOffset = targetOffset;
+        }
 
         transform.position = player.transform.position + (cinematicMode ? Vector3.zero : dir) + new Vector3(0, yOffset);
     }
 
- 
+    private float GetTargetOffset(State state)
+    {
+        switch (state)
+        {
+            case State.VeryHigh:
+                return veryHighOffset;
+
+            case State.High:
+                return highOffset;
+
+        }
+
+        return 0;
+    }
+
+    private State GetCurrentTargetState()
+    {
+        if (interactionHandler.InDialog())
+        {
+            return State.VeryHigh;
+        }
+        else if (player.InOverworld() || cinematicMode)
+        {
+            return State.High;
+        }
+
+        return State.Normal;
+    }
+
+    public enum State
+    {
+        Normal,
+        High,
+        VeryHigh
+    }
 }

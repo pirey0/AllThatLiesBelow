@@ -8,6 +8,7 @@ public class DefaultProjectInstaller : ScriptableObjectInstaller<DefaultProjectI
     public override void InstallBindings()
     {
         Container.Bind<ShopPricesParser>().AsSingle().NonLazy();
+        Container.Bind<GameInstanceDataManger>().AsSingle().NonLazy();
 
         Container.Bind<KernelParser>().FromComponentInNewPrefab(KernelIteratorPrefab).AsSingle().NonLazy();
     }

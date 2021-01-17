@@ -45,9 +45,6 @@ public class SacrificeActions : MonoBehaviour
                 fontAsset.material.SetFloat("_Sharpness", -1);
                 fontAsset2.material.SetFloat("_Sharpness", -1);
                 break;
-            case AltarRewardType.Sadness:
-                GameObject.FindObjectOfType<Bed>().SacrificedHappyness();
-                cameraController.Camera.GetComponent<PostProcessVolume>().profile = noHappinessProfile;
                 //Happyness
                 break;
             default:

@@ -9,6 +9,10 @@ public class PauseMenu : StateListenerBehaviour
     [SerializeField] SceneReference mainMenu;
     [SerializeField] Image darkoverlay;
 
+    [Zenject.Inject] GameInstanceDataManger gameInstanceData;
+
+    public event System.Action PauseEnter, PauseExit;
+
     protected override void OnRealStart()
     {
         Unpause();
@@ -31,18 +35,17 @@ public class PauseMenu : StateListenerBehaviour
     {
         Time.timeScale = 0f;
         darkoverlay.color = new Color(0, 0, 0, 0.66f);
-
         foreach (Transform child in transform)
         {
             child.gameObject.SetActive(true);
         }
 
         gameState.ChangeStateTo(GameState.State.Paused);
+        PauseEnter?.Invoke();
     }
 
     public void Unpause()
     {
-
         Time.timeScale = 1;
 
         darkoverlay.color = new Color(0, 0, 0, 0);
@@ -53,11 +56,14 @@ public class PauseMenu : StateListenerBehaviour
         }
 
         gameState.ChangeStateTo(GameState.State.Playing);
+        PauseExit?.Invoke();
     }
 
     public void ReturnToMainMenu()
     {
         Unpause();
+
+        gameInstanceData.ReturnToMenuFromScene = true;
         SceneManager.LoadScene(mainMenu);
     }
 }

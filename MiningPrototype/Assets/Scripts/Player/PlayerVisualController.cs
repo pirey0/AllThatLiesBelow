@@ -17,7 +17,7 @@ public class PlayerVisualController : MonoBehaviour
 
     [SerializeField] PlayerVisualState[] visualStates;
     [SerializeField] SpriteAnimation[] climbNoHelmet, climbIdleNoHelmet, climbHelmet, climbIdleHelmet, climbHelmetLamp, climbIdleHelmetLamp;
-    [SerializeField] HelmetAndPickaxeBasedAnimationHolder[] helmetAndPickaxeBasedAnimationHolders;
+    [SerializeField] HelmetAndPickaxeBasedAnimationHolder[] longIdleAnimations;
 
     [Zenject.Inject] ProgressionHandler progressionHandler;
 
@@ -75,14 +75,14 @@ public class PlayerVisualController : MonoBehaviour
     {
         helmentState = newLevel > 0 ? newLevel == 2 ? HelmetState.HelmetWidthLamp : HelmetState.Helmet : HelmetState.None;
         headAnimator.ChangeHelmetState(helmentState);
-        UpdateClimbAnimations();
+        UpdateUpgradeDependantAnimations();
     }
 
     public void ChangePickaxeLevel(int newLevel)
     {
         pickaxeLevel = Mathf.Clamp(newLevel, 1, pickaxeMaxLevel);
         pickaxe.SetPickaxeLevel(pickaxeLevel);
-        UpdateClimbAnimations();
+        UpdateUpgradeDependantAnimations();
     }
 
     [Button]
@@ -115,7 +115,8 @@ public class PlayerVisualController : MonoBehaviour
         ChangePickaxeLevel(pickaxeLevel - 1);
     }
 
-    private void UpdateClimbAnimations()
+
+    private void UpdateUpgradeDependantAnimations()
     {
         visualStateMap["Climb"].BodyAnimation = GetBodyAnimationFor("Climb");
         visualStateMap["ClimbIdle"].BodyAnimation = GetBodyAnimationFor("ClimbIdle");
@@ -139,7 +140,7 @@ public class PlayerVisualController : MonoBehaviour
         }
         else if (statename == "LongIdle")
         {
-            foreach (HelmetAndPickaxeBasedAnimationHolder holder in helmetAndPickaxeBasedAnimationHolders)
+            foreach (var holder in longIdleAnimations)
             {
                 if (holder.helmetState == helmentState)
                     return holder.animations[pickaxeLevel - 1];

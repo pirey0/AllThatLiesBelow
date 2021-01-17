@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class Bed : MonoBehaviour, IInteractable
+public class Bed : StateListenerBehaviour, IInteractable
 {
     [SerializeField] AudioSource wakeupSound;
     [SerializeField] SpriteRenderer spriteRenderer;
@@ -24,9 +24,10 @@ public class Bed : MonoBehaviour, IInteractable
     [Inject] EnvironmentEffectsHandler effectHandler;
     [Inject] PlayerStatementsHandler playerStatements;
     [Inject] CursorHandler cursorHandler;
+    [Inject] GameInstanceDataManger gameInstanceData;
+    [Inject] PlayerStateMachine player;
 
     string defaultWakeUpTest;
-    bool sacrificedHappyness = false;
     float lastSleepTimeStamp = -10000;
 
     private event System.Action<IInteractable> ForceInterrupt;
@@ -35,6 +36,16 @@ public class Bed : MonoBehaviour, IInteractable
     {
         defaultWakeUpTest = wakeUpText;
     }
+
+    protected override void OnRealStart()
+    {
+        if (gameInstanceData.LoadBecauseOfDeath)
+        {
+            transitionEffectHandler.FadeIn(FadeType.Nightmare);
+            WakeUpFromNightmare(player.gameObject);
+        }
+    }
+
     public void BeginInteracting(GameObject interactor)
     {
         PlayerStateMachine player = interactor.GetComponent<PlayerStateMachine>();
@@ -113,38 +124,23 @@ public class Bed : MonoBehaviour, IInteractable
             saveHandler.Save();
             playerToEnableAgain.Disable();
 
-            if (sacrificedHappyness)
-            {
-                transitionEffectHandler.FadeIn(FadeType.Nightmare);
-                nightFadeToBlack.color = new Color(0, 0, 0, 0);
-            }
-            else
-                wakeupSound?.Play();
+            wakeupSound?.Play();
 
             yield return new WaitForSeconds(0.25f);
 
-            spriteRenderer.sprite = sacrificedHappyness ? badDream : wakeup;
+            spriteRenderer.sprite = wakeup;
 
             playerStatements.Say(wakeUpText, 7f);
 
-            if (!sacrificedHappyness)
+            yield return new WaitForSeconds(1f);
+
+            while (nightOpacity > 0f)
             {
-                yield return new WaitForSeconds(1f);
+                nightOpacity -= Time.deltaTime * 0.33f;
+                nightFadeToBlack.color = new Color(0, 0, 0, nightOpacity);
 
-                while (nightOpacity > 0f)
-                {
-                    nightOpacity -= Time.deltaTime * 0.33f;
-                    nightFadeToBlack.color = new Color(0, 0, 0, nightOpacity);
-
-                    yield return null;
-                }
-
+                yield return null;
             }
-            else
-            {
-                yield return new WaitForSeconds(5f);
-            }
-
         }
         LeaveBed(playerToEnableAgain);
     }
@@ -168,16 +164,9 @@ public class Bed : MonoBehaviour, IInteractable
         wakeUpText = newWakeUpText;
     }
 
-    [Button]
-    public void SacrificedHappyness()
-    {
-        if (wakeUpText == defaultWakeUpTest)
-            wakeUpText = "And yet another day of pain.";
-
-        sacrificedHappyness = true;
-    }
     public Vector3 GetPosition()
     {
         return transform.position;
     }
+
 }
