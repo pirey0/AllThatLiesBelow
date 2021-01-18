@@ -14,6 +14,7 @@ public class AltarLocation : PlayerTrigger, INonPersistantSavable
     [SerializeField] bool encounter;
     [NaughtyAttributes.HideIf("encounter")]
     [SerializeField] string dialogName;
+    [SerializeField] string locationName;
 
     [SerializeField] GameObject dialogVisualizerPrefab;
     [SerializeField] GameObject visualAltarPrefab;
@@ -30,6 +31,11 @@ public class AltarLocation : PlayerTrigger, INonPersistantSavable
 
     public override void OnPlayerEnter()
     {
+        if (!string.IsNullOrWhiteSpace(locationName))
+        {
+            progressionHandler.SetVariable(locationName, true);
+        }
+
         if (dialogVisualizerPrefab != null)
         {
             serviceProvider = new BasicDialogServiceProvider(progressionHandler);
@@ -97,6 +103,10 @@ public class AltarLocation : PlayerTrigger, INonPersistantSavable
             Destroy(inventoryObject.gameObject);
 
         serviceProvider = null;
+        if (!string.IsNullOrWhiteSpace(locationName))
+        {
+            progressionHandler.SetVariable(locationName, false);
+        }
     }
 
 
