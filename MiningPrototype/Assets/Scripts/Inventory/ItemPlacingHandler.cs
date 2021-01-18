@@ -38,9 +38,7 @@ public class ItemPlacingHandler : MonoBehaviour
     public void Hide(bool resetHeldItem = false)
     {
         if (resetHeldItem)
-        {
             currentHeld = ItemAmountPair.Nothing;
-        }
 
         cursorHandler.Show();
 
@@ -190,8 +188,8 @@ public class ItemPlacingHandler : MonoBehaviour
         return currentReceiver != null && currentReceiver.WouldTakeDrop(currentHeld);
     }
 
-    public bool IsAboveReceiver()
+    public bool IsAboveOtherReceiver()
     {
-        return currentReceiver != null;
+        return currentReceiver != null && !currentReceiver.IsSameInventory(currentOrigin);
     }
 }

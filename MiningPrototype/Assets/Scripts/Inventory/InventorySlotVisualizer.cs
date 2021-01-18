@@ -164,9 +164,10 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         defaultAnchorPosition = rectTransform.anchoredPosition;
         targetGraphic.raycastTarget = false;
         parentRegular = rectTransform.parent;
-        rectTransform.SetParent(inWorldCanvas.transform, worldPositionStays: false); //hope your eyes are okay now.
+        rectTransform.SetParent(inWorldCanvas.transform, worldPositionStays: false);
         rectTransform.localScale = Vector3.one * 0.75f;
         inDrag = true;
+        itemPlacingHandler.Show(new ItemAmountPair(type, amount), origin);
         StartCoroutine(UpdateInDrag());
     }
 
@@ -178,7 +179,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        bool inUI = GetDistance() < 2;
+        bool inUI = GetDistance() < 1;
 
         if (!inUI)
         {
@@ -206,7 +207,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
 
             if (Input.GetMouseButtonDown(1)) //On right click while dragging <- dirty
             {
-                if (amount > 0 && GetDistance() > 2)
+                if (amount > 0 && GetDistance() > 1)
                 {
                     //drop half when pressing shift and 1 when not
                     int a = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) ? (amount / 2) : 1;
@@ -236,9 +237,9 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         float distance = GetDistance();
         var info = ItemsData.GetItemInfo(type);
 
-        if (distance > 2)
+        if (distance > 1)
         {
-            if (itemPlacingHandler.IsAboveReceiver())
+            if (itemPlacingHandler.IsAboveOtherReceiver())
             {
                 EnableVisuals();
                 itemPlacingHandler.Hide();
@@ -352,6 +353,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
     {
         return origin == inventory;
     }
+
 
     public class Factory : Zenject.PlaceholderFactory<UnityEngine.Object, InventorySlotVisualizer>
     {
