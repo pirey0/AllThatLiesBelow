@@ -67,7 +67,7 @@ public class DebugMode : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F8))
+        if (Input.GetKeyDown(KeyCode.F8) || Input.GetKeyDown(KeyCode.Alpha8))
         {
             if (open)
             {

@@ -12,6 +12,7 @@ public class MainMenuCreditsVisualizer : MonoBehaviour
 
     [SerializeField] AnimationCurve inOutCurve;
     [SerializeField] AudioSource woosh;
+    [SerializeField] GameObject creditsButton;
 
     float animationPosition = 0;
     int animationDirection = 0;
@@ -26,6 +27,7 @@ public class MainMenuCreditsVisualizer : MonoBehaviour
 
         woosh.pitch = 1;
         woosh.Play();
+        creditsButton.SetActive(false);
     }
 
     public void Hide()
@@ -35,6 +37,7 @@ public class MainMenuCreditsVisualizer : MonoBehaviour
 
         woosh.pitch = 0.66f;
         woosh.Play();
+        creditsButton.SetActive(true);
     }
 
     public void Toggle()
