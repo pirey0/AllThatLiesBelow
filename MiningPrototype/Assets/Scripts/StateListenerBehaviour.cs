@@ -8,10 +8,11 @@ public class StateListenerBehaviour : MonoBehaviour
     protected GameState gameState;
 
     [Zenject.Inject]
-    private void InjectGameState(GameState gameState)
+    private void InjectGameState(GameState gameState = null)
     {
         this.gameState = gameState;
-        gameState.StateChanged += OnStateChangedInternal;
+        if (gameState != null)
+            gameState.StateChanged += OnStateChangedInternal;
     }
 
     protected virtual void OnDisable()

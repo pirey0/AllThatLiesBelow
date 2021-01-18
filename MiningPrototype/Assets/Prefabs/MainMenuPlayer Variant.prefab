@@ -412,7 +412,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4861610435777981045, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 5165143014864439578, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
       propertyPath: m_Enabled
@@ -480,7 +480,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8691724117488202440, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9025539967259614005, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
@@ -505,6 +505,7 @@ PrefabInstance:
     - {fileID: 3210262223222190072, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
     - {fileID: 154330390, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
     - {fileID: 7960320352954100584, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
+    - {fileID: 7601346859764138071, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
 --- !u!1 &7961638020175144867 stripped
 GameObject:

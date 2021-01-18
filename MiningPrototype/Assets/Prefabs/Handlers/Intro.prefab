@@ -45,55 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee36492e951180f4eb65767f318af13f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texts:
-  - text: "Dear John,\r\n\rI hope this letter finds you well on your journey."
-    duration: 5
-  - text: "It\u2019s strange to think that when you'll read this we will have been
-      apart for weeks, while I write this only days after you left."
-    duration: 10
-  - text: "I still can\u2019t believe we're doing this."
-    duration: 5
-  - text: Searching for gold based on what an old man wrote in his diary is crazy,
-      even for us.
-    duration: 5
-  - text: "Of course, our little Jack thinks it\u2019s the coolest thing ever."
-    duration: 5
-  - text: "I don\u2019t think it has sunk in yet how long you might be gone for,
-      but I don\u2019t have the heart to tell him."
-    duration: 6
-  - text: Mrs. Caulfield came by yesterday to remind me of our outstanding rent.
-    duration: 5
-  - text: She also threatened with eviction.
-    duration: 5
-  - text: "Not in so many words of course, but it\u2019s coming. Maybe sooner than
-      we thought..."
-    duration: 5
-  - text: "If this doesn\u2019t work out we really are doomed."
-    duration: 5
-  - text: "I've been so worried that I haven\u2019t slept since you left, but I've
-      put the time to good use."
-    duration: 5
-  - text: "Re-reading uncle Tom\u2019s journals over and over again, I found something
-      that might help:"
-    duration: 3
-  - text: He mentions an elevator east of the entrance to the mine that leads straight
-      to the gold.
-    duration: 5
-  - text: "You should check it out! Maybe it\u2019s easier than we thought..."
-    duration: 5
-  - text: "I miss you and I can\u2019t wait to hear from you. I\u2019ll sleep easier
-      once I know you\u2019re safe."
-    duration: 5
-  - text: 'I love you!
-
-
-      Yours,
-
-      Isabel'
-    duration: 5
   horizontalSpeed: 0.33
-  delayBeforeTorchRequest: 5
-  skipIntroInEditor: 1
+  delayBeforeTorchRequest: 105
+  skipIntroInEditor: 0
   introLight: {fileID: 7846751759372128578}
   introAudio: {fileID: 5516158713761891191}
   IntroLetterReader: {fileID: 7029649004853565779, guid: 8f537abe22053bb41968fff6dd00deb7, type: 3}

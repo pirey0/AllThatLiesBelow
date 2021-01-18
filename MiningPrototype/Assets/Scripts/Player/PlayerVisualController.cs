@@ -19,7 +19,7 @@ public class PlayerVisualController : MonoBehaviour
     [SerializeField] SpriteAnimation[] climbNoHelmet, climbIdleNoHelmet, climbHelmet, climbIdleHelmet, climbHelmetLamp, climbIdleHelmetLamp;
     [SerializeField] HelmetAndPickaxeBasedAnimationHolder[] longIdleAnimations, hitAnimations;
 
-    [Zenject.Inject] ProgressionHandler progressionHandler;
+    [Zenject.Inject(Optional =true)] ProgressionHandler progressionHandler;
 
     Dictionary<string, PlayerVisualState> visualStateMap;
 

@@ -6,17 +6,18 @@ public class TilemapAttachedEntity : MonoBehaviour, ITileUpdateReceiver
 {
     [SerializeField] protected Vector2Int tileOffsetToAttachTo;
 
-    [Zenject.Inject] RuntimeProceduralMap map;
+    [Zenject.Inject(Optional = true)] RuntimeProceduralMap map;
 
     void Start()
     {
         var pos = GetAttachCoordinates();
-        map.AddToReceiverMapAt(pos.x, pos.y, this);
+        if (map != null)
+            map.AddToReceiverMapAt(pos.x, pos.y, this);
     }
 
     private void OnDestroy()
     {
-        if(map != null)
+        if (map != null)
         {
             var pos = GetAttachCoordinates();
             map.RemoveFromReceiverMapAt(pos.x, pos.y, this);
@@ -30,7 +31,7 @@ public class TilemapAttachedEntity : MonoBehaviour, ITileUpdateReceiver
 
     public void OnTileChanged(int x, int y, TileUpdateReason reason)
     {
-        if(reason == TileUpdateReason.Collapse || reason == TileUpdateReason.Destroy)
+        if (reason == TileUpdateReason.Collapse || reason == TileUpdateReason.Destroy)
         {
             Destroy(gameObject);
         }

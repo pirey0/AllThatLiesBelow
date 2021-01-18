@@ -14,8 +14,8 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
     [SerializeField] protected bool slowWalkMode;
     [SerializeField] bool debug;
 
-    [Zenject.Inject] DamageEffectHandler damageEffectHandler;
-    [Zenject.Inject] protected ProgressionHandler progressionHandler;
+    [Zenject.Inject (Optional = true)] DamageEffectHandler damageEffectHandler;
+    [Zenject.Inject (Optional = true)] protected ProgressionHandler progressionHandler;
 
     StateMachine stateMachine;
     StateMachine.State s_idle, s_crouchIdle, s_jump, s_fall, s_walk, s_slowWalk, s_crouchWalk, s_climb, s_climbIde, s_inventory, s_death, s_hit, s_longIdle, s_disabled, s_fallDeath;
@@ -215,7 +215,7 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         NotifyActivity();
         gameState.ChangeStateTo(GameState.State.Respawning);
         PlayerDeath?.Invoke();
-        progressionHandler.NotifyPlayerDeath();
+        progressionHandler?.NotifyPlayerDeath();
     }
 
     private void DeathUpdate()
@@ -579,12 +579,12 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         {
             Debug.Log("Killed from fall Damage with a speed of: " + -oldVelocity.y);
             stateMachine.ForceTransitionTo(s_fallDeath);
-            damageEffectHandler.TakeDamage(1f);
+            damageEffectHandler?.TakeDamage(1f);
         }
         else if (-oldVelocity.y > hurtSpeed)
         {
             stateMachine.ForceTransitionTo(s_hit);
-            damageEffectHandler.TakeDamage(0.66f);
+            damageEffectHandler?.TakeDamage(0.66f);
         }
     }
 
@@ -619,12 +619,12 @@ public abstract class BasePlayerStateMachine : StateListenerBehaviour, IStateMac
         if (strength == DamageStrength.Strong)
         {
             stateMachine.ForceTransitionTo(s_death);
-            damageEffectHandler.TakeDamage(1f);
+            damageEffectHandler?.TakeDamage(1f);
         }
         else if (strength == DamageStrength.Weak)
         {
             stateMachine.ForceTransitionTo(s_hit);
-            damageEffectHandler.TakeDamage(0.66f);
+            damageEffectHandler?.TakeDamage(0.66f);
         }
     }
 
