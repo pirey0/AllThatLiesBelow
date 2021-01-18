@@ -42,6 +42,32 @@ public class PlatformHandler : MonoBehaviour
         platformObjects.Add(new PlatformObject(newPlatform));
     }
 
+    internal void CheckForAttachmentToWall(Platform platform)
+    {
+        PlatformObject platformObject = GetPlatformObjectByPlatform(platform);
+
+        if (platformObject != null && !platformObject.IsBeeingDestroyed)
+        {
+            platformObject.RemoveEmptyAtStart();
+            platformObject.RemoveEmptyAtEnd();
+
+            if (!platformObject.platforms[0].HasConnectionToWall() && !platformObject.platforms[platformObject.platforms.Count-1].HasConnectionToWall())
+                platformObject.Destroy();
+        }
+    }
+
+    private PlatformObject GetPlatformObjectByPlatform(Platform platform)
+    {
+        for (int p = platformObjects.Count - 1; p >= 0; p--)
+        {
+            if (platformObjects[p] != null && platformObjects[p].platforms.Contains(platform))
+            {
+                return platformObjects[p];
+            }
+        }
+
+        return null;
+    }
     private void MergePlatformObjects(PlatformObject platformObject, PlatformObject adjacendPlatformObject)
     {
         PlatformObject first = platformObject.startX < adjacendPlatformObject.startX ? platformObject : adjacendPlatformObject;
@@ -59,27 +85,25 @@ public class PlatformHandler : MonoBehaviour
 
     public void NotifyPlatformDestroyed(Platform platform)
     {
-        for (int p = platformObjects.Count - 1; p > 0; p--)
+        PlatformObject platformObject = GetPlatformObjectByPlatform(platform);
+
+        if (platformObject != null && platformObject.platforms.Contains(platform))
         {
-            PlatformObject platformObject = platformObjects[p];
-            if (platformObject != null && platformObject.platforms.Contains(platform))
+            int x = platform.transform.position.ToGridPosition().x;
+
+            List<Platform> potentiallyUnstable = CheckForConnectionsLeft(platformObject, x);
+            potentiallyUnstable.AddRange(CheckForConnectionsRight(platformObject, x));
+
+            foreach (Platform unstable in potentiallyUnstable)
             {
-                int x = platform.transform.position.ToGridPosition().x;
-
-                List<Platform> potentiallyUnstable = CheckForConnectionsLeft(platformObject, x);
-                potentiallyUnstable.AddRange(CheckForConnectionsRight(platformObject, x));
-
-                foreach (Platform unstable in potentiallyUnstable)
-                {
-                    platformObject.Remove(unstable);
-                    unstable.UncarveDestroy();
-                }
-
-                platformObject.Remove(platform);
-
-                if (platformObject.platforms.Count <= 0)
-                    platformObjects.Remove(platformObject);
+                platformObject.Remove(unstable);
+                unstable.UncarveDestroy();
             }
+
+            platformObject.Remove(platform);
+
+            if (platformObject.platforms.Count <= 0)
+                platformObjects.Remove(platformObject);
         }
     }
 
@@ -138,6 +162,8 @@ public class PlatformHandler : MonoBehaviour
         public int startX;
         public List<Platform> platforms = new List<Platform>();
 
+        public bool IsBeeingDestroyed = false;
+
         public PlatformObject(Platform platform)
         {
             startX = platform.transform.position.ToGridPosition().x;
@@ -151,6 +177,8 @@ public class PlatformHandler : MonoBehaviour
 
         public void Destroy()
         {
+            IsBeeingDestroyed = true;
+
             for (int i = platforms.Count - 1; i >= 0; i--)
             {
                 if (platforms[i] != null)
@@ -190,18 +218,29 @@ public class PlatformHandler : MonoBehaviour
         public void Remove(Platform unstable)
         {
             platforms[platforms.IndexOf(unstable)] = null;
+
+
+            RemoveEmptyAtStart();
+            RemoveEmptyAtEnd();
+
+            if (platforms.Count > 0)
+                startX = platforms[0].transform.position.ToGridPosition().x;
+        }
+
+        public void RemoveEmptyAtEnd()
+        {
+            int i = platforms.Count - 1;
+
+            while (i >= 0 && i < platforms.Count && platforms[i] == null)
+                platforms.RemoveAt(i--);
+        }
+
+        public void RemoveEmptyAtStart()
+        {
             int i = 0;
 
             while (i >= 0 && i < platforms.Count && platforms[i] == null)
                 platforms.RemoveAt(i);
-
-            i = platforms.Count - 1;
-
-            while (i >= 0 && i < platforms.Count && platforms[i] == null)
-                platforms.RemoveAt(i--);
-
-            if (platforms.Count > 0)
-                startX = platforms[0].transform.position.ToGridPosition().x;
         }
     }
 
