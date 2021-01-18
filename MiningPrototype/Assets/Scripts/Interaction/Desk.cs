@@ -130,7 +130,7 @@ public class Desk : MonoBehaviour, IInteractable
         {
             var type = amount == 10 ? LetterToFamily.LetterType.Payed10 : amount == 100 ? LetterToFamily.LetterType.Payed100 : LetterToFamily.LetterType.Payed1000;
             LetterToFamily order = new LetterToFamily(type);
-            int id = readableItemHandler.AddNewReadable("Here are " + amount + " gold. \n With Love, \n Thomas");
+            int id = readableItemHandler.AddNewReadable("Here are " + amount + " gold. \n With Love, \n John");
             progressionHandler.RegisterSpecialLetter(id, order);
             inventoryManager.PlayerCollects(ItemType.LetterToFamily, id);
 
