@@ -23,6 +23,7 @@ public class Platform : TilemapCarvingEntity
         var pos = transform.position.ToGridPosition();
         map.NotifyRecieversOfUpdates(pos.x + 1, pos.y, TileUpdateReason.VisualUpdate);
         map.NotifyRecieversOfUpdates(pos.x - 1, pos.y, TileUpdateReason.VisualUpdate);
+
         spriteRenderer.sprite = UpdateVisualsBaseOnNeighbours(pos.x, pos.y);
         platformHandler.NotifyPlatformPlaced(this);
     }
@@ -32,6 +33,12 @@ public class Platform : TilemapCarvingEntity
         if (this != null)
         {
             spriteRenderer.sprite = UpdateVisualsBaseOnNeighbours(x, y);
+
+            if (map.IsNeighbourAt(x - 1, y))
+                map.AddToReceiverMapAt(x - 1, y, this);
+
+            if (map.IsNeighbourAt(x + 1, y))
+                map.AddToReceiverMapAt(x + 1, y, this);
         }
     }
 
@@ -41,6 +48,7 @@ public class Platform : TilemapCarvingEntity
         fRight = (map.IsNeighbourAt(x + 2, y) ? 4 : 0);
         nLeft = (map.IsBlockAt(x - 1, y) ? 1 : 0) + (map.IsNeighbourAt(x - 1, y) ? 2 : 0);
         nRight = (map.IsBlockAt(x + 1, y) ? 1 : 0) + (map.IsNeighbourAt(x + 1, y) ? 2 : 0);
+
 
         if ((nLeft + fLeft) > 1)
         {
