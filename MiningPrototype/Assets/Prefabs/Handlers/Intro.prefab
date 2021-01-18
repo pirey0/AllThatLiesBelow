@@ -96,6 +96,7 @@ MonoBehaviour:
   skipIntroInEditor: 1
   introLight: {fileID: 7846751759372128578}
   introAudio: {fileID: 5516158713761891191}
+  IntroLetterReader: {fileID: 7029649004853565779, guid: 8f537abe22053bb41968fff6dd00deb7, type: 3}
 --- !u!114 &7846751759372128578
 MonoBehaviour:
   m_ObjectHideFlags: 0

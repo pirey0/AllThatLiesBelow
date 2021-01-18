@@ -23,7 +23,9 @@ public class InventoryOwnerDropBased : InventoryOwner
 
     public override Inventory GetInventory()
     {
-        Inventory.Add(drops.GetRandomDrop());
+        if (!touched)
+            Inventory.Add(drops.GetRandomDrop());
+
         return base.GetInventory();
     }
 }

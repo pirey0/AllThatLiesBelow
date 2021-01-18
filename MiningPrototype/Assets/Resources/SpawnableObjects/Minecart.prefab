@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5673821890802406385}
   - component: {fileID: 5673821890802406386}
   - component: {fileID: 5759090450879258084}
+  - component: {fileID: 8234647663372272898}
   m_Layer: 0
   m_Name: Minecart
   m_TagString: Untagged
@@ -65,6 +66,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory:
     canDeposit: 1
+    maxSize: 0
     content: []
   inventoryVisualizerPrefab: {fileID: 8727063801762088802, guid: c396613fa9613cb4d8d82148ef5649a7, type: 3}
   openSource: {fileID: 5673821890802406386}
@@ -284,6 +286,19 @@ MonoBehaviour:
     type: 0
     amount: 0
   destroyEffects: {fileID: 4888635124280202427, guid: c7333c0e8139a984db63c0ab6a7f05ac, type: 3}
+--- !u!114 &8234647663372272898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5673821890802406387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df01105a907093e48993808b5c3fecd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: -6465566751694194690, guid: 9712f50582e773f48b3349bf1474009a, type: 3}
 --- !u!1 &7968752618212215833
 GameObject:
   m_ObjectHideFlags: 0

@@ -75,6 +75,7 @@ public class HoverHighlighter : MonoBehaviour, IHoverable
             GameObject child = new GameObject();
             child.transform.parent = transform;
             child.transform.localPosition = Vector3.zero;
+            child.transform.localRotation = Quaternion.identity;
             spriteRenderer = child.AddComponent<SpriteRenderer>();
             spriteRenderer.sprite = parentRenderer.sprite;
             spriteRenderer.sortingLayerID = SortingLayer.NameToID("Player");

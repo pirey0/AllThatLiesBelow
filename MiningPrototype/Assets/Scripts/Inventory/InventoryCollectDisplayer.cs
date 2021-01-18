@@ -12,6 +12,8 @@ public class InventoryCollectDisplayer : MonoBehaviour
 
     [Zenject.Inject] CameraController cameraController;
     [Zenject.Inject] InventoryManager inventoryManager;
+
+    List<GameObject> displayObjects = new List<GameObject>();
     private void Start()
     {
         inventoryManager.PlayerCollected += OnPlayerCollected;
@@ -30,9 +32,16 @@ public class InventoryCollectDisplayer : MonoBehaviour
 
     private void OnPlayerCollected(ItemAmountPair obj)
     {
-        Vector3 position = Util.MouseToWorld(cameraController.Camera);
+        for (int i = displayObjects.Count - 1; i >= 0; i--)
+        {
+            if (displayObjects[i] == null)
+                displayObjects.RemoveAt(i);
+        }
+
+        Vector3 position = Util.MouseToWorld(cameraController.Camera) + Vector3.down * 0.5f * displayObjects.Count;
         var go = Instantiate(prefab, position, Quaternion.identity, transform); //safe no injection needed
         go.SetItem(obj);
+        displayObjects.Add(go.gameObject);
 
         if (onCollectSound != null)
             onCollectSound.Play();

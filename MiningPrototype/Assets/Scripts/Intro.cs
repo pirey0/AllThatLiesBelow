@@ -12,6 +12,7 @@ public class Intro : StateListenerBehaviour
     [SerializeField] bool skipIntroInEditor;
     [SerializeField] Light2D introLight;
     [SerializeField] AudioSource introAudio;
+    [SerializeField] GameObject IntroLetterReader;
 
     [Zenject.Inject] PlayerStateMachine player;
     [Zenject.Inject] EnvironmentEffectsHandler effectHandler;
@@ -72,11 +73,12 @@ public class Intro : StateListenerBehaviour
         pauseMenu.PauseEnter += OnPausedEnter;
         pauseMenu.PauseExit += OnPauseEnd;
         introAudio.Play();
+        Instantiate(IntroLetterReader);
 
         for (int i = 0; i < texts.Count; i++)
         {
             yield return new WaitForSeconds(1);
-            playerStatements.Say(texts[i].text, texts[i].duration);
+            //playerStatements.Say(texts[i].text, texts[i].duration);
             yield return new WaitForSeconds(texts[i].duration);
         }
 

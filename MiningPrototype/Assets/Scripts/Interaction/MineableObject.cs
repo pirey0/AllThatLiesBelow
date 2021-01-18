@@ -33,7 +33,12 @@ public class MineableObject : MirrorWorldFollower, IMinableNonGrid
         InventoryOwner inventoryOwner = GetComponent<InventoryOwner>();
 
         if (inventoryOwner != null && contains.IsNull())
-            contains = inventoryOwner.GetInventory().GetContent()[0];
+        {
+            ItemAmountPair[] content = inventoryOwner.GetInventory().GetContent();
+            if (content != null && content.Length > 0)
+                contains = content[0];
+        }
+  
 
         if (!contains.IsNull() && contains.amount > 0)
         {
