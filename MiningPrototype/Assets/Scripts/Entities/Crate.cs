@@ -31,7 +31,7 @@ public class Crate : MineableObject, INonPersistantSavable
         transform.rotation = Quaternion.identity;
         spriteRenderer.sprite = crateSprites[(int)crateType];
         BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
-        boxCollider.size = spriteRenderer.bounds.size;
+        boxCollider.size = spriteRenderer.bounds.size - new Vector3(0.25f,0.25f);
         boxCollider.offset = (spriteRenderer.bounds.center - transform.position);
         transform.rotation = rot;
     }
