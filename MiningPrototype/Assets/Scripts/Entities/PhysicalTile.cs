@@ -17,6 +17,7 @@ public class PhysicalTile : MineableObject, IEntity
     [SerializeField] GameObject onLandEffects;
     [SerializeField] float RequiredSpeedForStrongHit;
     [SerializeField] float RequiredSpeedForStrongHitWithHelmet;
+    [SerializeField] float maxAngleToDamage;
 
     [Zenject.Inject] ProgressionHandler progressionHandler;
 
@@ -75,9 +76,11 @@ public class PhysicalTile : MineableObject, IEntity
             float endY = transform.position.y;
             float yDif = startY - endY;
 
-            if (transform.position.y > collision.transform.position.y)
+            float angle = Vector3.Angle(Vector3.down, collision.transform.position - transform.position);
+
+            if (angle < maxAngleToDamage)
             {
-                Debug.Log("Physical Tile hit after fall of height: " + yDif);
+                Debug.Log("Physical Tile hit after fall of height " + yDif  + " with an angle of " + angle);
                 float reqHeight = progressionHandler.HelmetLevel > 0 ? RequiredSpeedForStrongHitWithHelmet : RequiredSpeedForStrongHit;
 
                 if (yDif > reqHeight)

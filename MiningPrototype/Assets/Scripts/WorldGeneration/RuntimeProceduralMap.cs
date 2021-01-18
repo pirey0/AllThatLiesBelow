@@ -319,6 +319,17 @@ public class RuntimeProceduralMap : RenderedMap
         }
     }
 
+    public void RemoveFromReceiverMapAt(int x, int y, ITileUpdateReceiver receiver)
+    {
+        if (IsOutOfBounds(x, y))
+            return;
+
+        if(receiverMap[x,y] != null)
+        {
+            receiverMap[x, y].Remove(receiver);
+        }
+    }
+
     private IEnumerator RunCompleteGeneration()
     {
         DurationTracker tracker = new DurationTracker("Complete generation");

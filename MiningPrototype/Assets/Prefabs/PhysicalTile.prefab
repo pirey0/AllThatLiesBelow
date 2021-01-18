@@ -160,6 +160,7 @@ MonoBehaviour:
   onLandEffects: {fileID: 1586765510811434306, guid: 3d65f7745bb6c4b45861ec80fb7ae2f9, type: 3}
   RequiredSpeedForStrongHit: 3
   RequiredSpeedForStrongHitWithHelmet: 6
+  maxAngleToDamage: 60
 --- !u!82 &6570287908250345048
 AudioSource:
   m_ObjectHideFlags: 0

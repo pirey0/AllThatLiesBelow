@@ -11,7 +11,7 @@ public class SimpleTilemapCarvingEntity : TilemapCarvingEntity
 
     public override void OnTileChanged(int x, int y, TileUpdateReason reason)
     {
-        if (reason == TileUpdateReason.Destroy)
+        if (reason == TileUpdateReason.Destroy || reason == TileUpdateReason.Collapse)
             UncarveDestroy();
     }
 }

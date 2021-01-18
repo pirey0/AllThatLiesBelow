@@ -12,7 +12,9 @@ The individual bachelor repositories, containing the our respective _theses_ and
 
 * [Luca Martinelli individual repository](https://bitbucket.org/btkgamedesign/2020_ba_luca_martinelli/)
 
-* [Process documentation](insert miro link here)
+Since the documentaion is crucial part of the grading as well, our _working miro board_ containing the documentation can be found here:
+
+* [Process documentation](https://miro.com/app/board/o9J_khjrQXY=/)
 
 The repository is hosted in two locations:
 
