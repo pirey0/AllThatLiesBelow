@@ -30,11 +30,13 @@ public class SupportPreview : SupportBase, IItemPreview
         {
             AdaptHeightTo(CalculateHeight());
             front.color = Color.green;
+            front.sortingLayerName = "Support";
             couldPlace = true;
         }
         else
         {
             front.color = Color.red;
+            front.sortingLayerName = "PlacingPreview";
             AdaptHeightTo(2);
             couldPlace = false;
         }
