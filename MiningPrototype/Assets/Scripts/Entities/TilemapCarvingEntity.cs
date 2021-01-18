@@ -65,7 +65,7 @@ public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateRec
             {
                 Vector2Int pos = tilemapPos + item.Offset;
                 map.SetMapAt(pos.x, pos.y, Tile.Make(item.Type), TileUpdateReason.Carve, updateProperties: true, updateVisuals: true);
-                map.SetReceiverMapAt(pos.x, pos.y, this);
+                map.AddToReceiverMapAt(pos.x, pos.y, this);
             }
         }
         else
@@ -82,7 +82,7 @@ public abstract class TilemapCarvingEntity : MirrorWorldFollower, ITileUpdateRec
             {
                 Vector2Int pos = tilemapPos + item.Offset;
                 map.SetMapAt(pos.x, pos.y, Tile.Air, TileUpdateReason.Uncarve, updateProperties: true, updateVisuals: true);
-                map.SetReceiverMapAt(pos.x, pos.y, this);
+                map.AddToReceiverMapAt(pos.x, pos.y, this);
             }
             tilemapPos = new Vector2Int(-1, -1);
         }
