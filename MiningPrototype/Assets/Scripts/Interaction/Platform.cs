@@ -21,8 +21,6 @@ public class Platform : TilemapCarvingEntity
         Carve();
 
         var pos = transform.position.ToGridPosition();
-        map.NotifyRecieversOfUpdates(pos.x + 1, pos.y, TileUpdateReason.VisualUpdate);
-        map.NotifyRecieversOfUpdates(pos.x - 1, pos.y, TileUpdateReason.VisualUpdate);
 
         spriteRenderer.sprite = UpdateVisualsBaseOnNeighbours(pos.x, pos.y);
         platformHandler.NotifyPlatformPlaced(this);
@@ -30,15 +28,10 @@ public class Platform : TilemapCarvingEntity
 
     public override void OnTileUpdated(int x, int y)
     {
-        if (this != null)
+        if (this != null && !isbeingDestroyed)
         {
+            platformHandler.CheckForAttachmentToWall(this);
             spriteRenderer.sprite = UpdateVisualsBaseOnNeighbours(x, y);
-
-            if (map.IsNeighbourAt(x - 1, y))
-                map.AddToReceiverMapAt(x - 1, y, this);
-
-            if (map.IsNeighbourAt(x + 1, y))
-                map.AddToReceiverMapAt(x + 1, y, this);
         }
     }
 
