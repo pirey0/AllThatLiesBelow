@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 1463627275459214338}
   - component: {fileID: 9209084938339595520}
   - component: {fileID: 7885144015366984118}
+  - component: {fileID: 5528223796921110030}
   m_Layer: 0
   m_Name: Mushroom
   m_TagString: Untagged
@@ -5252,3 +5253,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 18
   uniqueName: 
+--- !u!114 &5528223796921110030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7813767547359419721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e74c6686ff4bd82419203f1646737331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileOffsetToAttachTo: {x: 0, y: -1}

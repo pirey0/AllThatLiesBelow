@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5257947157915077520}
   - component: {fileID: 122015594887928418}
   - component: {fileID: 2508763234559260806}
+  - component: {fileID: 3187360869948726736}
   m_Layer: 0
   m_Name: BigMushroom
   m_TagString: Untagged
@@ -249,6 +250,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 30
   uniqueName: 
+--- !u!114 &3187360869948726736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4286787554297043612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e74c6686ff4bd82419203f1646737331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileOffsetToAttachTo: {x: 0, y: 0}
 --- !u!1 &5185108760318256092
 GameObject:
   m_ObjectHideFlags: 0
