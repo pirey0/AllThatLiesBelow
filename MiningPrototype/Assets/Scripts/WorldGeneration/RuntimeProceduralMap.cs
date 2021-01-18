@@ -46,7 +46,7 @@ public class RuntimeProceduralMap : RenderedMap
     [Zenject.Inject] SceneAdder sceneAdder;
 
     bool[,] additiveCoveredMap;
-    ITileUpdateReceiver[,] receiverMap;
+    LinkedList<ITileUpdateReceiver>[,] receiverMap;
     List<UnstableTile> unstableTiles = new List<UnstableTile>();
 
     public event System.Action<MirrorState> MirrorSideChanged;
@@ -74,7 +74,7 @@ public class RuntimeProceduralMap : RenderedMap
             Debug.LogError("TileMap settings missing.");
             return;
         }
-        receiverMap = new ITileUpdateReceiver[SizeX, SizeY];
+        receiverMap = new LinkedList<ITileUpdateReceiver>[SizeX, SizeY];
     }
 
     protected override void OnDestroy()
@@ -104,7 +104,7 @@ public class RuntimeProceduralMap : RenderedMap
 
     public void SetOresAllwaysVisible(bool visible)
     {
-        oreTilemap.GetComponent<TilemapRenderer>().material =  visible? unlitMaterial : litMaterial;
+        oreTilemap.GetComponent<TilemapRenderer>().material = visible ? unlitMaterial : litMaterial;
         showOverlayAlways = visible;
 
         UpdateAllOres();
@@ -113,10 +113,10 @@ public class RuntimeProceduralMap : RenderedMap
     private void UpdateAllOres()
     {
         oreTilemap.ClearAllTiles();
-        Util.IterateXY(SizeX, SizeY, (x,y) => 
-        { 
-        var oreTile = GetVisualOverlayTileFor(x, y);
-        oreTilemap.SetTile(new Vector3Int(x, y, 0), oreTile);
+        Util.IterateXY(SizeX, SizeY, (x, y) =>
+        {
+            var oreTile = GetVisualOverlayTileFor(x, y);
+            oreTilemap.SetTile(new Vector3Int(x, y, 0), oreTile);
         });
     }
 
@@ -162,7 +162,15 @@ public class RuntimeProceduralMap : RenderedMap
                 var info = GetTileInfo(t.Type);
                 if (info.NotifiesInsteadOfCrumbling)
                 {
-                    receiverMap[x, y]?.OnTileCrumbleNotified(x, y);
+                    if (receiverMap[x, y] != null)
+                    {
+                        var recvCurrent = receiverMap[x, y].First;
+                        while (recvCurrent != null)
+                        {
+                            recvCurrent.Value.OnTileCrumbleNotified(x, y);
+                            recvCurrent = recvCurrent.Next;
+                        }
+                    }
                 }
                 else
                 {
@@ -176,6 +184,7 @@ public class RuntimeProceduralMap : RenderedMap
             }
         }
     }
+
 
     public CrumbleType GetCrumbleTypeAt(int x, int y)
     {
@@ -292,12 +301,22 @@ public class RuntimeProceduralMap : RenderedMap
         this[t.Location] = tile;
     }
 
-    public void SetReceiverMapAt(int x, int y, ITileUpdateReceiver receiver)
+    public void AddToReceiverMapAt(int x, int y, ITileUpdateReceiver receiver)
     {
         if (IsOutOfBounds(x, y))
             return;
 
-        receiverMap[x, y] = receiver;
+        if (receiverMap[x, y] == null)
+        {
+            var list = new LinkedList<ITileUpdateReceiver>();
+            list.AddLast(receiver);
+            receiverMap[x, y] = list;
+        }
+        else
+        {
+            if (!receiverMap[x, y].Contains(receiver))
+                receiverMap[x, y].AddLast(receiver);
+        }
     }
 
     private IEnumerator RunCompleteGeneration()
@@ -433,12 +452,28 @@ public class RuntimeProceduralMap : RenderedMap
 
         if ((reason & TileUpdateReason.VisualUpdate) == TileUpdateReason.None)
         {
-            receiverMap[x, y]?.OnTileChanged(x, y, reason);
-            receiverMap[x, y] = null;
+            if (receiverMap[x, y] != null)
+            {
+                var current = receiverMap[x, y].First;
+                while (current != null)
+                {
+                    current.Value.OnTileChanged(x, y, reason);
+                    current = current.Next;
+                }
+                receiverMap[x, y] = null;
+            }
         }
         else
         {
-            receiverMap[x, y]?.OnTileUpdated(x, y);
+            if (receiverMap[x, y] != null)
+            {
+                var current = receiverMap[x, y].First;
+                while (current != null)
+                {
+                    current.Value.OnTileUpdated(x, y);
+                    current = current.Next;
+                }
+            }
         }
     }
 
