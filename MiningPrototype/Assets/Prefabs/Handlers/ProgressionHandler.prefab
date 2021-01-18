@@ -56,7 +56,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4afd9598e673b064e97b6984f43196ca, type: 2}
   instantDeliveryAudio: {fileID: 5016016371274373291}
   timeMiningBeforePassageOfDay: 600
-  includeDebugDialogs: 1
+  includeDebugDialogs: 0
   payed10LetterId: 10
   payed100LetterId: 20
   payed1000LetterId: 30
