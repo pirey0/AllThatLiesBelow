@@ -38,6 +38,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     Letterbox letterBox;
     DropBox postbox;
     AltarDialogCollection altarDialogs;
+    string currentAltarLocation;
 
     public int CurrentDay { get => data.day; }
     public int PickaxeLevel { get => data.pickaxeLevel; }
@@ -380,6 +381,28 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
         data.rewardsSacrificed.Clear();
     }
 
+    public void EnterAltarLocation(string newLoc)
+    {
+        if (!string.IsNullOrWhiteSpace(currentAltarLocation))
+        {
+            SetVariable(currentAltarLocation, false);
+        }
+
+        if (!string.IsNullOrWhiteSpace(newLoc))
+        {
+            SetVariable(newLoc, true);
+        }
+
+        currentAltarLocation = newLoc;
+    }
+
+    public void LeaveAltarLocation(string newLoc)
+    {
+        if (!string.IsNullOrWhiteSpace(newLoc) && currentAltarLocation == newLoc)
+        {
+            EnterAltarLocation(String.Empty);
+        }
+    }
 
     public void RegisterSpecialLetter(int id, ILetter letter)
     {

@@ -31,10 +31,7 @@ public class AltarLocation : PlayerTrigger, INonPersistantSavable
 
     public override void OnPlayerEnter()
     {
-        if (!string.IsNullOrWhiteSpace(locationName))
-        {
-            progressionHandler.SetVariable(locationName, true);
-        }
+        progressionHandler.EnterAltarLocation(locationName);
 
         if (dialogVisualizerPrefab != null)
         {
@@ -103,10 +100,7 @@ public class AltarLocation : PlayerTrigger, INonPersistantSavable
             Destroy(inventoryObject.gameObject);
 
         serviceProvider = null;
-        if (!string.IsNullOrWhiteSpace(locationName))
-        {
-            progressionHandler.SetVariable(locationName, false);
-        }
+        progressionHandler.LeaveAltarLocation(locationName);
     }
 
 
@@ -124,6 +118,7 @@ public class AltarLocation : PlayerTrigger, INonPersistantSavable
 
         sd.Encounter = encounter;
         sd.DialogName = dialogName;
+        sd.LocationName = locationName;
 
         return sd;
     }
@@ -139,6 +134,7 @@ public class AltarLocation : PlayerTrigger, INonPersistantSavable
         {
             encounter = lsd.Encounter;
             dialogName = lsd.DialogName;
+            locationName = lsd.LocationName;
         }
     }
 
@@ -148,5 +144,6 @@ public class AltarLocation : PlayerTrigger, INonPersistantSavable
     {
         public bool Encounter;
         public string DialogName;
+        public string LocationName;
     }
 }

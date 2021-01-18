@@ -79,12 +79,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   encounter: 0
   dialogName: Selection
+  locationName: 
   dialogVisualizerPrefab: {fileID: 4928746856500993310, guid: 4d74de850e4e80c4d8e7a4ee042e423d, type: 3}
   visualAltarPrefab: {fileID: 5015372644985189744, guid: 8d82bda16db171744bd4ebb1e40ed263, type: 3}
   altarInventoryPrefab: {fileID: 1828622420978389859, guid: e6f1c6c8db3cbfc4ea8139b106f7ce2f, type: 3}
-  visualizerSpawnLocation: {fileID: 5293726412507664650}
-  visualAltarSpawnLocation: {fileID: 5293726410888860400}
-  altarInventorySpawnLocation: {fileID: 5293726411546495059}
 --- !u!58 &5293726411210119232
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -100,7 +98,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 30
+  m_Radius: 25
 --- !u!1 &5293726411546495058
 GameObject:
   m_ObjectHideFlags: 0
