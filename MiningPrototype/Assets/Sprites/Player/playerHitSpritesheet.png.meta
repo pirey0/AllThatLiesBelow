@@ -26,6 +26,12 @@ TextureImporter:
   - first:
       213: -8181520143648851813
     second: playerHitSpritesheet_3
+  - first:
+      213: -1456244654093936773
+    second: playerHitSpritesheet_4
+  - first:
+      213: -4866115194469177432
+    second: playerHitSpritesheet_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -192,6 +198,48 @@ TextureImporter:
       bones: []
       spriteID: b987b13e6c6657e80800000000000000
       internalID: -8181520143648851813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: playerHitSpritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b775baed3316acbe0800000000000000
+      internalID: -1456244654093936773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: playerHitSpritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a7a88d2306187cb0800000000000000
+      internalID: -4866115194469177432
       vertices: []
       indices: 
       edges: []

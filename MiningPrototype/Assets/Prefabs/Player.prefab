@@ -12053,7 +12053,7 @@ MonoBehaviour:
     CarryItemState: 0
     PickaxeState: 0
   - StateName: Hit
-    BodyAnimation: {fileID: 11400000, guid: 2a750a01f3d7b3f4ea5b6da594480891, type: 2}
+    BodyAnimation: {fileID: 11400000, guid: 07c12ba4260a62543858a7cae004b4a7, type: 2}
     HeadState: 0
     HandsState: 0
     CarryItemState: 0
@@ -12143,6 +12143,16 @@ MonoBehaviour:
     - {fileID: 11400000, guid: c6b8ca323ea318548aa0810da0682353, type: 2}
     - {fileID: 11400000, guid: 6bc288fab72465e41a82a4badb548a9d, type: 2}
     - {fileID: 11400000, guid: 9b5a3b63c4f7dcf4f9ba5c4d881b930f, type: 2}
+  hitAnimations:
+  - helmetState: 0
+    animations:
+    - {fileID: 11400000, guid: 07c12ba4260a62543858a7cae004b4a7, type: 2}
+  - helmetState: 1
+    animations:
+    - {fileID: 11400000, guid: 061dab32a897ee841b4b8b642e44de0e, type: 2}
+  - helmetState: 2
+    animations:
+    - {fileID: 11400000, guid: 2a750a01f3d7b3f4ea5b6da594480891, type: 2}
 --- !u!114 &651199607118553818
 MonoBehaviour:
   m_ObjectHideFlags: 0
