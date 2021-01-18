@@ -11,6 +11,7 @@ public class Intro : StateListenerBehaviour
     [SerializeField] float delayBeforeTorchRequest;
     [SerializeField] bool skipIntroInEditor;
     [SerializeField] Light2D introLight;
+    [SerializeField] AudioSource introAudio;
 
     [Zenject.Inject] PlayerStateMachine player;
     [Zenject.Inject] EnvironmentEffectsHandler effectHandler;
@@ -70,6 +71,7 @@ public class Intro : StateListenerBehaviour
         cameraPanner.EnterCinematicMode();
         pauseMenu.PauseEnter += OnPausedEnter;
         pauseMenu.PauseExit += OnPauseEnd;
+        introAudio.Play();
 
         for (int i = 0; i < texts.Count; i++)
         {
