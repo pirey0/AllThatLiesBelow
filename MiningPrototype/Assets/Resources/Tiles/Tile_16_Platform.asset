@@ -20,16 +20,15 @@ MonoBehaviour:
   Targetable: 1
   TargetPriority: 0
   CrumbleType: 4
-  CanBeUnstable: 1
-  NotifiesInsteadOfCrumbling: 0
+  CanBeUnstable: 0
+  NotifiesInsteadOfCrumbling: 1
   UnstableTimeBeforeCrumble: 5
-  CountsAsNeighbour: 1
-  MinableInOverworld: 1
+  CountsAsNeighbour: 0
+  MinableInOverworld: 0
   DamageIsInBackground: 1
   DrawsToShifted: 0
   UseTilesFromOtherInfo: 0
-  Tiles:
-  - {fileID: 0}
+  Tiles: []
   TileSourceInfo: {fileID: 0}
   Visibility2Tile: {fileID: 0}
   Overlay: {fileID: 0}

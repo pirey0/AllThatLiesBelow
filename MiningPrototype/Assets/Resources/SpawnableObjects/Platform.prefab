@@ -118,7 +118,7 @@ MonoBehaviour:
     amount: 1
   tilesToOccupy:
   - Offset: {x: 0, y: 0}
-    Type: 12
+    Type: 16
   carvingOffset: {x: 0, y: 0, z: 0}
   edgeCollider: {fileID: 2369803932061110844}
   spriteRenderer: {fileID: 5000783938460949121}

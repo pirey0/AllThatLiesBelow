@@ -19,8 +19,8 @@ public class PlatformPreview : PlatformBase, IItemPreview
         transform.position = gridPos.AsV3();
 
         bool tS = map.IsAirAt(gridPos.x, gridPos.y);
-        bool tL = map.IsBlockAt(gridPos.x+1, gridPos.y);
-        bool tR = map.IsBlockAt(gridPos.x-1, gridPos.y);
+        bool tL = map.IsBlockAt(gridPos.x+1, gridPos.y) && !map[gridPos.x + 1, gridPos.y].IsEntityType();
+        bool tR = map.IsBlockAt(gridPos.x-1, gridPos.y) && !map[gridPos.x - 1, gridPos.y].IsEntityType();
 
         if (tS && (tL || tR) && !Util.InOverworld(gridPos.y))
         {
