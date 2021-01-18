@@ -15,18 +15,16 @@ A0A
 0X0
 000
 
-110
-1X0
-00A
+//if this should be readded please add larger versions
+//110
+//1X0
+//00A
 
-011
-0X1
-A00
+//011
+//0X1
+//A00
 
-1XXX1
-00000
-
-0XXX0
+AXXXA
 00000
 
 111X00
@@ -36,17 +34,18 @@ A00
 000000
 
 A1A
-0X0
+0S0
 A0A
 
 A0A
-1X0
+1S0
 A0A
 
 A0A
-0X1
+0S1
 A0A
 
+AAAA
 0SS0
 A00A
 
