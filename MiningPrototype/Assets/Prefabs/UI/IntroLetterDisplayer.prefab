@@ -180,7 +180,7 @@ MonoBehaviour:
     miss you and I can\u2019t wait to hear from you. I\u2019ll sleep easier once
     I know you\u2019re safe.    \n\nI love you!\n\nYours, \n\nIsabel"
   range: 20
-  ToHighlight: 0
+  ToHighlight: -245
 --- !u!1 &7029649004853565779
 GameObject:
   m_ObjectHideFlags: 0

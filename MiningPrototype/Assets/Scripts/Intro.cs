@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
+using System.Linq;
 
 public class Intro : StateListenerBehaviour
 {
-    public List<IntroTextElement> texts = new List<IntroTextElement>();
     [SerializeField] float horizontalSpeed;
     [SerializeField] float delayBeforeTorchRequest;
     [SerializeField] bool skipIntroInEditor;
@@ -75,13 +75,6 @@ public class Intro : StateListenerBehaviour
         introAudio.Play();
         Instantiate(IntroLetterReader);
 
-        for (int i = 0; i < texts.Count; i++)
-        {
-            yield return new WaitForSeconds(1);
-            //playerStatements.Say(texts[i].text, texts[i].duration);
-            yield return new WaitForSeconds(texts[i].duration);
-        }
-
         //Torch section
         yield return new WaitForSeconds(delayBeforeTorchRequest - 2);
         introLight.intensity = 0.3f;
@@ -141,13 +134,4 @@ public class Intro : StateListenerBehaviour
             placedLadder = true;
         }
     }
-}
-
-[System.Serializable]
-public class IntroTextElement
-{
-
-    [TextArea(5,100)]
-    public string text;
-    public float duration;
 }
