@@ -4939,12 +4939,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c842d050f132ba46bf14535e5924ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overlayAnimator: {fileID: 0}
-  damageMultiplier: 10
-  contains:
+  drop:
     type: 17
     amount: 1
-  destroyEffects: {fileID: 4888635124280202427, guid: c7333c0e8139a984db63c0ab6a7f05ac, type: 3}
+  tilesToOccupy:
+  - Offset: {x: 0, y: 0}
+    Type: 12
+  carvingOffset: {x: 0, y: 0, z: 0}
   z: 0.5
   innerRadiusOverY:
     serializedVersion: 2
