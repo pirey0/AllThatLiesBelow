@@ -19,6 +19,10 @@ public class ItemPlacingHandler : MonoBehaviour
     bool holdingPlacable;
     ItemAmountPair currentHeld;
     Inventory currentOrigin;
+    bool isHolding;
+    bool isHidden;
+
+    System.Action cancelCallback;
 
     public bool IsDraggingItem
     {
@@ -35,11 +39,9 @@ public class ItemPlacingHandler : MonoBehaviour
 
     public event System.Action<ItemType> Placed;
 
-    public void Hide(bool resetHeldItem = false)
+    public void Hide()
     {
-        if (resetHeldItem)
-            currentHeld = ItemAmountPair.Nothing;
-
+        isHidden = true;
         cursorHandler.Show();
 
         player.SetHeldItem(setToPickaxe: true);
@@ -52,13 +54,32 @@ public class ItemPlacingHandler : MonoBehaviour
             currentReceiver.EndHover();
     }
 
-    public void Show(ItemAmountPair pair, Inventory origin)
+    public void Remove()
     {
+        Hide();
+        isHolding = false;
+        currentOrigin = null;
+        currentHeld = ItemAmountPair.Nothing;
+    }
+
+    public void Show(ItemAmountPair pair, Inventory origin, System.Action newCancelCallback)
+    {
+        if (origin == currentOrigin && currentHeld == pair && !isHidden)
+            return;
+
+        if (isHolding && !isHidden)
+        {
+            Remove();
+            cancelCallback?.Invoke();
+        }
+
+        cancelCallback = newCancelCallback;
         currentHeld = pair;
         currentOrigin = origin;
         var info = ItemsData.GetItemInfo(pair.type);
         cursorHandler.Hide();
-
+        isHidden = false;
+        isHolding = true;
         if (info.CanBePlaced)
         {
             if (info.PickupPreviewPrefab != null)

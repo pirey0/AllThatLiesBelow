@@ -80,7 +80,7 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
             audioSource.Play();
         }
 
-        if(info.Shortcut != KeyCode.None && showShortcut)
+        if (info.Shortcut != KeyCode.None && showShortcut)
         {
             var shortCut = info.Shortcut.ToString();
             if (shortCut.StartsWith("Alpha"))
@@ -167,26 +167,44 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
         rectTransform.SetParent(inWorldCanvas.transform, worldPositionStays: false);
         rectTransform.localScale = Vector3.one * 0.75f;
         inDrag = true;
-        itemPlacingHandler.Show(new ItemAmountPair(type, amount), origin);
+        itemPlacingHandler.Show(new ItemAmountPair(type, amount), origin, OnPlacingHandlerCancel);
         StartCoroutine(UpdateInDrag());
+    }
+
+    private void OnPlacingHandlerCancel()
+    {
+        Debug.Log("Placing handler cancel");
+        inDrag = false;
+        ResetView();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.position = Util.MouseToWorld(cameraController.Camera);
-        UpdatePlacingPreview();
+        if (inDrag)
+        {
+            rectTransform.position = Util.MouseToWorld(cameraController.Camera);
+            UpdatePlacingPreview();
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        bool inUI = GetDistance() < 1;
-
-        if (!inUI)
+        if (inDrag)
         {
-            itemPlacingHandler.TryPlace(type, rectTransform.position);
+            bool inUI = GetDistance() < 1;
+
+            if (!inUI)
+            {
+                itemPlacingHandler.TryPlace(type, rectTransform.position);
+            }
+            itemPlacingHandler.Remove();
+            inDrag = false;
+            ResetView();
         }
-        itemPlacingHandler.Hide(resetHeldItem: true);
-        inDrag = false;
+    }
+
+    private void ResetView()
+    {
         EnableVisuals();
         rectTransform.anchoredPosition = defaultAnchorPosition;
         rectTransform.localScale = Vector3.one;
@@ -242,16 +260,16 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
             if (itemPlacingHandler.IsAboveOtherReceiver())
             {
                 EnableVisuals();
-                itemPlacingHandler.Hide();
                 bool canDrop = itemPlacingHandler.WouldBeReceived();
                 canDropOverlay.SetActive(canDrop);
                 canNotDropOverlay.SetActive(!canDrop);
+                itemPlacingHandler.Hide();
             }
             else
             {
                 if (VisualsEnabled)
                 {
-                    itemPlacingHandler.Show(new ItemAmountPair(type, amount), origin);
+                    itemPlacingHandler.Show(new ItemAmountPair(type, amount), origin, OnPlacingHandlerCancel);
                     if (info.CanBePlaced)
                         DisableVisuals();
 

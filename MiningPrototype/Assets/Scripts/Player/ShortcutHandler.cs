@@ -60,8 +60,14 @@ public class ShortcutHandler : MonoBehaviour
         }
 
         currentShortcut = value;
-        itemPlacingHandler.Show(new ItemAmountPair(currentShortcut, 1), inventory.Inventory);
+        itemPlacingHandler.Show(new ItemAmountPair(currentShortcut, 1), inventory.Inventory, OnCancel);
         Debug.Log("Pressed shortcut for " + value);
+    }
+
+    private void OnCancel()
+    {
+        Debug.Log("Cancelled shortcut press for " + currentShortcut);
+        currentShortcut = ItemType.None;
     }
 
     private void OnShortcutUp(ItemType value)
@@ -69,7 +75,8 @@ public class ShortcutHandler : MonoBehaviour
         if (currentShortcut == value)
         {
             Debug.Log("Released shortcut for " + value);
-            itemPlacingHandler.Hide(resetHeldItem: true);
+            itemPlacingHandler.Remove();
+            currentShortcut = ItemType.None;
         }
     }
 }
