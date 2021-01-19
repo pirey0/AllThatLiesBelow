@@ -47,7 +47,6 @@ public class ShortcutHandler : MonoBehaviour
             if (Input.GetMouseButtonDown(1))
             {
                 itemPlacingHandler.TryPlace(currentShortcut, mousePos);
-                OnShortcutUp(currentShortcut);
             }
         }
     }

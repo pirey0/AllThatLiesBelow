@@ -95,6 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1639eaefcb3c3eb449a5794796262f0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0.5, y: 0, z: 0}
+  offset: {x: 0.5, y: 0.5, z: 0}
   spriteRenderer: {fileID: 901228395799964702}
   underworldOnly: 1

@@ -10,7 +10,7 @@ using Zenject;
 public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropReceiver
 {
     [SerializeField] public Image icon;
-    [SerializeField] public TMP_Text amountDisplay, shortcutDisplay;
+    [SerializeField] public TMP_Text amountDisplay;
     [SerializeField] ImageSpriteAnimator imageSpriteAnimator;
     [SerializeField] AudioSource audioSource;
     [SerializeField] GameObject canDropOverlay, canNotDropOverlay;
@@ -78,14 +78,6 @@ public class InventorySlotVisualizer : Button, IBeginDragHandler, IEndDragHandle
             imageSpriteAnimator.Play(info.Animation);
             audioSource.clip = info.AudioClip;
             audioSource.Play();
-        }
-
-        if (info.Shortcut != KeyCode.None && showShortcut)
-        {
-            var shortCut = info.Shortcut.ToString();
-            if (shortCut.StartsWith("Alpha"))
-                shortCut = shortCut.Substring(5);
-            shortcutDisplay.text = shortCut;
         }
     }
 
