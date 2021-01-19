@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CustomizeableSign : MineableObject, INonPersistantSavable, IBaseInteractable
+public class CustomizeableSign : TilemapCarvingEntity, INonPersistantSavable, IBaseInteractable
 {
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] SpriteRenderer symbolRenderer;
@@ -18,6 +18,20 @@ public class CustomizeableSign : MineableObject, INonPersistantSavable, IBaseInt
     private void Start()
     {
         spriteRenderer.sortingOrder = 10000 - (int)transform.position.y;
+        Carve();
+    }
+
+    public override void OnTileCrumbleNotified(int x, int y)
+    {
+        UncarveDestroy();
+    }
+
+    public override void OnTileChanged(int x, int y, TileUpdateReason reason)
+    {
+        if(reason == TileUpdateReason.Destroy)
+        {
+            UncarveDestroy();
+        }
     }
 
     public void BeginInteracting(GameObject interactor)

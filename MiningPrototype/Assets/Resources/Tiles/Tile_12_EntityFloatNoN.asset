@@ -25,7 +25,7 @@ MonoBehaviour:
   UnstableTimeBeforeCrumble: 5
   CountsAsNeighbour: 0
   MinableInOverworld: 0
-  DamageIsInBackground: 1
+  DamageIsInBackground: 0
   DrawsToShifted: 0
   UseTilesFromOtherInfo: 0
   Tiles: []

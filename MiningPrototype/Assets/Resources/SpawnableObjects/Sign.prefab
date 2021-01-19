@@ -48,12 +48,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6735f4c1e262a4a4b825dc0a489e4b12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overlayAnimator: {fileID: 2572252096898507101}
-  damageMultiplier: 2
-  contains:
+  drop:
     type: 25
     amount: 1
-  destroyEffects: {fileID: 4888635124280202427, guid: c7333c0e8139a984db63c0ab6a7f05ac, type: 3}
+  tilesToOccupy:
+  - Offset: {x: 0, y: 0}
+    Type: 11
+  carvingOffset: {x: 0, y: 0, z: 0}
   spriteRenderer: {fileID: 2572252096484831995}
   symbolRenderer: {fileID: 2572252096488208330}
   symbols:
