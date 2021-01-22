@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
-public class Torch : TilemapCarvingEntity
+public class Torch : MineableObject
 {
     [SerializeField] float z = 0.9f;
     [SerializeField] AnimationCurve innerRadiusOverY, outerRadiusOverY;
@@ -20,14 +20,5 @@ public class Torch : TilemapCarvingEntity
         float or = outerRadiusOverY.Evaluate(y);
         pl.pointLightInnerRadius = ir;
         pl.pointLightOuterRadius = or;
-        Carve();
-    }
-
-    public override void OnTileChanged(int x, int y, TileUpdateReason reason)
-    {
-        if(reason == TileUpdateReason.Destroy)
-        {
-            UncarveDestroy();
-        }
     }
 }

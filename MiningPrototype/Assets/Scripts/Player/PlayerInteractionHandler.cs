@@ -66,7 +66,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     private void Update()
     {
         RemoveDistantInteractables();
-        
+
         if (player.CanUseInventory())
         {
             if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.E))
@@ -161,7 +161,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         else if (hasDigTarget && !eventSystem.IsPointerOverGameObject() && gameState.CurrentState != GameState.State.Paused)
             cursorHandler.SetCursor(CursorType.Mining);
         else
-                cursorHandler.SetCursor(CursorType.Interactable);
+            cursorHandler.SetCursor(CursorType.Interactable);
 
         if (newHover != hover)
         {
@@ -296,7 +296,10 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
             if (Util.IsNullOrDestroyed(nonGridDigTarget))
                 mouseHighlight.position = new Vector3(-1000, -1000);
             else
-                mouseHighlight.position = new Vector3(nonGridDigTarget.GetPosition().x, nonGridDigTarget.GetPosition().y, 0);
+            {
+                var pos = nonGridDigTarget.GetPosition();
+                mouseHighlight.position = pos;
+            }
         }
         else
         {
@@ -306,7 +309,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
                 mouseHighlight.position = new Vector3(-1000, -1000);
         }
 
-        
+
     }
 
     private void TryPlace()
@@ -438,7 +441,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
     {
         foreach (var i in currentInteractables)
         {
-            if(i is Altar)
+            if (i is Altar)
             {
                 return true;
             }
