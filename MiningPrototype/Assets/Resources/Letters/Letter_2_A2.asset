@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 2
   Author: Wife
-  Content: need money but we're okay
+  Content: "Dear John,\r\nLife is hard without you, but so far Jack and I have managed.\r\nI
+    have budgeted what little money we have left so it\u2019ll tide us\r\nover for
+    a little while longer. What happens after that I don\u2019t want to think\r\nabout.
+    I put all my faith in you, that you will manage to get us out of this.\r\nI miss
+    you and I love you,\r\n\nIsabel"
   NextID: 3
   daysToNext: 0

@@ -10,18 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3447797fe2bbafb4f91c9c92cdfdf251, type: 3}
-  m_Name: Letter_1_A1
+  m_Name: Letter_1_A1_OLD
   m_EditorClassIdentifier: 
   ID: 1
   Author: Wife
-  Content: '-East of the entrance: escalator, leads to Gold (said Grandpa)
-
-    -it''s
-    gonna be easy!
-
-    -miss you
-
-    -don''t know how to do this but hope this
-    works out'
+  Content: OUTDATED
   NextID: 2
   daysToNext: 2

@@ -14,13 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 5
   Author: Wife
-  Content: '-last letter from our house
-
-    -things are packed
-
-    -don''t know
-    what to do
-
-    -hate you'
+  Content: "John,\r\nWriting this letter to you is the last thing I\u2019ll do in
+    this house. Maybe it\u2019s also the last letter I\u2019ll ever write to you.
+    Our things are packed and we\u2019re ready to leave. I\u2019m terrified. I don\u2019t
+    know what to do and I don\u2019t know where to go. I can\u2019t believe we spent
+    all this time apart and now it doesn\u2019t even matter. We failed.\r\nIsabel"
   NextID: -1
   daysToNext: 0
