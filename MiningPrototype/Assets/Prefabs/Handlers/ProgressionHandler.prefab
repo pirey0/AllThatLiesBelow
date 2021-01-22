@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveID: 74e74007-1ac0-4ff3-b5ee-b9d9ecf0658f
   newOrderCrateSpawner: {fileID: 2388821099892900699}
-  startingLetterID: 1
+  startingLetterID: 2
   startingItems: []
   pickaxeUpgrades:
   - {fileID: 11400000, guid: 588b4692d53efc14e87e8afa97f5e134, type: 2}
