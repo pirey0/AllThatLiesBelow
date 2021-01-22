@@ -25,8 +25,6 @@ public class PlayerSettings : ScriptableObject
     
     public float digSpeed = 10;
     
-    public SpriteAnimation an_Walk, an_Idle, an_Fall, an_Inventory, an_Climb, an_ClimbIdle;
-    
     public int miningBreakParticlesCount;
     public float miningParticlesRateOverTime = 4;
     
