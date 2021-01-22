@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee36492e951180f4eb65767f318af13f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalSpeed: 0.33
-  delayBeforeTorchRequest: 105
-  skipIntroInEditor: 0
+  horizontalSpeed: 0.39
+  delayBeforeTorchRequest: 90
+  skipIntroInEditor: 1
   introLight: {fileID: 7846751759372128578}
   introAudio: {fileID: 5516158713761891191}
   IntroLetterReader: {fileID: 7029649004853565779, guid: 8f537abe22053bb41968fff6dd00deb7, type: 3}
