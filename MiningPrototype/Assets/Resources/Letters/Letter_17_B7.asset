@@ -19,3 +19,4 @@ MonoBehaviour:
     -never wants to speak to you again'
   NextID: -1
   daysToNext: 0
+  lastInSequence: 1

@@ -17,3 +17,4 @@ MonoBehaviour:
   Content: "-can't do this anymore\r\n-running off with John\r\r\n-Bye!"
   NextID: -1
   daysToNext: 0
+  lastInSequence: 1

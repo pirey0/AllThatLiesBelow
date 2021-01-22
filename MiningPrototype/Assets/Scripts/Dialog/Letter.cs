@@ -14,4 +14,5 @@ public class Letter : ScriptableObject
     [Header("Narrative Letter")]
     public int NextID = -1;
     public int daysToNext;
+    public bool lastInSequence;
 }

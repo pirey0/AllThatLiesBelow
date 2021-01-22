@@ -18,9 +18,9 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     [SerializeField] float timeMiningBeforePassageOfDay;
     [SerializeField] bool includeDebugDialogs;
 
-    [SerializeField] int payed10LetterId;
-    [SerializeField] int payed100LetterId;
-    [SerializeField] int payed1000LetterId;
+    [SerializeField] int payed10LetterIdGood, payed10LetterIdBad;
+    [SerializeField] int payed100LetterIdGood, payed100LetterIdBad;
+    [SerializeField] int payed1000LetterIdGood, payed1000LetterIdBad;
 
     [Zenject.Inject] EnvironmentEffectsHandler overworldEffectHandler;
     [Zenject.Inject] CameraController cameraController;
@@ -297,13 +297,15 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     {
         if (l != null)
         {
-            //Missing if happy or sad letter
             switch (l.Type)
             {
                 case LetterToFamily.LetterType.Payed10:
                     if (!GetVariable("Sent10Gold"))
                     {
-                        data.nextLetterID = payed10LetterId;
+                        if (data.recievedLastInSequence)
+                            data.nextLetterID = payed10LetterIdBad;
+                        else
+                            data.nextLetterID = payed10LetterIdGood;
                         SetVariable("Sent10Gold", true);
                     }
                     break;
@@ -311,7 +313,10 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
                 case LetterToFamily.LetterType.Payed100:
                     if (!GetVariable("Sent100Gold"))
                     {
-                        data.nextLetterID = payed100LetterId;
+                        if (data.recievedLastInSequence)
+                            data.nextLetterID = payed100LetterIdBad;
+                        else
+                            data.nextLetterID = payed100LetterIdGood;
                         SetVariable("Sent100Gold", true);
                     }
                     break;
@@ -319,7 +324,10 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
                 case LetterToFamily.LetterType.Payed1000:
                     if (!GetVariable("Sent1000Gold"))
                     {
-                        data.nextLetterID = payed1000LetterId;
+                        if (data.recievedLastInSequence)
+                            data.nextLetterID = payed1000LetterIdBad;
+                        else
+                            data.nextLetterID = payed1000LetterIdGood;
                         SetVariable("Sent1000Gold", true);
                     }
                     break;
@@ -360,6 +368,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
                     ReceiveLetterWithID(newLetter.ID);
                     data.nextLetterID = newLetter.NextID;
                     data.daysToNextLetter = newLetter.daysToNext;
+                    data.recievedLastInSequence = newLetter.lastInSequence;
                 }
             }
         }
@@ -565,6 +574,7 @@ public class ProgressionSaveData : SaveData
 
     public float leftOverworldTimestamp;
     public float saveTimestamp;
+    public bool recievedLastInSequence;
 
     //upgrades;
     public int pickaxeLevel = 1;

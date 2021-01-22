@@ -16,9 +16,10 @@ MonoBehaviour:
   Author: Wife
   Content: '-friends think I''m a fool for still doing this
 
-    -thinking hard
-    about breaking up
+    -thinking hard about
+    breaking up
 
     -might be better for son'
   NextID: -1
   daysToNext: 0
+  lastInSequence: 1

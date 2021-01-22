@@ -48,6 +48,7 @@ public class DebugMode : MonoBehaviour
         AddCheat("/upgradepickaxe", "Upgrades the pickaxe level","UpgradePickaxe");
         AddCheat("/setVariable", "Set a dialog variable", "SetDialogVariable");
         AddCheat("/efficiency", "Set the mining speed multiplyer", "SetMiningSpeed");
+        AddCheat("/skipDay", "Skip a Day", "NextDay");
     }
 
     private void AddCheat(string command, string description, string methodname)
@@ -148,6 +149,10 @@ public class DebugMode : MonoBehaviour
         }
     }
 
+    private void NextDay()
+    {
+        progressionHandler.StartNextDay();
+    }
     private void ShowMap()
     {
         showMap = !showMap;
