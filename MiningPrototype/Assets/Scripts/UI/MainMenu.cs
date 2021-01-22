@@ -103,10 +103,13 @@ public class MainMenu : MonoBehaviour
 
     private IEnumerator Load()
     {
-        animator.SetTrigger("FadeOut");
-        yield return new WaitForSeconds(0.5f);
-        SaveHandler.LoadFromSavefile = true;
-        yield return Play();
+        if (SaveHandler.SaveFileExists())
+        {
+            animator.SetTrigger("FadeOut");
+            yield return new WaitForSeconds(0.5f);
+            SaveHandler.LoadFromSavefile = true;
+            SceneManager.LoadScene(playScene);
+        }
     }
 
     private IEnumerator Settings()
