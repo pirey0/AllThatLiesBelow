@@ -123,10 +123,4 @@ public class MainMenu : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         Application.Quit();
     }
-
-    private void OnGUI()
-    {
-        string str = (gameInstanceDataManger != null) ?( "return: " + gameInstanceDataManger.ReturnToMenuFromScene.ToString()): "no dataManagerFound";
-        GUILayout.Box(str);
-    }
 }
