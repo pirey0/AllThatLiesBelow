@@ -10,6 +10,7 @@ public class PlayerInventoryOpener : Button, IDropReceiver
 {
     [SerializeField] Sprite closed, open;
     [SerializeField] public Canvas Canvas;
+    [SerializeField] public Transform ShortcutParent;
     [SerializeField] Material bagMaterial;
 
     [Zenject.Inject] PlayerInteractionHandler playerInteractionHandler;

@@ -1,4 +1,5 @@
 ﻿using NaughtyAttributes;
+using NaughtyAttributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -69,7 +70,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
 
         if (player.CanUseInventory())
         {
-            if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.I))
             {
                 ToggleInventory();
             }
