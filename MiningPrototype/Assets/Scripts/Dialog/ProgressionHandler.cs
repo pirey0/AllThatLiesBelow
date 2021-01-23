@@ -208,6 +208,13 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
                 player.TakeDamage(DamageStrength.Strong);
                 break;
 
+            case "Give5Gold":
+                inventoryManager.PlayerCollects(ItemType.Gold, 5);
+                break;
+
+            case "Give15Gold":
+                inventoryManager.PlayerCollects(ItemType.Gold, 15);
+                break;
 
 
             default:
