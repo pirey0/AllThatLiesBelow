@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Letter_17_B7
   m_EditorClassIdentifier: 
   ID: 17
-  Author: Wife
-  Content: '-son has to start a job he hates
-
-    -never wants to speak to you again'
+  Author: Isabel
+  Content: "Dear John,\nIt\u2019s been months and my friends tell me I\u2019m crazy
+    for still holding out hope. Maybe I am. It\u2019s getting harder to assure Jack
+    that you will be back soon. There is no way that we can still pay the tuition
+    and he took it hard. Maybe I should stop encouraging his fantasies of you being
+    a great hero. His hopes will only get crushed one after another.\n\nYours,\nIsabel"
   NextID: -1
   daysToNext: 0
   lastInSequence: 1

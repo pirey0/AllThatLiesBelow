@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Letter_33_D3
   m_EditorClassIdentifier: 
   ID: 33
-  Author: Wife
-  Content: '-it''s been too long
-
-    -don''t even know you anymore'
+  Author: Isabel
+  Content: "Dear John,\nThe weeks have passed and you\u2019re still not home. I can\u2019t
+    do this anymore. It\u2019s been so long I don\u2019t even know you anymore. How
+    would we ever do this? Is there a plan for situations like this? I guess not.
+    But I\u2019m at the end of my rope here.\n\nYours,\nIsabel"
   NextID: 34
   daysToNext: 0
+  lastInSequence: 0

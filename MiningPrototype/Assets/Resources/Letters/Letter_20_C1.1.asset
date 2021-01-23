@@ -13,12 +13,15 @@ MonoBehaviour:
   m_Name: Letter_20_C1.1
   m_EditorClassIdentifier: 
   ID: 20
-  Author: Wife
-  Content: '-thx!
-
-    -son off to school
-
-    -think we could make a great living
-    if you send 1000 Gold'
+  Author: Isabel
+  Content: "Dear John,\nYou did it! Jack will start at Oakwood next week and he is
+    so happy. \nNow that our son is taken care of, I\u2019ve started thinking about
+    us. And while I really want you home, I don\u2019t want things to go back to
+    the way they were. All the gold is going into Jack\u2019s education and where
+    will that leave us? Will we have to worry about how to pay our rent again in
+    a few months? Rely on Jack in a few years to pay for us? I don\u2019t want that,
+    John. Maybe if you stayed a little longer we could find enough gold to never
+    worry about such things again? Wouldn\u2019t that be nice?\nThink about it...\n\nLove,\nIsabel"
   NextID: 22
   daysToNext: 0
+  lastInSequence: 0

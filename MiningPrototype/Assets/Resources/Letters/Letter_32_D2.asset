@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Letter_32_D2
   m_EditorClassIdentifier: 
   ID: 32
-  Author: Wife
-  Content: '-feels like you''ll never come home
-
-    -will you?'
+  Author: Isabel
+  Content: "Dear John,\nI\u2019ve been waiting for you to come home any day for the
+    past few weeks, but you never came. Is that some game you\u2019re playing? Will
+    you ever come home?\n\nYours,\nIsabel"
   NextID: 33
   daysToNext: 0
+  lastInSequence: 0

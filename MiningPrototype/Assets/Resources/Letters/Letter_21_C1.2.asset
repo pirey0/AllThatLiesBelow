@@ -13,13 +13,16 @@ MonoBehaviour:
   m_Name: Letter_21_C1.2
   m_EditorClassIdentifier: 
   ID: 21
-  Author: Wife
-  Content: '-too late again
-
-    -couldn''t stand son''s unhappiness, took matters
-    in own hands and took a loan
-
-    -send 1000 Gold so we can live better than
-    this'
+  Author: Isabel
+  Content: "Dear John,\nYour gold came too late. Maybe being a gold prospector is
+    not your calling, maybe you don\u2019t care about us as much as I thought. I
+    don\u2019t know. Jack was heartbroken when I told him he couldn\u2019t go to
+    Oakwood and I couldn\u2019t stand it. I took a loan and paid the tuition. He\u2019ll
+    start in a week and he can\u2019t wait. There is some money left, but I\u2019ve
+    been thinking. I don\u2019t want to live from hand to mouth ever again. If you
+    stayed a little longer and brought home more gold, we wouldn\u2019t have to.
+    I think we should do just that. And live a comfortable life once you are back.\nThink
+    about it, John.\n\nYours,\nIsabel"
   NextID: 22
   daysToNext: 0
+  lastInSequence: 0

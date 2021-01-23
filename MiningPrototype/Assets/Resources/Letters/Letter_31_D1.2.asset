@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: Letter_31_D1.2
   m_EditorClassIdentifier: 
   ID: 31
-  Author: Wife
-  Content: '-took you long enough
-
-    -bought bigger house but feels empty (even
-    with cat)'
+  Author: Isabel
+  Content: "Dear John,\nThank you for sending the gold. I bought us a nice house
+    on the outskirts of town and a new cat that Jack wanted. It feels so strange,
+    living in a house that is meant for us while you\u2019re not here. What if we
+    won\u2019t even need it anymore to grow old? Together I mean. I guess we\u2019ll
+    find out once you\u2019re home. It makes me nervous, now that it\u2019s going
+    to be so soon. Are you nervous, too?\n\nYours,\nIsabel"
   NextID: 32
   daysToNext: 0
+  lastInSequence: 0

@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Letter_23_C3
   m_EditorClassIdentifier: 
   ID: 23
-  Author: Wife
-  Content: '-still time for loan
-
-    -looking forward to having you home soon'
+  Author: Isabel
+  Content: "Dear John,\nJack has been at Oakwood for a few weeks now and he loves
+    it. He made friends and it seems his rebellious phase is over for now. School
+    work doesn\u2019t even bother him. He really is more brilliant than all of us
+    imagined.\nI can\u2019t wait until you\u2019re home and see for yourself!\n\nLove,\nIsabel"
   NextID: 24
   daysToNext: 0
+  lastInSequence: 0

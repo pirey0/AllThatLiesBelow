@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: Letter_26_C6
   m_EditorClassIdentifier: 
   ID: 26
-  Author: Wife
-  Content: '-son really misses you
-
-    -John is more father to him than you are'
+  Author: Isabel
+  Content: "Dear John,\nI found Jack crying in his room yesterday. He admitted that
+    he cried because he misses you. My heart broke for him. We\u2019ve been so selfish.
+    Jack needs his father. Not Thomas, who, by the way, is doing a good job at being
+    a surrogate father. But it\u2019s not enough and he\u2019s not you. Just hurry,
+    before everything falls apart.\n\nYours,\nIsabel"
   NextID: 27
   daysToNext: 0
+  lastInSequence: 0

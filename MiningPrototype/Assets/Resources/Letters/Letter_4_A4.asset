@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Letter_4_A4
   m_EditorClassIdentifier: 
   ID: 4
-  Author: Wife
-  Content: "Dear John,\r\nMoney has run out a few days ago and Mrs. Caulfield is
-    after us once again. She gave us another month to pay our rent, then we lose
-    our home. I\u2019m so scared. I can\u2019t do this! What about our little boy?
-    He can\u2019t grow up homeless! I\u2019d rather give him up than have him lead
-    a life like that. Please don\u2019t let it happen, John. I could never forgive
-    you that. We really need you to come through now. It\u2019s our last chance.\r\nYours,\r\nIsabel"
+  Author: Isabel
+  Content: "Dear John,\nMoney has run out a few days ago and Mrs. Caulfield is after
+    us once again. She gave us another month to pay our rent, then we lose our home.
+    I\u2019m so scared. I can\u2019t do this! What about our little boy? He can\u2019t
+    grow up homeless! I\u2019d rather give him up than have him lead a life like
+    that. Please don\u2019t let it happen, John. I could never forgive you that.
+    We really need you to come through now. It\u2019s our last chance.\n\nYours,\nIsabel"
   NextID: 5
   daysToNext: 4
+  lastInSequence: 0

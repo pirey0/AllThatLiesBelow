@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: Letter_25_C5
   m_EditorClassIdentifier: 
   ID: 25
-  Author: Wife
-  Content: '-what''s taking you so long?
-
-    -sometimes I''m afraid our relationship
-    won''t survive this'
+  Author: Isabel
+  Content: "Dear John,\nI know I have no right to ask this, but what the hell is
+    taking you so long? I miss you so much. When I lie awake at night I can\u2019t
+    help but fear that our relationship won\u2019t survive this. I looked at a photograph
+    of our wedding and it took me a moment to even recognize you. It\u2019s getting
+    harder and harder to conjure up your face in my head. Please just come back home
+    soon!\nLove,\nIsabel"
   NextID: 26
   daysToNext: 0
+  lastInSequence: 0

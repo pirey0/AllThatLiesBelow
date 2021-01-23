@@ -15,4 +15,24 @@ public class Letter : ScriptableObject
     public int NextID = -1;
     public int daysToNext;
     public bool lastInSequence;
+
+
+    [NaughtyAttributes.Button]
+    public void CheckForSpecialCharacters()
+    {
+        foreach (var c in Content)
+        {
+            if((int)c < 32)
+            {
+                Debug.Log((int)c);
+            }
+        }
+
+    }
+
+    [NaughtyAttributes.Button]
+    public void RemoveASCII13()
+    {
+        Content = Content.Replace(((char)13).ToString(), "");
+    }
 }

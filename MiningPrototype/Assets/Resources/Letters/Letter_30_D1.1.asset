@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Letter_30_D1.1
   m_EditorClassIdentifier: 
   ID: 30
-  Author: Wife
-  Content: '-thx!
-
-    -bought a new house and cat
-
-    -come home now'
+  Author: Isabel
+  Content: "Dear John,\nI can\u2019t believe it. I\u2019ve never held that much money
+    in my hands. I found us a nice little house on the outskirts of town. Jack insisted
+    on buying a new cat and I gave in. His name is Oscar, he is just a few months
+    old and adorable.\nI can\u2019t wait till you see the house and meet Oscar. It
+    will be any day now, right? Still can\u2019t get that in my head. I\u2019m so
+    happy!\n\nI love you,\nIsabel"
   NextID: 32
   daysToNext: 0
+  lastInSequence: 0

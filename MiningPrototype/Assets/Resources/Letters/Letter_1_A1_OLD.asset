@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Letter_1_A1_OLD
   m_EditorClassIdentifier: 
   ID: 1
-  Author: Wife
+  Author: Isabel
   Content: OUTDATED
   NextID: 2
   daysToNext: 2
+  lastInSequence: 0

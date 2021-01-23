@@ -13,8 +13,14 @@ MonoBehaviour:
   m_Name: Letter_13_B3
   m_EditorClassIdentifier: 
   ID: 13
-  Author: Wife
-  Content: "-son's been bullied\r\r\n-school even more important now\r\n-wish you
-    were home\r\n-but John helps"
+  Author: Isabel
+  Content: "Dear John,\nJack has been acting up and started getting into fights with
+    the other boys. I really wish that you were here, so that we could talk about
+    this like parents do. I think Jack just really needs a father right now. Just
+    as I could really need a husband. Sometimes I fear that we can never go back
+    to normal. You have been gone so long, I wonder if we will even recognize each
+    other, when we meet again. But maybe those worries just stem from being so lonely.
+    I\u2019m sure we\u2019ll be fine!\n\nLove,\nIsabel "
   NextID: 14
   daysToNext: 0
+  lastInSequence: 0

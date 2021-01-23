@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Letter_11_B1.2
   m_EditorClassIdentifier: 
   ID: 11
-  Author: Wife
-  Content: '-well thx but
-
-    -John lent money
-
-    -son needs education (can''t
-    end up like you): 100 Gold'
+  Author: Isabel
+  Content: "Hello John,\nThe gold came too late. Your old friend Thomas heard of
+    our peril and paid our rent. I am mortified, but he saved us and I paid him back.\nI
+    wasn\u2019t sure if I wanted to write you again, but I have news from Jack. His
+    teacher said he was doing well in school and that he should go to Oakwood. I
+    agree. He is a bright kid and I don\u2019t want him to end up like us. If you
+    send more gold, we can pay the tuition.\n\nYours,\nIsabel"
   NextID: 12
   daysToNext: 0
+  lastInSequence: 0

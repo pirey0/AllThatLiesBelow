@@ -13,8 +13,15 @@ MonoBehaviour:
   m_Name: Letter_34_D4
   m_EditorClassIdentifier: 
   ID: 34
-  Author: Wife
-  Content: "-can't do this anymore\r\n-running off with John\r\r\n-Bye!"
+  Author: Isabel
+  Content: "Dear John,\nI\u2019ve finally opened my eyes. I don\u2019t know if you\u2019ll
+    ever be home and I\u2019m sick and tired of waiting. I don\u2019t know why I
+    didn\u2019t see it before, but while you haven\u2019t been there, somebody else
+    was. Thomas was by my side the whole time and he has given me and Jack support
+    that you never have. We have decided to act on our feelings and give this a try.
+    I\u2019m sorry, John. I never meant to hurt you. The house is yours when you
+    come home. I hope that in time you will understand and forgive me. I wish you
+    all the best.\n\nGoodbye,\nIsabel"
   NextID: -1
   daysToNext: 0
   lastInSequence: 1

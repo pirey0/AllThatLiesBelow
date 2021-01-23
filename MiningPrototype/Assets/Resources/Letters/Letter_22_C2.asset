@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Letter_22_C2
   m_EditorClassIdentifier: 
   ID: 22
-  Author: Wife
-  Content: '-rented out room to John
-
-    -son is thriving in school'
+  Author: Isabel
+  Content: "Dear John,\nI miss you but I think we\u2019ve made a good choice. Life
+    has been so hard on us and it\u2019ll be good to catch a break. Hopefully one
+    that lasts until the day we die.\nI rented the spare bedroom to Thomas, just
+    to make things easier financially. It\u2019s a good arrangement. He pays little
+    rent but repairs things around the house and he keeps me company when Jack is
+    at school.\n\nWith love,\nIsabel"
   NextID: 23
   daysToNext: 0
+  lastInSequence: 0

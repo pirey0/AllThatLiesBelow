@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Letter_14_B4
   m_EditorClassIdentifier: 
   ID: 14
-  Author: Wife
-  Content: '-tuition is due
-
-    -son really needs this opportunity
-
-    -don''t
-    want to tell him no'
+  Author: Isabel
+  Content: "Dear John,\nI write to remind you, that Jack\u2019s tuition is due soon.
+    He really needs this opportunity and I\u2019d hate to tell him no. He is so looking
+    forward to it. He also managed to stay out of fights over the last few weeks.
+    Your friend Thomas came by to repair the lock on the back door and I think he
+    may have had a word with him. If that is true, I am grateful. I really ran out
+    of ideas.\nPlease keep the tuition in mind and I hope I\u2019ll see you soon!\n\nLove,\nIsabel"
   NextID: 15
   daysToNext: 0
+  lastInSequence: 0

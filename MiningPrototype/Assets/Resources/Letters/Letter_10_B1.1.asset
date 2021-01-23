@@ -13,7 +13,14 @@ MonoBehaviour:
   m_Name: Letter_10_B1.1
   m_EditorClassIdentifier: 
   ID: 10
-  Author: Wife
-  Content: "-thx!\r\n-rent paid\r\r\n-son needs to go to school: 100 Gold"
+  Author: Isabel
+  Content: "My dear John,\nI can\u2019t believe you actually did it! I shouldn\u2019t
+    have doubted you, I know. You would do anything for us. It\u2019s why we love
+    you!\nIt\u2019s also why I come to you with another request: Jack is doing exceptionally
+    well in school, and his teacher thinks he\u2019d do even better at Oakwood. It
+    would be a great opportunity for him, but we\u2019ll need more gold to pay the
+    tuition. I implore you to think about it, for Jack\u2019s sake. We can take a
+    little more separation for the future of our son, right?\n \nWith love,\nIsabel"
   NextID: 12
   daysToNext: 0
+  lastInSequence: 0

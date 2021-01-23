@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Letter_15_B5
   m_EditorClassIdentifier: 
   ID: 15
-  Author: Wife
-  Content: '-last chance
-
-    -Do you even still love us?'
+  Author: Isabel
+  Content: "Dear John,\nDid my last letter reach you? Jack\u2019s tuition needs to
+    be paid within the month or he won\u2019t get into Oakwood. Please do this, John,
+    and soon. For our son. For us.\n\nYours,\nIsabel"
   NextID: 16
   daysToNext: 0
+  lastInSequence: 0

@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Letter_3_A3
   m_EditorClassIdentifier: 
   ID: 3
-  Author: Wife
-  Content: "Dear John,\r\nJack managed to break a window while playing ball in the
+  Author: Isabel
+  Content: "Dear John,\nJack managed to break a window while playing ball in the
     garden and there goes my budgeting. He swears it was an accident and he is so
     contrite that I believe him, but I still grounded him. I know he can\u2019t understand
     the gravity of our situation, even though he is a bright kid, but I was so angry.
     Right now I don\u2019t even know if we\u2019ll have anything to eat in three
-    week\u2019s time.\r\nPlease, John, you have to hurry!\r\nLove,\r\nIsabel"
+    week\u2019s time.\nPlease, John, you have to hurry!\n\nLove,\nIsabel"
   NextID: 4
   daysToNext: 0
+  lastInSequence: 0

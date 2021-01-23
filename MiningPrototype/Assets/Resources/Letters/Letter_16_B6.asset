@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: Letter_16_B6
   m_EditorClassIdentifier: 
   ID: 16
-  Author: Wife
-  Content: "-You don't love us or you'd put more effort in it\r\r\n-No chance we
-    can pay tuition\r\n-We were counting on you"
+  Author: Isabel
+  Content: "Dear John,\nDo you even still love us? Do you love me? I had a dream
+    last night that you met someone new. And I realize that it might be true. We
+    have been apart for so long that I can\u2019t help but wonder. Is that why you
+    haven\u2019t sent any gold? Do you not plan on coming back? Surely, you wouldn\u2019t
+    leave us hanging like that, right?\n\nPlease write back soon,\nIsabel"
   NextID: 17
   daysToNext: 0
+  lastInSequence: 0

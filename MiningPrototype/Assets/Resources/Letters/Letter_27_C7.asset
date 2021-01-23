@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: Letter_27_C7
   m_EditorClassIdentifier: 
   ID: 27
-  Author: Wife
-  Content: '-friends think I''m a fool for still doing this
-
-    -thinking hard about
-    breaking up
-
-    -might be better for son'
+  Author: Isabel
+  Content: "Dear John,\nThomas and I talked yesterday. He has become a really good
+    friend to me and to Jack. He said it was stupid of me to still wait for your
+    return and he might have a point. I can\u2019t live like this, holding on to
+    the ghost of days long past. And it\u2019s unfair to Jack. If I didn\u2019t hold
+    up hope, he might just find a father figure in Thomas. Maybe that would be better.
+    Maybe breaking this up would be best for everyone. I honestly don\u2019t know
+    anymore.\n\nYours,\nIsabel"
   NextID: -1
   daysToNext: 0
   lastInSequence: 1

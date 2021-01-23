@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Letter_24_C4
   m_EditorClassIdentifier: 
   ID: 24
-  Author: Wife
-  Content: '-cat died, had to dig a grave, don''t know how you do this all day
-
-    -John
-    helped
-
-    -wish you were home but what you do is important'
+  Author: Isabel
+  Content: "Dear John,\nOur cat died today. Must have finally used up all her lives
+    in one of her crazy stunts. She drove me crazy, but I\u2019ll miss her. I had
+    to dig a grave in the backyard. Seriously, I have no idea how you do it. I was
+    ready to throw the shovel away after five minutes. The whole thing reminded me
+    that life is short. I wanted to tell you that I love you and that I wish you
+    were home. But what you do is important and I can wait a little longer. \n\nYours,\nIsabel"
   NextID: 25
   daysToNext: 0
+  lastInSequence: 0

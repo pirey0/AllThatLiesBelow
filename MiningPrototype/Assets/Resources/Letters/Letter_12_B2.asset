@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Letter_12_B2
   m_EditorClassIdentifier: 
   ID: 12
-  Author: Wife
-  Content: '-son thinks you''re a hero
-
-    -future is bright'
+  Author: Isabel
+  Content: "Dear John,\nLife is so much easier now that we don\u2019t have to worry
+    about food and housing anymore. I didn\u2019t realize how much it weighed on
+    me, but now I feel like I can finally breathe again. I\u2019m glad you agreed
+    to look for gold for a little while longer. This separation is hard on our relationship,
+    but it\u2019s for our son, so we will have to endure. I\u2019m glad we can invest
+    in something that will make his life so much easier in the future.\n\nWith love,\nIsabel"
   NextID: 13
   daysToNext: 0
+  lastInSequence: 0
