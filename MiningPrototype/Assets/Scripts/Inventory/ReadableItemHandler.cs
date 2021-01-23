@@ -99,7 +99,7 @@ public class ReadableItemHandler : MonoBehaviour
             str += upgrade.ToString() + "\n";
         }
 
-        str += "\nThe money is attached to this list. \n\n - John";
+        str += "\nThe payment is attached to this list. \n\n - John";
 
         int index = currentIndex++;
         readableItems.Add(index, str);
