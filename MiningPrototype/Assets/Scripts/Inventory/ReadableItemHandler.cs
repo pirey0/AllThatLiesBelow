@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class ReadableItemHandler : MonoBehaviour
+public class ReadableItemHandler : MonoBehaviour, ISavable
 {
     const int START_INDEX = 10000;
 
@@ -101,16 +102,38 @@ public class ReadableItemHandler : MonoBehaviour
 
         str += "\nThe payment is attached to this list. \n\n - John";
 
-        int index = currentIndex++;
-        readableItems.Add(index, str);
+        int index = FindMatchingReadable(str);
+        if (index < 0) //if not found assign new index
+        {
+            index = currentIndex++;
+            readableItems.Add(index, str);
+        }
         return index;
     }
 
     public int AddNewReadable(string str)
     {
-        int index = currentIndex++;
-        readableItems.Add(index, str);
+        int index = FindMatchingReadable(str);
+        if (index < 0) //if not found assign new index
+        {
+            index = currentIndex++;
+            readableItems.Add(index, str);
+        }
         return index;
+    }
+
+    private int FindMatchingReadable(string str)
+    {
+        var vs = readableItems.Values.ToArray();
+
+        for (int i = 0; i < vs.Length; i++)
+        {
+            if (vs[i] == str)
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 
     internal string GetAuthor(int id)
@@ -118,5 +141,44 @@ public class ReadableItemHandler : MonoBehaviour
         var letter = LettersHolder.Instance.GetLetterWithID(id);
 
         return letter == null ? null : letter.Author;
+    }
+
+    public SaveData ToSaveData()
+    {
+        var sd = new ReadableItemHandlerSaveData();
+        sd.GUID = GetSaveID();
+        sd.CurrentID = currentIndex;
+        sd.ReadLettersIds = readLettersIds;
+        sd.ReadableItems = readableItems;
+
+        return sd;
+    }
+
+    public void Load(SaveData data)
+    {
+        if (data is ReadableItemHandlerSaveData sd)
+        {
+            readLettersIds = sd.ReadLettersIds;
+            currentIndex = sd.CurrentID;
+            readableItems = sd.ReadableItems;
+        }
+    }
+
+    public string GetSaveID()
+    {
+        return "ReadableItemHandler";
+    }
+
+    public int GetLoadPriority()
+    {
+        return 0;
+    }
+
+    [System.Serializable]
+    public class ReadableItemHandlerSaveData : SaveData
+    {
+        public List<int> ReadLettersIds;
+        public int CurrentID;
+        public Dictionary<int, string> ReadableItems;
     }
 }
