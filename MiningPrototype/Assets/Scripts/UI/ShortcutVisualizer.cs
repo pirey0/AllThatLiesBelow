@@ -20,6 +20,7 @@ public class ShortcutVisualizer : MonoBehaviour
 
     private void OnDisable()
     {
+        if(playerInteractionHandler != null)
         playerInteractionHandler.Inventory.InventoryChanged -= UpdateShortcuts;
     }
 
