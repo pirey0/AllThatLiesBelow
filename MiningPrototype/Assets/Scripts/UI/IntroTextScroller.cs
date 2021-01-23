@@ -1,4 +1,5 @@
 ﻿using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -26,7 +27,7 @@ public class IntroTextScroller : MonoBehaviour
 
         for (int i = 0; i < textToDisplay.Length; i++)
         {
-            int alpha = (i > center && i < center + range)?99: Mathf.RoundToInt((1f - Mathf.Clamp(Mathf.Abs((float)center - (float)i) / (float)range, 0f, 1f)) * 100f);
+            int alpha = (i > center && i < center + range)?255: Mathf.RoundToInt((1f - Mathf.Clamp(Mathf.Abs((float)center - (float)i) / (float)range, 0f, 1f)) * 255);
 
             if (alpha != alphaBefore)
             {
@@ -42,7 +43,8 @@ public class IntroTextScroller : MonoBehaviour
 
     private string GetDoubleStringAlpha(int alpha)
     {
-        return alpha < 10 ? "0" + alpha.ToString() : Mathf.Min(alpha,99).ToString();
+        string str = alpha.ToString("X");
+        return str.Length < 2 ? "0" + str: str;
     }
 
     private void Update()
