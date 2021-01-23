@@ -44,10 +44,11 @@ public class ShortcutHandler : MonoBehaviour
         {
             var mousePos = Util.MouseToWorld(cameraController.Camera);
             itemPlacingHandler.UpdatePosition(mousePos);
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) || Input.GetMouseButton(0))
             {
                 itemPlacingHandler.TryPlace(currentShortcut, mousePos);
             }
+            
         }
     }
 

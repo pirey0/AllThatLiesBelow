@@ -6,7 +6,6 @@ using UnityEngine.Rendering;
 
 public class ShortcutVisualizer : MonoBehaviour
 {
-    [SerializeField] ShortcutHandler shortcutHandler;
     [SerializeField] ShortcutVisual prefab;
 
     [Zenject.Inject] PlayerInteractionHandler playerInteractionHandler;
