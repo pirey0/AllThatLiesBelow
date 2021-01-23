@@ -6,7 +6,6 @@ using UnityEngine.Rendering;
 
 public class ShortcutVisualizer : MonoBehaviour
 {
-    [SerializeField] ShortcutHandler shortcutHandler;
     [SerializeField] ShortcutVisual prefab;
 
     [Zenject.Inject] PlayerInteractionHandler playerInteractionHandler;
@@ -21,6 +20,7 @@ public class ShortcutVisualizer : MonoBehaviour
 
     private void OnDisable()
     {
+        if(playerInteractionHandler != null)
         playerInteractionHandler.Inventory.InventoryChanged -= UpdateShortcuts;
     }
 
