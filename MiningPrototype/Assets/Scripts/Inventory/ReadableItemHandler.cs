@@ -87,7 +87,7 @@ public class ReadableItemHandler : MonoBehaviour
 
     public int AddNewOrder(Order order)
     {
-        string str = "New Order:\n";
+        string str = "Hey Rick, please get me the following things: \n\n";
 
         foreach (ItemAmountPair pair in order.Items)
         {
@@ -98,6 +98,8 @@ public class ReadableItemHandler : MonoBehaviour
         {
             str += upgrade.ToString() + "\n";
         }
+
+        str += "\nThe money is attached to this list. \n\n - John";
 
         int index = currentIndex++;
         readableItems.Add(index, str);
