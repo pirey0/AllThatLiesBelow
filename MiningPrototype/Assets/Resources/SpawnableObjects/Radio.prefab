@@ -224,7 +224,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: bba97e689688e92449c7ac1cac46e208, type: 3}
   - {fileID: 8300000, guid: c3d74dbaf7e83c14782023be1b81b38f, type: 3}
   - {fileID: 8300000, guid: f1268528b010453498d8664848ed2dca, type: 3}
-  - {fileID: 8300000, guid: 7c9515057f2edb9449232e215c419108, type: 3}
+  - {fileID: 8300000, guid: 104ce53f7b840d34f9a9b110ce64e462, type: 3}
   - {fileID: 8300000, guid: 54bc16138e850f747ac92df4547c051b, type: 3}
   - {fileID: 8300000, guid: 4342d8431086412448425f2ffae9333b, type: 3}
   spriteAnimator: {fileID: 1021434048550090917}
