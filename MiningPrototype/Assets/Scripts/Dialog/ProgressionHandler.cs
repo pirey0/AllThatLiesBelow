@@ -111,13 +111,14 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
         //Reapply all effects on load
         foreach (var item in data.rewardsReceived)
         {
-            sacrificeActions.ApplyReward(item, data);
+            sacrificeActions.ApplyRewardFromLoading(item, data);
         }
 
         letterBox = FindObjectOfType<Letterbox>();
         postbox = FindObjectOfType<DropBox>();
 
         OnChangePickaxeLevel?.Invoke(data.pickaxeLevel);
+        OnChangeHelmetLevel?.Invoke(data.helmetLevel);
     }
 
 

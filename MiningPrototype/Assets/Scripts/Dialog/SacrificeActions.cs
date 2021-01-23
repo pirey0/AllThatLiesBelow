@@ -33,13 +33,36 @@ public class SacrificeActions : MonoBehaviour
                 data.instantDelivery = true;
                 break;
             case AltarRewardType.Spring:
-                data.isSpring = true;
                 effectHandler.MakeSpring();
+                data.isSpring = true;
                 map.ReplaceAll(TileType.Snow, TileType.Grass);
                 break;
             case AltarRewardType.MidasTouch:
                 data.isMidas = true;
                 //everything you touch turns to gold
+                break;
+            case AltarRewardType.Analphabetism:
+                fontAsset.material.SetFloat("_Sharpness", -1);
+                fontAsset2.material.SetFloat("_Sharpness", -1);
+                break;
+                //Happyness
+                break;
+            default:
+                Debug.Log("Unimplemented aquired bonus: " + reward);
+                break;
+        }
+    }
+
+    public void ApplyRewardFromLoading(AltarRewardType reward, ProgressionSaveData data)
+    {
+        switch (reward)
+        {
+            case AltarRewardType.InstantDelivery:
+                break;
+            case AltarRewardType.Spring:
+                effectHandler.MakeSpring();
+                break;
+            case AltarRewardType.MidasTouch:
                 break;
             case AltarRewardType.Analphabetism:
                 fontAsset.material.SetFloat("_Sharpness", -1);
