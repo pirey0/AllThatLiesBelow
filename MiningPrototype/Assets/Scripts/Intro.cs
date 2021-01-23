@@ -115,11 +115,15 @@ public class Intro : StateListenerBehaviour
     private void OnPausedEnter()
     {
         cursorHandler?.Show();
+        introAudio.Pause();
+
+
     }
 
     private void OnPauseEnd()
     {
         cursorHandler?.Hide();
+        introAudio.UnPause();
     }
 
     private void OnIntroPlaced(ItemType obj)
