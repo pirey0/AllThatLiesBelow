@@ -5,14 +5,19 @@ using UnityEngine;
 
 public class SaveTester : MonoBehaviour
 {
-    [Zenject.Inject] SaveHandler saveHandler;
+#if UNITY_EDITOR
 
+    [Zenject.Inject] SaveHandler saveHandler;
     private void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.F4))
             Save();
         else if (Input.GetKeyDown(KeyCode.F5))
             Load();
+
+
+
     }
 
     [Button(null, EButtonEnableMode.Playmode)]
@@ -28,4 +33,6 @@ public class SaveTester : MonoBehaviour
         //Reload self
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
+
+#endif
 }

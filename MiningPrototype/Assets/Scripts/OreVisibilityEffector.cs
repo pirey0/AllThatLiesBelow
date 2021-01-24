@@ -8,13 +8,9 @@ public class OreVisibilityEffector : MonoBehaviour
     [SerializeField] float timeLeft = 60;
     [Zenject.Inject] RuntimeProceduralMap runtimeProceduralMap;
 
-    bool active = false;
     void Start()
     {
-        active = true;
-
         StartCoroutine(SetOreVisibleForCoroutine(runtimeProceduralMap, timeLeft, Callback));
-
     }
 
     private void Callback()
