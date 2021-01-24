@@ -20,9 +20,10 @@ MonoBehaviour:
   Weight: 1
   CanBePlaced: 1
   PickupHoldSprite: {fileID: 1875917246518206917, guid: e7e6e97dc47eeec4d8d1ca9beb28ab1f, type: 3}
-  PickupHoldOffset: {x: 0, y: 0}
+  PickupHoldOffset: {x: 0, y: 0.5}
   PickupPreviewPrefab: {fileID: 5973925749000279482, guid: 9c4b0f5fe777c014983875e6a6fa07d1, type: 3}
   Prefab: {fileID: 3972625243980868046, guid: 27f96f8dceef49b4ea40437889f05df3, type: 3}
+  Shortcut: 0
   AmountIsUniqueID: 0
   IsUpgrade: 0
   RequiredLevel: 0
