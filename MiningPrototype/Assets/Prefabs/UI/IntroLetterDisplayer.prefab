@@ -33,8 +33,8 @@ RectTransform:
   m_Father: {fileID: 7029649004853565791}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: -300}
   m_SizeDelta: {x: -600, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -72,16 +72,17 @@ MonoBehaviour:
     we're doing this. Searching for gold based on what an old man wrote in his diary
     is crazy, even for us. Of course, our little Jack thinks it\u2019s the coolest
     thing ever. I don\u2019t think it has sunk in yet how long you might be gone
-    for, but I don\u2019t have the heart to tell him.\nMrs. Caulfield came by yesterday
-    to remind me of our outstanding rent. She also threatened with eviction. Not
-    in so many words of course, but it\u2019s coming. Maybe sooner than we thought...\nIf
-    this doesn\u2019t work out we really are doomed. I've been so worried that I
-    haven\u2019t slept since you left, but I've put the time to good use. Re-reading
-    uncle Tom\u2019s journals over and over again, I found something that might help:
-    He mentions an elevator east of the entrance to the mine that leads straight
-    to the gold. You should check it out! Maybe it\u2019s easier than we thought...\n\nI
-    miss you and I can\u2019t wait to hear from you. I\u2019ll sleep easier once
-    I know you\u2019re safe.    \n\nI love you!\n\nYours, \n\nIsabel"
+    for, but I don\u2019t have the heart to tell him.\nYou should know that Mrs.
+    Caulfield came by yesterday to remind me of our outstanding rent. She also threatened
+    with eviction. Not in so many words of course, but it\u2019s coming. Maybe sooner
+    than we thought...\nIf this doesn\u2019t work out we really are doomed. I've
+    been so worried that I haven\u2019t slept since you left, but I've put the time
+    to good use. Re-reading uncle Tom\u2019s journals over and over again, I found
+    something that might help: He mentions an elevator east of the entrance to the
+    mine that leads straight to the gold. You should check it out! Maybe it\u2019s
+    easier than we thought...\n\nI miss you and I can\u2019t wait to hear from you.
+    I\u2019ll sleep easier once I know you\u2019re safe.    \n\nI love you!\n\nYours,
+    \n\nIsabel"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d4b1999f5a6dee24da6dc56286d165ff, type: 2}
   m_sharedMaterial: {fileID: -7364954933653177434, guid: d4b1999f5a6dee24da6dc56286d165ff, type: 2}
@@ -169,16 +170,17 @@ MonoBehaviour:
     we're doing this. Searching for gold based on what an old man wrote in his diary
     is crazy, even for us. Of course, our little Jack thinks it\u2019s the coolest
     thing ever. I don\u2019t think it has sunk in yet how long you might be gone
-    for, but I don\u2019t have the heart to tell him.\nMrs. Caulfield came by yesterday
-    to remind me of our outstanding rent. She also threatened with eviction. Not
-    in so many words of course, but it\u2019s coming. Maybe sooner than we thought...\nIf
-    this doesn\u2019t work out we really are doomed. I've been so worried that I
-    haven\u2019t slept since you left, but I've put the time to good use. Re-reading
-    uncle Tom\u2019s journals over and over again, I found something that might help:
-    He mentions an elevator east of the entrance to the mine that leads straight
-    to the gold. You should check it out! Maybe it\u2019s easier than we thought...\n\nI
-    miss you and I can\u2019t wait to hear from you. I\u2019ll sleep easier once
-    I know you\u2019re safe.    \n\nI love you!\n\nYours, \n\nIsabel"
+    for, but I don\u2019t have the heart to tell him.\nYou should know that Mrs.
+    Caulfield came by yesterday to remind me of our outstanding rent. She also threatened
+    with eviction. Not in so many words of course, but it\u2019s coming. Maybe sooner
+    than we thought...\nIf this doesn\u2019t work out we really are doomed. I've
+    been so worried that I haven\u2019t slept since you left, but I've put the time
+    to good use. Re-reading uncle Tom\u2019s journals over and over again, I found
+    something that might help: He mentions an elevator east of the entrance to the
+    mine that leads straight to the gold. You should check it out! Maybe it\u2019s
+    easier than we thought...\n\nI miss you and I can\u2019t wait to hear from you.
+    I\u2019ll sleep easier once I know you\u2019re safe.    \n\nI love you!\n\nYours,
+    \n\nIsabel"
   range: 20
   ToHighlight: -245
 --- !u!1 &7029649004853565779
