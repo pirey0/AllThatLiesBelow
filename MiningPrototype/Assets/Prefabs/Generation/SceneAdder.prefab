@@ -952,7 +952,7 @@ MonoBehaviour:
   gizmoColor: {r: 0.8, g: 0.05255122, b: 0, a: 1}
   XInArea: 1
   YInArea: 0
-  areaTopRight: {x: 60, y: 265, z: 0}
+  areaTopRight: {x: 40, y: 265, z: 0}
   areaBotLeft: {x: 20, y: 265, z: 0}
 --- !u!1 &3510606058087648147
 GameObject:

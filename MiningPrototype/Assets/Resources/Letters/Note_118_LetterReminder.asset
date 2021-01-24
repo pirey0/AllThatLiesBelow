@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3447797fe2bbafb4f91c9c92cdfdf251, type: 3}
+  m_Name: Note_118_LetterReminder
+  m_EditorClassIdentifier: 
+  ID: 118
+  Author: Reminder
+  Content: 'Reminder: Dont forget to bring your letters and orders to your postbox,
+    otherwise they cant be send.'
+  NextID: -1
+  daysToNext: 0
+  lastInSequence: 0

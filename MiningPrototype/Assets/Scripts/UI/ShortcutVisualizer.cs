@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class ShortcutVisualizer : MonoBehaviour
+public class ShortcutVisualizer : StateListenerBehaviour
 {
     [SerializeField] ShortcutVisual prefab;
 
@@ -13,23 +13,20 @@ public class ShortcutVisualizer : MonoBehaviour
 
     Dictionary<ItemType, ShortcutVisual> visuals = new Dictionary<ItemType, ShortcutVisual>();
 
-    private void OnEnable()
+    protected override void OnRealStart()
     {
         playerInteractionHandler.Inventory.InventoryChanged += UpdateShortcuts;
-    }
 
-    private void OnDisable()
-    {
-        if(playerInteractionHandler != null)
-        playerInteractionHandler.Inventory.InventoryChanged -= UpdateShortcuts;
-    }
-
-    private void Start()
-    {
         foreach (ItemAmountPair itemAmountPair in playerInteractionHandler.Inventory.GetContent())
         {
             UpdateShortcuts(true, itemAmountPair, false);
         }
+    }
+
+    private void OnDestroy()
+    {
+        if (playerInteractionHandler != null)
+            playerInteractionHandler.Inventory.InventoryChanged -= UpdateShortcuts;
     }
 
     private void UpdateShortcuts(bool add, ItemAmountPair element, bool playsound)
