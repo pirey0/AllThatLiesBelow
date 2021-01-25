@@ -11,18 +11,19 @@ public class Platform : TilemapCarvingEntity
 
     [Zenject.Inject] PlatformHandler platformHandler;
 
-    int fLeft, nLeft, nRight, fRight;
+    bool platformLeft, platformRight, wallLeft, wallRight, wallFarLeft, wallFarRight;
 
     private void Start()
     {
-        //var placmentAttr = CalculatePlacement();
-        //AdaptPlacementTo(placmentAttr);
-        //Debug.Log("Support placed with height: " + placmentAttr);
         Carve();
 
         var pos = transform.position.ToGridPosition();
 
         spriteRenderer.sprite = UpdateVisualsBaseOnNeighbours(pos.x, pos.y);
+
+        map.NotifyRecieversOfUpdates(pos.x + 1, pos.y, TileUpdateReason.VisualUpdate);
+        map.NotifyRecieversOfUpdates(pos.x - 1, pos.y, TileUpdateReason.VisualUpdate);
+
         platformHandler.NotifyPlatformPlaced(this);
     }
 
@@ -30,6 +31,8 @@ public class Platform : TilemapCarvingEntity
     {
         if (this != null && !isbeingDestroyed)
         {
+            Util.DebugDrawTileCrossed(new Vector2Int(x,y),Color.green);
+
             platformHandler.CheckForAttachmentToWall(this);
             spriteRenderer.sprite = UpdateVisualsBaseOnNeighbours(x, y);
         }
@@ -37,38 +40,36 @@ public class Platform : TilemapCarvingEntity
 
     private Sprite UpdateVisualsBaseOnNeighbours(int x, int y)
     {
-        fLeft = (map.IsNeighbourAt(x - 2, y) ? 4 : 0);
-        fRight = (map.IsNeighbourAt(x + 2, y) ? 4 : 0);
-        nLeft = (map.IsBlockAt(x - 1, y) ? 1 : 0) + (map.IsNeighbourAt(x - 1, y) ? 2 : 0);
-        nRight = (map.IsBlockAt(x + 1, y) ? 1 : 0) + (map.IsNeighbourAt(x + 1, y) ? 2 : 0);
+        
+        platformLeft = map.GetTileAt(x - 1, y).Type == TileType.Platform;
+        platformRight = map.GetTileAt(x + 1, y).Type == TileType.Platform;
+        wallLeft = map.IsNeighbourAt(x - 1, y);
+        wallRight = map.IsNeighbourAt(x + 1, y);
+        wallFarLeft = map.IsNeighbourAt(x - 2, y);
+        wallFarRight = map.IsNeighbourAt(x + 2, y);
 
 
-        if ((nLeft + fLeft) > 1)
+        if (wallRight)
         {
-            if (nLeft == 1 || nRight == 0)
-            {
-                return this.left;
-            }
-            else if (nLeft != 0)
-            {
-                return this.farLeft;
-            }
-
-        }
-        else if ((nRight + fRight) > 1)
-        {
-            if (nRight == 1 || nLeft == 0)
-            {
-                return this.right;
-            }
-            else if (nRight != 0)
-            {
+            if (platformLeft)
                 return this.farRight;
-            }
-        }
-        else if (nLeft + nRight < 2)
+            else
+                return this.right;
+
+        } else if (wallLeft)
         {
-            return this.centerDot;
+            if (platformRight)
+                return this.farLeft;
+            else
+                return this.left;
+        } else if (platformLeft || platformRight)
+        {
+            if (wallFarRight && platformRight)
+                return this.right;
+            else if (wallFarLeft && platformLeft)
+                return this.left;
+            else if (!(platformLeft && platformRight))
+                return this.centerDot;
         }
 
         return this.center;
@@ -76,7 +77,7 @@ public class Platform : TilemapCarvingEntity
 
     public override void OnTileChanged(int x, int y, TileUpdateReason reason)
     {
-        if (this != null && reason == TileUpdateReason.Destroy)
+        if (this != null && reason == TileUpdateReason.Destroy && !isbeingDestroyed)
         {
             Debug.Log("Platform destroyed.");
             platformHandler.NotifyPlatformDestroyed(this);
@@ -111,26 +112,10 @@ public class Platform : TilemapCarvingEntity
 
 
 #if UNITY_EDITOR
-    void OnDrawGizmos()
+    void OnDrawGizmosSelected()
     {
-        UnityEditor.Handles.Label(transform.position, fLeft + "<" + nLeft + " - " + nRight + ">" + fRight);
+        UnityEditor.Handles.Label(transform.position + Vector3.down * (transform.position.y % 10f) * 0.1f, wallFarLeft + " < " + platformLeft + "=wall?"+ wallLeft + " - " + platformRight + "=wall?"+wallRight + " > " + wallFarRight);
     }
 
 #endif
-
-
-    //public override void AdaptPlacementTo((Direction, int) placementAtr)
-    //{
-    //    base.AdaptPlacementTo(placementAtr);
-    //
-    //    if (placementAtr.Item1 == Direction.Right)
-    //    {
-    //        edgeCollider.SetPoints(new List<Vector2>() { new Vector2(-0.5f, 0), new Vector2(placementAtr.Item2 - 0.5f, 0) });
-    //    }
-    //    else
-    //    {
-    //        edgeCollider.SetPoints(new List<Vector2>() { new Vector2(-placementAtr.Item2 + 0.5f, 0), new Vector2(+0.5f, 0) });
-    //    }
-    //
-    //}
 }

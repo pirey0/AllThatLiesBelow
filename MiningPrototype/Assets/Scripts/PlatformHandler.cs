@@ -7,6 +7,17 @@ public class PlatformHandler : MonoBehaviour
 {
     private List<PlatformObject> platformObjects = new List<PlatformObject>();
     const bool SHOW_DEBUG = false;
+    bool immune = true;
+
+    private void Start()
+    {
+        Invoke("DisableImmunity",2);
+    }
+
+    private void DisableImmunity()
+    {
+        immune = false;
+    }
 
     public void NotifyPlatformPlaced(Platform newPlatform)
     {
@@ -44,6 +55,9 @@ public class PlatformHandler : MonoBehaviour
 
     internal void CheckForAttachmentToWall(Platform platform)
     {
+        if (immune)
+            return;
+
         PlatformObject platformObject = GetPlatformObjectByPlatform(platform);
 
         if (platformObject != null && !platformObject.IsBeeingDestroyed)
