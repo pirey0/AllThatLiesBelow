@@ -4,17 +4,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : StateListenerBehaviour
 {
     [Zenject.Inject] PlayerInteractionHandler player;
 
     public event System.Action<ItemAmountPair> PlayerCollected;
 
+    protected override void OnRealStart()
+    {
+        player.Inventory.InventoryChanged += OnInventoryChanged;
+    }
+
+    private void OnInventoryChanged(bool add, ItemAmountPair element, bool playsound)
+    {
+        if (add)
+        {
+            PlayerCollected?.Invoke(element);
+        }
+    }
+
     public void PlayerCollects(ItemType itemType, int amount)
     {
         player.Inventory.Add(itemType, amount, playSound: false);
-
-        PlayerCollected?.Invoke(new ItemAmountPair(itemType, amount));
     }
 
     public void PlayerCollects(ItemAmountPair[] itemAmountPair)
@@ -34,8 +45,6 @@ public class InventoryManager : MonoBehaviour
     {
         return player.Inventory.Contains(new ItemAmountPair(type, amount));
     }
-
-
 
     public void ForcePlayerInventoryClose()
     {

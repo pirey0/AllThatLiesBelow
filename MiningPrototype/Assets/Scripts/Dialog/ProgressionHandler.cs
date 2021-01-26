@@ -62,11 +62,20 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     {
         player.EnteredOverworld += OnEnterOverworld;
         player.LeftOverworld += OnLeftOverworld;
+        inventoryManager.PlayerCollected += OnPlayerCollected;
 
         if (gameInstanceData.LoadBecauseOfDeath)
         {
             Debug.Log("Setting Died variable because load from death");
             SetVariable("Died", true);
+        }
+    }
+
+    private void OnPlayerCollected(ItemAmountPair obj)
+    {
+        if (obj.type == ItemType.CopperClaw && !GetVariable("HasCopperClaw"))
+        {
+            SetVariable("HasCopperClaw", true);
         }
     }
 
@@ -216,6 +225,9 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
                 inventoryManager.PlayerCollects(ItemType.Gold, 15);
                 break;
 
+            case "Give30Copper":
+                inventoryManager.PlayerCollects(ItemType.Copper, 30);
+                break;
 
             default:
                 Debug.LogWarning("Fired unimplemented event " + ev);
@@ -314,6 +326,8 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
                             data.nextLetterID = payed10LetterIdBad;
                         else
                             data.nextLetterID = payed10LetterIdGood;
+
+                        data.daysToNextLetter = 0;
                         SetVariable("Sent10Gold", true);
                     }
                     break;
@@ -325,6 +339,8 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
                             data.nextLetterID = payed100LetterIdBad;
                         else
                             data.nextLetterID = payed100LetterIdGood;
+
+                        data.daysToNextLetter = 0;
                         SetVariable("Sent100Gold", true);
                     }
                     break;
@@ -336,6 +352,8 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
                             data.nextLetterID = payed1000LetterIdBad;
                         else
                             data.nextLetterID = payed1000LetterIdGood;
+
+                        data.daysToNextLetter = 0;
                         SetVariable("Sent1000Gold", true);
                     }
                     break;

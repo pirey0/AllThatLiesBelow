@@ -144,11 +144,6 @@ public class Desk : MonoBehaviour, IInteractable
         }
     }
 
-    private void SetPayedVariable(int amount)
-    {
-        progressionHandler.SetVariable("Sent" + amount + "Gold", true);
-    }
-
     public void SitAtDesk(PlayerStateMachine playerToHide)
     {
         if (deskState == DeskState.Sitting)
