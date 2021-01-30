@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1113203590791219631}
-  - component: {fileID: 1113203590791219630}
+  - component: {fileID: 7837096438211195710}
   m_Layer: 0
-  m_Name: KernelIterator
+  m_Name: CrumblingHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1113203590791219630
+--- !u!114 &7837096438211195710
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,9 +40,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1113203590791219625}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 357afaf8e6b22d94194bc765eaaa2cd6, type: 3}
+  m_Script: {fileID: 11500000, guid: 7fbcab77904e758438c5e41c4e2cb029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sizeX: 25
-  sizeY: 20
+  sizeY: 22
   debug: 0

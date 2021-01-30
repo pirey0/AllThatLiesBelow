@@ -20,6 +20,7 @@ public class DebugMode : MonoBehaviour
     [Inject] PrefabFactory factory;
     [Inject] StatsTracker statsTracker;
     [Inject] EnvironmentEffectsHandler environmentEffectsHandler;
+    [Inject] CrumblingHandler crumblingHandler;
 
     Texture2D debugTex;
     bool open;
@@ -48,7 +49,26 @@ public class DebugMode : MonoBehaviour
         AddCheat("/setVariable", "Set a dialog variable", "SetDialogVariable");
         AddCheat("/efficiency", "Set the mining speed multiplyer", "SetMiningSpeed");
         AddCheat("/skipDay", "Skip a Day", "NextDay");
+        AddCheat("/creative", "Enter Creative Mode", "CreativeMode");
+        AddCheat("/survival", "Enter Survival Mode", "SurvivalMode");
+        AddCheat("/toggleCrumble", "Switch Crumbling on and off", "ToggleCrumble");
     }
+
+    private void ToggleCrumble()
+    {
+        crumblingHandler.TogglePaused();
+    }
+
+    private void CreativeMode()
+    {
+        playerManager.ChangePlayerTo(PlayerType.Creative);
+    }
+
+    private void SurvivalMode()
+    {
+        playerManager.ChangePlayerTo(PlayerType.Normal);
+    }
+
 
     private void AddCheat(string command, string description, string methodname)
     {

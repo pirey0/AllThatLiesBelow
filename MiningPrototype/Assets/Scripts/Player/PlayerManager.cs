@@ -3,12 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PlayerType
+{
+    Normal,
+    Creative
+}
+
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] GameObject normalPlayerPrefab;
+    [SerializeField] GameObject creativeModePlayerPrefab;
 
     [Zenject.Inject] PrefabFactory prefabFactory;
 
+    PlayerType currentType;
     IPlayerController player;
     IPlayerInteraction playerInteraction;
     Transform playerTransform;
@@ -16,11 +24,32 @@ public class PlayerManager : MonoBehaviour
     private void Awake()
     {
         var p = prefabFactory.Create(normalPlayerPrefab);
-        playerTransform = p;
-        player = p.GetComponent<IPlayerController>();
-        playerInteraction = p.GetComponent<IPlayerInteraction>();
+        SetupNewPlayer(p);
     }
 
+    private void SetupNewPlayer(Transform newObject)
+    {
+        playerTransform = newObject;
+        if (newObject != null)
+        {
+            player = newObject.GetComponent<IPlayerController>();
+            playerInteraction = newObject.GetComponent<IPlayerInteraction>();
+        }
+    }
+    public void ChangePlayerTo(PlayerType type)
+    {
+        if(type != currentType)
+        {
+            currentType = type;
+            Destroy(playerTransform);
+            Transform newP = null;
+            if (type == PlayerType.Normal)
+                newP = prefabFactory.Create(normalPlayerPrefab);
+            else if (type == PlayerType.Creative)
+                newP = prefabFactory.Create(creativeModePlayerPrefab);
+            SetupNewPlayer(newP);
+        }
+    }
     public IPlayerController GetPlayer()
     {
         return player;
@@ -36,7 +65,7 @@ public class PlayerManager : MonoBehaviour
         return playerInteraction;
     }
 
-    internal Transform GetPlayerTransform()
+    public Transform GetPlayerTransform()
     {
         return playerTransform;
     }

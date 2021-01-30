@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f206c61bfbcf094e8d886e3e612ec88, type: 3}
   m_Name: DefaultSceneInstaller
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 8633471933228471848, guid: d57cb195febf6a647be206265cbe50fd, type: 3}
   progressionPrefab: {fileID: 2388821100420778845, guid: 8f9d573c8734bb14092a75f0f481e070, type: 3}
   readableItemPrefab: {fileID: 1960365942269115461, guid: 809d08b81c4e06647907e110f888ead2, type: 3}
   cameraPannerPrefab: {fileID: 3841827697160721108, guid: 34b68ab6d1c273b4790ef6b88022039c, type: 3}
@@ -36,3 +35,4 @@ MonoBehaviour:
   uisHandlerPrefab: {fileID: 1862846585481757528, guid: 65a6ddabcffc9bb49b65ef18ea54e5ba, type: 3}
   altarDialogHandlerPrefab: {fileID: 5499054407750593895, guid: 7521942565c5b054294abdfc8ddcec89, type: 3}
   playerManagerPrefab: {fileID: 552462180331638438, guid: 7d55092b312a3c248bb4300c777a9425, type: 3}
+  crumblingHandlerPrefab: {fileID: 1113203590791219625, guid: 60c77369bde1c074494aee14c3a744d1, type: 3}

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KernelIterator : StateListenerBehaviour
+public class CrumblingHandler : StateListenerBehaviour
 {
     [SerializeField] int sizeX, sizeY;
     [SerializeField] bool debug;
@@ -16,12 +16,23 @@ public class KernelIterator : StateListenerBehaviour
     int currentStartX;
     int currentStartY;
     int currentIndex;
+
+    bool paused;
+
     protected override void OnRealStart()
     {
         kernels = kernelParser.GetAllKernels();
         StartCoroutine(KernelRoutine());
     }
 
+    public void TogglePaused()
+    {
+        paused = !paused;
+        if (paused)
+            Debug.Log("Crumbling paused.");
+        else
+            Debug.Log("Crumbling resumed.");
+    }
     private IEnumerator KernelRoutine()
     {
         currentIndex = 0;
@@ -33,6 +44,9 @@ public class KernelIterator : StateListenerBehaviour
 
         while (true)
         {
+            if (paused)
+                yield return null;
+
             Kernel currentKernel = kernels[currentIndex];
 
             if (currentKernel.MatchesWith(map, x, y))
