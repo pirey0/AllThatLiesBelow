@@ -8,16 +8,16 @@ public class ShortcutVisualizer : StateListenerBehaviour
 {
     [SerializeField] ShortcutVisual prefab;
 
-    [Zenject.Inject] PlayerInteractionHandler playerInteractionHandler;
+    [Zenject.Inject] PlayerManager playerManager;
     [Zenject.Inject] PlayerInventoryOpener playerInventoryOpener;
 
     Dictionary<ItemType, ShortcutVisual> visuals = new Dictionary<ItemType, ShortcutVisual>();
 
     protected override void OnRealStart()
     {
-        playerInteractionHandler.Inventory.InventoryChanged += UpdateShortcuts;
+        playerManager.GetPlayerInventory().InventoryChanged += UpdateShortcuts;
 
-        foreach (ItemAmountPair itemAmountPair in playerInteractionHandler.Inventory.GetContent())
+        foreach (ItemAmountPair itemAmountPair in playerManager.GetPlayerInventory().GetContent())
         {
             UpdateShortcuts(true, itemAmountPair, false);
         }
@@ -25,8 +25,8 @@ public class ShortcutVisualizer : StateListenerBehaviour
 
     private void OnDestroy()
     {
-        if (playerInteractionHandler != null)
-            playerInteractionHandler.Inventory.InventoryChanged -= UpdateShortcuts;
+        if (playerManager != null)
+            playerManager.GetPlayerInventory().InventoryChanged -= UpdateShortcuts;
     }
 
     private void UpdateShortcuts(bool add, ItemAmountPair element, bool playsound)
@@ -44,7 +44,7 @@ public class ShortcutVisualizer : StateListenerBehaviour
         }
         else
         {
-            if (!playerInteractionHandler.Inventory.Contains(new ItemAmountPair(type, 1)) && visuals.ContainsKey(type))
+            if (!playerManager.GetPlayerInventory().Contains(new ItemAmountPair(type, 1)) && visuals.ContainsKey(type))
             {
                 Destroy(visuals[type].gameObject);
                 visuals.Remove(type);

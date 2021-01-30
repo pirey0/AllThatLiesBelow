@@ -41,7 +41,7 @@ public class Explosion : MonoBehaviour
             {
                 entity.UncarveDestroy();
             }
-            else if (hit.transform.TryGetComponent(out PlayerStateMachine player))
+            else if (hit.transform.TryGetComponent(out IPlayerController player))
             {
                 player.TakeDamage(DamageStrength.Strong);
             }

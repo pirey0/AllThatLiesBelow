@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class ItemPlacingHandler : MonoBehaviour
 {
-    [Zenject.Inject] PlayerInteractionHandler player;
+    [Zenject.Inject] PlayerManager playerManger;
     [Zenject.Inject] CameraController cameraController;
     [Zenject.Inject] Zenject.DiContainer diContainer;
     [Zenject.Inject] InventoryManager inventoryManager;
@@ -44,7 +44,7 @@ public class ItemPlacingHandler : MonoBehaviour
         isHidden = true;
         cursorHandler.Show();
 
-        player.SetHeldItem(setToPickaxe: true);
+        playerManger.GetPlayerInteraction().SetHeldItem(setToPickaxe: true);
 
         if (previewTransform != null)
             Destroy(previewTransform.gameObject);
@@ -84,8 +84,8 @@ public class ItemPlacingHandler : MonoBehaviour
         {
             if (info.PickupPreviewPrefab != null)
             {
-                player.SetHeldItem(setToPickaxe: false);
-                player.SetHeldItemSprite(info);
+                playerManger.GetPlayerInteraction().SetHeldItem(setToPickaxe: false);
+                playerManger.GetPlayerInteraction().SetHeldItemSprite(info);
 
                 var go = diContainer.InstantiatePrefab(info.PickupPreviewPrefab);
                 previewTransform = go.transform;

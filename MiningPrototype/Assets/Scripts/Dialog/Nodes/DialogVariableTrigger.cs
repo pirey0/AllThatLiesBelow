@@ -12,7 +12,7 @@ public class DialogVariableTrigger : MonoBehaviour, INonPersistantSavable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out PlayerStateMachine psm))
+        if (collision.TryGetComponent(out IPlayerController psm))
         {
             progressionHandler.SetVariable(variableName, setToTrue);
             Debug.Log("Trigger: Set" + variableName + " " + setToTrue);

@@ -23,7 +23,7 @@ public class Desk : MonoBehaviour, IInteractable
     [Zenject.Inject] ProgressionHandler progressionHandler;
 
     List<GameObject> optionInstances;
-    PlayerStateMachine seatedPlayer;
+    IPlayerController seatedPlayer;
     NewOrderVisualizer currentOrder;
     DeskState deskState;
     private bool canSend = true;
@@ -39,17 +39,15 @@ public class Desk : MonoBehaviour, IInteractable
         WritingLetterForFamily,
     }
 
-    public void BeginInteracting(GameObject interactor)
+    public void BeginInteracting(IPlayerController player)
     {
-        PlayerStateMachine player = interactor.GetComponent<PlayerStateMachine>();
         seatedPlayer = player;
         RefreshOptions();
         SitAtDesk(player);
     }
 
-    public void EndInteracting(GameObject interactor)
+    public void EndInteracting(IPlayerController player)
     {
-        PlayerStateMachine player = interactor.GetComponent<PlayerStateMachine>();
         LeaveDesk();
     }
 
@@ -144,7 +142,7 @@ public class Desk : MonoBehaviour, IInteractable
         }
     }
 
-    public void SitAtDesk(PlayerStateMachine playerToHide)
+    public void SitAtDesk(IPlayerController playerToHide)
     {
         if (deskState == DeskState.Sitting)
             return;

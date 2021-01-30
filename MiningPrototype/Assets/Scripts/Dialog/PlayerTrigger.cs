@@ -8,7 +8,7 @@ public class PlayerTrigger : StateListenerBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out PlayerStateMachine psm))
+        if (collision.TryGetComponent(out IPlayerController psm))
         {
             OnPlayerEnter();
         }
@@ -16,7 +16,7 @@ public class PlayerTrigger : StateListenerBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out PlayerStateMachine psm))
+        if (collision.TryGetComponent(out IPlayerController psm))
         {
             OnPlayerExit();
         }

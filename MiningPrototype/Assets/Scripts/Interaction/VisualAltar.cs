@@ -13,7 +13,7 @@ public class VisualAltar : MonoBehaviour, IDialogUser
 
     [SerializeField] AltarSkinInfo[] skins;
 
-    [Zenject.Inject] PlayerInteractionHandler playerInteractionHandler;
+    [Zenject.Inject] PlayerManager playerManager;
 
     AudioClip last;
     DialogVisualizer dialogVisualizer;
@@ -62,7 +62,7 @@ public class VisualAltar : MonoBehaviour, IDialogUser
         }
         else
         {
-            spriteAnimator.Renderer.flipX = info.lookAtPlayer ? playerInteractionHandler.transform.position.x < transform.position.x : false;
+            spriteAnimator.Renderer.flipX = info.lookAtPlayer ? playerManager.GetPlayerPosition().x < transform.position.x : false;
 
             if (spriteAnimator.Animation != info.Animation)
             {

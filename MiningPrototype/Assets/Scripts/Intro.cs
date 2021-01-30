@@ -14,7 +14,7 @@ public class Intro : StateListenerBehaviour
     [SerializeField] AudioSource introAudio;
     [SerializeField] GameObject IntroLetterReader;
 
-    [Zenject.Inject] PlayerStateMachine player;
+    [Zenject.Inject] PlayerManager playerManager;
     [Zenject.Inject] EnvironmentEffectsHandler effectHandler;
     [Zenject.Inject] ProgressionHandler progressionHandler;
     [Zenject.Inject] ItemPlacingHandler placingHandler;
@@ -33,7 +33,7 @@ public class Intro : StateListenerBehaviour
         var start = LocationIndicator.Find(IndicatorType.PlayerStart);
         if (start != null)
         {
-            player.transform.position = start.transform.position;
+            playerManager.TeleportPlayerTo(start.transform.position);
         }
 
         if (!Application.isEditor || !skipIntroInEditor)
@@ -50,7 +50,7 @@ public class Intro : StateListenerBehaviour
             }
             var m = LocationIndicator.Find(IndicatorType.InFrontOfMine);
             if (m != null)
-                player.transform.position = m.transform.position;
+                playerManager.TeleportPlayerTo(m.transform.position);
         }
     }
 
@@ -65,6 +65,9 @@ public class Intro : StateListenerBehaviour
         effectHandler.SetNight();
         effectHandler.SetSnowAmount(3);
         effectHandler.OnMirrorSideChanged(RuntimeProceduralMap.MirrorState.Right);
+
+        IPlayerController player = playerManager.GetPlayer();
+
         player.CanDig = false;
         player.InCinematicMode = true;
         player.CinematicSlowWalk = true;

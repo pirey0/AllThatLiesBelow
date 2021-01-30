@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class HeldItemPreviewTester : MonoBehaviour
 {
-    [Zenject.Inject] PlayerInteractionHandler player;
+    [Zenject.Inject] PlayerManager playerManager;
 
     int i = 0;
     const int MAX_ITEM_ID = 38;
@@ -24,6 +24,6 @@ public class HeldItemPreviewTester : MonoBehaviour
 
         var info = ItemsData.GetItemInfo((ItemType)i);
 
-        player.SetHeldItemSprite(info);
+        playerManager.GetPlayerInteraction().SetHeldItemSprite(info);
     }
 }

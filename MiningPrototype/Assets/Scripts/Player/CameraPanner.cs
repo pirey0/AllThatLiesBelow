@@ -12,8 +12,7 @@ public class CameraPanner : MonoBehaviour
     [SerializeField] RectTransform topImage, botImage;
     [SerializeField] float barOpeningSpeed;
 
-    [Zenject.Inject] PlayerStateMachine player;
-    [Zenject.Inject] PlayerInteractionHandler interactionHandler;
+    [Zenject.Inject] PlayerManager playerManager;
 
     float yOffset;
     bool cinematicMode;
@@ -91,7 +90,7 @@ public class CameraPanner : MonoBehaviour
                 yOffset = targetOffset;
         }
 
-        transform.position = player.transform.position + (cinematicMode ? Vector3.zero : dir) + new Vector3(0, yOffset);
+        transform.position = playerManager.GetPlayerPosition() + (cinematicMode ? Vector3.zero : dir) + new Vector3(0, yOffset);
     }
 
     private float GetTargetOffset(State state)
@@ -111,11 +110,11 @@ public class CameraPanner : MonoBehaviour
 
     private State GetCurrentTargetState()
     {
-        if (interactionHandler.InDialog())
+        if (playerManager.GetPlayerInteraction().InDialog())
         {
             return State.VeryHigh;
         }
-        else if (player.InOverworld() || cinematicMode)
+        else if (playerManager.GetPlayer().InOverworld() || cinematicMode)
         {
             return State.High;
         }

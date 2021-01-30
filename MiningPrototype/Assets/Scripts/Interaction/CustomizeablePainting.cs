@@ -23,7 +23,7 @@ public class CustomizeablePainting : MineableObject, INonPersistantSavable, IBas
         spriteRenderer.sortingOrder = val;
     }
 
-    public void BeginInteracting(GameObject interactor)
+    public void BeginInteracting(IPlayerController player)
     {
         TryNextPainting();
     }

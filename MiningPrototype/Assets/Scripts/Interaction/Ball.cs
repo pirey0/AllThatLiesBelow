@@ -14,7 +14,7 @@ public class Ball : MineableObject
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.TryGetComponent(out PlayerStateMachine psm))
+        if (collision.transform.TryGetComponent(out IPlayerController psm))
         {
             Debug.Log("Hit Ball");
             rigidbody.AddForce(collision.contacts[0].normal * playerTouchVelocity, ForceMode2D.Impulse);

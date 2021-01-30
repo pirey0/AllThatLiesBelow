@@ -6,14 +6,14 @@ using Zenject;
 [CreateAssetMenu(fileName = "DefaultSceneInstaller", menuName = "Installers/DefaultSceneInstaller")]
 public class DefaultSceneInstaller : ScriptableObjectInstaller<DefaultSceneInstaller>
 {
-    [SerializeField] GameObject playerPrefab, progressionPrefab, readableItemPrefab, cameraPannerPrefab, cameraPrefab, itemPreviewPrefab, playerInventoryOpenerUIPrefab;
+    [SerializeField] GameObject progressionPrefab, readableItemPrefab, cameraPannerPrefab, cameraPrefab, itemPreviewPrefab, playerInventoryOpenerUIPrefab;
     [SerializeField] GameObject pauseMenuPrefab, toolTipPrefab, eventSystemPrefab, inWorldCanvasPrefab, playerStatementsPrefab, cursorHandlerPrefab;
     [SerializeField] GameObject debugModePrefab, inventoryManagerPrefab, saveHandlerPrefab, gameStatePrefab, transitionEffectHandlerPrefab, overworldEffectsHandlerPrefab, damageEffectHandlerPrefab;
-    [SerializeField] GameObject statsTrackerPrefab, uisHandlerPrefab, altarDialogHandlerPrefab;
+    [SerializeField] GameObject statsTrackerPrefab, uisHandlerPrefab, altarDialogHandlerPrefab, playerManagerPrefab;
 
     public override void InstallBindings()
     {
-        Container.Bind(typeof(PlayerStateMachine), typeof(PlayerInteractionHandler)).FromComponentInNewPrefab(playerPrefab).AsSingle().NonLazy();
+        Container.Bind<PlayerManager>().FromComponentInNewPrefab(playerManagerPrefab).AsSingle().NonLazy();
         Container.Bind(typeof(ProgressionHandler), typeof(SacrificeActions)).FromComponentInNewPrefab(progressionPrefab).AsSingle().NonLazy();
         Container.Bind<ReadableItemHandler>().FromComponentInNewPrefab(readableItemPrefab).AsSingle().NonLazy();
         Container.Bind<PlayerInventoryOpener>().FromComponentInNewPrefab(playerInventoryOpenerUIPrefab).AsSingle().NonLazy();

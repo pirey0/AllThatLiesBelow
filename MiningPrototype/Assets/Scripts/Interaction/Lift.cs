@@ -71,12 +71,12 @@ public class Lift : TilemapCarvingEntity, IBaseInteractable, INonPersistantSavab
         return data;
     }
 
-    public void BeginInteracting(GameObject interactor)
+    public void BeginInteracting(IPlayerController player)
     {
         if (cage.CanBeCalled())
         {
             Debug.Log("Called Lift");
-            cage.CallTo(interactor.transform.position.y);
+            cage.CallTo(player.transform.position.y);
             callSource.Play();
         }
         else

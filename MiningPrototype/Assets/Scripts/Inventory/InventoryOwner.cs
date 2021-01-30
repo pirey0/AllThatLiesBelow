@@ -7,6 +7,7 @@ using UnityEngine;
 public interface IInventoryOwner
 {
     Inventory Inventory { get; }
+    event Action<InventoryState> StateChanged;
 }
 
 public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteractable, ILayeredUI
@@ -121,12 +122,12 @@ public class InventoryOwner : StateListenerBehaviour, IInventoryOwner, IInteract
         }
     }
 
-    public virtual void BeginInteracting(GameObject interactor)
+    public virtual void BeginInteracting(IPlayerController player)
     {
         OpenInventory();
     }
 
-    public virtual void EndInteracting(GameObject interactor)
+    public virtual void EndInteracting(IPlayerController player)
     {
         CloseInventory();
     }

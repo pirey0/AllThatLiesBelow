@@ -25,7 +25,7 @@ public class Bed : StateListenerBehaviour, IInteractable
     [Inject] PlayerStatementsHandler playerStatements;
     [Inject] CursorHandler cursorHandler;
     [Inject] GameInstanceDataManger gameInstanceData;
-    [Inject] PlayerStateMachine player;
+    [Inject] PlayerManager playerManager;
 
     string defaultWakeUpTest;
     float lastSleepTimeStamp = -10000;
@@ -42,14 +42,12 @@ public class Bed : StateListenerBehaviour, IInteractable
         if (gameInstanceData.LoadBecauseOfDeath)
         {
             transitionEffectHandler.FadeIn(FadeType.Nightmare);
-            WakeUpFromNightmare(player.gameObject);
+            WakeUpFromNightmare(playerManager.GetPlayer());
         }
     }
 
-    public void BeginInteracting(GameObject interactor)
+    public void BeginInteracting(IPlayerController player)
     {
-        PlayerStateMachine player = interactor.GetComponent<PlayerStateMachine>();
-
         if (hut.IsOpen() && Time.time - lastSleepTimeStamp > sleepCooldown)
         {
             lastSleepTimeStamp = Time.time;
@@ -62,10 +60,8 @@ public class Bed : StateListenerBehaviour, IInteractable
         }
     }
 
-    public void EndInteracting(GameObject interactor)
+    public void EndInteracting(IPlayerController player)
     {
-        PlayerStateMachine player = interactor.GetComponent<PlayerStateMachine>();
-
         LeaveBed(player);
     }
 
@@ -79,7 +75,7 @@ public class Bed : StateListenerBehaviour, IInteractable
         ForceInterrupt -= action;
     }
 
-    private void EnterBed(PlayerStateMachine playerToHide)
+    private void EnterBed(IPlayerController playerToHide)
     {
         playerToHide.Disable();
         cursorHandler.Hide();
@@ -89,7 +85,7 @@ public class Bed : StateListenerBehaviour, IInteractable
         StartCoroutine(SleepCoroutine(playerToHide));
     }
 
-    private void LeaveBed(PlayerStateMachine playerToEnableAgain)
+    private void LeaveBed(IPlayerController playerToEnableAgain)
     {
         ForceInterrupt?.Invoke(this);
         playerToEnableAgain.Enable();
@@ -97,7 +93,7 @@ public class Bed : StateListenerBehaviour, IInteractable
         spriteRenderer.sprite = empty;
     }
 
-    IEnumerator SleepCoroutine(PlayerStateMachine playerToEnableAgain)
+    IEnumerator SleepCoroutine(IPlayerController playerToEnableAgain)
     {
         playerToEnableAgain.transform.position = transform.position;
 
@@ -145,14 +141,13 @@ public class Bed : StateListenerBehaviour, IInteractable
         LeaveBed(playerToEnableAgain);
     }
 
-    internal void WakeUpFromNightmare(GameObject gameObject)
+    internal void WakeUpFromNightmare(IPlayerController player)
     {
-        PlayerStateMachine playerToHide = gameObject.GetComponent<PlayerStateMachine>();
-        playerToHide.Disable();
-        StartCoroutine(NightmareCoroutine(playerToHide));
+        player.Disable();
+        StartCoroutine(NightmareCoroutine(player));
     }
 
-    IEnumerator NightmareCoroutine(PlayerStateMachine playerToEnableAgain)
+    IEnumerator NightmareCoroutine(IPlayerController playerToEnableAgain)
     {
         spriteRenderer.sprite = badDream;
         yield return new WaitForSeconds(5f);

@@ -6,7 +6,7 @@ using UnityEngine;
 public class DialogVisualizer : MonoBehaviour, IDialogVisualizer
 {
     [Zenject.Inject] InWorldCanvas inWorldCanvas;
-    [Zenject.Inject] PlayerInteractionHandler playerInteractionHandler;
+    [Zenject.Inject] PlayerManager playerManager;
 
     [SerializeField] DialogElement dialogElement;
     [SerializeField] Vector3 sentenceOffset, optionsOffset;
@@ -18,7 +18,7 @@ public class DialogVisualizer : MonoBehaviour, IDialogVisualizer
     public void DisplayOptions(string[] options)
     {
         DialogElement element = InstatiateElement();
-        element.StartFollowing(playerInteractionHandler.transform, optionsOffset);
+        element.StartFollowing(playerManager.GetPlayerTransform(), optionsOffset);
         element.Init(options, this, optionsOffset);
         dialogElements.Add(element);
 

@@ -9,7 +9,6 @@ public class FleshEatingPlant : MonoBehaviour
 
     [SerializeField] float snapDelay, snapAnimationTilSnap, snapAnimationRestDuration;
 
-    [Zenject.Inject] PlayerStateMachine playerStateMachine;
     [Zenject.Inject] CameraController cameraController;
 
     bool activated = false;
@@ -45,8 +44,8 @@ public class FleshEatingPlant : MonoBehaviour
     {
         if (inSnapping)
         {
-            if (collision.gameObject.GetComponent<PlayerInteractionHandler>() != null)
-                playerStateMachine.TakeDamage(DamageStrength.Strong);
+            if (collision.gameObject.TryGetComponent(out IPlayerController player))
+                player.TakeDamage(DamageStrength.Strong);
         }
     }
 }

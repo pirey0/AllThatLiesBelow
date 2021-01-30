@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IInteractable : IBaseInteractable
 {
-    void EndInteracting(GameObject interactor);
+    void EndInteracting(IPlayerController player);
 
     void SubscribeToForceQuit(System.Action<IInteractable> action);
     void UnsubscribeToForceQuit(System.Action<IInteractable> action);
@@ -14,5 +14,5 @@ public interface IInteractable : IBaseInteractable
 
 public interface IBaseInteractable
 {
-    void BeginInteracting(GameObject interactor);
+    void BeginInteracting(IPlayerController player);
 }

@@ -9,7 +9,7 @@ public class KernelIterator : StateListenerBehaviour
 
     [Zenject.Inject] KernelParser kernelParser;
     [Zenject.Inject] RuntimeProceduralMap map;
-    [Zenject.Inject] PlayerStateMachine player;
+    [Zenject.Inject] PlayerManager playerManager;
 
     Kernel[] kernels;
 
@@ -25,8 +25,9 @@ public class KernelIterator : StateListenerBehaviour
     private IEnumerator KernelRoutine()
     {
         currentIndex = 0;
-        currentStartX = player.transform.position.ToGridPosition().x - sizeX / 2;
-        currentStartY = player.transform.position.ToGridPosition().y - sizeY / 2;
+        var playerPos = playerManager.GetPlayerPosition().ToGridPosition();
+        currentStartX = playerPos.x - sizeX / 2;
+        currentStartY = playerPos.y - sizeY / 2;
         int x = currentStartX;
         int y = currentStartY;
 
@@ -45,7 +46,7 @@ public class KernelIterator : StateListenerBehaviour
 
             x++;
 
-            if (x >= map.SizeX - currentKernel.Width || x >= currentStartX+sizeX - currentKernel.Width)
+            if (x >= map.SizeX - currentKernel.Width || x >= currentStartX + sizeX - currentKernel.Width)
             {
                 x = currentStartX;
                 y++;
@@ -59,8 +60,9 @@ public class KernelIterator : StateListenerBehaviour
                     if (currentIndex >= kernels.Length) //finished all kernels
                     {
                         currentIndex = 0;
-                        currentStartX = player.transform.position.ToGridPosition().x - sizeX / 2;
-                        currentStartY = player.transform.position.ToGridPosition().y - sizeY / 2;
+                        playerPos = playerManager.GetPlayerPosition().ToGridPosition();
+                        currentStartX = playerPos.x - sizeX / 2;
+                        currentStartY = playerPos.y - sizeY / 2;
                         x = currentStartX;
                         y = currentStartY;
                     }
@@ -76,8 +78,8 @@ public class KernelIterator : StateListenerBehaviour
             for (int x = 0; x < k.Width; x++)
             {
                 Vector2Int loc = new Vector2Int(px + x, py + y);
-                Util.DebugDrawTileCrossed(loc, k[x,y].AsDebugColor(), 2f);
-                
+                Util.DebugDrawTileCrossed(loc, k[x, y].AsDebugColor(), 2f);
+
 
                 var info = map.GetTileInfoAt(loc);
                 if (info.CanBeUnstable)
@@ -100,9 +102,9 @@ public class KernelIterator : StateListenerBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        if (player != null)
+        if (playerManager != null)
         {
-            Vector3 pos = player.transform.position.ToGridPosition().AsV3();
+            Vector3 pos = playerManager.GetPlayerPosition().ToGridPosition().AsV3();
             Gizmos.DrawWireCube(pos, new Vector3(sizeX, sizeY, 0));
             UnityEditor.Handles.Label(pos + new Vector3(-sizeX / 2, sizeY / 2, 0), "KernelIterator #" + currentIndex);
 

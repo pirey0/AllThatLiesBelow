@@ -11,8 +11,7 @@ public class DebugMode : MonoBehaviour
     [SerializeField] List<GameObject> debugObjects;
     [SerializeField] GameObject debugChopper;
 
-    [Inject] PlayerStateMachine player;
-    [Inject] PlayerInteractionHandler playerInteraction;
+    [Inject] PlayerManager playerManager;
     [Inject] ProgressionHandler progressionHandler;
     [Inject] InventoryManager inventoryManager;
     [Inject] TooltipHandler tooltipHandler;
@@ -99,7 +98,7 @@ public class DebugMode : MonoBehaviour
         else if (open && showMap)
         {
             //Updating texture OnGUI
-            Vector2Int pos = player.transform.position.ToGridPosition();
+            Vector2Int pos = playerManager.GetPlayer().transform.position.ToGridPosition();
             for (int y = 0; y < debugTex.height; y++)
             {
                 for (int x = 0; x < debugTex.width; x++)
@@ -137,6 +136,7 @@ public class DebugMode : MonoBehaviour
     private void SpawnChopper()
     {
         var prevC = GameObject.FindObjectOfType<DebugChopper>();
+        var player = playerManager.GetPlayer();
         if (prevC != null)
         {
             player.ExitVehicle(prevC);
@@ -190,7 +190,7 @@ public class DebugMode : MonoBehaviour
         }
         else
         {
-            player.transform.position = target.position;
+            playerManager.TeleportPlayerTo(target.position);
             environmentEffectsHandler.UpdateOverworldEffects();
             environmentEffectsHandler.UpdateJungleEffects();
         }
@@ -201,7 +201,7 @@ public class DebugMode : MonoBehaviour
         GameObject target = GameObject.Find(name);
         if (target != null)
         {
-            player.transform.position = target.transform.position;
+            playerManager.TeleportPlayerTo(target.transform.position);
             environmentEffectsHandler.UpdateOverworldEffects();
             environmentEffectsHandler.UpdateJungleEffects();
         }
@@ -223,7 +223,7 @@ public class DebugMode : MonoBehaviour
 
     private void KillPlayer()
     {
-        player?.TakeDamage(DamageStrength.Strong);
+        playerManager.GetPlayer()?.TakeDamage(DamageStrength.Strong);
     }
 
     private void UpgradePickaxe()

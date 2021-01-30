@@ -41,7 +41,7 @@ public class LiftCage : MonoBehaviour, IVehicle
     [Zenject.Inject] CameraController cameraController;
 
     LiftState state = LiftState.Inactive;
-    PlayerStateMachine player;
+    IPlayerController player;
     Vector3 oldPosition;
     ParentedCameraShake cameraShake;
     float liftVelocity = 0;
@@ -95,7 +95,7 @@ public class LiftCage : MonoBehaviour, IVehicle
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out PlayerStateMachine psm))
+        if (collision.TryGetComponent(out IPlayerController psm))
         {
             if (!psm.InVehicle())
             {
@@ -107,7 +107,7 @@ public class LiftCage : MonoBehaviour, IVehicle
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out PlayerStateMachine psm))
+        if (collision.TryGetComponent(out IPlayerController psm))
         {
             psm.ExitVehicle(this);
             this.player = null;
@@ -322,7 +322,7 @@ public class LiftCage : MonoBehaviour, IVehicle
         return !playerInControl;
     }
 
-    public void EnteredBy(PlayerStateMachine player)
+    public void EnteredBy(IPlayerController player)
     {
         goingToTarget = false;
         playerInControl = true;
@@ -332,7 +332,7 @@ public class LiftCage : MonoBehaviour, IVehicle
         Debug.Log("Player entered " + this.name);
     }
 
-    public void LeftBy(PlayerStateMachine player)
+    public void LeftBy(IPlayerController player)
     {
         playerInControl = false;
         player.transform.parent = null;

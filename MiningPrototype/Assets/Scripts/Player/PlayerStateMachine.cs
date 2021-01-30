@@ -7,9 +7,34 @@ using UnityEngine;
 using Zenject;
 
 
+public interface IPlayerController
+{
+    Transform transform { get; }
+    Rigidbody2D Rigidbody { get; }
+
+    float GetHorizontalInputRaw();
+    float GetVerticalInputRaw();
+    bool CanDig { get; set; }
+    bool InCinematicMode { get; set; }
+    bool CinematicSlowWalk { get; set; }
+    float CinematicHorizontal { get; set; }
+
+    void TakeDamage(DamageStrength strength);
+
+    bool InVehicle();
+    void EnterVehicle(IVehicle vehicle);
+    void ExitVehicle(IVehicle vehicle);
+    void Disable();
+    void Enable();
+
+    event Action LeftOverworld;
+    event Action EnteredOverworld;
+    bool InOverworld();
+}
+
 
 [DefaultExecutionOrder(-20)]
-public class PlayerStateMachine : BasePlayerStateMachine
+public class PlayerStateMachine : BasePlayerStateMachine , IPlayerController
 {
     [SerializeField] PlayerStateInfo[] statesCanInteract;
     [SerializeField] PlayerInteractionHandler playerInteraction;

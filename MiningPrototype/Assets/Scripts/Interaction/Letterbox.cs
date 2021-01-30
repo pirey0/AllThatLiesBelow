@@ -45,15 +45,15 @@ public class Letterbox : InventoryOwner, INonPersistantSavable, IDropReceiver
        SetLetterboxStatus(LetterboxStatus.Closed);
     }
 
-    public override void BeginInteracting(GameObject interactor)
+    public override void BeginInteracting(IPlayerController player)
     {
-        base.BeginInteracting(interactor);
+        base.BeginInteracting(player);
         Open();
     }
 
-    public override void EndInteracting(GameObject interactor)
+    public override void EndInteracting(IPlayerController player)
     {
-        base.EndInteracting(interactor);
+        base.EndInteracting(player);
         Close();
     }
 

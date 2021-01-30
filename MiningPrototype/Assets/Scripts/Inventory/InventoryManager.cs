@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class InventoryManager : StateListenerBehaviour
 {
-    [Zenject.Inject] PlayerInteractionHandler player;
+    [Zenject.Inject] PlayerManager playerManager;
 
     public event System.Action<ItemAmountPair> PlayerCollected;
 
     protected override void OnRealStart()
     {
-        player.Inventory.InventoryChanged += OnInventoryChanged;
+        playerManager.GetPlayerInventory().InventoryChanged += OnInventoryChanged;
     }
 
     private void OnInventoryChanged(bool add, ItemAmountPair element, bool playsound)
@@ -25,7 +25,7 @@ public class InventoryManager : StateListenerBehaviour
 
     public void PlayerCollects(ItemType itemType, int amount)
     {
-        player.Inventory.Add(itemType, amount, playSound: false);
+        playerManager.GetPlayerInventory().Add(itemType, amount, playSound: false);
     }
 
     public void PlayerCollects(ItemAmountPair[] itemAmountPair)
@@ -38,16 +38,16 @@ public class InventoryManager : StateListenerBehaviour
     public bool PlayerTryPay(ItemType itemType, int amount)
     {
         Debug.Log("Player try pay: " + itemType + " " + amount);
-        return player.Inventory.TryRemove(new ItemAmountPair(itemType, amount));
+        return playerManager.GetPlayerInventory().TryRemove(new ItemAmountPair(itemType, amount));
     }
 
     public bool PlayerHas(ItemType type, int amount)
     {
-        return player.Inventory.Contains(new ItemAmountPair(type, amount));
+        return playerManager.GetPlayerInventory().Contains(new ItemAmountPair(type, amount));
     }
 
     public void ForcePlayerInventoryClose()
     {
-        player.CloseInventory();
+        playerManager.GetPlayerInteraction().CloseInventory();
     }
 }

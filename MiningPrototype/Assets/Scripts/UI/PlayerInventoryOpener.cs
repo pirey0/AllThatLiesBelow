@@ -13,7 +13,7 @@ public class PlayerInventoryOpener : Button, IDropReceiver
     [SerializeField] public Transform ShortcutParent;
     [SerializeField] Material bagMaterial;
 
-    [Zenject.Inject] PlayerInteractionHandler playerInteractionHandler;
+    [Zenject.Inject] PlayerManager playerManager;
     [Zenject.Inject] CameraController cameraController;
 
     private bool isBlinking;
@@ -23,18 +23,15 @@ public class PlayerInventoryOpener : Button, IDropReceiver
         bagMaterial = new Material(targetGraphic.material);
         targetGraphic.material = bagMaterial;
         Canvas.worldCamera = cameraController.Camera;
+        playerManager.GetPlayerInteraction().StateChanged += UpdateSprite;
     }
 
-    protected override void OnEnable()
+    protected override void OnDestroy()
     {
-        base.OnEnable();
-        playerInteractionHandler.StateChanged += UpdateSprite;
-    }
-
-    protected override void OnDisable()
-    {
-        base.OnDisable();
-        playerInteractionHandler.StateChanged -= UpdateSprite;
+        if(playerManager != null)
+        {
+            playerManager.GetPlayerInteraction().StateChanged -= UpdateSprite;
+        }
     }
 
     public void Hide()
@@ -116,12 +113,12 @@ public class PlayerInventoryOpener : Button, IDropReceiver
 
     public override void OnPointerDown(PointerEventData eventData)
     {
-        playerInteractionHandler.ToggleInventory();
+        playerManager.GetPlayerInteraction().ToggleInventory();
     }
 
     public bool WouldTakeDrop(ItemAmountPair pair)
     {
-        return playerInteractionHandler.WouldTakeDrop(pair);
+        return playerManager.GetPlayerInteraction().WouldTakeDrop(pair);
     }
 
     public void BeginHoverWith(ItemAmountPair pair)
@@ -141,12 +138,12 @@ public class PlayerInventoryOpener : Button, IDropReceiver
 
     public void ReceiveDrop(ItemAmountPair pair, Inventory origin)
     {
-        playerInteractionHandler.ReceiveDrop(pair, origin);
+        playerManager.GetPlayerInteraction().ReceiveDrop(pair, origin);
     }
 
     public bool IsSameInventory(Inventory inventory)
     {
-        return playerInteractionHandler.Inventory == inventory;
+        return playerManager.GetPlayerInventory() == inventory;
     }
 
     //public void UpdatePosition()

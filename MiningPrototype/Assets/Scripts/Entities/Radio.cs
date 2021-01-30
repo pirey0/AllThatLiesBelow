@@ -16,7 +16,7 @@ public class Radio : MineableObject, IBaseInteractable, INonPersistantSavable
     bool inTransition;
     int radioIndex = 0;
 
-    public void BeginInteracting(GameObject interactor)
+    public void BeginInteracting(IPlayerController player)
     {
         if (!inTransition)
         {

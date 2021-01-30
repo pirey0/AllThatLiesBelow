@@ -16,7 +16,7 @@ public class Note : MirrorWorldFollower, IInteractable, INonPersistantSavable
 
     }
 
-    public void BeginInteracting(GameObject interactor)
+    public void BeginInteracting(IPlayerController player)
     {
         readableItemHandler.HideEvent += OnHide;
         readableItemHandler.Display(item.amount, null);
@@ -27,7 +27,7 @@ public class Note : MirrorWorldFollower, IInteractable, INonPersistantSavable
         forceQuit?.Invoke(this);
     }
 
-    public void EndInteracting(GameObject interactor)
+    public void EndInteracting(IPlayerController player)
     {
         readableItemHandler.HideEvent -= OnHide;
         readableItemHandler.Hide();

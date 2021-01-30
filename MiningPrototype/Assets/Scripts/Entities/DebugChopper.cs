@@ -10,7 +10,7 @@ public class DebugChopper : MonoBehaviour, IVehicle
     [SerializeField] Transform playerPos;
     [SerializeField] SpriteRenderer spriteRenderer;
 
-    PlayerStateMachine player;
+    IPlayerController player;
     private void Update()
     {
         if (player != null)
@@ -50,20 +50,20 @@ public class DebugChopper : MonoBehaviour, IVehicle
         return true;
     }
 
-    public void EnteredBy(PlayerStateMachine player)
+    public void EnteredBy(IPlayerController player)
     {
         rigidbody.isKinematic = true;
         collider.isTrigger = true;
         this.player = player;
-        player.GetComponent<Rigidbody2D>().isKinematic = true;
+        player.Rigidbody.isKinematic = true;
     }
 
-    public void LeftBy(PlayerStateMachine player)
+    public void LeftBy(IPlayerController player)
     {
         rigidbody.isKinematic = false;
         collider.isTrigger = false;
         this.player = null;
-        player.GetComponent<Rigidbody2D>().isKinematic = false;
+        player.Rigidbody.isKinematic = false;
     }
 
 

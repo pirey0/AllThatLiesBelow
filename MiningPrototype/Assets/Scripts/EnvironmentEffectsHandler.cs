@@ -27,7 +27,6 @@ public class EnvironmentEffectsHandler : StateListenerBehaviour
     [SerializeField] bool isSpring = false;
 
     [Zenject.Inject] CameraController cam;
-    [Zenject.Inject] PlayerStateMachine player;
     [Zenject.Inject] RuntimeProceduralMap map;
 
     float snowMultiplyer = 1;

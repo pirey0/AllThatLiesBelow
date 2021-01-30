@@ -8,7 +8,18 @@ using UnityEngine.Tilemaps;
 using UnityEngineInternal;
 using Zenject;
 
-public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
+
+public interface IPlayerInteraction : IInventoryOwner, IDropReceiver
+{
+    void ForceInteractionWith(IInteractable altar);
+    void SetHeldItem(bool setToPickaxe);
+    void SetHeldItemSprite(ItemInfo info);
+    bool InDialog();
+    void ToggleInventory();
+    void CloseInventory();
+}
+
+public class PlayerInteractionHandler : InventoryOwner, IDropReceiver , IPlayerInteraction
 {
     [SerializeField] PlayerSettings settings;
     [SerializeField] PlayerStateMachine player;
@@ -209,7 +220,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
                 }
                 else
                 {
-                    baseInteractable.BeginInteracting(gameObject);
+                    baseInteractable.BeginInteracting(player);
                 }
             }
         }
@@ -220,7 +231,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         Debug.Log("Started interacting with: " + interactable.gameObject.name);
         currentInteractables.Add(interactable);
         interactable.SubscribeToForceQuit(OnInteractableForceQuit);
-        interactable.BeginInteracting(gameObject);
+        interactable.BeginInteracting(player);
     }
 
     public void ForceInteractionWith(IInteractable interactable)
@@ -454,7 +465,7 @@ public class PlayerInteractionHandler : InventoryOwner, IDropReceiver
         if (!Util.IsNullOrDestroyed(interactable))
         {
             interactable.UnsubscribeToForceQuit(OnInteractableForceQuit);
-            interactable.EndInteracting(gameObject);
+            interactable.EndInteracting(player);
             currentInteractables.Remove(interactable);
             return true;
         }

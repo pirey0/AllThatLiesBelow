@@ -34,7 +34,7 @@ public class CustomizeableSign : TilemapCarvingEntity, INonPersistantSavable, IB
         }
     }
 
-    public void BeginInteracting(GameObject interactor)
+    public void BeginInteracting(IPlayerController player)
     {
         TryNextSymbol();
     }

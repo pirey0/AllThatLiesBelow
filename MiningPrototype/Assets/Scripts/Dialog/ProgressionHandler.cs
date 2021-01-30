@@ -28,7 +28,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
     [Zenject.Inject] InventoryManager inventoryManager;
     [Zenject.Inject] SacrificeActions sacrificeActions;
     [Zenject.Inject] SceneAdder sceneAdder;
-    [Zenject.Inject] PlayerStateMachine player;
+    [Zenject.Inject] PlayerManager playerManager;
     [Zenject.Inject] GameInstanceDataManger gameInstanceData;
 
     public event System.Action<int> OnChangePickaxeLevel;
@@ -60,8 +60,8 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
 
     protected override void OnRealStart()
     {
-        player.EnteredOverworld += OnEnterOverworld;
-        player.LeftOverworld += OnLeftOverworld;
+        playerManager.GetPlayer().EnteredOverworld += OnEnterOverworld;
+        playerManager.GetPlayer().LeftOverworld += OnLeftOverworld;
         inventoryManager.PlayerCollected += OnPlayerCollected;
 
         if (gameInstanceData.LoadBecauseOfDeath)
@@ -190,11 +190,11 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
         switch (ev)
         {
             case "Camshake1":
-                cameraController.Shake(player.transform.position, CameraShakeType.explosion);
+                cameraController.Shake(playerManager.GetPlayerPosition(), CameraShakeType.explosion);
                 break;
 
             case "Camshake2":
-                cameraController.Shake(player.transform.position, CameraShakeType.hill, 5);
+                cameraController.Shake(playerManager.GetPlayerPosition(), CameraShakeType.hill, 5);
                 break;
 
             case "Spring":
@@ -214,7 +214,7 @@ public class ProgressionHandler : StateListenerBehaviour, ISavable, IDialogPrope
                 break;
 
             case "KillPlayer":
-                player.TakeDamage(DamageStrength.Strong);
+                playerManager.GetPlayer().TakeDamage(DamageStrength.Strong);
                 break;
 
             case "Give5Gold":

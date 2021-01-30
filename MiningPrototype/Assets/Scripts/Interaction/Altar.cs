@@ -22,7 +22,7 @@ public class Altar : StateListenerBehaviour, IInteractable, IDialogUser
     private bool inInteraction;
     private event System.Action<IInteractable> NotifyForcedEnd;
 
-    public void BeginInteracting(GameObject interactor)
+    public void BeginInteracting(IPlayerController player)
     {
         dialogServices.Aborted = false;
         Debug.Log("Begin Altar Interaction");
@@ -37,7 +37,7 @@ public class Altar : StateListenerBehaviour, IInteractable, IDialogUser
         NotifyForcedEnd?.Invoke(this);
     }
 
-    public void EndInteracting(GameObject interactor)
+    public void EndInteracting(IPlayerController player)
     {
         Debug.Log("End Altar Interaction");
         gameObject.layer = 0;
@@ -57,7 +57,7 @@ public class Altar : StateListenerBehaviour, IInteractable, IDialogUser
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!inInteraction && collision.TryGetComponent<PlayerInteractionHandler>(out var pi))
+        if (!inInteraction && collision.TryGetComponent<IPlayerInteraction>(out var pi))
         {
             pi.ForceInteractionWith(this);
         }

@@ -18,7 +18,7 @@ public class Hut : StateListenerBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.GetComponent<PlayerInteractionHandler>() == null)
+        if (collision.GetComponent<IPlayerController>() == null)
             return;
 
         //enable this section when you want the hut to stay open when the player digs into the ground
@@ -38,7 +38,7 @@ public class Hut : StateListenerBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<PlayerInteractionHandler>() == null)
+        if (collision.GetComponent<IPlayerController>() == null)
             return;
 
         if (gameState.CurrentState == GameState.State.Playing)
