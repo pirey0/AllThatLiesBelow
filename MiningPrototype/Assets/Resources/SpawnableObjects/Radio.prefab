@@ -226,7 +226,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f1268528b010453498d8664848ed2dca, type: 3}
   - {fileID: 8300000, guid: 104ce53f7b840d34f9a9b110ce64e462, type: 3}
   - {fileID: 8300000, guid: 54bc16138e850f747ac92df4547c051b, type: 3}
-  - {fileID: 8300000, guid: 4342d8431086412448425f2ffae9333b, type: 3}
+  - {fileID: 8300000, guid: 11f35e7ad75863e42a3ce65d2044befe, type: 3}
   spriteAnimator: {fileID: 1021434048550090917}
   on: {fileID: 11400000, guid: 79d1a0f0eebc6544992ffe1a8b1e52ce, type: 2}
   off: {fileID: 11400000, guid: 6d32901f9e355384889ff818d08242c5, type: 2}
